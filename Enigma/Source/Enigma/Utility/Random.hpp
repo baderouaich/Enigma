@@ -1,0 +1,51 @@
+#pragma once
+#ifndef ENIGMA_RANDOM_H
+#define ENIGMA_RANDOM_H
+
+#include <Enigma/Core/Core.hpp>
+#include <random>
+
+NS_ENIGMA_BEGIN
+class ENIGMA_API Random
+{
+public:
+	/*
+	*	Returns a Random Real between min and max
+	*/
+	template<typename T>
+	static T Real(T min, T max) noexcept
+	{
+		ENIGMA_CORE_ASSERT(min < max, "min is >= max");
+		std::uniform_real_distribution<T> dist(min, max);
+		auto& mt = Random::GetEngine();
+		return dist(mt);
+	}
+
+	/*
+	*	Returns a Random Integer between min and max
+	*/
+	template<typename T>
+	static T Int(T min, T max) noexcept
+	{
+		ENIGMA_CORE_ASSERT(min < max, "min is >= max");
+		std::uniform_int_distribution<T> dist(min, max);
+		auto& mt = Random::GetEngine();
+		return dist(mt);
+	}
+
+	/*
+    *	Returns a Random bool value, either 'true' or 'false' 
+	*/
+	static bool Bool(f64 chance = 0.5 /*50% 50% chance*/) noexcept
+	{
+		std::bernoulli_distribution dist(chance);
+		auto& mt = Random::GetEngine();
+		return dist(mt);
+	}
+	
+private:
+	static std::mt19937& GetEngine() noexcept;
+};
+NS_ENIGMA_END
+
+#endif // !ENIGMA_RANDOM_H

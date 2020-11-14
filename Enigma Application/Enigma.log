@@ -1,0 +1,13 @@
+[21:21:43] [info] Enigma: | OpenGL Info |
+		Manufacturer: Intel
+		Renderer: Intel(R) HD Graphics 4600
+		Version: 4.3.0 - Build 20.19.15.5126
+
+[21:21:43] [trace] Enigma APP: __cdecl AppDelegate::AppDelegate(const struct Enigma::WindowSettings &)
+[21:21:43] [trace] Enigma APP: void __cdecl MainScene::OnCreate(void)
+[21:22:05] [trace] Enigma APP: MouseButtonPressedEvent: 0
+[21:22:05] [trace] Enigma APP: MouseButtonPressedEvent: 0
+[21:22:06] [trace] Enigma APP: MouseButtonPressedEvent: 0
+[21:22:07] [trace] Enigma APP: KeyPressedEvent: 256 (0 repeats)
+[21:22:07] [trace] Enigma APP: void __cdecl MainScene::OnDestroy(void)
+[21:22:07] [trace] Enigma APP: __cdecl AppDelegate::~AppDelegate(void)
