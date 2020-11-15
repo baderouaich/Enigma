@@ -23,10 +23,15 @@ project "glad"
 	filter "system:windows"
 		systemversion "latest"
 	
+	
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "on"
+		symbols "On"
 
 	filter "configurations:Release"
 		runtime "Release"
-		optimize "on"
+		optimize "On"
+
+	filter "configurations:Dist"
+		runtime "Release"
+		optimize "Full"

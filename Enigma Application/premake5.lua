@@ -29,6 +29,7 @@ project "Enigma Application"
 		"%{IncludeDir.imgui}", -- ImGui
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- pfd
+		--"%{IncludeDir.cryptopp}", -- cryptopp
 	}
 
 	links

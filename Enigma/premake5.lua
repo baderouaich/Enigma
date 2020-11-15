@@ -4,6 +4,7 @@ project "Enigma"
 	cppdialect "C++17"
 	staticruntime "on"
 
+
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 	
@@ -36,6 +37,7 @@ project "Enigma"
 		"%{IncludeDir.imgui}", -- ImGui
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- stb_image
+		--"%{IncludeDir.cryptopp}", -- cryptopp
 	}
 
 
@@ -46,6 +48,7 @@ project "Enigma"
 		"imgui", -- links ImGui lib
 		"spdlog", -- links SpdLog lib
 		"stb_image", -- links stb_image lib
+		--"cryptopp", -- links cryptopp lib
 
 		"opengl32" --Loads opengl32 kernel .lib
 	}

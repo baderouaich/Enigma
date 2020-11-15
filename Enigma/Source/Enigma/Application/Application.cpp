@@ -28,6 +28,7 @@ Application::Application(const WindowSettings& window_settings)
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
 	this->InitSceneData();
+
 }
 
 void Application::InitWindow(const WindowSettings& window_settings)
@@ -78,6 +79,7 @@ void Application::OnEvent(Event& event)
 	EventDispatcher dispatcher(event);
 	dispatcher.Dispatch<WindowCloseEvent>(ENIGMA_BIND_FUN(Application::OnWindowClose));
 	dispatcher.Dispatch<WindowResizeEvent>(ENIGMA_BIND_FUN(Application::OnWindowResize));
+	dispatcher.Dispatch<FrameBufferResizeEvent>(ENIGMA_BIND_FUN(Application::OnFrameBufferResize));
 	
 	// Alert All Scenes OnEvent
 	for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
@@ -103,13 +105,18 @@ bool Application::OnWindowClose(WindowCloseEvent& event)
 
 bool Application::OnWindowResize(WindowResizeEvent& event)
 {
-	//ENIGMA_CORE_INFO("{}: {}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
+	ENIGMA_CORE_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
 
 	//Update Renderer Viewport
 	//Renderer::SetViewport(0, 0, event.GetWidth(), event.GetHeight());
 
+	// Update OpenGL Viewport
+	glViewport(0, 0, event.GetWidth(), event.GetHeight());
+
 	return false;
 }
+
+
 
 bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 {
