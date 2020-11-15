@@ -3,8 +3,8 @@
 using namespace Enigma;
 
 
-
-static const ImVec4 BACKGROUND_COLOR(49 / 255.0f, 34 / 255.0f, 56 / 255.0f, 1.0f);
+#define VEC_RGBA(r, g, b, a) ImVec4(r/255.0f, g/255.0f, b/255.0f, a/255.0f)
+static const ImVec4 BACKGROUND_COLOR = VEC_RGBA(46, 33, 59, 255);
 
 class MainMenuScene : public Enigma::Scene
 {
@@ -21,7 +21,11 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private:
+	void LoadImGuiFont();
 
 
+private:
+	ImFont* m_enigma_font{ nullptr };
+	ImFont* m_pieces_of_eight_font{ nullptr };
 };
 

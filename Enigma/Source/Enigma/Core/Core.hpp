@@ -6,21 +6,18 @@
 #include "Macros.hpp"
 #include "Constants.hpp"
 #include "Types.hpp"
+#include "Version.hpp"
 
 
 ///API import & export macros
-#ifdef ENIGMA_PLATFORM_WINDOWS
 #if ENIGMA_DYNAMIC_LINK
 #ifdef ENIGMA_BUILD_DLL
-#define ENIGMA_API __declspec(dllexport)
+	#define ENIGMA_API __declspec(dllexport)
 #else
-#define ENIGMA_API __declspec(dllimport)
+	#define ENIGMA_API __declspec(dllimport)
 #endif
 #else
-#define ENIGMA_API
-#endif
-#else
-#error "Enigma supports only Windows at the moment!"
+	#define ENIGMA_API
 #endif
 ///
 

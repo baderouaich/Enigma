@@ -28,7 +28,7 @@ void Logger::Initialize()
 	m_core_logger->flush_on(spdlog::level::trace);
 	
 	//Client Logger
-	m_client_logger = Enigma::MakeShared<spdlog::logger>("Enigma APP", log_sinks.begin(), log_sinks.end());
+	m_client_logger = Enigma::MakeShared<spdlog::logger>("Enigma App", log_sinks.begin(), log_sinks.end());
 	spdlog::register_logger(m_client_logger);
 	m_client_logger->set_level(spdlog::level::trace);
 	m_client_logger->flush_on(spdlog::level::trace);
