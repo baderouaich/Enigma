@@ -58,7 +58,7 @@ void MainMenuScene::OnImGuiDraw()
 	//ImGui::SetWindowPos(ImVec2(win_x, win_y));
 	ImGui::SetWindowSize(ImVec2(win_w, win_h));
 	{
-		spacing(12);
+		spacing(15);
 
 		// Enigma Version
 		{
@@ -67,7 +67,7 @@ void MainMenuScene::OnImGuiDraw()
 				ImGui::Text("Enigma %s", ENIGMA_VERSION);
 			ImGui::PopFont();
 		}
-		spacing(6);
+		spacing(9);
 
 		// Buttons
 		ImGui::PushFont(m_enigma_font);
