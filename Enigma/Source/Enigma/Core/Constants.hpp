@@ -21,6 +21,7 @@ namespace Enigma
 		{
 			static constexpr const auto ENIGMA_FONT_PATH = "./Resources/Fonts/Enigma.ttf";
 			static constexpr const auto PIECES_OF_EIGHT_FONT_PATH = "./Resources/Fonts/Pieces of Eight.ttf";
+			static constexpr const auto NUNITO_SANS_REGULAR = "./Resources/Fonts/NunitoSans-Regular.ttf";
 
 		}
 

@@ -124,6 +124,9 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 	//window_settings.maximum_width = 1280 + 100;
 	//window_settings.maximum_height = 720 + 100;
 	window_settings.is_vsync = true;
+#if ENIGMA_DEBUG
+    window_settings.is_show_fps = true;
+#endif
 	window_settings.is_resizable = false;
 	window_settings.gl_major_version = 4;
 	window_settings.gl_minor_version = 3;

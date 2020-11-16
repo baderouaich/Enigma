@@ -1,5 +1,6 @@
 #include "pch.hpp"
 #include "MainMenuScene.hpp"
+#include <string>
 
 MainMenuScene::MainMenuScene()
 	:
@@ -8,11 +9,13 @@ MainMenuScene::MainMenuScene()
 }
 
 
-void MainMenuScene::LoadImGuiFont()
+void MainMenuScene::LoadImGuiFonts()
 {
-	m_pieces_of_eight_font = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::PIECES_OF_EIGHT_FONT_PATH, 45.0f);
-	m_enigma_font = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::ENIGMA_FONT_PATH, 20.0f);
-	if (!m_enigma_font || !m_pieces_of_eight_font)
+	m_fonts["Enigma"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::ENIGMA_FONT_PATH, 45.0f);
+	m_fonts["Pieces of Eight"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::PIECES_OF_EIGHT_FONT_PATH, 30.0f);
+	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::NUNITO_SANS_REGULAR, 30.0f);
+
+	if (!m_fonts["Enigma"] || !m_fonts["Pieces of Eight"] || !m_fonts["NunitoSans-Regular"])
 	{
 		ENIGMA_ERROR("Could not load fonts");
 		Application::GetInstance().EndApplication();
@@ -28,7 +31,7 @@ void MainMenuScene::OnCreate()
 	glClearColor(BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, BACKGROUND_COLOR.w);
 
 
-	this->LoadImGuiFont();
+	this->LoadImGuiFonts();
 }
 
 void MainMenuScene::OnUpdate(const f32& dt)
@@ -48,29 +51,27 @@ void MainMenuScene::OnImGuiDraw()
 
 	static const auto button_size = ImVec2(350.0f, 45.0f);
 
-	static const auto spacing = [](ui8 n) {
-		for (auto i = 0; i < n; i++)
-			ImGui::Spacing();
-	};
+	static const auto spacing = [](ui8 n) { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 	ImGui::Begin("Buttons Container", nullptr, container_flags);
 	//ImGui::SetWindowPos(ImVec2(win_x, win_y));
-	ImGui::SetWindowSize(ImVec2(win_w, win_h));
+	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h)));
 	{
 		spacing(15);
 
 		// Enigma Version
 		{
-			ImGui::SetCursorPosX((io.DisplaySize.x - 160.0f) / 2.0f);
-			ImGui::PushFont(m_pieces_of_eight_font);
+			ImGui::SetCursorPosX((io.DisplaySize.x - (ImGui::CalcTextSize("Enigma x.y.z").x * m_fonts["Enigma"]->Scale)) / 2.0f);
+			ImGui::PushFont(m_fonts["Enigma"]);
 				ImGui::Text("Enigma %s", ENIGMA_VERSION);
 			ImGui::PopFont();
 		}
+
 		spacing(9);
 
 		// Buttons
-		ImGui::PushFont(m_enigma_font);
+		ImGui::PushFont(m_fonts["NunitoSans-Regular"]);
 		{
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Encrypt File", button_size))
@@ -80,15 +81,18 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Decrypt File", button_size))
 			{
+
 			}
 			spacing(3);
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Encrypt Text", button_size))
 			{
+
 			}
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Decrypt Text", button_size))
 			{
+
 			}
 		}
 		ImGui::PopFont();
@@ -171,7 +175,6 @@ void MainMenuScene::OnImGuiDraw()
 #endif
 
 
-
 	// Clear GL buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
@@ -212,5 +215,6 @@ void MainMenuScene::OnEvent(Event& event)
 void MainMenuScene::OnDestroy()
 {
 	LOG(ENIGMA_CURRENT_FUNCTION);
-
+	
+	m_fonts.clear();
 }

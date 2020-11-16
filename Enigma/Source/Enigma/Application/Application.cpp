@@ -144,7 +144,8 @@ void Application::Run()
 			//Update
 			{
 				UpdateDeltaTime();
-				UpdateFPS();
+				if(m_window->m_is_show_fps)
+					UpdateFPS();
 				// Update back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnUpdate(m_delta_time);
 			}

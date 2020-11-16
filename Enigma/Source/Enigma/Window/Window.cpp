@@ -107,6 +107,7 @@ Window::Window(const WindowSettings& window_settings)
 	m_maximum_size(window_settings.maximum_width, window_settings.maximum_height),
 	m_frame_buffer_size(0, 0),
 	m_vsync(window_settings.is_vsync),
+	m_is_show_fps(window_settings.is_show_fps),
 	m_GLFWwindow(nullptr),
 	m_monitor(nullptr),
 	m_video_mode(nullptr),
@@ -627,8 +628,15 @@ void Window::SetShouldClose(bool close) const noexcept
 void Window::SetTitle(const String& title) noexcept
 {
 	// title - FPS: x
-	const ui32& FPS = Application::GetInstance().GetFPS();
-	glfwSetWindowTitle(m_GLFWwindow, (title + " - FPS: " + std::to_string(FPS)).c_str());
+	if (m_is_show_fps)
+	{
+		const ui32& FPS = Application::GetInstance().GetFPS();
+		glfwSetWindowTitle(m_GLFWwindow, (title + " - FPS: " + std::to_string(FPS)).c_str());
+	}
+	else
+	{
+		glfwSetWindowTitle(m_GLFWwindow, title.c_str());
+	}
 	m_title = title;
 	
 #if 0

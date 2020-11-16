@@ -303,6 +303,7 @@ private: /*Properties*/
 	std::pair<i32, i32> m_maximum_size;
 	std::pair<i32, i32> m_frame_buffer_size;
 	bool m_vsync;
+	bool m_is_show_fps;
 
 	GLFWwindow* m_GLFWwindow; // GLFW window
 	GLFWmonitor* m_monitor;

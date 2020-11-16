@@ -97,6 +97,11 @@ struct ENIGMA_API WindowSettings
 	bool is_auto_iconify = true;
 
 	/*
+	*	Show FPS count next to window title in format: title - FPS: x
+	*/
+	bool is_show_fps = false;
+
+	/*
 	*	 Specifies the desired refresh rate for full screen windows. If set to -1, the highest
 	*	 available refresh rate will be used. This hint is ignored for windowed mode windows.
 	*/

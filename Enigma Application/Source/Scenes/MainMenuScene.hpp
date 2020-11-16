@@ -14,18 +14,17 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	void OnUpdate(const f32& dt) override;
-	void OnDraw() override;
+	[[maybe_unused]] void OnUpdate(const f32& dt) override;
+	[[maybe_unused]] void OnDraw() override;
 	void OnImGuiDraw() override;
 	void OnEvent(Event& event) override;
 	void OnDestroy() override;
 
 private:
-	void LoadImGuiFont();
+	void LoadImGuiFonts();
 
 
 private:
-	ImFont* m_enigma_font{ nullptr };
-	ImFont* m_pieces_of_eight_font{ nullptr };
+	std::unordered_map<String, ImFont*> m_fonts;
 };
 

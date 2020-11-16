@@ -1,8 +1,11 @@
-[13:39:51] [info] Enigma: | OpenGL Info |
+[22:41:59] [info] Enigma: | OpenGL Info |
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 4.3.0 - Build 20.19.15.5126
 
-[13:39:51] [trace] Enigma App: __cdecl AppDelegate::AppDelegate(const struct Enigma::WindowSettings &)
-[13:39:51] [info] Enigma App: AES/CBC
-[13:39:51] [trace] Enigma App: void __cdecl MainMenuScene::OnCreate(void)
+[22:41:59] [trace] Enigma App: __cdecl AppDelegate::AppDelegate(const struct Enigma::WindowSettings &)
+[22:41:59] [info] Enigma App: AES/CBC
+[22:41:59] [trace] Enigma App: void __cdecl MainMenuScene::OnCreate(void)
+[22:42:05] [trace] Enigma App: KeyPressedEvent: 256 (0 repeats)
+[22:42:05] [trace] Enigma App: void __cdecl MainMenuScene::OnDestroy(void)
+[22:42:05] [trace] Enigma App: __cdecl AppDelegate::~AppDelegate(void)
