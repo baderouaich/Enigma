@@ -37,7 +37,7 @@ project "Enigma"
 		"%{IncludeDir.imgui}", -- ImGui
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- stb_image
-		--"%{IncludeDir.cryptopp}", -- cryptopp
+		"%{IncludeDir.cryptopp}", -- cryptopp
 	}
 
 
@@ -48,7 +48,7 @@ project "Enigma"
 		"imgui", -- links ImGui lib
 		"spdlog", -- links SpdLog lib
 		"stb_image", -- links stb_image lib
-		--"cryptopp", -- links cryptopp lib
+		"cryptopp", -- links cryptopp lib
 
 		"opengl32" --Loads opengl32 kernel .lib
 	}
@@ -64,6 +64,10 @@ project "Enigma"
 	filter "system:linux"
 		defines
 		{
+		}
+		links
+		{
+			"pthread"
 		}
 
 	filter "system:macosx"

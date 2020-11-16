@@ -27,7 +27,7 @@ IncludeDir["imgui"]		= "%{wks.location}/Dependencies/imgui"
 IncludeDir["spdlog"]	= "%{wks.location}/Dependencies/spdlog/include" 
 IncludeDir["pfd"]		= "%{wks.location}/Dependencies/pfd/include" 
 IncludeDir["stb_image"]	= "%{wks.location}/Dependencies/stb_image/include" 
---IncludeDir["cryptopp"]	= "%{wks.location}/Dependencies/cryptopp" 
+IncludeDir["cryptopp"]	= "%{wks.location}/Dependencies/cryptopp" 
 
 
 -- Organize libs solution in a single filtered directory 
@@ -38,7 +38,7 @@ group "Dependencies"
 	include "Dependencies/spdlog"
 	include "Dependencies/pfd"
 	include "Dependencies/stb_image"
-	--include "Dependencies/cryptopp"
+	include "Dependencies/cryptopp"
 group ""
 
 -- Include Enigma Application projects solution

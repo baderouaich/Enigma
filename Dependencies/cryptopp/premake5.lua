@@ -13,10 +13,15 @@ project "cryptopp"
 	defines 
 	{
 		"_WINSOCK_DEPRECATED_NO_WARNINGS",
-		--"CRYPTOPP_DISABLE_ASM",
-		"CRYPTOPP_IMPORTS", -- for static build
-		--"CRYPTOPP_DLL"  -- for dynamic build
+		"CRYPTOPP_DISABLE_ASM", -- disable assembly files x64dll.asm, x64masm.asm and rdrand.as
+		--"CRYPTOPP_IMPORTS", -- for static build
+		--"CRYPTOPP_DLL",  -- for dynamic build
+		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- Needed to use MD5 in Crypto++
 	}
+
+	-- Enable SSE2 vector processing
+	--vectorextensions "SSE2"
+
 	
 	files
 	{
@@ -103,10 +108,13 @@ project "cryptopp"
 
 	filter "system:windows"
 		systemversion "latest"
-		links
-		{
-			"Ws2_32", -- windows sockets Ws2_32.lib 
-		}
+		--[[links 
+	 	{
+	      "advapi32", "kernel32", "user32", "gdi32", "comdlg32",
+	      "shell32", "windowscodecs", "comctl32", "msimg32",
+	      "winspool", "wininet", "urlmon", "gdiplus", "ole32",
+	      "oleAut32", "shlwapi", "version", "crypt32"
+	    }--]]
 
 
 	filter "configurations:Debug"
