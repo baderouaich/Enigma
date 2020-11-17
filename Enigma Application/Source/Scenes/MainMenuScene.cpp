@@ -1,6 +1,10 @@
 #include "pch.hpp"
 #include "MainMenuScene.hpp"
+#include "Enigma/System/Dialogs/MessageBox.hpp"
 #include <string>
+
+#include "EncryptTextScene.hpp"
+#include "DecryptTextScene.hpp"
 
 MainMenuScene::MainMenuScene()
 	:
@@ -13,14 +17,33 @@ void MainMenuScene::LoadImGuiFonts()
 {
 	m_fonts["Enigma"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::ENIGMA_FONT_PATH, 45.0f);
 	m_fonts["Pieces of Eight"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::PIECES_OF_EIGHT_FONT_PATH, 30.0f);
-	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::NUNITO_SANS_REGULAR, 30.0f);
+	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::NUNITO_SANS_REGULAR_FONT_PATH, 30.0f);
+	m_fonts["Goldman-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::GOLDMAN_BOLD_FONT_PATH, 20.0f);
+	m_fonts["Goldman-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::GOLDMAN_REGULAR_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_BOLD_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Bold-Italic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_BOLD_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Italic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Light"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_LIGHT_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-LightItalic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_LIGHT_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Medium"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_MEDIUM_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-MediumItalic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_MEDIUM_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_REGULAR_FONT_PATH, 20.0f);
 
-	if (!m_fonts["Enigma"] || !m_fonts["Pieces of Eight"] || !m_fonts["NunitoSans-Regular"])
+	for (const auto& [k, v] : m_fonts)
 	{
-		ENIGMA_ERROR("Could not load fonts");
-		Application::GetInstance().EndApplication();
+		if (!v)
+		{
+			ENIGMA_ERROR("Could not load font {0}", k.c_str());
+			Enigma::MessageBox msg_box("Resource Loading Error",
+				"Failed to load font " + k,
+				Enigma::MessageBox::Icon::Error,
+				Enigma::MessageBox::Choice::Ok);
+			auto action = msg_box.Show();
+			UNUSED(action);
+			Application::GetInstance().EndApplication();
+		}
 	}
-	
+
 }
 
 void MainMenuScene::OnCreate()
@@ -28,41 +51,43 @@ void MainMenuScene::OnCreate()
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
-	glClearColor(BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, BACKGROUND_COLOR.w);
-
+	glClearColor(
+		Constants::Colors::BACKGROUND_COLOR[0],
+		Constants::Colors::BACKGROUND_COLOR[1],
+		Constants::Colors::BACKGROUND_COLOR[2],
+		Constants::Colors::BACKGROUND_COLOR[3]
+	);
 
 	this->LoadImGuiFonts();
 }
 
 void MainMenuScene::OnUpdate(const f32& dt)
-{
-
-}
+{}
 
 void MainMenuScene::OnDraw()
-{
-}
+{}
 
 void MainMenuScene::OnImGuiDraw()
 {
-	const auto& [win_w, win_h] = __super::GetSceneData().window->GetSize();
-	const auto& [win_x, win_y] = __super::GetSceneData().window->GetPosition();
+	const auto& [win_w, win_h] = Application::GetInstance().GetWindow()->GetSize();
+	const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
 	const auto& io = ImGui::GetIO();
 
 	static const auto button_size = ImVec2(350.0f, 45.0f);
 
-	static const auto spacing = [](ui8 n) { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto spacing = [](ui8 n) noexcept { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 	ImGui::Begin("Buttons Container", nullptr, container_flags);
-	//ImGui::SetWindowPos(ImVec2(win_x, win_y));
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h)));
+	ImGui::SetWindowPos(ImVec2(static_cast<f32>(win_x), static_cast<f32>(win_y)));
 	{
 		spacing(15);
 
 		// Enigma Version
 		{
-			ImGui::SetCursorPosX((io.DisplaySize.x - (ImGui::CalcTextSize("Enigma x.y.z").x * m_fonts["Enigma"]->Scale)) / 2.0f);
+			static const ImVec2 label_size = { ImGui::CalcTextSize("Enigma x.y.z").x * m_fonts["Enigma"]->Scale, ImGui::CalcTextSize("Enigma x.y.z").y * m_fonts["Enigma"]->Scale };
+			ImGui::SetCursorPosX((io.DisplaySize.x - label_size.x) / 2.0f);
 			ImGui::PushFont(m_fonts["Enigma"]);
 				ImGui::Text("Enigma %s", ENIGMA_VERSION);
 			ImGui::PopFont();
@@ -77,6 +102,7 @@ void MainMenuScene::OnImGuiDraw()
 			if (ImGui::Button("Encrypt File", button_size))
 			{
 				// Push new EncryptFileScene to perform operation 
+
 			}
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Decrypt File", button_size))
@@ -87,13 +113,30 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Encrypt Text", button_size))
 			{
-
+				Application::GetInstance().PushScene(new EncryptTextScene(m_fonts));
 			}
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Decrypt Text", button_size))
 			{
+				Application::GetInstance().PushScene(new DecryptTextScene(m_fonts));
 
 			}
+		}
+
+		//Exit Button
+		{
+			const static ImVec2 exit_btn_size(70.0f, 45.0f);
+			ImGui::SetCursorPos(ImVec2(io.DisplaySize.x - exit_btn_size.x, io.DisplaySize.y - exit_btn_size.y));
+
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.25f, 0.72f, 0.74f, 0.2f));
+			ImGui::PushStyleColor(ImGuiCol_Text,  ImVec4(0.10f, 0.56f, 0.58f, 1.0f));
+			if (ImGui::Button("Exit", exit_btn_size))
+			{
+				__super::EndScene();
+			}
+			ImGui::PopStyleColor(4);
 		}
 		ImGui::PopFont();
 
@@ -182,6 +225,7 @@ void MainMenuScene::OnImGuiDraw()
 
 void MainMenuScene::OnEvent(Event& event)
 {
+	/*
 	//Listening to specific event
 	EventDispatcher dispatcher(event);
 	dispatcher.Dispatch<MouseButtonPressedEvent>([](const MouseButtonPressedEvent& e) -> bool
@@ -198,11 +242,6 @@ void MainMenuScene::OnEvent(Event& event)
 			return true; // handled, return false if other scenes may use the event
 		});
 
-	if (Input::IsKeyPressed(Enigma::Key::Escape))
-	{
-		__super::EndScene();
-	}
-
 
 	if (Input::IsKeyPressed(Enigma::Key::S))
 	{
@@ -210,6 +249,7 @@ void MainMenuScene::OnEvent(Event& event)
 
 		ENIGMA_TRACE("{0} {1}", win_x, win_y);
 	}
+	*/
 };
 
 void MainMenuScene::OnDestroy()

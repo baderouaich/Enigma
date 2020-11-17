@@ -10,6 +10,10 @@
 #include <Enigma/Debug/Logger/Logger.hpp>
 
 
+#define TESTING true
+#include <Enigma/Test/Encryption/AESEncryptionTest.hpp>
+
+
 extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication();
 
 int main(int argc, char* argv[])
@@ -18,10 +22,15 @@ int main(int argc, char* argv[])
 
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
+
+#if TESTING
+	AESEncryptionTest a;
+#else
 	// Create Application
 	Enigma::UniquePtr<Enigma::Application> _App = Enigma::CreateApplication();
 	// Run Application
 	_App->Run();
+#endif
 
 	return EXIT_SUCCESS;
 }

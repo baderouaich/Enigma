@@ -2,12 +2,11 @@
 #include <Enigma.hpp>
 using namespace Enigma;
 
-
-class MainMenuScene : public Enigma::Scene
+class EncryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	MainMenuScene();
-	virtual ~MainMenuScene() = default;
+	EncryptTextScene(const std::unordered_map<String, ImFont*>& fonts);
+	virtual ~EncryptTextScene() = default;
 
 private: /* Overrides */
 	void OnCreate() override;
@@ -18,11 +17,6 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private:
-	void LoadImGuiFonts();
-
-
-private:
-	std::unordered_map<String, ImFont*> m_fonts;
-
+	const std::unordered_map<String, ImFont*>& m_fonts;
 };
 
