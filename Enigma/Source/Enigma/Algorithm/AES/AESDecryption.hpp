@@ -11,6 +11,9 @@
 #include <ccm.h> // CBC_Mode
 #include <md5.h> // MD5
 #include <osrng.h> // AutoSeededRandomPool
+#include <sha.h> // SHA256
+#include <hkdf.h> // KeyDerivationFunction
+#include <modes.h> // 
 
 
 NS_ENIGMA_BEGIN
@@ -22,20 +25,9 @@ public:
 	~AESDecryption();
 
 	/*
-	*	Decrypts base64 Cipher buffer
+	*	Decrypt encrypted (IV, CIPHER)
 	*/
-	String Decrypt(const String& base64_cipher);
-
-
-public: /* Accessors */
-	//Get auto extracted IV
-	byte* const& GetIV() const noexcept { return m_iv; }
-	//Get auto extracted Key
-	byte* const& GetKey() const noexcept { return m_key; }
-
-private:
-	byte* m_key; //auto extracted Encryption password from base64 cipher
-	byte* m_iv; //auto extracted 16bytes iv from base64 cipher
+	String Decrypt(const String& password, const String& buffer);
 
 private:
 	UniquePtr<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption> m_aes_decryption;

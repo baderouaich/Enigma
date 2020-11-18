@@ -11,7 +11,7 @@
 
 
 #define TESTING true
-#include <Enigma/Test/Encryption/AESEncryptionTest.hpp>
+#include <Enigma/Test/AESEncryptionDecryptionTest.hpp>
 
 
 extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication();
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	Enigma::Logger::Initialize();
 
 #if TESTING
-	AESEncryptionTest a;
+	Enigma::UniquePtr<AESEncryptionDecryptionTest> a(new AESEncryptionDecryptionTest);
 #else
 	// Create Application
 	Enigma::UniquePtr<Enigma::Application> _App = Enigma::CreateApplication();
