@@ -10,7 +10,7 @@
 #include <Enigma/Debug/Logger/Logger.hpp>
 
 
-#define TESTING true
+#define TESTING false
 #include <Enigma/Test/AESEncryptionDecryptionTest.hpp>
 
 
