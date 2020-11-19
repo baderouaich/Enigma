@@ -2,6 +2,7 @@ project "glfw"
 	kind "StaticLib"
 	language "C"
 	staticruntime "on"
+	systemversion "latest"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
@@ -22,10 +23,6 @@ project "glfw"
 	--[[ For Linux --]]
 	filter "system:linux"
 		pic "on"
-
-		systemversion "latest"
-		staticruntime "on"
-
 		files
 		{
 			"src/x11_init.c",
@@ -39,7 +36,6 @@ project "glfw"
 			"src/osmesa_context.c",
 			"src/linux_joystick.c"
 		}
-
 		defines
 		{
 			"_GLFW_X11"
@@ -47,9 +43,6 @@ project "glfw"
 
 	--[[ For Windows --]]
 	filter "system:windows"
-		systemversion "latest"
-		staticruntime "on"
-
 		files
 		{
 			"src/win32_init.c",
@@ -62,12 +55,12 @@ project "glfw"
 			"src/egl_context.c",
 			"src/osmesa_context.c"
 		}
-
 		defines 
 		{ 
 			"_GLFW_WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
+
 
 	filter "configurations:Debug"
 		runtime "Debug"

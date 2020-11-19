@@ -8,6 +8,10 @@
 #include "Types.hpp"
 #include "Version.hpp"
 
+/// Enable/Disable gtest Testing
+#define ENIGMA_TEST true
+///
+
 
 ///API import & export macros
 #if ENIGMA_DYNAMIC_LINK
@@ -41,6 +45,8 @@
 
 
 
+
+
 //Windows
 #if defined(_MSC_VER)
 	//Disable warning  4251 in MSC Microsoft Visual C++
@@ -49,7 +55,7 @@
 #pragma warning( disable: 4251 )
 #endif
 
-//_CRT_SECURE_NO_WARNINGS Disable Clang warnings
+/// _CRT_SECURE_NO_WARNINGS Disable Clang warnings
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -63,6 +69,14 @@
 #define __super  
 #endif
 /// 
+
+
+// ENIGMA_LOG_CURRENT_FUNCTION() on debug
+#ifdef ENIGMA_DEBUG
+	#define ENIGMA_LOG_CURRENT_FUNCTION() ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION())
+#else
+	#define ENIGMA_LOG_CURRENT_FUNCTION()
+#endif // ENIGMA_DEBUG
 
 
 #endif // !ENIGMA_CORE_H

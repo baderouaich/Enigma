@@ -16,7 +16,7 @@ i32 _base64Decode(const byte* input, size_t input_len, byte* output, size_t* out
 	for (i = (sizeof(m_characters)) - 1; i >= 0; i--) 
 	{
 		inalphabet[m_characters[i]] = 1;
-		decoder[m_characters[i]] = i;
+		decoder[m_characters[i]] = static_cast<byte>(i);
 	}
 
 	i8_count = 0;

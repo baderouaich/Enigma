@@ -21,14 +21,14 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["glfw"]		= "%{wks.location}/Dependencies/glfw/include"
-IncludeDir["glad"]		= "%{wks.location}/Dependencies/glad/include"
-IncludeDir["imgui"]		= "%{wks.location}/Dependencies/imgui" 
-IncludeDir["spdlog"]	= "%{wks.location}/Dependencies/spdlog/include" 
-IncludeDir["pfd"]		= "%{wks.location}/Dependencies/pfd/include" 
-IncludeDir["stb_image"]	= "%{wks.location}/Dependencies/stb_image/include" 
-IncludeDir["cryptopp"]	= "%{wks.location}/Dependencies/cryptopp" 
-
+IncludeDir["glfw"]			= "%{wks.location}/Dependencies/glfw/include"
+IncludeDir["glad"]			= "%{wks.location}/Dependencies/glad/include"
+IncludeDir["imgui"]			= "%{wks.location}/Dependencies/imgui" 
+IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include" 
+IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include" 
+IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" 
+IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp" 
+IncludeDir["googletest"]	= "%{wks.location}/Dependencies/googletest/include" 
 
 -- Organize libs solution in a single filtered directory 
 group "Dependencies"
@@ -39,9 +39,10 @@ group "Dependencies"
 	include "Dependencies/pfd"
 	include "Dependencies/stb_image"
 	include "Dependencies/cryptopp"
+	include "Dependencies/googletest"
 group ""
 
--- Include Enigma Application projects solution
+-- Include Enigma Application project solution
 project "Enigma"
 	language "C++"
 	cppdialect "C++17"
@@ -73,6 +74,7 @@ project "Enigma"
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- stb_image
 		"%{IncludeDir.cryptopp}", -- cryptopp
+		"%{IncludeDir.googletest}", -- googletest
 	}
 
 
@@ -84,7 +86,8 @@ project "Enigma"
 		"spdlog", -- links SpdLog lib
 		"stb_image", -- links stb_image lib
 		"cryptopp", -- links cryptopp lib
-
+		"googletest", --TODO: link googletest.lib only in debug
+		
 		"opengl32" --Loads opengl32 kernel .lib
 	}
 
@@ -125,6 +128,7 @@ project "Enigma"
 		runtime "Debug"
 		symbols "On"
 		optimize "Off"
+
 		
 	filter "configurations:Release"
 		kind "WindowedApp" -- Release as windowed application

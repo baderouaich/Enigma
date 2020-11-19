@@ -1,7 +1,6 @@
 #include "pch.hpp"
+#include "Enigma.hpp"
 #include "MainMenuScene.hpp"
-#include "System/Dialogs/MessageBox.hpp"
-#include <string>
 
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
@@ -10,11 +9,14 @@ MainMenuScene::MainMenuScene()
 	:
 	Enigma::Scene()
 {
+	LOG(ENIGMA_CURRENT_FUNCTION);
 }
 
 
 void MainMenuScene::LoadImGuiFonts()
 {
+	LOG(ENIGMA_CURRENT_FUNCTION);
+
 	m_fonts["Enigma"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::ENIGMA_FONT_PATH, 45.0f);
 	m_fonts["Pieces of Eight"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::PIECES_OF_EIGHT_FONT_PATH, 30.0f);
 	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::NUNITO_SANS_REGULAR_FONT_PATH, 30.0f);
@@ -33,14 +35,17 @@ void MainMenuScene::LoadImGuiFonts()
 	{
 		if (!v)
 		{
+			//console alert
 			ENIGMA_ERROR("Could not load font {0}", k.c_str());
+			//ui alert
 			Enigma::MessageBox msg_box("Resource Loading Error",
 				"Failed to load font " + k,
 				Enigma::MessageBox::Icon::Error,
 				Enigma::MessageBox::Choice::Ok);
 			auto action = msg_box.Show();
 			UNUSED(action);
-			Application::GetInstance().EndApplication();
+			//no further without dear fonts :c
+			__super::EndScene();
 		}
 	}
 
@@ -57,7 +62,7 @@ void MainMenuScene::OnCreate()
 		Constants::Colors::BACKGROUND_COLOR[2],
 		Constants::Colors::BACKGROUND_COLOR[3]
 	);
-
+	// Load dear fonts
 	this->LoadImGuiFonts();
 }
 

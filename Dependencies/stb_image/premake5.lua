@@ -22,8 +22,31 @@ project "stb_image"
 		"include"
 	}
 		
+	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
+		defines
+		{
+		}
+		links
+		{
+		}
+
+	filter "system:linux"
+		defines
+		{
+		}
+		links
+		{
+		}
+
+	filter "system:macosx"
+		defines
+		{
+		}	
+		links
+		{
+		}
 
 
 
