@@ -5,23 +5,27 @@
 using namespace std;
 using namespace Enigma;
 
+
 TEST(Encrypt_And_Decrypt_Text, AES)
 {
     UniquePtr<AESEncryption> aes_encyptor = MakeUnique<Enigma::AESEncryption>();
     UniquePtr<AESDecryption> aes_decryptor = MakeUnique<Enigma::AESDecryption>();
-
     String buffer, password;
-    cout << "Enter buffer to encrypt: ";
+    String encrypted, decrypted;
+    
+    cout << "\nEnter buffer to encrypt: ";
     getline(cin, buffer);
-    cout << "Enter password (encryption key): ";
+    cout << "\nEnter password (encryption key): ";
     getline(cin, password);
 
 
-    String encrypted = aes_encyptor->Encrypt(password, buffer); // iv + cipher
-    cout << "Encrypted: " << encrypted << endl;
+    encrypted = aes_encyptor->Encrypt(password, buffer); // iv + cipher
+    cout << "\nEncrypted: " << encrypted;
 
-    String decrypted = aes_decryptor->Decrypt(password, encrypted);;
-    cout << "Decrypted: " << decrypted << endl;
+    decrypted = aes_decryptor->Decrypt(password, encrypted);;
+    cout << "\nDecrypted: " << decrypted << endl;
 
+    EXPECT_NE(buffer, encrypted);
     EXPECT_EQ(buffer, decrypted);
 }
+

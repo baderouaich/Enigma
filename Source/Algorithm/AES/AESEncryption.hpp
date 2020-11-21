@@ -39,6 +39,7 @@ private:
 	UniquePtr<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption> m_aes_encryption; // Current Mode and intent
 	UniquePtr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
 
+private:
 };
 NS_ENIGMA_END
 

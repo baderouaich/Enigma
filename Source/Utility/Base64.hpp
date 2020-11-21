@@ -9,18 +9,19 @@ class ENIGMA_API Base64
 {
 public:
     /*
-    *   Decodes a 64base encoded memory. The decoded memory is
-    *   expected to be freed by the caller by calling `free()`
-    *   returns the length of the out buffer
+    *   Decodes a Base64 string
     */
-    static size_t Decode(const byte* in, size_t inLength, byte** out);
+	static String Decode(const StringView& encoded_buffer);
 
     /*
-     *  Encodes bytes into a 64base encoded memory with terminating '\0' character.
-     *  The encoded memory is expected to be freed by the caller by calling `free()`
-     *  returns the length of the out buffer
+     *	Encodes string bytes into Base64 string
      */
-    static size_t Encode(const byte* in, size_t inLength, byte** out);
+	static String Encode(const StringView& buffer);
+
+	/*
+	*	Checks if a byte is base64
+	*/
+	static const bool IsBase64(const ui8& c) noexcept;
 };
 NS_ENIGMA_END
 

@@ -15,22 +15,23 @@ AESEncryption::AESEncryption()
 
 String AESEncryption::Encrypt(const String& password, const String& buffer)
 {
-    { // Make sure encryption mode and the seeder are initialized
+    // Make sure encryption mode and the seeder are initialized
+    { 
         ENIGMA_CORE_ASSERT(m_aes_encryption, "AESEncryption is not initialized properly");
         ENIGMA_CORE_ASSERT(m_auto_seeded_random_pool, "AESEncryption is not initialized properly");
     }
-
-    { // Validate Arguments
+    // Validate Arguments
+    {
         // AES password length must be at least 9 for security reasons
-        if (password.size() < 9)
+        if (password.size() < Constants::Algorithm::AES::AES_MINIMUM_PASSWORD_LENGTH)
         {
-            const char msg[] = "AES Minimun Password Length is 9";
-            ENIGMA_CORE_ERROR(msg);
+            const String msg = "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::AES::AES_MINIMUM_PASSWORD_LENGTH);
+            ENIGMA_CORE_ERROR(msg.c_str());
             Enigma::MessageBox msg_box("AES Encryption Failure", msg, Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
-            UNUSED(msg_box.Show());
-            return "";
+            Enigma::MessageBox::Action action = msg_box.Show();
+            UNUSED(action);
+            return String();
         }
-        //
     }
 
     String encrypted; // Final encrypted buffer

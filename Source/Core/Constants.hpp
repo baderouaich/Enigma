@@ -11,6 +11,19 @@ namespace Enigma
 {
 	namespace Constants
 	{
+		namespace Algorithm
+		{
+			namespace AES
+			{
+				static constexpr const ui16 AES_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
+			}
+		}
+
+		namespace Utility
+		{
+			static constexpr const ui8 BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+		}
+
 		namespace Graphics
 		{
 			/*

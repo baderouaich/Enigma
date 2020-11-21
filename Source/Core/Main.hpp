@@ -13,6 +13,7 @@
 
 #if ENIGMA_TEST
 	#include <Tests/Algorithm/AESTests.hpp>
+	#include <Tests/Utils/Base64Tests.hpp>
 #endif
 
 
@@ -20,12 +21,10 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication();
 
 int main(int argc, char* argv[])
 {
-	UNUSED(argc), UNUSED(argv);
-
+#if !ENIGMA_TEST
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
-
-#if !ENIGMA_TEST
+	UNUSED(argc), UNUSED(argv);
 	// Create Application
 	Enigma::UniquePtr<Enigma::Application> _App = Enigma::CreateApplication();
 	// Run Application
