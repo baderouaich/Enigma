@@ -98,7 +98,7 @@ String Base64::Encode(const StringView& buffer)
 	bits = 0;
 	for (input_idx = 0; input_idx < in_length; input_idx++)
 	{
-		bits |= buffer[input_idx];
+		bits |= static_cast<const byte&>(buffer[input_idx]);
 
 		i8_count++;
 		if (i8_count == 3)
@@ -136,7 +136,6 @@ String Base64::Encode(const StringView& buffer)
 		output[output_idx++] = '=';
 	}
 	output[output_idx++] = 0;
-
 	return output;
 }
 
