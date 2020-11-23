@@ -1,0 +1,11 @@
+[14:27:11] [trace] Enigma App: class std::unique_ptr<class Enigma::Application,struct std::default_delete<class Enigma::Application> > __cdecl Enigma::CreateApplication(void)
+[14:27:12] [info] Enigma: [ OpenGL Info ]
+		Manufacturer: Intel
+		Renderer: Intel(R) HD Graphics 4600
+		Version: 3.3.0 - Build 20.19.15.5126
+
+[14:27:12] [trace] Enigma App: __cdecl AppDelegate::AppDelegate(const struct Enigma::WindowSettings &)
+[14:27:12] [trace] Enigma App: __cdecl MainMenuScene::MainMenuScene(void)
+[14:27:12] [trace] Enigma App: void __cdecl MainMenuScene::OnCreate(void)
+[14:27:12] [trace] Enigma App: void __cdecl MainMenuScene::LoadImGuiFonts(void)
+[14:27:22] [trace] Enigma App: void __cdecl MainMenuScene::OnDestroy(void)

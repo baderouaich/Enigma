@@ -22,7 +22,7 @@ bool Input::IsMouseButtonPressed(MouseCode button) noexcept
 std::pair<f32, f32> Input::GetMousePosition() noexcept
 {
 	GLFWwindow* window = Application::GetInstance().GetWindow()->GetGLFWwindow();
-	f64 xPos, yPos;
+	f64 xPos{0.0}, yPos{0.0};
 	glfwGetCursorPos(window, &xPos, &yPos);
 	return std::make_pair( static_cast<f32>(xPos), static_cast<f32>(yPos) );
 }

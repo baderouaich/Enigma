@@ -5,16 +5,17 @@
 #include "Utility/Base64.hpp"
 
 NS_ENIGMA_BEGIN
-using namespace CryptoPP;
 
 AESDecryption::AESDecryption()
+    :
+    m_aes_decryption(MakeUnique<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption>())
 {
-    m_aes_decryption = MakeUnique<CFB_Mode<AES>::Decryption>();
 }
 
 
 String AESDecryption::Decrypt(const String& password, const String& buffer)
 {
+    using namespace CryptoPP;
     // Split IV and Cipher from buffer
     String iv = buffer.substr(0, AES::BLOCKSIZE);
     String encrypted = buffer.substr(AES::BLOCKSIZE, buffer.size() - 1);

@@ -4,13 +4,12 @@
 #include "Utility/Base64.hpp"
 
 NS_ENIGMA_BEGIN
-using namespace CryptoPP;
-
 
 AESEncryption::AESEncryption()
+    :
+    m_aes_encryption(MakeUnique<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption>()),
+    m_auto_seeded_random_pool(MakeUnique<CryptoPP::AutoSeededRandomPool>())
 {
-    m_aes_encryption = MakeUnique<CFB_Mode<AES>::Encryption>();
-    m_auto_seeded_random_pool = MakeUnique<CryptoPP::AutoSeededRandomPool>();
 }
 
 String AESEncryption::Encrypt(const String& password, const String& buffer)
@@ -38,8 +37,9 @@ String AESEncryption::Encrypt(const String& password, const String& buffer)
     String iv = this->GenerateRandomIV(); // Random generated 16 bytes IV
     try
     {
+        using namespace CryptoPP;
         // Prepare Key
-        CryptoPP::SecByteBlock key(AES::MAX_KEYLENGTH + AES::BLOCKSIZE); // Encryption key to be generated from user password + IV
+        SecByteBlock key(AES::MAX_KEYLENGTH + AES::BLOCKSIZE); // Encryption key to be generated from user password + IV
         HKDF<SHA256> hkdf;
         hkdf.DeriveKey(
             key, 

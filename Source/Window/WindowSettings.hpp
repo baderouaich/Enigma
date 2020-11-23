@@ -111,12 +111,6 @@ struct ENIGMA_API WindowSettings
 	*	 Defines the number of samples to use (For anti-aliasing)
 	*/
 	ui32 samples = 4;
-
-
-	/////-- OpenGL Context Settings --/////
-	//Todo: maybe derived settings for context?
-	ui16 gl_major_version = Constants::Graphics::OpenGL_MAJOR_VERSION;
-	ui16 gl_minor_version = Constants::Graphics::OpenGL_MINOR_VERSION;
 };
 
 NS_ENIGMA_END

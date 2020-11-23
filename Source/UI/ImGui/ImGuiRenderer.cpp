@@ -43,12 +43,11 @@ ImGuiRenderer::ImGuiRenderer()
     }
 
 
-    // Setup Platform/Renderer bindings
+    // Set imgui gl context version (to the same one used by window)
     Application& app = Application::GetInstance();
     GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow()->GetGLFWwindow());
-    auto [major, minor] = app.GetWindow()->GetOpenGLVersion();
-    std::stringstream version;
-    version << "#version " << major << minor << "0";
+    std::ostringstream version;
+    version << "#version " << ENIGMA_GL_VERSION_MAJOR << ENIGMA_GL_VERSION_MINOR << "0";
     if (!ImGui_ImplGlfw_InitForOpenGL(window, true))
     {
         ENIGMA_CORE_ERROR("ImGui init for GLFW failed.");
@@ -58,9 +57,6 @@ ImGuiRenderer::ImGuiRenderer()
         ENIGMA_CORE_ERROR("ImGui init for OpenGL failed.");
     }
 }
-
-
-
 
 
 

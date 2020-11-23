@@ -1,5 +1,5 @@
 #pragma once
-#include <Enigma.hpp>
+#include "Scene.hpp"
 using namespace Enigma;
 
 
@@ -20,9 +20,7 @@ private: /* Overrides */
 private:
 	void LoadImGuiFonts();
 
-
 private:
 	std::unordered_map<String, ImFont*> m_fonts;
-
 };
 

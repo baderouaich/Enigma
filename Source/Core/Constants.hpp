@@ -3,8 +3,8 @@
 #define ENIGMA_CONSTANTS_H
 
 #include "Types.hpp"
-#include <math.h>
 
+#include <math.h> // M_PI
 #include <aes.h> // MAX_KEYLENGTH, BLOCKSIZE
 
 namespace Enigma
@@ -22,15 +22,6 @@ namespace Enigma
 		namespace Utility
 		{
 			static constexpr const ui8 BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-		}
-
-		namespace Graphics
-		{
-			/*
-			*	OpenGL Default Version (Consider using version 4.3 as minimum to work properly)
-			*/
-			static constexpr const ui16 OpenGL_MAJOR_VERSION = 4;
-			static constexpr const ui16 OpenGL_MINOR_VERSION = 3;
 		}
 
 		namespace Fonts

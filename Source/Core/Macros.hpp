@@ -3,13 +3,13 @@
 #define ENIGMA_MACROS_H
 
 ///Enable/Disable Profiling
-#define ENIGMA_ENABLE_PROFILING 0
+#define ENIGMA_ENABLE_PROFILING false
 ///
 
 
 ///Enable/Disable Assertions
 #ifdef ENIGMA_DEBUG
-#define ENIGMA_ENABLE_ASSERTS 1
+	#define ENIGMA_ENABLE_ASSERTS true
 #endif
 ///
 
@@ -138,5 +138,36 @@ do { \
     Class& operator=(Class&& obj) = delete;        
 ///
 
+
+
+/// glAssert to handle opengl calls errors (for opengl versions less than 4.3 with no error callback func to handle errors)
+#include <glad/glad.h>
+static constexpr const char* GetGlEnumString(const GLenum& _enum) noexcept
+{
+#define CASE_ENUM(e) case e: return #e
+	switch (_enum)
+	{
+		// errors
+		CASE_ENUM(GL_NONE);
+		CASE_ENUM(GL_INVALID_ENUM);
+		CASE_ENUM(GL_INVALID_VALUE);
+		CASE_ENUM(GL_INVALID_OPERATION);
+		CASE_ENUM(GL_INVALID_FRAMEBUFFER_OPERATION);
+		CASE_ENUM(GL_OUT_OF_MEMORY);
+		default: return "Unknown GLenum";
+	};
+#undef CASE_ENUM
+}
+#define glAssert(call) \
+		do \
+		{ \
+			(call); \
+			GLenum err = glGetError(); \
+			if (err != GL_NO_ERROR) \
+			{ \
+				ENIGMA_CORE_ASSERT(false, GetGlEnumString(err)); \
+			} \
+		} while (false)
+///
 
 #endif // !ENIGMA_MACROS_H

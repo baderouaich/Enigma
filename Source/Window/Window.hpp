@@ -167,11 +167,6 @@ public:	/* Accessors */
 	*/
 	const i32& GetRefreshRate() noexcept;
 
-	/*
-	*	Returns OpenGL version (major, minor)
-	*/
-	const std::pair<ui16, ui16>& GetOpenGLVersion() const noexcept;
-
 public: /* Modifiers */
 	using EventCallback = std::function<void(Event&)>;
 	/*
@@ -310,8 +305,6 @@ private: /*Properties*/
 	const GLFWvidmode* m_video_mode;
 
 	UniquePtr<Cursor> m_cursor;	// Window cursor
-
-	std::pair<ui16, ui16> m_OpenGL_version; // Desired OpenGL Version from WindowSettings
 
 public: /*Good Friends :)*/
 	friend class Application;

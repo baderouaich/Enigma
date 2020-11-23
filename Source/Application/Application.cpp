@@ -107,11 +107,8 @@ bool Application::OnWindowResize(WindowResizeEvent& event)
 {
 	ENIGMA_CORE_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
 
-	//Update Renderer Viewport
-	//Renderer::SetViewport(0, 0, event.GetWidth(), event.GetHeight());
-
 	// Update OpenGL Viewport
-	glViewport(0, 0, event.GetWidth(), event.GetHeight());
+	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
 
 	return false;
 }
@@ -123,7 +120,7 @@ bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 	ENIGMA_CORE_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
 
 	// Update OpenGL Viewport
-	glViewport(0, 0, event.GetWidth(), event.GetHeight());
+	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
 
 	return false;
 }
@@ -143,7 +140,9 @@ void Application::Run()
 		{
 			//Update
 			{
+				// Delta time
 				UpdateDeltaTime();
+				// FPS
 				if(m_window->m_is_show_fps)
 					UpdateFPS();
 				// Update back scene (last pushed scene which is the active one)
@@ -157,11 +156,11 @@ void Application::Run()
 
 				// ImGui
 				m_imgui_renderer->Begin();
-				m_scenes.back()->OnImGuiDraw();
+					m_scenes.back()->OnImGuiDraw();
 				m_imgui_renderer->End();
 
 				// Force execution of GL commands in finite time 
-				glFlush();
+				glAssert( glFlush() );
 			}
 
 			// Check if the current active scene wants to quit

@@ -5,26 +5,23 @@
 #ifndef ENIGMA_MAIN_H
 #define ENIGMA_MAIN_H
 
-
 #include <Core/Core.hpp>
 #include <Application/Application.hpp>
 #include <Logger/Logger.hpp>
-
 
 #if ENIGMA_TEST
 	#include <Tests/Algorithm/AESTests.hpp>
 	#include <Tests/Utils/Base64Tests.hpp>
 #endif
 
-
 extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication();
 
 int main(int argc, char* argv[])
 {
 #if !ENIGMA_TEST
+	UNUSED(argc), UNUSED(argv);
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
-	UNUSED(argc), UNUSED(argv);
 	// Create Application
 	Enigma::UniquePtr<Enigma::Application> _App = Enigma::CreateApplication();
 	// Run Application

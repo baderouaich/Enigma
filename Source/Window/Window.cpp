@@ -111,8 +111,7 @@ Window::Window(const WindowSettings& window_settings)
 	m_GLFWwindow(nullptr),
 	m_monitor(nullptr),
 	m_video_mode(nullptr),
-	m_cursor(nullptr),
-	m_OpenGL_version(window_settings.gl_major_version, window_settings.gl_minor_version)
+	m_cursor(nullptr)
 {
 	if (!InitGLFW(window_settings))
 		throw std::exception("Failed to Initialize GLFW");
@@ -139,9 +138,8 @@ bool Window::InitGLFW(const WindowSettings& window_settings)
 
 	/// Set window hints
 	//OpenGL version
-	const auto& [major, minor] = m_OpenGL_version;
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, static_cast<int>(major));
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, static_cast<int>(minor));
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, ENIGMA_GL_VERSION_MAJOR);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, ENIGMA_GL_VERSION_MINOR);
 
 	glfwWindowHint(GLFW_RESIZABLE, window_settings.is_resizable);
 	glfwWindowHint(GLFW_DECORATED, window_settings.is_decorated);
@@ -361,42 +359,25 @@ bool Window::InitGLAD()
 
 bool Window::InitOpenGLOptions()
 {
-	//TODO: Require GL 4.3+
-
-	glEnable(GL_DEPTH_TEST); // TO USE THE Z COORDINATE
+#if false
+	glAssert( glEnable(GL_DEPTH_TEST) ); // TO USE THE Z COORDINATE
 
 	//DONT DRAW BACK FACES OF DRAWINGS, tell gl to cull back face
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	glAssert( glEnable(GL_CULL_FACE) );
+	glAssert( glCullFace(GL_BACK) );
 
-	glFrontFace(GL_CCW); // DRAW FRONT FACE DRAWINGS INDICES CLOCK WISE 
+	glAssert( glFrontFace(GL_CCW) ); // DRAW FRONT FACE DRAWINGS INDICES CLOCK WISE 
 
-	glEnable(GL_BLEND); // ENABLE BLENDING
+	glAssert( glEnable(GL_BLEND) ); // ENABLE BLENDING
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // TEXTURES ALPHA BLENDING
+	glAssert( glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA) ); // TEXTURES ALPHA BLENDING
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // DRAW BACK AND FRONT OF DRAWINGS FILLED (USE GL_LINE OR LINES or other opts)
-
-#if ENIGMA_DEBUG
-	//Set OpenGL Debug CALLBACK for gl >= 4.3 http://docs.gl/gl4/glDebugMessageCallback
-	const auto& [major, minor] = m_OpenGL_version;
-	if (major >= 4 && minor >= 3)
-	{
-		glEnable(GL_DEBUG_OUTPUT);
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		glDebugMessageCallback(OpenGLDebugCallBack, nullptr);
-		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, nullptr, GL_FALSE);
-	}
-	else
-	{
-		ENIGMA_CORE_WARN("Ignoring glDebugMessageCallback() as it is not supported in this GL version, use gl >= 4.3");
-		if (major < 4)
-			ENIGMA_CORE_WARN("Enigma requires at least OpenGL version >= 4.+ to work properly");
-	}
+	glAssert( glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) ); // DRAW BACK AND FRONT OF DRAWINGS FILLED (USE GL_LINE OR LINES or other opts)
+#endif
 
 	/// Log OpenGL Info
 	ENIGMA_CORE_INFO(
-		"| OpenGL Info |\n"
+		"[ OpenGL Info ]\n"
 		"\t\tManufacturer: {}\n"
 		"\t\tRenderer: {}\n"
 		"\t\tVersion: {}\n",
@@ -404,8 +385,6 @@ bool Window::InitOpenGLOptions()
 		glGetString(GL_RENDERER),
 		glGetString(GL_VERSION)
 	);
-#endif
-
 
 	return true;
 }
@@ -551,12 +530,6 @@ const i32& Window::GetRefreshRate() noexcept
 	return m_video_mode->refreshRate;
 }
 
-const std::pair<ui16, ui16>& Window::GetOpenGLVersion() const noexcept
-{
-	return m_OpenGL_version;
-}
-
-
 void Window::SetFullscreen(bool full_screen) noexcept
 {
 	if (this->IsFullscreen() == full_screen) return;
@@ -638,21 +611,6 @@ void Window::SetTitle(const String& title) noexcept
 		glfwSetWindowTitle(m_GLFWwindow, title.c_str());
 	}
 	m_title = title;
-	
-#if 0
-	if (show_fps)
-	{
-		// title - FPS: x
-		const ui32& FPS = Application::GetInstance().GetFPS();
-		glfwSetWindowTitle(m_GLFWwindow, const_cast<const String&&>(title + " - FPS: " + std::to_string(FPS)).c_str());
-	}
-	else
-	{
-		// title
-		glfwSetWindowTitle(m_GLFWwindow, title.c_str());
-	}
-	m_title = title;
-#endif
 }
 
 void Window::SetPosition(const i32& x, const i32& y) const noexcept

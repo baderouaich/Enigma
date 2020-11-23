@@ -52,7 +52,7 @@
 ///
 
 
-///STD 
+///the C++ Standard Libraries
 #include <iostream>
 #include <string>
 #include <sstream>

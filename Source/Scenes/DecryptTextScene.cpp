@@ -13,12 +13,12 @@ void DecryptTextScene::OnCreate()
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
-	glClearColor(
-		Constants::Colors::BACKGROUND_COLOR[0],
-		Constants::Colors::BACKGROUND_COLOR[1],
-		Constants::Colors::BACKGROUND_COLOR[2],
-		Constants::Colors::BACKGROUND_COLOR[3]
-	);
+	glAssert(glClearColor(
+			Constants::Colors::BACKGROUND_COLOR[0],
+			Constants::Colors::BACKGROUND_COLOR[1],
+			Constants::Colors::BACKGROUND_COLOR[2],
+			Constants::Colors::BACKGROUND_COLOR[3]
+		));
 
 }
 
@@ -62,7 +62,8 @@ void DecryptTextScene::OnImGuiDraw()
 
 
 	// Clear GL buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
 

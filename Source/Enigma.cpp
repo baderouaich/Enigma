@@ -2,16 +2,18 @@
 #include "Enigma.hpp"
 
 #include "Scenes/MainMenuScene.hpp"
+#include "glad/glad.h"
+
 
 class AppDelegate : public Enigma::Application
 {
 public:
-	AppDelegate(const Enigma::WindowSettings& window_settings)
+	explicit AppDelegate(const Enigma::WindowSettings& window_settings)
 		:
 		Enigma::Application(window_settings)
 	{
 		LOG(ENIGMA_CURRENT_FUNCTION);
-
+		
 		//Window
 		const auto& window = __super::GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
@@ -49,8 +51,6 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 	window_settings.is_show_fps = true;
 #endif
 	window_settings.is_resizable = false;
-	window_settings.gl_major_version = 4; // Todo: maybe 3.3 is mostly supported? 
-	window_settings.gl_minor_version = 3;
 
 	return Enigma::MakeUnique<AppDelegate>(std::move(window_settings));
 }
