@@ -5,10 +5,10 @@
 #include "glad/glad.h"
 
 
-class AppDelegate : public Enigma::Application
+class EnigmaApplication : public Enigma::Application
 {
 public:
-	explicit AppDelegate(const Enigma::WindowSettings& window_settings)
+	explicit EnigmaApplication(const Enigma::WindowSettings& window_settings)
 		:
 		Enigma::Application(window_settings)
 	{
@@ -17,7 +17,7 @@ public:
 		//Window
 		const auto& window = __super::GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
-		//window->SetIcon("Resources/Textures/EnigmaLogo.png");
+		window->SetIcon("Resources/Branding/EnigmaLogoNoText_200x200.png");
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
 
@@ -26,7 +26,7 @@ public:
 	}
 
 
-	virtual ~AppDelegate() = default;
+	virtual ~EnigmaApplication() = default;
 };
 
 
@@ -46,11 +46,9 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 	//window_settings.minimum_height = 720 - 100;
 	//window_settings.maximum_width = 1280 + 100;
 	//window_settings.maximum_height = 720 + 100;
-	window_settings.is_vsync = true;
-#if ENIGMA_DEBUG
-	window_settings.is_show_fps = true;
-#endif
+	window_settings.is_vsync = !ENIGMA_DEBUG;
+	window_settings.is_show_fps = ENIGMA_DEBUG;
 	window_settings.is_resizable = false;
 
-	return Enigma::MakeUnique<AppDelegate>(std::move(window_settings));
+	return Enigma::MakeUnique<EnigmaApplication>(std::move(window_settings));
 }

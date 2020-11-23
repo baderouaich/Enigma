@@ -95,6 +95,13 @@ project "Enigma"
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
+		--executable icon
+	    files { 'resources.rc', '**.ico' }
+	    vpaths 
+	    {
+	  	  ['Resources/*'] = { '*.rc', '**.ico' } 
+	    }
+
 		defines
 		{
 			"_CRT_SECURE_NO_WARNINGS", -- disable MSVC std warnings
