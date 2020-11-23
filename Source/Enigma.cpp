@@ -17,7 +17,7 @@ public:
 		//Window
 		const auto& window = __super::GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
-		window->SetIcon("Resources/Branding/EnigmaLogoNoText_200x200.png");
+		window->SetIcon("Resources/Branding/EnigmaLogo_200x200.png");
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
 
