@@ -32,13 +32,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-#      with:
-#        fetch-depth: 1
+
     - name: Generate Project Make Files
-      run: sudo ./Gen-Linux-GMake2.sh
+      run: |
+        sudo apt-get update
+        sudo ./Gen-Linux-GMake2.sh
 
     - name: Build Project
-      run: sudo make
+      run: |
+        make
+        
 #
 #    # update os and install Premake5
 #    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
