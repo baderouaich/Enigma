@@ -24,11 +24,11 @@ jobs:
           #commit_msg: "<optional commit message>"
           #check_library:
           #skip_preprocessor:
-          enable: warning,portability,performance,missingInclude
+          enable: warning,portability,performance
           exclude_check: ./Dependencies/
           #inconclusive:
           #inline_suppression:
           force_language: c++
-          #max_ctu_depth:
-          platform: win64
-          output_file: Static-Analysis-Report.txt #(default cppcheck_report.txt)
+          max_ctu_depth: 4 #default 2
+          #platform: 
+          output_file: ./Static-Analysis-Report.txt #(default cppcheck_report.txt)
