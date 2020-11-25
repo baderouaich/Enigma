@@ -29,6 +29,6 @@ jobs:
           #inconclusive:
           #inline_suppression:
           force_language: c++
-          max_ctu_depth: 4 #default 2
+          max_ctu_depth: 4
           #platform: 
           output_file: ./Static-Analysis-Report.txt #(default cppcheck_report.txt)
