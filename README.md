@@ -7,7 +7,7 @@
 ![Enigma](Resources/Branding/EnigmaLogo_Full.jpg)
 
 <!--DESCRIOTION-->
-Encrypt & Decrypt your important datas
+Encrypt & Decrypt your important data
 
 
 ## Supported Algorithm

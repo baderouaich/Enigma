@@ -45,8 +45,13 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 		//window_settings.maximum_width = 1280;
 		//window_settings.maximum_height = 720;
 		window_settings.is_resizable = false;
-		window_settings.is_vsync = !ENIGMA_DEBUG;
-		window_settings.is_show_fps = ENIGMA_DEBUG;
+#ifdef ENIGMA_DEBUG
+		window_settings.is_vsync = false;
+		window_settings.is_show_fps = true;
+#else
+		window_settings.is_vsync = true;
+		window_settings.is_show_fps = false;
+#endif
 	}
 	return Enigma::MakeUnique<EnigmaApplication>(std::move(window_settings));
 }
