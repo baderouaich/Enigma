@@ -1,6 +1,10 @@
 # Enigma
+<!--WORKFLOW-->
+[![Build Status](https://github.com/BaderEddineOuaich/Enigma/workflows/build/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=build) [![Static Analysis Status](https://github.com/BaderEddineOuaich/Enigma/workflows/static-analysis/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=static-analysis)
+
 <!--LOGO-->
 ![Enigma](Resources/Branding/EnigmaLogo_Full.jpg)
+
 <!--DESCRIOTION-->
 Encrypt & Decrypt your important datas
 

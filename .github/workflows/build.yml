@@ -8,6 +8,8 @@ on:
   pull_request:
     branches: [ master ]
 
+# platform tasks
+jobs:
   Linux:
     runs-on: ubuntu-latest
     steps:
