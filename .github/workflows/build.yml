@@ -22,11 +22,11 @@ jobs:
       run: ./Gen-Windows-vs2019.bat
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v16.0
 
     - name: Build Solution
       run: msbuild -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo Enigma.sln
-      
+
 # TODO
 #  Linux:
 #    runs-on: ubuntu-latest
