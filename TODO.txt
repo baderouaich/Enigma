@@ -2,3 +2,4 @@
 - Generate RSA Public & Private Keys
 - AES check password min 9 and max 64 length 
 - Static analysis on Enigma sources
+- Fix window on maximize, when dragging to centre it gets minimized

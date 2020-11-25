@@ -24,23 +24,13 @@ namespace Enigma
 			static constexpr const ui8 BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 		}
 
+		namespace Textures
+		{
+			static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/EnigmaLogoMini.png";
+		}
+
 		namespace Fonts
 		{
-			/*
-			 Enigma.ttf
-			 Pieces of Eight.ttf
-			 NunitoSans-Regular.ttf
-			 Goldman-Bold.ttf
-			 Goldman-Regular.ttf
-			 Ubuntu-Bold.ttf
-			 Ubuntu-BoldItalic.ttf
-			 Ubuntu-Italic.ttf
-			 Ubuntu-Light.ttf
-			 Ubuntu-LightItalic.ttf
-			 Ubuntu-Medium.ttf
-			 Ubuntu-MediumItalic.ttf
-			 Ubuntu-Regular.ttf
-			*/
 			static constexpr const auto ENIGMA_FONT_PATH = "./Resources/Fonts/Enigma.ttf";
 			static constexpr const auto PIECES_OF_EIGHT_FONT_PATH = "./Resources/Fonts/Pieces of Eight.ttf";
 			static constexpr const auto NUNITO_SANS_REGULAR_FONT_PATH = "./Resources/Fonts/NunitoSans-Regular.ttf";
@@ -54,8 +44,6 @@ namespace Enigma
 			static constexpr const auto UBUNTU_MEDIUM_FONT_PATH = "./Resources/Fonts/Ubuntu-Medium.ttf";
 			static constexpr const auto UBUNTU_MEDIUM_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-MediumItalic.ttf";
 			static constexpr const auto UBUNTU_REGULAR_FONT_PATH = "./Resources/Fonts/Ubuntu-Regular.ttf";
-
-
 		}
 
 		namespace Colors

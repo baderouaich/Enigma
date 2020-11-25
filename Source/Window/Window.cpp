@@ -8,94 +8,6 @@ static void GLFWErrorCallback(int error, const char* message)
 {
 	ENIGMA_CORE_ERROR("GFLW ERROR #{}: {}", error, message);
 }
-
-static void GLAPIENTRY OpenGLDebugCallBack(GLenum source,
-	GLenum type,
-	GLuint id,
-	GLenum severity,
-	GLsizei length,
-	const GLchar* message,
-	const void* userParam)
-{
-	///----- Filter debug msg -----///
-	
-	// ignore non-significant error/warning codes
-	if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
-
-	String output("");
-
-	output += "OpenGL Debug Message:\n";
-	output += "Debug message (" + std::to_string(id) + "): " + message + "\n";
-
-	switch (source)
-	{
-		case GL_DEBUG_SOURCE_API:				output += "Source: API";				break;
-		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		output += "Source: Window System";		break;
-		case GL_DEBUG_SOURCE_SHADER_COMPILER:	output += "Source: Shader Compiler";	break;
-		case GL_DEBUG_SOURCE_THIRD_PARTY:		output += "Source: Third Party";		break;
-		case GL_DEBUG_SOURCE_APPLICATION:		output += "Source: Application";		break;
-		case GL_DEBUG_SOURCE_OTHER:				output += "Source: Other";				break;
-	}
-
-	output += "\n";
-
-	switch (type)
-	{
-		case GL_DEBUG_TYPE_ERROR:               output += "Type: Error";				break;
-		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: output += "Type: Deprecated Behaviour"; break;
-		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  output += "Type: Undefined Behaviour";	break;
-		case GL_DEBUG_TYPE_PORTABILITY:         output += "Type: Portability";			break;
-		case GL_DEBUG_TYPE_PERFORMANCE:         output += "Type: Performance";			break;
-		case GL_DEBUG_TYPE_MARKER:              output += "Type: Marker";				break;
-		case GL_DEBUG_TYPE_PUSH_GROUP:          output += "Type: Push Group";			break;
-		case GL_DEBUG_TYPE_POP_GROUP:           output += "Type: Pop Group";			break;
-		case GL_DEBUG_TYPE_OTHER:               output += "Type: Other";				break;
-	}
-
-	output += "\n";
-
-	switch (severity)
-	{
-		case GL_DEBUG_SEVERITY_HIGH:			
-		{
-			output += "Severity: High";
-			ENIGMA_CORE_ERROR(output);
-			break;
-		}
-		case GL_DEBUG_SEVERITY_MEDIUM:
-		{
-			output += "Severity: Medium";
-			ENIGMA_CORE_WARN(output);
-			break;
-		}
-		case GL_DEBUG_SEVERITY_LOW:				
-		{
-			output += "Severity: Low";	
-			ENIGMA_CORE_INFO(output);
-			break;
-		}
-		case GL_DEBUG_SEVERITY_NOTIFICATION:
-		{
-			output += "Severity: Notification";	
-			ENIGMA_CORE_INFO(output);
-			break;
-		}
-	}
-
-	
-	/*
-	if (severity == GL_DEBUG_SEVERITY_MEDIUM || severity == GL_DEBUG_SEVERITY_HIGH)
-	ENIGMA_CORE_WARN
-	(
-		"OpenGL Debug\n"
-		"\t type: {}\n"
-		"\t id: {}\n"
-		"\t severity: {}\n"
-		"\t length: {}\n"
-		"\t message: {}\n",
-		 type, id, severity, length, message);
-	*/
-}
 /* Static Functions End */
 
 Window::Window(const WindowSettings& window_settings)
@@ -155,6 +67,7 @@ bool Window::InitGLFW(const WindowSettings& window_settings)
 #if __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
 #endif
+
 #ifdef ENIGMA_DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 #endif
@@ -195,7 +108,6 @@ bool Window::InitGLFWCallbacks()
 	/// Set GLFW Callbacks ///
 	if (!m_GLFWwindow)
 		return false;
-
 	
 	//Window ReSize
 	glfwSetWindowSizeCallback(m_GLFWwindow, [](GLFWwindow* window, int width, int height)
@@ -230,7 +142,7 @@ bool Window::InitGLFWCallbacks()
 	glfwSetWindowPosCallback(m_GLFWwindow, [](GLFWwindow* window, int x, int y)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-			if (! this_window.IsFullscreen()) // fullscreen triggers a move event, ignore it.
+			if (!this_window.IsFullscreen()) // fullscreen triggers a move event, ignore it.
 			{
 				auto& [win_x, win_y] = this_window.m_position;
 				win_x = x;
@@ -239,14 +151,14 @@ bool Window::InitGLFWCallbacks()
 				WindowMoveEvent event(x, y);
 				this_window.m_event_callback(event);
 			}
-
 		});
 
 	//Window Maximized
 	glfwSetWindowMaximizeCallback(m_GLFWwindow, [](GLFWwindow* window, int maximized)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-			WindowMaximizedEvent event(maximized == GLFW_TRUE);
+			const bool is_maximized = maximized == GLFW_TRUE;
+			WindowMaximizedEvent event(is_maximized);
 			this_window.m_event_callback(event);
 		});
 
@@ -346,6 +258,8 @@ bool Window::InitGLFWCallbacks()
 			MouseMotionEvent event(static_cast<f32>(xPos), static_cast<f32>(yPos));
 			this_window.m_event_callback(event); //dispatch event
 		});
+	
+	
 	return true;
 }
 
@@ -624,8 +538,9 @@ void Window::SetIcon(const String& icon_path) noexcept
 	stbi_set_flip_vertically_on_load(false);
 	byte* pixels = stbi_load(icon_path.c_str(), &width, &height, &channels, 4);
 
-	ENIGMA_CORE_ASSERT(pixels, "Failed to load image!");
-	ENIGMA_CORE_ASSERT(channels == 4, "Icon must be RGBA");
+	ENIGMA_CORE_ASSERT(pixels, "Failed to load window icon");
+	//not necessary the alpha channel
+	//ENIGMA_CORE_ASSERT(channels == 4, "Icon must be RGBA");
 
 	GLFWimage images[1];
 	images[0].pixels = pixels;

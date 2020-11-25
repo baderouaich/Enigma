@@ -14,12 +14,11 @@ public:
 	{
 		LOG(ENIGMA_CURRENT_FUNCTION);
 		
-		//Window
+		//Set Window Icon & Cursor
 		const auto& window = __super::GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
-		window->SetIcon("Resources/Branding/EnigmaLogo_200x200.png");
+		window->SetIcon(Enigma::Constants::Textures::ENIGMA_LOGO_PNG_PATH);
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
-
 
 		//Push Main Menu scene
 		__super::PushScene(new MainMenuScene());
@@ -35,20 +34,19 @@ public:
 */
 extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
-
 	//Construct Window
 	Enigma::WindowSettings window_settings;
-	window_settings.title = "Enigma";
-	window_settings.width = 640;
-	window_settings.height = 480;
-	//window_settings.minimum_width = 1280 - 100;
-	//window_settings.minimum_height = 720 - 100;
-	//window_settings.maximum_width = 1280 + 100;
-	//window_settings.maximum_height = 720 + 100;
-	window_settings.is_vsync = !ENIGMA_DEBUG;
-	window_settings.is_show_fps = ENIGMA_DEBUG;
-	window_settings.is_resizable = false;
-
+	{
+		window_settings.title = "Enigma";
+		window_settings.width = 640;
+		window_settings.height = 480;
+		//window_settings.minimum_width = window_settings.width - 100;
+		//window_settings.minimum_height = window_settings.height - 100;
+		//window_settings.maximum_width = 1280;
+		//window_settings.maximum_height = 720;
+		window_settings.is_resizable = false;
+		window_settings.is_vsync = !ENIGMA_DEBUG;
+		window_settings.is_show_fps = ENIGMA_DEBUG;
+	}
 	return Enigma::MakeUnique<EnigmaApplication>(std::move(window_settings));
 }

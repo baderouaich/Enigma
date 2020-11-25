@@ -1,5 +1,5 @@
 # Enigma
-<img src="Resources/Branding/EnigmaLogo_200x200.png" /> <br>
+<img src="Resources/Branding/EnigmaLogo_Full.jpg" /> <br>
 Encrypt & Decrypt your important data
 
 # Supported Algorithm
