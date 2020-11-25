@@ -1,0 +1,32 @@
+# Enigma Static Analysis using CppCheck
+# https://github.com/marketplace/actions/cppcheck-action
+name: static-analysis
+
+# analyse on pushes and pull requests
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  build:
+    name: cppcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cppcheck
+        uses: deep5050/cppcheck-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN}}
+          github_username: "BaderEddineOuaich"
+          github_email: "badereddineouaich@gmail.com"
+          #commit_msg: "<optional commit message>"
+          #check_library:
+          #skip_preprocessor:
+          enable: all
+          exclude_check: ./Dependencies/
+          #inconclusive:
+          #inline_suppression:
+          force_language: c++
+          #max_ctu_depth:
+          platform: win64
+          #output_file:
