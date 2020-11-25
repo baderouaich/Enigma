@@ -1,0 +1,29 @@
+# Enigma Build workflow task on Linux
+name: build-linux
+
+# build on pushs and pull requests on master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  Linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    # update os and install Premake5
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install premake5 
+
+    # generate project Makefiles and make executable
+    - name: Build Enigma g++ 64-bit
+      run: |
+        g++ --version
+        premake5 gmake2
+        make

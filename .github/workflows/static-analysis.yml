@@ -1,11 +1,13 @@
-# Enigma Static Analysis using CppCheck
+# Enigma Static Analysis task using CppCheck
 # https://github.com/marketplace/actions/cppcheck-action
 name: static-analysis
 
-# analyse on pushes and pull requests
+# analyse on pushs and pull requests on master branch
 on:
-  push: {}
-  pull_request: {}
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -29,4 +31,4 @@ jobs:
           force_language: c++
           #max_ctu_depth:
           platform: win64
-          #output_file:
+          #output_file: Enigma-CppCheck-Static-Analysis-Report.txt (default cppcheck_report.txt)
