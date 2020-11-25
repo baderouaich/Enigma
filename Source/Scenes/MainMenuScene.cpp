@@ -18,6 +18,7 @@ void MainMenuScene::LoadImGuiFonts()
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	m_fonts["Enigma"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::ENIGMA_FONT_PATH, 45.0f);
+	m_fonts["Audiowide-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
 	m_fonts["Pieces of Eight"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::PIECES_OF_EIGHT_FONT_PATH, 30.0f);
 	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::NUNITO_SANS_REGULAR_FONT_PATH, 30.0f);
 	m_fonts["Goldman-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::GOLDMAN_BOLD_FONT_PATH, 20.0f);
@@ -56,12 +57,12 @@ void MainMenuScene::OnCreate()
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
-	glClearColor(
+	glAssert(glClearColor(
 		Constants::Colors::BACKGROUND_COLOR[0],
 		Constants::Colors::BACKGROUND_COLOR[1],
 		Constants::Colors::BACKGROUND_COLOR[2],
 		Constants::Colors::BACKGROUND_COLOR[3]
-	);
+	));
 	// Load dear fonts
 	this->LoadImGuiFonts();
 }
@@ -82,6 +83,13 @@ void MainMenuScene::OnImGuiDraw()
 
 	static constexpr const auto spacing = [](ui8 n) noexcept { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
 
+	ImFont* const& ubuntu_medium_font = m_fonts.at("Ubuntu-Medium");
+	ImFont* const& audiowide_regular_font = m_fonts.at("Audiowide-Regular");
+	ImFont* const& nonito_sans_regular_font = m_fonts.at("NunitoSans-Regular");
+	ImFont* const& ubuntu_light_font = m_fonts.at("Ubuntu-Light");
+	ImFont* const& ubuntu_regular_font = m_fonts.at("Ubuntu-Regular");
+	ImFont* const& goldman_regular_font = m_fonts.at("Goldman-Regular");
+
 	static const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 	ImGui::Begin("Buttons Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h)));
@@ -91,17 +99,22 @@ void MainMenuScene::OnImGuiDraw()
 
 		// Enigma Version
 		{
-			static const ImVec2 label_size = { ImGui::CalcTextSize("Enigma x.y.z").x * m_fonts["Enigma"]->Scale, ImGui::CalcTextSize("Enigma x.y.z").y * m_fonts["Enigma"]->Scale };
+			static const ImVec2 label_size = { ImGui::CalcTextSize("Enigma x.y.z").x * audiowide_regular_font->Scale, ImGui::CalcTextSize("Enigma x.y.z").y * audiowide_regular_font->Scale };
 			ImGui::SetCursorPosX((io.DisplaySize.x - label_size.x) / 2.0f);
-			ImGui::PushFont(m_fonts["Enigma"]);
+			ImGui::PushFont(audiowide_regular_font);
 				ImGui::Text("Enigma %s", ENIGMA_VERSION);
 			ImGui::PopFont();
+		}
+
+		//Enigma Icon
+		{
+			//ImGui::Image()
 		}
 
 		spacing(9);
 
 		// Buttons
-		ImGui::PushFont(m_fonts["NunitoSans-Regular"]);
+		ImGui::PushFont(nonito_sans_regular_font);
 		{
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 			if (ImGui::Button("Encrypt File", button_size))

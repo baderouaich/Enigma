@@ -29,6 +29,7 @@ namespace Enigma
 		namespace Fonts
 		{
 			static constexpr const auto ENIGMA_FONT_PATH = "./Resources/Fonts/Enigma.ttf";
+			static constexpr const auto AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
 			static constexpr const auto PIECES_OF_EIGHT_FONT_PATH = "./Resources/Fonts/Pieces of Eight.ttf";
 			static constexpr const auto NUNITO_SANS_REGULAR_FONT_PATH = "./Resources/Fonts/NunitoSans-Regular.ttf";
 			static constexpr const auto GOLDMAN_BOLD_FONT_PATH = "./Resources/Fonts/Goldman-Bold.ttf";
