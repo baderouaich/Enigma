@@ -24,11 +24,11 @@ jobs:
           #commit_msg: "<optional commit message>"
           #check_library:
           #skip_preprocessor:
-          enable: all
+          enable: warning,portability,performance,missingInclude
           exclude_check: ./Dependencies/
           #inconclusive:
           #inline_suppression:
           force_language: c++
           #max_ctu_depth:
           platform: win64
-          #output_file: Enigma-CppCheck-Static-Analysis-Report.txt (default cppcheck_report.txt)
+          output_file: Static-Analysis-Report.txt #(default cppcheck_report.txt)
