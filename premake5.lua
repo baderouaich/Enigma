@@ -1,3 +1,5 @@
+include "./Premake/premake_customization/solution_items.lua"
+
 workspace "Enigma"  -- Workspace which is the solution in windows, in xcode will be something else
 	architecture "x86_64" -- Targeted architecture x64
 	startproject "Enigma" -- Set 'Enigma Application' project as start up project
@@ -8,6 +10,16 @@ workspace "Enigma"  -- Workspace which is the solution in windows, in xcode will
 		"Release", 
 		"Dist" -- Distribution, when everything is done, optimization: Full
 	}
+
+	-- include editorconfig, which is a configuration file convention that is
+	-- used to define and maintain consistent code styles between team members working
+	-- on the same code as well as between different editors and IDEs that they might use.
+	-- The styles are saved in INI-like files named
+	solution_items
+	{
+		".editorconfig" -- depends on ./Premake/premake_customization/solution_items.lua
+	}
+
 	
 	--https://github.com/premake/premake-core/wiki/flags
 	flags

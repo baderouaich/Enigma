@@ -7,9 +7,7 @@
 #include <stb_image.h>
 
 #include <Core/Core.hpp>
-#include <Core/Types.hpp>
 #include <Window/Cursor/Cursor.hpp>
-#include <Memory/CreatePtr.hpp>
 #include <Events/Event.hpp>
 
 #include <string>
