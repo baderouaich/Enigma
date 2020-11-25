@@ -7,7 +7,7 @@
 [Source/Application/Application.cpp:118] -> [Source/Application/Application.hpp:62]: (performance, inconclusive) Technically the member function 'Application::OnFrameBufferResize' can be static (but you may consider moving to unnamed namespace).
 [Source/Application/Application.hpp:55]: (style) Class 'Application' has a constructor with 1 argument that is not explicit.
 [Source/Enigma.cpp:0]: (information) This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details.
-[Source/Window/Window.hpp:29]: (style) Class 'Window' has a constructor with 1 argument that is not explicit.
+[Source/Window/Window.hpp:27]: (style) Class 'Window' has a constructor with 1 argument that is not explicit.
 [Source/Window/WindowSettings.hpp:50]: (information) Skipping configuration 'false' since the value of 'false' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly.
 [Source/Window/WindowSettings.hpp:55]: (information) Skipping configuration 'false' since the value of 'false' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly.
 [Source/Window/WindowSettings.hpp:79]: (information) Skipping configuration 'false' since the value of 'false' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly.
