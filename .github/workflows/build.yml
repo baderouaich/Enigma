@@ -35,10 +35,10 @@ jobs:
 #      with:
 #        fetch-depth: 1
     - name: Generate Project Make Files
-      run: ./Gen-Linux-GMake2.sh
+      run: sudo ./Gen-Linux-GMake2.sh
 
     - name: Build Project
-      run: make
+      run: sudo make
 #
 #    # update os and install Premake5
 #    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
