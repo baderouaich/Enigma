@@ -10,23 +10,44 @@ on:
 
 # platform tasks
 jobs:
-  Linux:
-    runs-on: ubuntu-latest
+  Windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
     steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
+    - uses: actions/checkout@v2
 
-    # update os and install Premake5
-    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update -y
-        sudo apt-get install -y premake
+    - name: Generate Project Files
+      run: ./Gen-Windows-vs2019.bat
 
-    # generate project Makefiles and make executable
-    - name: Build Enigma g++ 64-bit
-      run: |
-        g++ --version
-        premake5 gmake2
-        make
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build Solution
+      run: msbuild -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo Enigma.sln
+      
+# TODO
+#  Linux:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v1
+#      with:
+#        fetch-depth: 1
+#
+#    # update os and install Premake5
+#    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
+#    - name: Install Dependencies
+#      run: |
+#        sudo apt-get update -y
+#        sudo apt-get install -y premake
+#
+#    # generate project Makefiles and make executable
+#    - name: Build Enigma g++ 64-bit
+#      run: |
+#        g++ --version
+#        premake5 gmake2
+#        make
+#
+#  MacOSX:
+#    runs-on:
