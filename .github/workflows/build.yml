@@ -36,7 +36,7 @@ jobs:
     - name: Generate Project Make Files
       run: |
         sudo apt-get update
-        sudo bash ./Gen-Linux-GMake2.sh
+        sudo ./Premake/Linux/premake5 gmake2
 
     - name: Make Project
       run: |
