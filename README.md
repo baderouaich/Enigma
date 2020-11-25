@@ -26,6 +26,8 @@ Under Dev
 [MIT License](LICENSE.md)
 
 
-### Features and bugs<br>
+## Features and bugs
+
 If you face any problems feel free to open an issue at the [issue tracker][tracker]. If you feel the program is missing a feature, please raise a ticket on Github. Pull requests are also welcome.
+
 [tracker]: https://github.com/BaderEddineOuaich/Enigma/issues

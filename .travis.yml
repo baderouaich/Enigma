@@ -23,8 +23,11 @@ before_install:
  - sudo apt-get install premake5
 
 script:
+ # log c++ compiler erison
  - g++-10 --version
+ # generate make files using premake5
  - premake5 gmake2
- - make
+ # make project executable with 2 virtual cpus -j2
+ - make -j8 
 
 
