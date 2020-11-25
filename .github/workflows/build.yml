@@ -18,10 +18,11 @@ jobs:
         fetch-depth: 1
 
     # update os and install Premake5
+    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
     - name: Install Dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install premake5 
+        sudo apt-get update -y
+        sudo apt-get install -y premake
 
     # generate project Makefiles and make executable
     - name: Build Enigma g++ 64-bit
