@@ -4,9 +4,6 @@
 
 #include "Types.hpp"
 
-#include <math.h> // M_PI
-#include <aes.h> // MAX_KEYLENGTH, BLOCKSIZE
-
 namespace Enigma
 {
 	namespace Constants
@@ -21,12 +18,12 @@ namespace Enigma
 
 		namespace Utility
 		{
-			static constexpr const ui8 BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+			static constexpr const byte BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 		}
 
 		namespace Textures
 		{
-			static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/EnigmaLogoMini.png";
+			static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/EnigmaLetterE.png";
 		}
 
 		namespace Fonts
@@ -50,8 +47,8 @@ namespace Enigma
 		{
 			//#define VEC_RGBA(r, g, b, a) ImVec4(r/255.0f, g/255.0f, b/255.0f, a/255.0f)
 			#define FLOAT_RGBA(r, g, b, a) {r/255.0f, g/255.0f, b/255.0f, a/255.0f}
-			static const float BACKGROUND_COLOR[] = FLOAT_RGBA(46, 33, 59, 255);
-
+			//static const float BACKGROUND_COLOR[] = FLOAT_RGBA(46, 33, 59, 255);
+			static const float BACKGROUND_COLOR[] = FLOAT_RGBA(30, 37, 43, 255);
 		}
 
 	}
