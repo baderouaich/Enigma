@@ -27,21 +27,21 @@ jobs:
     - name: Build Solution
       run: msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo 
 
-
-  Linux:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Generate Project Make Files
-      run: |
-        sudo apt-get update
-        sudo ./Premake/Linux/premake5 gmake2
-
-    - name: Make Project
-      run: |
-        make
-
+# TODO:
+#  Linux:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#
+#    - name: Generate Project Make Files
+#      run: |
+#        sudo apt-get update
+#        sudo ./Gen-Linux-GMake2.sh
+#
+#    - name: Make Project
+#      run: |
+#        make
+#
 #
 #    # update os and install Premake5
 #    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
