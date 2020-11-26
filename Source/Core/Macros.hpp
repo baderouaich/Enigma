@@ -170,4 +170,11 @@ static constexpr const char* GetGlEnumString(const GLenum& _enum) noexcept
 		} while (false)
 ///
 
+
+
+/// Begin and end timer with a unit
+#define BEGIN_TIMER(var) auto var = std::chrono::steady_clock::now();
+#define END_TIMER(var, unit) std::chrono::duration_cast<std::chrono::unit>(std::chrono::steady_clock::now() - var).count()
+///
+
 #endif // !ENIGMA_MACROS_H

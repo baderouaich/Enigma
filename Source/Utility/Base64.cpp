@@ -13,7 +13,7 @@ String Base64::Decode(const StringView& encoded_buffer)
 	const size_t out_length = ((in_length * 3) / 4) + 1;
 	String output(out_length, '\000');
 
-	static byte inalphabet[256], decoder[256];
+	static byte inalphabet[256]{'\000'}, decoder[256]{'\000'};
 	i32 i, bits, c = 0, i8_count; //, errors = 0;
 	ui32 input_idx = 0;
 	ui32 output_idx = 0;
@@ -139,9 +139,9 @@ String Base64::Encode(const StringView& buffer)
 	return output;
 }
 
-const bool Base64::IsBase64(const ui8& c) noexcept
+inline const bool Base64::IsBase64(const ui8& c) noexcept
 {
-	return (isalnum(c) || (c == '+') || (c == '/'));
+	return std::isalnum(c) || (c == '+') || (c == '/');
 }
 
 NS_ENIGMA_END

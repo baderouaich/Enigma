@@ -21,7 +21,7 @@ public:
 	/*
 	*	Checks if a byte is base64
 	*/
-	static const bool IsBase64(const ui8& c) noexcept;
+	static inline const bool IsBase64(const ui8& c) noexcept;
 };
 NS_ENIGMA_END
 

@@ -9,7 +9,7 @@
 #include "Version.hpp"
 
 /// Enable/Disable gtest Testing
-#define ENIGMA_TEST false
+#define ENIGMA_TEST true
 ///
 
 

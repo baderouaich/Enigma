@@ -28,4 +28,3 @@ TEST(Encrypt_And_Decrypt_Text, AES)
     EXPECT_NE(buffer, encrypted);
     EXPECT_EQ(buffer, decrypted);
 }
-

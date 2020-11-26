@@ -18,10 +18,8 @@ jobs:
       - name: cppcheck
         uses: deep5050/cppcheck-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN}}
-          github_username: "BaderEddineOuaich"
-          github_email: "badereddineouaich@gmail.com"
-          #commit_msg: "<optional commit message>"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          #commit_msg: "<optional commit message>" # commit msg when file is generated
           #check_library:
           #skip_preprocessor:
           enable: warning,portability,performance
@@ -32,3 +30,8 @@ jobs:
           max_ctu_depth: 4
           #platform: 
           output_file: ./Static-Analysis-Report.txt #(default cppcheck_report.txt)
+      - name: publish report    
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'master' # your branch name goes here
