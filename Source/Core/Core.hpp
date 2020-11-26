@@ -9,7 +9,11 @@
 #include "Version.hpp"
 
 /// Enable/Disable gtest Testing
-#define ENIGMA_TEST true
+#define ENIGMA_TEST false
+///
+
+///Enable/Disable Profiling
+#define ENIGMA_PROFILE true
 ///
 
 

@@ -4,10 +4,7 @@
 #pragma once
 #ifndef ENIGMA_MAIN_H
 #define ENIGMA_MAIN_H
-
-#include <Core/Core.hpp>
-#include <Application/Application.hpp>
-#include <Logger/Logger.hpp>
+#include <Enigma.hpp>
 
 #if ENIGMA_TEST
 	#include <Tests/Algorithm/AESTests.hpp>
@@ -26,12 +23,13 @@ int main(int argc, char* argv[])
 	Enigma::UniquePtr<Enigma::Application> _App = Enigma::CreateApplication();
 	// Run Application
 	_App->Run();
-
+	// Exit
 	return EXIT_SUCCESS;
 #else
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 #endif
+
 }
 
 

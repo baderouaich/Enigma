@@ -54,11 +54,13 @@
 #include <Utility/Base64.hpp>
 #include <Utility/FileUtils.hpp>
 #include <Utility/StringUtils.hpp>
+#include <Utility/OpenGLUtils.hpp>
 //
 
 
-//Hardware RAM, CPU, GPU
+//Analytocs: Hardware usage RAM, CPU, GPU, Profiler
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 //
+
 
 #endif // !ENIGMA_H

@@ -13,7 +13,7 @@ public:
 		Enigma::Application(window_settings)
 	{
 		LOG(ENIGMA_CURRENT_FUNCTION);
-		
+
 		//Set Window Icon & Cursor
 		const auto& window = __super::GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
