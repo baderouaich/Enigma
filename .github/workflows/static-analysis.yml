@@ -16,18 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-
-      # For generating cppcheck reports with filename contains datetime
-      # we have to set the current date time in a seperated task which outputs it 
-      # access NOW with ${{steps.NOW.outputs}}
-      - name: Set Current DateTime
-        id: NOW
-        run: |
-         echo "::set-output name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
-         echo ${{steps.NOW.outputs}}
-
-
-
       # CppCheck analysis task
       - name: cppcheck
         uses: deep5050/cppcheck-action@main
@@ -43,8 +31,7 @@ jobs:
           force_language: c++
           max_ctu_depth: 4
           #platform: 
-          output_file: ./Reports/Static Analysis/CppCheck-${{steps.NOW.outputs}}.txt #(default cppcheck_report.txt)
-
+          output_file: ./Reports/CppCheck-Static-Analysis.txt #(default cppcheck_report.txt)
 
       # Report generating task
       - name: publish report    
