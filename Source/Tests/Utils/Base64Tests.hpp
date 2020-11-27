@@ -1,10 +1,11 @@
 #pragma once
-#include <gtest/gtest.h>
-#include "Utility/Base64.hpp"
+#include <catch2/catch_all.hpp>
+#include "Algorithm/AES/AESEncryption.hpp"
+#include "Algorithm/AES/AESDecryption.hpp"
 using namespace std;
 using namespace Enigma;
 
-TEST(Encode_And_Decode_Cipher, Base64)
+TEST_CASE("Encode_And_Decode_Cipher", "Base64")
 {
     UniquePtr<AESEncryption> aes_encyptor = MakeUnique<Enigma::AESEncryption>();
     UniquePtr<AESDecryption> aes_decryptor = MakeUnique<Enigma::AESDecryption>();
@@ -25,10 +26,10 @@ TEST(Encode_And_Decode_Cipher, Base64)
     encrypted_decoded_base64 = Base64::Decode(encrypted_encoded_base64);
     cout << "\nEncrypted decoded base64: " << encrypted_decoded_base64 << endl;
 
-    EXPECT_EQ(encrypted, encrypted_decoded_base64);
+    REQUIRE(encrypted == encrypted_decoded_base64);
 }
 
-TEST(Encode_And_Decode_Text, Base64)
+TEST_CASE("Encode_And_Decode_Text", "Base64")
 {
     String buffer = R"(
 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -46,6 +47,9 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     String base64_decoded = Base64::Decode(base64_encoded);
     cout << "Base64 decoded: " << base64_decoded << endl;
 
-    EXPECT_NE(buffer, base64_encoded);
-    EXPECT_EQ(buffer, base64_decoded);
+   REQUIRE(buffer != base64_encoded);
+   REQUIRE(buffer == base64_decoded);
+	
 }
+
+

@@ -40,7 +40,7 @@ IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include"
 IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include" 
 IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" 
 IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp" 
-IncludeDir["googletest"]	= "%{wks.location}/Dependencies/googletest/include" 
+IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src" 
 
 -- Organize libs solution in a single filtered directory 
 group "Dependencies"
@@ -51,7 +51,7 @@ group "Dependencies"
 	include "Dependencies/pfd"
 	include "Dependencies/stb_image"
 	include "Dependencies/cryptopp"
-	include "Dependencies/googletest"
+	include "Dependencies/catch2"
 group ""
 
 -- Include Enigma Application project solution
@@ -86,7 +86,7 @@ project "Enigma"
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- stb_image
 		"%{IncludeDir.cryptopp}", -- cryptopp
-		"%{IncludeDir.googletest}", -- googletest
+		"%{IncludeDir.catch2}", -- googletest
 	}
 
 
@@ -98,7 +98,7 @@ project "Enigma"
 		"spdlog", -- links SpdLog lib
 		"stb_image", -- links stb_image lib
 		"cryptopp", -- links cryptopp lib
-		"googletest", --TODO: link googletest.lib only in debug
+		"catch2", --TODO: link googletest.lib only in debug
 		
 		"opengl32" --Loads opengl32 kernel .lib
 	}

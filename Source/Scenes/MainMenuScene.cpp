@@ -17,20 +17,20 @@ void MainMenuScene::LoadImGuiFonts()
 {
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
-	m_fonts["Enigma"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::ENIGMA_FONT_PATH, 45.0f);
-	m_fonts["Audiowide-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
-	m_fonts["Pieces of Eight"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::PIECES_OF_EIGHT_FONT_PATH, 30.0f);
-	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::NUNITO_SANS_REGULAR_FONT_PATH, 30.0f);
-	m_fonts["Goldman-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::GOLDMAN_BOLD_FONT_PATH, 20.0f);
-	m_fonts["Goldman-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::GOLDMAN_REGULAR_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_BOLD_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-Bold-Italic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_BOLD_ITALIC_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-Italic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_ITALIC_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-Light"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_LIGHT_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-LightItalic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_LIGHT_ITALIC_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-Medium"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_MEDIUM_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-MediumItalic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_MEDIUM_ITALIC_FONT_PATH, 20.0f);
-	m_fonts["Ubuntu-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Fonts::UBUNTU_REGULAR_FONT_PATH, 20.0f);
+	m_fonts["Enigma"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::ENIGMA_FONT_PATH, 45.0f);
+	m_fonts["Audiowide-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
+	m_fonts["Pieces of Eight"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::PIECES_OF_EIGHT_FONT_PATH, 30.0f);
+	m_fonts["NunitoSans-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::NUNITO_SANS_REGULAR_FONT_PATH, 30.0f);
+	m_fonts["Goldman-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::GOLDMAN_BOLD_FONT_PATH, 20.0f);
+	m_fonts["Goldman-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::GOLDMAN_REGULAR_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Bold"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_BOLD_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Bold-Italic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_BOLD_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Italic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Light"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_LIGHT_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-LightItalic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_LIGHT_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Medium"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_MEDIUM_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-MediumItalic"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_MEDIUM_ITALIC_FONT_PATH, 20.0f);
+	m_fonts["Ubuntu-Regular"] = ImGui::GetIO().Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::UBUNTU_REGULAR_FONT_PATH, 20.0f);
 
 	for (const auto& [k, v] : m_fonts)
 	{

@@ -17,7 +17,7 @@ public:
 		//Set Window Icon & Cursor
 		const auto& window = __super::GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
-		window->SetIcon(Enigma::Constants::Textures::ENIGMA_LOGO_PNG_PATH);
+		window->SetIcon(Enigma::Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
 		//Push Main Menu scene

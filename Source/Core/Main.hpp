@@ -7,11 +7,9 @@
 #include <Enigma.hpp>
 
 #if ENIGMA_TEST
-	#include <Tests/Algorithm/AESTests.hpp>
+	//#include <Tests/Algorithm/AESTests.hpp>
 	#include <Tests/Utils/Base64Tests.hpp>
 #endif
-
-extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication();
 
 int main(int argc, char* argv[])
 {
@@ -26,17 +24,18 @@ int main(int argc, char* argv[])
 	// Exit
 	return EXIT_SUCCESS;
 #else
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
+	// Run Tests
+	return Catch::Session().run(argc, argv);
 #endif
 
 }
 
 
+
 /*
 *	Windows Entry Point (for Release & Distribution)
 */
-#if defined(ENIGMA_PLATFORM_WINDOWS)
+#if defined(ENIGMA_PLATFORM_WINDOWS) && (defined(ENIGMA_RELEASE) || defined(ENIGMA_DIST))
 
 int WINAPI WinMain(
 	_In_ HINSTANCE instance, 

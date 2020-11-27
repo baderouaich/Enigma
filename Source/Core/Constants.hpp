@@ -21,27 +21,30 @@ namespace Enigma
 			static constexpr const byte BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 		}
 
-		namespace Textures
+		namespace Resources
 		{
-			static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/EnigmaLetterE.png";
-		}
+			namespace Textures
+			{
+				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/EnigmaLetterE.png";
+			}
 
-		namespace Fonts
-		{
-			static constexpr const auto ENIGMA_FONT_PATH = "./Resources/Fonts/Enigma.ttf";
-			static constexpr const auto AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
-			static constexpr const auto PIECES_OF_EIGHT_FONT_PATH = "./Resources/Fonts/Pieces of Eight.ttf";
-			static constexpr const auto NUNITO_SANS_REGULAR_FONT_PATH = "./Resources/Fonts/NunitoSans-Regular.ttf";
-			static constexpr const auto GOLDMAN_BOLD_FONT_PATH = "./Resources/Fonts/Goldman-Bold.ttf";
-			static constexpr const auto GOLDMAN_REGULAR_FONT_PATH = "./Resources/Fonts/Goldman-Regular.ttf";
-			static constexpr const auto UBUNTU_BOLD_FONT_PATH = "./Resources/Fonts/Ubuntu-Bold.ttf";
-			static constexpr const auto UBUNTU_BOLD_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-BoldItalic.ttf";
-			static constexpr const auto UBUNTU_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-Italic.ttf";
-			static constexpr const auto UBUNTU_LIGHT_FONT_PATH = "./Resources/Fonts/Ubuntu-Light.ttf";
-			static constexpr const auto UBUNTU_LIGHT_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-LightItalic.ttf";
-			static constexpr const auto UBUNTU_MEDIUM_FONT_PATH = "./Resources/Fonts/Ubuntu-Medium.ttf";
-			static constexpr const auto UBUNTU_MEDIUM_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-MediumItalic.ttf";
-			static constexpr const auto UBUNTU_REGULAR_FONT_PATH = "./Resources/Fonts/Ubuntu-Regular.ttf";
+			namespace Fonts
+			{
+				static constexpr const auto ENIGMA_FONT_PATH = "./Resources/Fonts/Enigma.ttf";
+				static constexpr const auto AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
+				static constexpr const auto PIECES_OF_EIGHT_FONT_PATH = "./Resources/Fonts/Pieces of Eight.ttf";
+				static constexpr const auto NUNITO_SANS_REGULAR_FONT_PATH = "./Resources/Fonts/NunitoSans-Regular.ttf";
+				static constexpr const auto GOLDMAN_BOLD_FONT_PATH = "./Resources/Fonts/Goldman-Bold.ttf";
+				static constexpr const auto GOLDMAN_REGULAR_FONT_PATH = "./Resources/Fonts/Goldman-Regular.ttf";
+				static constexpr const auto UBUNTU_BOLD_FONT_PATH = "./Resources/Fonts/Ubuntu-Bold.ttf";
+				static constexpr const auto UBUNTU_BOLD_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-BoldItalic.ttf";
+				static constexpr const auto UBUNTU_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-Italic.ttf";
+				static constexpr const auto UBUNTU_LIGHT_FONT_PATH = "./Resources/Fonts/Ubuntu-Light.ttf";
+				static constexpr const auto UBUNTU_LIGHT_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-LightItalic.ttf";
+				static constexpr const auto UBUNTU_MEDIUM_FONT_PATH = "./Resources/Fonts/Ubuntu-Medium.ttf";
+				static constexpr const auto UBUNTU_MEDIUM_ITALIC_FONT_PATH = "./Resources/Fonts/Ubuntu-MediumItalic.ttf";
+				static constexpr const auto UBUNTU_REGULAR_FONT_PATH = "./Resources/Fonts/Ubuntu-Regular.ttf";
+			}
 		}
 
 		namespace Colors

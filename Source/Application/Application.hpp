@@ -28,7 +28,6 @@ NS_ENIGMA_BEGIN
 struct WindowSettings;
 class Window;
 class ImGuiRenderer;
-class Random;
 
 class ENIGMA_API Application
 {
