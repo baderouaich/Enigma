@@ -22,7 +22,10 @@ jobs:
       # access NOW with ${{steps.NOW.outputs}}
       - name: Set Current DateTime
         id: NOW
-        run: echo "::set-output name=NOW::$(date +'%Y-%m-%d')"
+        run: |
+         echo "::set-output name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
+         echo ${{steps.NOW.outputs}}
+
 
 
       # CppCheck analysis task
