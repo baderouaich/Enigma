@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: cppcheck
-        uses: deep5050/cppcheck-action@master
+        uses: deep5050/cppcheck-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           #commit_msg: "<optional commit message>" # commit msg when file is generated, not editable anymore.
