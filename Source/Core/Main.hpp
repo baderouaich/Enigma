@@ -4,11 +4,12 @@
 #pragma once
 #ifndef ENIGMA_MAIN_H
 #define ENIGMA_MAIN_H
-#include <Enigma.hpp>
 
 #if ENIGMA_TEST
-	//#include <Tests/Algorithm/AESTests.hpp>
-	#include <Tests/Utils/Base64Tests.hpp>
+	#include <Tests/Algorithm/AESTests.hpp>
+	//#include <Tests/Utils/Base64Tests.hpp>
+#else
+	#include <Enigma.hpp>
 #endif
 
 int main(int argc, char* argv[])

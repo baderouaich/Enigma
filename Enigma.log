@@ -1,15 +1,18 @@
-[14:21:33] [info] Enigma: [ OpenGL Info ]
+[15:00:23] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[14:21:33] [trace] Enigma App: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[14:21:33] [trace] Enigma App: __cdecl MainMenuScene::MainMenuScene(void)
-[14:21:33] [trace] Enigma App: void __cdecl MainMenuScene::OnCreate(void)
-[14:21:33] [trace] Enigma App: void __cdecl MainMenuScene::LoadImGuiFonts(void)
-[14:21:36] [trace] Enigma App: void __cdecl EncryptTextScene::OnCreate(void)
-[14:21:38] [trace] Enigma App: void __cdecl EncryptTextScene::OnDestroy(void)
-[14:21:38] [trace] Enigma App: void __cdecl DecryptTextScene::OnCreate(void)
-[14:21:39] [trace] Enigma App: MouseButtonPressedEvent: 0
-[14:21:39] [trace] Enigma App: void __cdecl DecryptTextScene::OnDestroy(void)
-[14:21:44] [trace] Enigma App: void __cdecl MainMenuScene::OnDestroy(void)
+[15:00:23] [trace] Enigma App: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[15:00:23] [trace] Enigma App: __cdecl MainMenuScene::MainMenuScene(void)
+[15:00:23] [trace] Enigma App: void __cdecl MainMenuScene::OnCreate(void)
+[15:00:23] [trace] Enigma App: void __cdecl MainMenuScene::LoadImGuiFonts(void)
+[15:00:28] [trace] Enigma App: void __cdecl EncryptTextScene::OnCreate(void)
+[15:00:29] [trace] Enigma App: void __cdecl EncryptTextScene::OnDestroy(void)
+[15:00:34] [trace] Enigma App: void __cdecl DecryptTextScene::OnCreate(void)
+[15:00:35] [trace] Enigma App: MouseButtonPressedEvent: 0
+[15:00:35] [trace] Enigma App: void __cdecl DecryptTextScene::OnDestroy(void)
+[15:00:36] [trace] Enigma App: void __cdecl EncryptTextScene::OnCreate(void)
+[15:00:46] [error] Enigma: GFLW ERROR #65545: Win32: Failed to convert clipboard to string: The operation completed successfully.  | D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Window\Window.cpp:9 | void __cdecl Enigma::GLFWErrorCallback(int,const char *)
+[15:01:20] [trace] Enigma App: void __cdecl EncryptTextScene::OnDestroy(void)
+[15:01:21] [trace] Enigma App: void __cdecl MainMenuScene::OnDestroy(void)

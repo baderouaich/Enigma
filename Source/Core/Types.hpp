@@ -2,11 +2,12 @@
 #ifndef ENIGMA_TYPES_H
 #define ENIGMA_TYPES_H
 
-#include <cstdint>	// std::int*_t
-#include <cstddef>	// std::size_t
-#include <memory>	// smart pointers
-#include <string>	//std::string, std::string_view
-#include <sstream>	//std::stringstream
+#include <cstdint>	//	std::int*_t
+#include <cstddef>	//	std::size_t
+#include <memory>	//	smart pointers
+#include <string>	//	std::string, std::string_view
+#include <sstream>	//	std::stringstream
+#include <imgui.h>	//	ImVec4, ImVec2
 
 namespace Enigma
 {
@@ -26,6 +27,8 @@ namespace Enigma
 	using StringStream	= std::stringstream;
 	using StringView	= std::string_view;
 
+	using Color4f	= ImVec4;
+	using Vec2f		= ImVec2;
 
 	/*
 	*	Smart pointers

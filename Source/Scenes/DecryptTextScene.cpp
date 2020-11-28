@@ -14,19 +14,21 @@ void DecryptTextScene::OnCreate()
 
 	// Set background clear color
 	glAssert(glClearColor(
-			Constants::Colors::BACKGROUND_COLOR[0],
-			Constants::Colors::BACKGROUND_COLOR[1],
-			Constants::Colors::BACKGROUND_COLOR[2],
-			Constants::Colors::BACKGROUND_COLOR[3]
-		));
-
+		Constants::Colors::BACKGROUND_COLOR.x,
+		Constants::Colors::BACKGROUND_COLOR.y,
+		Constants::Colors::BACKGROUND_COLOR.z,
+		Constants::Colors::BACKGROUND_COLOR.w
+	));
 }
 
 void DecryptTextScene::OnUpdate(const f32& dt)
 {}
 
 void DecryptTextScene::OnDraw()
-{}
+{
+	// Clear GL buffers
+	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+}
 
 void DecryptTextScene::OnImGuiDraw()
 {
@@ -34,7 +36,7 @@ void DecryptTextScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
 	const auto& io = ImGui::GetIO();
 
-	static const auto button_size = ImVec2(350.0f, 45.0f);
+	static const auto button_size = ImVec2(win_w / 3.0f, 45.0f);
 
 	static const auto spacing = [](ui8 n) { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
 
@@ -60,10 +62,6 @@ void DecryptTextScene::OnImGuiDraw()
 	}
 	ImGui::End();
 
-
-	// Clear GL buffers
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
 

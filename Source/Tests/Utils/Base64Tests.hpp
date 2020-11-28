@@ -2,20 +2,24 @@
 #include <catch2/catch_all.hpp>
 #include "Algorithm/AES/AESEncryption.hpp"
 #include "Algorithm/AES/AESDecryption.hpp"
-using namespace std;
 using namespace Enigma;
+using namespace Catch;
+using namespace Catch::Matchers;
 
 TEST_CASE("Encode_And_Decode_Cipher", "Base64")
 {
-    UniquePtr<AESEncryption> aes_encyptor = MakeUnique<Enigma::AESEncryption>();
-    UniquePtr<AESDecryption> aes_decryptor = MakeUnique<Enigma::AESDecryption>();
+	using std::cout, std::cin, std::endl;
+
+	UniquePtr<AESEncryption> aes_encyptor = MakeUnique<AESEncryption>();
+	UniquePtr<AESDecryption> aes_decryptor = MakeUnique<AESDecryption>();
+
     String buffer, password;
     String encrypted, decrypted;
     String encrypted_encoded_base64, encrypted_decoded_base64;
 
-    cout << "\nBase64 - Enter buffer to encrypt: ";
+	cout << "Base64 - Enter buffer to encrypt: " << endl;
     getline(cin, buffer);
-    cout << "\nBase64 - Enter password (encryption key): ";
+	cout << "Base64 - Enter password (encryption key): " << endl;
     getline(cin, password);
 
 
@@ -25,12 +29,17 @@ TEST_CASE("Encode_And_Decode_Cipher", "Base64")
     cout << "\nEncrypted encoded base64: " << encrypted_encoded_base64;
     encrypted_decoded_base64 = Base64::Decode(encrypted_encoded_base64);
     cout << "\nEncrypted decoded base64: " << encrypted_decoded_base64 << endl;
-
-    REQUIRE(encrypted == encrypted_decoded_base64);
+	decrypted = aes_decryptor->Decrypt(password, encrypted_decoded_base64);
+    cout << "\nDecrypted decoded base64: " << decrypted << endl;
+	
+	REQUIRE_THAT(encrypted, Equals(encrypted_decoded_base64));
+	REQUIRE_THAT(buffer, Equals(decrypted));
 }
 
 TEST_CASE("Encode_And_Decode_Text", "Base64")
 {
+	using std::cout, std::cin, std::endl;
+
     String buffer = R"(
 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -41,11 +50,11 @@ of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
 publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 )";
 
-    cout << "Buffer: " << buffer << endl;
+    //cout << "Buffer: " << buffer << endl;
     String base64_encoded = Base64::Encode(buffer);
-    cout << "Base64 encoded: " << base64_encoded << endl;
+    //cout << "Base64 encoded: " << base64_encoded << endl;
     String base64_decoded = Base64::Decode(base64_encoded);
-    cout << "Base64 decoded: " << base64_decoded << endl;
+    //cout << "Base64 decoded: " << base64_decoded << endl;
 
    REQUIRE(buffer != base64_encoded);
    REQUIRE(buffer == base64_decoded);

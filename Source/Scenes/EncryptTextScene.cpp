@@ -13,19 +13,22 @@ void EncryptTextScene::OnCreate()
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
-	glClearColor(
-		Constants::Colors::BACKGROUND_COLOR[0],
-		Constants::Colors::BACKGROUND_COLOR[1],
-		Constants::Colors::BACKGROUND_COLOR[2],
-		Constants::Colors::BACKGROUND_COLOR[3]
-	);
+	glAssert(glClearColor(
+		Constants::Colors::BACKGROUND_COLOR.x,
+		Constants::Colors::BACKGROUND_COLOR.y,
+		Constants::Colors::BACKGROUND_COLOR.z,
+		Constants::Colors::BACKGROUND_COLOR.w
+	));
 }
 
 void EncryptTextScene::OnUpdate(const f32& dt)
 {}
 
 void EncryptTextScene::OnDraw()
-{}
+{
+	// Clear GL buffers
+	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+}
 
 void EncryptTextScene::OnImGuiDraw()
 {
@@ -37,17 +40,15 @@ void EncryptTextScene::OnImGuiDraw()
 	static const auto spacing = [](ui8 n) { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
 	static const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 
-	ImFont* const& ubuntu_medium_font = m_fonts.at("Ubuntu-Medium");
-	ImFont* const& ubuntu_light_font = m_fonts.at("Ubuntu-Light");
-	ImFont* const& ubuntu_regular_font = m_fonts.at("Ubuntu-Regular");
-	ImFont* const& goldman_regular_font = m_fonts.at("Goldman-Regular");
+	ImFont* const& font_audiowide_regular = m_fonts.at("Audiowide-Regular-45");
+	ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 
 	ImGui::Begin("ETS Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h)));
 	ImGui::SetWindowPos(ImVec2(static_cast<f32>(win_x), static_cast<f32>(win_y)));
 	{
 		// Text to encrypt input text
-		ImGui::PushFont(ubuntu_regular_font);
+		ImGui::PushFont(font_audiowide_regular);
 		{
 			static char buffer[1024 * 1024 * 1]{ '\000' }; // 1mb max buffer
 			// Label
@@ -76,7 +77,7 @@ void EncryptTextScene::OnImGuiDraw()
 
 
 		// Back To Main Menu Scene Button
-		ImGui::PushFont(ubuntu_medium_font);
+		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			const static ImVec2 back_btn_size = { ImGui::CalcTextSize("Back to Menu").x + 10.0f, 45.0f };
 			ImGui::SetCursorPos(ImVec2(io.DisplaySize.x - back_btn_size.x, io.DisplaySize.y - back_btn_size.y));
@@ -98,10 +99,6 @@ void EncryptTextScene::OnImGuiDraw()
 
 	}
 	ImGui::End();
-
-
-	// Clear GL buffers
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 
