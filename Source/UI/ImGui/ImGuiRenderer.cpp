@@ -50,11 +50,11 @@ ImGuiRenderer::ImGuiRenderer()
     version << "#version " << ENIGMA_GL_VERSION_MAJOR << ENIGMA_GL_VERSION_MINOR << "0";
     if (!ImGui_ImplGlfw_InitForOpenGL(window, true))
     {
-        ENIGMA_CORE_ERROR("ImGui init for GLFW failed.");
+        ENIGMA_ERROR("ImGui init for GLFW failed.");
     }
     if (!ImGui_ImplOpenGL3_Init(version.str().c_str()))
     {
-        ENIGMA_CORE_ERROR("ImGui init for OpenGL failed.");
+        ENIGMA_ERROR("ImGui init for OpenGL failed.");
     }
 }
 

@@ -6,7 +6,7 @@ using namespace Enigma;
 class MainMenuScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	MainMenuScene();
+	MainMenuScene() noexcept;
 	virtual ~MainMenuScene() = default;
 
 private: /* Overrides */

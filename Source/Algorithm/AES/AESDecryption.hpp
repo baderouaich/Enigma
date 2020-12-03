@@ -22,7 +22,7 @@ class ENIGMA_API AESDecryption
 {
 public:
 	AESDecryption();
-	~AESDecryption();
+	~AESDecryption() noexcept;
 
 	/*
 	*	Decrypt encrypted (IV, CIPHER)

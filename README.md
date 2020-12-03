@@ -16,15 +16,28 @@ Encrypt & Decrypt your important data
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git` <br>
-- <i>Run Platform project generation script</i>: <br>
- <strong>Windows</strong> : Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br>
- <strong>Linux</strong> : Run `Gen-Linux-GMake2.sh` to generate Make Files<br>
- <strong>MacOS</strong> : Run `Gen-MacOS-XCode.sh` to generate XCode Project<br>
 
+ <strong>Windows</strong> : <br>
+ - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br> 
+- Open Enigma.sln and Change configuration to Release or Dist
+- Build Solution and Run `./Bin/Release-windows-x86_64/Enigma/Enigma.exe`
 
-## Status
-Under Dev
-<image src="Resources/Dev Process/Latest.png"/>
+<strong>Linux</strong> : <br>
+ - Install necessary libs `sudo apt install libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
+ - Run `Gen-Linux-GMake2.sh` to generate Make Files
+ - make config=release (or dist) -j x (replace x with number of threads to use for compilation)
+ - Run Enigma binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
+
+<strong>MacOS</strong> : <br>
+- Run `Gen-MacOS-XCode.sh` to generate XCode Project<br>
+- TODO
+
+## Status (Under Development)
+Latest Test on `Windows 10 Version 20H2`
+<image src="Resources/Dev Process/Windows-Latest.png"/>
+<br>
+Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
+<image src="Resources/Dev Process/Linux-Latest.png"/>
 
 
 ## License

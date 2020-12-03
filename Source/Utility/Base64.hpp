@@ -9,14 +9,14 @@ class ENIGMA_API Base64
 {
 public:
     /*
-    *   Decodes a Base64 string
-    */
-	static String Decode(const StringView& encoded_buffer);
-
-    /*
      *	Encodes string bytes into Base64 string
      */
 	static String Encode(const StringView& buffer);
+
+    /*
+    *   Decodes a Base64 string
+    */
+	static String Decode(const StringView& encoded_buffer);
 
 	/*
 	*	Checks if a byte is base64

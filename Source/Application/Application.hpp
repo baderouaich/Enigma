@@ -45,9 +45,9 @@ private:
 	void Run();
 
 	/*
-	*	Immediate exit from application without waiting for GL flushes nor scenes iterating to finish. 
+	*	Immediate exit from application without waiting for GL flushing nor scenes iterations to finish. 
 	*/
-	void Exit(const String& message, i32 code);
+	void Exit(const String& message, i32 exit_code);
 	
 
 public: /* Constructor / Destructors */
@@ -98,17 +98,16 @@ private: /* Updaters */
 
 private: /* Initializer Functions */
 	void InitWindow(const WindowSettings& window_settings);
-	void InitSceneData();
 	void InitImGuiRenderer();
-
 
 private:
 	SharedPtr<Window> m_window;
 
 private:
 	std::vector<Scene*> m_scenes;
+	//TODO: maybe not needed, since we can access everything from Application::GetInstance()
 	//Scene data, to access everything we need (window, settings, other scenes...) from all scenes
-	SceneData m_scene_data;
+	//SceneData m_scene_data;
 
 private: /* Delta time */
 	f32 m_last_frame_time;

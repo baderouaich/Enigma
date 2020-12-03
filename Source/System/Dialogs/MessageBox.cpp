@@ -12,7 +12,7 @@ MessageBox::MessageBox(const String& title, const String& message, Icon icon, Ch
 {
 }
 
-MessageBox::Action MessageBox::Show() const noexcept
+MessageBox::Action MessageBox::Show() const
 {
 	//Spawn pfd dialog & get performed user action
 	auto result = pfd::message(
@@ -25,7 +25,7 @@ MessageBox::Action MessageBox::Show() const noexcept
 	return static_cast<MessageBox::Action>(result);
 }
 
-MessageBox::~MessageBox()
+MessageBox::~MessageBox() noexcept
 {
 }
 

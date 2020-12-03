@@ -3,7 +3,6 @@
 #define ENIGMA_CREATE_PTR_H
 
 #include <Core/Core.hpp>
-#include <Logger/Logger.hpp>
 
 NS_ENIGMA_BEGIN
 /*

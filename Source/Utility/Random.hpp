@@ -15,9 +15,9 @@ public:
 	template<typename T>
 	static T Real(T min, T max) noexcept
 	{
-		ENIGMA_CORE_ASSERT(min < max, "min is >= max");
+		ENIGMA_ASSERT(min < max, "min is >= max");
 		std::uniform_real_distribution<T> dist(min, max);
-		auto& mt = Random::GetEngine();
+		auto& mt = GetEngine();
 		return dist(mt);
 	}
 
@@ -27,9 +27,9 @@ public:
 	template<typename T>
 	static T Int(T min, T max) noexcept
 	{
-		ENIGMA_CORE_ASSERT(min < max, "min is >= max");
+		ENIGMA_ASSERT(min < max, "min is >= max");
 		std::uniform_int_distribution<T> dist(min, max);
-		auto& mt = Random::GetEngine();
+		auto& mt = GetEngine();
 		return dist(mt);
 	}
 
@@ -39,12 +39,12 @@ public:
 	static bool Bool(f64 chance = 0.5 /*50% 50% chance*/) noexcept
 	{
 		std::bernoulli_distribution dist(chance);
-		auto& mt = Random::GetEngine();
+		auto& mt = GetEngine();
 		return dist(mt);
 	}
 	
 private:
-	static std::mt19937& GetEngine() noexcept;
+	static std::mt19937& GetEngine();
 };
 NS_ENIGMA_END
 

@@ -31,15 +31,6 @@
 
 ///Asserts
 #ifdef ENIGMA_ENABLE_ASSERTS
-#define ENIGMA_CORE_ASSERT(x, ...) \
-		do \
-		{ \
-			if(!(x)) \
-			{ \
-				ENIGMA_CORE_ERROR("Assertion Failed: {}", __VA_ARGS__); \
-				ENIGMA_DEBUG_BREAK(); \
-			} \
-		} while(false) 
 #define ENIGMA_ASSERT(x, ...) \
 		do \
 		{ \
@@ -50,7 +41,7 @@
 			} \
 		} while(false) 
 #else
-	#define ENIGMA_CORE_ASSERT(x, ...)
+	#define ENIGMA_ASSERT(x, ...)
 	#define ENIGMA_ASSERT(x, ...)
 #endif
 ///

@@ -34,7 +34,7 @@ public:
 	/*
 	*	Update the RAMInfo at runtime
 	*/
-	void Update() noexcept;
+	void Update();
 
 	/*
 	*	Return the total physical memory reserved (in bytes)

@@ -14,7 +14,7 @@ SaveFileDialog::SaveFileDialog(const String& title, const String& initial_path, 
 }
 
 
-String SaveFileDialog::Show() const noexcept
+String SaveFileDialog::Show() const
 {
 	return pfd::save_file(
 		m_title,
@@ -24,7 +24,7 @@ String SaveFileDialog::Show() const noexcept
 		.result();
 }
 
-SaveFileDialog::~SaveFileDialog()
+SaveFileDialog::~SaveFileDialog() noexcept
 {
 }
 

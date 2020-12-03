@@ -9,29 +9,20 @@
 
 NS_ENIGMA_BEGIN
 
-class Scene;
-struct SceneData
-{
-	Window* window;
-	f32* delta_time;
-	std::vector<Scene*>* scenes;
-	ui32 *FPS;
-};
-
 class ENIGMA_API Scene : public CreatePtr<Scene>
 {
 public:
 	friend class Application;
 
-public:
-    Scene();
-    Scene(SceneData& scene_data);
-    virtual ~Scene();
-
 	ENIGMA_NON_COPYABLE(Scene);
 	ENIGMA_NON_MOVEABLE(Scene);
 
-	/*Scene Life Cicle*/
+public:
+    Scene() noexcept;
+   // Scene(SceneData& scene_data)  noexcept;
+    virtual ~Scene() noexcept;
+
+	/* Scene Life Cicle */
 	virtual void OnCreate() = 0;
 	virtual void OnEvent(Event& event) = 0;
 	virtual void OnUpdate(const f32& dt) = 0;
@@ -41,25 +32,25 @@ public:
 
 public: /* Controlls */
 	/* Ends current Scene */
-	virtual void EndScene();
+	virtual void EndScene() noexcept;
 	
 	/* Pauses current Scene */
-	void PauseScene();
+	void PauseScene() noexcept;
 	
 	/* Resumes current Scene */
-	void ResumeScene();
+	void ResumeScene() noexcept;
 
 public: /*Accessors*/
 	constexpr const bool& WantsQuit() const noexcept { return m_quit; }
 	constexpr const bool& IsPaused() const noexcept { return m_isPaused; }
-	constexpr const SceneData& GetSceneData() const noexcept { return *m_scene_data; }
+	//constexpr const SceneData& GetSceneData() const noexcept { return *m_scene_data; }
 
 
 public: /*Modifiers*/
 
 
 protected:
-    SceneData* m_scene_data;
+   // SceneData* m_scene_data;
 	bool m_quit;
 	bool m_isPaused;
 };

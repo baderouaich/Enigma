@@ -12,7 +12,7 @@ OpenFileDialog::OpenFileDialog(const String& title, const String& initial_path, 
 {
 }
 
-std::vector<String> OpenFileDialog::Show() const noexcept
+std::vector<String> OpenFileDialog::Show() const
 {
 	return pfd::open_file(
 		m_title,
@@ -22,7 +22,7 @@ std::vector<String> OpenFileDialog::Show() const noexcept
 		.result();
 }
 
-OpenFileDialog::~OpenFileDialog()
+OpenFileDialog::~OpenFileDialog() noexcept
 {
 }
 NS_ENIGMA_END

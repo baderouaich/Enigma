@@ -12,7 +12,7 @@ Notification::Notification(const String& title, const String& message, Icon icon
 }
 
 
-void Notification::Show() const noexcept
+void Notification::Show() const
 {
 	pfd::notify r = pfd::notify(
 		m_title,
@@ -22,7 +22,7 @@ void Notification::Show() const noexcept
 	UNUSED(r);
 }
 
-Notification::~Notification()
+Notification::~Notification() noexcept
 {
 }
 

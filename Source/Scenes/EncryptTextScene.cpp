@@ -34,14 +34,14 @@ void EncryptTextScene::OnImGuiDraw()
 {
 	const auto& [win_w, win_h] = Application::GetInstance().GetWindow()->GetSize();
 	const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
-	const auto& io = ImGui::GetIO();
+	static const auto& io = ImGui::GetIO();
 
 	static const auto button_size = ImVec2(350.0f, 45.0f);
 	static const auto spacing = [](ui8 n) { for (auto i = 0; i < n; i++) ImGui::Spacing(); };
 	static const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 
-	ImFont* const& font_audiowide_regular = m_fonts.at("Audiowide-Regular-45");
-	ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
+	static ImFont* const& font_audiowide_regular = m_fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 
 	ImGui::Begin("ETS Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h)));

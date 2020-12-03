@@ -4,23 +4,22 @@
 NS_ENIGMA_BEGIN
 
 
-Scene::Scene()
+Scene::Scene() noexcept
 	:
-	m_scene_data(nullptr),
 	m_quit(false),
 	m_isPaused(false)
-
 {
 
 }
-Scene::Scene(SceneData& scene_data)
-	:
+/*
+Scene::Scene(SceneData& scene_data) noexcept
+	: 
 	m_scene_data(&scene_data),
 	m_quit(false),
 	m_isPaused(false)
 {
 }
-
+*/
 //
 //void Scene::SetSceneData(SceneData* scene_data) noexcept
 //{
@@ -30,7 +29,7 @@ Scene::Scene(SceneData& scene_data)
 
 //void Scene::PushScene(Scene* scene) noexcept
 //{
-//	ENIGMA_CORE_ASSERT(scene, "Scene is nullptr");
+//	ENIGMA_ASSERT(scene, "Scene is nullptr");
 //
 //	scene->SetSceneData(m_scene_data);
 //	m_scene_data->scenes->emplace_back(scene);
@@ -40,23 +39,23 @@ Scene::Scene(SceneData& scene_data)
 //}
 
 
-void Scene::PauseScene()
+void Scene::PauseScene() noexcept
 {
 	this->m_isPaused = true;
 }
 
-void Scene::ResumeScene()
+void Scene::ResumeScene() noexcept
 {
 	this->m_isPaused = false;
 }
 
 
-void Scene::EndScene()
+void Scene::EndScene() noexcept
 {
 	this->m_quit = true;
 }
 
-Scene::~Scene()
+Scene::~Scene()  noexcept
 {
 }
 

@@ -24,13 +24,13 @@ public: /* Constructors / Destructor */
 		const String& initial_path = ".",
 		const bool allow_multiselect = true,
 		const std::vector<String>& filters = { "All Files", "*" });
-	~OpenFileDialog();
+	~OpenFileDialog() noexcept;
 
 public: /* Accessors */
 	/*
 	*	Spawns Open File Dialog and returns selected file(s) path
 	*/
-	std::vector<String> Show() const noexcept;
+	std::vector<String> Show() const;
 
 private:
 	const String m_title;

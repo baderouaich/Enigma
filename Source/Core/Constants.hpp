@@ -43,7 +43,7 @@ namespace Enigma
 
 			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(30, 37, 43, 255);
 
-			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(255, 255, 255, 200);
+			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(255, 255, 255, 225);
 
 			static const Color4f BUTTON_COLOR = COLOR4I_TO_COLOR4F(31, 103, 145, 150);
 			static const Color4f BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(31, 103, 145, 200);

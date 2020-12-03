@@ -91,7 +91,7 @@ void DecryptTextScene::OnEvent(Event& event)
 
 	if (Input::IsKeyPressed(Enigma::Key::S))
 	{
-		const auto& [win_x, win_y] = __super::GetSceneData().window->GetPosition();
+		const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
 
 		ENIGMA_TRACE("{0} {1}", win_x, win_y);
 	}

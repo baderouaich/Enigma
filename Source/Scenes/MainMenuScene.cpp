@@ -5,7 +5,7 @@
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
 
-MainMenuScene::MainMenuScene()
+MainMenuScene::MainMenuScene()  noexcept
 	:
 	Enigma::Scene()
 {
@@ -17,7 +17,7 @@ void MainMenuScene::LoadImGuiFonts()
 {
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
-	const auto& io = ImGui::GetIO();
+	static const auto& io = ImGui::GetIO();
 
 	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
 	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20);
@@ -74,14 +74,14 @@ void MainMenuScene::OnImGuiDraw()
 {
 	const auto& [win_w, win_h] = Application::GetInstance().GetWindow()->GetSize();
 	const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
-	const auto& io = ImGui::GetIO();
+	static const auto& io = ImGui::GetIO();
 
-	static const auto button_size = Vec2f(win_w / 2.5f, 40.0f); // 5 buttons
+	const auto button_size = Vec2f(win_w / 2.5f, 40.0f); // 5 buttons
 
 	static constexpr const auto spacing = [](ui8 n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 
-	ImFont* const& font_audiowide_regular = m_fonts.at("Audiowide-Regular-45");
-	ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
+	static ImFont* const& font_audiowide_regular = m_fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 	
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 	ImGui::Begin("Container", nullptr, container_flags);
@@ -101,7 +101,6 @@ void MainMenuScene::OnImGuiDraw()
 		}
 		ImGui::PopStyleColor(1);
 		ImGui::PopFont();
-
 
 		spacing(9);
 
@@ -134,10 +133,7 @@ void MainMenuScene::OnImGuiDraw()
 				Application::GetInstance().PushScene(new DecryptTextScene(m_fonts));
 
 			}
-
 			spacing(6);
-
-			//Exit Button
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				if (ImGui::Button("Exit", button_size))

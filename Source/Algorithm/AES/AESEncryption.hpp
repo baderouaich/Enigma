@@ -21,7 +21,7 @@ class ENIGMA_API AESEncryption
 {
 public:
 	AESEncryption();
-	~AESEncryption();
+	~AESEncryption() noexcept;
 
 	/*
 	*	Encrypts Buffer and returns (IV + Cipher)

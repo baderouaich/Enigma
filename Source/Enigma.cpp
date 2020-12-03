@@ -42,10 +42,11 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 		window_settings.height = 480;
 		//window_settings.minimum_width = window_settings.width - 100;
 		//window_settings.minimum_height = window_settings.height - 100;
-		//window_settings.maximum_width = 1280;
-		//window_settings.maximum_height = 720;
+		//window_settings.maximum_width = 800;
+		//window_settings.maximum_height = 600;
+		//window_settings.is_resizable = true;
 		window_settings.is_resizable = false;
-#ifdef ENIGMA_DEBUG
+#if ENIGMA_DEBUG
 		window_settings.is_vsync = false;
 		window_settings.is_show_fps = true;
 #else

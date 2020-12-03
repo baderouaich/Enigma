@@ -29,13 +29,13 @@ public: /* Constructors / Destructor */
 	*	@param icon: Icon type of the notification
 	*/
 	Notification(const String& title, const String& message, Icon icon = Icon::Info);
-	~Notification();
+	~Notification() noexcept;
 
 public: /* Accessors */
 	/*
 	*	Spawns System Notification
 	*/
-	void Show() const noexcept;
+	void Show() const;
 
 private:
 	const String m_title;

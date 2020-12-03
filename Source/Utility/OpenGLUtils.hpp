@@ -39,7 +39,7 @@ public:
 			GLenum err = glGetError(); \
 			if (err != GL_NO_ERROR) \
 			{ \
-				ENIGMA_CORE_ASSERT(false, OpenGLUtils::GetGLErrorEnumString(err)); \
+				ENIGMA_ASSERT(false, OpenGLUtils::GetGLErrorEnumString(err)); \
 			} \
 		} while (false)
 ///

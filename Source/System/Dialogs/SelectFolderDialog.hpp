@@ -21,13 +21,13 @@ public: /* Constructors / Destructor */
 	explicit SelectFolderDialog(const String& title,
 		const String& initial_path = ".",
 		const bool force_path = true);
-	~SelectFolderDialog();
+	~SelectFolderDialog() noexcept;
 
 public: /* Accessors */
 	/*
 	*	Spawns Select Folder Dialog and returns selected folder path
 	*/
-	String Show() const noexcept;
+	String Show() const;
 
 private:
 	const String m_title;

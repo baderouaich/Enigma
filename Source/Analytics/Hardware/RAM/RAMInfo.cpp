@@ -3,7 +3,7 @@
 
 NS_ENIGMA_BEGIN
 
-void RAMInfo::Update() noexcept
+void RAMInfo::Update()
 {
 	static bool success = false;
 
@@ -17,9 +17,7 @@ void RAMInfo::Update() noexcept
 	success = host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&m_memory_status, &count) == KERN_SUCCESS;
 #endif
 
-	if (!success)
-		ENIGMA_CORE_ERROR("Failed to Update RAM Info");
-	
+	ENIGMA_ASSERT(success, "Failed to Update RAM Info");
 }
 
 size_t RAMInfo::GetUsedRAM() const noexcept

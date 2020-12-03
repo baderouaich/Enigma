@@ -6,7 +6,7 @@ NS_ENIGMA_BEGIN
 /* Static Functions Begin */
 static void GLFWErrorCallback(int error, const char* message)
 {
-	ENIGMA_CORE_ERROR("GFLW ERROR #{}: {}", error, message);
+	ENIGMA_ERROR("GFLW ERROR #{}: {}", error, message);
 }
 /* Static Functions End */
 
@@ -205,7 +205,7 @@ bool Window::InitGLFWCallbacks()
 				}
 				break;
 				default:
-					ENIGMA_CORE_WARN("Unsupported Key Event {}", key);
+					ENIGMA_WARN("Unsupported Key Event {0}", key);
 					break;
 			}
 		});
@@ -238,7 +238,7 @@ bool Window::InitGLFWCallbacks()
 			}
 			break;
 			default:
-				ENIGMA_CORE_WARN("Unsupported Mouse Button Event {}", button);
+				ENIGMA_WARN("Unsupported Mouse Button Event {0}", button);
 				break;
 			}
 		});
@@ -290,7 +290,7 @@ bool Window::InitOpenGLOptions()
 #endif
 
 	/// Log OpenGL Info
-	ENIGMA_CORE_INFO(
+	ENIGMA_INFO(
 		"[ OpenGL Info ]\n"
 		"\t\tManufacturer: {}\n"
 		"\t\tRenderer: {}\n"
@@ -538,15 +538,15 @@ void Window::SetIcon(const String& icon_path) noexcept
 	stbi_set_flip_vertically_on_load(false);
 	byte* pixels = stbi_load(icon_path.c_str(), &width, &height, &channels, 4);
 
-	ENIGMA_CORE_ASSERT(pixels, "Failed to load window icon");
+	ENIGMA_ASSERT(pixels, "Failed to load window icon");
 	//not necessary the alpha channel
-	//ENIGMA_CORE_ASSERT(channels == 4, "Icon must be RGBA");
+	//ENIGMA_ASSERT(channels == 4, "Icon must be RGBA");
 
-	GLFWimage images[1];
+	std::array<GLFWimage, 1> images{};
 	images[0].pixels = pixels;
 	images[0].width = width;
 	images[0].height = height;
-	glfwSetWindowIcon(m_GLFWwindow, 1, images);
+	glfwSetWindowIcon(m_GLFWwindow, images.size(), images.data());
 
 	stbi_image_free(pixels);
 	pixels = nullptr;

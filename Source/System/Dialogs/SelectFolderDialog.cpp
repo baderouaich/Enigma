@@ -12,7 +12,7 @@ SelectFolderDialog::SelectFolderDialog(const String& title, const String& initia
 }
 
 
-String SelectFolderDialog::Show() const noexcept
+String SelectFolderDialog::Show() const
 {
 	return pfd::select_folder(
 		m_title,
@@ -21,7 +21,7 @@ String SelectFolderDialog::Show() const noexcept
 		.result();
 }
 
-SelectFolderDialog::~SelectFolderDialog()
+SelectFolderDialog::~SelectFolderDialog() noexcept
 {
 }
 

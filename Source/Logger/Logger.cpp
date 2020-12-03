@@ -4,8 +4,7 @@
 NS_ENIGMA_BEGIN
 
 // static members
-SharedPtr<spdlog::logger> Logger::m_core_logger;
-SharedPtr<spdlog::logger> Logger::m_client_logger;
+SharedPtr<spdlog::logger> Logger::m_logger;
 
 void Logger::Initialize()
 {
@@ -21,17 +20,11 @@ void Logger::Initialize()
 	// set pattern of the file logger
 	log_sinks[1]->set_pattern("[%T] [%l] %n: %v");
 
-	//Engine Core Logger
-	m_core_logger = Enigma::MakeShared<spdlog::logger>("Enigma", log_sinks.begin() , log_sinks.end());
-	spdlog::register_logger(m_core_logger);
-	m_core_logger->set_level(spdlog::level::trace);
-	m_core_logger->flush_on(spdlog::level::trace);
-	
-	//Client Logger
-	m_client_logger = Enigma::MakeShared<spdlog::logger>("Enigma App", log_sinks.begin(), log_sinks.end());
-	spdlog::register_logger(m_client_logger);
-	m_client_logger->set_level(spdlog::level::trace);
-	m_client_logger->flush_on(spdlog::level::trace);
+	//Engine Logger
+	m_logger = Enigma::MakeShared<spdlog::logger>("Enigma", log_sinks.begin() , log_sinks.end());
+	spdlog::register_logger(m_logger);
+	m_logger->set_level(spdlog::level::trace);
+	m_logger->flush_on(spdlog::level::trace);
 }
 
 NS_ENIGMA_END

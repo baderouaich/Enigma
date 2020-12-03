@@ -21,12 +21,12 @@ Application::Application(const WindowSettings& window_settings)
 	m_FPS_timer(0.0f),
 	m_FPS(0)
 {
-	ENIGMA_CORE_ASSERT(!m_instance, "Application Instance already exists");
+	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
 
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
-	this->InitSceneData();
+	//this->InitSceneData();
 
 }
 
@@ -41,12 +41,20 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_CORE_ERROR("{0}", e.what());
+		// console alert
+		ENIGMA_ERROR("{0}", e.what());
+		
+		// ui alert
+		Enigma::MessageBox msg_box("Error occured", "Couldn't Construct Window: " + String(e.what()), Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
+		auto action = msg_box.Show();
+		UNUSED(action);
+		
+		// exit
 		this->Exit("Couldn't Construct Window", EXIT_FAILURE); // No Application without a window :c
 	}
 }
 
-
+/*
 void Application::InitSceneData()
 {
 	m_scene_data.window = &(*m_window);
@@ -54,7 +62,7 @@ void Application::InitSceneData()
 	m_scene_data.scenes = &m_scenes;
 	m_scene_data.FPS = &m_FPS;
 }
-
+*/
 
 void Application::InitImGuiRenderer()
 {
@@ -63,11 +71,9 @@ void Application::InitImGuiRenderer()
 
 void Application::PushScene(Scene* scene)
 {
-	ENIGMA_CORE_ASSERT(scene, "Scene is nullptr");
-
-	scene->m_scene_data = &m_scene_data;
+	ENIGMA_ASSERT(scene, "Scene is nullptr");
+	//scene->m_scene_data = &m_scene_data;
 	this->m_scenes.emplace_back(scene);
-
 	// Notify user on scene created
 	scene->OnCreate();
 }
@@ -95,7 +101,7 @@ void Application::OnEvent(Event& event)
 
 bool Application::OnWindowClose(WindowCloseEvent& event)
 {
-	ENIGMA_CORE_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
 	
 	this->EndApplication();
 	
@@ -104,7 +110,7 @@ bool Application::OnWindowClose(WindowCloseEvent& event)
 
 bool Application::OnWindowResize(WindowResizeEvent& event)
 {
-	ENIGMA_CORE_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
+	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
 
 	// Update OpenGL Viewport
 	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
@@ -116,7 +122,7 @@ bool Application::OnWindowResize(WindowResizeEvent& event)
 
 bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 {
-	ENIGMA_CORE_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
+	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
 
 	// Update OpenGL Viewport
 	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
@@ -186,17 +192,17 @@ void Application::Run()
 }
 
 
-void Application::Exit(const String& message, i32 code)
+void Application::Exit(const String& message, i32 exit_code)
 {
-	if (Logger::GetCoreLogger())
+	if (Logger::GetLogger())
 	{
-		ENIGMA_CORE_ERROR("Application has exited with code {0} : {1}", code, message.c_str());
+		ENIGMA_ERROR("Application has exited with code {0} : {1}", exit_code, message.c_str());
 	}
 	else
 	{
-		std::cerr << "Application has exited with code " << code << " : " << message << std::endl;
+		std::cerr << "Application has exited with code " << exit_code << " : " << message << std::endl;
 	}
-	std::exit(code);
+	std::exit(exit_code);
 }
 
 

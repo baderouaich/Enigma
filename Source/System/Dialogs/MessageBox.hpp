@@ -65,13 +65,13 @@ public: /* Constructors / Destructor */
 	MessageBox(const String& title, const String& message,
 		Icon icon = Icon::Info,
 		Choice choice = Choice::Ok_Cancel);
-	~MessageBox();
+	~MessageBox() noexcept;
 
 public: /* Accessors */
 	/*
 	*	Spawns MessageBox and returns user Action
 	*/
-	MessageBox::Action Show() const noexcept;
+	MessageBox::Action Show() const;
 	
 private:
 	const String m_title;

@@ -47,7 +47,7 @@ String AESDecryption::Decrypt(const String& password, const String& buffer)
     }
     catch (const CryptoPP::Exception& e)
     {
-        ENIGMA_CORE_ERROR("{0}", e.what());
+        ENIGMA_ERROR("{0}", e.what());
 
         Enigma::MessageBox msg_box("AES Decryption Failure", e.what(), Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
         UNUSED(msg_box.Show());
@@ -58,9 +58,8 @@ String AESDecryption::Decrypt(const String& password, const String& buffer)
 
 
 
-AESDecryption::~AESDecryption()
+AESDecryption::~AESDecryption() noexcept
 {
-
 }
 
 NS_ENIGMA_END

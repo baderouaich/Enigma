@@ -24,13 +24,13 @@ public: /* Constructors / Destructor */
 		const String& initial_path = ".",
 		const bool force_overwrite = true,
 		const std::vector<String>& filters = { "All Files", "*" });
-	~SaveFileDialog();
+	~SaveFileDialog() noexcept;
 
 public: /* Accessors */
 	/*
 	*	Spawn Save file dialog and get selected path
 	*/
-	String Show() const noexcept;
+	String Show() const;
 
 private:
 	const String m_title;
