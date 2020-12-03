@@ -24,12 +24,12 @@ Encrypt & Decrypt your important data
 
 <strong>Linux</strong> : <br>
  - Install necessary libs `sudo apt install libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
- - Run `Gen-Linux-GMake2.sh` to generate Make Files
- - make config=release (or dist) -j x (replace x with number of threads to use for compilation)
+ - Run `sudo bash ./Gen-Linux-GMake2.sh` to generate Make Files
+ - `make config=release (or dist) -j X` replace X with number of threads to use for compilation, the more the faster
  - Run Enigma binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
 <strong>MacOS</strong> : <br>
-- Run `Gen-MacOS-XCode.sh` to generate XCode Project<br>
+- Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
 - TODO
 
 ## Status (Under Development)
