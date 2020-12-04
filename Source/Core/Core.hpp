@@ -2,7 +2,7 @@
 #ifndef ENIGMA_CORE_H
 #define ENIGMA_CORE_H
 
-#include "Platform.hpp"
+// #include "Platform.hpp" /* Now platform is detected by premake5.lua script while generating project */ 
 #include "Macros.hpp"
 #include "Constants.hpp"
 #include "Types.hpp"

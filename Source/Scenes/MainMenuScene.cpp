@@ -20,7 +20,7 @@ void MainMenuScene::LoadImGuiFonts()
 	static const auto& io = ImGui::GetIO();
 
 	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
-	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20);
+	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20.0f);
 
 	// Check if fonts are loaded
 	for (const auto& [font_name, font] : m_fonts)

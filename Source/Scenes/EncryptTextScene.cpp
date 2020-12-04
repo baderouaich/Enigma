@@ -52,7 +52,7 @@ void EncryptTextScene::OnImGuiDraw()
 		{
 			static char buffer[1024 * 1024 * 1]{ '\000' }; // 1mb max buffer
 			// Label
-			ImGui::Text("Text to Encrypt: %d / %d (1mb max)", strlen(buffer), IM_ARRAYSIZE(buffer)); spacing(1);
+			ImGui::Text("Text to Encrypt: %llu / %llu (1mb max)", std::strlen(buffer), size_t(IM_ARRAYSIZE(buffer))); spacing(1);
 			// Input text
 			ImGui::PushItemWidth(win_w - 80.0f);
 			ImGui::InputText("##text", buffer, IM_ARRAYSIZE(buffer));

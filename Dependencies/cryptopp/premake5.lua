@@ -8,15 +8,12 @@ project "cryptopp"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
-	--flags {"NoPCH"}
-
 	defines 
 	{
-		"_WINSOCK_DEPRECATED_NO_WARNINGS",
 		"CRYPTOPP_DISABLE_ASM", -- disable assembly files x64dll.asm, x64masm.asm and rdrand.as
+		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
 		--"CRYPTOPP_DLL",  -- for dynamic build
-		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- Needed to use MD5 in Crypto++
 	}
 
 	-- Enable SSE2 vector processing
@@ -102,19 +99,39 @@ project "cryptopp"
 	filter "platforms:x64"
 		files 
 		{
-			"x64dll.asm",
-			"x64masm.asm"
+			-- Enable if CRYPTOPP_DISABLE_ASM not defined above
+			--"x64dll.asm",
+			--"x64masm.asm"
 		}
 
 	filter "system:windows"
 		systemversion "latest"
-		--[[links 
+		defines
+		{
+			"_WINSOCK_DEPRECATED_NO_WARNINGS",
+		}
+		links 
 	 	{
-	      "advapi32", "kernel32", "user32", "gdi32", "comdlg32",
+	      --[["advapi32", "kernel32", "user32", "gdi32", "comdlg32",
 	      "shell32", "windowscodecs", "comctl32", "msimg32",
 	      "winspool", "wininet", "urlmon", "gdiplus", "ole32",
 	      "oleAut32", "shlwapi", "version", "crypt32"
-	    }--]]
+	      --]]
+	    }
+	filter "system:linux"
+		defines
+		{
+		}
+		links 
+	 	{
+	    }
+	filter "system:macosx"
+		defines
+		{
+		}
+		links 
+	 	{
+	    }
 
 
 	filter "configurations:Debug"

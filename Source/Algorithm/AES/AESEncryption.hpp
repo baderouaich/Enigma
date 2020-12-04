@@ -5,16 +5,14 @@
 #include <Logger/Logger.hpp>
 
 // Crypto++
+#include <cryptlib.h> // HexEncoder, HexDecoder
 #include <aes.h> // AES
 #include <filters.h> // StringSink, StringSource, StreamTransformationFilter
 #include <ccm.h> // CBC_Mode
 #include <osrng.h> // AutoSeededRandomPool
-#include <cryptlib.h> // HexEncoder, HexDecoder
-#include <md5.h> // MD5
-#include <osrng.h> // AutoSeededRandomPool
 #include <sha.h> // SHA256
 #include <hkdf.h> // KeyDerivationFunction
-#include <modes.h> // 
+#include <modes.h> // Classes for block cipher modes of operation
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API AESEncryption
