@@ -6,7 +6,7 @@ NS_ENIGMA_BEGIN
 /* Static Functions Begin */
 static void GLFWErrorCallback(int error, const char* message)
 {
-	ENIGMA_ERROR("GFLW ERROR #{}: {}", error, message);
+	ENIGMA_ERROR("GFLW ERROR #{0}: {1}", error, message);
 }
 /* Static Functions End */
 
@@ -26,13 +26,13 @@ Window::Window(const WindowSettings& window_settings)
 	m_cursor(nullptr)
 {
 	if (!InitGLFW(window_settings))
-		throw std::exception("Failed to Initialize GLFW");
+		throw std::runtime_error("Failed to Initialize GLFW");
 	if (!InitGLFWCallbacks())
-		throw std::exception("Failed to Initialize GLFW Callbacks");
+		throw std::runtime_error("Failed to Initialize GLFW Callbacks");
 	if (!InitGLAD())
-		throw std::exception("Failed to Initialize GLAD");
+		throw std::runtime_error("Failed to Initialize GLAD");
 	if (!InitOpenGLOptions())
-		throw std::exception("Failed to Initialize OpenGL Options");
+		throw std::runtime_error("Failed to Initialize OpenGL Options");
 }
 
 
@@ -167,17 +167,24 @@ bool Window::InitGLFWCallbacks()
 	glfwSetWindowFocusCallback(m_GLFWwindow, [](GLFWwindow* window, int focused)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-			if (focused)
-				this_window.m_event_callback(WindowFocusEvent());
+			if (focused == GLFW_TRUE)
+			{
+				WindowFocusEvent event;
+				this_window.m_event_callback(event);
+			}
 			else
-				this_window.m_event_callback(WindowFocusLostEvent());
+			{
+				WindowFocusLostEvent event;
+				this_window.m_event_callback(event);
+			}
 		});
 
 	//Window Close
 	glfwSetWindowCloseCallback(m_GLFWwindow, [](GLFWwindow* window)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-			this_window.m_event_callback(WindowCloseEvent());
+			WindowCloseEvent event;
+			this_window.m_event_callback(event);
 		});
 
 	//Key
@@ -546,7 +553,7 @@ void Window::SetIcon(const String& icon_path) noexcept
 	images[0].pixels = pixels;
 	images[0].width = width;
 	images[0].height = height;
-	glfwSetWindowIcon(m_GLFWwindow, images.size(), images.data());
+	glfwSetWindowIcon(m_GLFWwindow, static_cast<i32>(images.size()), images.data());
 
 	stbi_image_free(pixels);
 	pixels = nullptr;

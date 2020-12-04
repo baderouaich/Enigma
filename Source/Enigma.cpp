@@ -15,13 +15,13 @@ public:
 		LOG(ENIGMA_CURRENT_FUNCTION);
 
 		//Set Window Icon & Cursor
-		const auto& window = __super::GetWindow();
+		const auto& window = GetWindow();
 		window->SetCursor(Enigma::CursorMode::Arrow);
 		window->SetIcon(Enigma::Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
 		//Push Main Menu scene
-		__super::PushScene(new MainMenuScene());
+		PushScene(new MainMenuScene());
 	}
 
 

@@ -8,7 +8,7 @@
 #include "Types.hpp"
 #include "Version.hpp"
 
-/// Enable/Disable gtest Testing
+/// Enable/Disable Catch2 Tests
 #define ENIGMA_TEST false
 ///
 
@@ -71,13 +71,6 @@
 #endif
 ///
 
-
-
-/// __super tidy keyword for non msc compilers
-#ifndef _MSC_VER 
-#define __super  
-#endif
-/// 
 
 
 #endif // !ENIGMA_CORE_H

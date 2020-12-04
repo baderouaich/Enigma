@@ -78,7 +78,7 @@ project "Enigma"
 	--Add Libraries include directories
 	includedirs
 	{
-		"Source", -- include Source/ dir so we can include e.g "Enigma/Core/Core.h" directly, not to keep going back steps e.g "../../Core/Core.h"
+		"Source", -- include Source/ dir so we can include e.g "Enigma/Core/Core.hpp" directly, not to keep going back steps e.g "../../Core/Core.hpp"
 		"%{IncludeDir.spdlog}", -- spdlog
 		"%{IncludeDir.glfw}", -- GLFW
 		"%{IncludeDir.glad}", -- Glad
@@ -86,7 +86,7 @@ project "Enigma"
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- stb_image
 		"%{IncludeDir.cryptopp}", -- cryptopp
-		"%{IncludeDir.catch2}", -- googletest
+		"%{IncludeDir.catch2}", -- catch2
 	}
 
 
@@ -98,9 +98,7 @@ project "Enigma"
 		"spdlog", -- links SpdLog lib
 		"stb_image", -- links stb_image lib
 		"cryptopp", -- links cryptopp lib
-		"catch2", --TODO: link googletest.lib only in debug
-		
-		"opengl32" --Loads opengl32 kernel .lib
+		"catch2", --TODO: link  catch2.lib only in debug
 	}
 
 
@@ -113,36 +111,48 @@ project "Enigma"
 	    {
 	  	  ['Resources/*'] = { '*.rc', '**.ico' } 
 	    }
-
+		--
 		defines
 		{
+			"ENIGMA_PLATFORM_WINDOWS",
 			"_CRT_SECURE_NO_WARNINGS", -- disable MSVC std warnings
 		}
 		links
 		{
+			"opengl32" -- Loads windows opengl32 kernel .lib
 		}
 
 	filter "system:linux"
 		defines
 		{
+			"ENIGMA_PLATFORM_LINUX",
 		}
 		links
 		{
-			"pthread"
+			"X11", -- x11 Linux gui libs
+			"dl", -- dynamic loader interface
+			"GL", -- unix based systems opengl lib
+			"pthread", -- std::thread
+			"stdc++fs" -- std::filesystem
 		}
 
 	filter "system:macosx"
 		defines
 		{
+			"ENIGMA_PLATFORM_MACOS",
 		}	
 		links
 		{
+			-- TODO
+			"GL", -- unix based systems opengl
+			"pthread", -- std::thread
+			"stdc++fs" -- std::filesystem
 		}
 
 	
 	--- Configurations ---
 	filter "configurations:Debug"
-		kind "ConsoleApp" --We need console for debugging
+		kind "ConsoleApp" -- Debug we need console for logging
 		defines "ENIGMA_DEBUG"
 		runtime "Debug"
 		symbols "On"

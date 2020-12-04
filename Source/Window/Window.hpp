@@ -12,6 +12,7 @@
 
 #include <string>
 #include <utility>
+#include <exception>
 
 #include "WindowSettings.hpp"
 

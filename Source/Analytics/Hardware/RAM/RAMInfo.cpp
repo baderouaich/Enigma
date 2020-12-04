@@ -3,12 +3,20 @@
 
 NS_ENIGMA_BEGIN
 
+RAMInfo::RAMInfo() noexcept
+{
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+	m_memory_status.dwLength = sizeof(m_memory_status);
+#elif defined(ENIGMA_PLATFORM_LINUX)
+#elif defined(ENIGMA_PLATFORM_MACOS)
+#endif
+}
+
 void RAMInfo::Update()
 {
 	static bool success = false;
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
-	m_memory_status.dwLength = sizeof(m_memory_status);
 	success = GlobalMemoryStatusEx(&m_memory_status);
 #elif defined(ENIGMA_PLATFORM_LINUX)
 	success = sysinfo(&m_memory_status) == 0;

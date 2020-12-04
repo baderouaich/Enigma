@@ -88,7 +88,7 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.10f, 0.56f, 0.58f, 1.0f));
 			if (ImGui::Button("Back to Menu", back_btn_size))
 			{
-				__super::EndScene();
+				EndScene();
 			}
 			ImGui::PopStyleColor(4);
 		}
@@ -107,7 +107,7 @@ void EncryptTextScene::OnEvent(Event& event)
 	// Go back to main menu scene
 	if (Input::IsKeyPressed(Enigma::Key::Escape))
 	{
-		__super::EndScene();
+		EndScene();
 	}
 };
 

@@ -23,14 +23,19 @@ Encrypt & Decrypt your important data
 - Build Solution and Run `./Bin/Release-windows-x86_64/Enigma/Enigma.exe`
 
 <strong>Linux</strong> : <br>
+ - Install Latest gcc & g++ Compiler<br>
+  `sudo add-apt-repository ppa:ubuntu-toolchain-r/test`<br>
+  `sudo apt update`<br>
+  `sudo apt install gcc-10 g++-10`<br>
  - Install necessary libs `sudo apt install libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
- - Run `sudo bash ./Gen-Linux-GMake2.sh` to generate Make Files
- - `make config=release (or dist) -j X` replace X with number of threads to use for compilation, the more the faster
- - Run Enigma binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
+ - Run `sudo bash ./Gen-Linux-GMake2.sh` to generate Makefiles
+ - `make config=release CC=gcc-10 CPP=g++-10 -j X` <br> 
+   replace X with number of threads to use for compilation, the more the faster<br>
+   replace release with dist for full performance
+ - Run Enigma Binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
-<strong>MacOS</strong> : <br>
+<strong>MacOS TODO</strong> : <br>
 - Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
-- TODO
 
 ## Status (Under Development)
 Latest Test on `Windows 10 Version 20H2`

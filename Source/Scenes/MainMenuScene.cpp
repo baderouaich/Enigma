@@ -39,7 +39,7 @@ void MainMenuScene::LoadImGuiFonts()
 			UNUSED(action);
 
 			//no further without dear fonts :c
-			__super::EndScene();
+			EndScene();
 		}
 	}
 
@@ -138,7 +138,7 @@ void MainMenuScene::OnImGuiDraw()
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				if (ImGui::Button("Exit", button_size))
 				{
-					__super::EndScene();
+					EndScene();
 				}
 			}
 		}
@@ -158,7 +158,7 @@ void MainMenuScene::OnImGuiDraw()
 
 			if (ImGui::Button("Exit", exit_btn_size))
 			{
-				__super::EndScene();
+				EndScene();
 			}
 			ImGui::PopStyleColor(4);
 		}*/
@@ -192,7 +192,7 @@ void MainMenuScene::OnEvent(Event& event)
 
 	if (Input::IsKeyPressed(Enigma::Key::S))
 	{
-		const auto& [win_x, win_y] = __super::GetSceneData().window->GetPosition();
+		const auto& [win_x, win_y] = GetSceneData().window->GetPosition();
 
 		ENIGMA_TRACE("{0} {1}", win_x, win_y);
 	}

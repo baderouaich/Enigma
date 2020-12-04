@@ -3,6 +3,7 @@
 #define ENIGMA_RAM_INFO_H
 
 #include <Core/Core.hpp>
+#include <Logger/Logger.hpp>
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	//https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex
@@ -11,13 +12,13 @@ typedef MEMORYSTATUSEX memory_status_t;
 #elif defined(ENIGMA_PLATFORM_LINUX)
 	//https://man7.org/linux/man-pages/man2/sysinfo.2.html
 	#include <sys/sysinfo.h>
-typedef sysinfo memory_status_t;
+typedef struct sysinfo memory_status_t;
 #elif defined(ENIGMA_PLATFORM_MACOS)
 	//https://stackoverflow.com/questions/5012886/determining-the-available-amount-of-ram-on-an-ios-device
 	#include <mach/vm_statistics.h>
 	#include <mach/mach.h>
 	#include <mach/mach_host.h>
-typedef vm_statistics_data_t memory_status_t;
+typedef struct vm_statistics_data_t memory_status_t;
 #endif
 
 NS_ENIGMA_BEGIN
@@ -27,7 +28,7 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API RAMInfo
 {
 public: /* Constructors / Destructor */
-	RAMInfo() = default;
+	RAMInfo() noexcept;
 	~RAMInfo() = default;
 
 public:

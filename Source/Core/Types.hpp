@@ -49,32 +49,6 @@ namespace Enigma
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
-
-
-	/*
-	*	Some Literal Size Convertors
-	*/
-	// bytes to kilobytes
-	inline constexpr size_t operator ""_KB(const size_t bytes) noexcept
-	{
-		return bytes * 1024ULL;
-	}
-	// bytes to megabytes
-	inline constexpr size_t operator ""_MB(const size_t bytes) noexcept
-	{
-		return bytes * 1024ULL * 1024ULL;
-	}
-	// bytes to gigabytes
-	inline constexpr size_t operator ""_GB(const size_t bytes) noexcept
-	{
-		return bytes * 1024ULL * 1024ULL * 1024ULL;
-	}
-	// bytes to terabytes
-	inline constexpr size_t operator ""_TB(const size_t bytes) noexcept
-	{
-		return bytes * 1024ULL * 1024ULL * 1024ULL * 1024ULL;
-	}
-
 }
 
 #endif // !ENIGMA_TYPES_H

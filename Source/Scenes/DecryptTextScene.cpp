@@ -53,7 +53,7 @@ void DecryptTextScene::OnImGuiDraw()
 			}
 			if (ImGui::Button("Close Scene"))
 			{
-				__super::EndScene();
+				EndScene();
 			}
 			spacing(9);
 
@@ -85,7 +85,7 @@ void DecryptTextScene::OnEvent(Event& event)
 
 	if (Input::IsKeyPressed(Enigma::Key::Escape))
 	{
-		__super::EndScene();
+		EndScene();
 	}
 
 

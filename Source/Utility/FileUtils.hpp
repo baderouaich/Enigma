@@ -6,8 +6,14 @@
 #include <Logger/Logger.hpp>
 
 #include <fstream>
-#include <filesystem>
-namespace fs = std::filesystem;
+// Configure std::filesystem for non MSVC compilers
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+	#include <filesystem>
+	namespace fs = std::filesystem;
+#else
+	#include <experimental/filesystem>
+	namespace fs = std::experimental::filesystem;
+#endif
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API FileUtils

@@ -1,12 +1,14 @@
-[14:36:37] [info] Enigma: [ OpenGL Info ]
+[13:26:17] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[14:36:37] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[14:36:37] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[14:36:37] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[14:36:37] [trace] Enigma: void __cdecl MainMenuScene::LoadImGuiFonts(void)
-[14:36:40] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[14:36:41] [trace] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[14:36:43] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[13:26:18] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[13:26:19] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[13:26:19] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[13:26:19] [trace] Enigma: void __cdecl MainMenuScene::LoadImGuiFonts(void)
+[13:26:31] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
+[13:26:31] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
+[13:26:34] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 640, 480
+[13:26:34] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 640, 480
+[13:26:36] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
