@@ -20,7 +20,28 @@ project "glfw"
 		"src/window.c"
 	}
 
-	--[[ For Linux --]]
+	-- Platform --
+	--[[ Windows --]]
+	filter "system:windows"
+		files
+		{
+			"src/win32_init.c",
+			"src/win32_joystick.c",
+			"src/win32_monitor.c",
+			"src/win32_time.c",
+			"src/win32_thread.c",
+			"src/win32_window.c",
+			"src/wgl_context.c",
+			"src/egl_context.c",
+			"src/osmesa_context.c"
+		}
+		defines 
+		{ 
+			"_GLFW_WIN32",
+			"_CRT_SECURE_NO_WARNINGS"
+		}
+
+	--[[ Linux --]]
 	filter "system:linux"
 		pic "on"
 		files
@@ -41,35 +62,20 @@ project "glfw"
 			"_GLFW_X11"
 		}
 
-	--[[ For Windows --]]
-	filter "system:windows"
-		files
-		{
-			"src/win32_init.c",
-			"src/win32_joystick.c",
-			"src/win32_monitor.c",
-			"src/win32_time.c",
-			"src/win32_thread.c",
-			"src/win32_window.c",
-			"src/wgl_context.c",
-			"src/egl_context.c",
-			"src/osmesa_context.c"
-		}
-		defines 
-		{ 
-			"_GLFW_WIN32",
-			"_CRT_SECURE_NO_WARNINGS"
-		}
 
 
+	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "On"
+		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"
 		runtime "Release"
-		optimize "On"
+		optimize "On" -- Perform a balanced set of optimizations.
+		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
 
 	filter "configurations:Dist"
 		runtime "Release"
-		optimize "Full"
+		optimize "Full" -- Full optimization.
+		inlining "Auto" -- Inline any suitable function for full performance

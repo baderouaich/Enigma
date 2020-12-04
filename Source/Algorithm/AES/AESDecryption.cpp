@@ -50,7 +50,7 @@ String AESDecryption::Decrypt(const String& password, const String& buffer)
         ENIGMA_ERROR("{0}", e.what());
 
         Enigma::MessageBox msg_box("AES Decryption Failure", e.what(), Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
-        UNUSED(msg_box.Show());
+		[[maybe_unused]] auto action = msg_box.Show();
     }
 
     return decrypted;

@@ -46,8 +46,7 @@ void Application::InitWindow(const WindowSettings& window_settings)
 		
 		// ui alert
 		Enigma::MessageBox msg_box("Error occured", "Couldn't Construct Window: " + String(e.what()), Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
-		auto action = msg_box.Show();
-		UNUSED(action);
+		[[maybe_unused]] auto action = msg_box.Show();
 		
 		// exit
 		this->Exit("Couldn't Construct Window", EXIT_FAILURE); // No Application without a window :c

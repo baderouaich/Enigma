@@ -35,8 +35,7 @@ void MainMenuScene::LoadImGuiFonts()
 				"Failed to load font " + font_name,
 				Enigma::MessageBox::Icon::Error,
 				Enigma::MessageBox::Choice::Ok);
-			auto action = msg_box.Show();
-			UNUSED(action);
+			[[maybe_unused]] auto action = msg_box.Show();
 
 			//no further without dear fonts :c
 			EndScene();

@@ -75,8 +75,6 @@ do { \
 			ENIGMA_SAFE_DELETE_PTR(ptr); \
 	} \
 } while (false);
-
-#define UNUSED(x) (void)(x)
 ///
 
 

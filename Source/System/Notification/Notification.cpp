@@ -14,12 +14,11 @@ Notification::Notification(const String& title, const String& message, Icon icon
 
 void Notification::Show() const
 {
-	pfd::notify r = pfd::notify(
+	[[maybe_unused]] auto r = pfd::notify(
 		m_title,
 		m_message,
 		static_cast<pfd::icon>(m_icon)
 	);
-	UNUSED(r);
 }
 
 Notification::~Notification() noexcept

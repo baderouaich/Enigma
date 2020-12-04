@@ -51,7 +51,7 @@ group "Dependencies"
 	include "Dependencies/pfd"
 	include "Dependencies/stb_image"
 	include "Dependencies/cryptopp"
-	include "Dependencies/catch2"
+	include "Dependencies/catch2" -- will be included and linked only in debug mode
 group ""
 
 -- Include Enigma Application project solution
@@ -86,7 +86,6 @@ project "Enigma"
 		"%{IncludeDir.pfd}", -- pfd
 		"%{IncludeDir.stb_image}", -- stb_image
 		"%{IncludeDir.cryptopp}", -- cryptopp
-		"%{IncludeDir.catch2}", -- catch2
 	}
 
 
@@ -98,7 +97,6 @@ project "Enigma"
 		"spdlog", -- links SpdLog lib
 		"stb_image", -- links stb_image lib
 		"cryptopp", -- links cryptopp lib
-		"catch2", --TODO: link  catch2.lib only in debug
 	}
 
 
@@ -156,17 +154,28 @@ project "Enigma"
 		defines "ENIGMA_DEBUG"
 		runtime "Debug"
 		symbols "On"
-		optimize "Off"
-
+		optimize "Off" -- No optimization will be performed.
+		includedirs
+		{
+			"%{IncludeDir.catch2}", -- we use catch2 only in debug
+		}
+		links
+		{
+			"catch2", -- we need catch2 tests only in debug
+		}
 		
 	filter "configurations:Release"
 		kind "WindowedApp" -- Release as windowed application
 		defines "ENIGMA_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "On" -- Perform a balanced set of optimizations.
+		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
+
 
 	filter "configurations:Dist"
 		kind "WindowedApp" -- Distribution as windowed application
 		defines "ENIGMA_DIST"
 		runtime "Release"
-		optimize "Full"
+		optimize "Full" -- Full optimization.
+		inlining "Auto" -- Inline any suitable function for full performance
+

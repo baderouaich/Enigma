@@ -25,10 +25,12 @@ String AESEncryption::Encrypt(const String& password, const String& buffer)
         if (password.size() < Constants::Algorithm::AES::AES_MINIMUM_PASSWORD_LENGTH)
         {
             const String msg = "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::AES::AES_MINIMUM_PASSWORD_LENGTH);
+			//console alert
             ENIGMA_ERROR(msg.c_str());
+			//ui alert
             Enigma::MessageBox msg_box("AES Encryption Failure", msg, Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
-            Enigma::MessageBox::Action action = msg_box.Show();
-            UNUSED(action);
+			[[maybe_unused]] auto action = msg_box.Show();
+
             return String();
         }
     }
@@ -64,7 +66,7 @@ String AESEncryption::Encrypt(const String& password, const String& buffer)
         ENIGMA_ERROR("{0}", e.what());
 
         Enigma::MessageBox msg_box("AES Encryption Failure", e.what(), Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
-        UNUSED(msg_box.Show());
+		[[maybe_unused]] auto action = msg_box.Show();
     }
 
     return (iv + encrypted);

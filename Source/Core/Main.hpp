@@ -15,7 +15,6 @@
 int main(int argc, char* argv[])
 {
 #if !ENIGMA_TEST
-	UNUSED(argc), UNUSED(argv);
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 	// Create Application
@@ -44,8 +43,6 @@ int WINAPI WinMain(
 	_In_ LPSTR cmd_line, 
 	_In_ int cmd_show) 
 {
-	UNUSED(instance), UNUSED(prev_instance),
-	UNUSED(cmd_line), UNUSED(cmd_show);
 	return main(__argc, __argv);
 }
 
