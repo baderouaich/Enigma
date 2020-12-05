@@ -1,3 +1,4 @@
+-- imgui 1.79 release
 project "imgui"
 	kind "StaticLib"
 	language "C++"

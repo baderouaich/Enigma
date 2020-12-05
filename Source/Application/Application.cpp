@@ -101,7 +101,7 @@ void Application::OnEvent(Event& event)
 bool Application::OnWindowClose(WindowCloseEvent& event)
 {
 	ENIGMA_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
-	
+
 	this->EndApplication();
 	
 	return true; //the end of the app, all events are handled.
@@ -233,9 +233,11 @@ void Application::EndApplication() noexcept
 
 Application::~Application()
 {
-	// Cleanup Scenes
-	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](auto& scene)
+	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](Scene*& scene)
 	{
+		// Notify scenes OnDestroy before closing application
+		scene->OnDestroy();
+		// Cleanup Scene
 		ENIGMA_SAFE_DELETE_PTR(scene);
 	});
 	m_scenes.clear();
