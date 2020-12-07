@@ -1,13 +1,12 @@
-[22:27:13] [info] Enigma: [ OpenGL Info ]
+[22:40:04] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[22:27:13] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[22:27:13] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[22:27:13] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[22:27:13] [trace] Enigma: void __cdecl MainMenuScene::LoadImGuiFonts(void)
-[22:27:13] [error] Enigma: Failed to load font Resources/Fonts/Audiowide-Regular-45 | D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\MainMenuScene.cpp:331 | void __cdecl MainMenuScene::LoadImGuiFonts(void)
-[22:27:15] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
-[22:27:15] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
-[22:27:30] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[22:40:04] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[22:40:04] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[22:40:04] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[22:40:04] [trace] Enigma: void __cdecl MainMenuScene::LoadImGuiFonts(void)
+[22:40:05] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
+[22:40:08] [trace] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
+[22:40:09] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

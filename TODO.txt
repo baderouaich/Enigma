@@ -4,4 +4,3 @@
 - Static analysis on Enigma sources
 - Fix window on maximize, when dragging to centre it gets minimized
 - Add linux build to github workflow
-- ImFont::IsLoaded returns false on loaded fonts -> imgui issue #3643

@@ -321,6 +321,8 @@ void MainMenuScene::LoadImGuiFonts()
 	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 20.0f);
 	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 12.0f);
 
+	io.Fonts->Build(); //Build added fonts atlas --> imgui issue #3643
+
 	// Check if fonts are loaded
 	for (const auto& [font_name, font] : m_fonts)
 	{
