@@ -28,7 +28,8 @@ Encrypt & Decrypt your important data
   `sudo add-apt-repository ppa:ubuntu-toolchain-r/test`<br>
   `sudo apt update`<br>
   `sudo apt install gcc-10 g++-10`<br>
- - Install necessary libs `sudo apt install libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
+ - Install necessary libs<br>
+  `sudo apt install libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
  - Extract premake5 binary <br>
   `tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/`
  - Run `sudo bash ./Gen-Linux-GMake2.sh` to generate Makefiles
