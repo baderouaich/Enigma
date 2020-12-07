@@ -39,7 +39,7 @@ jobs:
         sudo apt install gcc-10 g++-10
 
     - name: Installing necessary libraries
-      run: sudo apt install libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev
+      run: sudo apt install libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev
 
     - name: Extracting premake5 binary
       run: tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/
