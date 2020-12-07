@@ -52,29 +52,29 @@
 
 
 ///Enigma Memory Safe Operations 
-#define ENIGMA_SAFE_DELETE_PTR(ptr) \
-do { \
-	if ((ptr)){ \
-		delete (ptr); \
-		(ptr) = nullptr; \
-	} \
-} while(false)
-
-#define ENIGMA_SAFE_DELETE_ARRAY_PTR(ptr) \
-do { \
-	if ((ptr)) { \
-		delete[](ptr); \
-		(ptr) = nullptr; \
-	} \
-} while(false)
-
-#define ENIGMA_SAFE_DELETE_LIST_PTR(list) \
-do { \
-	if (((list)[0])){ \
-		for (auto& ptr : list) \
-			ENIGMA_SAFE_DELETE_PTR(ptr); \
-	} \
-} while (false);
+//#define ENIGMA_SAFE_DELETE_PTR(ptr) \
+//do { \
+//	if ((ptr)){ \
+//		delete (ptr); \
+//		(ptr) = nullptr; \
+//	} \
+//} while(false)
+//
+//#define ENIGMA_SAFE_DELETE_ARRAY_PTR(ptr) \
+//do { \
+//	if ((ptr)) { \
+//		delete[](ptr); \
+//		(ptr) = nullptr; \
+//	} \
+//} while(false)
+//
+//#define ENIGMA_SAFE_DELETE_LIST_PTR(list) \
+//do { \
+//	if (((list)[0])){ \
+//		for (auto& ptr : list) \
+//			ENIGMA_SAFE_DELETE_PTR(ptr); \
+//	} \
+//} while (false);
 ///
 
 

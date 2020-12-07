@@ -303,7 +303,7 @@ private: /*Properties*/
 	GLFWmonitor* m_monitor;
 	const GLFWvidmode* m_video_mode;
 
-	UniquePtr<Cursor> m_cursor;	// Window cursor
+	std::unique_ptr<Cursor> m_cursor;	// Window cursor
 
 public: /*Good Friends :)*/
 	friend class Application;

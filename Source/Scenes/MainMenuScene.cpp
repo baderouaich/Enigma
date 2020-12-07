@@ -42,14 +42,13 @@ void MainMenuScene::OnDraw()
 
 void MainMenuScene::OnImGuiDraw()
 {
-	const auto& [win_w, win_h] = Enigma::Application::GetInstance().GetWindow()->GetSize();
-	const auto& [win_x, win_y] = Enigma::Application::GetInstance().GetWindow()->GetPosition();
+	const auto& [win_w, win_h] = Application::GetInstance().GetWindow()->GetSize();
+	const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
 	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
 
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
-	//ImGui::Dummy(ImVec2(0.0f, 20.0f));
 
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
@@ -129,12 +128,12 @@ void MainMenuScene::OnImGuiDraw()
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				if (ImGui::Button("Encrypt Text", button_size))
 				{
-					Application::GetInstance().PushScene(new EncryptTextScene(m_fonts));
+					Application::GetInstance().PushScene(std::make_shared<EncryptTextScene>(m_fonts));
 				}
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				if (ImGui::Button("Decrypt Text", button_size))
 				{
-					Application::GetInstance().PushScene(new DecryptTextScene(m_fonts));
+					Application::GetInstance().PushScene(std::make_shared<DecryptTextScene>(m_fonts));
 
 				}
 				spacing(6);
@@ -325,30 +324,30 @@ void MainMenuScene::LoadImGuiFonts()
 	// Check if fonts are loaded
 	for (const auto& [font_name, font] : m_fonts)
 	{
-		if (!font)
+		if (!font->IsLoaded())
 		{
-			//console alert
-			ENIGMA_ERROR("Could not load font {0}", font_name.c_str());
-
-			//ui alert
-			Enigma::UniquePtr<Enigma::MessageBox> msg_box = Enigma::MakeUnique<Enigma::MessageBox>("Resource Loading Error",
-				"Failed to load font " + font_name,
+			const String err_msg = "Failed to load font " + font_name;
+			// console alert
+			ENIGMA_ERROR(err_msg.c_str());
+			// ui alert
+			std::unique_ptr<Enigma::MessageBox> msg_box = std::make_unique<Enigma::MessageBox>(
+				"Resource Loading Error",
+				err_msg,
 				Enigma::MessageBox::Icon::Error,
 				Enigma::MessageBox::Choice::Ok);
 			[[maybe_unused]] auto action = msg_box->Show();
-
-			//no further without dear fonts :c
+			// no further without dear fonts :c
 			this->EndScene();
+			break;
 		}
 	}
-
 }
 
 void MainMenuScene::ShowAboutDialog()
 {
 	ENIGMA_INFO(ENIGMA_ABOUT);
 
-	Enigma::UniquePtr<Enigma::MessageBox> about_dialog = Enigma::MakeUnique<Enigma::MessageBox>(
+	std::unique_ptr<Enigma::MessageBox> about_dialog = std::make_unique<Enigma::MessageBox>(
 		"About Enigma " + String(ENIGMA_VERSION),
 		Enigma::String(ENIGMA_ABOUT),
 		Enigma::MessageBox::Icon::Info,

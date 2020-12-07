@@ -1,8 +1,10 @@
 #pragma once
 #ifndef ENIGMA_AES_ENCRYPTION_H
 #define ENIGMA_AES_ENCRYPTION_H
+
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
+#include <Memory/CreatePtr.hpp>
 
 // Crypto++
 #include <cryptlib.h> // HexEncoder, HexDecoder
@@ -15,7 +17,7 @@
 #include <modes.h> // Classes for block cipher modes of operation
 
 NS_ENIGMA_BEGIN
-class ENIGMA_API AESEncryption
+class ENIGMA_API AESEncryption : public CreatePtr<AESEncryption>
 {
 public:
 	AESEncryption();
@@ -34,8 +36,8 @@ private:
 	String GenerateRandomIV();
 	
 private:
-	UniquePtr<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption> m_aes_encryption; // Current Mode and intent
-	UniquePtr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
+	std::unique_ptr<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption> m_aes_encryption; // Current Mode and intent
+	std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
 
 private:
 };

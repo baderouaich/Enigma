@@ -23,7 +23,7 @@ private:
 	bool UserWantsToCancel();
 
 private:
-	const std::unordered_map<String, ImFont*>& m_fonts;
+	const std::unordered_map<String, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
 private:
 	Constants::Algorithm::Type m_algorithm; // selected algorithm to encrypt text with

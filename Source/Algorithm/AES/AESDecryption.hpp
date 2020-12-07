@@ -29,7 +29,7 @@ public:
 	String Decrypt(const String& password, const String& buffer);
 
 private:
-	UniquePtr<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption> m_aes_decryption;
+	std::unique_ptr<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption> m_aes_decryption;
 };
 NS_ENIGMA_END
 

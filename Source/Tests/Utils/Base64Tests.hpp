@@ -10,8 +10,8 @@ TEST_CASE("Encode_And_Decode_Cipher", "Base64")
 {
 	using std::cout, std::cin, std::endl;
 
-	UniquePtr<AESEncryption> aes_encyptor = MakeUnique<AESEncryption>();
-	UniquePtr<AESDecryption> aes_decryptor = MakeUnique<AESDecryption>();
+	std::unique_ptr<AESEncryption> aes_encyptor = make_unique<AESEncryption>();
+	std::unique_ptr<AESDecryption> aes_decryptor = make_unique<AESDecryption>();
 
     String buffer, password;
     String encrypted, decrypted;

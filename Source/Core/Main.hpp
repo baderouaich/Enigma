@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 	// Create Application
-	Enigma::UniquePtr<Enigma::Application> _App = Enigma::CreateApplication();
+	std::unique_ptr<Enigma::Application> _App = Enigma::CreateApplication();
 	// Run Application
 	_App->Run();
 	// Exit

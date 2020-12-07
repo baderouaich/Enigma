@@ -20,10 +20,10 @@ public:
 	static void Initialize();
 
 public: /* Accessors */
-	static const SharedPtr<spdlog::logger>& GetLogger() noexcept { return m_logger; }
+	static const std::shared_ptr<spdlog::logger>& GetLogger() noexcept { return m_logger; }
 
 private:
-    static SharedPtr<spdlog::logger> m_logger;
+    static std::shared_ptr<spdlog::logger> m_logger;
 };
 
 

@@ -16,14 +16,13 @@ private: /* Overrides */
 	void OnEvent(Enigma::Event& event) override;
 	void OnDestroy() override;
 
-private:
+private: /* Initializers */
 	void LoadImGuiFonts();
 
-private:
+private: /* Dialogs */
 	void ShowAboutDialog();
 
 private:
 	std::unordered_map<Enigma::String, ImFont*> m_fonts;
-	//std::unordered_map<String, std::unordered_map<unsigned short, ImFont*> m_fonts; // { "font name", {font_size, font} }
 };
 

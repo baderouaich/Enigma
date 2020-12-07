@@ -26,8 +26,6 @@ Application::Application(const WindowSettings& window_settings)
 
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
-	//this->InitSceneData();
-
 }
 
 void Application::InitWindow(const WindowSettings& window_settings)
@@ -68,7 +66,7 @@ void Application::InitImGuiRenderer()
 	m_imgui_renderer = ImGuiRenderer::CreateUnique();
 }
 
-void Application::PushScene(Scene* scene)
+void Application::PushScene(const std::shared_ptr<Scene>& scene)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr");
 	//scene->m_scene_data = &m_scene_data;
@@ -175,8 +173,7 @@ void Application::Run()
 				
 				// Destroy Scene
 				m_scenes.back()->EndScene(); // just to make sure, even if m_quit is true (who knows what can happen in OnDestroy)
-				ENIGMA_SAFE_DELETE_PTR(m_scenes.back());
-				m_scenes.pop_back();
+				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~shared_ptr to cleanup memory)
 			}
 
 		}
@@ -233,12 +230,12 @@ void Application::EndApplication() noexcept
 
 Application::~Application()
 {
-	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](Scene*& scene)
+	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const std::shared_ptr<Scene>& scene)
 	{
 		// Notify scenes OnDestroy before closing application
 		scene->OnDestroy();
 		// Cleanup Scene
-		ENIGMA_SAFE_DELETE_PTR(scene);
+		//ENIGMA_SAFE_DELETE_PTR(scene);
 	});
 	m_scenes.clear();
 }

@@ -190,11 +190,14 @@ void EncryptTextScene::OnEvent(Event& event)
 void EncryptTextScene::OnDestroy()
 {
 	LOG(ENIGMA_CURRENT_FUNCTION);
+
+	m_text.clear();
+	m_encryption_password.clear();
 }
 
 bool EncryptTextScene::UserWantsToCancel()
 {
-	Enigma::UniquePtr<Enigma::MessageBox> confirm_dialog = Enigma::MakeUnique<Enigma::MessageBox>(
+	std::unique_ptr<Enigma::MessageBox> confirm_dialog = std::make_unique<Enigma::MessageBox>(
 		"Enigma",
 		"Are you sure you want to cancel the entire operation?",
 		Enigma::MessageBox::Icon::Question,

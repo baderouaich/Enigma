@@ -17,6 +17,6 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private:
-	const std::unordered_map<String, ImFont*>& m_fonts;
+	const std::unordered_map<String, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 };
 

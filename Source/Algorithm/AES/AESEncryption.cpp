@@ -7,8 +7,8 @@ NS_ENIGMA_BEGIN
 
 AESEncryption::AESEncryption()
     :
-    m_aes_encryption(MakeUnique<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption>()),
-    m_auto_seeded_random_pool(MakeUnique<CryptoPP::AutoSeededRandomPool>())
+    m_aes_encryption(std::make_unique<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption>()),
+    m_auto_seeded_random_pool(std::make_unique<CryptoPP::AutoSeededRandomPool>())
 {
 }
 

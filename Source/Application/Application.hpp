@@ -3,7 +3,6 @@
 #define ENIGMA_APPLICATION_H
 
 #include <Core/Core.hpp>
-#include <Core/Types.hpp>
 #include <Logger/Logger.hpp>
 #include <Scenes/Scene.hpp>
 #include <Memory/CreatePtr.hpp>
@@ -14,7 +13,6 @@
 
 #include <GLFW/glfw3.h>
 
-#include <memory>
 #include <string>
 
 /*
@@ -69,7 +67,7 @@ public: /*Accessors*/
 	/*
 	*	Returns the Window of this Application
 	*/
-	const SharedPtr<Window>& GetWindow() const noexcept { return m_window; }
+	const std::shared_ptr<Window>& GetWindow() const noexcept { return m_window; }
 
 	/*
 	*	Destroys Window and ends app
@@ -80,7 +78,7 @@ public: /*Accessors*/
 	*	Pushes new Scene to the stack
 	*	Cleans memory when scene ends
 	*/
-	void PushScene(Scene* scene);
+	void PushScene(const std::shared_ptr<Scene>& scene);
 
 	/*
 	*	Returns FPS (Frames Per Second) count
@@ -100,11 +98,12 @@ private: /* Initializer Functions */
 	void InitWindow(const WindowSettings& window_settings);
 	void InitImGuiRenderer();
 
-private:
-	SharedPtr<Window> m_window;
+private: /* Window */
+	std::shared_ptr<Window> m_window;
 
-private:
-	std::vector<Scene*> m_scenes;
+private: /* Scenes */
+	std::vector<std::shared_ptr<Scene>> m_scenes;
+
 	//TODO: maybe not needed, since we can access everything from Application::GetInstance()
 	//Scene data, to access everything we need (window, settings, other scenes...) from all scenes
 	//SceneData m_scene_data;
@@ -119,9 +118,9 @@ private: /* FPS */
 	ui32 m_FPS;
 
 private: /* ImGui */
-	UniquePtr<ImGuiRenderer> m_imgui_renderer;
+	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;
 
-private:
+private: /* Instance */
 	static Application* m_instance;
 
 };
@@ -129,7 +128,7 @@ private:
 /*
 *	Entry Point to be defined in user side
 */
-extern Enigma::UniquePtr<Enigma::Application> CreateApplication();
+extern std::unique_ptr<Enigma::Application> CreateApplication();
 
 NS_ENIGMA_END
 

@@ -18,7 +18,7 @@ public:
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
 		//Push Main Menu scene
-		PushScene(new MainMenuScene());
+		this->PushScene(std::make_shared<MainMenuScene>());
 	}
 
 
@@ -29,7 +29,7 @@ public:
 /*
 *	Entry Point
 */
-extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
+extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
 {
 	//Construct Window
 	Enigma::WindowSettings window_settings;
@@ -51,5 +51,5 @@ extern Enigma::UniquePtr<Enigma::Application> Enigma::CreateApplication()
 //		window_settings.is_show_fps = false;
 //#endif
 	}
-	return Enigma::MakeUnique<EnigmaApplication>(std::move(window_settings));
+	return std::make_unique<EnigmaApplication>(std::move(window_settings));
 }

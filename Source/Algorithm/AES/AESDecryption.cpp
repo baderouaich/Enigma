@@ -8,7 +8,7 @@ NS_ENIGMA_BEGIN
 
 AESDecryption::AESDecryption()
     :
-    m_aes_decryption(MakeUnique<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption>())
+    m_aes_decryption(std::make_unique<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption>())
 {
 }
 

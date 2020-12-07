@@ -4,7 +4,6 @@
 
 #include <cstdint>	//	std::int*_t
 #include <cstddef>	//	std::size_t
-#include <memory>	//	smart pointers
 #include <string>	//	std::string, std::string_view
 #include <sstream>	//	std::stringstream
 #include <imgui.h>	//	ImVec4, ImVec2
@@ -32,11 +31,10 @@ namespace Enigma
 
 	/*
 	*	Smart pointers
-	*/
 	template<typename T>
 	using UniquePtr = std::unique_ptr<T>;
 	template<typename T, typename ... Args>
-	constexpr UniquePtr<T> MakeUnique(Args && ... args)
+	constexpr UniquePtr<T> make_unique(Args && ... args)
 	{
 		return std::make_unique<T>(std::forward<Args>(args)...);
 	}
@@ -44,10 +42,11 @@ namespace Enigma
 	template<typename T>
 	using SharedPtr = std::shared_ptr<T>;
 	template<typename T, typename ... Args>
-	constexpr SharedPtr<T> MakeShared(Args && ... args)
+	constexpr SharedPtr<T> make_shared(Args && ... args)
 	{
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
+	*/
 
 }
 
