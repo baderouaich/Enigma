@@ -4,8 +4,7 @@
 
 static constexpr const char ENIGMA_VERSION[] = "1.0.0";
 static constexpr const char ENIGMA_ABOUT[] = 
-R"([ Enigma 1.0.0 ]
-
+R"(
 # Supported Algorithm:
 	- AES-CBC
 	-

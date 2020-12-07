@@ -1,9 +1,6 @@
-#include "pch.hpp"
+#include <pch.hpp>
 #include "Enigma.hpp"
-
 #include "Scenes/MainMenuScene.hpp"
-#include "glad/glad.h"
-
 
 class EnigmaApplication : public Enigma::Application
 {

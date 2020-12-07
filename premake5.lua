@@ -1,3 +1,5 @@
+require("premake", ">=5.0.0-alpha15")
+
 include "./Premake/premake_customization/solution_items.lua"
 
 workspace "Enigma"  -- Workspace which is the solution in windows, in xcode will be something else

@@ -1,12 +1,11 @@
-#include "pch.hpp"
-#include "Enigma.hpp"
+#include <pch.hpp>
 #include "MainMenuScene.hpp"
 
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
 
 
-MainMenuScene::MainMenuScene()  noexcept
+MainMenuScene::MainMenuScene() noexcept
 	:
 	Enigma::Scene()
 {
@@ -27,6 +26,9 @@ void MainMenuScene::OnCreate()
 
 	// Load dear fonts
 	this->LoadImGuiFonts();
+
+	// ImGui Push Menu bar background color, see issue #3637
+	ImGui::PushStyleColor(ImGuiCol_MenuBarBg, Constants::Colors::MENUBAR_BACKGROUND_COLOR);
 }
 
 void MainMenuScene::OnUpdate(const f32& dt)
@@ -44,9 +46,10 @@ void MainMenuScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Enigma::Application::GetInstance().GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.5f, 40.0f); // 5 buttons
+	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
 
-	static constexpr const auto spacing = [](ui8 n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	//ImGui::Dummy(ImVec2(0.0f, 20.0f));
 
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
@@ -58,23 +61,33 @@ void MainMenuScene::OnImGuiDraw()
 	{
 		// Menu bar
 		{
-			ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_MenuBarBg, Constants::Colors::BUTTON_COLOR); // Menu bar background color
-			ImGui::PushStyleVar(ImGuiStyleVar_::ImGuiStyleVar_FramePadding, ImVec2(0.0f, 16.0f)); // Menu bar padding
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 16.0f)); // Menu bar padding
 			ImGui::PushFont(font_audiowide_regular_20);
 			if (ImGui::BeginMenuBar())
 			{
 				if (ImGui::BeginMenu("Menu"))
 				{
-					if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-					if (ImGui::MenuItem("About")) { this->ShowAboutDialog(); }
 					if (ImGui::MenuItem("Exit")) { this->EndScene(); }
 					ImGui::EndMenu();
 				}
+				if (ImGui::BeginMenu("Examples"))
+				{
+					ImGui::MenuItem("Example 1");
+					ImGui::MenuItem("Example 2");
+					ImGui::MenuItem("Example 3");
+					ImGui::MenuItem("Example 4");
+					ImGui::EndMenu();
+				}
+				if (ImGui::BeginMenu("Help"))
+				{
+					if (ImGui::MenuItem("About")) { this->ShowAboutDialog(); }
+					ImGui::EndMenu();
+				}
+
 				ImGui::EndMenuBar();
 			}
 			ImGui::PopFont();
 			ImGui::PopStyleVar(1);
-			ImGui::PopStyleColor(1);
 		}
 
 		spacing(6);
@@ -288,9 +301,12 @@ void MainMenuScene::OnDestroy()
 {
 	LOG(ENIGMA_CURRENT_FUNCTION);
 	
-	m_fonts.clear();
-}
+	// ImGui Pop Menu bar background color, see issue #3637
+	ImGui::PopStyleColor(1); 
 
+	m_fonts.clear();
+
+}
 
 
 void MainMenuScene::LoadImGuiFonts()
@@ -301,6 +317,10 @@ void MainMenuScene::LoadImGuiFonts()
 
 	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
 	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20.0f);
+	
+	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 45.0f);
+	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 20.0f);
+	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 12.0f);
 
 	// Check if fonts are loaded
 	for (const auto& [font_name, font] : m_fonts)
@@ -318,7 +338,7 @@ void MainMenuScene::LoadImGuiFonts()
 			[[maybe_unused]] auto action = msg_box->Show();
 
 			//no further without dear fonts :c
-			EndScene();
+			this->EndScene();
 		}
 	}
 
@@ -329,7 +349,7 @@ void MainMenuScene::ShowAboutDialog()
 	ENIGMA_INFO(ENIGMA_ABOUT);
 
 	Enigma::UniquePtr<Enigma::MessageBox> about_dialog = Enigma::MakeUnique<Enigma::MessageBox>(
-		"About",
+		"About Enigma " + String(ENIGMA_VERSION),
 		Enigma::String(ENIGMA_ABOUT),
 		Enigma::MessageBox::Icon::Info,
 		Enigma::MessageBox::Choice::Ok);

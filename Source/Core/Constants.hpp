@@ -10,6 +10,12 @@ namespace Enigma
 	{
 		namespace Algorithm
 		{
+			enum class Type : ui8 
+			{
+				AES = 0,
+				CHACHA,
+				RSA
+			};
 			namespace AES
 			{
 				static constexpr const ui16 AES_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
@@ -31,6 +37,7 @@ namespace Enigma
 			namespace Fonts
 			{
 				static constexpr const auto AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
+				static constexpr const auto MONTSERRAT_FONT_PATH = "./Resources/Fonts/Montserrat-Medium.ttf";
 			}
 		}
 
@@ -48,6 +55,8 @@ namespace Enigma
 			static const Color4f BUTTON_COLOR = COLOR4I_TO_COLOR4F(31, 103, 145, 150);
 			static const Color4f BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(31, 103, 145, 200);
 			static const Color4f BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(31, 103, 145, 255); // PRESSED
+
+			static const Color4f MENUBAR_BACKGROUND_COLOR = Color4f{1.0f, 1.0f, 1.0f, 0.06f}; // WHITE TRANSPARENT
 
 		}
 
