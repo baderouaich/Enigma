@@ -48,7 +48,7 @@ jobs:
       run: sudo bash ./Gen-Linux-GMake2.sh
 
     - name: Make Enigma
-      run: make config=release CC=gcc-10 CPP=g++-10 -j 8
+      run: make config=release CC=gcc-10 CPP=g++-10
 
 
 #    - name: Generate Project Make Files
