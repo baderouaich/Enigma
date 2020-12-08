@@ -350,8 +350,8 @@ void MainMenuScene::ShowAboutDialog()
 	ENIGMA_INFO(ENIGMA_ABOUT);
 
 	std::unique_ptr<Enigma::MessageBox> about_dialog = std::make_unique<Enigma::MessageBox>(
-		"About Enigma " + String(ENIGMA_VERSION),
-		Enigma::String(ENIGMA_ABOUT),
+		"About Enigma",
+		"Version: " + String(ENIGMA_VERSION) + '\n' + String(ENIGMA_ABOUT),
 		Enigma::MessageBox::Icon::Info,
 		Enigma::MessageBox::Choice::Ok);
 	[[maybe_unused]] auto action = about_dialog->Show();

@@ -1,5 +1,5 @@
 #pragma once
-#include <Enigma.hpp>
+#include "Scene.hpp"
 using namespace Enigma;
 
 class DecryptTextScene : public Enigma::Scene

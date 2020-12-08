@@ -1,2 +1,2 @@
-# Generates XCode project using premake5.exe and premake5.lua script #
+# Generates XCode project using premake5 #
 ./Premake/MacOS/premake5 xcode4

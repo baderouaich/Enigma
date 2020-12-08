@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.hpp"
-USING_NS_ENIGMA
+using namespace Enigma;
 
 class MainMenuScene : public Enigma::Scene
 {
@@ -23,6 +23,6 @@ private: /* Dialogs */
 	void ShowAboutDialog();
 
 private:
-	std::unordered_map<Enigma::String, ImFont*> m_fonts;
+	std::unordered_map<String, ImFont*> m_fonts;
 };
 
