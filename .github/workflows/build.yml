@@ -45,7 +45,7 @@ jobs:
       run: tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/
 
     - name: Generating Makefiles
-      run: sudo bash ./Gen-Linux-GMake2.sh
+      run: sudo bash ./Gen-Linux-Makefile.sh
 
     - name: Make Enigma
       run: make config=release CC=gcc-10 CPP=g++-10
@@ -54,7 +54,7 @@ jobs:
 #    - name: Generate Project Make Files
 #      run: |
 #        sudo apt-get update
-#        sudo ./Gen-Linux-GMake2.sh
+#        sudo ./Gen-Linux-Makefile.sh
 #
 #    - name: Make Project
 #      run: |
