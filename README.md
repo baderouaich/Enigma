@@ -24,12 +24,13 @@ Encrypt & Decrypt your important data
  - <strong>Method 1: Visual Studio 16 2019</strong>
  - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br> 
  - Open Enigma.sln and Change configuration to Release or Dist
- - Build Solution and Run `./Bin/Release-windows-x86_64/Enigma/Enigma.exe`
+ - Build Solution and Run `./Bin/Release-windows-x86_64/Enigma/Enigma.exe`<br>
+ - Copy Resources/ folder next to the executable at '.\Bin\Release-windows-x86_64\Enigma\Enigma.exe' and run it
  - <strong>Method 2: Makefile (GMake2)</strong>
  - Run `Gen-Windows-Makefile.bat` to generate project Makefiles<br>
  - Run `make config=release CC="path/to/your/c/compiler" CXX="path/to/your/c++/compiler"`<br>
-   example: `make config=release CC="D:/MinGW/10.1.0/mingw64/bin/gcc.exe"  CXX="D:/MinGW/10.1.0/mingw64/bin/g++.exe" -j 2`<br>
- - Copy Resources/ folder next to '.\Bin\Release-windows-x86_64\Enigma\Enigma.exe' and run executable
+   example: `make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe  CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 2`<br>
+ - Copy Resources/ folder next to the executable at '.\Bin\Release-windows-x86_64\Enigma\Enigma.exe' and run it
 
 <br>
 
@@ -46,6 +47,7 @@ Encrypt & Decrypt your important data
  - `make config=release CC=gcc-10 CPP=g++-10 -j X` <br> 
    replace X with number of threads to use for compilation, the more the faster<br>
    replace release with dist for full performance
+ - Copy Resources/ folder next to the executable at './Bin/Release-linux-x86_64/Enigma/Enigma'
  - Run Enigma Binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
 <br>
