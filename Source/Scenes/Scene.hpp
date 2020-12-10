@@ -32,7 +32,7 @@ public:
 
 public: /* Controlls */
 	/* Ends current Scene */
-	virtual void EndScene() noexcept;
+	void EndScene() noexcept;
 	
 	/* Pauses current Scene */
 	void PauseScene() noexcept;

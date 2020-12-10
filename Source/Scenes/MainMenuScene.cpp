@@ -308,9 +308,9 @@ void MainMenuScene::OnDestroy()
 }
 
 
+
 void MainMenuScene::LoadImGuiFonts()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	static const auto& io = ImGui::GetIO();
 
@@ -328,7 +328,7 @@ void MainMenuScene::LoadImGuiFonts()
 	{
 		if (!font->IsLoaded())
 		{
-			const String err_msg = "Failed to load font " + font_name;
+			const String err_msg = "Failed to load font " + String(font_name);
 			// console alert
 			ENIGMA_ERROR(err_msg.c_str());
 			// ui alert
@@ -338,8 +338,9 @@ void MainMenuScene::LoadImGuiFonts()
 				Enigma::MessageBox::Icon::Error,
 				Enigma::MessageBox::Choice::Ok);
 			[[maybe_unused]] auto action = msg_box->Show();
+			
 			// no further without dear fonts :c
-			this->EndScene();
+			EndScene();
 			break;
 		}
 	}

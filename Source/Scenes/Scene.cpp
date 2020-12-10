@@ -49,7 +49,6 @@ void Scene::ResumeScene() noexcept
 	this->m_isPaused = false;
 }
 
-
 void Scene::EndScene() noexcept
 {
 	this->m_quit = true;

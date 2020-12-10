@@ -17,12 +17,15 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private: /* Initializers */
+	/*
+	*	Loads Font Resources Asynchronously
+	*/
 	void LoadImGuiFonts();
 
 private: /* Dialogs */
 	void ShowAboutDialog();
 
 private:
-	std::unordered_map<String, ImFont*> m_fonts;
+	std::unordered_map<std::string_view, ImFont*> m_fonts;
 };
 

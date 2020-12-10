@@ -5,7 +5,7 @@ using namespace Enigma;
 class EncryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	explicit EncryptTextScene(const std::unordered_map<String, ImFont*>& fonts);
+	explicit EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
 	virtual ~EncryptTextScene() = default;
 
 private: /* Overrides */
@@ -23,7 +23,7 @@ private:
 	bool UserWantsToCancel();
 
 private:
-	const std::unordered_map<String, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
+	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
 private:
 	Constants::Algorithm::Type m_algorithm; // selected algorithm to encrypt text with

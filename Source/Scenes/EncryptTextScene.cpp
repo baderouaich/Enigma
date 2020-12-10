@@ -1,7 +1,7 @@
 #include "pch.hpp"
 #include "EncryptTextScene.hpp"
 
-EncryptTextScene::EncryptTextScene(const std::unordered_map<String, ImFont*>& fonts)
+EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
 	:
 	Enigma::Scene(),
 	m_fonts(fonts),

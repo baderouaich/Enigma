@@ -5,7 +5,7 @@ using namespace Enigma;
 class DecryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	explicit DecryptTextScene(const std::unordered_map<String, ImFont*>& fonts);
+	explicit DecryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
 	virtual ~DecryptTextScene() = default;
 
 private: /* Overrides */
@@ -17,6 +17,7 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private:
-	const std::unordered_map<String, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
+	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 };
+
 
