@@ -62,22 +62,24 @@ project "Enigma"
 	cppdialect "C++17"
 	staticruntime "on"
 
+	---[[ Binary Output dirs ]]---
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	---[[ Precompiled Header ]]---
 	pchheader "pch.hpp"
 	pchsource "Source/pch.cpp"
 
 	--warnings "Extra"
 	
+	---[[ Source files ]]---
 	files
 	{
 		"Source/**.hpp",
 		"Source/**.cpp"
 	}
 
-
-	--Add Libraries include directories
+	---[[ Add Libraries include directories ]]---	
 	includedirs
 	{
 		"Source", -- include Source/ dir so we can include e.g "Enigma/Core/Core.hpp" directly, not to keep going back steps e.g "../../Core/Core.hpp"
@@ -91,6 +93,7 @@ project "Enigma"
 	}
 
 
+	---[[ Link Libraries ]]---
 	links
 	{
 		"glfw", --links GLFW .lib
@@ -102,7 +105,7 @@ project "Enigma"
 	}
 
 
-	--- Platform ---
+	---[[ Platform ]]---
 	filter "system:windows"
 		systemversion "latest"
 		--executable icon
@@ -150,7 +153,7 @@ project "Enigma"
 		}
 
 	
-	--- Configurations ---
+	---[[ Configurations ]]---
 	filter "configurations:Debug"
 		kind "ConsoleApp" -- Debug we need console for logging
 		defines "ENIGMA_DEBUG"
@@ -159,20 +162,19 @@ project "Enigma"
 		optimize "Off" -- No optimization will be performed.
 		includedirs
 		{
-			"%{IncludeDir.catch2}", -- we use catch2 only in debug
+			"%{IncludeDir.catch2}", -- we use catch2 tests only in debug
 		}
 		links
 		{
-			"catch2", -- we need catch2 tests only in debug
+			"catch2", -- we use catch2 tests only in debug
 		}
-		
+
 	filter "configurations:Release"
 		kind "WindowedApp" -- Release as windowed application
 		defines "ENIGMA_RELEASE"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.
 		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
-
 
 	filter "configurations:Dist"
 		kind "WindowedApp" -- Distribution as windowed application
