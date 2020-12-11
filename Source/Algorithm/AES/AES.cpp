@@ -11,6 +11,7 @@ AES::AES(Algorithm::Intent intent) noexcept
 {
 }
 
+
 String AES::Encrypt(const String& password, const String& buffer)
 {    
 	// Make sure encryption mode and the seeder are initialized
@@ -120,10 +121,6 @@ String AES::Decrypt(const String& password, const String& buffer)
 	}
 
 	return decrypted;
-}
-
-AES::~AES() noexcept
-{
 }
 
 NS_ENIGMA_END

@@ -15,7 +15,8 @@ public:
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit AES(Algorithm::Intent intent) noexcept;
-	virtual ~AES() noexcept;
+	explicit AES() noexcept;
+	virtual ~AES() = default;
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;

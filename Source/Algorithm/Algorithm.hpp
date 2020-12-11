@@ -32,9 +32,12 @@ public:
 	explicit Algorithm(Intent intent) noexcept 
 		:
 		m_intent(intent),
-		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr)
+		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr) // we only generate random iv when encrypting
+	{}
+	virtual ~Algorithm() const noexcept 
 	{}
 
+public:
 	virtual String Encrypt(const String& password, const String& buffer) = 0;
 	virtual String Decrypt(const String& password, const String& buffer) = 0;
 
@@ -44,8 +47,6 @@ protected:
 	*/
 	String GenerateRandomIV(const size_t& iv_size) 
 	{
-		//if (!m_auto_seeded_random_pool)
-		//	m_auto_seeded_random_pool = std::make_unique<CryptoPP::AutoSeededRandomPool>();
 		String iv(iv_size, '\000');
 		m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
 		return iv;

@@ -130,10 +130,5 @@ String ChaCha::Decrypt(const String& password, const String& buffer)
 	return decrypted;
 }
 
-
-ChaCha::~ChaCha() noexcept
-{
-}
-
 NS_ENIGMA_END
 
