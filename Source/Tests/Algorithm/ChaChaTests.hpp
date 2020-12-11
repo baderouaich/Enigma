@@ -1,6 +1,4 @@
 #pragma once
-#include <Core/Core.hpp>
-#ifdef ENIGMA_DEBUG
 #include <catch2/catch_all.hpp>
 #include <Algorithm/ChaCha/ChaCha.hpp>
 using namespace Enigma;
@@ -44,5 +42,3 @@ TEST_CASE("ChaCha Encryption and Decryption")
 		REQUIRE(decrypted.size() == 0);
 	}
 }
-
-#endif
