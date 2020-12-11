@@ -24,7 +24,7 @@ jobs:
           #commit_msg: "<optional commit message>" # commit msg when file is generated, not editable anymore.
           #check_library:
           skip_preprocessor: enable
-          enable: warning,portability,performance
+          enable: all #warning,portability,performance
           exclude_check: ./Dependencies/
           #inconclusive:
           #inline_suppression:
