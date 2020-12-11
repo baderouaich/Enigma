@@ -34,7 +34,7 @@ public:
 		m_intent(intent),
 		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr) // we only generate random iv when encrypting
 	{}
-	virtual ~Algorithm() const noexcept 
+	virtual ~Algorithm() noexcept 
 	{}
 
 public:
