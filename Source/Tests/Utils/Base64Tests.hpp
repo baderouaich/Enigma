@@ -1,4 +1,6 @@
 #pragma once
+#include <Core/Core.hpp>
+#ifdef ENIGMA_DEBUG
 #include <catch2/catch_all.hpp>
 #include <Utility/Base64.hpp>
 #include <Algorithm/AES/AES.hpp>
@@ -62,3 +64,4 @@ publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 }
 
 
+#endif

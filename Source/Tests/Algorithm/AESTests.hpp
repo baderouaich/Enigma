@@ -1,4 +1,6 @@
 #pragma once
+#include <Core/Core.hpp>
+#ifdef ENIGMA_DEBUG
 #include <catch2/catch_all.hpp>
 #include <Algorithm/AES/AES.hpp>
 using namespace Enigma;
@@ -42,3 +44,4 @@ TEST_CASE("AES Encryption and AES Decryption")
 		REQUIRE(decrypted.size() == 0);
 	}
 }
+#endif
