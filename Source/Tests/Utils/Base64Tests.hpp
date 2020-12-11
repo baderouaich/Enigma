@@ -1,17 +1,17 @@
 #pragma once
 #include <catch2/catch_all.hpp>
-#include "Algorithm/AES/AESEncryption.hpp"
-#include "Algorithm/AES/AESDecryption.hpp"
+#include <Utility/Base64.hpp>
+#include <Algorithm/AES/AES.hpp>
 using namespace Enigma;
 using namespace Catch;
 using namespace Catch::Matchers;
 
-TEST_CASE("Encode_And_Decode_Cipher", "Base64")
+TEST_CASE("Encode And Decode Cipher", "Base64")
 {
 	using std::cout, std::cin, std::endl;
 
-	std::unique_ptr<AESEncryption> aes_encyptor = make_unique<AESEncryption>();
-	std::unique_ptr<AESDecryption> aes_decryptor = make_unique<AESDecryption>();
+	std::unique_ptr<Enigma::AES> aes_encryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Encrypt);
+	std::unique_ptr<Enigma::AES> aes_decryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Decrypt);
 
     String buffer, password;
     String encrypted, decrypted;
@@ -23,7 +23,7 @@ TEST_CASE("Encode_And_Decode_Cipher", "Base64")
     getline(cin, password);
 
 
-    encrypted = aes_encyptor->Encrypt(password, buffer); // iv + cipher
+    encrypted = aes_encryptor->Encrypt(password, buffer); // iv + cipher
     cout << "\nEncrypted: " << encrypted;
     encrypted_encoded_base64 = Base64::Encode(encrypted);
     cout << "\nEncrypted encoded base64: " << encrypted_encoded_base64;

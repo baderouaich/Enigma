@@ -20,12 +20,12 @@ Encrypt & Decrypt your important data
 <br>
 
  <strong>Windows</strong> : <br>
- - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha15-windows.zip`
+ - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha15-windows.zip`<br>
 <strong>Method 1: Visual Studio 16 2019</strong>
  - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br> 
  - Open Enigma.sln and Change configuration to Release or Dist
  - Build Solution and Run `./Bin/Release-windows-x86_64/Enigma/Enigma.exe`<br>
- - Copy Resources/ folder next to the executable at '.\Bin\Release-windows-x86_64\Enigma\Enigma.exe' and run it
+ - Copy Resources/ folder next to the executable at '.\Bin\Release-windows-x86_64\Enigma\Enigma.exe' and run it<br>
 <strong>Method 2 (Unstable): Makefile (GMake2)</strong>
  - Run `Gen-Windows-Makefile.bat` to generate project Makefiles<br>
  - Run `make config=release CC="path/to/your/c/compiler" CXX="path/to/your/c++/compiler"`<br>

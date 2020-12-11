@@ -1,17 +1,16 @@
 #pragma once
 #include <catch2/catch_all.hpp>
-#include "Algorithm/AES/AESEncryption.hpp"
-#include "Algorithm/AES/AESDecryption.hpp"
+#include <Algorithm/AES/AES.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
 
 
-TEST_CASE("AESEncryption & AESDecryption")
+TEST_CASE("AES Encryption and AES Decryption")
 {
 	using std::cout, std::cin, std::endl;
 
-	std::unique_ptr<AESEncryption> aes_encyptor = make_unique<AESEncryption>();
-	std::unique_ptr<AESDecryption> aes_decryptor = make_unique<AESDecryption>();
+	std::unique_ptr<Enigma::AES> aes_encryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Encrypt);
+	std::unique_ptr<Enigma::AES> aes_decryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Decrypt);
 
 	String buffer, password;
 	String encrypted, decrypted;
@@ -21,20 +20,10 @@ TEST_CASE("AESEncryption & AESDecryption")
 	cout << "\nEnter password (encryption key): ";
 	getline(cin, password);
 
-	// now let's benchmark:
-	//BENCHMARK("AESEncryption::Encrypt") 
-	//{
-	//	encrypted = aes_encyptor->Encrypt(password, buffer); // iv + cipher
-	//};
-	encrypted = aes_encyptor->Encrypt(password, buffer); // iv + cipher
-	cout << "\nEncrypted: " << encrypted << endl;
-	auto s =GENERATE(Catch::Generators::as<String>{}, "aa", "b", "c");
 
-	// now let's benchmark:
-	//BENCHMARK("AESDecryption::Decrypt")
-	//{
-	//	decrypted = aes_decryptor->Decrypt(password, encrypted);
-	//};
+	encrypted = aes_encryptor->Encrypt(password, buffer); // iv + cipher
+	cout << "\nEncrypted: " << encrypted << endl;
+
 	decrypted = aes_decryptor->Decrypt(password, encrypted);
 	cout << "\nDecrypted: " << decrypted << endl;
 
@@ -52,6 +41,4 @@ TEST_CASE("AESEncryption & AESDecryption")
 		REQUIRE(encrypted.size() == 0);
 		REQUIRE(decrypted.size() == 0);
 	}
-
-
 }
