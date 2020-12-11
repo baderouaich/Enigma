@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	ChaCha(Algorithm::Intent intent) noexcept;
+	explicit ChaCha(Algorithm::Intent intent) noexcept;
 	virtual ~ChaCha() noexcept;
 
 public:

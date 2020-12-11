@@ -23,15 +23,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           #commit_msg: "<optional commit message>" # commit msg when file is generated, not editable anymore.
           #check_library:
-          #skip_preprocessor:
+          skip_preprocessor: enable
           enable: warning,portability,performance
           exclude_check: ./Dependencies/
           #inconclusive:
           #inline_suppression:
           force_language: c++
-          max_ctu_depth: 6
+          max_ctu_depth: 9 #default 2
           #platform: 
-          output_file: ./CppCheck_Static_Analysis_Report.txt #(default cppcheck_report.txt)
+          output_file: ./Static Analysis/CppCheck_Report.txt #(default cppcheck_report.txt)
 
       # Report generating task
       - name: publish report    

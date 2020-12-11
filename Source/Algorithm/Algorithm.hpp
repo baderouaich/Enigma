@@ -29,7 +29,7 @@ public:
 	enum class Intent : ui8 { Encrypt, Decrypt };
 
 public:
-	Algorithm(Intent intent) noexcept 
+	explicit Algorithm(Intent intent) noexcept 
 		:
 		m_intent(intent),
 		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr)
