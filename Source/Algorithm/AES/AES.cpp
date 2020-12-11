@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 AES::AES(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(intent),
-	m_aes_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption>() : nullptr),
-	m_aes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption>() : nullptr)
+	m_aes_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::AES>::Encryption>() : nullptr),
+	m_aes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::AES>::Decryption>() : nullptr)
 {
 }
 
@@ -30,25 +30,26 @@ String AES::Encrypt(const String& password, const String& buffer)
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 	
-	String iv = this->GenerateRandomIV(); // Random generated 16 bytes IV
+	String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 16 bytes IV
 	String encrypted; // Final encrypted buffer
 	String output; // return value will be (iv + encrypted)
 	try
 	{
-		// Prepare Key
+		// Prepare key
 		CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE); // Encryption key to be generated from user password + IV
+		
+		// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
 		CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
 		hkdf.DeriveKey(
-			key,
-			key.size(),
-			reinterpret_cast<const byte*>(password.data()),
-			password.size(),
-			reinterpret_cast<const byte*>(iv.data()),
-			iv.size(),
-			nullptr,
-			0);
-		m_aes_encryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+			key, key.size(),
+			reinterpret_cast<const byte*>(password.data()), password.size(),
+			reinterpret_cast<const byte*>(iv.data()), iv.size(),
+			nullptr, 0
+		);
 
+		// Set Key and IV to the encryptor
+		m_aes_encryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+	
 		// Encrypt
 		std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
 			buffer,
@@ -86,18 +87,17 @@ String AES::Decrypt(const String& password, const String& buffer)
 	{
 		// Prepare Key
 		CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE);
+		
+		// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
 		CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
 		hkdf.DeriveKey(
-			key,
-			key.size(),
-			reinterpret_cast<const byte*>(password.data()),
-			password.size(),
-			reinterpret_cast<const byte*>(iv.data()),
-			iv.size(),
-			nullptr,
-			0);
+			key, key.size(),
+			reinterpret_cast<const byte*>(password.data()), password.size(),
+			reinterpret_cast<const byte*>(iv.data()), iv.size(),
+			nullptr, 0);
+		
+		// Set Key and IV to the decryptor
 		m_aes_decryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
-
 
 		// Decrypt
 		std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(

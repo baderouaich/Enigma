@@ -42,11 +42,11 @@ protected:
 	/*
 	*	Generates random 16 bytes IV String
 	*/
-	String GenerateRandomIV() 
+	String GenerateRandomIV(const size_t& iv_size) 
 	{
 		//if (!m_auto_seeded_random_pool)
 		//	m_auto_seeded_random_pool = std::make_unique<CryptoPP::AutoSeededRandomPool>();
-		String iv(CryptoPP::AES::BLOCKSIZE, '\000');
+		String iv(iv_size, '\000');
 		m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
 		return iv;
 	}

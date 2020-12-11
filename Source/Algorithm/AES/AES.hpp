@@ -22,8 +22,9 @@ public:
 	String Decrypt(const String& password, const String& buffer) override;
 
 private:
-	std::unique_ptr<CryptoPP::CFB_Mode<CryptoPP::AES>::Encryption> m_aes_encryption;
-	std::unique_ptr<CryptoPP::CFB_Mode<CryptoPP::AES>::Decryption> m_aes_decryption; 
+	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::AES>::Encryption> m_aes_encryption; // AES-CBC encryptor
+	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::AES>::Decryption> m_aes_decryption; // AES-CBC decryptor
+
 };
 
 NS_ENIGMA_END

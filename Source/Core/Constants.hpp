@@ -18,9 +18,27 @@ namespace Enigma
 			};
 			namespace AES
 			{
+				/*
+				Modes: https://stackoverflow.com/questions/1220751/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb
+				#ECB should not be used if encrypting more than one block of data with the same key.
+
+				#CBC, OFB and CFB are similar, however OFB/CFB is better because you only need encryption and not decryption, which can save code space.
+
+				#CTR is used if you want good parallelization (ie. speed), instead of CBC/OFB/CFB.
+
+				#XTS mode is the most common if you are encoding a random accessible data (like a hard disk or RAM).
+
+				#OCB is by far the best mode, as it allows encryption and authentication in a single pass. However there are patents on it in USA.
+				*/
 				static constexpr const ui16 AES_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
 				//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 			}
+			namespace ChaCha
+			{
+				static constexpr const ui16 CHACHA_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
+				//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
+			}
+
 		}
 
 		namespace Utility
