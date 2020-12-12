@@ -13,7 +13,7 @@
 ///
 
 ///Enable/Disable Profiling (N/I)
-#define ENIGMA_PROFILE true
+#define ENIGMA_PROFILE false
 ///
 
 

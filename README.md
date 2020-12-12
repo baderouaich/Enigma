@@ -1,7 +1,9 @@
 # Enigma
 <!--WORKFLOW-->
-![](https://img.shields.io/badge/license-MIT-yellow)
-[![Build Status](https://github.com/BaderEddineOuaich/Enigma/workflows/build/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=build) [![Static Analysis Status](https://github.com/BaderEddineOuaich/Enigma/workflows/static-analysis/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=static-analysis)
+[![MIT License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/BaderEddineOuaich/Enigma/blob/master/LICENSE.md)
+[![Build Status](https://github.com/BaderEddineOuaich/Enigma/workflows/build/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=build) 
+[![Static Analysis Status](https://github.com/BaderEddineOuaich/Enigma/workflows/static-analysis/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=static-analysis)
+
 
 <!--LOGO-->
 ![Enigma](Resources/Branding/EnigmaLogo_Full.jpg)

@@ -6,8 +6,8 @@
 #define ENIGMA_MAIN_H
 
 #if ENIGMA_TEST
-	//#include <Tests/Algorithm/AESTests.hpp>
-	#include <Tests/Algorithm/ChaChaTests.hpp>
+	#include <Tests/Algorithm/AESTests.hpp>
+	//#include <Tests/Algorithm/ChaChaTests.hpp>
 	//#include <Tests/Utils/Base64Tests.hpp>
 #else
 	#include <Enigma.hpp>

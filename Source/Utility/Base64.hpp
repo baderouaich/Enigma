@@ -11,12 +11,12 @@ public:
     /*
      *	Encodes string bytes into Base64 string
      */
-	static String Encode(const StringView& buffer);
+	static String Encode(const std::string_view& buffer);
 
     /*
     *   Decodes a Base64 string
     */
-	static String Decode(const StringView& encoded_buffer);
+	static String Decode(const std::string_view& encoded_buffer);
 
 	/*
 	*	Checks if a byte is base64

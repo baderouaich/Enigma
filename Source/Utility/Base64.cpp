@@ -4,7 +4,7 @@
 
 NS_ENIGMA_BEGIN
 
-String Base64::Encode(const StringView& buffer)
+String Base64::Encode(const std::string_view& buffer)
 {
 	using Constants::Utility::BASE64_CHARACTERS;
 
@@ -63,7 +63,7 @@ String Base64::Encode(const StringView& buffer)
 	return output;
 }
 
-String Base64::Decode(const StringView& encoded_buffer)
+String Base64::Decode(const std::string_view& encoded_buffer)
 {
 	using Constants::Utility::BASE64_CHARACTERS;
 

@@ -29,7 +29,7 @@ public:
 	/*
 	*	Default Constructor
 	*/
-	Cursor();
+	Cursor() noexcept;
 
 	/*
 	*	Creates Standard Cursor 

@@ -541,12 +541,12 @@ void Window::SetPosition(const i32& x, const i32& y) const noexcept
 
 void Window::SetIcon(const String& icon_path) noexcept
 {
-	i32 width, height, channels;
-	stbi_set_flip_vertically_on_load(false);
+	i32 width{}, height{}, channels{};
+	stbi_set_flip_vertically_on_load(1);
 	byte* pixels = stbi_load(icon_path.c_str(), &width, &height, &channels, 4);
 
 	ENIGMA_ASSERT(pixels, "Failed to load window icon");
-	//not necessary the alpha channel
+	//the alpha channel aint necessary
 	//ENIGMA_ASSERT(channels == 4, "Icon must be RGBA");
 
 	std::array<GLFWimage, 1> images{};

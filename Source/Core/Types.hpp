@@ -22,32 +22,21 @@ namespace Enigma
 	using f64	= double;
 	using byte	= ui8;
 	using size_t	= std::size_t;
+
 	using String	= std::string;
-	using StringStream	= std::stringstream;
-	using StringView	= std::string_view;
+
+//#if defined(ENIGMA_PLATFORM_WINDOWS)
+//	using String	= std::wstring;
+//	using StringStream	= std::wstringstream;
+//	using StringView	= std::wstring_view;
+//#else
+//	using String	= std::string;
+//	using StringStream	= std::stringstream;
+//	using StringView	= std::string_view;
+//#endif
 
 	using Color4f	= ImVec4;
 	using Vec2f		= ImVec2;
-
-	/*
-	*	Smart pointers
-	template<typename T>
-	using UniquePtr = std::unique_ptr<T>;
-	template<typename T, typename ... Args>
-	constexpr UniquePtr<T> make_unique(Args && ... args)
-	{
-		return std::make_unique<T>(std::forward<Args>(args)...);
-	}
-
-	template<typename T>
-	using SharedPtr = std::shared_ptr<T>;
-	template<typename T, typename ... Args>
-	constexpr SharedPtr<T> make_shared(Args && ... args)
-	{
-		return std::make_shared<T>(std::forward<Args>(args)...);
-	}
-	*/
-
 }
 
 #endif // !ENIGMA_TYPES_H

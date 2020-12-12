@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 
-Cursor::Cursor()
+Cursor::Cursor() noexcept
 	:
 	m_mode(CursorMode::Arrow),
 	m_GLFWcursor(nullptr)
