@@ -6,11 +6,11 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 	Enigma::Scene(),
 	m_fonts(fonts),
 	// AES as default algorithm
-	m_algorithm(Constants::Algorithm::Type::AES),
+	m_algorithm(Algorithm::Type::AES),
 	// Max text length to encrypt 1mb
 	m_text(1024 * 1024 * 1, '\000'),
 	// Max encryption password length 1024 characters
-	m_encryption_password(1024, '\000')
+	m_password(1024, '\000')
 {
 
 }
@@ -86,21 +86,21 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::Text("Algorithm:");
 
 			// Algo types radio buttons
-			if (ImGui::RadioButton("AES", m_algorithm == Constants::Algorithm::Type::AES))
+			if (ImGui::RadioButton("AES", m_algorithm == Algorithm::Type::AES))
 			{
-				m_algorithm = Constants::Algorithm::Type::AES;
+				m_algorithm = Algorithm::Type::AES;
 			}
 			inline_dummy(0.0f, 1.0f);
 			ImGui::SameLine();
-			if (ImGui::RadioButton("RSA", m_algorithm == Constants::Algorithm::Type::RSA))
+			if (ImGui::RadioButton("RSA", m_algorithm == Algorithm::Type::RSA))
 			{
-				m_algorithm = Constants::Algorithm::Type::RSA;
+				m_algorithm = Algorithm::Type::RSA;
 			}
 			inline_dummy(0.0f, 1.0f);
 			ImGui::SameLine();
-			if (ImGui::RadioButton("CHACHA", m_algorithm == Constants::Algorithm::Type::CHACHA))
+			if (ImGui::RadioButton("CHACHA", m_algorithm == Algorithm::Type::CHACHA))
 			{
-				m_algorithm = Constants::Algorithm::Type::CHACHA;
+				m_algorithm = Algorithm::Type::CHACHA;
 			}
 		}
 		ImGui::PopFont();
@@ -128,13 +128,13 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("Encryption Password/Key:");
+			ImGui::Text("Password:");
 			// Input text
 			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 30.0f);
-			ImGui::InputTextMultiline("##text2", m_encryption_password.data(), m_encryption_password.size(), input_text_size);
+			ImGui::InputTextMultiline("##text2", m_password.data(), m_password.size(), input_text_size);
 			// Remaining characters
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%llu of %llu characters - 1KB MAX", std::strlen(m_encryption_password.data()), m_encryption_password.size());
+			ImGui::Text("%llu of %llu characters - 1KB MAX", std::strlen(m_password.data()), m_password.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -151,17 +151,12 @@ void EncryptTextScene::OnImGuiDraw()
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
 				if (ImGui::Button("Cancel", button_size))
 				{
-					// Confirm encryption abortion
-					if (this->UserWantsToCancel())
-					{
-						this->EndScene();
-					}
+					this->OnCancelButtonPressed();
 				}
 				ImGui::SameLine();
 				if (ImGui::Button("Encrypt", button_size))
 				{
-					// Push new EncryptFileScene to perform operation 
-
+					this->OnEncryptButtonPressed();
 				}
 
 			}
@@ -192,19 +187,45 @@ void EncryptTextScene::OnDestroy()
 	LOG(ENIGMA_CURRENT_FUNCTION);
 
 	m_text.clear();
-	m_encryption_password.clear();
+	m_password.clear();
 }
 
-bool EncryptTextScene::UserWantsToCancel()
+void EncryptTextScene::OnEncryptButtonPressed()
 {
+	// Validate fields 
+	{
+		if (StringUtils::IsAll(m_text, '\000'))
+		{
+			m_errors.push("m_text is empty");
+			ENIGMA_TRACE("m_text is empty");
+		}
+		else if (StringUtils::IsAll(m_password, '\000'))
+		{
+			ENIGMA_TRACE("m_password is empty");
+			m_errors.push("m_password is empty");
+		}
+		else
+		{
+			// All Good
+
+		}
+	}
+
+}
+
+void EncryptTextScene::OnCancelButtonPressed()
+{
+	// Show alert dialog to user asking whether the operation should be aborted
 	std::unique_ptr<Enigma::MessageBox> confirm_dialog = std::make_unique<Enigma::MessageBox>(
 		"Enigma",
 		"Are you sure you want to cancel the entire operation?",
 		Enigma::MessageBox::Icon::Question,
 		Enigma::MessageBox::Choice::Yes_No
-	);
-
+		);
 	Enigma::MessageBox::Action action = confirm_dialog->Show();
+	if (action == Enigma::MessageBox::Action::Yes)
+	{
+		this->EndScene();
+	}
 
-	return action == Enigma::MessageBox::Action::Yes;
 }

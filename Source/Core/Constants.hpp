@@ -10,12 +10,7 @@ namespace Enigma
 	{
 		namespace Algorithm
 		{
-			enum class Type : ui8 
-			{
-				AES = 0,
-				CHACHA,
-				RSA
-			};
+
 			namespace AES
 			{
 				/*

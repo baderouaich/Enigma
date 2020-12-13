@@ -9,7 +9,7 @@
 #include "Version.hpp"
 
 /// Enable/Disable Catch2 Tests
-#define ENIGMA_TEST ENIGMA_DEBUG
+#define ENIGMA_TEST false
 ///
 
 ///Enable/Disable Profiling (N/I)

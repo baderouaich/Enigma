@@ -27,7 +27,12 @@ class ENIGMA_API Algorithm
 {
 public:
 	enum class Intent : ui8 { Encrypt, Decrypt };
-
+	enum class Type : ui8
+	{
+		AES = 0,
+		CHACHA,
+		RSA
+	};
 public:
 	explicit Algorithm(Intent intent) noexcept 
 		:

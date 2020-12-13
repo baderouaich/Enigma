@@ -5,7 +5,9 @@
 #include <System/Dialogs/OpenFileDialog.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
+#define TEST_FILES false
 
+#if TEST_FILES
 String GetSelectedFilePath()
 {
 	Enigma::OpenFileDialog ofd("Select a file to encrypt", ".", false);
@@ -75,7 +77,7 @@ TEST_CASE("AES File Encryption and Decryption")
 	}
 }
 
-#if 0
+#else
 TEST_CASE("AES Encryption and Decryption")
 {
 	using std::cout, std::cin, std::endl;

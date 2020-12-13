@@ -5,12 +5,26 @@
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 
-#include <string>
+#include <string>	// std::string, std::string_view
+#include <algorithm> // std::all_of
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API StringUtils
 {
 public:
+	/*
+	*	Check whether all string characters are the same. 
+	*	used to check if string is empty when memory is allocated with '\000' and size is not 0
+	*/
+	template<typename T>
+	static bool IsAll(String& str, const T& v)
+	{
+		return std::all_of(str.begin(), str.end(), [&v](const auto& c)
+			{
+				return c == v;
+			});
+	}
+
     /*
     *   Removes leading and trailing spaces from a string
     */
