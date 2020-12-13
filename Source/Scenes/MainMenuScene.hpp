@@ -15,17 +15,19 @@ private: /* Overrides */
 	void OnImGuiDraw() override;
 	void OnEvent(Enigma::Event& event) override;
 	void OnDestroy() override;
+	
+private: /* Callbacks */
+	// Buttons
+	void OnEncryptFileButtonPressed();
+	void OnDecryptFileButtonPressed();
+	void OnEncryptTextButtonPressed();
+	void OnDecryptTextButtonPressed();
+	// Menu
+	void OnAboutMenuButtonPressed();
 
 private: /* Initializers */
-	/*
-	*	Loads Font Resources Asynchronously
-	*/
 	void LoadImGuiFonts();
-
-private: /* Dialogs */
-	void ShowAboutDialog();
 
 private:
 	std::unordered_map<std::string_view, ImFont*> m_fonts;
 };
-

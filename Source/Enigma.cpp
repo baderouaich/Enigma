@@ -35,8 +35,8 @@ extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
 	Enigma::WindowSettings window_settings;
 	{
 		window_settings.title = "Enigma";
-		window_settings.width = 640;
-		window_settings.height = 480;
+		window_settings.width = 800;
+		window_settings.height = 600;
 		//window_settings.minimum_width = window_settings.width - 100;
 		//window_settings.minimum_height = window_settings.height - 100;
 		//window_settings.maximum_width = 800;

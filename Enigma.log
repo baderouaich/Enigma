@@ -1,30 +1,13 @@
-[14:55:59] [info] Enigma: [ OpenGL Info ]
+[22:31:39] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[14:56:01] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[14:56:01] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[14:56:01] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[14:56:05] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[14:56:07] [trace] Enigma: m_text is empty
-[14:56:08] [trace] Enigma: m_text is empty
-[14:56:08] [trace] Enigma: m_text is empty
-[14:56:10] [trace] Enigma: m_text is empty
-[14:56:13] [trace] Enigma: m_text is empty
-[14:56:17] [trace] Enigma: m_text is empty
-[14:56:18] [trace] Enigma: m_text is empty
-[14:56:18] [trace] Enigma: m_text is empty
-[14:56:20] [trace] Enigma: m_text is empty
-[14:56:20] [trace] Enigma: m_text is empty
-[14:56:20] [trace] Enigma: m_text is empty
-[14:56:20] [trace] Enigma: m_text is empty
-[14:56:20] [trace] Enigma: m_text is empty
-[14:56:21] [trace] Enigma: m_text is empty
-[14:56:21] [trace] Enigma: m_text is empty
-[14:56:21] [trace] Enigma: m_text is empty
-[14:56:21] [trace] Enigma: m_text is empty
-[14:56:21] [trace] Enigma: m_text is empty
-[14:56:21] [trace] Enigma: m_text is empty
-[14:56:23] [trace] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[14:56:23] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[22:31:39] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[22:31:39] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[22:31:39] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[22:31:47] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
+[22:31:47] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
+[22:31:48] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 600
+[22:31:48] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 600
+[22:31:55] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

@@ -12,12 +12,13 @@
 //
 
 
-//System Dialogs, Notification
+//System Dialogs, Notification, Clipboard
 #include <System/Dialogs/MessageBox.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <System/Dialogs/SaveFileDialog.hpp>
 #include <System/Dialogs/SelectFolderDialog.hpp>
 #include <System/Notification/Notification.hpp>
+#include <System/Clipboard/Clipboard.hpp>
 //
 
 //Events
