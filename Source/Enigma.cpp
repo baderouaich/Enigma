@@ -18,7 +18,7 @@ public:
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
 		//Push Main Menu scene
-		this->PushScene(std::make_shared<MainMenuScene>());
+		this->PushScene(std::make_unique<MainMenuScene>());
 	}
 
 
@@ -42,6 +42,7 @@ extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
 		//window_settings.maximum_width = 800;
 		//window_settings.maximum_height = 600;
 		//window_settings.is_resizable = true;
+		window_settings.maximum_fps = 30;
 		window_settings.is_resizable = false;
 //#if ENIGMA_DEBUG
 		window_settings.is_vsync = false;

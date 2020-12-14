@@ -561,13 +561,13 @@ void Window::SetIcon(const String& icon_path) noexcept
 
 void Window::SetCursor(CursorMode mode) noexcept
 {
-	m_cursor = Cursor::CreateUnique(mode);
+	m_cursor = std::make_unique<Cursor>(mode);
 	glfwSetCursor(m_GLFWwindow, m_cursor->GetGLFWCursor());
 }
 
 void Window::SetCursor(const String& image_path, const i32& xhot, const i32& yhot) noexcept
 {
-	m_cursor = Cursor::CreateUnique(image_path, xhot, yhot);
+	m_cursor = std::make_unique<Cursor>(image_path, xhot, yhot);
 	glfwSetCursor(m_GLFWwindow, m_cursor->GetGLFWCursor());
 }
 

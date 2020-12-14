@@ -5,7 +5,6 @@
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include <Scenes/Scene.hpp>
-#include <Memory/CreatePtr.hpp>
 #include <Events/Event.hpp>
 #include <Events/ApplicationEvent.hpp>
 #include <Events/KeyEvent.hpp>
@@ -67,7 +66,7 @@ public: /*Accessors*/
 	/*
 	*	Returns the Window of this Application
 	*/
-	const std::shared_ptr<Window>& GetWindow() const noexcept { return m_window; }
+	const std::unique_ptr<Window>& GetWindow() const noexcept { return m_window; }
 
 	/*
 	*	Destroys Window and ends app
@@ -99,7 +98,7 @@ private: /* Initializer Functions */
 	void InitImGuiRenderer();
 
 private: /* Window */
-	std::shared_ptr<Window> m_window;
+	std::unique_ptr<Window> m_window;
 
 private: /* Scenes */
 	std::vector<std::shared_ptr<Scene>> m_scenes;
@@ -116,6 +115,7 @@ private: /* Delta time */
 private: /* FPS */
 	f32 m_FPS_timer;
 	ui32 m_FPS;
+	ui32 m_max_FPS;
 
 private: /* ImGui */
 	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;

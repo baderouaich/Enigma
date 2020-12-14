@@ -22,7 +22,7 @@ NS_ENIGMA_BEGIN
 /*
 *	OpenGL Based Window
 */
-class ENIGMA_API Window : public CreatePtr<Window>
+class ENIGMA_API Window
 {
 public:
 	Window(const WindowSettings& window_settings = WindowSettings());

@@ -3,11 +3,11 @@
 #define ENIGMA_IMGUI_RENDERER_H
 
 #include <Core/Core.hpp>
-#include <Memory/CreatePtr.hpp>
 
 NS_ENIGMA_BEGIN
 /*Refs: examples/example_glfw_opengl3/main.cpp*/
-class ENIGMA_API ImGuiRenderer : public CreatePtr<ImGuiRenderer>
+class ENIGMA_API ImGuiRenderer
+
 {
 public:
 	ImGuiRenderer();

@@ -45,6 +45,11 @@ struct ENIGMA_API WindowSettings
 	i32 maximum_height = GLFW_DONT_CARE;
 
 	/*
+	*	Window Maximum Frames Per Second.
+	*/
+	ui32 maximum_fps = 60;
+
+	/*
 	*	Enable/Disable vertical sync
 	*/
 	bool is_vsync = false;

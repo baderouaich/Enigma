@@ -3,7 +3,6 @@
 #define ENIGMA_CURSOR_H
 
 #include <Core/Core.hpp>
-#include <Memory/CreatePtr.hpp>
 #include <GLFW/glfw3.h>
 
 NS_ENIGMA_BEGIN
@@ -23,7 +22,8 @@ enum class CursorMode : ui8
 	NONE = Arrow
 };
 
-class ENIGMA_API Cursor : public CreatePtr<Cursor>
+class ENIGMA_API Cursor
+
 {
 public:
 	/*

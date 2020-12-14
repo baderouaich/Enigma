@@ -9,7 +9,7 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API Scene : public CreatePtr<Scene>
+class ENIGMA_API Scene
 {
 public:
 	friend class Application;

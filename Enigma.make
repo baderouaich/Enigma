@@ -87,6 +87,7 @@ GENERATED += $(OBJDIR)/AES.o
 GENERATED += $(OBJDIR)/Application.o
 GENERATED += $(OBJDIR)/Base64.o
 GENERATED += $(OBJDIR)/ChaCha.o
+GENERATED += $(OBJDIR)/Clipboard.o
 GENERATED += $(OBJDIR)/Cursor.o
 GENERATED += $(OBJDIR)/DecryptTextScene.o
 GENERATED += $(OBJDIR)/EncryptTextScene.o
@@ -112,6 +113,7 @@ OBJECTS += $(OBJDIR)/AES.o
 OBJECTS += $(OBJDIR)/Application.o
 OBJECTS += $(OBJDIR)/Base64.o
 OBJECTS += $(OBJDIR)/ChaCha.o
+OBJECTS += $(OBJDIR)/Clipboard.o
 OBJECTS += $(OBJDIR)/Cursor.o
 OBJECTS += $(OBJDIR)/DecryptTextScene.o
 OBJECTS += $(OBJDIR)/EncryptTextScene.o
@@ -233,6 +235,9 @@ $(OBJDIR)/MainMenuScene.o: Source/Scenes/MainMenuScene.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Scene.o: Source/Scenes/Scene.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Clipboard.o: Source/System/Clipboard/Clipboard.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/MessageBox.o: Source/System/Dialogs/MessageBox.cpp

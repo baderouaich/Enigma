@@ -19,7 +19,8 @@ Application::Application(const WindowSettings& window_settings)
 	m_delta_time(0.0f),
 	//FPS
 	m_FPS_timer(0.0f),
-	m_FPS(0)
+	m_FPS(0),
+	m_max_FPS(window_settings.maximum_fps)
 {
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
@@ -33,7 +34,7 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	try
 	{
 		// Create Window
-		m_window = Window::CreateShared(window_settings);
+		m_window = std::make_unique<Window>(window_settings);
 		// Set Window Events callback
 		m_window->SetEventCallback(ENIGMA_BIND_FUN(Application::OnEvent));
 	}
@@ -63,16 +64,18 @@ void Application::InitSceneData()
 
 void Application::InitImGuiRenderer()
 {
-	m_imgui_renderer = ImGuiRenderer::CreateUnique();
+	m_imgui_renderer = std::make_unique<ImGuiRenderer>();
 }
 
 void Application::PushScene(const std::shared_ptr<Scene>& scene)
 {
-	ENIGMA_ASSERT(scene, "Scene is nullptr");
-	//scene->m_scene_data = &m_scene_data;
-	this->m_scenes.emplace_back(scene);
+	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
+
+	// Push scene & Notify user on scene created
+	this->m_scenes.emplace_back(scene)->OnCreate(); // c++17 only emplace_back returns inserted item
+	
 	// Notify user on scene created
-	scene->OnCreate();
+	//scene->OnCreate();
 }
 
 void Application::OnEvent(Event& event)
@@ -145,8 +148,7 @@ void Application::Run()
 				// Delta time
 				UpdateDeltaTime();
 				// FPS
-				if(m_window->m_is_show_fps)
-					UpdateFPS();
+				UpdateFPS();
 				// Update back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnUpdate(m_delta_time);
 			}
@@ -173,7 +175,7 @@ void Application::Run()
 				
 				// Destroy Scene
 				m_scenes.back()->EndScene(); // just to make sure, even if m_quit is true (who knows what can happen in OnDestroy)
-				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~shared_ptr to cleanup memory)
+				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~unique_ptr to cleanup memory)
 			}
 
 		}
@@ -211,14 +213,40 @@ void Application::UpdateDeltaTime() noexcept
 
 void Application::UpdateFPS() noexcept
 {
-	m_FPS++;
-	m_FPS_timer += m_delta_time;
-	if (m_FPS_timer >= 1.0f)
+	/// Limit FPS
+	while (static_cast<f32>(glfwGetTime()) < m_last_frame_time + 1.0f / m_max_FPS)
 	{
-		m_window->SetTitle(m_window->GetTitle());
-		m_FPS = 0;
-		m_FPS_timer = 0.0f;
+		// TODO: whats the best to use in this case, yield or sleep_for?
+		// Put the thread to sleep
+		std::this_thread::yield();
+
+		//const auto sleep_millis = static_cast<i64>(((1.0 / m_max_FPS) - m_delta_time) * 1000.0);
+		//std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
+		/*
+		yield()
+		will stop the execution of the current thread and give priority to other process/threads
+		(if there are other process/threads waiting in the queue). 
+		The execution of the thread is not stopped. (it just release the CPU).
+
+		sleep_for()
+		will make your thread sleep for a given time (the thread is stopped for a given time).
+		*/
 	}
+	///
+
+	/// Update Frames per second & set to window title
+	if (m_window->m_is_show_fps)
+	{
+		m_FPS++;
+		m_FPS_timer += m_delta_time;
+		if (m_FPS_timer >= 1.0f)
+		{
+			m_window->SetTitle(m_window->GetTitle());
+			m_FPS = 0;
+			m_FPS_timer = 0.0f;
+		}
+	}
+	///
 }
 
 
@@ -230,12 +258,11 @@ void Application::EndApplication() noexcept
 
 Application::~Application()
 {
-	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const std::shared_ptr<Scene>& scene)
+	// OnDestroy() alert scenes
+	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const auto& scene)
 	{
 		// Notify scenes OnDestroy before closing application
 		scene->OnDestroy();
-		// Cleanup Scene
-		//ENIGMA_SAFE_DELETE_PTR(scene);
 	});
 	m_scenes.clear();
 }
