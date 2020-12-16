@@ -115,7 +115,7 @@ private: /* Delta time */
 private: /* FPS */
 	f32 m_FPS_timer;
 	ui32 m_FPS;
-	ui32 m_max_FPS;
+	//ui32 m_max_FPS;
 
 private: /* ImGui */
 	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;

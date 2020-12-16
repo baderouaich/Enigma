@@ -6,18 +6,19 @@
 #define ENIGMA_MAIN_H
 
 #if ENIGMA_TEST
-	#include <Tests/Algorithm/AESTests.hpp>
+	#include <Tests/Utils/Base64Tests.hpp>
+	//#include <Tests/Algorithm/AESTests.hpp>
 	//#include <Tests/Algorithm/ChaChaTests.hpp>
-	//#include <Tests/Utils/Base64Tests.hpp>
+	//#include <Tests/Algorithm/TripleDESTests.hpp>
 #else
 	#include <Enigma.hpp>
 #endif
 
 int main(int argc, char* argv[])
 {
-#if !ENIGMA_TEST
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
+#if !ENIGMA_TEST
 	// Create Application
 	std::unique_ptr<Enigma::Application> _App = Enigma::CreateApplication();
 	// Run Application

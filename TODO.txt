@@ -1,3 +1,4 @@
+- Support AES-GCM 
 - Generate RSA Public & Private Keys
 - Fix window on maximize, when dragging to centre it gets minimized
 - Load resources asynchronously

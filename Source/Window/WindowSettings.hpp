@@ -47,7 +47,7 @@ struct ENIGMA_API WindowSettings
 	/*
 	*	Window Maximum Frames Per Second.
 	*/
-	ui32 maximum_fps = 60;
+	//ui32 maximum_fps = 60;
 
 	/*
 	*	Enable/Disable vertical sync

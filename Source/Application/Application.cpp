@@ -5,6 +5,7 @@
 #include <Window/Window.hpp>
 #include <Window/WindowSettings.hpp>
 #include <UI/ImGui/ImGuiRenderer.hpp>
+#include <Utility/DialogUtils.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -19,8 +20,8 @@ Application::Application(const WindowSettings& window_settings)
 	m_delta_time(0.0f),
 	//FPS
 	m_FPS_timer(0.0f),
-	m_FPS(0),
-	m_max_FPS(window_settings.maximum_fps)
+	m_FPS(0)
+	//,m_max_FPS(window_settings.maximum_fps)
 {
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
@@ -40,13 +41,11 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	}
 	catch (const std::exception& e)
 	{
+		const String msg = "Couldn't Construct Window: " + String(e.what());
 		// console alert
-		ENIGMA_ERROR("{0}", e.what());
-		
+		ENIGMA_ERROR(msg.c_str());
 		// ui alert
-		Enigma::MessageBox msg_box("Error occured", "Couldn't Construct Window: " + String(e.what()), Enigma::MessageBox::Icon::Error, Enigma::MessageBox::Choice::Ok);
-		[[maybe_unused]] auto action = msg_box.Show();
-		
+		[[maybe_unused]] auto action = DialogUtils::Error(msg);		
 		// exit
 		this->Exit("Couldn't Construct Window", EXIT_FAILURE); // No Application without a window :c
 	}
@@ -213,8 +212,9 @@ void Application::UpdateDeltaTime() noexcept
 
 void Application::UpdateFPS() noexcept
 {
+#if 0
 	/// Limit FPS
-	while (static_cast<f32>(glfwGetTime()) < m_last_frame_time + 1.0f / m_max_FPS)
+	while (static_cast<f32>(glfwGetTime()) < m_last_frame_time + (1.0f / m_max_FPS))
 	{
 		// TODO: whats the best to use in this case, yield or sleep_for?
 		// Put the thread to sleep
@@ -233,7 +233,7 @@ void Application::UpdateFPS() noexcept
 		*/
 	}
 	///
-
+#endif
 	/// Update Frames per second & set to window title
 	if (m_window->m_is_show_fps)
 	{

@@ -514,24 +514,28 @@ void Window::SetMaximumSize(const i32& maximum_width, const i32& maximum_height)
 	glfwSetWindowSizeLimits(m_GLFWwindow, min_w, min_h, max_w, max_h);
 }
 
-void Window::SetShouldClose(bool close) const noexcept
+void Window::SetShouldClose(const bool close) const noexcept
 {
 	glfwSetWindowShouldClose(m_GLFWwindow, close);
 }
 
 void Window::SetTitle(const String& title) noexcept
 {
+	if (m_title != title)
+		m_title = title;
+
 	// title - FPS: x
 	if (m_is_show_fps)
 	{
 		const ui32& FPS = Application::GetInstance().GetFPS();
-		glfwSetWindowTitle(m_GLFWwindow, (title + " - FPS: " + std::to_string(FPS)).c_str());
+		const String title_with_fps = m_title + " - FPS: " + std::to_string(FPS);
+		glfwSetWindowTitle(m_GLFWwindow, title_with_fps.c_str());
 	}
 	else
 	{
-		glfwSetWindowTitle(m_GLFWwindow, title.c_str());
+		glfwSetWindowTitle(m_GLFWwindow, m_title.c_str());
 	}
-	m_title = title;
+
 }
 
 void Window::SetPosition(const i32& x, const i32& y) const noexcept

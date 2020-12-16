@@ -15,8 +15,10 @@
 #include <modes.h> // Classes for block cipher modes of operation
 
 #include <aes.h> // AES
+#include <gcm.h> // GCM Mode
 #include <chacha.h> // ChaCha/Salsa20
 #include <rsa.h> // RSA
+#include <des.h> // TripleDES
 
 NS_ENIGMA_BEGIN
 
@@ -30,8 +32,8 @@ public:
 	enum class Type : ui8
 	{
 		AES = 0,
-		CHACHA,
-		RSA
+		ChaCha,
+		TripleDES
 	};
 public:
 	explicit Algorithm(Intent intent) noexcept 

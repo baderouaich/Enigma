@@ -22,9 +22,9 @@ public:
 	String Decrypt(const String& password, const String& buffer) override;
 
 private:
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::AES>::Encryption> m_aes_encryption; // AES-CBC encryptor
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::AES>::Decryption> m_aes_decryption; // AES-CBC decryptor
-
+	// AES symmetric cipher is recommended to be used with GCM mode
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryption; // AES-GCM encryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryption; // AES-GCM decryptor
 };
 
 NS_ENIGMA_END

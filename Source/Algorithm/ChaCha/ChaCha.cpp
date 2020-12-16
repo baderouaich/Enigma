@@ -82,6 +82,9 @@ String ChaCha::Encrypt(const String& password, const String& buffer)
 
 String ChaCha::Decrypt(const String& password, const String& buffer)
 {
+	// Make sure decryption mode is initialized
+	ENIGMA_ASSERT(m_chacha_decryption, "ChaCha Decryption is not initialized properly");
+
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(iv + encrypted))
 	const String iv = buffer.substr(0, CryptoPP::ChaCha::IV_LENGTH);
 	const String encrypted = buffer.substr(CryptoPP::ChaCha::IV_LENGTH, buffer.size() - 1);

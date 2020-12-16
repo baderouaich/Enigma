@@ -78,9 +78,10 @@ TEST_CASE("AES File Encryption and Decryption")
 }
 
 #else
-TEST_CASE("AES Encryption and Decryption")
+TEST_CASE("AES-GCM Encryption and Decryption")
 {
 	using std::cout, std::cin, std::endl;
+	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	std::unique_ptr<Enigma::AES> aes_encryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Encrypt);
 	std::unique_ptr<Enigma::AES> aes_decryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Decrypt);
@@ -100,8 +101,8 @@ TEST_CASE("AES Encryption and Decryption")
 	decrypted = aes_decryptor->Decrypt(password, encrypted);
 	cout << "\nDecrypted: " << decrypted << endl;
 
-	REQUIRE_THAT(buffer, !Equals(encrypted));
-	REQUIRE_THAT(buffer, Equals(decrypted));
+	REQUIRE_THAT(buffer, !Equals(encrypted)); // buffer must not equal cipher
+	REQUIRE_THAT(buffer, Equals(decrypted)); // buffer must equal decrypted cipher
 
 
 	SECTION("Clearing buffers")

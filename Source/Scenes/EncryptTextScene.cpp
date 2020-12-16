@@ -58,7 +58,8 @@ void EncryptTextScene::OnImGuiDraw()
 	static ImFont* const& font_montserrat_medium_20 = m_fonts.at("Montserrat-Medium-20");
 	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
 
-	static constexpr const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
+	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
+	//static constexpr const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 	ImGui::Begin("Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
@@ -90,9 +91,9 @@ void EncryptTextScene::OnImGuiDraw()
 			}
 			inline_dummy(0.0f, 1.0f);
 			ImGui::SameLine();
-			if (ImGui::RadioButton("CHACHA", m_algorithm == Algorithm::Type::CHACHA))
+			if (ImGui::RadioButton("CHACHA", m_algorithm == Algorithm::Type::ChaCha))
 			{
-				m_algorithm = Algorithm::Type::CHACHA;
+				m_algorithm = Algorithm::Type::ChaCha;
 			}
 		}
 		ImGui::PopFont();
@@ -249,7 +250,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			case Enigma::Algorithm::Type::AES:
 				algo_encryptor.reset(new Enigma::AES(Enigma::Algorithm::Intent::Encrypt));
 				break;
-			case Enigma::Algorithm::Type::CHACHA:
+			case Enigma::Algorithm::Type::ChaCha:
 				algo_encryptor.reset(new Enigma::ChaCha(Enigma::Algorithm::Intent::Encrypt));
 				break;
 			}

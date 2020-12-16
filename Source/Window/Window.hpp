@@ -186,7 +186,7 @@ public: /* Modifiers */
 	/*
 	*	Close Window
 	*/
-	void SetShouldClose(bool close) const noexcept;
+	void SetShouldClose(const bool close) const noexcept;
 	
 	/*
 	*	Enable / Disable Vertical Sync

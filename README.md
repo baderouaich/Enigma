@@ -13,14 +13,9 @@ Encrypt & Decrypt your important data
 
 
 ## Supported Algorithm
-### AES-CBC 
-The Advanced Encryption Standard (AES), is a block cipher adopted as an encryption standard by the U.S. government for military and government use.<br>
-CBC (Cipher Blocker Chaining) is an advanced form of block cipher encryption
+### AES-GCM
 ### ChaCha
-Salsa20 and the closely related ChaCha are stream ciphers developed by Daniel J. Bernstein. Salsa20, the original cipher, was designed in 2005,
-then later submitted to eSTREAM by Bernstein. ChaCha is a modification of Salsa20 published in 2008.
-It uses a new round function that increases diffusion and increases performance on some architectures.
-
+### TripleDES-CBC
 
 
 ## Compiling
