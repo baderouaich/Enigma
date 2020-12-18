@@ -1,0 +1,4 @@
+nofile:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 configurations. Use --force to check all configurations. For more details, use --enable=information. [toomanyconfigs]
+
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+
