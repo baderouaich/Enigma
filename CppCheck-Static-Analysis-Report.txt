@@ -1,4 +1,32 @@
-nofile:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 configurations. Use --force to check all configurations. For more details, use --enable=information. [toomanyconfigs]
+Source/Analytics/Hardware/RAM/RAMInfo.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 4 configurations. Use --force to check all configurations. [toomanyconfigs]
 
+^
+Source/Analytics/Hardware/RAM/RAMInfo.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+Source/Enigma.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 17 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Source/Enigma.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+Source/System/Dialogs/MessageBox.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 2 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Source/System/Dialogs/MessageBox.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+Source/Window/Window.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 4 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Source/Window/Window.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
+Source/pch.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 17 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Source/pch.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
 nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
 
