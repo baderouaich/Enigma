@@ -16,6 +16,7 @@ ifeq ($(config),debug)
   pfd_config = debug
   stb_image_config = debug
   cryptopp_config = debug
+  cxxopts_config = debug
   catch2_config = debug
   Enigma_config = debug
 
@@ -27,6 +28,7 @@ else ifeq ($(config),release)
   pfd_config = release
   stb_image_config = release
   cryptopp_config = release
+  cxxopts_config = release
   catch2_config = release
   Enigma_config = release
 
@@ -38,6 +40,7 @@ else ifeq ($(config),dist)
   pfd_config = dist
   stb_image_config = dist
   cryptopp_config = dist
+  cxxopts_config = dist
   catch2_config = dist
   Enigma_config = dist
 
@@ -45,13 +48,13 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := glfw glad imgui spdlog pfd stb_image cryptopp catch2 Enigma
+PROJECTS := glfw glad imgui spdlog pfd stb_image cryptopp cxxopts catch2 Enigma
 
 .PHONY: all clean help $(PROJECTS) Dependencies
 
 all: $(PROJECTS)
 
-Dependencies: catch2 cryptopp glad glfw imgui pfd spdlog stb_image
+Dependencies: catch2 cryptopp cxxopts glad glfw imgui pfd spdlog stb_image
 
 glfw:
 ifneq (,$(glfw_config))
@@ -95,13 +98,19 @@ ifneq (,$(cryptopp_config))
 	@${MAKE} --no-print-directory -C Dependencies/cryptopp -f Makefile config=$(cryptopp_config)
 endif
 
+cxxopts:
+ifneq (,$(cxxopts_config))
+	@echo "==== Building cxxopts ($(cxxopts_config)) ===="
+	@${MAKE} --no-print-directory -C Dependencies/cxxopts -f Makefile config=$(cxxopts_config)
+endif
+
 catch2:
 ifneq (,$(catch2_config))
 	@echo "==== Building catch2 ($(catch2_config)) ===="
 	@${MAKE} --no-print-directory -C Dependencies/catch2 -f Makefile config=$(catch2_config)
 endif
 
-Enigma: glfw glad imgui spdlog stb_image cryptopp catch2
+Enigma: glfw glad imgui spdlog stb_image cxxopts cryptopp catch2
 ifneq (,$(Enigma_config))
 	@echo "==== Building Enigma ($(Enigma_config)) ===="
 	@${MAKE} --no-print-directory -C . -f Enigma.make config=$(Enigma_config)
@@ -115,6 +124,7 @@ clean:
 	@${MAKE} --no-print-directory -C Dependencies/pfd -f Makefile clean
 	@${MAKE} --no-print-directory -C Dependencies/stb_image -f Makefile clean
 	@${MAKE} --no-print-directory -C Dependencies/cryptopp -f Makefile clean
+	@${MAKE} --no-print-directory -C Dependencies/cxxopts -f Makefile clean
 	@${MAKE} --no-print-directory -C Dependencies/catch2 -f Makefile clean
 	@${MAKE} --no-print-directory -C . -f Enigma.make clean
 
@@ -136,6 +146,7 @@ help:
 	@echo "   pfd"
 	@echo "   stb_image"
 	@echo "   cryptopp"
+	@echo "   cxxopts"
 	@echo "   catch2"
 	@echo "   Enigma"
 	@echo ""

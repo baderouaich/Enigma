@@ -63,5 +63,8 @@
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 //
 
+//Enigma Command line interface
+#include <CLI/CLI.hpp>
+//
 
 #endif // !ENIGMA_H

@@ -19,12 +19,22 @@ int main(int argc, char* argv[])
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 #if !ENIGMA_TEST
-	// Create Application
-	std::unique_ptr<Enigma::Application> _App = Enigma::CreateApplication();
-	// Run Application
-	_App->Run();
-	// Exit
-	return EXIT_SUCCESS;
+	// Command Line Interface Entry
+	if (argc > 1)
+	{
+		std::unique_ptr<Enigma::CLI> _Cli = std::make_unique<Enigma::CLI>(argc, argv);
+		return _Cli->Run();
+	}
+	// Application Entry
+	else
+	{
+		// Create Enigma UI Application
+		std::unique_ptr<Enigma::Application> _App = Enigma::CreateApplication();
+		// Run Application
+		_App->Run();
+		// Exit
+		return EXIT_SUCCESS;
+	}
 #else
 	// Run Tests
 	return Catch::Session().run(argc, argv);

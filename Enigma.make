@@ -38,11 +38,11 @@ TARGETDIR = Bin/Debug-windows-x86_64/Enigma
 TARGET = $(TARGETDIR)/Enigma.exe
 OBJDIR = Bin-Intermediate/Debug-windows-x86_64/Enigma
 DEFINES += -DENIGMA_PLATFORM_WINDOWS -D_CRT_SECURE_NO_WARNINGS -DENIGMA_DEBUG
-INCLUDES += -ISource -IDependencies/spdlog/include -IDependencies/glfw/include -IDependencies/glad/include -IDependencies/imgui -IDependencies/pfd/include -IDependencies/stb_image/include -IDependencies/cryptopp -IDependencies/catch2/src
+INCLUDES += -ISource -IDependencies/spdlog/include -IDependencies/glfw/include -IDependencies/glad/include -IDependencies/imgui -IDependencies/pfd/include -IDependencies/stb_image/include -IDependencies/cxxopts/include -IDependencies/cryptopp -IDependencies/catch2/src
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -std=c++17
-LIBS += Dependencies/glfw/Bin/Debug-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Debug-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Debug-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Debug-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Debug-windows-x86_64/stb_image/stb_image.lib Dependencies/cryptopp/Bin/Debug-windows-x86_64/cryptopp/cryptopp.lib Dependencies/catch2/Bin/Debug-windows-x86_64/catch2/catch2.lib -lopengl32
-LDDEPS += Dependencies/glfw/Bin/Debug-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Debug-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Debug-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Debug-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Debug-windows-x86_64/stb_image/stb_image.lib Dependencies/cryptopp/Bin/Debug-windows-x86_64/cryptopp/cryptopp.lib Dependencies/catch2/Bin/Debug-windows-x86_64/catch2/catch2.lib
+LIBS += Dependencies/glfw/Bin/Debug-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Debug-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Debug-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Debug-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Debug-windows-x86_64/stb_image/stb_image.lib Dependencies/cxxopts/Bin/Debug-windows-x86_64/cxxopts/cxxopts.lib Dependencies/cryptopp/Bin/Debug-windows-x86_64/cryptopp/cryptopp.lib Dependencies/catch2/Bin/Debug-windows-x86_64/catch2/catch2.lib -lopengl32
+LDDEPS += Dependencies/glfw/Bin/Debug-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Debug-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Debug-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Debug-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Debug-windows-x86_64/stb_image/stb_image.lib Dependencies/cxxopts/Bin/Debug-windows-x86_64/cxxopts/cxxopts.lib Dependencies/cryptopp/Bin/Debug-windows-x86_64/cryptopp/cryptopp.lib Dependencies/catch2/Bin/Debug-windows-x86_64/catch2/catch2.lib
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
@@ -50,11 +50,11 @@ TARGETDIR = Bin/Release-windows-x86_64/Enigma
 TARGET = $(TARGETDIR)/Enigma.exe
 OBJDIR = Bin-Intermediate/Release-windows-x86_64/Enigma
 DEFINES += -DENIGMA_PLATFORM_WINDOWS -D_CRT_SECURE_NO_WARNINGS -DENIGMA_RELEASE
-INCLUDES += -ISource -IDependencies/spdlog/include -IDependencies/glfw/include -IDependencies/glad/include -IDependencies/imgui -IDependencies/pfd/include -IDependencies/stb_image/include -IDependencies/cryptopp
+INCLUDES += -ISource -IDependencies/spdlog/include -IDependencies/glfw/include -IDependencies/glad/include -IDependencies/imgui -IDependencies/pfd/include -IDependencies/stb_image/include -IDependencies/cxxopts/include -IDependencies/cryptopp
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
-LIBS += Dependencies/glfw/Bin/Release-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Release-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Release-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Release-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Release-windows-x86_64/stb_image/stb_image.lib Dependencies/cryptopp/Bin/Release-windows-x86_64/cryptopp/cryptopp.lib -lopengl32
-LDDEPS += Dependencies/glfw/Bin/Release-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Release-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Release-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Release-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Release-windows-x86_64/stb_image/stb_image.lib Dependencies/cryptopp/Bin/Release-windows-x86_64/cryptopp/cryptopp.lib
+LIBS += Dependencies/glfw/Bin/Release-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Release-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Release-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Release-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Release-windows-x86_64/stb_image/stb_image.lib Dependencies/cxxopts/Bin/Release-windows-x86_64/cxxopts/cxxopts.lib Dependencies/cryptopp/Bin/Release-windows-x86_64/cryptopp/cryptopp.lib -lopengl32
+LDDEPS += Dependencies/glfw/Bin/Release-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Release-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Release-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Release-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Release-windows-x86_64/stb_image/stb_image.lib Dependencies/cxxopts/Bin/Release-windows-x86_64/cxxopts/cxxopts.lib Dependencies/cryptopp/Bin/Release-windows-x86_64/cryptopp/cryptopp.lib
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -mwindows -s
 
 else ifeq ($(config),dist)
@@ -62,11 +62,11 @@ TARGETDIR = Bin/Dist-windows-x86_64/Enigma
 TARGET = $(TARGETDIR)/Enigma.exe
 OBJDIR = Bin-Intermediate/Dist-windows-x86_64/Enigma
 DEFINES += -DENIGMA_PLATFORM_WINDOWS -D_CRT_SECURE_NO_WARNINGS -DENIGMA_DIST
-INCLUDES += -ISource -IDependencies/spdlog/include -IDependencies/glfw/include -IDependencies/glad/include -IDependencies/imgui -IDependencies/pfd/include -IDependencies/stb_image/include -IDependencies/cryptopp
+INCLUDES += -ISource -IDependencies/spdlog/include -IDependencies/glfw/include -IDependencies/glad/include -IDependencies/imgui -IDependencies/pfd/include -IDependencies/stb_image/include -IDependencies/cxxopts/include -IDependencies/cryptopp
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O3
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -std=c++17
-LIBS += Dependencies/glfw/Bin/Dist-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Dist-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Dist-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Dist-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Dist-windows-x86_64/stb_image/stb_image.lib Dependencies/cryptopp/Bin/Dist-windows-x86_64/cryptopp/cryptopp.lib -lopengl32
-LDDEPS += Dependencies/glfw/Bin/Dist-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Dist-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Dist-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Dist-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Dist-windows-x86_64/stb_image/stb_image.lib Dependencies/cryptopp/Bin/Dist-windows-x86_64/cryptopp/cryptopp.lib
+LIBS += Dependencies/glfw/Bin/Dist-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Dist-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Dist-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Dist-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Dist-windows-x86_64/stb_image/stb_image.lib Dependencies/cxxopts/Bin/Dist-windows-x86_64/cxxopts/cxxopts.lib Dependencies/cryptopp/Bin/Dist-windows-x86_64/cryptopp/cryptopp.lib -lopengl32
+LDDEPS += Dependencies/glfw/Bin/Dist-windows-x86_64/glfw/glfw.lib Dependencies/glad/Bin/Dist-windows-x86_64/glad/glad.lib Dependencies/imgui/Bin/Dist-windows-x86_64/imgui/imgui.lib Dependencies/spdlog/Bin/Dist-windows-x86_64/spdlog/spdlog.lib Dependencies/stb_image/Bin/Dist-windows-x86_64/stb_image/stb_image.lib Dependencies/cxxopts/Bin/Dist-windows-x86_64/cxxopts/cxxopts.lib Dependencies/cryptopp/Bin/Dist-windows-x86_64/cryptopp/cryptopp.lib
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -mwindows -s
 
 endif
@@ -86,6 +86,7 @@ CUSTOM += $(OBJDIR)/resources.res
 GENERATED += $(OBJDIR)/AES.o
 GENERATED += $(OBJDIR)/Application.o
 GENERATED += $(OBJDIR)/Base64.o
+GENERATED += $(OBJDIR)/CLI.o
 GENERATED += $(OBJDIR)/ChaCha.o
 GENERATED += $(OBJDIR)/Clipboard.o
 GENERATED += $(OBJDIR)/Cursor.o
@@ -112,6 +113,7 @@ GENERATED += $(OBJDIR)/resources.res
 OBJECTS += $(OBJDIR)/AES.o
 OBJECTS += $(OBJDIR)/Application.o
 OBJECTS += $(OBJDIR)/Base64.o
+OBJECTS += $(OBJDIR)/CLI.o
 OBJECTS += $(OBJDIR)/ChaCha.o
 OBJECTS += $(OBJDIR)/Clipboard.o
 OBJECTS += $(OBJDIR)/Cursor.o
@@ -214,6 +216,9 @@ $(OBJDIR)/RAMInfo.o: Source/Analytics/Hardware/RAM/RAMInfo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Application.o: Source/Application/Application.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CLI.o: Source/CLI/CLI.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Enigma.o: Source/Enigma.cpp
