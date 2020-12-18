@@ -1,0 +1,9 @@
+[23:51:20] [info] Enigma: [ OpenGL Info ]
+		Manufacturer: Intel
+		Renderer: Intel(R) HD Graphics 4600
+		Version: 3.3.0 - Build 20.19.15.5126
+
+[23:51:20] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[23:51:20] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[23:51:20] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[23:51:23] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

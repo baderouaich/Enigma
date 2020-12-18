@@ -29,6 +29,14 @@ namespace Enigma
 			}
 		}
 
+		namespace CLI
+		{
+			constexpr const char* CLI_DESCRIPTION = "";
+			constexpr const char* CLI_HELP_MESSAGE =
+R"(
+ - example command line options
+)";
+		}
 		namespace Utility
 		{
 			static constexpr const byte BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
