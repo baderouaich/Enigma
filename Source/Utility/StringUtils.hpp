@@ -50,6 +50,22 @@ public:
         str.erase(str.find_last_not_of(t) + 1);
     }
 
+	/*
+	*   Lowercase a string
+	*/
+	static void Lower(String& str)
+	{
+		std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+	}
+
+	/*
+	*   Uppercase a string
+	*/
+	static void Upper(String& str)
+	{
+		std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+	}
+
 };
 NS_ENIGMA_END
 

@@ -273,7 +273,7 @@ bool Window::InitGLFWCallbacks()
 bool Window::InitGLAD()
 {
 	/* Init Glad OpenGL */
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	if (!gladLoadGLLoader((GLADloadproc)(glfwGetProcAddress)))
 		return false;
 	return true;
 }
