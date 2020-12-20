@@ -10,6 +10,8 @@ namespace Enigma
 	{
 		namespace Algorithm
 		{
+			// GCM is defined for block ciphers with a block size of 128 bits. https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
+
 			namespace AES
 			{
 				//https://www.cryptopp.com/wiki/GCM_Mode
@@ -43,7 +45,8 @@ namespace Enigma
 		{
 			namespace Textures
 			{
-				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/EnigmaLetterE.png";
+				// window icon
+				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf2.png";
 			}
 
 			namespace Fonts

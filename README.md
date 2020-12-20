@@ -6,17 +6,54 @@
 
 
 <!--LOGO-->
-![Enigma](Resources/Branding/EnigmaLogo_Full.jpg)
+![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png)
 
 <!--DESCRIOTION-->
-Encrypt & Decrypt your important data
+A Simple, Reliable and Efficient UI + CLI Encryption Tool
+
 
 
 ## Supported Algorithm
-### AES-GCM
-### ChaCha
-### TripleDES-CBC
+- [x] AES-GCM (Highly recommended)
+- [x] ChaCha
+- [x] TripleDES-CBC
+- [ ] Twofish-CBC
+- [ ] IDEA-CBC
 
+## Enigma CLI
+```text
+Usage:
+  Enigma [OPTION...]
+
+  -e, --encrypt                 Encrypt operation
+  -d, --decrypt                 Decrypt operation
+  -m, --mode [aes, chacha, tripledes]
+                                Encryption/Decryption mode (default: aes)
+  -p, --password arg            Encryption/Decryption password
+  -t, --text arg                Text to encrypt
+  -i, --infile arg              File name to encrypt (default: .)
+  -o, --oufile arg              Output encrypted file name (default: .)
+  -h, --help                    Shows help message
+
+```
+- Example encypting a text with AES-GCM:<br>
+```text
+enigma -e --mode=aes --password=123@mypass --text="this is my very important data securely encrypted"
+output: dGhpcyBpcyBteSB2ZXJ5IGltcG9ydGFudCBkYXRhIHNlY3VyZWx5IGVuY3J5cHRlZA==
+```
+- Example decrypting a text with AES-GCM:<br>
+```text
+enigma -d --mode=aes --password=123@mypass --text="dGhpcyBpcyBteSB2ZXJ5IGltcG9ydGFudCBkYXRhIHNlY3VyZWx5IGVuY3J5cHRlZA=="
+output: this is my very important data securely encrypted
+```
+- Example encypting a file with AES-GCM:<br>
+```text
+enigma -e --mode=aes --password=123@mypass --infile="C:/Users/bader/Desktop/data.txt" --outfile="C:/Users/bader/Desktop/data-encrypted.txt"
+```
+- Example decypting a file with AES-GCM:<br>
+```text
+enigma -d --mode=aes --password=123@mypass --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
+```
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git` <br>

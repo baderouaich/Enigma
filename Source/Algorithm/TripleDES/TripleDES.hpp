@@ -22,6 +22,7 @@ public:
 	String Decrypt(const String& password, const String& buffer) override;
 
 private: 
+	// Note: using CBC since GCM is defined for block ciphers with a block size of 128 bits https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
 	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Encryption> m_tripledes_encryption; // 3 Key TripleDES-CBC encryptor
 	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption> m_tripledes_decryption; // 3 Key TripleDES-CBC decryptor
 };

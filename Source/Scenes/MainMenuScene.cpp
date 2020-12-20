@@ -55,12 +55,13 @@ void MainMenuScene::OnImGuiDraw()
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 
-	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
+	static constexpr const auto container_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
 	//static constexpr const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_MenuBar;
 	ImGui::Begin("Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
+
 		// Menu bar
 		{
 			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 22.0f)); // 16.0f Menu bar padding
