@@ -72,8 +72,8 @@ String ChaCha::Encrypt(const String& password, const String& buffer)
 	catch (const CryptoPP::Exception& e)
 	{
 		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("ChaCha Encryption Failure ") + CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()),
-			e.GetWhat()
+			String("ChaCha Encryption Failure "),
+			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
 		);
 	}
 
@@ -125,8 +125,8 @@ String ChaCha::Decrypt(const String& password, const String& buffer)
 	catch (const CryptoPP::Exception& e)
 	{
 		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("ChaCha Decryption Failure ") + CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()),
-			e.GetWhat()
+			String("ChaCha Decryption Failure "),
+			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
 		);
 	}
 

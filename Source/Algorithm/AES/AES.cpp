@@ -68,8 +68,8 @@ String AES::Encrypt(const String& password, const String& buffer)
 	catch (const CryptoPP::Exception& e)
 	{
 		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("AES Encryption Failure ") + CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()),
-			e.GetWhat()
+			String("AES Encryption Failure "),
+			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
 		);
 	}
 
@@ -118,8 +118,8 @@ String AES::Decrypt(const String& password, const String& buffer)
 	catch (const CryptoPP::Exception& e)
 	{
 		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("AES Decryption Failure ") + CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()),
-			e.GetWhat()
+			String("AES Decryption Failure "),
+			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
 		);
 	}
 

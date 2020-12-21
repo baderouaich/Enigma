@@ -40,21 +40,21 @@ Usage:
 ```
 - Example encypting a text with AES-GCM:<br>
 ```text
-enigma -e --mode=aes --password=123@mypass --text="this is my very important data securely encrypted"
-output: dGhpcyBpcyBteSB2ZXJ5IGltcG9ydGFudCBkYXRhIHNlY3VyZWx5IGVuY3J5cHRlZA==
+enigma -e --mode=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
+output: cekP1lnUL/aJ9ZDNDzgpIuNAfvN5Oe0DOospT80XnocgKRI6OMDTQ5UydUyfnGgb9EcQQAcR8bksN/lBxabSCyujT3c=
 ```
 - Example decrypting a text with AES-GCM:<br>
 ```text
-enigma -d --mode=aes --password=123@mypass --text="dGhpcyBpcyBteSB2ZXJ5IGltcG9ydGFudCBkYXRhIHNlY3VyZWx5IGVuY3J5cHRlZA=="
-output: this is my very important data securely encrypted
+enigma -d --mode=aes --password="My@pa$$W0rd" --text="cekP1lnUL/aJ9ZDNDzgpIuNAfvN5Oe0DOospT80XnocgKRI6OMDTQ5UydUyfnGgb9EcQQAcR8bksN/lBxabSCyujT3c="
+output: my important data securly encrypted!
 ```
 - Example encypting a file with AES-GCM:<br>
 ```text
-enigma -e --mode=aes --password=123@mypass --infile="C:/Users/bader/Desktop/data.txt" --outfile="C:/Users/bader/Desktop/data-encrypted.txt"
+enigma -e --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data.txt" --outfile="C:/Users/bader/Desktop/data-encrypted.txt"
 ```
 - Example decypting a file with AES-GCM:<br>
 ```text
-enigma -d --mode=aes --password=123@mypass --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
+enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
 ```
 
 ## Compiling

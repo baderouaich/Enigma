@@ -174,14 +174,16 @@ project "Enigma"
 		}
 
 	filter "configurations:Release"
-		kind "WindowedApp" -- Release as windowed application
+		kind "ConsoleApp" -- we need console for logging CLI
+		--kind "WindowedApp" -- Release as windowed application
 		defines "ENIGMA_RELEASE"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.
 		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
 
 	filter "configurations:Dist"
-		kind "WindowedApp" -- Distribution as windowed application
+		kind "ConsoleApp" -- we need console for logging CLI
+		--kind "WindowedApp" -- Distribution as windowed application
 		defines "ENIGMA_DIST"
 		runtime "Release"
 		optimize "Full" -- Full optimization.

@@ -14,24 +14,25 @@ public:
 	*/
 	static const String GetCryptoPPErrorString(const enum CryptoPP::Exception::ErrorType& _enum) noexcept
 	{
+		using ERROR = CryptoPP::Exception::ErrorType;
 #define CASE_ENUM(e) case e: return #e
 		switch (_enum)
 		{
 			/// \brief A method was called which was not implemented
-			CASE_ENUM(CryptoPP::Exception::ErrorType::NOT_IMPLEMENTED);
+			CASE_ENUM(ERROR::NOT_IMPLEMENTED);
 			/// \brief An invalid argument was detected
-			CASE_ENUM(CryptoPP::Exception::ErrorType::INVALID_ARGUMENT);
+			CASE_ENUM(ERROR::INVALID_ARGUMENT);
 			/// \brief BufferedTransformation received a Flush(true) signal but can't flush buffers
-			CASE_ENUM(CryptoPP::Exception::ErrorType::CANNOT_FLUSH);
+			CASE_ENUM(ERROR::CANNOT_FLUSH);
 			/// \brief Data integerity check, such as CRC or MAC, failed
-			CASE_ENUM(CryptoPP::Exception::ErrorType::DATA_INTEGRITY_CHECK_FAILED);
+			CASE_ENUM(ERROR::DATA_INTEGRITY_CHECK_FAILED);
 			/// \brief Input data was received that did not conform to expected format
-			CASE_ENUM(CryptoPP::Exception::ErrorType::INVALID_DATA_FORMAT);
+			CASE_ENUM(ERROR::INVALID_DATA_FORMAT);
 			/// \brief Error reading from input device or writing to output device
-			CASE_ENUM(CryptoPP::Exception::ErrorType::IO_ERROR);
+			CASE_ENUM(ERROR::IO_ERROR);
 			/// \brief Some other error occurred not belonging to other categories
 			default:
-			CASE_ENUM(CryptoPP::Exception::ErrorType::OTHER_ERROR);
+			CASE_ENUM(ERROR::OTHER_ERROR);
 		}
 #undef CASE_ENUM
 	}

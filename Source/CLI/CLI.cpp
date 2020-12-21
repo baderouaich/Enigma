@@ -75,12 +75,12 @@ i32 CLI::Run()
 		// Encrypting or Decrypting ?
 		if (r.count("e") || r.count("encrypt")) // -e or --encrypt
 		{
-			LOG("Encrypting ");
+			//LOG("Encrypting ");
 			intent = Algorithm::Intent::Encrypt;
 		}
 		else if (r.count("d") || r.count("decrypt")) // -d or --decrypt
 		{
-			LOG("Decrypting ");
+			//LOG("Decrypting ");
 			intent = Algorithm::Intent::Decrypt;
 		}
 		else
@@ -96,7 +96,7 @@ i32 CLI::Run()
 			else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
 			else throw std::runtime_error("Unsupported algorithm mode: " + m);
 
-			LOG("Mode: {0}", m);
+			//LOG("Mode: {0}", m);
 		}
 		else
 			throw std::runtime_error("You should specify an encryption/decryption mode like: --mode=aes or -m aes");
@@ -106,7 +106,7 @@ i32 CLI::Run()
 		{
 			password = r["p"].as<String>();
 
-			LOG("Password: {0}", password);
+			//LOG("Password: {0}", password);
 		}
 		else
 			throw std::runtime_error("You should specify an encryption/decryption password like: --password=mypass or -p mypass");
@@ -117,7 +117,7 @@ i32 CLI::Run()
 		{
 			text = r["t"].as<String>();
 
-			LOG("Text: {0}", text);
+			//LOG("Text: {0}", text);
 		}
 		
 		// Or Is there a file to encrypt/decrypt?
@@ -125,13 +125,13 @@ i32 CLI::Run()
 		{
 			infilename = r["i"].as<String>();
 
-			LOG("In File name: {0}", infilename);
+			//LOG("In File name: {0}", infilename);
 		}
 		if (r.count("o") || r.count("outfile")) // -o "C:/file" | --outfile="C:/file"
 		{
 			outfilename = r["o"].as<String>();
 
-			LOG("Out File name: {0}", outfilename);
+			//LOG("Out File name: {0}", outfilename);
 		}
 
 
@@ -197,12 +197,38 @@ i32 CLI::Run()
 
 void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text)
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	//LOG(ENIGMA_CURRENT_FUNCTION);
+
+	String encrypted_text{}, encrypted_text_base64{};
+	encrypted_text = algorithm->Encrypt(password, text);
+	if (!encrypted_text.empty())
+	{
+		encrypted_text_base64 = Base64::Encode(encrypted_text);
+	}
+	if (!encrypted_text_base64.empty())
+	{
+		ENIGMA_INFO(encrypted_text_base64);
+	}
+
+	encrypted_text.clear();
+	encrypted_text_base64.clear();
 }
 
-void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text_encrypted)
+void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& encrypted_text_base64)
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	//LOG(ENIGMA_CURRENT_FUNCTION);
+
+	String encrypted_text{}, decrypted_text{};
+
+	// Decode encypted text base64
+	encrypted_text = Base64::Decode(encrypted_text_base64);
+	// Decrypt
+	decrypted_text = algorithm->Decrypt(password, encrypted_text);
+
+	ENIGMA_INFO(decrypted_text);
+
+	encrypted_text.clear();
+	decrypted_text.clear();
 }
 
 void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_file, const String& out_filename_encypted)
