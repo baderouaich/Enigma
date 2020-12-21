@@ -6,7 +6,9 @@
 
 
 <!--LOGO-->
-![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png)
+<!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
+<img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="430"/>
+
 
 <!--DESCRIOTION-->
 A Simple, Reliable and Efficient UI + CLI Encryption Tool
