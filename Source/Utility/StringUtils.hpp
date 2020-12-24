@@ -12,9 +12,10 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API StringUtils
 {
 public:
+
 	/*
 	*	Check whether all string characters are the same. 
-	*	used to check if string is empty when memory is allocated with '\000' and size is not 0
+	*	used to check if string is empty when memory is allocated with '\000' and size is not 0 (or use strlen())
 	*/
 	template<typename T>
 	static bool IsAll(String& str, const T& v)

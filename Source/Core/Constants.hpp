@@ -10,30 +10,34 @@ namespace Enigma
 	{
 		namespace Algorithm
 		{
+			// Notes:
 			// GCM is defined for block ciphers with a block size of 128 bits. https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
-
+			// No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
+			
+			static constexpr const size_t MINIMUM_PASSWORD_LENGTH = 9; // AT LEAST 9 CHARACTERS, FOR SECURITY REASONS.
+			
 			namespace AES
 			{
 				//https://www.cryptopp.com/wiki/GCM_Mode
-				static constexpr const ui16 AES_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
-				//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 			}
 			namespace ChaCha
 			{
 				//https://www.cryptopp.com/wiki/ChaCha20
-				static constexpr const ui16 CHACHA_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
-				//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 			}
 			namespace TripleDES
 			{
 				//https://www.cryptopp.com/wiki/TripleDES
-				static constexpr const ui16 TRIPLEDES_MINIMUM_PASSWORD_LENGTH = 9; // at least 6 to 64 characters
 			}
 		}
 
 		namespace CLI
 		{
 			constexpr const char* CLI_HELP_MESSAGE = "say --help or -h for details";
+		}
+
+		namespace ErrorMessages
+		{
+			static constexpr const auto WEAK_PASSWORD_ERROR_MESSAGE = "Password is too weak! consider using 9 characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\";
 		}
 
 		namespace Utility

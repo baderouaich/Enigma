@@ -6,6 +6,8 @@
 #include <Utility/CryptoPPUtils.hpp>
 
 // Crypto++
+// This ignores all warnings raised inside External headers
+#pragma warning(push, 0)
 #include <cryptlib.h> // HexEncoder, HexDecoder
 #include <filters.h> // StringSink, StringSource, StreamTransformationFilter
 #include <ccm.h> // CBC_Mode
@@ -19,6 +21,7 @@
 #include <chacha.h> // ChaCha/Salsa20
 #include <rsa.h> // RSA
 #include <des.h> // TripleDES
+#pragma warning(pop)
 
 NS_ENIGMA_BEGIN
 

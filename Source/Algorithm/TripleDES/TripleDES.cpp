@@ -22,10 +22,10 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 
 	// Validate Arguments
 	{
-		// TripleDES password length must be at least 9 for security reasons
-		if (password.size() < Constants::Algorithm::TripleDES::TRIPLEDES_MINIMUM_PASSWORD_LENGTH)
+		// Password length must be at least 9 for security reasons
+		if (password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 		{
-			ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(String("TripleDES Encryption Failure"), "TripleDES Minimum Password Length is " + std::to_string(Constants::Algorithm::TripleDES::TRIPLEDES_MINIMUM_PASSWORD_LENGTH));
+			ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(String("TripleDES Encryption Failure"), "TripleDES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 			return String();
 		}
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc

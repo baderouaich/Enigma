@@ -9,16 +9,12 @@
 #include <Algorithm/ChaCha/ChaCha.hpp>
 #include <Algorithm/TripleDES/TripleDES.hpp>
 
-#include <cxxopts.hpp> // cmd parser LIB
-/*
-Options can be given as:
---long
---long=argument
---long argument
--a
--ab
--abc argument
-*/
+#include <cxxopts.hpp> // cmd parser library
+
+#pragma warning(push, 0) // disable warnings
+	#include <cxxopts.hpp> // cmd parser library
+#pragma warning(pop)
+
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API CLI
@@ -27,7 +23,7 @@ class ENIGMA_API CLI
 	using Type = Algorithm::Type;
 
 public:
-	CLI(i32 argc, char** argv);
+	CLI(const i32& argc, char** argv);
 	~CLI() noexcept;
 
 public:

@@ -7,7 +7,7 @@ NS_ENIGMA_BEGIN
 //$ enigma -encrypt --mode=aes --text="hello world!" 
 //$ enigma -encrypt --mode=aes --infile="C:/Users/bader/Desktop/file.txt" --outfile="C:/Users/bader/Desktop/encrypted.txt"
 
-CLI::CLI(i32 argc, char** argv)
+CLI::CLI(const i32& argc, char** argv)
 {
 	try
 	{
@@ -194,38 +194,52 @@ i32 CLI::Run()
 	return EXIT_SUCCESS;
 }
 
-
 void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text)
 {
-	//LOG(ENIGMA_CURRENT_FUNCTION);
+	// assert the pw size to be 9 or more
+	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 
 	String encrypted_text{}, encrypted_text_base64{};
-	encrypted_text = algorithm->Encrypt(password, text);
-	if (!encrypted_text.empty())
-	{
-		encrypted_text_base64 = Base64::Encode(encrypted_text);
-	}
-	if (!encrypted_text_base64.empty())
-	{
-		ENIGMA_INFO(encrypted_text_base64);
-	}
+	f64 elapsed_seconds{0.0};
 
+	ENIGMA_BEGIN_TIMER(t1);
+	{
+		encrypted_text = algorithm->Encrypt(password, text);
+		ENIGMA_ASSERT_OR_THROW(!encrypted_text.empty(), "Failed to encrypt text");
+
+		encrypted_text_base64 = Base64::Encode(encrypted_text);
+		ENIGMA_ASSERT_OR_THROW(!encrypted_text_base64.empty(), "Failed to encode encrypted text to base64");
+
+		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+	}
+	
+	ENIGMA_INFO(encrypted_text_base64);
+	ENIGMA_INFO("Encrypted {0} bytes in {1:0.3f} seconds.", text.size(), elapsed_seconds);
+	
 	encrypted_text.clear();
 	encrypted_text_base64.clear();
 }
 
 void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& encrypted_text_base64)
 {
-	//LOG(ENIGMA_CURRENT_FUNCTION);
+	// assert the pw size to be 9 or more
+	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 
 	String encrypted_text{}, decrypted_text{};
+	f64 elapsed_seconds{0.0};
 
-	// Decode encypted text base64
-	encrypted_text = Base64::Decode(encrypted_text_base64);
-	// Decrypt
-	decrypted_text = algorithm->Decrypt(password, encrypted_text);
+	ENIGMA_BEGIN_TIMER(t1);
+	{
+		encrypted_text = Base64::Decode(encrypted_text_base64);
+		ENIGMA_ASSERT_OR_THROW(!encrypted_text.empty(), "Failed to decode encrypted text from base64 to cipher");
 
+		decrypted_text = algorithm->Decrypt(password, encrypted_text);
+		ENIGMA_ASSERT_OR_THROW(!decrypted_text.empty(), "Failed to decrypt text");
+
+		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+	}
 	ENIGMA_INFO(decrypted_text);
+	ENIGMA_INFO("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_text.size(), elapsed_seconds);
 
 	encrypted_text.clear();
 	decrypted_text.clear();
@@ -244,6 +258,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 CLI::~CLI() noexcept
 {
+
 }
 
 NS_ENIGMA_END

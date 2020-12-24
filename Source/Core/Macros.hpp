@@ -44,6 +44,15 @@
 	#define ENIGMA_ASSERT(x, ...)
 	#define ENIGMA_ASSERT(x, ...)
 #endif
+
+#define ENIGMA_ASSERT_OR_THROW(x, msg) \
+	do \
+	{ \
+		if (!(x)) \
+		{ \
+			throw std::runtime_error(msg); \
+		} \
+	} while(false)
 ///
 
 
@@ -127,8 +136,8 @@
 
 
 /// Begin and end timer with a unit
-#define BEGIN_TIMER(var) auto var = std::chrono::steady_clock::now();
-#define END_TIMER(var, unit) std::chrono::duration_cast<std::chrono::unit>(std::chrono::steady_clock::now() - var).count()
+#define ENIGMA_BEGIN_TIMER(var) const auto var = std::chrono::steady_clock::now()
+#define ENIGMA_END_TIMER(var, type, unit) std::chrono::duration_cast<std::chrono::duration<type, unit>>(std::chrono::steady_clock::now() - var).count()
 ///
 
 

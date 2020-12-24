@@ -5,10 +5,11 @@
 #include <Core/Core.hpp>
 
 //Logging Library
+// This ignores all warnings raised inside External headers
+#pragma warning(push, 0)
 #include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/fmt/ostr.h>
-#include <spdlog/sinks/basic_file_sink.h>
+#pragma warning(pop)
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API Logger
@@ -27,12 +28,28 @@ private:
 };
 
 
-/// Enigma Log Macros
-#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
-#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info(__VA_ARGS__)
-#define ENIGMA_WARN(...)				::Enigma::Logger::GetLogger()->warn("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
-#define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
-#define ENIGMA_CRITICAL(...)			::Enigma::Logger::GetLogger()->critical("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+
+/// Enigma Log 
+#if defined(ENIGMA_DEBUG) 
+	// for debug mode, we're using more detailed logging
+	#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
+	#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info(__VA_ARGS__)
+	#define ENIGMA_WARN(...)				::Enigma::Logger::GetLogger()->warn("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	#define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	#define ENIGMA_CRITICAL(...)			::Enigma::Logger::GetLogger()->critical("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	//#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	//#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	//#define ENIGMA_WARN(...)				::Enigma::Logger::GetLogger()->warn("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	//#define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+	//#define ENIGMA_CRITICAL(...)			::Enigma::Logger::GetLogger()->critical("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+#else
+	#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
+	#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info(__VA_ARGS__)
+	#define ENIGMA_WARN(...)				::Enigma::Logger::GetLogger()->warn(__VA_ARGS__)
+	#define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error(__VA_ARGS__)
+	#define ENIGMA_CRITICAL(...)			::Enigma::Logger::GetLogger()->critical(__VA_ARGS__)
+#endif
+
 
 #define log_trace(...)				ENIGMA_TRACE(__VA_ARGS__)
 #define log_info(...)				ENIGMA_INFO(__VA_ARGS__)
