@@ -59,7 +59,7 @@ enigma -e --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/d
 ```text
 enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
 ```
-<image src="Resources/Dev Process/CLI-EncryptDecryptFile-Demo.png"/>
+<image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br>
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git` <br>
