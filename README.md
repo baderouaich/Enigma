@@ -29,14 +29,15 @@ Usage:
 
   -e, --encrypt                 Encrypt operation
   -d, --decrypt                 Decrypt operation
-  -m, --mode [aes, chacha, tripledes]
-                                Encryption/Decryption mode (default: aes)
+  -m, --mode [AES, ChaCha, TripleDES]
+                                Encryption/Decryption mode (default: AES)
   -p, --password arg            Encryption/Decryption password
   -t, --text arg                Text to encrypt
-  -i, --infile arg              File name to encrypt (default: .)
-  -o, --oufile arg              Output encrypted file name (default: .)
-  -h, --help                    Shows help message
-
+  -i, --infile arg              File name to encrypt
+  -o, --oufile arg              Output encrypted file name (default:
+                                C:\Users\bader\AppData\Local\Temp\Enigma)
+  -h, --help                    Displays help message
+  -v, --version                 Displays Enigma current version
 ```
 - Example encypting a text with AES-GCM:<br>
 ```text
