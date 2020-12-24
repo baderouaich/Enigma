@@ -37,7 +37,7 @@ public:
 		}
 		else
 		{
-			ENIGMA_ERROR("Failed to read file {0}", filename.c_str());
+			ENIGMA_ERROR("Failed to read file {0}", filename);
 			return false;
 		}
 	}
@@ -57,7 +57,7 @@ public:
 		}
 		else
 		{
-			ENIGMA_ERROR("Failed to write file {0}", filename.c_str());
+			ENIGMA_ERROR("Failed to write file {0}", filename);
 			return false;
 		}
 	}

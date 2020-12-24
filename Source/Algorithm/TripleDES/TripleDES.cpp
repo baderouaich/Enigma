@@ -5,7 +5,7 @@ NS_ENIGMA_BEGIN
 
 TripleDES::TripleDES(Algorithm::Intent intent) noexcept
 	:
-	Algorithm(intent),
+	Algorithm(Algorithm::Type::TripleDES, intent),
 	m_tripledes_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Encryption>() : nullptr),
 	m_tripledes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
 {

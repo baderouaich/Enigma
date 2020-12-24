@@ -6,7 +6,7 @@ NS_ENIGMA_BEGIN
 
 ChaCha::ChaCha(Algorithm::Intent intent) noexcept
 	:
-	Algorithm(intent),
+	Algorithm(Algorithm::Type::ChaCha, intent),
 	m_chacha_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::ChaCha::Encryption>() : nullptr),
 	m_chacha_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::ChaCha::Decryption>() : nullptr)
 {

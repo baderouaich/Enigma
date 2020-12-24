@@ -5,7 +5,7 @@ NS_ENIGMA_BEGIN
 
 AES::AES(Algorithm::Intent intent) noexcept
 	:
-	Algorithm(intent),
+	Algorithm(Algorithm::Type::AES, intent),
 	m_aes_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>() : nullptr),
 	m_aes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>() : nullptr)
 {

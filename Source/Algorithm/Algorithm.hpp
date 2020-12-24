@@ -42,17 +42,22 @@ public:
 		Last = TripleDES
 	};
 public:
-	explicit Algorithm(Intent intent) noexcept 
+	explicit Algorithm(Type type, Intent intent) noexcept 
 		:
+		m_type(type),
 		m_intent(intent),
-		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr) // we only generate random iv when encrypting
+		// we only generate random iv when encrypting
+		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr) 
 	{}
-	virtual ~Algorithm() noexcept 
-	{}
+	virtual ~Algorithm() noexcept {}
 
 public:
 	virtual String Encrypt(const String& password, const String& buffer) = 0;
 	virtual String Decrypt(const String& password, const String& buffer) = 0;
+
+public:
+	const Type& GetType() const noexcept { return m_type; }
+	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
 
 protected:
 	/*
@@ -66,7 +71,7 @@ protected:
 	}
 
 public:
-	static String AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
+	static String AlgoTypeEnumToStr(const Algorithm::Type& e) noexcept
 	{
 #define CASE_ENUM(e) case Algorithm::Type::e: return #e
 		switch (e)
@@ -74,7 +79,9 @@ public:
 			CASE_ENUM(AES);
 			CASE_ENUM(ChaCha);
 			CASE_ENUM(TripleDES);
-		default: return "Unknown";
+			//CASE_ENUM(Twofish);
+			//CASE_ENUM(IDEA);
+			default: return "Unknown";
 		}
 #undef CASE_ENUM
 	}
@@ -90,6 +97,7 @@ public:
 	}
 
 protected:
+	Type m_type; // Algorithm type: AES, ChaCha, TripleDES...
 	Intent m_intent; // Operation, Encrypt or Decrypt
 	std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
 
