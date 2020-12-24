@@ -3,9 +3,6 @@
 
 NS_ENIGMA_BEGIN
 
-//Example command to encrypt text with aes
-//$ enigma -encrypt --mode=aes --text="hello world!" 
-//$ enigma -encrypt --mode=aes --infile="C:/Users/bader/Desktop/file.txt" --outfile="C:/Users/bader/Desktop/encrypted.txt"
 
 CLI::CLI(const i32& argc, char** argv)
 {
@@ -16,18 +13,21 @@ CLI::CLI(const i32& argc, char** argv)
 		//	->positional_help("positional_help")
 		//	.show_positional_help();
 		
+		
 		m_options
 			->allow_unrecognised_options()
 			.add_options()
 			//option, description, value, arg_help message
 			("e,encrypt", "Encrypt operation") // -e | --encrypt
 			("d,decrypt", "Decrypt operation") // -d | --decrypt
-			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("aes"), "[aes, chacha, tripledes]") // -m aes | --mode=aes
+			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithms()) // -m aes | --mode=aes
 			("p,password", "Encryption/Decryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
 			("t,text", "Text to encrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
-			("i,infile", "File name to encrypt", cxxopts::value<std::string>()->default_value(".")) // -i "C:/file" | --infile="C:/file"
-			("o,oufile", "Output encrypted file name", cxxopts::value<std::string>()->default_value(".")) // -o "C:/file" | --outfile="C:/file"
-			("h,help", "Shows help message"); // HELP
+			("i,infile", "File name to encrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
+			("o,oufile", "Output encrypted file name", cxxopts::value<std::string>()->default_value(fs::temp_directory_path().string() + "Enigma")) // -o "C:/file" | --outfile="C:/file"
+			("h,help", "Displays help message")  // HELP
+			("v,version", "Displays Enigma current version")  // VERSION
+			;
 			
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));
 
@@ -63,6 +63,12 @@ i32 CLI::Run()
 	if (r.count("h") || r.count("help"))
 	{
 		ENIGMA_INFO(m_options->help());
+		return EXIT_SUCCESS;
+	}
+	// Handle --version & -v options
+	if (r.count("v") || r.count("version"))
+	{
+		ENIGMA_INFO(ENIGMA_VERSION);
 		return EXIT_SUCCESS;
 	}
 

@@ -32,7 +32,7 @@ namespace Enigma
 
 		namespace CLI
 		{
-			constexpr const char* CLI_HELP_MESSAGE = "say --help or -h for details";
+			constexpr const char* CLI_HELP_MESSAGE = "say -h or --help for details";
 		}
 
 		namespace ErrorMessages

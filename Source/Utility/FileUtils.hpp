@@ -61,6 +61,8 @@ public:
 			return false;
 		}
 	}
+
+
 };
 NS_ENIGMA_END
 

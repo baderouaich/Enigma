@@ -36,7 +36,10 @@ public:
 	{
 		AES = 0,
 		ChaCha,
-		TripleDES
+		TripleDES,
+
+		First = AES,
+		Last = TripleDES
 	};
 public:
 	explicit Algorithm(Intent intent) noexcept 
@@ -60,6 +63,30 @@ protected:
 		String iv(iv_size, '\000');
 		m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
 		return iv;
+	}
+
+public:
+	static String AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
+	{
+#define CASE_ENUM(e) case Algorithm::Type::e: return #e
+		switch (e)
+		{
+			CASE_ENUM(AES);
+			CASE_ENUM(ChaCha);
+			CASE_ENUM(TripleDES);
+		default: return "Unknown";
+		}
+#undef CASE_ENUM
+	}
+	static String GetSupportedAlgorithms() noexcept
+	{
+		String out = "[";
+		for (ui8 i = static_cast<ui8>(Algorithm::Type::First); i <= static_cast<ui8>(Algorithm::Type::Last); i++)
+		{
+			out += AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) + (i != ui8(Algorithm::Type::Last) ? ", " : "");
+		}
+		out += ']';
+		return out;
 	}
 
 protected:
