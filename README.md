@@ -49,6 +49,8 @@ output: cekP1lnUL/aJ9ZDNDzgpIuNAfvN5Oe0DOospT80XnocgKRI6OMDTQ5UydUyfnGgb9EcQQAcR
 enigma -d --mode=aes --password="My@pa$$W0rd" --text="cekP1lnUL/aJ9ZDNDzgpIuNAfvN5Oe0DOospT80XnocgKRI6OMDTQ5UydUyfnGgb9EcQQAcR8bksN/lBxabSCyujT3c="
 output: my important data securly encrypted!
 ```
+<image src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>
+
 - Example encypting a file with AES-GCM:<br>
 ```text
 enigma -e --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data.txt" --outfile="C:/Users/bader/Desktop/data-encrypted.txt"
@@ -57,6 +59,7 @@ enigma -e --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/d
 ```text
 enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
 ```
+<image src="Resources/Dev Process/CLI-EncryptDecryptFile-Demo.png"/>
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git` <br>
