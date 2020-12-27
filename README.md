@@ -64,19 +64,19 @@ enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/d
 
 
 ## Enigma UI
+<image src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>
+<!--
 Latest Test on `Windows 10 Version 20H2`
 <image src="Resources/Dev Process/Windows-Latest.png"/>
 <br>
 Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 <image src="Resources/Dev Process/Linux-Latest.png"/>
-
+-->
 
 
 ## Compiling
-- <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git` <br>
-
+- <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git`
 <br>
-
  <strong>Windows</strong> : <br>
  - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha15-windows.zip`<br>
 <strong>Method 1: Visual Studio 16 2019</strong>

@@ -174,7 +174,7 @@ project "Enigma"
 		}
 
 	filter "configurations:Release"
-		kind "ConsoleApp" -- we need console for logging CLI
+		kind "ConsoleApp" -- we need console for logging in CLI
 		--kind "WindowedApp" -- Release as windowed application
 		defines "ENIGMA_RELEASE"
 		runtime "Release"
@@ -182,7 +182,7 @@ project "Enigma"
 		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
 
 	filter "configurations:Dist"
-		kind "ConsoleApp" -- we need console for logging CLI
+		kind "ConsoleApp" -- we need console for logging in CLI
 		--kind "WindowedApp" -- Distribution as windowed application
 		defines "ENIGMA_DIST"
 		runtime "Release"

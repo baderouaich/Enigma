@@ -85,16 +85,41 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::Text("Algorithm:");
 
 			// Algo types radio buttons
+			const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
+			for (const auto& [algo_name, algo_type] : supported_algorithms)
+			{
+				inline_dummy(6.0f, 0.0f);
+				ImGui::SameLine();
+				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm == algo_type))
+				{
+					m_algorithm = algo_type;
+				}
+			}
+			
+			/*
+			Hardcoded Arghh!
 			if (ImGui::RadioButton("AES", m_algorithm == Algorithm::Type::AES))
 			{
 				m_algorithm = Algorithm::Type::AES;
 			}
-			inline_dummy(0.0f, 1.0f);
+			inline_dummy(2.0f, 0.0f);
 			ImGui::SameLine();
-			if (ImGui::RadioButton("CHACHA", m_algorithm == Algorithm::Type::ChaCha20))
+			if (ImGui::RadioButton("ChaCha20", m_algorithm == Algorithm::Type::ChaCha20))
 			{
 				m_algorithm = Algorithm::Type::ChaCha20;
 			}
+			inline_dummy(2.0f, 0.0f);
+			ImGui::SameLine();
+			if (ImGui::RadioButton("TripleDES", m_algorithm == Algorithm::Type::TripleDES))
+			{
+				m_algorithm = Algorithm::Type::TripleDES;
+			}			
+			inline_dummy(2.0f, 0.0f);
+			ImGui::SameLine();
+			if (ImGui::RadioButton("Twofish", m_algorithm == Algorithm::Type::Twofish))
+			{
+				m_algorithm = Algorithm::Type::Twofish;
+			}*/
 		}
 		ImGui::PopFont();
 
@@ -106,20 +131,6 @@ void EncryptTextScene::OnImGuiDraw()
 			// Label
 			ImGui::Text("Text to Encrypt:");
 			// Input text
-			/*ImGui::InputTextMultiline("##text1", m_text.data(), m_text.size(),
-				input_text_size,
-				ImGuiInputTextFlags_CallbackResize | ImGuiInputTextFlags_CallbackCharFilter,
-				[](ImGuiTextEditCallbackData* data)->int
-				{
-					String& mystr = *static_cast<String*>(data->UserData);
-					mystr.resize(data->BufSize);
-					mystr = data->Buf;
-				//	data->EventChar = *static_cast<const char*>(data->UserData);
-					return mystr.size();
-				}, 
-				&m_text
-			);
-			*/
 			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 60.0f);
 			ImGui::InputTextMultiline("##text1", m_text.data(), m_text.size(), input_text_size);
 			// Remaining characters
@@ -156,15 +167,17 @@ void EncryptTextScene::OnImGuiDraw()
 				// Label
 				ImGui::Text("Encrypted Text (in Base64):");
 				// Encrypted text
-				const ImVec2 copy_button_size(45.0f, 30.0f);
+				const ImVec2 copy_button_size(45.0f, 25.0f);
 				const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f - copy_button_size.x, 60.0f);
 				ImGui::InputTextMultiline("##text3", m_encrypted_text_base64.data(), m_encrypted_text_base64.size(), input_text_size);
-				ImGui::Text("%llu characters", m_encrypted_text_base64.size());
-				ImGui::SameLine();
-				if (ImGui::Button("Copy", copy_button_size))
-				{
-					this->OnCopyEncryptedBase64TextButtonPressed();
-				}
+				ImGui::PushFont(font_montserrat_medium_12);
+					ImGui::Text("%llu characters", m_encrypted_text_base64.size());
+					ImGui::SameLine();
+					if (ImGui::Button("Copy", copy_button_size))
+					{
+						this->OnCopyEncryptedBase64TextButtonPressed();
+					}
+				ImGui::PopFont();
 			}
 			ImGui::PopFont();
 		}
@@ -181,9 +194,9 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
-				if (ImGui::Button("Cancel", button_size))
+				if (ImGui::Button("Back", button_size))
 				{
-					this->OnCancelButtonPressed();
+					this->OnBackButtonPressed();
 				}
 				ImGui::SameLine();
 				if (ImGui::Button("Encrypt", button_size))
@@ -253,12 +266,23 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			case Enigma::Algorithm::Type::ChaCha20:
 				algo_encryptor.reset(new Enigma::ChaCha20(Enigma::Algorithm::Intent::Encrypt));
 				break;
+			case Enigma::Algorithm::Type::TripleDES:
+				algo_encryptor.reset(new Enigma::TripleDES(Enigma::Algorithm::Intent::Encrypt));
+				break;
+			case Enigma::Algorithm::Type::Twofish:
+				algo_encryptor.reset(new Enigma::Twofish(Enigma::Algorithm::Intent::Encrypt));
+				break;
 			}
 			// Encrypt text
-			m_encrypted_text = algo_encryptor->Encrypt(m_password, m_text);
+			String text_no_extra = String(m_text.begin(), m_text.begin() + m_text.find_first_of('\000'));
+			String password_no_extra = String(m_password.begin(), m_password.begin() + m_password.find_first_of('\000'));
+			ENIGMA_LOG("text_no_extra {0}", text_no_extra);
+			ENIGMA_LOG("password_no_extra {0}", password_no_extra);
+			m_encrypted_text = algo_encryptor->Encrypt(password_no_extra, text_no_extra);
 			ENIGMA_ASSERT(!m_encrypted_text.empty(), "Failed to encrypt text");
 			//m_encrypted_text.resize(std::strlen(m_encrypted_text.data()) + 1); // remove \000
-			m_encrypted_text_base64 = Base64::Encode(String(m_encrypted_text.begin(), m_encrypted_text.begin() + m_encrypted_text.find_first_of('\000'))); // remove \000
+			//m_encrypted_text_base64 = Base64::Encode(String(m_encrypted_text.begin(), m_encrypted_text.begin() + m_encrypted_text.find_first_of('\000'))); // remove \000
+			m_encrypted_text_base64 = Base64::Encode(m_encrypted_text); 
 			ENIGMA_ASSERT(!m_encrypted_text_base64.empty(), "Failed to encode encrypted text to Base64");
 
 			ENIGMA_INFO("Encrypted");
@@ -267,14 +291,22 @@ void EncryptTextScene::OnEncryptButtonPressed()
 
 }
 
-void EncryptTextScene::OnCancelButtonPressed()
+void EncryptTextScene::OnBackButtonPressed()
 {
-	// Show alert dialog to user asking whether the operation should be aborted
-	const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?"); 
-	if (action == Enigma::MessageBox::Action::Yes)
+	// Check if fields are not empty to confirm abortion with the user
+	if (!StringUtils::IsAll(m_text, '\000') || !StringUtils::IsAll(m_password, '\000'))
 	{
-		this->EndScene();
+		// Show alert dialog to user asking whether the operation should be aborted
+		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?"); 
+		if (action == Enigma::MessageBox::Action::Yes)
+		{
+			this->EndScene();
+		}
 	}
+	// fields are empty, safe to abort operation.
+	else
+		this->EndScene();
+
 }
 
 void EncryptTextScene::OnCopyEncryptedBase64TextButtonPressed()

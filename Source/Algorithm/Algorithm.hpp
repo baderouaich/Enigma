@@ -87,7 +87,7 @@ public:
 		}
 #undef CASE_ENUM
 	}
-	static String GetSupportedAlgorithms() noexcept
+	static String GetSupportedAlgorithmsStr() noexcept
 	{
 		String out = "[";
 		for (ui8 i = static_cast<ui8>(Algorithm::Type::First); i <= static_cast<ui8>(Algorithm::Type::Last); i++)
@@ -97,7 +97,15 @@ public:
 		out += ']';
 		return out;
 	}
-
+	static std::vector<std::pair<String, Algorithm::Type>> GetSupportedAlgorithms() noexcept
+	{
+		std::vector<std::pair<String, Algorithm::Type>> out(static_cast<size_t>(Algorithm::Type::Last) + 1);
+		for (ui8 i = static_cast<ui8>(Algorithm::Type::First); i <= static_cast<ui8>(Algorithm::Type::Last); i++)
+		{
+			out[static_cast<size_t>(i)] = std::make_pair(AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) , static_cast<Algorithm::Type>(i));
+		}
+		return out;
+	}
 protected:
 	Type m_type; // Algorithm type: AES, ChaCha, TripleDES...
 	Intent m_intent; // Operation, Encrypt or Decrypt

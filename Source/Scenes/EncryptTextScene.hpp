@@ -20,7 +20,7 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnEncryptButtonPressed();
-	void OnCancelButtonPressed();
+	void OnBackButtonPressed();
 	void OnCopyEncryptedBase64TextButtonPressed();
 
 private:

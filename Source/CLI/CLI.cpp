@@ -20,7 +20,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			//option, description, value, arg_help message
 			("e,encrypt", "Encrypt operation") // -e | --encrypt
 			("d,decrypt", "Decrypt operation") // -d | --decrypt
-			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithms()) // -m aes | --mode=aes
+			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithmsStr()) // -m aes | --mode=aes
 			("p,password", "Encryption/Decryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
 			("t,text", "Text to encrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
 			("i,infile", "File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
