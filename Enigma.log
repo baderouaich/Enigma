@@ -1,18 +1,13 @@
-[23:19:11] [info] Enigma: [ OpenGL Info ]
+[23:26:26] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[23:19:11] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[23:19:11] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[23:19:11] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[23:20:11] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[23:20:23] [debug] Enigma: text_no_extra my important data securly encrypted!
-[23:20:23] [debug] Enigma: password_no_extra My@pa$$W0rd
-[23:20:24] [info] Enigma: Encrypted
-[23:20:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
-[23:20:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
-[23:20:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 600
-[23:20:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 600
-[23:21:49] [trace] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[23:21:54] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[23:26:26] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[23:26:26] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[23:26:26] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[23:26:29] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
+[23:26:29] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
+[23:26:34] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 600
+[23:26:34] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 600
+[23:27:07] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

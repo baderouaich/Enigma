@@ -73,14 +73,14 @@ void MainMenuScene::OnImGuiDraw()
 					if (ImGui::MenuItem("Exit")) { this->EndScene(); }
 					ImGui::EndMenu();
 				}
-				if (ImGui::BeginMenu("Examples"))
+				/*if (ImGui::BeginMenu("Examples"))
 				{
 					ImGui::MenuItem("Example 1");
 					ImGui::MenuItem("Example 2");
 					ImGui::MenuItem("Example 3");
 					ImGui::MenuItem("Example 4");
 					ImGui::EndMenu();
-				}
+				}*/
 				if (ImGui::BeginMenu("Help"))
 				{
 					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
