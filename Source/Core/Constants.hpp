@@ -20,7 +20,7 @@ namespace Enigma
 			{
 				//https://www.cryptopp.com/wiki/GCM_Mode
 			}
-			namespace ChaCha
+			namespace ChaCha20
 			{
 				//https://www.cryptopp.com/wiki/ChaCha20
 			}

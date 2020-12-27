@@ -35,7 +35,7 @@ public:
 	enum class Type : ui8
 	{
 		AES = 0,
-		ChaCha,
+		ChaCha20,
 		TripleDES,
 
 		First = AES,
@@ -77,7 +77,7 @@ public:
 		switch (e)
 		{
 			CASE_ENUM(AES);
-			CASE_ENUM(ChaCha);
+			CASE_ENUM(ChaCha20);
 			CASE_ENUM(TripleDES);
 			//CASE_ENUM(Twofish);
 			//CASE_ENUM(IDEA);

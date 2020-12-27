@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.hpp"
 #include <Algorithm/AES/AES.hpp>
-#include <Algorithm/ChaCha/ChaCha.hpp>
+#include <Algorithm/ChaCha20/ChaCha20.hpp>
 using namespace Enigma;
 
 class EncryptTextScene : public Enigma::Scene

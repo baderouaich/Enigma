@@ -17,7 +17,7 @@ A Simple, Reliable and Efficient UI + CLI Encryption Tool
 
 ## Supported Algorithm
 - [x] AES-GCM (Highly recommended)
-- [x] ChaCha
+- [x] ChaCha20
 - [x] TripleDES-CBC
 - [ ] Twofish-CBC
 - [ ] IDEA-CBC

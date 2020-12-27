@@ -93,93 +93,93 @@ i32 CLI::Run()
 		else
 			throw std::runtime_error("You should specify whether you want to encrypt -e or decrypt -d, or say -help");
 		
-		// White algorithm mode are we using ?
-		if (r.count("m") || r.count("mode")) // --m=aes or --mode=aes or chacha..
-		{
-			mode = r["m"].as<String>();
-			StringUtils::Lower(mode);
+// White algorithm mode are we using ?
+if (r.count("m") || r.count("mode")) // --m=aes or --mode=aes or chacha..
+{
+	mode = r["m"].as<String>();
+	StringUtils::Lower(mode);
 
-			//Hardcoded argh!!
-			//if (m == "aes") mode = Algorithm::Type::AES;
-			//else if (m == "chacha") mode = Algorithm::Type::ChaCha;
-			//else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
-			//else throw std::runtime_error("Unsupported algorithm mode: " + m);
+	//Hardcoded argh!!
+	//if (m == "aes") mode = Algorithm::Type::AES;
+	//else if (m == "chacha") mode = Algorithm::Type::ChaCha20;
+	//else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
+	//else throw std::runtime_error("Unsupported algorithm mode: " + m);
 
-			//LOG("Mode: {0}", m);
-		}
-		else
-			throw std::runtime_error("You should specify an encryption/decryption mode like: --mode=aes or -m aes");
+	//LOG("Mode: {0}", m);
+}
+else
+throw std::runtime_error("You should specify an encryption/decryption mode like: --mode=aes or -m aes");
 
-		// What is the encryption/decryption password?
-		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
-		{
-			password = r["p"].as<String>();
+// What is the encryption/decryption password?
+if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
+{
+	password = r["p"].as<String>();
 
-			//LOG("Password: {0}", password);
-		}
-		else
-			throw std::runtime_error("You should specify an encryption/decryption password like: --password=mypass or -p mypass");
-
-
-		// Is there a text to encrypt/decrypt?
-		if (r.count("t") || r.count("text")) // -t "lorem" | --text="lorem"
-		{
-			text = r["t"].as<String>();
-
-			//LOG("Text: {0}", text);
-		}
-		
-		// Or Is there a file to encrypt/decrypt?
-		if (r.count("i") || r.count("infile")) // -i "C:/file" | --infile="C:/file_to_encrypt.txt"
-		{
-			infilename = r["i"].as<String>();
-
-			//LOG("In File name: {0}", infilename);
-		}
-		if (r.count("o") || r.count("outfile")) // -o "C:/file" | --outfile="C:/file"
-		{
-			outfilename = r["o"].as<String>();
-
-			//LOG("Out File name: {0}", outfilename);
-		}
+	//LOG("Password: {0}", password);
+}
+else
+throw std::runtime_error("You should specify an encryption/decryption password like: --password=mypass or -p mypass");
 
 
-		// Call Scenarios //
-		// Create polymorphic Algorithm type
-		algorithm = this->CreateAlgorithm(mode, intent);
-		
-		// Check wether its a text or file encryption/decryption
-		if (!text.empty())
-		{
-			// Check intention
-			switch (intent)
-			{
-			case Intent::Encrypt:
-				this->OnEncryptText(algorithm, password, text);
-				break;
-			case Intent::Decrypt:
-				this->OnDecryptText(algorithm, password, text);
-				break;
-			}
-		}
-		else if (!infilename.empty() && !outfilename.empty())
-		{
-			// Check intention
-			switch (intent)
-			{
-			case Intent::Encrypt:
-				this->OnEncryptFile(algorithm, password, infilename, outfilename);
-				break;
-			case Intent::Decrypt:
-				this->OnDecryptFile(algorithm, password, infilename, outfilename);
-				break;
-			}
-		}
-		else
-			throw std::runtime_error("in file name and out file name should not be empty");
+// Is there a text to encrypt/decrypt?
+if (r.count("t") || r.count("text")) // -t "lorem" | --text="lorem"
+{
+	text = r["t"].as<String>();
+
+	//LOG("Text: {0}", text);
+}
+
+// Or Is there a file to encrypt/decrypt?
+if (r.count("i") || r.count("infile")) // -i "C:/file" | --infile="C:/file_to_encrypt.txt"
+{
+	infilename = r["i"].as<String>();
+
+	//LOG("In File name: {0}", infilename);
+}
+if (r.count("o") || r.count("outfile")) // -o "C:/file" | --outfile="C:/file"
+{
+	outfilename = r["o"].as<String>();
+
+	//LOG("Out File name: {0}", outfilename);
+}
+
+
+// Call Scenarios //
+// Create polymorphic Algorithm type
+algorithm = this->CreateAlgorithm(mode, intent);
+
+// Check wether its a text or file encryption/decryption
+if (!text.empty())
+{
+	// Check intention
+	switch (intent)
+	{
+	case Intent::Encrypt:
+		this->OnEncryptText(algorithm, password, text);
+		break;
+	case Intent::Decrypt:
+		this->OnDecryptText(algorithm, password, text);
+		break;
+	}
+}
+else if (!infilename.empty() && !outfilename.empty())
+{
+	// Check intention
+	switch (intent)
+	{
+	case Intent::Encrypt:
+		this->OnEncryptFile(algorithm, password, infilename, outfilename);
+		break;
+	case Intent::Decrypt:
+		this->OnDecryptFile(algorithm, password, infilename, outfilename);
+		break;
+	}
+}
+else
+throw std::runtime_error("in file name and out file name should not be empty");
 
 	}
-	catch (const std::exception& e) 
+	catch (const std::exception& e)
 	{
 		ENIGMA_ERROR("Failed to parse arguments: {0}", e.what());
 		return EXIT_FAILURE;
@@ -194,10 +194,11 @@ i32 CLI::Run()
 
 std::unique_ptr<Algorithm> CLI::CreateAlgorithm(const String& mode, const Intent& intent)
 {
+	//auto ModeIn = [&mode](vector<> v)
 	if (mode == "aes")
 		return std::make_unique<Enigma::AES>(intent);
 	else if (mode == "chacha")
-		return std::make_unique<Enigma::ChaCha>(intent);
+		return std::make_unique<Enigma::ChaCha20>(intent);
 	else if (mode == "tripledes")
 		return std::make_unique<Enigma::TripleDES>(intent);
 	//else if (mode == "twofish")

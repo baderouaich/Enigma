@@ -1,17 +1,17 @@
 #pragma once
 #include <catch2/catch_all.hpp>
-#include <Algorithm/ChaCha/ChaCha.hpp>
+#include <Algorithm/ChaCha20/ChaCha20.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
 
 
-TEST_CASE("ChaCha Encryption and Decryption")
+TEST_CASE("ChaCha20 Encryption and Decryption")
 {
 	using std::cout, std::cin, std::endl;
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	std::unique_ptr<Enigma::ChaCha> chacha_encryptor = std::make_unique<Enigma::ChaCha>(Enigma::ChaCha::Intent::Encrypt);
-	std::unique_ptr<Enigma::ChaCha> chacha_decryptor = std::make_unique<Enigma::ChaCha>(Enigma::ChaCha::Intent::Decrypt);
+	std::unique_ptr<Enigma::ChaCha20> chacha_encryptor = std::make_unique<Enigma::ChaCha20>(Enigma::ChaCha20::Intent::Encrypt);
+	std::unique_ptr<Enigma::ChaCha20> chacha_decryptor = std::make_unique<Enigma::ChaCha20>(Enigma::ChaCha20::Intent::Decrypt);
 
 	String buffer, password;
 	String encrypted, decrypted;

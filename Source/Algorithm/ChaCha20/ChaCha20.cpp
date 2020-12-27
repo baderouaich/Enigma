@@ -1,38 +1,38 @@
 #include "pch.hpp"
-#include "ChaCha.hpp"
+#include "ChaCha20.hpp"
 
 
 NS_ENIGMA_BEGIN
 
-ChaCha::ChaCha(Algorithm::Intent intent) noexcept
+ChaCha20::ChaCha20(Algorithm::Intent intent) noexcept
 	:
-	Algorithm(Algorithm::Type::ChaCha, intent),
+	Algorithm(Algorithm::Type::ChaCha20, intent),
 	m_chacha_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::ChaCha::Encryption>() : nullptr),
 	m_chacha_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::ChaCha::Decryption>() : nullptr)
 {
 }
 
 
-String ChaCha::Encrypt(const String& password, const String& buffer)
+String ChaCha20::Encrypt(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT(m_chacha_encryption, "ChaCha Encryption is not initialized properly");
-		ENIGMA_ASSERT(m_auto_seeded_random_pool, "ChaCha Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT(m_chacha_encryption, "ChaCha20 Encryption is not initialized properly");
+		ENIGMA_ASSERT(m_auto_seeded_random_pool, "ChaCha20 Encryption seeder is not initialized properly");
 	}
 
 	// Validate Arguments
 	{
-		// ChaCha password length must be at least 9 for security reasons
+		// ChaCha20 password length must be at least 9 for security reasons
 		if (password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 		{
-			ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(String("ChaCha Encryption Failure"), "ChaCha Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
+			ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(String("ChaCha20 Encryption Failure"), "ChaCha20 Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 			return String();
 		}
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 
-	String iv = this->GenerateRandomIV(CryptoPP::ChaCha::IV_LENGTH); // Randomly generated 8 bytes ChaCha IV
+	String iv = this->GenerateRandomIV(CryptoPP::ChaCha::IV_LENGTH); // Randomly generated 8 bytes ChaCha20 IV
 	String encrypted; // Final encrypted buffer
 	String output; // return value will be (iv + encrypted)
 	try
@@ -72,7 +72,7 @@ String ChaCha::Encrypt(const String& password, const String& buffer)
 	catch (const CryptoPP::Exception& e)
 	{
 		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("ChaCha Encryption Failure "),
+			String("ChaCha20 Encryption Failure "),
 			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
 		);
 	}
@@ -80,10 +80,10 @@ String ChaCha::Encrypt(const String& password, const String& buffer)
 	return output;
 }
 
-String ChaCha::Decrypt(const String& password, const String& buffer)
+String ChaCha20::Decrypt(const String& password, const String& buffer)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT(m_chacha_decryption, "ChaCha Decryption is not initialized properly");
+	ENIGMA_ASSERT(m_chacha_decryption, "ChaCha20 Decryption is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(iv + encrypted))
 	const String iv = buffer.substr(0, CryptoPP::ChaCha::IV_LENGTH);
@@ -125,7 +125,7 @@ String ChaCha::Decrypt(const String& password, const String& buffer)
 	catch (const CryptoPP::Exception& e)
 	{
 		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("ChaCha Decryption Failure "),
+			String("ChaCha20 Decryption Failure "),
 			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
 		);
 	}

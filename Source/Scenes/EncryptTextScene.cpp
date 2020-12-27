@@ -91,9 +91,9 @@ void EncryptTextScene::OnImGuiDraw()
 			}
 			inline_dummy(0.0f, 1.0f);
 			ImGui::SameLine();
-			if (ImGui::RadioButton("CHACHA", m_algorithm == Algorithm::Type::ChaCha))
+			if (ImGui::RadioButton("CHACHA", m_algorithm == Algorithm::Type::ChaCha20))
 			{
-				m_algorithm = Algorithm::Type::ChaCha;
+				m_algorithm = Algorithm::Type::ChaCha20;
 			}
 		}
 		ImGui::PopFont();
@@ -250,8 +250,8 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			case Enigma::Algorithm::Type::AES:
 				algo_encryptor.reset(new Enigma::AES(Enigma::Algorithm::Intent::Encrypt));
 				break;
-			case Enigma::Algorithm::Type::ChaCha:
-				algo_encryptor.reset(new Enigma::ChaCha(Enigma::Algorithm::Intent::Encrypt));
+			case Enigma::Algorithm::Type::ChaCha20:
+				algo_encryptor.reset(new Enigma::ChaCha20(Enigma::Algorithm::Intent::Encrypt));
 				break;
 			}
 			// Encrypt text

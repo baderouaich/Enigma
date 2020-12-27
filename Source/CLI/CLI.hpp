@@ -6,7 +6,7 @@
 #include <Logger/Logger.hpp>
 
 #include <Algorithm/AES/AES.hpp>
-#include <Algorithm/ChaCha/ChaCha.hpp>
+#include <Algorithm/ChaCha20/ChaCha20.hpp>
 #include <Algorithm/TripleDES/TripleDES.hpp>
 
 #include <cxxopts.hpp> // cmd parser library
