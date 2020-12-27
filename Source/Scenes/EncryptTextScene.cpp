@@ -19,7 +19,7 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 
 void EncryptTextScene::OnCreate()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
 	glAssert(glClearColor(
@@ -216,7 +216,7 @@ void EncryptTextScene::OnEvent(Event& event)
 
 void EncryptTextScene::OnDestroy()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	m_text.clear();
 	m_password.clear();

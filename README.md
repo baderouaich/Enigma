@@ -14,13 +14,13 @@
 A Simple, Reliable and Efficient UI + CLI Encryption Tool
 
 
-
 ## Supported Algorithm
 - [x] AES-GCM (Highly recommended)
 - [x] ChaCha20
 - [x] TripleDES-CBC
-- [ ] Twofish-CBC
+- [x] Twofish-GCM
 - [ ] IDEA-CBC
+
 
 ## Enigma CLI
 ```text
@@ -29,7 +29,7 @@ Usage:
 
   -e, --encrypt                 Encrypt operation
   -d, --decrypt                 Decrypt operation
-  -m, --mode [AES, ChaCha, TripleDES]
+  -m, --mode [AES, ChaCha20, TripleDES, Twofish]
                                 Encryption/Decryption mode (default: AES)
   -p, --password arg            Encryption/Decryption password
   -t, --text arg                Text to encrypt
@@ -60,6 +60,17 @@ enigma -e --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/d
 enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
 ```
 <image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br>
+
+
+
+## Enigma UI
+Latest Test on `Windows 10 Version 20H2`
+<image src="Resources/Dev Process/Windows-Latest.png"/>
+<br>
+Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
+<image src="Resources/Dev Process/Linux-Latest.png"/>
+
+
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git` <br>
@@ -101,14 +112,6 @@ enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/d
 
 <strong>MacOS TODO</strong> : <br>
 - Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
-
-
-## Status (Under Development)
-Latest Test on `Windows 10 Version 20H2`
-<image src="Resources/Dev Process/Windows-Latest.png"/>
-<br>
-Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
-<image src="Resources/Dev Process/Linux-Latest.png"/>
 
 
 ## License

@@ -10,12 +10,12 @@ MainMenuScene::MainMenuScene() noexcept
 	:
 	Enigma::Scene()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 }
 
 void MainMenuScene::OnCreate()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
 	glAssert(glClearColor(
@@ -192,8 +192,8 @@ void MainMenuScene::OnEvent(Enigma::Event& event)
 
 void MainMenuScene::OnDestroy()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
-	
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+
 	// ImGui Pop Menu bar background color, see issue #3637
 	ImGui::PopStyleColor(1); 
 

@@ -4,7 +4,7 @@
 NS_ENIGMA_BEGIN
 
 
-CLI::CLI(const i32& argc, char** argv)
+CLI::CLI(const i32& argc, const char* const* argv)
 {
 	try
 	{
@@ -12,10 +12,10 @@ CLI::CLI(const i32& argc, char** argv)
 		//m_options
 		//	->positional_help("positional_help")
 		//	.show_positional_help();
-		
-		
+
+
 		m_options
-			->allow_unrecognised_options()
+			->allow_unrecognised_options() // allow unknown options, will be ignored and can be retrieved with unmatched()
 			.add_options()
 			//option, description, value, arg_help message
 			("e,encrypt", "Encrypt operation") // -e | --encrypt
@@ -28,14 +28,13 @@ CLI::CLI(const i32& argc, char** argv)
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma current version")  // VERSION
 			;
-			
+
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));
 
-		// get the unmatched arguments
-		const auto& unmatched_args = m_parse_result->unmatched();
-		for (const auto& arg : unmatched_args)
+		// Display the unmatched arguments if available
+		for (const auto& uarg : m_parse_result->unmatched())
 		{
-			ENIGMA_TRACE("Unknown argument {0}", arg.c_str());
+			ENIGMA_TRACE("Unknown argument {0}", uarg.c_str());
 		}
 		//if (!unmatched_args.empty())
 		//	ENIGMA_INFO(m_options->help());
@@ -72,11 +71,12 @@ i32 CLI::Run()
 		return EXIT_SUCCESS;
 	}
 
+	ENIGMA_TRACE("Processing arguments...");
+
 	std::unique_ptr<Algorithm> algorithm{}; // polymorphic algorithm
 	Intent intent{}; // Encrypt or Decrypt?
 	String mode{}; // "aes", "tripledes"..
 	String password{}, text{}, infilename{}, outfilename{};
-	ENIGMA_TRACE("Processing arguments...");
 	try
 	{
 		// Encrypting or Decrypting ?
@@ -92,91 +92,91 @@ i32 CLI::Run()
 		}
 		else
 			throw std::runtime_error("You should specify whether you want to encrypt -e or decrypt -d, or say -help");
-		
-// White algorithm mode are we using ?
-if (r.count("m") || r.count("mode")) // --m=aes or --mode=aes or chacha..
-{
-	mode = r["m"].as<String>();
-	StringUtils::Lower(mode);
 
-	//Hardcoded argh!!
-	//if (m == "aes") mode = Algorithm::Type::AES;
-	//else if (m == "chacha") mode = Algorithm::Type::ChaCha20;
-	//else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
-	//else throw std::runtime_error("Unsupported algorithm mode: " + m);
+		// White algorithm mode are we using ?
+		if (r.count("m") || r.count("mode")) // --m=aes or --mode=aes or chacha..
+		{
+			mode = r["m"].as<String>();
+			StringUtils::Lower(mode);
 
-	//LOG("Mode: {0}", m);
-}
-else
-throw std::runtime_error("You should specify an encryption/decryption mode like: --mode=aes or -m aes");
+			//Hardcoded argh!!
+			//if (m == "aes") mode = Algorithm::Type::AES;
+			//else if (m == "chacha") mode = Algorithm::Type::ChaCha20;
+			//else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
+			//else throw std::runtime_error("Unsupported algorithm mode: " + m);
 
-// What is the encryption/decryption password?
-if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
-{
-	password = r["p"].as<String>();
+			//LOG("Mode: {0}", m);
+		}
+		else
+			throw std::runtime_error("You should specify an encryption/decryption mode like: --mode=aes or -m aes");
 
-	//LOG("Password: {0}", password);
-}
-else
-throw std::runtime_error("You should specify an encryption/decryption password like: --password=mypass or -p mypass");
+		// What is the encryption/decryption password?
+		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
+		{
+			password = r["p"].as<String>();
 
-
-// Is there a text to encrypt/decrypt?
-if (r.count("t") || r.count("text")) // -t "lorem" | --text="lorem"
-{
-	text = r["t"].as<String>();
-
-	//LOG("Text: {0}", text);
-}
-
-// Or Is there a file to encrypt/decrypt?
-if (r.count("i") || r.count("infile")) // -i "C:/file" | --infile="C:/file_to_encrypt.txt"
-{
-	infilename = r["i"].as<String>();
-
-	//LOG("In File name: {0}", infilename);
-}
-if (r.count("o") || r.count("outfile")) // -o "C:/file" | --outfile="C:/file"
-{
-	outfilename = r["o"].as<String>();
-
-	//LOG("Out File name: {0}", outfilename);
-}
+			//LOG("Password: {0}", password);
+		}
+		else
+			throw std::runtime_error("You should specify an encryption/decryption password like: --password=mypass or -p mypass");
 
 
-// Call Scenarios //
-// Create polymorphic Algorithm type
-algorithm = this->CreateAlgorithm(mode, intent);
+		// Is there a text to encrypt/decrypt?
+		if (r.count("t") || r.count("text")) // -t "lorem" | --text="lorem"
+		{
+			text = r["t"].as<String>();
 
-// Check wether its a text or file encryption/decryption
-if (!text.empty())
-{
-	// Check intention
-	switch (intent)
-	{
-	case Intent::Encrypt:
-		this->OnEncryptText(algorithm, password, text);
-		break;
-	case Intent::Decrypt:
-		this->OnDecryptText(algorithm, password, text);
-		break;
-	}
-}
-else if (!infilename.empty() && !outfilename.empty())
-{
-	// Check intention
-	switch (intent)
-	{
-	case Intent::Encrypt:
-		this->OnEncryptFile(algorithm, password, infilename, outfilename);
-		break;
-	case Intent::Decrypt:
-		this->OnDecryptFile(algorithm, password, infilename, outfilename);
-		break;
-	}
-}
-else
-throw std::runtime_error("in file name and out file name should not be empty");
+			//LOG("Text: {0}", text);
+		}
+
+		// Or Is there a file to encrypt/decrypt?
+		if (r.count("i") || r.count("infile")) // -i "C:/file" | --infile="C:/file_to_encrypt.txt"
+		{
+			infilename = r["i"].as<String>();
+
+			//LOG("In File name: {0}", infilename);
+		}
+		if (r.count("o") || r.count("outfile")) // -o "C:/file" | --outfile="C:/file"
+		{
+			outfilename = r["o"].as<String>();
+
+			//LOG("Out File name: {0}", outfilename);
+		}
+
+
+		// Call Scenarios //
+		// Create polymorphic Algorithm type
+		algorithm = this->CreateAlgorithm(mode, intent);
+
+		// Check wether its a text or file encryption/decryption
+		if (!text.empty())
+		{
+			// Check intention
+			switch (intent)
+			{
+			case Intent::Encrypt:
+				this->OnEncryptText(algorithm, password, text);
+				break;
+			case Intent::Decrypt:
+				this->OnDecryptText(algorithm, password, text);
+				break;
+			}
+		}
+		else if (!infilename.empty() && !outfilename.empty())
+		{
+			// Check intention
+			switch (intent)
+			{
+			case Intent::Encrypt:
+				this->OnEncryptFile(algorithm, password, infilename, outfilename);
+				break;
+			case Intent::Decrypt:
+				this->OnDecryptFile(algorithm, password, infilename, outfilename);
+				break;
+			}
+		}
+		else
+			throw std::runtime_error("in file name and out file name should not be empty");
 
 	}
 	catch (const std::exception& e)
@@ -194,15 +194,19 @@ throw std::runtime_error("in file name and out file name should not be empty");
 
 std::unique_ptr<Algorithm> CLI::CreateAlgorithm(const String& mode, const Intent& intent)
 {
-	//auto ModeIn = [&mode](vector<> v)
-	if (mode == "aes")
+	const auto ModeIn = [&mode](const std::vector<std::string_view>& v) -> bool
+	{
+		return std::find(v.begin(), v.end(), mode) != v.end();
+	};
+
+	if (ModeIn({ "aes", "aes-gcm" }))
 		return std::make_unique<Enigma::AES>(intent);
-	else if (mode == "chacha")
+	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20" }))
 		return std::make_unique<Enigma::ChaCha20>(intent);
-	else if (mode == "tripledes")
+	else if (ModeIn({ "tripledes", "triple-des", "tripledes-cbc" }))
 		return std::make_unique<Enigma::TripleDES>(intent);
-	//else if (mode == "twofish")
-	//	return std::make_unique<Enigma::TwoFish>(intent);
+	else if (ModeIn({ "twofish", "twofish-gcm" }))
+		return std::make_unique<Enigma::Twofish>(intent);
 	//else if (mode == "idea")
 	//	return std::make_unique<Enigma::IDEA>(intent);
 	else
@@ -215,11 +219,11 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 
 	String encrypted_text{}, encrypted_text_base64{};
-	f64 elapsed_seconds{0.0};
+	f64 elapsed_seconds{ 0.0 };
 
 	ENIGMA_BEGIN_TIMER(t1);
 	{
-		ENIGMA_TRACE("Encrypting Text With " + algorithm->GetTypeString() + " Algorithm ...");
+		ENIGMA_TRACE("Encrypting Text with " + algorithm->GetTypeString() + " Algorithm ...");
 		encrypted_text = algorithm->Encrypt(password, text);
 		ENIGMA_ASSERT_OR_THROW(!encrypted_text.empty(), "Failed to encrypt text");
 
@@ -229,10 +233,10 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
-	
+
 	ENIGMA_INFO(encrypted_text_base64);
-	ENIGMA_INFO("Encrypted {0} bytes in {1:0.3f} seconds.", text.size(), elapsed_seconds);
-	
+	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds.", text.size(), elapsed_seconds);
+
 	encrypted_text.clear();
 	encrypted_text_base64.clear();
 }
@@ -243,7 +247,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 
 	String encrypted_text{}, decrypted_text{};
-	f64 elapsed_seconds{0.0};
+	f64 elapsed_seconds{ 0.0 };
 
 	ENIGMA_BEGIN_TIMER(t1);
 	{
@@ -258,7 +262,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 	ENIGMA_INFO(decrypted_text);
-	ENIGMA_INFO("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_text.size(), elapsed_seconds);
+	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_text.size(), elapsed_seconds);
 
 	encrypted_text.clear();
 	decrypted_text.clear();
@@ -270,16 +274,16 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 	// assert input file is valid
 	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename), "Input file " + in_filename + " does not exist");
-	
+
 
 	String buffer{}, encrypted_buffer{};
-	f64 elapsed_seconds{0.0};
+	f64 elapsed_seconds{ 0.0 };
 
-	
+
 	ENIGMA_TRACE("Reading buffer from " + in_filename + "...");
 	const bool successfully_read_file = FileUtils::Read(in_filename, buffer);
 	ENIGMA_ASSERT_OR_THROW(successfully_read_file, "Failed to read file content " + in_filename);
-	
+
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Encrypting buffer with " + algorithm->GetTypeString() + " Algorithm ...");
@@ -291,8 +295,8 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_TRACE("Writing Cipher to " + out_filename_encypted + "...");
 	const bool successfully_written_file = FileUtils::Write(out_filename_encypted, encrypted_buffer);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save cipher to file " + out_filename_encypted);
-	
-	ENIGMA_INFO("Encrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
+
+	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
 
 	buffer.clear();
 	encrypted_buffer.clear();
@@ -326,7 +330,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	const bool successfully_written_file = FileUtils::Write(out_filename_decrypted, decrypted_cipher);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save decrypted cipher to file " + out_filename_decrypted);
 
-	ENIGMA_INFO("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_cipher.size(), elapsed_seconds);
+	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_cipher.size(), elapsed_seconds);
 
 	cipher.clear();
 	decrypted_cipher.clear();

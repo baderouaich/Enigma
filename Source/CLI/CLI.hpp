@@ -8,8 +8,7 @@
 #include <Algorithm/AES/AES.hpp>
 #include <Algorithm/ChaCha20/ChaCha20.hpp>
 #include <Algorithm/TripleDES/TripleDES.hpp>
-
-#include <cxxopts.hpp> // cmd parser library
+#include <Algorithm/Twofish/Twofish.hpp>
 
 #pragma warning(push, 0) // disable warnings
 	#include <cxxopts.hpp> // cmd parser library
@@ -38,7 +37,7 @@ class ENIGMA_API CLI
 	using Type = Algorithm::Type;
 
 public:
-	CLI(const i32& argc, char** argv);
+	CLI(const i32& argc, const char* const* argv);
 	~CLI() noexcept;
 
 public:

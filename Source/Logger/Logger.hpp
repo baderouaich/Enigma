@@ -33,6 +33,7 @@ private:
 #if defined(ENIGMA_DEBUG) 
 	// for debug mode, we're using more detailed logging
 	#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
+	#define ENIGMA_LOG(...)					::Enigma::Logger::GetLogger()->debug(__VA_ARGS__)
 	#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info(__VA_ARGS__)
 	#define ENIGMA_WARN(...)				::Enigma::Logger::GetLogger()->warn("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
 	#define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
@@ -44,6 +45,7 @@ private:
 	//#define ENIGMA_CRITICAL(...)			::Enigma::Logger::GetLogger()->critical("{0} | {1}:{2} | {3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
 #else
 	#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
+	#define ENIGMA_LOG(...)					::Enigma::Logger::GetLogger()->debug(__VA_ARGS__)
 	#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info(__VA_ARGS__)
 	#define ENIGMA_WARN(...)				::Enigma::Logger::GetLogger()->warn(__VA_ARGS__)
 	#define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error(__VA_ARGS__)
@@ -52,14 +54,15 @@ private:
 
 
 #define log_trace(...)				ENIGMA_TRACE(__VA_ARGS__)
+#define log_debug(...)				ENIGMA_LOG(__VA_ARGS__)
 #define log_info(...)				ENIGMA_INFO(__VA_ARGS__)
 #define log_warn(...)				ENIGMA_WARN(__VA_ARGS__)
 #define log_error(...)				ENIGMA_ERROR(__VA_ARGS__)
 #define log_critical(...)			ENIGMA_CRITICAL(__VA_ARGS__)
 
 
-#define LOG(...)					ENIGMA_TRACE(__VA_ARGS__)
 #define LOG_TRACE(...)				ENIGMA_TRACE(__VA_ARGS__)
+#define LOG_DEBUG(...)				ENIGMA_LOG(__VA_ARGS__)
 #define LOG_INFO(...)				ENIGMA_INFO(__VA_ARGS__)
 #define LOG_WARN(...)				ENIGMA_WARN(__VA_ARGS__)
 #define LOG_ERROR(...)				ENIGMA_ERROR(__VA_ARGS__)

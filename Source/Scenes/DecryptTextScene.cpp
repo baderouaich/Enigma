@@ -10,7 +10,7 @@ DecryptTextScene::DecryptTextScene(const std::unordered_map<std::string_view, Im
 
 void DecryptTextScene::OnCreate()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	// Set background clear color
 	glAssert(glClearColor(
@@ -42,5 +42,5 @@ void DecryptTextScene::OnEvent(Event& event)
 
 void DecryptTextScene::OnDestroy()
 {
-	LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 }

@@ -21,6 +21,7 @@
 #include <chacha.h> // ChaCha/Salsa20
 #include <rsa.h> // RSA
 #include <des.h> // TripleDES
+#include <twofish.h> // Twofish
 #pragma warning(pop)
 
 NS_ENIGMA_BEGIN
@@ -37,9 +38,10 @@ public:
 		AES = 0,
 		ChaCha20,
 		TripleDES,
+		Twofish,
 
 		First = AES,
-		Last = TripleDES
+		Last = Twofish
 	};
 public:
 	explicit Algorithm(Type type, Intent intent) noexcept 
@@ -79,7 +81,7 @@ public:
 			CASE_ENUM(AES);
 			CASE_ENUM(ChaCha20);
 			CASE_ENUM(TripleDES);
-			//CASE_ENUM(Twofish);
+			CASE_ENUM(Twofish);
 			//CASE_ENUM(IDEA);
 			default: return "Unknown";
 		}

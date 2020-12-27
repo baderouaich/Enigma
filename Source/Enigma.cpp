@@ -9,7 +9,7 @@ public:
 		:
 		Enigma::Application(window_settings)
 	{
-		LOG(ENIGMA_CURRENT_FUNCTION);
+		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 		//Set Window Icon & Cursor
 		const auto& window = GetWindow();
