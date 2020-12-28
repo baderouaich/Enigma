@@ -3,6 +3,7 @@
 #define ENIGMA_CONSTANTS_H
 
 #include "Types.hpp"
+#include <vector>
 
 namespace Enigma
 {
@@ -39,6 +40,7 @@ namespace Enigma
 		{
 			static constexpr const auto WEAK_PASSWORD_ERROR_MESSAGE = "Password is too weak! consider using 9 characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\";
 		}
+
 
 		namespace Utility
 		{
@@ -79,6 +81,14 @@ namespace Enigma
 
 		}
 
+
+		// Advices
+		static const std::vector<std::string_view> NOTES
+		{
+			"Don't use the same password for all your encrypted data",
+			"Keep a written copy of your encryption password and the algorithm name you used in a safe place",
+			"For serious data, use strong algorithms like AES-GCM and TripleDES",
+		};
 	}
 }
 

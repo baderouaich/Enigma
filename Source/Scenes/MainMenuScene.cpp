@@ -51,6 +51,7 @@ void MainMenuScene::OnImGuiDraw()
 
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 
+	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
 	static ImFont* const& font_audiowide_regular_60 = m_fonts.at("Audiowide-Regular-60");
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
@@ -155,6 +156,16 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopFont();
 		}
 
+
+
+		// Daily Tips/Advices
+		{
+			ImGui::SetCursorPos(ImVec2(25.0f, io.DisplaySize.y - 25.0f));
+			static const auto& note = Constants::NOTES[Random::Int<size_t>(0, Constants::NOTES.size() - 1)];
+			ImGui::PushFont(font_montserrat_medium_12);
+			ImGui::Text("Tip: %s", note.data());
+			ImGui::PopFont();
+		}
 	}
 	ImGui::End();
 
