@@ -49,9 +49,6 @@ private: /* Scenarios (divide and conquer) */
 	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted);
 	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted);
 
-private: /* Create polymorphic algorithm */
-	std::unique_ptr<Algorithm> CreateAlgorithm(const String& mode, const Intent& intent);
-
 private:
 	std::unique_ptr<cxxopts::Options> m_options;
 	std::unique_ptr<cxxopts::ParseResult> m_parse_result;

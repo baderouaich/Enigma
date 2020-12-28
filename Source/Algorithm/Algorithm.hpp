@@ -26,6 +26,10 @@
 
 NS_ENIGMA_BEGIN
 
+class AES;
+class ChaCha20;
+class TripleDES;
+class Twofish;
 /*
 *	Algorithm abstract class
 */
@@ -53,12 +57,42 @@ public:
 	{}
 	virtual ~Algorithm() noexcept {}
 
+public: /* Create polymorphic algorithm by either mode name or type*/
+	template<class A = Algorithm>
+	static std::unique_ptr<A> CreateFromName(const String& mode, const Intent& intent)
+	{
+		const auto ModeIn = [&mode](const std::vector<std::string_view>& v) -> bool
+		{
+			return std::find(v.begin(), v.end(), mode) != v.end();
+		};
+
+		if (ModeIn({ "aes", "aes-gcm" }))
+			return std::make_unique<AES>(intent);
+		else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20" }))
+			return std::make_unique<ChaCha20>(intent);
+		else if (ModeIn({ "tripledes", "triple-des", "tripledes-cbc" }))
+			return std::make_unique<TripleDES>(intent);
+		else if (ModeIn({ "twofish", "twofish-gcm" }))
+			return std::make_unique<Twofish>(intent);
+		//else if (mode == "idea")
+		//	return std::make_unique<Enigma::IDEA>(intent);
+		else
+			throw std::runtime_error("Unsupported algorithm mode: " + mode);
+	}
+	static std::unique_ptr<Algorithm> CreateFromType(const Type& type, const Intent& intent)
+	{
+		String mode = AlgoTypeEnumToStr(type);
+		StringUtils::Lower(mode);
+		return CreateFromName(mode, intent);
+	}
+
 public:
 	virtual String Encrypt(const String& password, const String& buffer) = 0;
 	virtual String Decrypt(const String& password, const String& buffer) = 0;
 
 public:
 	const Type& GetType() const noexcept { return m_type; }
+	void SetType(const Type& type) noexcept { this->m_type = type; }
 	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
 
 protected:

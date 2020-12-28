@@ -48,11 +48,12 @@
 #define ENIGMA_ASSERT_OR_THROW(x, msg) \
 	do \
 	{ \
-		if (!(x)) \
+		if(!(x)) \
 		{ \
+			ENIGMA_ASSERT(false, msg); \
 			throw std::runtime_error(msg); \
 		} \
-	} while(false)
+	} while (false)
 ///
 
 

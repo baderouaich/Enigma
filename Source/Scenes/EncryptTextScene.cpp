@@ -1,6 +1,7 @@
 #include "pch.hpp"
 #include "EncryptTextScene.hpp"
 #include <Utility/DialogUtils.hpp>
+#include <Utility/ImGuiUtils.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 
 EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
@@ -8,11 +9,8 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 	Enigma::Scene(),
 	m_fonts(fonts),
 	// AES as default algorithm
-	m_algorithm(Algorithm::Type::AES),
-	// Max text length to encrypt 1mb
-	m_text(1024 * 1024 * 1, '\000'),
-	// Max encryption password length 1024 characters
-	m_password(1024, '\000')
+	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt)),
+	m_operation_completed(false)
 {
 
 }
@@ -90,9 +88,9 @@ void EncryptTextScene::OnImGuiDraw()
 			{
 				inline_dummy(6.0f, 0.0f);
 				ImGui::SameLine();
-				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm == algo_type))
+				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm->GetType() == algo_type))
 				{
-					m_algorithm = algo_type;
+					m_algorithm->SetType(algo_type);
 				}
 			}
 			
@@ -130,31 +128,38 @@ void EncryptTextScene::OnImGuiDraw()
 		{
 			// Label
 			ImGui::Text("Text to Encrypt:");
+
 			// Input text
-			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 60.0f);
-			ImGui::InputTextMultiline("##text1", m_text.data(), m_text.size(), input_text_size);
+			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 120.0f);
+			ImGuiUtils::InputTextMultiline("##text1", &m_text, input_text_size);
+
 			// Remaining characters
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%llu of %llu characters - 1MB MAX", std::strlen(m_text.data()), m_text.size());
+			ImGui::Text("%llu bytes", m_text.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
 
 		spacing(3);
 
-		// Encryption Password
+		// Encryption Password & Confirm password
+		// password text coloring for each state
+		ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, (m_password.empty() && m_confirm_password.empty()) ? ImVec4(1.0f, 1.0f, 1.0f, 1.0f) : m_password == m_confirm_password ? ImVec4(0.2f, 1.0f, 0.0f, 0.6f) : ImVec4(1.0f, 0.2f, 0.0f, 0.6f));
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
 			ImGui::Text("Password:");
 			// Input text
-			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 30.0f);
-			ImGui::InputTextMultiline("##text2", m_password.data(), m_password.size(), input_text_size);
+			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 33.0f);
+			ImGuiUtils::InputTextMultiline("##text2", &m_password, input_text_size, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGui::Text("Confirm Password:");
+			ImGuiUtils::InputTextMultiline("##text3", &m_confirm_password, input_text_size, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGui::PopStyleColor();
 			// Remaining characters
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%llu of %llu characters - 1KB MAX", std::strlen(m_password.data()), m_password.size());
-			ImGui::PopFont();
+			ImGui::Text("%llu bytes", m_password.size());
 		}
+		ImGui::PopFont();
 		ImGui::PopFont();
 
 		spacing(3);
@@ -165,18 +170,19 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("Encrypted Text (in Base64):");
+				ImGui::Text("Encrypted Text (encoded in base64)");
 				// Encrypted text
 				const ImVec2 copy_button_size(45.0f, 25.0f);
-				const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f - copy_button_size.x, 60.0f);
-				ImGui::InputTextMultiline("##text3", m_encrypted_text_base64.data(), m_encrypted_text_base64.size(), input_text_size);
+				const ImVec2 input_text_size(static_cast<f32>(win_w) - 20.0f - copy_button_size.x, 33.0f);
+				ImGuiUtils::InputTextMultiline("##text4", &m_encrypted_text_base64, input_text_size);
 				ImGui::PushFont(font_montserrat_medium_12);
-					ImGui::Text("%llu characters", m_encrypted_text_base64.size());
 					ImGui::SameLine();
 					if (ImGui::Button("Copy", copy_button_size))
 					{
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
+					//ImGui::NewLine();
+					ImGui::Text("%llu bytes", m_encrypted_text_base64.size());
 				ImGui::PopFont();
 			}
 			ImGui::PopFont();
@@ -240,72 +246,63 @@ void EncryptTextScene::OnDestroy()
 void EncryptTextScene::OnEncryptButtonPressed()
 {
 	// Validate fields 
+	if (m_text.empty())
 	{
-		//todo, use std::strlen()
-		if (StringUtils::IsAll(m_text, '\000'))
+		[[maybe_unused]] auto _ = DialogUtils::Warn("Text to encrypt is empty");
+	}
+	else if (m_password.empty() || m_confirm_password.empty())
+	{
+		[[maybe_unused]] auto _ = DialogUtils::Warn("Encryption Password is empty");
+	}
+	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
+	{
+		[[maybe_unused]] auto _ = DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
+	}
+	else if (m_password != m_confirm_password)
+	{
+		[[maybe_unused]] auto _ = DialogUtils::Warn("Password doesn't match");
+	}
+	else // Alles gut
+	{ 
+		try
 		{
-			ENIGMA_TRACE("m_text is empty");
-			[[maybe_unused]] auto _ = DialogUtils::Warn("Text to encrypt is empty");
-		}
-		else if (StringUtils::IsAll(m_password, '\000'))
-		{
-			ENIGMA_TRACE("m_password is empty");
-			[[maybe_unused]] auto _ = DialogUtils::Warn("Encryption Password is empty");
-		}
-		else
-		{
-			// TODO MORE WORK ON \000 headaches //
-
 			// Create encryptor based on selected algorithm type
-			std::unique_ptr<Enigma::Algorithm> algo_encryptor = nullptr;
-			switch (m_algorithm)
-			{
-			case Enigma::Algorithm::Type::AES:
-				algo_encryptor.reset(new Enigma::AES(Enigma::Algorithm::Intent::Encrypt));
-				break;
-			case Enigma::Algorithm::Type::ChaCha20:
-				algo_encryptor.reset(new Enigma::ChaCha20(Enigma::Algorithm::Intent::Encrypt));
-				break;
-			case Enigma::Algorithm::Type::TripleDES:
-				algo_encryptor.reset(new Enigma::TripleDES(Enigma::Algorithm::Intent::Encrypt));
-				break;
-			case Enigma::Algorithm::Type::Twofish:
-				algo_encryptor.reset(new Enigma::Twofish(Enigma::Algorithm::Intent::Encrypt));
-				break;
-			}
-			// Encrypt text
-			String text_no_extra = String(m_text.begin(), m_text.begin() + m_text.find_first_of('\000'));
-			String password_no_extra = String(m_password.begin(), m_password.begin() + m_password.find_first_of('\000'));
-			ENIGMA_LOG("text_no_extra {0}", text_no_extra);
-			ENIGMA_LOG("password_no_extra {0}", password_no_extra);
-			m_encrypted_text = algo_encryptor->Encrypt(password_no_extra, text_no_extra);
-			ENIGMA_ASSERT(!m_encrypted_text.empty(), "Failed to encrypt text");
-			//m_encrypted_text.resize(std::strlen(m_encrypted_text.data()) + 1); // remove \000
-			//m_encrypted_text_base64 = Base64::Encode(String(m_encrypted_text.begin(), m_encrypted_text.begin() + m_encrypted_text.find_first_of('\000'))); // remove \000
-			m_encrypted_text_base64 = Base64::Encode(m_encrypted_text); 
-			ENIGMA_ASSERT(!m_encrypted_text_base64.empty(), "Failed to encode encrypted text to Base64");
+			m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Encrypt);
+			ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
 
-			ENIGMA_INFO("Encrypted");
+			// Encrypt text
+			m_encrypted_text = m_algorithm->Encrypt(m_password, m_text);
+			ENIGMA_ASSERT_OR_THROW(!m_encrypted_text.empty(), "Failed to encrypt text");
+
+			// Encode cipher to Base64
+			m_encrypted_text_base64 = Base64::Encode(m_encrypted_text); 
+			ENIGMA_ASSERT_OR_THROW(!m_encrypted_text_base64.empty(), "Failed to encode cipher text to Base64");
+
+			m_operation_completed = true;
+		}
+		catch (const std::exception& e)
+		{
+			ENIGMA_ERROR(e.what());
+			DialogUtils::Error(e.what());
 		}
 	}
-
 }
 
 void EncryptTextScene::OnBackButtonPressed()
 {
-	// Check if fields are not empty to confirm abortion with the user
-	if (!StringUtils::IsAll(m_text, '\000') || !StringUtils::IsAll(m_password, '\000'))
+	if (m_operation_completed || (m_text.empty() && m_password.empty() && m_confirm_password.empty()))
 	{
-		// Show alert dialog to user asking whether the operation should be aborted
+		// fields are empty or operation is completed, safe to abort operation.
+		this->EndScene();
+	}
+	else
+	{	// Show alert dialog to user asking whether the operation should be aborted
 		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?"); 
 		if (action == Enigma::MessageBox::Action::Yes)
 		{
 			this->EndScene();
 		}
 	}
-	// fields are empty, safe to abort operation.
-	else
-		this->EndScene();
 
 }
 

@@ -146,7 +146,7 @@ i32 CLI::Run()
 
 		// Call Scenarios //
 		// Create polymorphic Algorithm type
-		algorithm = this->CreateAlgorithm(mode, intent);
+		algorithm = Algorithm::CreateFromName(mode, intent);
 
 		// Check wether its a text or file encryption/decryption
 		if (!text.empty())
@@ -190,27 +190,6 @@ i32 CLI::Run()
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;
-}
-
-std::unique_ptr<Algorithm> CLI::CreateAlgorithm(const String& mode, const Intent& intent)
-{
-	const auto ModeIn = [&mode](const std::vector<std::string_view>& v) -> bool
-	{
-		return std::find(v.begin(), v.end(), mode) != v.end();
-	};
-
-	if (ModeIn({ "aes", "aes-gcm" }))
-		return std::make_unique<Enigma::AES>(intent);
-	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20" }))
-		return std::make_unique<Enigma::ChaCha20>(intent);
-	else if (ModeIn({ "tripledes", "triple-des", "tripledes-cbc" }))
-		return std::make_unique<Enigma::TripleDES>(intent);
-	else if (ModeIn({ "twofish", "twofish-gcm" }))
-		return std::make_unique<Enigma::Twofish>(intent);
-	//else if (mode == "idea")
-	//	return std::make_unique<Enigma::IDEA>(intent);
-	else
-		throw std::runtime_error("Unsupported algorithm mode: " + mode);
 }
 
 void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text)

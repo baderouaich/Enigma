@@ -27,11 +27,12 @@ private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
 private:
-	Algorithm::Type m_algorithm; // selected algorithm to encrypt text with
+	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to encrypt text with
 	String m_text; // Text to encrypt
 	String m_encrypted_text; // Encrypted text cipher
 	String m_encrypted_text_base64; // Encrypted text cipher in Base64
-	String m_password; // Encryption password
+	String m_password, m_confirm_password; // Encryption password
+	bool m_operation_completed; // true if user completed encryption successfully, used as a flag to whether show the user confirmation dialog on back pressed.
 };
 
 
