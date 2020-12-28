@@ -161,7 +161,7 @@ void MainMenuScene::OnImGuiDraw()
 		// Daily Tips/Advices
 		{
 			ImGui::SetCursorPos(ImVec2(25.0f, io.DisplaySize.y - 25.0f));
-			static const auto& note = Constants::NOTES[Random::Int<size_t>(0, Constants::NOTES.size() - 1)];
+			static const auto& note = Constants::Tips[Random::Int<size_t>(0, Constants::Tips.size() - 1)];
 			ImGui::PushFont(font_montserrat_medium_12);
 			ImGui::Text("Tip: %s", note.data());
 			ImGui::PopFont();

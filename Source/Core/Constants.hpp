@@ -83,7 +83,7 @@ namespace Enigma
 
 
 		// Advices
-		static const std::vector<std::string_view> NOTES
+		static const std::vector<std::string_view> Tips
 		{
 			"Don't use the same password for all your encrypted data",
 			"Keep a written copy of your encryption password and the algorithm name you used in a safe place",
