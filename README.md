@@ -77,7 +77,8 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git`<br>
-<h2>Windows</h2> : <br>
+
+### Windows
  - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha15-windows.zip`<br><br>
 <strong>Method 1: Visual Studio 16 2019</strong>
  - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br> 
@@ -90,9 +91,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
    example: `make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe  CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 2`<br>
  - Copy `Resources/` folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and run it
 
-<br>
-
- <h2>Linux</h2> : <br>
+### Linux
  - Install Latest gcc & g++ Compiler<br>
   `sudo add-apt-repository ppa:ubuntu-toolchain-r/test`<br>
   `sudo apt update`<br>
@@ -108,9 +107,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma`
  - Run Enigma Binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
-<br>
-
-<h2>MacOS TODO</h2> : <br>
+### MacOS TODO
 - Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
 
 
