@@ -29,6 +29,14 @@ namespace Enigma
 			{
 				//https://www.cryptopp.com/wiki/TripleDES
 			}
+			namespace Twofish
+			{
+				//https://www.cryptopp.com/wiki/TWOFISH
+			}
+			namespace IDEA
+			{
+				//https://www.cryptopp.com/wiki/IDEA
+			}
 		}
 
 		namespace CLI

@@ -19,9 +19,10 @@
 #include <aes.h> // AES
 #include <gcm.h> // GCM Mode
 #include <chacha.h> // ChaCha/Salsa20
-#include <rsa.h> // RSA
+//#include <rsa.h> // RSA
 #include <des.h> // TripleDES
 #include <twofish.h> // Twofish
+#include <idea.h> // IDEA
 #pragma warning(pop)
 
 NS_ENIGMA_BEGIN
@@ -30,6 +31,7 @@ class AES;
 class ChaCha20;
 class TripleDES;
 class Twofish;
+class IDEA;
 /*
 *	Algorithm abstract class
 */
@@ -43,9 +45,10 @@ public:
 		ChaCha20,
 		TripleDES,
 		Twofish,
+		IDEA,
 
 		First = AES,
-		Last = Twofish
+		Last = IDEA
 	};
 public:
 	explicit Algorithm(Type type, Intent intent) noexcept 
@@ -56,6 +59,24 @@ public:
 		m_auto_seeded_random_pool(intent == Intent::Encrypt ? std::make_unique<CryptoPP::AutoSeededRandomPool>() : nullptr) 
 	{}
 	virtual ~Algorithm() noexcept {}
+
+public:
+	/*
+	*	Encrypts buffer with password
+	*  @param password: Encryption password
+	*  @param buffer: Buffer to encrypt (text, binary...)
+	*  @return (iv + cipher)
+	*/
+	virtual String Encrypt(const String& password, const String& buffer) = 0;
+	/*
+	*	Decrypts cipher with password
+	*  @param password: Password used to Encyrpt buffer
+	*  @param iv_cipher: IV plus Encyrpted buffer 
+	*  @return decrypted cipher
+	*/
+	virtual String Decrypt(const String& password, const String& iv_cipher) = 0;
+
+
 
 public: /* Create polymorphic algorithm by either mode name or type*/
 	template<class A = Algorithm>
@@ -74,7 +95,7 @@ public: /* Create polymorphic algorithm by either mode name or type*/
 			return std::make_unique<TripleDES>(intent);
 		else if (ModeIn({ "twofish", "twofish-gcm" }))
 			return std::make_unique<Twofish>(intent);
-		//else if (mode == "idea")
+		//else if (ModeIn({ "idea", "idea-gcm" }))
 		//	return std::make_unique<Enigma::IDEA>(intent);
 		else
 			throw std::runtime_error("Unsupported algorithm mode: " + mode);
@@ -86,9 +107,6 @@ public: /* Create polymorphic algorithm by either mode name or type*/
 		return CreateFromName(mode, intent);
 	}
 
-public:
-	virtual String Encrypt(const String& password, const String& buffer) = 0;
-	virtual String Decrypt(const String& password, const String& buffer) = 0;
 
 public:
 	const Type& GetType() const noexcept { return m_type; }
@@ -116,7 +134,7 @@ public:
 			CASE_ENUM(ChaCha20);
 			CASE_ENUM(TripleDES);
 			CASE_ENUM(Twofish);
-			//CASE_ENUM(IDEA);
+			CASE_ENUM(IDEA);
 			default: return "Unknown";
 		}
 #undef CASE_ENUM

@@ -76,14 +76,14 @@ String AES::Encrypt(const String& password, const String& buffer)
 	return output;
 }
 
-String AES::Decrypt(const String& password, const String& buffer)
+String AES::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT(m_aes_decryption, "AES Decryption is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(iv + encrypted))
-	const String iv = buffer.substr(0, CryptoPP::AES::BLOCKSIZE);
-	const String encrypted = buffer.substr(CryptoPP::AES::BLOCKSIZE, buffer.size() - 1);
+	const String iv = iv_cipher.substr(0, CryptoPP::AES::BLOCKSIZE);
+	const String cipher = iv_cipher.substr(CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
 
 	// Final decrypted buffer
 	String decrypted;
@@ -105,7 +105,7 @@ String AES::Decrypt(const String& password, const String& buffer)
 
 		// Decrypt
 		std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
-			encrypted,
+			cipher,
 			true,
 			new CryptoPP::AuthenticatedDecryptionFilter(
 				*m_aes_decryption,

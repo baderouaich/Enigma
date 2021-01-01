@@ -19,7 +19,7 @@ public:
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& buffer) override;
+	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private: 
 	// Note: using CBC since GCM is defined for block ciphers with a block size of 128 bits https://en.m.wikipedia.org/wiki/Galois/Counter_Mode

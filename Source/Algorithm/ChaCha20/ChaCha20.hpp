@@ -19,7 +19,7 @@ public:
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& buffer) override;
+	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
 	std::unique_ptr<CryptoPP::ChaCha::Encryption> m_chacha_encryption; // ChaCha20 encryptor

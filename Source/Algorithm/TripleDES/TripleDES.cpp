@@ -76,15 +76,15 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	return output;
 }
 
-String TripleDES::Decrypt(const String& password, const String& buffer)
+String TripleDES::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT(m_tripledes_decryption, "TripleDES Decryption is not initialized properly");
 
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(iv + encrypted))
-	const String iv = buffer.substr(0, CryptoPP::DES_EDE3::BLOCKSIZE);
-	const String encrypted = buffer.substr(CryptoPP::DES_EDE3::BLOCKSIZE, buffer.size() - 1);
+	const String iv = iv_cipher.substr(0, CryptoPP::DES_EDE3::BLOCKSIZE);
+	const String cipher = iv_cipher.substr(CryptoPP::DES_EDE3::BLOCKSIZE, iv_cipher.size() - 1);
 
 	// Final decrypted buffer
 	String decrypted;
@@ -106,7 +106,7 @@ String TripleDES::Decrypt(const String& password, const String& buffer)
 
 		// Decrypt
 		std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
-			encrypted,
+			cipher,
 			true,
 			new CryptoPP::StreamTransformationFilter(
 				*m_tripledes_decryption,
