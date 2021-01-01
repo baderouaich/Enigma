@@ -292,12 +292,11 @@ void EncryptTextScene::OnBackButtonPressed()
 		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
 		if (action == Enigma::MessageBox::Action::Yes)
 		{
-		endscene:
 			this->EndScene();
 		}
 	}
 	else
-		goto endscene;
+		this->EndScene();
 }
 
 void EncryptTextScene::OnCopyEncryptedBase64TextButtonPressed()
