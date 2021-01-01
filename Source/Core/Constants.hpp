@@ -3,7 +3,6 @@
 #define ENIGMA_CONSTANTS_H
 
 #include "Types.hpp"
-#include <vector>
 
 namespace Enigma
 {
@@ -23,6 +22,8 @@ namespace Enigma
 			}
 			namespace ChaCha20
 			{
+				// The ChaCha20 algorithm is a stream cipher using a key of 256 bit size.
+				// the ChaCha20 stream cipher does not have a block operation mode therefore it does not use padding.
 				//https://www.cryptopp.com/wiki/ChaCha20
 			}
 			namespace TripleDES
@@ -41,7 +42,7 @@ namespace Enigma
 
 		namespace CLI
 		{
-			constexpr const char* CLI_HELP_MESSAGE = "say -h or --help for details";
+			constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help for details";
 		}
 
 		namespace ErrorMessages
@@ -88,15 +89,6 @@ namespace Enigma
 			static const Color4f MENUBAR_BACKGROUND_COLOR = Color4f{1.0f, 1.0f, 1.0f, 0.06f}; // WHITE TRANSPARENT
 
 		}
-
-
-		// Advices
-		static const std::vector<std::string_view> Tips
-		{
-			"Don't use the same password for all your encrypted data",
-			"Keep a written copy of your encryption password and the algorithm name you used in a safe place",
-			"For serious data, use strong algorithms like AES-GCM and TripleDES",
-		};
 	}
 }
 

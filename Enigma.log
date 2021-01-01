@@ -1,0 +1,14 @@
+[21:26:38] [info] Enigma: [ OpenGL Info ]
+		Manufacturer: Intel
+		Renderer: Intel(R) HD Graphics 4600
+		Version: 3.3.0 - Build 20.19.15.5126
+
+[21:26:38] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[21:26:39] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[21:26:39] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[21:26:46] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
+[21:26:47] [trace] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
+[21:26:48] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[21:26:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowClose(class Enigma::WindowCloseEvent &): Closing Window due WindowCloseEvent
+[21:26:50] [trace] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[21:26:50] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

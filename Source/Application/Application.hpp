@@ -61,7 +61,7 @@ public: /*Accessors*/
 	/*
 	*	Returns the instance of this Application
 	*/
-	static Application& GetInstance() noexcept { return *m_instance; }
+	static Application* GetInstance() noexcept { return m_instance; }
 
 	/*
 	*	Returns the Window of this Application

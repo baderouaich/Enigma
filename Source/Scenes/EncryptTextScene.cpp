@@ -9,8 +9,7 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 	Enigma::Scene(),
 	m_fonts(fonts),
 	// AES as default algorithm
-	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt)),
-	m_operation_completed(false)
+	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
 {
 
 }
@@ -40,8 +39,8 @@ void EncryptTextScene::OnDraw()
 
 void EncryptTextScene::OnImGuiDraw()
 {
-	const auto& [win_w, win_h] = Enigma::Application::GetInstance().GetWindow()->GetSize();
-	const auto& [win_x, win_y] = Enigma::Application::GetInstance().GetWindow()->GetPosition();
+	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
+	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
 	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
@@ -248,19 +247,19 @@ void EncryptTextScene::OnEncryptButtonPressed()
 	// Validate fields 
 	if (m_text.empty())
 	{
-		[[maybe_unused]] auto _ = DialogUtils::Warn("Text to encrypt is empty");
+		(void)DialogUtils::Warn("Text to encrypt is empty");
 	}
 	else if (m_password.empty() || m_confirm_password.empty())
 	{
-		[[maybe_unused]] auto _ = DialogUtils::Warn("Encryption Password is empty");
+		(void)DialogUtils::Warn("Encryption Password is empty");
 	}
 	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 	{
-		[[maybe_unused]] auto _ = DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
+		(void)DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 	}
 	else if (m_password != m_confirm_password)
 	{
-		[[maybe_unused]] auto _ = DialogUtils::Warn("Password doesn't match");
+		(void)DialogUtils::Warn("Password doesn't match");
 	}
 	else // Alles gut
 	{ 
@@ -277,33 +276,28 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			// Encode cipher to Base64
 			m_encrypted_text_base64 = Base64::Encode(m_encrypted_text); 
 			ENIGMA_ASSERT_OR_THROW(!m_encrypted_text_base64.empty(), "Failed to encode cipher text to Base64");
-
-			m_operation_completed = true;
 		}
 		catch (const std::exception& e)
 		{
 			ENIGMA_ERROR(e.what());
-			DialogUtils::Error(e.what());
+			(void)DialogUtils::Error(e.what());
 		}
 	}
 }
 
 void EncryptTextScene::OnBackButtonPressed()
 {
-	if (m_operation_completed || (m_text.empty() && m_password.empty() && m_confirm_password.empty()))
-	{
-		// fields are empty or operation is completed, safe to abort operation.
-		this->EndScene();
-	}
-	else
+	if ((!m_text.empty() || !m_password.empty() || !m_confirm_password.empty()))
 	{	// Show alert dialog to user asking whether the operation should be aborted
-		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?"); 
+		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
 		if (action == Enigma::MessageBox::Action::Yes)
 		{
+		endscene:
 			this->EndScene();
 		}
 	}
-
+	else
+		goto endscene;
 }
 
 void EncryptTextScene::OnCopyEncryptedBase64TextButtonPressed()

@@ -66,7 +66,7 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 			);
 		//NOTE: StringSource will auto clean the allocated memory
 
-		// Output iv plus encrypted buffer since we need iv later for decryption
+		// Output IV plus Cipher since we need iv later for decryption
 		output = std::move(iv + encrypted);
 	}
 	catch (const CryptoPP::Exception& e)
@@ -89,7 +89,7 @@ String ChaCha20::Decrypt(const String& password, const String& iv_cipher)
 	const String iv = iv_cipher.substr(0, CryptoPP::ChaCha::IV_LENGTH);
 	const String cipher = iv_cipher.substr(CryptoPP::ChaCha::IV_LENGTH, iv_cipher.size() - 1);
 
-	// Final decrypted buffer
+	// Recovered buffer
 	String decrypted;
 	try
 	{

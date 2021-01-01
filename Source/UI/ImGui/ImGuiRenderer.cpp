@@ -47,7 +47,7 @@ ImGuiRenderer::ImGuiRenderer()
 
 
     // Set imgui gl context version (to the same one used by window)
-    const auto& app = Application::GetInstance();
+    const auto& app = *Application::GetInstance();
     GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow()->GetGLFWwindow());
 	std::ostringstream version{};
     version << "#version " << ENIGMA_GL_VERSION_MAJOR << ENIGMA_GL_VERSION_MINOR << '0';
@@ -75,7 +75,7 @@ void ImGuiRenderer::Begin()
 void ImGuiRenderer::End()
 {  
   auto& io = ImGui::GetIO();
-  const auto& app = Application::GetInstance();
+  const auto& app = *Application::GetInstance();
   io.DisplaySize = ImVec2(
       static_cast<f32>(app.GetWindow()->GetWidth()),
       static_cast<f32>(app.GetWindow()->GetHeight())

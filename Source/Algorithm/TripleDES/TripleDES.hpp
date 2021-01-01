@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	TripleDES Algorithm Encryptor/Decryptor
+*	TripleDES-CBC Algorithm Encryptor/Decryptor
 */
 class TripleDES : public Algorithm
 {

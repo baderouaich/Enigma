@@ -285,11 +285,11 @@ private: /* Initializer Functions */
 	bool InitOpenGLOptions();
 
 
-private: /*Events*/
+private: /* Events */
 	EventCallback m_event_callback;
 
 
-private: /*Properties*/
+private: /* Properties */
 	String m_title;
 	std::pair<i32, i32> m_position;
 	std::pair<i32, i32> m_size;
@@ -305,7 +305,7 @@ private: /*Properties*/
 
 	std::unique_ptr<Cursor> m_cursor;	// Window cursor
 
-public: /*Good Friends :)*/
+public: /* Good Friends :) */
 	friend class Application;
 };
 

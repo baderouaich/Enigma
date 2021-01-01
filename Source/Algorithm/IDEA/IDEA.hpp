@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	IDEA Algorithm Encryptor/Decryptor
+*	IDEA-CBC Algorithm Encryptor/Decryptor
 */
 class IDEA : public Algorithm
 {
@@ -22,8 +22,8 @@ public:
 	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption> m_idea_encryption; // IDEA-GCM encryptor
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption> m_idea_decryption; // IDEA-GCM decryptor
+	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption> m_idea_encryption; // IDEA-CBC encryptor
+	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption> m_idea_decryption; // IDEA-CBC decryptor
 };
 
 NS_ENIGMA_END

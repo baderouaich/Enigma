@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	AES Algorithm Encryptor/Decryptor
+*	AES-GCM Algorithm Encryptor/Decryptor
 */
 class AES : public Algorithm
 {

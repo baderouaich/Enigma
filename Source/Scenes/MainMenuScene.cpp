@@ -43,8 +43,8 @@ void MainMenuScene::OnDraw()
 
 void MainMenuScene::OnImGuiDraw()
 {
-	const auto& [win_w, win_h] = Application::GetInstance().GetWindow()->GetSize();
-	const auto& [win_x, win_y] = Application::GetInstance().GetWindow()->GetPosition();
+	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
+	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
 	const auto button_size = Vec2f(win_w / 2.5f, 45.0f);
@@ -155,17 +155,6 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopStyleColor(3);
 			ImGui::PopFont();
 		}
-
-
-
-		// Daily Tips/Advices
-		{
-			ImGui::SetCursorPos(ImVec2(25.0f, io.DisplaySize.y - 25.0f));
-			static const auto& note = Constants::Tips[Random::Int<size_t>(0, Constants::Tips.size() - 1)];
-			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("Tip: %s", note.data());
-			ImGui::PopFont();
-		}
 	}
 	ImGui::End();
 
@@ -261,12 +250,12 @@ void MainMenuScene::OnDecryptFileButtonPressed()
 
 void MainMenuScene::OnEncryptTextButtonPressed()
 {
-	Application::GetInstance().PushScene(std::make_shared<EncryptTextScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<EncryptTextScene>(m_fonts));
 }
 
 void MainMenuScene::OnDecryptTextButtonPressed()
 {
-	Application::GetInstance().PushScene(std::make_shared<DecryptTextScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<DecryptTextScene>(m_fonts));
 }
 
 void MainMenuScene::OnAboutMenuButtonPressed()

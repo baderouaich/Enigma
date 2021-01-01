@@ -80,9 +80,11 @@ bool Window::InitGLFW(const WindowSettings& window_settings)
 		this->Destroy();
 		return false;
 	} 
+	
 	//Set min & max size
 	this->SetMinimumSize(window_settings.minimum_width, window_settings.minimum_height);
 	this->SetMaximumSize(window_settings.maximum_width, window_settings.maximum_height);
+	
 	//Set fullscreen mode if enabled
 	this->SetFullscreen(window_settings.is_fullscreen);
 
@@ -468,13 +470,14 @@ void Window::SetFullscreen(bool full_screen) noexcept
 	{
 		// backup window position and window size 
 		// (Note: position and size are not updated by GLFW callback when fullscreen mode is on)
-		const auto& [w, h] = this->GetSize();
-		const auto& [x, y] = this->GetPosition();
+		const auto& [w, h] = m_size;
+		const auto& [x, y] = m_position;
 
 		// restore last window size and position
 		glfwSetWindowMonitor(m_GLFWwindow, nullptr, x, y, w, h, m_video_mode->refreshRate);
 	}
 }
+
 
 void Window::SetRefreshRate(const i32& refresh_rate) noexcept
 {
@@ -527,7 +530,7 @@ void Window::SetTitle(const String& title) noexcept
 	// title - FPS: x
 	if (m_is_show_fps)
 	{
-		const ui32& FPS = Application::GetInstance().GetFPS();
+		const ui32& FPS = Application::GetInstance()->GetFPS();
 		const String title_with_fps = m_title + " - FPS: " + std::to_string(FPS);
 		glfwSetWindowTitle(m_GLFWwindow, title_with_fps.c_str());
 	}

@@ -32,7 +32,6 @@ private:
 	String m_encrypted_text; // Encrypted text cipher
 	String m_encrypted_text_base64; // Encrypted text cipher in Base64
 	String m_password, m_confirm_password; // Encryption password
-	bool m_operation_completed; // true if user completed encryption successfully, used as a flag to whether show the user confirmation dialog on back pressed.
 };
 
 

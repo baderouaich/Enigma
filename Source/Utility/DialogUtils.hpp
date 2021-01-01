@@ -24,7 +24,7 @@ public:
 			);
 		return (msgbox->Show());
 	}
-	static const Enigma::MessageBox::Action Warn(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
+    static const Enigma::MessageBox::Action Warn(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
 		const auto msgbox = std::make_unique<Enigma::MessageBox>(
 			"Enigma",

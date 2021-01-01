@@ -85,7 +85,7 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 	const String iv = iv_cipher.substr(0, CryptoPP::AES::BLOCKSIZE);
 	const String cipher = iv_cipher.substr(CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
 
-	// Final decrypted buffer
+	// Recovered buffer
 	String decrypted;
 	try
 	{

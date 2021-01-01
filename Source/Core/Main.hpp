@@ -11,6 +11,7 @@
 	#include <Tests/Algorithm/ChaChaTests.hpp>
 	#include <Tests/Algorithm/TripleDESTests.hpp>
 	#include <Tests/Algorithm/TwofishTests.hpp>
+	#include <Tests/Algorithm/IDEATests.hpp>
 #else
 	#include <Enigma.hpp>
 #endif

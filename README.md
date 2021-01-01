@@ -19,7 +19,7 @@ A Simple, Reliable and Efficient UI + CLI Encryption Tool
 - [x] ChaCha20
 - [x] TripleDES-CBC
 - [x] Twofish-GCM
-- [ ] IDEA-CBC
+- [x] IDEA-CBC
 
 
 ## Enigma CLI
@@ -29,13 +29,13 @@ Usage:
 
   -e, --encrypt                 Encrypt operation
   -d, --decrypt                 Decrypt operation
-  -m, --mode [AES, ChaCha20, TripleDES, Twofish]
+  -m, --mode [AES, ChaCha20, TripleDES, Twofish, IDEA]
                                 Encryption/Decryption mode (default: AES)
   -p, --password arg            Encryption/Decryption password
   -t, --text arg                Text to encrypt
   -i, --infile arg              File name to encrypt
   -o, --oufile arg              Output encrypted file name (default:
-                                C:\Users\bader\AppData\Local\Temp\Enigma)
+                                C:\Users\%USER%\AppData\Local\Temp\Enigma)
   -h, --help                    Displays help message
   -v, --version                 Displays Enigma current version
 ```

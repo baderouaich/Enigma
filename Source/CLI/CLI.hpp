@@ -9,6 +9,7 @@
 #include <Algorithm/ChaCha20/ChaCha20.hpp>
 #include <Algorithm/TripleDES/TripleDES.hpp>
 #include <Algorithm/Twofish/Twofish.hpp>
+#include <Algorithm/IDEA/IDEA.hpp>
 
 #pragma warning(push, 0) // disable warnings
 	#include <cxxopts.hpp> // cmd parser library

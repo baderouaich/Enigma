@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	Twofish Algorithm Encryptor/Decryptor
+*	Twofish-GCM Algorithm Encryptor/Decryptor
 */
 class Twofish : public Algorithm
 {
