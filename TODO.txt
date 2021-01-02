@@ -1,4 +1,4 @@
-- Maybe ship Algorithm used in encryption with cipher? will be like (algo_enum_id + iv + cipher) so we can auto-detect algorithm used to encrypt buffer when decrypting. user may forget algorithm mode..
+-DONE: Maybe ship Algorithm used in encryption with cipher? will be like (algo_enum_id + iv + cipher) so we can auto-detect algorithm used to encrypt buffer when decrypting. user may forget algorithm mode..
 - Add Command line support (enigma --encrypt -mode=aes -infile=file outfil=...) 
 - Support AES-GCM 
 - Generate RSA Public & Private Keys

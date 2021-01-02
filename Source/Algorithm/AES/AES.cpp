@@ -31,9 +31,9 @@ String AES::Encrypt(const String& password, const String& buffer)
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 	
-	String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 32 bytes IV
-	String encrypted; // Final encrypted buffer
-	String output; // return value will be (iv + encrypted)
+	String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 16 bytes IV
+	String cipher{}; // Final encrypted buffer
+	String output(sizeof(Algorithm::Type), static_cast<const ui8>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 	try
 	{
 		// Prepare key
@@ -57,13 +57,13 @@ String AES::Encrypt(const String& password, const String& buffer)
 			true,
 			new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
 				*m_aes_encryption, 
-				new CryptoPP::StringSink(encrypted)
+				new CryptoPP::StringSink(cipher)
 			)
 		);
 		//NOTE: StringSource will auto clean the allocated memory
 
-		// Output iv plus encrypted buffer since we need iv later for decryption
-		output = std::move(iv + encrypted);
+		// Output(AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
+		output +=  std::move(iv + cipher);
 	}
 	catch (const CryptoPP::Exception& e)
 	{
@@ -81,9 +81,11 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT(m_aes_decryption, "AES Decryption is not initialized properly");
 
-	// Split IV and Cipher from buffer (we output encrypted buffers as String(iv + encrypted))
-	const String iv = iv_cipher.substr(0, CryptoPP::AES::BLOCKSIZE);
-	const String cipher = iv_cipher.substr(CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
+	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
+	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
+	ENIGMA_ASSERT(!iv.empty(), "Failed to extract IV from iv_cipher");
+	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
+	ENIGMA_ASSERT(!cipher.empty(), "Failed to extract cipher from iv_cipher");
 
 	// Recovered buffer
 	String decrypted;

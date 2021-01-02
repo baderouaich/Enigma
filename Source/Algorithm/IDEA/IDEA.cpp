@@ -32,8 +32,8 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	}
 
 	String iv = this->GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE); // Randomly generated 8 bytes IV
-	String encrypted; // Final encrypted buffer
-	String output; // return value will be (iv + encrypted)
+	String cipher; // Final encrypted buffer
+	String output(sizeof(Algorithm::Type), static_cast<const ui8>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 	try
 	{
 		// Prepare key
@@ -57,13 +57,13 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 			true,
 			new CryptoPP::StreamTransformationFilter(
 				*m_idea_encryption,
-				new CryptoPP::StringSink(encrypted)
+				new CryptoPP::StringSink(cipher)
 			)
 			);
 		//NOTE: StringSource will auto clean the allocated memory
 
-		// Output iv plus encrypted buffer since we need iv later for decryption
-		output = std::move(iv + encrypted);
+		// Output(AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
+		output += std::move(iv + cipher);
 	}
 	catch (const CryptoPP::Exception& e)
 	{
@@ -81,10 +81,11 @@ String IDEA::Decrypt(const String& password, const String& iv_cipher)
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT(m_idea_decryption, "IDEA Decryption is not initialized properly");
 
-
-	// Split IV and Cipher from buffer (we output encrypted buffers as String(iv + encrypted))
-	const String iv = iv_cipher.substr(0, CryptoPP::IDEA::BLOCKSIZE);
-	const String cipher = iv_cipher.substr(CryptoPP::IDEA::BLOCKSIZE, iv_cipher.size() - 1);
+	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
+	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
+	ENIGMA_ASSERT(!iv.empty(), "Failed to extract IV from iv_cipher");
+	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::IDEA::BLOCKSIZE, iv_cipher.size() - 1);
+	ENIGMA_ASSERT(!cipher.empty(), "Failed to extract cipher from iv_cipher");
 
 	// Recovered buffer
 	String decrypted;

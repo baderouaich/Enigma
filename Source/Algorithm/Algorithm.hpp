@@ -65,13 +65,13 @@ public:
 	*	Encrypts buffer with password
 	* @param password: Encryption password
 	* @param buffer: Buffer to encrypt (text, binary...)
-	* @return (IV + Cipher)
+	* @return (Algo type enum id + IV + Cipher)
 	*/
 	virtual String Encrypt(const String& password, const String& buffer) = 0;
 	/*
 	*	Decrypts cipher with password
 	* @param password: Password used to Encyrpt buffer
-	* @param iv_cipher: (IV + Cipher)
+	* @param iv_cipher: (Algo type enum id + IV + Cipher)
 	* @return Recovered Buffer
 	*/
 	virtual String Decrypt(const String& password, const String& iv_cipher) = 0;
