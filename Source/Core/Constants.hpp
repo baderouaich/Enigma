@@ -42,7 +42,7 @@ namespace Enigma
 
 		namespace CLI
 		{
-			constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help for details";
+			constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help to display available options";
 		}
 
 		namespace ErrorMessages
@@ -81,12 +81,17 @@ namespace Enigma
 			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(30, 37, 43, 255);
 
 			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(255, 255, 255, 225);
+			static const Color4f ERROR_TEXT_COLOR = COLOR4I_TO_COLOR4F(176, 39, 39, 255);
+			static const Color4f PASSWORD_MATCH_TEXT_COLOR = COLOR4I_TO_COLOR4F(66, 158, 83, 225);
+
 
 			static const Color4f BUTTON_COLOR = COLOR4I_TO_COLOR4F(31, 103, 145, 150);
 			static const Color4f BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(31, 103, 145, 200);
 			static const Color4f BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(31, 103, 145, 255); // PRESSED
 
 			static const Color4f MENUBAR_BACKGROUND_COLOR = Color4f{1.0f, 1.0f, 1.0f, 0.06f}; // WHITE TRANSPARENT
+
+
 
 		}
 	}

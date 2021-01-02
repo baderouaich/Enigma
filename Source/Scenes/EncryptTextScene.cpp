@@ -8,7 +8,7 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 	:
 	Enigma::Scene(),
 	m_fonts(fonts),
-	// AES as default algorithm
+	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
 	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
 {
 
@@ -126,7 +126,7 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("Text to Encrypt:");
+			ImGui::Text("Text:");
 
 			// Input text
 			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 120.0f);
@@ -143,7 +143,13 @@ void EncryptTextScene::OnImGuiDraw()
 
 		// Encryption Password & Confirm password
 		// password text coloring for each state
-		ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, (m_password.empty() && m_confirm_password.empty()) ? ImVec4(1.0f, 1.0f, 1.0f, 1.0f) : m_password == m_confirm_password ? ImVec4(0.2f, 1.0f, 0.0f, 0.6f) : ImVec4(1.0f, 0.2f, 0.0f, 0.6f));
+		ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text,
+			(m_password.empty() && m_confirm_password.empty()) ? // if password or confirm password is empty...
+			Constants::Colors::TEXT_COLOR :  // ... set color to white
+			m_password == m_confirm_password ?  // else if password matches confim password...
+			Constants::Colors::PASSWORD_MATCH_TEXT_COLOR : // ... set color to green
+			Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
+		); 
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
@@ -164,16 +170,16 @@ void EncryptTextScene::OnImGuiDraw()
 		spacing(3);
 
 		// Encrypted text in Base64 output
-		if (!m_encrypted_text.empty())
+		if (!m_cipher.empty())
 		{
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("Encrypted Text (encoded in base64)");
+				ImGui::Text("Cipher (in base64):");
 				// Encrypted text
 				const ImVec2 copy_button_size(45.0f, 25.0f);
 				const ImVec2 input_text_size(static_cast<f32>(win_w) - 20.0f - copy_button_size.x, 33.0f);
-				ImGuiUtils::InputTextMultiline("##text4", &m_encrypted_text_base64, input_text_size);
+				ImGuiUtils::InputTextMultiline("##text4", &m_cipher_base64, input_text_size);
 				ImGui::PushFont(font_montserrat_medium_12);
 					ImGui::SameLine();
 					if (ImGui::Button("Copy", copy_button_size))
@@ -181,7 +187,7 @@ void EncryptTextScene::OnImGuiDraw()
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
 					//ImGui::NewLine();
-					ImGui::Text("%llu bytes", m_encrypted_text_base64.size());
+					ImGui::Text("%llu bytes", m_cipher_base64.size());
 				ImGui::PopFont();
 			}
 			ImGui::PopFont();
@@ -238,8 +244,8 @@ void EncryptTextScene::OnDestroy()
 
 	m_text.clear();
 	m_password.clear();
-	m_encrypted_text.clear();
-	m_encrypted_text_base64.clear();
+	m_cipher.clear();
+	m_cipher_base64.clear();
 }
 
 void EncryptTextScene::OnEncryptButtonPressed()
@@ -270,12 +276,18 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
 
 			// Encrypt text
-			m_encrypted_text = m_algorithm->Encrypt(m_password, m_text);
-			ENIGMA_ASSERT_OR_THROW(!m_encrypted_text.empty(), "Failed to encrypt text");
+			m_cipher = m_algorithm->Encrypt(m_password, m_text);
+			ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to encrypt text");
 
 			// Encode cipher to Base64
-			m_encrypted_text_base64 = Base64::Encode(m_encrypted_text); 
-			ENIGMA_ASSERT_OR_THROW(!m_encrypted_text_base64.empty(), "Failed to encode cipher text to Base64");
+			m_cipher_base64 = Base64::Encode(m_cipher); 
+			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), "Failed to encode cipher text to Base64");
+			
+			// Spawn notification alert if window is not focused
+			if (! Application::GetInstance()->GetWindow()->IsFocused())
+			{
+				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
+			}
 		}
 		catch (const std::exception& e)
 		{
@@ -301,6 +313,6 @@ void EncryptTextScene::OnBackButtonPressed()
 
 void EncryptTextScene::OnCopyEncryptedBase64TextButtonPressed()
 {
-	Enigma::Clipboard::Set(m_encrypted_text_base64);
+	Clipboard::Set(m_cipher_base64);
 }
 

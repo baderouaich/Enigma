@@ -29,8 +29,8 @@ private:
 private:
 	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to encrypt text with
 	String m_text; // Text to encrypt
-	String m_encrypted_text; // Encrypted text cipher
-	String m_encrypted_text_base64; // Encrypted text cipher in Base64
+	String m_cipher; // Encrypted text
+	String m_cipher_base64; // Encrypted text in Base64
 	String m_password, m_confirm_password; // Encryption password
 };
 

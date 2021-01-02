@@ -41,7 +41,7 @@ public:
 	enum class Intent : ui8 { Encrypt, Decrypt };
 	enum class Type : ui8
 	{
-		AES = 0,
+		AES = 0x00,
 		ChaCha20,
 		TripleDES,
 		Twofish,
@@ -71,7 +71,7 @@ public:
 	/*
 	*	Decrypts cipher with password
 	* @param password: Password used to Encyrpt buffer
-	* @param iv_cipher: IV + Cipher
+	* @param iv_cipher: (IV + Cipher)
 	* @return Recovered Buffer
 	*/
 	virtual String Decrypt(const String& password, const String& iv_cipher) = 0;

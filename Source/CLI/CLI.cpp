@@ -32,18 +32,18 @@ CLI::CLI(const i32& argc, const char* const* argv)
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));
 
 		// Display the unmatched arguments if available
-		for (const auto& uarg : m_parse_result->unmatched())
+		const auto& unmatched_args = m_parse_result->unmatched();
+		if (!unmatched_args.empty())
 		{
-			ENIGMA_TRACE("Unknown argument {0}", uarg.c_str());
+			for (const auto& uarg : unmatched_args)
+				ENIGMA_TRACE("Unknown argument {0}", uarg);
+			throw std::runtime_error("Received unknown arguments");
 		}
-		//if (!unmatched_args.empty())
-		//	ENIGMA_INFO(m_options->help());
-
 
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: {0}", e.what());
+		ENIGMA_ERROR("Failed to parse arguments: {0} | {1}", e.what(), Constants::CLI::CLI_HELP_MESSAGE);
 		std::exit(EXIT_FAILURE);
 	}
 	catch (...)
@@ -71,9 +71,9 @@ i32 CLI::Run()
 		return EXIT_SUCCESS;
 	}
 
-	ENIGMA_TRACE("Processing arguments...");
+	ENIGMA_LOG("Processing arguments...");
 
-	std::unique_ptr<Algorithm> algorithm{}; // polymorphic algorithm
+	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
 	Intent intent{}; // Encrypt or Decrypt?
 	String mode{}; // "aes", "tripledes"..
 	String password{}, text{}, infilename{}, outfilename{};
@@ -144,7 +144,8 @@ i32 CLI::Run()
 		}
 
 
-		// Call Scenarios //
+		///============ Call Scenarios ============///
+
 		// Create polymorphic Algorithm type
 		algorithm = Algorithm::CreateFromName(mode, intent);
 
@@ -176,7 +177,7 @@ i32 CLI::Run()
 			}
 		}
 		else
-			throw std::runtime_error("in file name and out file name should not be empty");
+			throw std::runtime_error("Please specify what to encrypt, either text using --text or a file using --infile & --outfile");
 
 	}
 	catch (const std::exception& e)
