@@ -107,8 +107,8 @@ i32 CLI::Run()
 
 			//LOG("Mode: {0}", m);
 		}
-		else
-			throw std::runtime_error("You should specify an encryption/decryption mode like: --mode=aes or -m aes");
+		else if(intent == Algorithm::Intent::Encrypt) // If intent is encrypting, mode is required, otherwise we can detect which mode used for encryption.
+			throw std::runtime_error("You should specify an encryption mode like: --mode=aes or -m aes, unless you are decrypting, then we can autodetect the mode used for encryption.");
 
 		// What is the encryption/decryption password?
 		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
@@ -147,7 +147,38 @@ i32 CLI::Run()
 		///============ Call Scenarios ============///
 
 		// Create polymorphic Algorithm type
-		algorithm = Algorithm::CreateFromName(mode, intent);
+		// if mode is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
+		if (mode.empty())
+		{
+			ui8 cipher_first_byte{(ui8)Algorithm::Type::Last + 1};
+			if (!text.empty())
+			{
+				// extract first byte from cipher which must be the mode type used in encryption
+				cipher_first_byte = *std::make_unique<String>(Base64::Decode(text))->begin();
+			}
+			else
+			{
+				// check if the infile exists
+				ENIGMA_ASSERT_OR_THROW(fs::exists(infilename), "infile does not exist.");
+				// extract first byte from infile cipher which must be the mode type used in encryption
+				if (std::ifstream ifs{ infilename, std::ios_base::binary | std::ios_base::in })
+				{
+					ifs >> cipher_first_byte;
+					ifs.close();
+				}
+			}
+			// Check if detected mode is valid
+			ENIGMA_ASSERT_OR_THROW((cipher_first_byte >= (ui8)Algorithm::Type::First &&
+				cipher_first_byte <= (ui8)Algorithm::Type::Last),
+				"Could not auto-detect algorithm mode used for encryption, please set it manually with --mode=" +
+				Algorithm::GetSupportedAlgorithmsStr());
+
+			algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), intent);
+			
+			ENIGMA_INFO("Auto-Detected Algorithm used for encryption => {0}", algorithm->GetTypeString());
+		}
+		else
+			algorithm = Algorithm::CreateFromName(mode, intent);
 
 		// Check wether its a text or file encryption/decryption
 		if (!text.empty())

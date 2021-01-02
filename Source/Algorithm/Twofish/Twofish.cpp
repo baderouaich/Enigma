@@ -62,8 +62,8 @@ String Twofish::Encrypt(const String& password, const String& buffer)
 			);
 		//NOTE: StringSource will auto clean the allocated memory
 
-		// Output(AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-		output += std::move(iv + cipher);
+		// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
+		output.append(std::move(iv + cipher));
 	}
 	catch (const CryptoPP::Exception& e)
 	{
@@ -83,10 +83,9 @@ String Twofish::Decrypt(const String& password, const String& iv_cipher)
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::Twofish::BLOCKSIZE);
-	ENIGMA_ASSERT(!iv.empty(), "Failed to extract IV from iv_cipher");
+	ENIGMA_ASSERT_OR_RETURN(!iv.empty(), "Failed to extract IV from iv_cipher", String());
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::Twofish::BLOCKSIZE, iv_cipher.size() - 1);
-	ENIGMA_ASSERT(!cipher.empty(), "Failed to extract cipher from iv_cipher");
-
+	ENIGMA_ASSERT_OR_RETURN(!cipher.empty(), "Failed to extract cipher from iv_cipher", String());
 
 	// Recovered buffer
 	String decrypted;

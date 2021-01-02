@@ -31,8 +31,8 @@ String AES::Encrypt(const String& password, const String& buffer)
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 	
-	String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 16 bytes IV
-	String cipher{}; // Final encrypted buffer
+	const String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 16 bytes IV
+	String cipher{}; // encrypted buffer
 	String output(sizeof(Algorithm::Type), static_cast<const ui8>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 	try
 	{
@@ -62,8 +62,8 @@ String AES::Encrypt(const String& password, const String& buffer)
 		);
 		//NOTE: StringSource will auto clean the allocated memory
 
-		// Output(AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-		output +=  std::move(iv + cipher);
+		// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
+		output.append(std::move(iv + cipher));
 	}
 	catch (const CryptoPP::Exception& e)
 	{
@@ -83,9 +83,9 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
-	ENIGMA_ASSERT(!iv.empty(), "Failed to extract IV from iv_cipher");
+	ENIGMA_ASSERT_OR_RETURN(!iv.empty(), "Failed to extract IV from iv_cipher", String());
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
-	ENIGMA_ASSERT(!cipher.empty(), "Failed to extract cipher from iv_cipher");
+	ENIGMA_ASSERT_OR_RETURN(!cipher.empty(), "Failed to extract cipher from iv_cipher", String());
 
 	// Recovered buffer
 	String decrypted;

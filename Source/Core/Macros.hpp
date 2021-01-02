@@ -54,6 +54,16 @@
 			throw std::runtime_error(msg); \
 		} \
 	} while (false)
+
+#define ENIGMA_ASSERT_OR_RETURN(x, msg, ret) \
+	do \
+	{ \
+		if(!(x)) \
+		{ \
+			ENIGMA_ASSERT(false, msg); \
+			return ret; \
+		} \
+	} while (false)
 ///
 
 

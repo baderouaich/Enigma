@@ -7,11 +7,11 @@
 
 #if ENIGMA_TEST
 	//#include <Tests/Utils/Base64Tests.hpp>
-	#include <Tests/Algorithm/AESTests.hpp>
-	#include <Tests/Algorithm/ChaChaTests.hpp>
-	#include <Tests/Algorithm/TripleDESTests.hpp>
-	#include <Tests/Algorithm/TwofishTests.hpp>
-	#include <Tests/Algorithm/IDEATests.hpp>
+	//#include <Tests/Algorithm/AESTests.hpp>
+	//#include <Tests/Algorithm/ChaChaTests.hpp>
+	//#include <Tests/Algorithm/TripleDESTests.hpp>
+	//#include <Tests/Algorithm/TwofishTests.hpp>
+	//#include <Tests/Algorithm/IDEATests.hpp>
 #else
 	#include <Enigma.hpp>
 #endif
