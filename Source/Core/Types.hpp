@@ -22,7 +22,6 @@ namespace Enigma
 	using f64	= double;
 	using byte	= ui8;
 	using size_t	= std::size_t;
-
 	using String	= std::string;
 
 //#if defined(ENIGMA_PLATFORM_WINDOWS)

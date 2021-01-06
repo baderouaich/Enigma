@@ -74,6 +74,8 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PopFont();
 		
 		spacing(3);
+		ImGui::Separator();
+		spacing(3);
 
 		// Algorithm To encrypt text with
 		ImGui::PushFont(font_audiowide_regular_20);
@@ -120,7 +122,9 @@ void EncryptTextScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
-		spacing(3);
+		spacing(2);
+		ImGui::Separator();
+		spacing(2);
 
 		// Text to encrypt
 		ImGui::PushFont(font_montserrat_medium_20);
@@ -129,10 +133,10 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::Text("Text:");
 
 			// Input text
-			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 120.0f);
+			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 5);
 			ImGuiUtils::InputTextMultiline("##text1", &m_text, input_text_size);
 
-			// Remaining characters
+			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
 			ImGui::Text("%llu bytes", m_text.size());
 			ImGui::PopFont();
@@ -155,12 +159,11 @@ void EncryptTextScene::OnImGuiDraw()
 			// Label
 			ImGui::Text("Password:");
 			// Input text
-			const ImVec2 input_text_size(static_cast<f32>(win_w) - 10.0f, 33.0f);
-			ImGuiUtils::InputTextMultiline("##text2", &m_password, input_text_size, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiUtils::InputText("##text2", &m_password, win_w, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::Text("Confirm Password:");
-			ImGuiUtils::InputTextMultiline("##text3", &m_confirm_password, input_text_size, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiUtils::InputText("##text3", &m_confirm_password, win_w, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::PopStyleColor();
-			// Remaining characters
+			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
 			ImGui::Text("%llu bytes", m_password.size());
 		}
@@ -178,8 +181,7 @@ void EncryptTextScene::OnImGuiDraw()
 				ImGui::Text("Cipher (in base64):");
 				// Encrypted text
 				const ImVec2 copy_button_size(45.0f, 25.0f);
-				const ImVec2 input_text_size(static_cast<f32>(win_w) - 20.0f - copy_button_size.x, 33.0f);
-				ImGuiUtils::InputTextMultiline("##text4", &m_cipher_base64, input_text_size);
+				ImGuiUtils::InputText("##text4", &m_cipher_base64, win_w - (copy_button_size.x * 2.0f));
 				ImGui::PushFont(font_montserrat_medium_12);
 					ImGui::SameLine();
 					if (ImGui::Button("Copy", copy_button_size))
@@ -195,8 +197,10 @@ void EncryptTextScene::OnImGuiDraw()
 
 
 
-		spacing(9);
-		
+		spacing(3);
+		ImGui::Separator();
+		spacing(3);
+
 		// Encrypt Button
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
@@ -240,7 +244,7 @@ void EncryptTextScene::OnEvent(Event& event)
 
 void EncryptTextScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_LOG(ENIGMA_CURRENT_FUNCTION);
 
 	m_text.clear();
 	m_password.clear();

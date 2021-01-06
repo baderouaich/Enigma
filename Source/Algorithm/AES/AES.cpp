@@ -33,7 +33,7 @@ String AES::Encrypt(const String& password, const String& buffer)
 	
 	const String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 16 bytes IV
 	String cipher{}; // encrypted buffer
-	String output(sizeof(Algorithm::Type), static_cast<const ui8>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
+	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 	try
 	{
 		// Prepare key

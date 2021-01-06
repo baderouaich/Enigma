@@ -272,6 +272,7 @@ bool Window::InitGLFWCallbacks()
 	return true;
 }
 
+
 bool Window::InitGLAD()
 {
 	/* Init Glad OpenGL */

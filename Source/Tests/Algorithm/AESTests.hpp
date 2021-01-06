@@ -5,6 +5,8 @@
 #include <System/Dialogs/OpenFileDialog.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
+using namespace std;
+
 #define TEST_FILES false
 
 #if TEST_FILES
@@ -80,7 +82,6 @@ TEST_CASE("AES File Encryption and Decryption")
 #else
 TEST_CASE("AES-GCM Encryption and Decryption")
 {
-	using std::cout, std::cin, std::endl;
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	std::unique_ptr<Enigma::AES> aes_encryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Encrypt);

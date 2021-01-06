@@ -192,7 +192,7 @@ void MainMenuScene::OnEvent(Enigma::Event& event)
 
 void MainMenuScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_LOG(ENIGMA_CURRENT_FUNCTION);
 
 	// ImGui Pop Menu bar background color, see issue #3637
 	ImGui::PopStyleColor(1); 

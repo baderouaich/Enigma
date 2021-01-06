@@ -3,11 +3,11 @@
 #include <Algorithm/ChaCha20/ChaCha20.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
+using namespace std;
 
 
 TEST_CASE("ChaCha20 Encryption and Decryption")
 {
-	using std::cout, std::cin, std::endl;
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	std::unique_ptr<Enigma::ChaCha20> chacha_encryptor = std::make_unique<Enigma::ChaCha20>(Enigma::ChaCha20::Intent::Encrypt);

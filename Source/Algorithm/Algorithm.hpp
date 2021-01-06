@@ -18,10 +18,11 @@
 #include <aes.h> // AES
 #include <gcm.h> // GCM Mode
 #include <chacha.h> // ChaCha/Salsa20
-//#include <rsa.h> // RSA
 #include <des.h> // TripleDES
 #include <twofish.h> // Twofish
 #include <idea.h> // IDEA
+#include <rsa.h> // RSA
+#include <pssr.h> // RSA PSSR
 #pragma warning(pop)
 
 NS_ENIGMA_BEGIN
@@ -38,18 +39,30 @@ class IDEA;
 class ENIGMA_API Algorithm
 {
 public:
-	enum class Intent : ui8 { Encrypt, Decrypt };
-	enum class Type : ui8
+	enum class Intent : byte { Encrypt, Decrypt };
+	enum class Type : byte
 	{
-		AES = 0x00,
-		ChaCha20,
-		TripleDES,
-		Twofish,
-		IDEA,
+		AES			= 0x01,
+		ChaCha20	= 0x02,
+		TripleDES	= 0x03,
+		Twofish		= 0x04,
+		IDEA		= 0x05,
 
 		First = AES,
 		Last = IDEA
 	};
+	/*
+	// Algo type enum id in base64 to help us detect algorithm used in encryption if user forgot or haven't set --mode option
+	// Each raw text or file encryption ships the first byte as Type::Algo enum used for encryption.
+	inline static const std::map<std::string_view, const Algorithm::Type> Algorithm::ALGO_TYPE_BASE64_ENUM_IDS =
+	{
+		{"4pi6", Type::AES},
+		{"4pi7", Type::ChaCha20},
+		{"4pml", Type::TripleDES},
+		{"4pmm", Type::Twofish},
+		{"4pmj", Type::IDEA}
+	};
+	*/
 public:
 	explicit Algorithm(Type type, Intent intent) noexcept 
 		:
@@ -113,12 +126,9 @@ public:
 	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
 
 protected:
-	/*
-	*	Generates random 16 bytes IV String
-	*/
-	String GenerateRandomIV(const size_t& iv_size) 
+	String GenerateRandomIV(const size_t& size) 
 	{
-		String iv(iv_size, '\000');
+		String iv(size, '\000');
 		m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
 		return iv;
 	}
@@ -150,10 +160,10 @@ public:
 	}
 	static std::vector<std::pair<String, Algorithm::Type>> GetSupportedAlgorithms() noexcept
 	{
-		std::vector<std::pair<String, Algorithm::Type>> out(static_cast<size_t>(Algorithm::Type::Last) + 1);
+		std::vector<std::pair<String, Algorithm::Type>> out(static_cast<size_t>(Algorithm::Type::Last));
 		for (ui8 i = static_cast<ui8>(Algorithm::Type::First); i <= static_cast<ui8>(Algorithm::Type::Last); i++)
 		{
-			out[static_cast<size_t>(i)] = std::make_pair(AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) , static_cast<Algorithm::Type>(i));
+			out[static_cast<size_t>(i) - 1] = std::make_pair(AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) , static_cast<Algorithm::Type>(i));
 		}
 		return out;
 	}
@@ -163,6 +173,7 @@ protected:
 	std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
 
 };
+
 
 NS_ENIGMA_END
 

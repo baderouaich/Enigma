@@ -1,11 +1,15 @@
-[18:42:47] [info] Enigma: [ OpenGL Info ]
+[23:38:49] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[18:42:47] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[18:42:47] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[18:42:47] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[18:42:50] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[18:43:23] [trace] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[18:43:24] [trace] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[23:38:49] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[23:38:49] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[23:38:49] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[23:38:50] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[23:38:56] [error] Enigma: AES Decryption Failure : DATA_INTEGRITY_CHECK_FAILED
+HashVerificationFilter: message hash or MAC not valid
+D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Algorithm\AES\AES.cpp:125
+class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl Enigma::AES::Decrypt(const class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > &,const class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > &)
+[23:39:06] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[23:39:08] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

@@ -33,7 +33,7 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 
 	String iv = this->GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE); // Randomly generated 8 bytes IV
 	String cipher; // Final encrypted buffer
-	String output(sizeof(Algorithm::Type), static_cast<const ui8>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
+	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 	try
 	{
 		// Prepare key

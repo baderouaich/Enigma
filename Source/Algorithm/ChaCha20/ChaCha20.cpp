@@ -34,7 +34,7 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 
 	String iv = this->GenerateRandomIV(CryptoPP::ChaCha::IV_LENGTH); // Randomly generated 8 bytes ChaCha20 IV
 	String cipher; // Final encrypted buffer
-	String output(sizeof(Algorithm::Type), static_cast<const ui8>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
+	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 	try
 	{
 		// Prepare key

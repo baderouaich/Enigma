@@ -32,6 +32,7 @@ private:
 	String m_cipher; // Encrypted text
 	String m_cipher_base64; // Encrypted text in Base64
 	String m_password, m_confirm_password; // Encryption password
+
 };
 
 

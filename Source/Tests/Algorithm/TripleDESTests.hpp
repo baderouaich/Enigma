@@ -3,11 +3,11 @@
 #include <Algorithm/TripleDES/TripleDES.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
+using namespace std;
 
 
 TEST_CASE("TripleDES Encryption and Decryption")
 {
-	using std::cout, std::cin, std::endl;
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	std::unique_ptr<Enigma::TripleDES> tripledes_encryptor = std::make_unique<Enigma::TripleDES>(Enigma::TripleDES::Intent::Encrypt);

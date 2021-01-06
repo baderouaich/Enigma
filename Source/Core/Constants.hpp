@@ -6,6 +6,26 @@
 
 namespace Enigma
 {
+	/*
+	* Notes
+	* Raw Text:
+	- When encrypting a raw text, cipher is encoded to Base64 to make it readable and copyable to user.
+	- When decrypting a raw text, Base64 text is decoded to cipher, then its decrypted to recovered text.
+	* Binary:
+	- infile can be either encrypted file to be recovered, or a new file to be encrypted
+	- outfile can be either encrypted file or recovered file.
+	- When encrypting a file, cipher is outputed in binary to the outfile specified by the user without any encoding.
+	- When decrypting a file, recovered binary is outputed to outfile specified by the user.
+
+	Crypto++ Important Usage Notes *
+
+	 - If a constructor for A takes a pointer to an object B (except primitive types such as int and char),
+	 then A owns B and will delete B at A's destruction. If a constructor for A takes a reference to an object B,
+	 then the caller retains ownership of B and should not destroy it until A no longer needs it.
+
+	 - Crypto++ is thread safe at the class level. This means you can use Crypto++ safely in a multithreaded
+	 application, but you must provide synchronization when multiple threads access a common Crypto++ object.
+	*/
 	namespace Constants
 	{
 		namespace Algorithm

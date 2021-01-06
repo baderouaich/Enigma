@@ -3,11 +3,11 @@
 #include <Algorithm/IDEA/IDEA.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
+using namespace std;
 
 
 TEST_CASE("IDEA Encryption and Decryption")
 {
-	using std::cout, std::cin, std::endl;
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	std::unique_ptr<Enigma::IDEA> idea_encryptor = std::make_unique<Enigma::IDEA>(Enigma::IDEA::Intent::Encrypt);

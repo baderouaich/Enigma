@@ -3,11 +3,11 @@
 #include <Algorithm/Twofish/Twofish.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
+using namespace std;
 
 
 TEST_CASE("Twofish Encryption and Decryption")
 {
-	using std::cout, std::cin, std::endl;
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	std::unique_ptr<Enigma::Twofish> twofish_encryptor = std::make_unique<Enigma::Twofish>(Enigma::Twofish::Intent::Encrypt);
