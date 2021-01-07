@@ -18,8 +18,8 @@ public:
 	virtual ~AES() = default;
 
 public:
-	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& iv_cipher) override;
+	String Encrypt(const String& password, const String& buffer) noexcept(false) override;
+	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
 
 private:
 	// AES symmetric cipher is recommended to be used with GCM mode

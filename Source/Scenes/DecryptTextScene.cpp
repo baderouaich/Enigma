@@ -273,7 +273,28 @@ void DecryptTextScene::OnDecryptButtonPressed()
 		(void)DialogUtils::Error("Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
 		return;
 	}
-	m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Decrypt);
-	m_recovered_text = m_algorithm->Decrypt(m_password, m_cipher);
+	try
+	{
+		m_cipher = Base64::Decode(m_cipher_base64);
+		ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
+	
+		// Create encryptor based on selected algorithm type
+		m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Decrypt);
+		ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
+		
+		m_recovered_text = m_algorithm->Decrypt(m_password, m_cipher);
+		ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to recover encrypted text");
+
+		// Spawn notification alert if window is not focused
+		if (!Application::GetInstance()->GetWindow()->IsFocused())
+		{
+			Notification{ "Enigma", "Successfully Decrypted Text" }.Show();
+		}
+	}
+	catch (const std::exception& e)
+	{
+		ENIGMA_ERROR(e.what());
+		(void)DialogUtils::Error(e.what());
+	}
 	//TODO: handle decryption failure in a better way.
 }

@@ -1,15 +1,22 @@
-[23:38:49] [info] Enigma: [ OpenGL Info ]
+[10:13:59] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[23:38:49] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[23:38:49] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[23:38:49] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[23:38:50] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
-[23:38:56] [error] Enigma: AES Decryption Failure : DATA_INTEGRITY_CHECK_FAILED
-HashVerificationFilter: message hash or MAC not valid
-D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Algorithm\AES\AES.cpp:125
-class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl Enigma::AES::Decrypt(const class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > &,const class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > &)
-[23:39:06] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
-[23:39:08] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[10:13:59] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[10:13:59] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[10:13:59] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[10:14:17] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
+[10:14:41] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
+[10:14:42] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[10:14:50] [error] Enigma: StreamTransformationFilter: invalid PKCS #7 block padding found
+D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\DecryptTextScene.cpp:296
+void __cdecl DecryptTextScene::OnDecryptButtonPressed(void)
+[10:15:06] [error] Enigma: HashVerificationFilter: message hash or MAC not valid
+D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\DecryptTextScene.cpp:296
+void __cdecl DecryptTextScene::OnDecryptButtonPressed(void)
+[10:15:10] [error] Enigma: HashVerificationFilter: message hash or MAC not valid
+D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\DecryptTextScene.cpp:296
+void __cdecl DecryptTextScene::OnDecryptButtonPressed(void)
+[10:15:15] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[10:15:16] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

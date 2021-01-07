@@ -18,8 +18,8 @@ public:
 	virtual ~Twofish() = default;
 
 public:
-	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& iv_cipher) override;
+	String Encrypt(const String& password, const String& buffer) noexcept(false) override;
+	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
 
 private:
 	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Encryption> m_twofish_encryption; // Twofish-GCM encryptor

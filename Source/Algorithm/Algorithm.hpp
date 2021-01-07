@@ -51,18 +51,7 @@ public:
 		First = AES,
 		Last = IDEA
 	};
-	/*
-	// Algo type enum id in base64 to help us detect algorithm used in encryption if user forgot or haven't set --mode option
-	// Each raw text or file encryption ships the first byte as Type::Algo enum used for encryption.
-	inline static const std::map<std::string_view, const Algorithm::Type> Algorithm::ALGO_TYPE_BASE64_ENUM_IDS =
-	{
-		{"4pi6", Type::AES},
-		{"4pi7", Type::ChaCha20},
-		{"4pml", Type::TripleDES},
-		{"4pmm", Type::Twofish},
-		{"4pmj", Type::IDEA}
-	};
-	*/
+
 public:
 	explicit Algorithm(Type type, Intent intent) noexcept 
 		:
@@ -79,15 +68,17 @@ public:
 	* @param password: Encryption password
 	* @param buffer: Buffer to encrypt (text, binary...)
 	* @return (Algo type enum id + IV + Cipher)
+	* @throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Encrypt(const String& password, const String& buffer) = 0;
+	virtual String Encrypt(const String& password, const String& buffer) noexcept(false) = 0;
 	/*
 	*	Decrypts cipher with password
 	* @param password: Password used to Encyrpt buffer
 	* @param iv_cipher: (Algo type enum id + IV + Cipher)
 	* @return Recovered Buffer
+	* @throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Decrypt(const String& password, const String& iv_cipher) = 0;
+	virtual String Decrypt(const String& password, const String& iv_cipher) noexcept(false) = 0;
 
 
 public: /* Create polymorphic algorithm by either mode name or type*/

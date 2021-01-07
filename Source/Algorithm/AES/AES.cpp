@@ -16,62 +16,49 @@ String AES::Encrypt(const String& password, const String& buffer)
 {    
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT(m_aes_encryption, "AES Encryption is not initialized properly");
-		ENIGMA_ASSERT(m_auto_seeded_random_pool, "AES Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_aes_encryption, "AES Encryption is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "AES Encryption seeder is not initialized properly");
 	}
 
 	// Validate Arguments
 	{
 		// AES password length must be at least 9 for security reasons
-		if (password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
-		{
-			ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(String("AES Encryption Failure"), "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
-			return String();
-		}
+		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 	
 	const String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE); // Randomly generated 16 bytes IV
 	String cipher{}; // encrypted buffer
 	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
-	try
-	{
-		// Prepare key
-		CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE); // Encryption key to be generated from user password + IV
-		
-		// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
-		CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
-		hkdf.DeriveKey(
-			key, key.size(),
-			reinterpret_cast<const byte*>(password.data()), password.size(),
-			reinterpret_cast<const byte*>(iv.data()), iv.size(),
-			nullptr, 0
-		);
-
-		// Set Key and IV to the encryptor
-		m_aes_encryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
 	
-		// Encrypt
-		std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
-			buffer,
-			true,
-			new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
-				*m_aes_encryption, 
-				new CryptoPP::StringSink(cipher)
-			)
-		);
-		//NOTE: StringSource will auto clean the allocated memory
+	// Prepare key
+	CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE); // Encryption key to be generated from user password + IV
+		
+	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
+	CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
+	hkdf.DeriveKey(
+		key, key.size(),
+		reinterpret_cast<const byte*>(password.data()), password.size(),
+		reinterpret_cast<const byte*>(iv.data()), iv.size(),
+		nullptr, 0
+	);
 
-		// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-		output.append(std::move(iv + cipher));
-	}
-	catch (const CryptoPP::Exception& e)
-	{
-		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("AES Encryption Failure "),
-			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
-		);
-	}
+	// Set Key and IV to the encryptor
+	m_aes_encryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+	
+	// Encrypt
+	std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
+		buffer,
+		true,
+		new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
+			*m_aes_encryption, 
+			new CryptoPP::StringSink(cipher)
+		)
+	);
+	//NOTE: StringSource will auto clean the allocated memory
+
+	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
+	output.append(std::move(iv + cipher));
 
 	return output;
 }
@@ -83,47 +70,38 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
-	ENIGMA_ASSERT_OR_RETURN(!iv.empty(), "Failed to extract IV from iv_cipher", String());
+	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV from iv_cipher");
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
-	ENIGMA_ASSERT_OR_RETURN(!cipher.empty(), "Failed to extract cipher from iv_cipher", String());
+	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from iv_cipher");
 
 	// Recovered buffer
-	String decrypted;
-	try
-	{
-		// Prepare Key
-		CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE);
-		
-		// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
-		CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
-		hkdf.DeriveKey(
-			key, key.size(),
-			reinterpret_cast<const byte*>(password.data()), password.size(),
-			reinterpret_cast<const byte*>(iv.data()), iv.size(),
-			nullptr, 0);
-		
-		// Set Key and IV to the decryptor
-		m_aes_decryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+	String decrypted{};
 
-		// Decrypt
-		std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
-			cipher,
-			true,
-			new CryptoPP::AuthenticatedDecryptionFilter(
-				*m_aes_decryption,
-				new CryptoPP::StringSink(decrypted)
-			)
-		);
+	// Prepare Key
+	CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE);
+		
+	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
+	CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
+	hkdf.DeriveKey(
+		key, key.size(),
+		reinterpret_cast<const byte*>(password.data()), password.size(),
+		reinterpret_cast<const byte*>(iv.data()), iv.size(),
+		nullptr, 0);
+		
+	// Set Key and IV to the decryptor
+	m_aes_decryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
 
-		//NOTE: StringSource will auto clean the allocated memory
-	}
-	catch (const CryptoPP::Exception& e)
-	{
-		ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(
-			String("AES Decryption Failure "),
-			CryptoPPUtils::GetCryptoPPErrorString(e.GetErrorType()) + '\n' + e.GetWhat()
-		);
-	}
+	// Decrypt
+	std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
+		cipher,
+		true,
+		new CryptoPP::AuthenticatedDecryptionFilter(
+			*m_aes_decryption,
+			new CryptoPP::StringSink(decrypted)
+		)
+	);
+
+	//NOTE: StringSource will auto clean the allocated memory
 
 	return decrypted;
 }
