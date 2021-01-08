@@ -1,11 +1,17 @@
-[22:04:05] [info] Enigma: [ OpenGL Info ]
+[22:07:46] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[22:04:05] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[22:04:06] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[22:04:06] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[22:04:07] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[22:05:52] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[22:06:24] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[22:07:46] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[22:07:46] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[22:07:46] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[22:07:52] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[22:07:52] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[22:07:53] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
+[22:08:09] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
+[22:08:10] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
+[22:08:15] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
+[22:08:17] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[22:09:24] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[22:09:24] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
