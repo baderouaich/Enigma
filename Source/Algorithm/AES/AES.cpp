@@ -70,9 +70,9 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
-	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV from iv_cipher");
+	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV from cipher");
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, iv_cipher.size() - 1);
-	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from iv_cipher");
+	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from cipher");
 
 	// Recovered buffer
 	String decrypted{};

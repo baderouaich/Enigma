@@ -14,6 +14,7 @@ bool Input::IsKeyPressed(KeyCode keycode) noexcept
 
 bool Input::IsMouseButtonPressed(MouseCode button) noexcept
 {
+
 	GLFWwindow* window = Application::GetInstance()->GetWindow()->GetGLFWwindow();
 	i32 state = glfwGetMouseButton(window, static_cast<i32>(button));
 	return state == GLFW_PRESS;

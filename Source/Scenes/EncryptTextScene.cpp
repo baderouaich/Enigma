@@ -11,7 +11,6 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
 	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
 {
-
 }
 
 void EncryptTextScene::OnCreate()
@@ -154,6 +153,7 @@ void EncryptTextScene::OnImGuiDraw()
 			Constants::Colors::PASSWORD_MATCH_TEXT_COLOR : // ... set color to green
 			Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
 		); 
+
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
@@ -165,9 +165,9 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%llu bytes", m_password.size());
+				ImGui::Text("%llu bytes", m_password.size());
+			ImGui::PopFont();
 		}
-		ImGui::PopFont();
 		ImGui::PopFont();
 
 		spacing(3);
