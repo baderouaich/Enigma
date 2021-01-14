@@ -7,7 +7,7 @@
 
 <!--LOGO-->
 <!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
-<img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="430"/>
+<img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/>
 
 
 <!--DESCRIOTION-->
@@ -15,11 +15,12 @@ A Simple, Reliable and Efficient UI + CLI Encryption Tool
 
 
 ## Supported Algorithm
-- [x] AES-GCM (Highly recommended)
-- [x] ChaCha20
-- [x] TripleDES-CBC
-- [x] Twofish-GCM
-- [x] IDEA-CBC
+- :white_check_mark: <strong>AES-GCM</strong> (Recommended)
+- :white_check_mark: <strong>ChaCha20</strong>
+- :white_check_mark: <strong>TripleDES-CBC</strong>
+- :white_check_mark: <strong>Twofish-GCM</strong>
+- :white_check_mark: <strong>IDEA-CBC</strong>
+<!-- - [ ] algo || [x] algo -->
 
 
 ## Enigma CLI
@@ -108,7 +109,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma`
  - Run Enigma Binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
-### MacOS TODO
+### MacOS TODO (when i figure out a way to test on macos with vm)
 - Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
 
 

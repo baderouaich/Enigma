@@ -129,6 +129,10 @@ void EncryptTextScene::OnImGuiDraw()
 			Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
 		); 
 
+		spacing(3);
+		ImGui::Separator();
+		spacing(3);
+
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
@@ -145,11 +149,13 @@ void EncryptTextScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
-		spacing(3);
-
 		// Encrypted text in Base64 output
 		if (!m_cipher.empty())
 		{
+			spacing(3);
+			ImGui::Separator();
+			spacing(3);
+
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label

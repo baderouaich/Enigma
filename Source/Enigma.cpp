@@ -17,7 +17,7 @@ public:
 		window->SetIcon(Enigma::Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
 
-		//Push Main Menu scene
+		//Push Main Menu scene as entry point
 		this->PushScene(std::make_unique<MainMenuScene>());
 	}
 
@@ -41,9 +41,8 @@ extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
 		//window_settings.minimum_height = window_settings.height - 100;
 		//window_settings.maximum_width = 800;
 		//window_settings.maximum_height = 600;
-		//window_settings.is_resizable = true;
-		window_settings.is_vsync = false;
 		window_settings.is_resizable = true;
+		window_settings.is_vsync = false;
 		window_settings.is_show_fps = true;
 	}
 	return std::make_unique<EnigmaApplication>(std::move(window_settings));
