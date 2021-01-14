@@ -93,31 +93,6 @@ void EncryptTextScene::OnImGuiDraw()
 					m_algorithm->SetType(algo_type);
 				}
 			}
-			
-			/*
-			Hardcoded Arghh!
-			if (ImGui::RadioButton("AES", m_algorithm == Algorithm::Type::AES))
-			{
-				m_algorithm = Algorithm::Type::AES;
-			}
-			inline_dummy(2.0f, 0.0f);
-			ImGui::SameLine();
-			if (ImGui::RadioButton("ChaCha20", m_algorithm == Algorithm::Type::ChaCha20))
-			{
-				m_algorithm = Algorithm::Type::ChaCha20;
-			}
-			inline_dummy(2.0f, 0.0f);
-			ImGui::SameLine();
-			if (ImGui::RadioButton("TripleDES", m_algorithm == Algorithm::Type::TripleDES))
-			{
-				m_algorithm = Algorithm::Type::TripleDES;
-			}			
-			inline_dummy(2.0f, 0.0f);
-			ImGui::SameLine();
-			if (ImGui::RadioButton("Twofish", m_algorithm == Algorithm::Type::Twofish))
-			{
-				m_algorithm = Algorithm::Type::Twofish;
-			}*/
 		}
 		ImGui::PopFont();
 
@@ -159,9 +134,9 @@ void EncryptTextScene::OnImGuiDraw()
 			// Label
 			ImGui::Text("Password:");
 			// Input text
-			ImGuiUtils::InputText("##text2", &m_password, win_w, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiUtils::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::Text("Confirm Password:");
-			ImGuiUtils::InputText("##text3", &m_confirm_password, win_w, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiUtils::InputText("##text3", &m_confirm_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -189,7 +164,7 @@ void EncryptTextScene::OnImGuiDraw()
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
 					//ImGui::NewLine();
-					ImGui::Text("%llu bytes", m_cipher_base64.size());
+					ImGui::Text("%llu bytes (Please save cipher base64 text above in a safe place)", m_cipher_base64.size());
 				ImGui::PopFont();
 			}
 			ImGui::PopFont();
@@ -248,6 +223,7 @@ void EncryptTextScene::OnDestroy()
 
 	m_text.clear();
 	m_password.clear();
+	m_confirm_password.clear();
 	m_cipher.clear();
 	m_cipher_base64.clear();
 }
@@ -293,10 +269,22 @@ void EncryptTextScene::OnEncryptButtonPressed()
 				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
 			}
 		}
+		catch (const CryptoPP::Exception& e)
+		{
+			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+			ENIGMA_ERROR("Decryption Failure: {}", err_msg);
+			(void)DialogUtils::Error("Decryption Failure", err_msg);
+		}
 		catch (const std::exception& e)
 		{
-			ENIGMA_ERROR(e.what());
-			(void)DialogUtils::Error(e.what());
+			ENIGMA_ERROR("Decryption Failure: {}", e.what());
+			(void)DialogUtils::Error("Decryption Failure", e.what());
+		}
+		catch (...)
+		{
+			const String err_msg = "Decryption Failure: Unknown Error";
+			ENIGMA_ERROR("Decryption Failure: Unknown Error");
+			(void)DialogUtils::Error(err_msg);
 		}
 	}
 }

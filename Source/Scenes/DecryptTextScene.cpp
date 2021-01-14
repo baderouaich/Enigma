@@ -133,7 +133,7 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::Text("Password:");
 
 			// Input text
-			ImGuiUtils::InputText("##text2", &m_password, win_w, ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiUtils::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -147,7 +147,7 @@ void DecryptTextScene::OnImGuiDraw()
 		// Decrypted/Recovered Text
 		if (!m_recovered_text.empty())
 		{
-			ImGui::PushFont(font_audiowide_regular_20);
+			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
 				ImGui::Text("Recovered Text:");
@@ -211,6 +211,11 @@ void DecryptTextScene::OnEvent(Event& event)
 void DecryptTextScene::OnDestroy()
 {
 	ENIGMA_LOG(ENIGMA_CURRENT_FUNCTION);
+
+	m_recovered_text.clear(); 
+	m_cipher.clear();
+	m_cipher_base64.clear();
+	m_password.clear();
 }
 
 
@@ -261,18 +266,17 @@ void DecryptTextScene::OnBackButtonPressed()
 
 void DecryptTextScene::OnDecryptButtonPressed()
 {
+	if (m_cipher_base64.empty())
+	{
+		(void)DialogUtils::Warn("Cipher Base64 is empty");
+		return;
+	}
 	if (m_password.empty())
 	{
 		(void)DialogUtils::Warn("Password is empty");
 		return;
 	}
 
-	m_cipher = Base64::Decode(m_cipher_base64);
-	if (m_cipher.empty())
-	{
-		(void)DialogUtils::Error("Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
-		return;
-	}
 	try
 	{
 		m_cipher = Base64::Decode(m_cipher_base64);
@@ -291,10 +295,23 @@ void DecryptTextScene::OnDecryptButtonPressed()
 			Notification{ "Enigma", "Successfully Decrypted Text" }.Show();
 		}
 	}
+	catch (const CryptoPP::Exception& e)
+	{
+		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+		ENIGMA_ERROR("Decryption Failure: {}", err_msg);
+		(void)DialogUtils::Error("Decryption Failure", err_msg);
+	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR(e.what());
-		(void)DialogUtils::Error(e.what());
+		ENIGMA_ERROR("Decryption Failure: {}", e.what());
+		(void)DialogUtils::Error("Decryption Failure", e.what());
 	}
+	catch (...)
+	{
+		const String err_msg = "Decryption Failure: Unknown Error";
+		ENIGMA_ERROR("Decryption Failure: Unknown Error");
+		(void)DialogUtils::Error(err_msg);
+	}
+	
 	//TODO: handle decryption failure in a better way.
 }

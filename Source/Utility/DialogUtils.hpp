@@ -14,12 +14,33 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API DialogUtils 
 {
 public:
+	static const Enigma::MessageBox::Action Error(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
+	{
+		const auto msgbox = std::make_unique<Enigma::MessageBox>(
+			title,
+			message,
+			Enigma::MessageBox::Icon::Error,
+			choice
+			);
+		return (msgbox->Show());
+	}
 	static const Enigma::MessageBox::Action Error(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
 		const auto msgbox = std::make_unique<Enigma::MessageBox>(
 			"Enigma",
 			message,
 			Enigma::MessageBox::Icon::Error,
+			choice
+			);
+		return (msgbox->Show());
+	}
+   
+	static const Enigma::MessageBox::Action Warn(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
+	{
+		const auto msgbox = std::make_unique<Enigma::MessageBox>(
+			title,
+			message,
+			Enigma::MessageBox::Icon::Warning,
 			choice
 			);
 		return (msgbox->Show());
@@ -35,6 +56,16 @@ public:
 		return (msgbox->Show());
 	}
 
+	static const Enigma::MessageBox::Action Question(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Yes_No)
+	{
+		const auto msgbox = std::make_unique<Enigma::MessageBox>(
+			title,
+			message,
+			Enigma::MessageBox::Icon::Question,
+			choice
+			);
+		return (msgbox->Show());
+	}
 	static const Enigma::MessageBox::Action Question(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Yes_No)
 	{
 		const auto msgbox = std::make_unique<Enigma::MessageBox>(
@@ -46,6 +77,16 @@ public:
 		return (msgbox->Show());
 	}
 
+	static const Enigma::MessageBox::Action Info(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
+	{
+		const auto msgbox = std::make_unique<Enigma::MessageBox>(
+			title,
+			message,
+			Enigma::MessageBox::Icon::Info,
+			choice
+			);
+		return (msgbox->Show());
+	}
 	static const Enigma::MessageBox::Action Info(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
 		const auto msgbox = std::make_unique<Enigma::MessageBox>(

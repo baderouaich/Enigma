@@ -1,17 +1,29 @@
-[22:07:46] [info] Enigma: [ OpenGL Info ]
+[15:09:11] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[22:07:46] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[22:07:46] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[22:07:46] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[22:07:52] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
-[22:07:52] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
-[22:07:53] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[22:08:09] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[22:08:10] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
-[22:08:15] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
-[22:08:17] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
-[22:09:24] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
-[22:09:24] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[15:09:11] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[15:09:11] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[15:09:11] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[15:09:12] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[15:09:14] [error] Enigma: Decryption Failure: Error Type: DATA_INTEGRITY_CHECK_FAILED
+Message: HashVerificationFilter: message hash or MAC not valid
+Reason: Data integerity check, such as CRC or MAC, failed. usually incorrect encryption password or corrupted cipher
+D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\DecryptTextScene.cpp:296
+void __cdecl DecryptTextScene::OnDecryptButtonPressed(void)
+[15:09:16] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[15:09:17] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[15:09:26] [error] Enigma: Decryption Failure: Error Type: DATA_INTEGRITY_CHECK_FAILED
+Message: HashVerificationFilter: message hash or MAC not valid
+Reason: Data integerity check, such as CRC or MAC, failed. usually incorrect encryption password or corrupted cipher
+D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\DecryptTextScene.cpp:296
+void __cdecl DecryptTextScene::OnDecryptButtonPressed(void)
+[15:09:29] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[15:09:30] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[15:09:32] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[15:09:33] [trace] Enigma: void __cdecl EncryptTextScene::OnCreate(void)
+[15:10:00] [debug] Enigma: void __cdecl EncryptTextScene::OnDestroy(void)
+[15:10:06] [trace] Enigma: void __cdecl DecryptTextScene::OnCreate(void)
+[15:10:07] [debug] Enigma: void __cdecl DecryptTextScene::OnDestroy(void)
+[15:10:09] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

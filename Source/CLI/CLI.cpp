@@ -1,5 +1,6 @@
 #include <pch.hpp>
 #include "CLI.hpp"
+#include <Utility/DialogUtils.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -211,14 +212,24 @@ i32 CLI::Run()
 			throw std::runtime_error("Please specify what to encrypt, either text using --text or a file using --infile & --outfile");
 
 	}
+	catch (const CryptoPP::Exception& e)
+	{
+		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+		ENIGMA_ERROR("Decryption Failure: {}", err_msg);
+		(void)DialogUtils::Error("Decryption Failure", err_msg);
+		return EXIT_FAILURE;
+	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: {0}", e.what());
+		ENIGMA_ERROR("Decryption Failure: {}", e.what());
+		(void)DialogUtils::Error("Decryption Failure", e.what());
 		return EXIT_FAILURE;
 	}
 	catch (...)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: UNKNOWN ERROR");
+		const String err_msg = "Decryption Failure: Unknown Error";
+		ENIGMA_ERROR("Decryption Failure: Unknown Error");
+		(void)DialogUtils::Error(err_msg);
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;
@@ -246,8 +257,9 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	}
 
 	ENIGMA_INFO(encrypted_text_base64);
-	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds.", text.size(), elapsed_seconds);
-
+	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
+		text.size(), elapsed_seconds);
+	
 	encrypted_text.clear();
 	encrypted_text_base64.clear();
 }

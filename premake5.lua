@@ -67,6 +67,7 @@ project "Enigma"
 	---[[ Binary Output dirs ]]---
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
+	--debugdir ("%{wks.location}") -- where we can access Resources/
 
 	---[[ Precompiled Header ]]---
 	pchheader "pch.hpp"

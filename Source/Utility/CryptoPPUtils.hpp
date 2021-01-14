@@ -12,28 +12,52 @@ public:
 	/*
 	*	Converts Crypto++ ErrorType into String
 	*/
-	static const String GetCryptoPPErrorString(const enum CryptoPP::Exception::ErrorType& _enum) noexcept
+	static const String GetErrorString(const enum CryptoPP::Exception::ErrorType& _enum) noexcept
 	{
-#define CASE_ENUM(e) case CryptoPP::Exception::ErrorType::e: return #e
+#define CASE_RETURN(e) case CryptoPP::Exception::ErrorType::e: return #e
 		switch (_enum)
 		{
 			/// \brief A method was called which was not implemented
-			CASE_ENUM(NOT_IMPLEMENTED);
+			CASE_RETURN(NOT_IMPLEMENTED);
 			/// \brief An invalid argument was detected
-			CASE_ENUM(INVALID_ARGUMENT);
+			CASE_RETURN(INVALID_ARGUMENT);
 			/// \brief BufferedTransformation received a Flush(true) signal but can't flush buffers
-			CASE_ENUM(CANNOT_FLUSH);
+			CASE_RETURN(CANNOT_FLUSH);
 			/// \brief Data integerity check, such as CRC or MAC, failed
-			CASE_ENUM(DATA_INTEGRITY_CHECK_FAILED);
+			CASE_RETURN(DATA_INTEGRITY_CHECK_FAILED);
 			/// \brief Input data was received that did not conform to expected format
-			CASE_ENUM(INVALID_DATA_FORMAT);
+			CASE_RETURN(INVALID_DATA_FORMAT);
 			/// \brief Error reading from input device or writing to output device
-			CASE_ENUM(IO_ERROR);
+			CASE_RETURN(IO_ERROR);
 			/// \brief Some other error occurred not belonging to other categories
 			default:
-			CASE_ENUM(OTHER_ERROR);
+			CASE_RETURN(OTHER_ERROR);
 		}
-#undef CASE_ENUM
+#undef CASE_RETURN
+	}
+
+	static const String GetErrorReason(const enum CryptoPP::Exception::ErrorType& _enum)
+	{
+		using ErrorType = CryptoPP::Exception::ErrorType;
+#define CASE_RETURN(c, ret) case c: return ret
+		switch (_enum)
+		{
+			CASE_RETURN(ErrorType::INVALID_ARGUMENT, "An invalid argument was detected");
+			CASE_RETURN(ErrorType::CANNOT_FLUSH, "BufferedTransformation received a Flush(true) signal but can't flush buffers");
+			CASE_RETURN(ErrorType::DATA_INTEGRITY_CHECK_FAILED, "Data integerity check, such as CRC or MAC, failed. usually incorrect encryption password or corrupted cipher");
+			CASE_RETURN(ErrorType::INVALID_DATA_FORMAT, "Input data was received that did not conform to expected format. usually corrupted cipher");
+			CASE_RETURN(ErrorType::IO_ERROR, "Error reading from input device or writing to output device");
+			default: return "Unknown Error";
+		}
+#undef CASE_RETURN
+	}
+	
+	static const String GetFullErrorMessage(const CryptoPP::Exception& e)
+	{
+		return  
+			"Error Type: " + GetErrorString(e.GetErrorType()) + '\n' +
+			"Message: " + e.GetWhat() + '\n' +
+			"Reason: " + GetErrorReason(e.GetErrorType());
 	}
 };
 
