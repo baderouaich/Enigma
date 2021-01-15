@@ -142,11 +142,14 @@ void DecryptTextScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
-		spacing(3);
 
 		// Decrypted/Recovered Text
 		if (!m_recovered_text.empty())
 		{
+			spacing(3);
+			ImGui::Separator();
+			spacing(3);
+
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label

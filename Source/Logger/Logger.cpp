@@ -16,9 +16,11 @@ void Logger::Initialize()
 	log_sinks[1] = std::make_shared<spdlog::sinks::basic_file_sink_mt>("Enigma.log", true);
 
 	// set pattern of the console logger
-	log_sinks[0]->set_pattern("%^[%T] %n: %v%$");
+	log_sinks[0]->set_pattern("%^[%T] %n: %v%$"); // regex like pattern output format https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
 	// set pattern of the file logger
-	log_sinks[1]->set_pattern("[%T] [%l] %n: %v");
+	log_sinks[1]->set_pattern("[%Y-%m-%d %T] [%l] %n: %v"); // [2021-10-31 23:46:59.678] [trace] Enigma: Some message
+	//log_sinks[1]->set_pattern("[%T] [%l] %n: %v");
+	//log_sinks[1]->set_pattern("%+"); // spdlog's default format	"[2014-10-31 23:46:59.678] [mylogger] [info] Some message"
 
 	//Engine Logger
 	m_logger = std::make_shared<spdlog::logger>("Enigma", log_sinks.begin() , log_sinks.end());

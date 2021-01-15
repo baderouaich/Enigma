@@ -6,6 +6,7 @@
 
 //Logging Library
 // This ignores all warnings raised inside External headers
+// https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
 #pragma warning(push, 0)
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
@@ -31,7 +32,7 @@ private:
 
 /// Enigma Log 
 #if defined(ENIGMA_DEBUG) 
-	// for debug mode, we're using more detailed logging
+	// for debug mode, we're using detailed logging (file:line function)
 	#define ENIGMA_TRACE(...)				::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
 	#define ENIGMA_LOG(...)					::Enigma::Logger::GetLogger()->debug(__VA_ARGS__)
 	#define ENIGMA_INFO(...)				::Enigma::Logger::GetLogger()->info(__VA_ARGS__)

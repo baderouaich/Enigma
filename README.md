@@ -109,7 +109,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma`
  - Run Enigma Binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
-### MacOS TODO (when i figure out a way to test on macos with vm)
+### MacOS TODO (when i figure out a way to test macos on vm)
 - Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
 
 
