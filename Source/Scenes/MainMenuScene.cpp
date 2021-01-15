@@ -1,6 +1,7 @@
 #include <pch.hpp>
 #include "MainMenuScene.hpp"
 
+#include "EncryptFileScene.hpp"
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
 #include <Utility/DialogUtils.hpp>
@@ -242,6 +243,7 @@ void MainMenuScene::LoadImGuiFonts()
 
 void MainMenuScene::OnEncryptFileButtonPressed()
 {
+	Application::GetInstance()->PushScene(std::make_shared<EncryptFileScene>(m_fonts));
 }
 
 void MainMenuScene::OnDecryptFileButtonPressed()

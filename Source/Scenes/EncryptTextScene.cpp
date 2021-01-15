@@ -161,7 +161,7 @@ void EncryptTextScene::OnImGuiDraw()
 				// Label
 				ImGui::Text("Cipher (in base64):");
 				// Encrypted text
-				const ImVec2 copy_button_size(45.0f, 25.0f);
+				static const ImVec2 copy_button_size(45.0f, 25.0f);
 				ImGuiUtils::InputText("##text4", &m_cipher_base64, win_w - (copy_button_size.x * 2.0f));
 				ImGui::PushFont(font_montserrat_medium_12);
 					ImGui::SameLine();

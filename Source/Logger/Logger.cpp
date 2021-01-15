@@ -22,7 +22,7 @@ void Logger::Initialize()
 	//log_sinks[1]->set_pattern("[%T] [%l] %n: %v");
 	//log_sinks[1]->set_pattern("%+"); // spdlog's default format	"[2014-10-31 23:46:59.678] [mylogger] [info] Some message"
 
-	//Engine Logger
+	// create & register Logger
 	m_logger = std::make_shared<spdlog::logger>("Enigma", log_sinks.begin() , log_sinks.end());
 	spdlog::register_logger(m_logger);
 	m_logger->set_level(spdlog::level::trace);
