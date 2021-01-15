@@ -1,6 +1,7 @@
 #include "pch.hpp"
 #include "EncryptFileScene.hpp"
 #include <Utility/ImGuiUtils.hpp>
+#include <Utility/DialogUtils.hpp>
 #include <System/Dialogs/MessageBox.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <System/Dialogs/SaveFileDialog.hpp>
@@ -27,6 +28,9 @@ void EncryptFileScene::OnCreate()
 		Constants::Colors::BACKGROUND_COLOR.w
 	));
 
+	// Set default m_in_file_path as enigma exe path
+	m_in_file_path = fs::current_path().string();
+
 }
 
 void EncryptFileScene::OnUpdate(const f32& dt)
@@ -46,10 +50,8 @@ void EncryptFileScene::OnImGuiDraw()
 
 	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
 
-	static constexpr const auto dummy = [](const f32& x, const f32& y) noexcept { ImGui::Dummy(ImVec2(x, y)); };
 	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
-	static constexpr const auto inline_spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); } };
 
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
@@ -140,16 +142,29 @@ void EncryptFileScene::OnDestroy()
 
 void EncryptFileScene::OnBrowseButtonClicked()
 {
-	std::unique_ptr<OpenFileDialog> ofd(new OpenFileDialog(
+	const auto ofd = std::make_unique<Enigma::OpenFileDialog>(
 		"Select A File To Encrypt",
 		".",
-		false
-	));
+		false // disable multi-select
+	);
 	
+	ENIGMA_TRACE("Selecting a file to encrypt...");
 	std::vector<String> selected_file_paths = ofd->Show();
 	if (selected_file_paths.empty())
+	{
+		ENIGMA_TRACE("Nothing is selected.");
 		return;
+	}
 
-	m_in_file_path = *selected_file_paths.begin();
+	if (fs::exists(*selected_file_paths.begin()) && fs::is_regular_file(*selected_file_paths.begin()))
+	{
+		m_in_file_path = *selected_file_paths.begin();
+		ENIGMA_TRACE("Selected file: {0}", m_in_file_path);
+	}
+	else
+	{
+		ENIGMA_WARN("File {0} does not exist", *selected_file_paths.begin());
+		(void)DialogUtils::Warn("File " + *selected_file_paths.begin() + " does not exist");
+	}
 }
 
