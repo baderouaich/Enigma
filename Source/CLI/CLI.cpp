@@ -214,22 +214,17 @@ i32 CLI::Run()
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-		ENIGMA_ERROR("Decryption Failure: {}", err_msg);
-		(void)DialogUtils::Error("Decryption Failure", err_msg);
+		ENIGMA_ERROR("Failed to parse arguments: {0}", CryptoPPUtils::GetFullErrorMessage(e));
 		return EXIT_FAILURE;
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Decryption Failure: {}", e.what());
-		(void)DialogUtils::Error("Decryption Failure", e.what());
+		ENIGMA_ERROR("Failed to parse arguments: {0}", e.what());
 		return EXIT_FAILURE;
 	}
 	catch (...)
 	{
-		const String err_msg = "Decryption Failure: Unknown Error";
-		ENIGMA_ERROR("Decryption Failure: Unknown Error");
-		(void)DialogUtils::Error(err_msg);
+		ENIGMA_ERROR("Failed to parse arguments: UNKNOWN ERROR");
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;
@@ -240,46 +235,46 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 
-	String encrypted_text{}, encrypted_text_base64{};
+	String cipher{}, cipher_base64{};
 	f64 elapsed_seconds{ 0.0 };
 
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Encrypting Text with " + algorithm->GetTypeString() + " Algorithm ...");
-		encrypted_text = algorithm->Encrypt(password, text);
-		ENIGMA_ASSERT_OR_THROW(!encrypted_text.empty(), "Failed to encrypt text");
+		cipher = algorithm->Encrypt(password, text);
+		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt text");
 
 		ENIGMA_TRACE("Encoding Cipher to Base64...");
-		encrypted_text_base64 = Base64::Encode(encrypted_text);
-		ENIGMA_ASSERT_OR_THROW(!encrypted_text_base64.empty(), "Failed to encode encrypted text to base64");
+		cipher_base64 = Base64::Encode(cipher);
+		ENIGMA_ASSERT_OR_THROW(!cipher_base64.empty(), "Failed to encode cipher to base64");
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 
-	ENIGMA_INFO(encrypted_text_base64);
+	ENIGMA_INFO(cipher_base64);
 	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
 		text.size(), elapsed_seconds);
 	
-	encrypted_text.clear();
-	encrypted_text_base64.clear();
+	cipher.clear();
+	cipher_base64.clear();
 }
 
-void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& encrypted_text_base64)
+void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& cipher_base64)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 
-	String encrypted_text{}, decrypted_text{};
+	String cipher{}, decrypted_text{};
 	f64 elapsed_seconds{ 0.0 };
 
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Decoding Base64 Text to Cipher...");
-		encrypted_text = Base64::Decode(encrypted_text_base64);
-		ENIGMA_ASSERT_OR_THROW(!encrypted_text.empty(), "Failed to decode encrypted text from base64 to cipher");
+		cipher = Base64::Decode(cipher_base64);
+		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to decode encrypted text from base64 to cipher");
 
 		ENIGMA_TRACE("Decrypting Cipher...");
-		decrypted_text = algorithm->Decrypt(password, encrypted_text);
+		decrypted_text = algorithm->Decrypt(password, cipher);
 		ENIGMA_ASSERT_OR_THROW(!decrypted_text.empty(), "Failed to decrypt text");
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
@@ -287,7 +282,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_INFO(decrypted_text);
 	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_text.size(), elapsed_seconds);
 
-	encrypted_text.clear();
+	cipher.clear();
 	decrypted_text.clear();
 }
 
@@ -296,10 +291,10 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 	// assert input file is valid
-	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename), "Input file " + in_filename + " does not exist");
+	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename) && fs::is_regular_file(in_filename), "Input file " + in_filename + " does not exist");
 
 
-	String buffer{}, encrypted_buffer{};
+	String buffer{}, cipher{};
 	f64 elapsed_seconds{ 0.0 };
 
 
@@ -310,19 +305,20 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Encrypting buffer with " + algorithm->GetTypeString() + " Algorithm ...");
-		encrypted_buffer = algorithm->Encrypt(password, buffer);
-		ENIGMA_ASSERT_OR_THROW(!encrypted_buffer.empty(), "Failed to encrypt file content");
+		cipher = algorithm->Encrypt(password, buffer);
+		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file content");
+		
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 
 	ENIGMA_TRACE("Writing Cipher to " + out_filename_encypted + "...");
-	const bool successfully_written_file = FileUtils::Write(out_filename_encypted, encrypted_buffer);
+	const bool successfully_written_file = FileUtils::Write(out_filename_encypted, cipher);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save cipher to file " + out_filename_encypted);
 
 	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
 
 	buffer.clear();
-	encrypted_buffer.clear();
+	cipher.clear();
 }
 
 void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted)
@@ -330,10 +326,10 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 	// assert input file is valid
-	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename_encrypted), "Input file " + in_filename_encrypted + " does not exist");
+	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename_encrypted) && fs::is_regular_file(in_filename_encrypted), "Input file " + in_filename_encrypted + " does not exist");
 
 
-	String cipher{}, decrypted_cipher{};
+	String cipher{}, buffer{}; // buffer: recovered file content
 	f64 elapsed_seconds{ 0.0 };
 
 
@@ -344,25 +340,24 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Decrypting Cipher with " + algorithm->GetTypeString() + " Algorithm ...");
-		decrypted_cipher = algorithm->Decrypt(password, cipher);
-		ENIGMA_ASSERT_OR_THROW(!decrypted_cipher.empty(), "Failed to decrypt file content");
+		buffer = algorithm->Decrypt(password, cipher);
+		ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file content");
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 
 	ENIGMA_TRACE("Writing Decrypted Cipher to " + out_filename_decrypted + "...");
-	const bool successfully_written_file = FileUtils::Write(out_filename_decrypted, decrypted_cipher);
+	const bool successfully_written_file = FileUtils::Write(out_filename_decrypted, buffer);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save decrypted cipher to file " + out_filename_decrypted);
 
-	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_cipher.size(), elapsed_seconds);
+	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
 
 	cipher.clear();
-	decrypted_cipher.clear();
+	buffer.clear();
 }
 
 
 CLI::~CLI() noexcept
 {
-
 }
 
 NS_ENIGMA_END

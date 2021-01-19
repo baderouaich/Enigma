@@ -21,11 +21,6 @@ class ENIGMA_API FileUtils
 public:
 	static bool Read(const String& filename, String& buffer)
 	{
-//#if defined(ENIGMA_PLATFORM_WINDOWS)
-//		using ifstream = std::wifstream;
-//#else
-//		using ifstream = std::ifstream;
-//#endif
 		if (std::ifstream ifs{ filename, std::ios::binary | std::ios::ate }) // ate: open & seek end 
 		{
 			const size_t file_size = static_cast<size_t>(ifs.tellg());
@@ -44,11 +39,6 @@ public:
 
 	static bool Write(const String& filename, const std::string_view& buffer)
 	{
-//#if defined(ENIGMA_PLATFORM_WINDOWS)
-//		using ofstream = std::wofstream;
-//#else
-//		using ofstream = std::ofstream;
-//#endif
 		if (std::ofstream ofs{ filename, std::ios::binary })
 		{
 			ofs.write(buffer.data(), buffer.size());

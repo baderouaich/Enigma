@@ -17,12 +17,17 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private: /* Callbacks */
-	void OnBrowseButtonClicked();
+	void OnBrowseInFileButtonPressed();
+	void OnEncryptButtonPressed();
+	void OnBackButtonPressed();
+
+	//void OnBrowseOutFileButtonClicked();
 
 private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to encrypt File with
 
-	String m_in_file_path; // In File to encrypt
+	String m_in_filename; // In File to encrypt
+	String m_password, m_confirm_password;
 };
 

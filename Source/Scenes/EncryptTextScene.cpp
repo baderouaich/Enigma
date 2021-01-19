@@ -117,24 +117,23 @@ void EncryptTextScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
-		spacing(3);
-
-		// Encryption Password & Confirm password
-		// password text coloring for each state
-		ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text,
-			(m_password.empty() && m_confirm_password.empty()) ? // if password or confirm password is empty...
-			Constants::Colors::TEXT_COLOR :  // ... set color to white
-			m_password == m_confirm_password ?  // else if password matches confim password...
-			Constants::Colors::PASSWORD_MATCH_TEXT_COLOR : // ... set color to green
-			Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
-		); 
+		//spacing(3);
 
 		spacing(3);
 		ImGui::Separator();
 		spacing(3);
-
+			
+		// Encryption Password & Confirm password
 		ImGui::PushFont(font_montserrat_medium_20);
-		{
+		{		
+			// password text coloring for each state
+			ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text,
+				(m_password.empty() && m_confirm_password.empty()) ? // if password or confirm password is empty...
+				Constants::Colors::TEXT_COLOR :  // ... set color to white
+				m_password == m_confirm_password ?  // else if password matches confim password...
+				Constants::Colors::PASSWORD_MATCH_TEXT_COLOR : // ... set color to green
+				Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
+			); 
 			// Label
 			ImGui::Text("Password:");
 			// Input text
@@ -182,7 +181,7 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(3);
 
-		// Encrypt Button
+		// Encrypt & Back Button
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
