@@ -94,9 +94,9 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 
 ### Linux
  - Install Latest gcc & g++ Compiler<br>
-  `sudo add-apt-repository ppa:ubuntu-toolchain-r/test`<br>
-  `sudo apt update`<br>
-  `sudo apt install gcc-10 g++-10`<br>
+  `sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
+	`sudo apt update`<br>
+	`sudo apt install gcc-10 g++-10`<br>
  - Install necessary libs<br>
   `sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
  - Extract premake5 binary <br>
