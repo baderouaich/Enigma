@@ -1,12 +1,12 @@
-[2021-01-16 18:15:23] [info] Enigma: [ OpenGL Info ]
+[2021-01-22 22:51:01] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-01-16 18:15:23] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[2021-01-16 18:15:23] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
-[2021-01-16 18:15:23] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
-[2021-01-16 18:15:24] [trace] Enigma: void __cdecl EncryptFileScene::OnCreate(void)
-[2021-01-16 18:15:29] [trace] Enigma: Selecting a file to encrypt...
-[2021-01-16 18:15:59] [debug] Enigma: void __cdecl EncryptFileScene::OnDestroy(void)
-[2021-01-16 18:16:00] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)
+[2021-01-22 22:51:01] [trace] Enigma: __cdecl EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[2021-01-22 22:51:01] [trace] Enigma: __cdecl MainMenuScene::MainMenuScene(void) noexcept
+[2021-01-22 22:51:01] [trace] Enigma: void __cdecl MainMenuScene::OnCreate(void)
+[2021-01-22 22:51:08] [trace] Enigma: void __cdecl EncryptFileScene::OnCreate(void)
+[2021-01-22 22:51:10] [trace] Enigma: Selecting a file to encrypt...
+[2021-01-22 22:52:00] [debug] Enigma: void __cdecl EncryptFileScene::OnDestroy(void)
+[2021-01-22 22:52:01] [debug] Enigma: void __cdecl MainMenuScene::OnDestroy(void)

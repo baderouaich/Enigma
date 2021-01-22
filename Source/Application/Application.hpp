@@ -42,9 +42,9 @@ private:
 	void Run();
 
 	/*
-	*	Immediate exit from application without waiting for GL flushing nor scenes iterations to finish. 
+	*	Immediate exit from application without waiting for GL flushes or scenes to be destroyed. 
 	*/
-	void Exit(const String& message, i32 exit_code);
+	void Exit(const String& message, i32 exit_code) noexcept;
 	
 
 public: /* Constructor / Destructors */

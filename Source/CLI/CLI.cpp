@@ -22,10 +22,11 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("e,encrypt", "Encrypt operation") // -e | --encrypt
 			("d,decrypt", "Decrypt operation") // -d | --decrypt
 			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithmsStr()) // -m aes | --mode=aes
-			("p,password", "Encryption/Decryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
+			("p,password", "Encryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
 			("t,text", "Text to encrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
-			("i,infile", "File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
-			("o,outfile", "File to Output Cipher/Decrypted", cxxopts::value<std::string>()->default_value(fs::temp_directory_path().string() + "Enigma")) // -o "C:/file" | --outfile="C:/file"
+			("i,infile", "Input File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
+			("o,outfile", "Output File to Encrypt/Decrypted", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
+			//("o,outfile", "Output File to Encrypt/Decrypted", cxxopts::value<std::string>()->default_value(fs::temp_directory_path().string() + "Enigma")) // -o "C:/file" | --outfile="C:/file"
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma current version")  // VERSION
 			;
@@ -37,7 +38,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 		if (!unmatched_args.empty())
 		{
 			for (const auto& uarg : unmatched_args)
-				ENIGMA_TRACE("Unknown argument {0}", uarg);
+				ENIGMA_WARN("Unknown argument {0}", uarg);
 			throw std::runtime_error("Received unknown arguments");
 		}
 
@@ -60,7 +61,7 @@ i32 CLI::Run()
 	const auto& r = *m_parse_result;
 
 	// Handle --help & -h options
-	if (r.count("h") || r.count("help"))
+	if (r.count("h") || r.count("help")) // u can also check only r.count("h"), cxxopts will check the second pair item "help" if the first one isnt there
 	{
 		ENIGMA_INFO(m_options->help());
 		return EXIT_SUCCESS;
@@ -169,8 +170,8 @@ i32 CLI::Run()
 				}
 			}
 			// Check if detected mode is valid
-			ENIGMA_ASSERT_OR_THROW((cipher_first_byte >= (ui8)Algorithm::Type::First &&
-				cipher_first_byte <= (ui8)Algorithm::Type::Last),
+
+			ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, (byte)Algorithm::Type::First, (byte)Algorithm::Type::Last),
 				"Could not auto-detect algorithm mode used for encryption, please set it manually with --mode=" +
 				Algorithm::GetSupportedAlgorithmsStr());
 

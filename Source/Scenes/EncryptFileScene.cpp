@@ -295,7 +295,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 
 
 			// Alert user that encryption was successfull
-			(void)Enigma::MessageBox{ "Enigma", "Encrypted" + m_in_filename + " => " + m_out_filename + " Successfully!", Enigma::MessageBox::Icon::Info, Enigma::MessageBox::Choice::Ok }.Show();
+			(void)Enigma::MessageBox{ "Enigma", "Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!", Enigma::MessageBox::Icon::Info, Enigma::MessageBox::Choice::Ok }.Show();
 
 		}
 		catch (const CryptoPP::Exception& e)

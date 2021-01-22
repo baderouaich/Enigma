@@ -57,18 +57,19 @@ Cursor::Cursor(const String& image_path, const i32& xhot, const i32& yhot)
 	:
 	m_mode(CursorMode::NONE)
 {
-	i32 width, height, channels;
+	i32 width{}, height{}, channels{};
 	stbi_set_flip_vertically_on_load(false);
 	byte* pixels = stbi_load(image_path.c_str(), &width, &height, &channels, 4);
 	ENIGMA_ASSERT(pixels, "Failed to load image");
-	ENIGMA_ASSERT(channels == 4, "Image must be RGBA");
+	//the alpha channel isn't necessary
+	//ENIGMA_ASSERT(channels == 4, "Image must be RGBA");
 
-	GLFWimage images[1];
+	std::array<GLFWimage, 1> images{};
 	images[0].pixels = pixels;
 	images[0].width = width;
 	images[0].height = height;
 
-	m_GLFWcursor = glfwCreateCursor(images, xhot, yhot);
+	m_GLFWcursor = glfwCreateCursor(images.data(), xhot, yhot);
 	ENIGMA_ASSERT(m_GLFWcursor, "Could not Create Image Cursor");
 
 	stbi_image_free(pixels);

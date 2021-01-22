@@ -41,13 +41,13 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	}
 	catch (const std::exception& e)
 	{
-		const String msg = "Couldn't Construct Window: " + String(e.what());
+		const String err_msg = "Couldn't Construct Window: " + String(e.what());
 		// console alert
-		ENIGMA_ERROR(msg.c_str());
+		ENIGMA_ERROR(err_msg);
 		// ui alert
-		[[maybe_unused]] auto action = DialogUtils::Error(msg);		
+		(void)DialogUtils::Error(err_msg);
 		// exit
-		this->Exit("Couldn't Construct Window", EXIT_FAILURE); // No Application without a window :c
+		this->Exit(err_msg, EXIT_FAILURE); // No Application without a window :c
 	}
 }
 
@@ -79,7 +79,7 @@ void Application::PushScene(const std::shared_ptr<Scene>& scene)
 
 void Application::OnEvent(Event& event)
 {
-	// Listen for WindowClose & WindowResize Events
+	// Listen for WindowClose, WindowResize and FrameBufferResizeEvent Events
 	EventDispatcher dispatcher(event);
 	dispatcher.Dispatch<WindowCloseEvent>(ENIGMA_BIND_FUN(Application::OnWindowClose));
 	dispatcher.Dispatch<WindowResizeEvent>(ENIGMA_BIND_FUN(Application::OnWindowResize));
@@ -109,7 +109,7 @@ bool Application::OnWindowClose(WindowCloseEvent& event)
 
 bool Application::OnWindowResize(WindowResizeEvent& event)
 {
-	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
+	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString());
 
 	// Update OpenGL Viewport
 	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
@@ -121,7 +121,7 @@ bool Application::OnWindowResize(WindowResizeEvent& event)
 
 bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 {
-	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString().c_str());
+	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString());
 
 	// Update OpenGL Viewport
 	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
@@ -166,7 +166,10 @@ void Application::Run()
 				glAssert( glFlush() );
 			}
 
-			// Check if the current active scene wants to quit
+			// Swap Buffers
+			m_window->SwapBuffers();
+
+			// Check if the current active scene wants to quit (scene must call EndScene to be destroyed)
 			if (m_scenes.back()->WantsQuit())
 			{
 				// Notify user before ending scene
@@ -174,7 +177,7 @@ void Application::Run()
 				
 				// Destroy Scene
 				m_scenes.back()->EndScene(); // just to make sure, even if m_quit is true (who knows what can happen in OnDestroy)
-				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~unique_ptr to cleanup memory)
+				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~shared_ptr to cleanup memory)
 			}
 
 		}
@@ -183,22 +186,19 @@ void Application::Run()
 			this->EndApplication();
 		}
 
-		// Swap Buffers
-		m_window->SwapBuffers();
 	}
 }
 
 
-void Application::Exit(const String& message, i32 exit_code)
+void Application::Exit(const String& message, i32 exit_code) noexcept
 {
+	const String msg = "Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
+	
 	if (Logger::GetLogger())
-	{
-		ENIGMA_ERROR("Application has exited with code {0} : {1}", exit_code, message.c_str());
-	}
+		ENIGMA_ERROR(msg);
 	else
-	{
-		std::cerr << "Application has exited with code " << exit_code << " : " << message << std::endl;
-	}
+		std::cerr << msg;
+
 	std::exit(exit_code);
 }
 
@@ -241,7 +241,7 @@ void Application::UpdateFPS() noexcept
 		m_FPS_timer += m_delta_time;
 		if (m_FPS_timer >= 1.0f)
 		{
-			m_window->SetTitle(m_window->GetTitle());
+			m_window->SetTitle(m_window->GetTitle()); // refresh title
 			m_FPS = 0;
 			m_FPS_timer = 0.0f;
 		}

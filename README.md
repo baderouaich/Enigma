@@ -32,11 +32,10 @@ Usage:
   -d, --decrypt                 Decrypt operation
   -m, --mode [AES, ChaCha20, TripleDES, Twofish, IDEA]
                                 Encryption/Decryption mode (default: AES)
-  -p, --password arg            Encryption/Decryption password
+  -p, --password arg            Encryption password
   -t, --text arg                Text to encrypt
-  -i, --infile arg              File name to encrypt
-  -o, --oufile arg              Output encrypted file name (default:
-                                C:\Users\%USER%\AppData\Local\Temp\Enigma)
+  -i, --infile arg              Input File to Encrypt/Decrypt
+  -o, --outfile arg             Output File to Encrypt/Decrypted
   -h, --help                    Displays help message
   -v, --version                 Displays Enigma current version
 ```

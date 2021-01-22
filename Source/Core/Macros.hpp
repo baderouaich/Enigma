@@ -98,7 +98,7 @@
 ///
 
 
-///Bit Shift
+/// Bit Shift
 #define BIT(x) (1 << x)
 ///
 
@@ -107,7 +107,9 @@
 #define ENIGMA_ARRAY_SIZE(arr) ::Enigma::size_t(sizeof(arr) / sizeof((arr)[0]))
 ///
 
-
+/// Check if value is between or equal a range
+#define ENIGMA_IS_BETWEEN(v, mi, ma) (v >= mi && v <= ma)
+///
 
 /// Resolve which function signature macro will be used. Note that this only
 /// is resolved when the (pre)compiler starts, so the syntax highlighting
@@ -153,15 +155,5 @@
 
 
 
-/// Alert message in console and ui
-#define ENIGMA_ERROR_ALERT_CONSOLE_AND_UI(title, msg) \
-			ENIGMA_ERROR((title + ": " + msg).c_str()); \
-			std::unique_ptr<Enigma::MessageBox> msg_box = std::make_unique<Enigma::MessageBox>( \
-				title, \
-				msg, \
-				Enigma::MessageBox::Icon::Error, \
-				Enigma::MessageBox::Choice::Ok); \
-			[[maybe_unused]] auto action = msg_box->Show(); \
-///
 
 #endif // !ENIGMA_MACROS_H

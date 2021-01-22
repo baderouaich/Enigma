@@ -169,14 +169,14 @@ void MainMenuScene::OnEvent(Enigma::Event& event)
 	EventDispatcher dispatcher(event);
 	dispatcher.Dispatch<MouseButtonPressedEvent>([](const MouseButtonPressedEvent& e) -> bool
 		{
-			LOG(e.ToString().c_str());
+			LOG(e.ToString());
 
 			return true; // handled, return false if other scenes may use the event
 		});
 
 	dispatcher.Dispatch<KeyPressedEvent>([](const KeyPressedEvent& e) -> bool
 		{
-			LOG(e.ToString().c_str());
+			LOG(e.ToString());
 
 			return true; // handled, return false if other scenes may use the event
 		});
@@ -224,7 +224,7 @@ void MainMenuScene::LoadImGuiFonts()
 		{
 			const String err_msg = "Failed to load font " + String(font_name);
 			// console alert
-			ENIGMA_ERROR(err_msg.c_str());
+			ENIGMA_ERROR(err_msg);
 			// ui alert
 			std::unique_ptr<Enigma::MessageBox> msg_box = std::make_unique<Enigma::MessageBox>(
 				"Resource Loading Error",

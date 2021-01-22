@@ -64,7 +64,7 @@ bool Window::InitGLFW(const WindowSettings& window_settings)
 	glfwWindowHint(GLFW_SAMPLES, window_settings.samples);
 
 
-#if __APPLE__
+#if defined(ENIGMA_PLATFORM_MACOS)
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
 #endif
 
@@ -525,21 +525,20 @@ void Window::SetShouldClose(const bool close) const noexcept
 
 void Window::SetTitle(const String& title) noexcept
 {
-	if (m_title != title)
-		m_title = title;
-
 	// title - FPS: x
 	if (m_is_show_fps)
 	{
 		const ui32& FPS = Application::GetInstance()->GetFPS();
-		const String title_with_fps = m_title + " - FPS: " + std::to_string(FPS);
+		const String title_with_fps = title + " - FPS: " + std::to_string(FPS);
 		glfwSetWindowTitle(m_GLFWwindow, title_with_fps.c_str());
 	}
 	else
 	{
-		glfwSetWindowTitle(m_GLFWwindow, m_title.c_str());
+		glfwSetWindowTitle(m_GLFWwindow, title.c_str());
 	}
 
+	m_title = title; // no worries, string::operator= has check if (this != _STD addressof(_Right))
+	
 }
 
 void Window::SetPosition(const i32& x, const i32& y) const noexcept
@@ -554,7 +553,7 @@ void Window::SetIcon(const String& icon_path) noexcept
 	byte* pixels = stbi_load(icon_path.c_str(), &width, &height, &channels, 4);
 
 	ENIGMA_ASSERT(pixels, "Failed to load window icon");
-	//the alpha channel aint necessary
+	//the alpha channel isn't necessary
 	//ENIGMA_ASSERT(channels == 4, "Icon must be RGBA");
 
 	std::array<GLFWimage, 1> images{};
