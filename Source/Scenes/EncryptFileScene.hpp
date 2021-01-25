@@ -28,5 +28,7 @@ private:
 	String m_in_filename; // In File to encrypt
 	String m_out_filename; // Out File encrypted location
 	String m_password, m_confirm_password;
+	bool m_compress{ true }; // Whether to compress file with Gzip before encrypting 
+
 };
 

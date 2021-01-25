@@ -4,17 +4,24 @@
 
 NS_ENIGMA_BEGIN
 
-String GZip::Compress(const std::string_view& buffer)
+String GZip::Compress(const std::string_view& buffer) noexcept(false)
 {
 	String compressed{};
-	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::StringSink(compressed)));
+	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::StringSink(compressed), CryptoPP::Gzip::DEFAULT_DEFLATE_LEVEL));
 	m_zipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
 	m_zipper->MessageEnd();
 	return compressed;
 }
 
-String GZip::Decompress(const std::string_view& buffer)
+String GZip::Decompress(const std::string_view& buffer) noexcept(false)
 {
+	String decompressed{};
+	m_unzipper.reset(new CryptoPP::Gunzip(new CryptoPP::StringSink(decompressed)));
+	m_unzipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
+	m_unzipper->MessageEnd();
+	return decompressed;
+
+	/*
 	String decompressed{};
 	m_unzipper.reset(new CryptoPP::Gunzip());
 	m_unzipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
@@ -24,6 +31,7 @@ String GZip::Decompress(const std::string_view& buffer)
 	decompressed.resize(retrievable_bytes_size, '\000');
 	m_unzipper->Get(reinterpret_cast<byte*>(&decompressed[0]), decompressed.size());
 	return decompressed;
+	*/
 }
 
 NS_ENIGMA_END

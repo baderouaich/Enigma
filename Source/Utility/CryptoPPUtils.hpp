@@ -44,8 +44,8 @@ public:
 		{
 			CASE_RETURN(ErrorType::INVALID_ARGUMENT, "An invalid argument was detected");
 			CASE_RETURN(ErrorType::CANNOT_FLUSH, "BufferedTransformation received a Flush(true) signal but can't flush buffers");
-			CASE_RETURN(ErrorType::DATA_INTEGRITY_CHECK_FAILED, "Data integerity check, such as CRC or MAC, failed. usually incorrect encryption password or corrupted cipher");
-			CASE_RETURN(ErrorType::INVALID_DATA_FORMAT, "Input data was received that did not conform to expected format. usually corrupted cipher");
+			CASE_RETURN(ErrorType::DATA_INTEGRITY_CHECK_FAILED, "Data integerity check, such as CRC or MAC, failed");
+			CASE_RETURN(ErrorType::INVALID_DATA_FORMAT, "Input data was received that did not conform to expected format");
 			CASE_RETURN(ErrorType::IO_ERROR, "Error reading from input device or writing to output device");
 			default: return "Unknown Error";
 		}

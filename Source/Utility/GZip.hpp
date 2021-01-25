@@ -16,8 +16,8 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API GZip
 {
 public:
-	static String Compress(const std::string_view& buffer);
-	static String Decompress(const std::string_view& buffer);
+	static String Compress(const std::string_view& buffer) noexcept(false);
+	static String Decompress(const std::string_view& buffer) noexcept(false);
 
 private:
 	inline static std::unique_ptr<CryptoPP::Gzip> m_zipper{ nullptr };

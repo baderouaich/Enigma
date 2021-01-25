@@ -119,6 +119,19 @@ void EncryptFileScene::OnImGuiDraw()
 					this->OnBrowseInFileButtonPressed();
 				}
 			ImGui::PopFont();
+
+			spacing(3);
+
+			// Compression 
+			ImGui::PushFont(font_montserrat_medium_20);
+			{
+				// Label
+				ImGui::Text("Compress File Before Encrypting (to reduce file size if sharing or uploading to cloud):");
+				ImGui::SameLine();
+				ImGui::Checkbox(" ", &m_compress);
+			}
+			ImGui::PopFont();
+
 		}
 		ImGui::PopFont();
 		
@@ -316,6 +329,18 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(file_read_success, "Failed to read buffer from file " + m_in_filename);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "File " + m_in_filename + " is empty");
 			
+			// Compression
+			size_t old_buffer_size{ 0 }, new_buffer_size{ 0 }, decreased_bytes{ 0 };
+			if (m_compress)
+			{
+				ENIGMA_TRACE("Compressing file buffer {0} ...", m_in_filename);
+				old_buffer_size = buffer.size();
+				buffer = GZip::Compress(buffer);
+				new_buffer_size = buffer.size();
+				decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
+				ENIGMA_TRACE("File size decreased by {0:0.3f} MB", (f32(decreased_bytes) / 1024.0f / 1024.0f));
+			}
+
 			// Encrypt file buffer
 			String cipher = m_algorithm->Encrypt(m_password, buffer);
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file buffer");
@@ -325,19 +350,17 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			// Write cipher to out file
 			const bool file_written_success = FileUtils::Write(m_out_filename, cipher);
 			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write cipher to file " + m_out_filename);
-#if 0
-			// Ask user where should we save it
-			const auto sfd = std::make_unique<Enigma::SaveFileDialog>(
-				"Select Where To Save Encrypted File",
-				m_in_filename + ".enigma", // in_file.txt.enigma
-				true // force overwrite
-				);
-			const String m_out_filename = sfd->Show();
-			//TODO
-#endif
-			// Alert user that encryption was successfull
-			(void)Enigma::MessageBox{ "Enigma", "Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!", Enigma::MessageBox::Icon::Info, Enigma::MessageBox::Choice::Ok }.Show();
 
+			// Alert user that encryption was successfull
+			(void)Enigma::MessageBox
+			{
+				"Enigma", "Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
+				(m_compress ? (decreased_bytes ? ("Compression Status: File size decreased by " +
+					std::to_string((f32(decreased_bytes) / 1024.0f / 1024.0f)) +  " MB") : "") : ""),
+				Enigma::MessageBox::Icon::Info,
+				Enigma::MessageBox::Choice::Ok
+			}.Show();
+		
 		}
 		catch (const CryptoPP::Exception& e)
 		{
@@ -352,8 +375,8 @@ void EncryptFileScene::OnEncryptButtonPressed()
 		}
 		catch (...)
 		{
-			const String err_msg = "Encryption Failure: Unknown Error";
-			ENIGMA_ERROR("Encryption Failure: Unknown Error");
+			const String err_msg = "Encryption Failure: UNKNOWN ERROR";
+			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}
 	}
@@ -364,30 +387,3 @@ void EncryptFileScene::OnBackButtonPressed()
 {
 	this->EndScene();
 }
-
-/*
-void EncryptFileScene::OnBrowseOutFileButtonClicked()
-{
-	const auto sfd = std::make_unique<Enigma::SelectFolderDialog>(
-		"Select Where To Save Encrypted File To",
-		m_out_file_path, // initial path
-		true // force overwrite
-		);
-
-	ENIGMA_TRACE("Selecting an output encyrpted file...");
-	m_out_file_path = sfd->Show();
-	if (fs::is_directory(m_out_file_path))
-	{
-		fs::path p = m_out_file_path;
-		p /=  fs::path(m_in_filename).filename().string() + ".enigma";
-		m_out_file_path = p.string();
-		ENIGMA_TRACE("Selected Dir: {0}", m_out_file_path);
-	}
-	else
-	{
-		ENIGMA_WARN("Path {0} is not valid", m_out_file_path);
-		(void)DialogUtils::Warn("Path " + m_out_file_path + " is invalid");
-	}
-
-}
-*/

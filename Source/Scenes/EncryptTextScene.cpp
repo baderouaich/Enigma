@@ -2,6 +2,7 @@
 #include "EncryptTextScene.hpp"
 #include <Utility/DialogUtils.hpp>
 #include <Utility/ImGuiUtils.hpp>
+#include <Utility/GZip.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 
 EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
