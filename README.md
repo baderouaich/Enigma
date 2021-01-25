@@ -33,11 +33,11 @@ Usage:
   -m, --mode [AES, ChaCha20, TripleDES, Twofish, IDEA]
                                 Encryption/Decryption mode (default: AES)
   -p, --password arg            Encryption password
-  -t, --text arg                Text to encrypt
+  -t, --text arg                Text to Encrypt/Decrypt
   -i, --infile arg              Input File to Encrypt/Decrypt
-  -o, --outfile arg             Output File to Encrypt/Decrypted
+  -o, --outfile arg             Output File to Encrypt/Decrypt
   -h, --help                    Displays help message
-  -v, --version                 Displays Enigma current version
+  -v, --version                 Displays Enigma's version
 ```
 - Example encypting a text with AES-GCM:<br>
 ```text

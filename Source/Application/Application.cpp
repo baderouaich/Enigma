@@ -43,11 +43,11 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	{
 		const String err_msg = "Couldn't Construct Window: " + String(e.what());
 		// console alert
-		ENIGMA_ERROR(err_msg);
+		ENIGMA_CRITICAL(err_msg);
 		// ui alert
 		(void)DialogUtils::Error(err_msg);
 		// exit
-		this->Exit(err_msg, EXIT_FAILURE); // No Application without a window :c
+		this->EndApplication(); // No Application without a window :c
 	}
 }
 
@@ -195,7 +195,7 @@ void Application::Exit(const String& message, i32 exit_code) noexcept
 	const String msg = "Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
 	
 	if (Logger::GetLogger())
-		ENIGMA_ERROR(msg);
+		ENIGMA_CRITICAL(msg);
 	else
 		std::cerr << msg;
 

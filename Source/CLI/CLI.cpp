@@ -23,12 +23,12 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("d,decrypt", "Decrypt operation") // -d | --decrypt
 			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithmsStr()) // -m aes | --mode=aes
 			("p,password", "Encryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
-			("t,text", "Text to encrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
+			("t,text", "Text to Encrypt/Decrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
 			("i,infile", "Input File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
-			("o,outfile", "Output File to Encrypt/Decrypted", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
+			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
 			//("o,outfile", "Output File to Encrypt/Decrypted", cxxopts::value<std::string>()->default_value(fs::temp_directory_path().string() + "Enigma")) // -o "C:/file" | --outfile="C:/file"
 			("h,help", "Displays help message")  // HELP
-			("v,version", "Displays Enigma current version")  // VERSION
+			("v,version", "Displays Enigma's version")  // VERSION
 			;
 
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));

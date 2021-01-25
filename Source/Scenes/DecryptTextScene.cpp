@@ -92,11 +92,18 @@ void DecryptTextScene::OnImGuiDraw()
 				}
 			}
 			ImGui::NewLine();
+
+			ImGui::PushFont(font_audiowide_regular_20); // buttons font
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			ImGui::Text("Forgot which Algorithm used in encryption ?"); inline_dummy(6.0f, 0.0f); ImGui::SameLine();
 			if (ImGui::Button("Auto-Detect Algorithm"))
 			{
 				this->OnAutoDetectAlgorithmButtonPressed();
 			}
+			ImGui::PopStyleColor(3);
+			ImGui::PopFont();
 
 		}
 		ImGui::PopFont();

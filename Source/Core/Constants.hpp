@@ -98,6 +98,35 @@ namespace Enigma
 				return Color4f{ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f };
 			};
 
+#if 0
+			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(12, 26, 50, 200);
+
+			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(216, 174, 123, 225);
+			static const Color4f ERROR_TEXT_COLOR = COLOR4I_TO_COLOR4F(201, 46, 101, 255);
+			static const Color4f PASSWORD_MATCH_TEXT_COLOR = COLOR4I_TO_COLOR4F(94, 172, 161, 225);
+
+
+			static const Color4f BUTTON_COLOR = COLOR4I_TO_COLOR4F(167, 114, 63, 200);
+			static const Color4f BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(202, 154, 91, 200);
+			static const Color4f BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(229, 185, 121, 200); // PRESSED
+
+			static const Color4f MENUBAR_BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(43, 132, 202, 100); // WHITE TRANSPARENT
+#endif
+#if 0
+			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(50, 51, 74, 255);
+
+			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(242, 242, 243, 225);
+			static const Color4f ERROR_TEXT_COLOR = COLOR4I_TO_COLOR4F(201, 46, 101, 255);
+			static const Color4f PASSWORD_MATCH_TEXT_COLOR = COLOR4I_TO_COLOR4F(94, 172, 161, 225);
+
+
+			static const Color4f BUTTON_COLOR = COLOR4I_TO_COLOR4F(89, 101, 231, 255);
+			static const Color4f BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(86, 195, 252, 255);
+			static const Color4f BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(94, 172, 161, 255); // PRESSED
+
+			static const Color4f MENUBAR_BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(91, 103, 234, 200); // WHITE TRANSPARENT
+#endif
+
 			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(30, 37, 43, 255);
 
 			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(255, 255, 255, 225);
@@ -110,7 +139,6 @@ namespace Enigma
 			static const Color4f BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(31, 103, 145, 255); // PRESSED
 
 			static const Color4f MENUBAR_BACKGROUND_COLOR = Color4f{1.0f, 1.0f, 1.0f, 0.06f}; // WHITE TRANSPARENT
-
 
 
 		}

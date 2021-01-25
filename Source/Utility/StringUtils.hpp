@@ -7,6 +7,7 @@
 
 #include <string>	// std::string, std::string_view
 #include <algorithm> // std::all_of
+#include <utility> // std::transform
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API StringUtils
@@ -56,7 +57,10 @@ public:
 	*/
 	static void Lower(String& str)
 	{
-		std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+		std::transform(str.begin(), str.end(), str.begin(), [](const char& c)
+		{
+			return static_cast<char>(std::tolower(c));
+		});
 	}
 
 	/*
@@ -64,7 +68,10 @@ public:
 	*/
 	static void Upper(String& str)
 	{
-		std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+		std::transform(str.begin(), str.end(), str.begin(), [](const char& c)
+		{
+			return static_cast<char>(std::toupper(c));
+		});
 	}
 
 };
