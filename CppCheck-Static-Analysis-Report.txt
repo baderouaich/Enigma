@@ -22,6 +22,12 @@ Source/System/Dialogs/MessageBox.cpp:0:0: information: Too many #ifdef configura
 Source/System/Dialogs/MessageBox.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
 
 ^
+Source/Utility/GZip.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 2 configurations. Use --force to check all configurations. [toomanyconfigs]
+
+^
+Source/Utility/GZip.cpp:0:0: information: This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details. [noValidConfiguration]
+
+^
 Source/Window/Window.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 1 of 4 configurations. Use --force to check all configurations. [toomanyconfigs]
 
 ^
