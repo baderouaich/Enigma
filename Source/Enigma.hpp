@@ -56,6 +56,10 @@
 #include <Utility/FileUtils.hpp>
 #include <Utility/StringUtils.hpp>
 #include <Utility/OpenGLUtils.hpp>
+#include <Utility/CryptoPPUtils.hpp>
+#include <Utility/ImGuiUtils.hpp>
+#include <Utility/DialogUtils.hpp>
+#include <Utility/GZip.hpp>
 //
 
 
