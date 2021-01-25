@@ -28,7 +28,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("i,infile", "Input File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
 			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
 			("c,compress", "Compress File Before Encrypting/Decrypting") // -c | --compress 
-			("u,decompress", "Decompress File Before Encrypting/Decrypting") // -u | --decompress 
+			("u,decompress", "Decompress File After Encrypting/Decrypting") // -u | --decompress 
 			//("o,outfile", "Output File to Encrypt/Decrypted", cxxopts::value<std::string>()->default_value(fs::temp_directory_path().string() + "Enigma")) // -o "C:/file" | --outfile="C:/file"
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma's version")  // VERSION

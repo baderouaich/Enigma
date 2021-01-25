@@ -7,7 +7,7 @@ NS_ENIGMA_BEGIN
 String GZip::Compress(const std::string_view& buffer) noexcept(false)
 {
 	String compressed{};
-	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::StringSink(compressed), CryptoPP::Gzip::DEFAULT_DEFLATE_LEVEL));
+	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::StringSink(compressed), CryptoPP::Gzip::MAX_DEFLATE_LEVEL));
 	m_zipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
 	m_zipper->MessageEnd();
 	return compressed;
