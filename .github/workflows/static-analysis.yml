@@ -24,14 +24,13 @@ jobs:
           #commit_msg: "<optional commit message>" # commit msg when file is generated, not editable anymore.
           #check_library:
           skip_preprocessor: enable
-          enable: all #warning,portability,performance #default is all
-          #enable: warning,style,performance,portability,missingInclude
+          enable: warning,style,performance,portability,missingInclude #default is all
           exclude_check: ./Dependencies/
           #inconclusive:
           #inline_suppression:
           force_language: c++
           max_ctu_depth: 9 #default 2
-          #platform: 
+          platform: unix64,win64
           output_file: ./CppCheck-Static-Analysis-Report.txt #(default cppcheck_report.txt)
 
       # Report generating task
