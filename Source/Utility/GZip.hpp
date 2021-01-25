@@ -4,9 +4,8 @@
 
 #include <Core/Core.hpp>
 
-//Crypto++ GZip Ref: https://www.cryptopp.com/wiki/Gzip && https://www.cryptopp.com/wiki/Gunzip
+// Crypto++ GZip Ref: https://www.cryptopp.com/wiki/Gzip && https://www.cryptopp.com/wiki/Gunzip
 #include <gzip.h>	// Gzip & Gunzip
-#include <files.h>	// FileSink
 
 NS_ENIGMA_BEGIN
 
