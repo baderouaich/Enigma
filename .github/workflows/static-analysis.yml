@@ -30,7 +30,7 @@ jobs:
           #inline_suppression:
           force_language: c++
           max_ctu_depth: 9 #default 2
-          platform: unix64,win64
+          #platform:
           output_file: ./CppCheck-Static-Analysis-Report.txt #(default cppcheck_report.txt)
 
       # Report generating task
