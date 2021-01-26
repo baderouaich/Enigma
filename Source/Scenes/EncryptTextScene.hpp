@@ -2,8 +2,8 @@
 #include "Scene.hpp"
 #include <Algorithm/AES/AES.hpp>
 #include <Algorithm/ChaCha20/ChaCha20.hpp>
-using namespace Enigma;
 
+NS_ENIGMA_BEGIN
 class EncryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
@@ -34,6 +34,4 @@ private:
 	String m_password, m_confirm_password; // Encryption password
 
 };
-
-
-
+NS_ENIGMA_END

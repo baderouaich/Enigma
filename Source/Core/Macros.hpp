@@ -155,5 +155,11 @@
 
 
 
+/// Convert bytes to kb, mb, gb, tb
+#define ENIGMA_BYTES_TO_KB(bytes) (static_cast<f32>(bytes) / 1024.0f)
+#define ENIGMA_BYTES_TO_MB(bytes) (static_cast<f32>(bytes) / 1024.0f / 1024.0f)
+#define ENIGMA_BYTES_TO_GB(bytes) (static_cast<f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
+#define ENIGMA_BYTES_TO_TB(bytes) (static_cast<f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
+///
 
 #endif // !ENIGMA_MACROS_H

@@ -2,22 +2,23 @@
 #include "Enigma.hpp"
 #include "Scenes/MainMenuScene.hpp"
 
-class EnigmaApplication : public Enigma::Application
+NS_ENIGMA_BEGIN
+
+class EnigmaApplication : public Application
 {
 public:
-	explicit EnigmaApplication(const Enigma::WindowSettings& window_settings)
+	explicit EnigmaApplication(const WindowSettings& window_settings)
 		:
-		Enigma::Application(window_settings)
+		Application(window_settings)
 	{
 		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
-		//Set Window Icon & Cursor
+		// Set Window runtime icon & Cursor
 		const auto& window = GetWindow();
-		window->SetCursor(Enigma::CursorMode::Arrow);
-		window->SetIcon(Enigma::Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
-		//window->SetCursor("Resources/Textures/Cursor.png", 0, 0);
+		window->SetCursor(CursorMode::Arrow);
+		window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 
-		//Push Main Menu scene as entry point
+		// Push Main Menu scene as an entry point
 		this->PushScene(std::make_unique<MainMenuScene>());
 	}
 
@@ -32,18 +33,15 @@ public:
 extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
 {
 	//Construct Window
-	Enigma::WindowSettings window_settings;
-	{
-		window_settings.title = "Enigma";
-		window_settings.width = 800;
-		window_settings.height = 600;
-		//window_settings.minimum_width = window_settings.width - 100;
-		//window_settings.minimum_height = window_settings.height - 100;
-		//window_settings.maximum_width = 800;
-		//window_settings.maximum_height = 600;
-		window_settings.is_resizable = true;
-		window_settings.is_vsync = false;
-		window_settings.is_show_fps = true;
-	}
+	WindowSettings window_settings;
+	window_settings.title = "Enigma";
+	window_settings.width = 800;
+	window_settings.height = 600;
+	window_settings.is_resizable = true;
+	window_settings.is_vsync = true;
+	window_settings.is_show_fps = true;
 	return std::make_unique<EnigmaApplication>(std::move(window_settings));
 }
+
+
+NS_ENIGMA_END

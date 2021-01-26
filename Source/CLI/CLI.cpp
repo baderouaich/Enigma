@@ -149,14 +149,18 @@ i32 CLI::Run()
 			//LOG("Out File name: {0}", outfilename);
 		}
 
+		// Check if file compression/decompression enabled
+		compress_or_decompress = r.count("c") || r.count("u") || r.count("compress") || r.count("decompress");
+
 
 		///============ Call Scenarios ============///
 
 		// Create polymorphic Algorithm type
+		
 		// if mode is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
 		if (mode.empty())
 		{
-			ui8 cipher_first_byte{(ui8)Algorithm::Type::Last + 1};
+			byte cipher_first_byte{(byte)Algorithm::Type::Last + 1};
 			if (!text.empty())
 			{
 				// extract first byte from cipher which must be the mode type used in encryption
@@ -166,15 +170,18 @@ i32 CLI::Run()
 			{
 				// check if the infile exists
 				ENIGMA_ASSERT_OR_THROW(fs::exists(infilename), "infile does not exist.");
+				ENIGMA_ASSERT_OR_THROW(!fs::is_empty(infilename), "infile is empty.");
+				ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(infilename), "infile is not a regular file.");
+
 				// extract first byte from infile cipher which must be the mode type used in encryption
 				if (std::ifstream ifs{ infilename, std::ios_base::binary | std::ios_base::in })
 				{
 					ifs >> cipher_first_byte;
 					ifs.close();
 				}
+				
 			}
 			// Check if detected mode is valid
-
 			ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, (byte)Algorithm::Type::First, (byte)Algorithm::Type::Last),
 				"Could not auto-detect algorithm mode used for encryption, please set it manually with --mode=" +
 				Algorithm::GetSupportedAlgorithmsStr());
@@ -202,8 +209,6 @@ i32 CLI::Run()
 		}
 		else if (!infilename.empty() && !outfilename.empty())
 		{
-			// Check if file compression/decompression enabled
-			compress_or_decompress = r.count("c") || r.count("u");
 
 			// Check intention
 			switch (intent)
@@ -299,7 +304,9 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 	// assert input file is valid
-	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename) && fs::is_regular_file(in_filename), "Input file " + in_filename + " does not exist");
+	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename), "Input file " + in_filename + " does not exist");
+	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(in_filename), "Input file " + in_filename + " is not a regular file");
+	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(in_filename), "Input file " + in_filename + " is empty");
 
 
 	String buffer{}, cipher{};
@@ -317,8 +324,8 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		const size_t old_buffer_size = buffer.size();
 		buffer = GZip::Compress(buffer);
 		const size_t new_buffer_size = buffer.size();
-		const size_t shrinked_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
-		ENIGMA_TRACE("File size decreased by {0:0.3f} MB", (f32(shrinked_bytes) / 1024.0f / 1024.0f));
+		const size_t decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
+		ENIGMA_LOG("File size decreased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(decreased_bytes));
 	}
 
 	// Encrypt
@@ -347,7 +354,9 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
 	// assert input file is valid
-	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename_encrypted) && fs::is_regular_file(in_filename_encrypted), "Input file " + in_filename_encrypted + " does not exist");
+	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename_encrypted), "Input file " + in_filename_encrypted + " does not exist");
+	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(in_filename_encrypted), "Input file " + in_filename_encrypted + " is not a regular file");
+	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(in_filename_encrypted), "Input file " + in_filename_encrypted + " is empty");
 
 
 	String cipher{}, buffer{}; // buffer: recovered file content

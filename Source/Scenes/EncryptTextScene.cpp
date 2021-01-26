@@ -5,6 +5,8 @@
 #include <Utility/GZip.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 
+NS_ENIGMA_BEGIN
+
 EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
 	:
 	Enigma::Scene(),
@@ -225,7 +227,7 @@ void EncryptTextScene::OnEvent(Event& event)
 
 void EncryptTextScene::OnDestroy()
 {
-	ENIGMA_LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	m_text.clear();
 	m_password.clear();
@@ -314,3 +316,5 @@ void EncryptTextScene::OnCopyEncryptedBase64TextButtonPressed()
 	Clipboard::Set(m_cipher_base64);
 }
 
+
+NS_ENIGMA_END

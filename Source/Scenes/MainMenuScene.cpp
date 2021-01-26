@@ -2,10 +2,13 @@
 #include "MainMenuScene.hpp"
 
 #include "EncryptFileScene.hpp"
+#include "DecryptFileScene.hpp"
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
+
 #include <Utility/DialogUtils.hpp>
 
+NS_ENIGMA_BEGIN
 
 MainMenuScene::MainMenuScene() noexcept
 	:
@@ -193,7 +196,7 @@ void MainMenuScene::OnEvent(Enigma::Event& event)
 
 void MainMenuScene::OnDestroy()
 {
-	ENIGMA_LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	// ImGui Pop Menu bar background color, see issue #3637
 	ImGui::PopStyleColor(1); 
@@ -226,15 +229,9 @@ void MainMenuScene::LoadImGuiFonts()
 			// console alert
 			ENIGMA_ERROR(err_msg);
 			// ui alert
-			std::unique_ptr<Enigma::MessageBox> msg_box = std::make_unique<Enigma::MessageBox>(
-				"Resource Loading Error",
-				err_msg,
-				Enigma::MessageBox::Icon::Error,
-				Enigma::MessageBox::Choice::Ok);
-			[[maybe_unused]] auto action = msg_box->Show();
-			
+			(void)DialogUtils::Error("Resource Loading Error", err_msg);
 			// no further without dear fonts :c
-			EndScene();
+			this->EndScene();
 			break;
 		}
 	}
@@ -248,6 +245,7 @@ void MainMenuScene::OnEncryptFileButtonPressed()
 
 void MainMenuScene::OnDecryptFileButtonPressed()
 {
+	Application::GetInstance()->PushScene(std::make_shared<DecryptFileScene>(m_fonts));
 }
 
 void MainMenuScene::OnEncryptTextButtonPressed()
@@ -264,7 +262,9 @@ void MainMenuScene::OnAboutMenuButtonPressed()
 {
 	ENIGMA_INFO(ENIGMA_ABOUT);
 	// Show about dialog
-	[[maybe_unused]] auto action = 
-		DialogUtils::Info("Version: " + String(ENIGMA_VERSION) + '\n' + String(ENIGMA_ABOUT));
+	(void)DialogUtils::Info("Version: " + String(ENIGMA_VERSION) + '\n' + String(ENIGMA_ABOUT));
 }
 
+
+
+NS_ENIGMA_END

@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.hpp"
-using namespace Enigma;
+
+NS_ENIGMA_BEGIN
 
 class MainMenuScene : public Enigma::Scene
 {
@@ -31,3 +32,5 @@ private: /* Initializers */
 private:
 	std::unordered_map<std::string_view, ImFont*> m_fonts;
 };
+
+NS_ENIGMA_END

@@ -3,6 +3,8 @@
 #include <Utility/ImGuiUtils.hpp>
 #include <Utility/DialogUtils.hpp>
 
+NS_ENIGMA_BEGIN
+
 DecryptTextScene::DecryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
 	:
 	Enigma::Scene(),
@@ -220,7 +222,7 @@ void DecryptTextScene::OnEvent(Event& event)
 
 void DecryptTextScene::OnDestroy()
 {
-	ENIGMA_LOG(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
 	m_recovered_text.clear(); 
 	m_cipher.clear();
@@ -247,9 +249,9 @@ void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 	}
 
 	// extract first byte from cipher which must be the mode type used in encryption
-	const byte& cipher_first_byte = m_cipher[0];
+	const byte& cipher_first_byte = *m_cipher.begin();
 	// Check if detected mode is valid
-	if (cipher_first_byte < (byte)Algorithm::Type::First || cipher_first_byte > (byte)Algorithm::Type::Last)
+	if (!ENIGMA_IS_BETWEEN(cipher_first_byte, (byte)Algorithm::Type::First, (byte)Algorithm::Type::Last))
 	{
 		(void)DialogUtils::Error("Could not auto-detect algorithm mode used for encryption");
 		return;
@@ -257,7 +259,7 @@ void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 	// if alles gut, create polymorphic algorithm decryptor
 	m_algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), Algorithm::Intent::Decrypt);
 	// little happy info dialog
-	(void)DialogUtils::Info("Successfully detected algorithm used in encryption which is: " + m_algorithm->GetTypeString());
+	(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + m_algorithm->GetTypeString());
 }
 
 void DecryptTextScene::OnBackButtonPressed()
@@ -325,3 +327,5 @@ void DecryptTextScene::OnDecryptButtonPressed()
 	
 	//TODO: handle decryption failure in a better way.
 }
+
+NS_ENIGMA_END

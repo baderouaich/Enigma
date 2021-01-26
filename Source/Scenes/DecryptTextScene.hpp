@@ -2,6 +2,7 @@
 #include "Scene.hpp"
 using namespace Enigma;
 
+NS_ENIGMA_BEGIN
 class DecryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
@@ -31,5 +32,5 @@ private:
 	String m_password; // Encryption password
 
 };
-
+NS_ENIGMA_END
 

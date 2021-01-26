@@ -26,9 +26,9 @@ A Simple, Reliable and Efficient UI + CLI Encryption Tool
 ## Features
 - :zap: Very fast encryption/decryption
 - :computer: User Interface & Command-Line Interface support
-- :shield: Strongest encryption algorithms of the decade wisely implemented
-- :detective: Auto-detect algorithm used for encryption (no need to keep remembering which one you used, just remember your password, and store cipher text or encrypted file somewhere preferably clouds)
-- :package:	File compression to reduce size if sharing or uploading to clouds
+- :shield: Strongest encryption algorithms of the decade
+- :detective: Auto-detect algorithm used for encryption (no need to keep remembering which algorithm you used, just remember your password, and store cipher base64-text or encrypted file somewhere preferably clouds)
+- :package:	GZip compression to reduce size of files if sharing or uploading to clouds
 - :page_facing_up: Open Source ofcourse!
 
 

@@ -8,9 +8,8 @@
 #include <System/Dialogs/SaveFileDialog.hpp>
 #include <System/Dialogs/SelectFolderDialog.hpp>
 
-#include <functional>
-
 NS_ENIGMA_BEGIN
+
 class ENIGMA_API DialogUtils 
 {
 public:
@@ -97,6 +96,7 @@ public:
 			);
 		return (msgbox->Show());
 	}
+
 };
 
 NS_ENIGMA_END

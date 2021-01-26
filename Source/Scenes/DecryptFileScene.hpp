@@ -1,12 +1,13 @@
 #pragma once
 #include "Scene.hpp"
 
+
 NS_ENIGMA_BEGIN
-class EncryptFileScene : public Scene
+class DecryptFileScene : public Scene
 {
 public:	/* Constructors / Destructor */
-	explicit EncryptFileScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
-	virtual ~EncryptFileScene() = default;
+	explicit DecryptFileScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
+	virtual ~DecryptFileScene() = default;
 
 private: /* Overrides */
 	void OnCreate() override;
@@ -17,18 +18,20 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private: /* Callbacks */
+	void OnAutoDetectAlgorithmButtonPressed();
 	void OnBrowseInFileButtonPressed();
 	void OnBrowseOutFileButtonPressed();
-	void OnEncryptButtonPressed();
+	void OnDecryptButtonPressed();
 	void OnBackButtonPressed();
 
 private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
-	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to encrypt File with
-	String m_in_filename; // In File to encrypt
-	String m_out_filename; // Out File encrypted location
-	String m_password, m_confirm_password;
-	bool m_compress{ true }; // Whether to compress file with Gzip before encrypting 
+	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to decrypt File with
+	String m_in_filename; // In File to decrypt
+	String m_out_filename; // Out File to be recover
+	String m_password; // encryption password
+	bool m_decompress{ true }; // Whether to deompress file with Gzip after decrypting 
 
 };
 NS_ENIGMA_END
+
