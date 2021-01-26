@@ -13,9 +13,9 @@ public:
 	{
 		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
-		// Set Window runtime icon & Cursor
+		// Set Window runtime icon
 		const auto& window = GetWindow();
-		window->SetCursor(CursorMode::Arrow);
+		//window->SetCursor(CursorMode::Arrow);
 		window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 
 		// Push Main Menu scene as an entry point
@@ -30,7 +30,7 @@ public:
 /*
 *	Entry Point
 */
-extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
+extern std::unique_ptr<Application> CreateApplication()
 {
 	//Construct Window
 	WindowSettings window_settings;
@@ -39,7 +39,7 @@ extern std::unique_ptr<Enigma::Application> Enigma::CreateApplication()
 	window_settings.height = 600;
 	window_settings.is_resizable = true;
 	window_settings.is_vsync = true;
-	window_settings.is_show_fps = true;
+	//window_settings.is_show_fps = true;
 	return std::make_unique<EnigmaApplication>(std::move(window_settings));
 }
 

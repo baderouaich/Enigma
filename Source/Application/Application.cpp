@@ -170,7 +170,7 @@ void Application::Run()
 			m_window->SwapBuffers();
 
 			// Check if the current active scene wants to quit (scene must call EndScene to be destroyed)
-			if (m_scenes.back()->WantsQuit())
+			if (m_scenes.back()->WantsToQuit())
 			{
 				// Notify user before ending scene
 				m_scenes.back()->OnDestroy();

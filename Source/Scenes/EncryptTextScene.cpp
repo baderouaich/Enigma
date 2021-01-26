@@ -187,15 +187,24 @@ void EncryptTextScene::OnImGuiDraw()
 		// Encrypt & Back Button
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
+			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
+			if (ImGui::Button("Back", button_size))
+			{
+				this->OnBackButtonPressed();
+			}
+			ImGui::PopStyleColor(3);
+			ImGui::PopFont();
+
+
+			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
-				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
-				if (ImGui::Button("Back", button_size))
-				{
-					this->OnBackButtonPressed();
-				}
+				
 				ImGui::SameLine();
 				if (ImGui::Button("Encrypt", button_size))
 				{
@@ -299,7 +308,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 
 void EncryptTextScene::OnBackButtonPressed()
 {
-	if ((!m_text.empty() || !m_password.empty() || !m_confirm_password.empty()))
+	if (!m_text.empty() || !m_password.empty() || !m_confirm_password.empty())
 	{	// Show alert dialog to user asking whether the operation should be aborted
 		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
 		if (action == Enigma::MessageBox::Action::Yes)

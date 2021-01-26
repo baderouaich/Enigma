@@ -58,6 +58,7 @@ void DecryptFileScene::OnImGuiDraw()
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 	static ImFont* const& font_montserrat_medium_20 = m_fonts.at("Montserrat-Medium-20");
+	static ImFont* const& font_montserrat_medium_18 = m_fonts.at("Montserrat-Medium-18");
 	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
 
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
@@ -130,16 +131,20 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGuiUtils::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
 			ImGui::PushFont(font_montserrat_medium_12);
 			ImGui::SameLine();
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			if (ImGui::Button("Browse", browse_button_size))
 			{
 				this->OnBrowseInFileButtonPressed();
 			}
+			ImGui::PopStyleColor(3);
 			ImGui::PopFont();
 
-			spacing(3);
+			spacing(1);
 
 			// Decompression (if used in encryption)
-			ImGui::PushFont(font_montserrat_medium_20);
+			ImGui::PushFont(font_montserrat_medium_18);
 			{
 				// Label
 				ImGui::Text("Decompress (gzip):");
@@ -151,7 +156,7 @@ void DecryptFileScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
-		spacing(3);
+		spacing(2);
 
 		// Out File Decrypted
 		if (!m_in_filename.empty())
@@ -165,10 +170,14 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGuiUtils::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
 				ImGui::PushFont(font_montserrat_medium_12);
 				ImGui::SameLine();
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				if (ImGui::Button("Browse ", browse_button_size))
 				{
 					this->OnBrowseOutFileButtonPressed();
 				}
+				ImGui::PopStyleColor(3);
 				ImGui::PopFont();
 			}
 			ImGui::PopFont();
@@ -206,11 +215,16 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
+				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
+				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
 				if (ImGui::Button("Back", button_size))
 				{
 					this->OnBackButtonPressed();
 				}
+				ImGui::PopStyleColor(3);
+
 				ImGui::SameLine();
 				if (ImGui::Button("Decrypt", button_size))
 				{
@@ -438,7 +452,16 @@ void DecryptFileScene::OnDecryptButtonPressed()
 
 void DecryptFileScene::OnBackButtonPressed()
 {
-	this->EndScene();
+	if (!m_in_filename.empty() || !m_out_filename.empty() || !m_password.empty())
+	{	// Show alert dialog to user asking whether the operation should be aborted
+		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
+		if (action == Enigma::MessageBox::Action::Yes)
+		{
+			this->EndScene();
+		}
+	}
+	else
+		this->EndScene();
 }
 
 

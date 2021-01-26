@@ -75,9 +75,11 @@ enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/d
 
 
 ## Enigma UI
-<image src="Resources/ScreenShots/UI-MainMenuScene.png"/>
-<image src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>
-<image src="Resources/ScreenShots/UI-DecryptText-Demo.png"/>
+<image width="400" src="Resources/ScreenShots/UI-MainMenuScene.png"/>
+<image width="400" src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>
+<image width="400" src="Resources/ScreenShots/UI-DecryptText-Demo.png"/>
+<image width="400" src="Resources/ScreenShots/UI-EncryptFile-Demo.png"/>
+<image width="400" src="Resources/ScreenShots/UI-DecryptFile-Demo.png"/>
 <!--
 Latest Test on `Windows 10 Version 20H2`
 <image src="Resources/Dev Process/Windows-Latest.png"/>

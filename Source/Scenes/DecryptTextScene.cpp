@@ -189,11 +189,16 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
+				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
+				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
 				if (ImGui::Button("Back", button_size))
 				{
 					this->OnBackButtonPressed();
 				}
+				ImGui::PopStyleColor(3);
+
 				ImGui::SameLine();
 				if (ImGui::Button("Decrypt", button_size))
 				{

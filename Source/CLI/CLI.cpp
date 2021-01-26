@@ -81,8 +81,11 @@ i32 CLI::Run()
 	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
 	Intent intent{}; // Encrypt or Decrypt?
 	String mode{}; // "aes", "tripledes"..
-	String password{}, text{}, infilename{}, outfilename{};
-	bool compress_or_decompress{ false }; // Compress/Decompress File Before Encrypting/Decrypting
+	String password{}; // Encryption password 
+	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
+	String infilename{}; // In file to encrypt if mode is --encrypt, otherwise file to be decrypted
+	String outfilename{}; // Out file to ouput encrypted cipher to if mode is --encrypt, otherwise decrypted file
+	bool compress{ false }, decompress{ false }; // Compress/Decompress File Before Encrypting/Decrypting
 	try
 	{
 		// Encrypting or Decrypting ?
@@ -150,7 +153,8 @@ i32 CLI::Run()
 		}
 
 		// Check if file compression/decompression enabled
-		compress_or_decompress = r.count("c") || r.count("u") || r.count("compress") || r.count("decompress");
+		compress = r.count("c") || r.count("compress");
+		decompress = r.count("u") || r.count("decompress");
 
 
 		///============ Call Scenarios ============///
@@ -214,10 +218,10 @@ i32 CLI::Run()
 			switch (intent)
 			{
 			case Intent::Encrypt:
-				this->OnEncryptFile(algorithm, password, infilename, outfilename, compress_or_decompress);
+				this->OnEncryptFile(algorithm, password, infilename, outfilename, compress);
 				break;
 			case Intent::Decrypt:
-				this->OnDecryptFile(algorithm, password, infilename, outfilename, compress_or_decompress);
+				this->OnDecryptFile(algorithm, password, infilename, outfilename, decompress);
 				break;
 			}
 		}
@@ -379,7 +383,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// Decompression (if needed)
 	if (decompress)
 	{
-		ENIGMA_TRACE("Decompressing file cipher {0} ...", in_filename_encrypted);
+		ENIGMA_TRACE("Decompressing file buffer {0} ...", in_filename_encrypted);
 		const size_t old_buffer_size = buffer.size();
 		buffer = GZip::Decompress(buffer);
 		const size_t new_buffer_size = buffer.size();

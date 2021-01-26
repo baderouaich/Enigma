@@ -35,14 +35,14 @@ public: /* Controlls */
 	void EndScene() noexcept;
 	
 	/* Pauses current Scene */
-	void PauseScene() noexcept;
+	//void PauseScene() noexcept;
 	
 	/* Resumes current Scene */
-	void ResumeScene() noexcept;
+	//void ResumeScene() noexcept;
 
 public: /*Accessors*/
-	constexpr const bool& WantsQuit() const noexcept { return m_quit; }
-	constexpr const bool& IsPaused() const noexcept { return m_isPaused; }
+	constexpr const bool& WantsToQuit() const noexcept { return m_quit; }
+	//constexpr const bool& IsPaused() const noexcept { return m_isPaused; }
 	//constexpr const SceneData& GetSceneData() const noexcept { return *m_scene_data; }
 
 
@@ -50,9 +50,9 @@ public: /*Modifiers*/
 
 
 protected:
-   // SceneData* m_scene_data;
 	bool m_quit;
-	bool m_isPaused;
+    //SceneData* m_scene_data;
+	//bool m_isPaused;
 };
 
 NS_ENIGMA_END
