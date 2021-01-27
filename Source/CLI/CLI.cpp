@@ -387,7 +387,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		buffer = GZip::Decompress(buffer);
 		const size_t new_buffer_size = buffer.size();
 		const size_t increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
-		ENIGMA_TRACE("File size increased by {0:0.3f} MB", (f32(increased_bytes) / 1024.0f / 1024.0f));
+		ENIGMA_LOG("File size increased by {0:0.3f} MB", (f32(increased_bytes) / 1024.0f / 1024.0f));
 	}
 
 
