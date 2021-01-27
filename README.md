@@ -45,8 +45,8 @@ Usage:
   -t, --text arg                Text to Encrypt/Decrypt
   -i, --infile arg              Input File to Encrypt/Decrypt
   -o, --outfile arg             Output File to Encrypt/Decrypt
-  -c, --compress                Compress File Before Encrypting/Decrypting
-  -u, --decompress              Decompress File After Encrypting/Decrypting
+  -c, --compress                Compress File Before Encrypting
+  -u, --decompress              Decompress File After Decrypting
   -h, --help                    Displays help message
   -v, --version                 Displays Enigma's version
 ```
