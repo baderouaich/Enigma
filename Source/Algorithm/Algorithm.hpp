@@ -24,6 +24,7 @@
 #include <rsa.h> // RSA
 #include <pssr.h> // RSA PSSR
 #pragma warning(pop)
+static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
 NS_ENIGMA_BEGIN
 

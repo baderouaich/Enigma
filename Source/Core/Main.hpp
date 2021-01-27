@@ -51,17 +51,23 @@ int main(int argc, char* argv[])
 /*
 *	Windows Entry Point (for Release & Distribution)
 */
-#if defined(ENIGMA_PLATFORM_WINDOWS) && (defined(ENIGMA_RELEASE) || defined(ENIGMA_DIST))
+#if 0
+	/*
+	* When using WinMain for Dist or Release, i encounter these problems:
+	* - unexpected crash caused by an issue with free() 'windows HeapFree' (still investigating)
+	* - permission denied glfw error when copying text in UI
+	*/
+	#if defined(ENIGMA_PLATFORM_WINDOWS) && (defined(ENIGMA_RELEASE) || defined(ENIGMA_DIST))
 
-int WINAPI WinMain(
-	_In_ HINSTANCE instance, 
-	_In_opt_ HINSTANCE prev_instance, 
-	_In_ LPSTR cmd_line, 
-	_In_ int cmd_show) 
-{
-	return main(__argc, __argv);
-}
-
+	int WINAPI WinMain(
+		_In_ HINSTANCE instance, 
+		_In_opt_ HINSTANCE prev_instance, 
+		_In_ LPSTR cmd_line, 
+		_In_ int cmd_show) 
+	{
+		return main(__argc, __argv);
+	}
+	#endif 
 #endif
 
 #endif // !ENIGMA_MAIN_H

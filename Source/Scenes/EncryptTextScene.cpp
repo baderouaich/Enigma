@@ -167,12 +167,16 @@ void EncryptTextScene::OnImGuiDraw()
 				ImGuiUtils::InputText("##text4", &m_cipher_base64, win_w - (copy_button_size.x * 2.0f));
 				ImGui::PushFont(font_montserrat_medium_12);
 					ImGui::SameLine();
+					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 					if (ImGui::Button("Copy", copy_button_size))
 					{
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
 					//ImGui::NewLine();
 					ImGui::Text("%llu bytes (Please save cipher base64 text above in a safe place)", m_cipher_base64.size());
+					ImGui::PopStyleColor(3);
 				ImGui::PopFont();
 			}
 			ImGui::PopFont();
@@ -279,12 +283,13 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			// Encode cipher to Base64
 			m_cipher_base64 = Base64::Encode(m_cipher); 
 			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), "Failed to encode cipher text to Base64");
-			
+
 			// Spawn notification alert if window is not focused
 			if (! Application::GetInstance()->GetWindow()->IsFocused())
 			{
 				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
 			}
+
 		}
 		catch (const CryptoPP::Exception& e)
 		{
