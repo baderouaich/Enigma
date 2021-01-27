@@ -147,7 +147,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_18);
 			{
 				// Label
-				ImGui::Text("Decompress (gzip):");
+				ImGui::Text("Decompress file with gzip after decrypting:");
 				ImGui::SameLine();
 				ImGui::Checkbox(" ", &m_decompress);
 			}

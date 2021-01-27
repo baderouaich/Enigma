@@ -133,7 +133,7 @@ void EncryptFileScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_18);
 			{
 				// Label
-				ImGui::Text("Compress (gzip):");
+				ImGui::Text("Compress file with gzip before encrypting");
 				ImGui::SameLine();
 				ImGui::Checkbox(" ", &m_compress);
 			}

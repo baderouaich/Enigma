@@ -1385,7 +1385,7 @@ inline message::message(std::string const &title,
                         icon _icon /* = icon::info */)
 {
 #if _WIN32
-    UINT style = MB_TOPMOST;
+    UINT style = MB_SYSTEMMODAL;
     switch (_icon)
     {
         case icon::warning: style |= MB_ICONWARNING; break;
