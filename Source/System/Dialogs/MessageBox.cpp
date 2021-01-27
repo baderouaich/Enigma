@@ -23,6 +23,21 @@ MessageBox::Action MessageBox::Show() const
 		.result();
 	
 	return static_cast<MessageBox::Action>(result);
+
+#if 0 
+	// asynchrounous
+	auto msg = pfd::message(
+		m_title,
+		m_message,
+		static_cast<pfd::choice>(m_choice),
+		static_cast<pfd::icon>(m_icon));
+	while (!msg.ready(1000))
+	{
+		ENIGMA_TRACE("MessageBox: Waited 1 second for user input");
+	}
+	auto result = msg.result();
+	return static_cast<MessageBox::Action>(result);
+#endif 
 }
 
 MessageBox::~MessageBox() noexcept

@@ -76,7 +76,7 @@ void DecryptTextScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(3);
 
-		// Algorithm To encrypt text with
+		// Algorithm To decrypt text with
 		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			// Label
@@ -264,7 +264,7 @@ void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 	// if alles gut, create polymorphic algorithm decryptor
 	m_algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), Algorithm::Intent::Decrypt);
 	// little happy info dialog
-	(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: {0} ", m_algorithm->GetTypeString());
+	(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + m_algorithm->GetTypeString());
 }
 
 void DecryptTextScene::OnBackButtonPressed()

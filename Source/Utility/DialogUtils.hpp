@@ -21,7 +21,8 @@ public:
 			Enigma::MessageBox::Icon::Error,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
 	static const Enigma::MessageBox::Action Error(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
@@ -31,7 +32,8 @@ public:
 			Enigma::MessageBox::Icon::Error,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
    
 	static const Enigma::MessageBox::Action Warn(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
@@ -42,7 +44,8 @@ public:
 			Enigma::MessageBox::Icon::Warning,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
     static const Enigma::MessageBox::Action Warn(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
@@ -52,7 +55,8 @@ public:
 			Enigma::MessageBox::Icon::Warning,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
 
 	static const Enigma::MessageBox::Action Question(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Yes_No)
@@ -63,7 +67,8 @@ public:
 			Enigma::MessageBox::Icon::Question,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
 	static const Enigma::MessageBox::Action Question(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Yes_No)
 	{
@@ -73,7 +78,8 @@ public:
 			Enigma::MessageBox::Icon::Question,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
 
 	static const Enigma::MessageBox::Action Info(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
@@ -84,7 +90,8 @@ public:
 			Enigma::MessageBox::Icon::Info,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
 	static const Enigma::MessageBox::Action Info(const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
@@ -94,7 +101,8 @@ public:
 			Enigma::MessageBox::Icon::Info,
 			choice
 			);
-		return (msgbox->Show());
+		auto action = msgbox->Show();
+		return action;
 	}
 
 };

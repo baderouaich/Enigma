@@ -238,11 +238,11 @@ void EncryptTextScene::OnDestroy()
 {
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
-	m_text.clear();
 	m_password.clear();
 	m_confirm_password.clear();
 	m_cipher.clear();
 	m_cipher_base64.clear();
+	m_text.clear();
 }
 
 void EncryptTextScene::OnEncryptButtonPressed()
@@ -289,18 +289,18 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		catch (const CryptoPP::Exception& e)
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-			ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
-			(void)DialogUtils::Error("Decryption Failure", err_msg);
+			ENIGMA_ERROR("Encryption Failure: {0}", err_msg);
+			(void)DialogUtils::Error("Encryption Failure", err_msg);
 		}
 		catch (const std::exception& e)
 		{
-			ENIGMA_ERROR("Decryption Failure: {0}", e.what());
-			(void)DialogUtils::Error("Decryption Failure", e.what());
+			ENIGMA_ERROR("Encryption Failure: {0}", e.what());
+			(void)DialogUtils::Error("Encryption Failure", e.what());
 		}
 		catch (...)
 		{
-			const String err_msg = "Decryption Failure: Unknown Error";
-			ENIGMA_ERROR("Decryption Failure: Unknown Error");
+			const String err_msg = "Encryption Failure: Unknown Error";
+			ENIGMA_ERROR("Encryption Failure: Unknown Error");
 			(void)DialogUtils::Error(err_msg);
 		}
 	}

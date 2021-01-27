@@ -74,10 +74,10 @@ public: /* Accessors */
 	MessageBox::Action Show() const;
 	
 private:
-	const String m_title;
-	const String m_message;
-	const Icon m_icon;
-	const Choice m_choice;
+	String m_title;
+	String m_message;
+	Icon m_icon;
+	Choice m_choice;
 };
 
 NS_ENIGMA_END

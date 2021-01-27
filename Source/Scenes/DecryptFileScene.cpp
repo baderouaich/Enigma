@@ -320,12 +320,12 @@ void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
 void DecryptFileScene::OnBrowseInFileButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::OpenFileDialog>(
-		"Select A File To Encrypt",
+		"Select A File To Decrypt",
 		m_in_filename, // initial path
 		false // disable multi-select
 		);
 
-	ENIGMA_TRACE("Selecting a file to encrypt...");
+	ENIGMA_TRACE("Selecting a file to decrypt...");
 	const std::vector<String> selected_file_paths = ofd->Show();
 	if (selected_file_paths.empty())
 	{
@@ -339,12 +339,12 @@ void DecryptFileScene::OnBrowseInFileButtonPressed()
 void DecryptFileScene::OnBrowseOutFileButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::SelectFolderDialog>(
-		"Select A Location To Save Encrypted File To",
+		"Select A Location To Save Decrypted File To",
 		m_in_filename, // initial path
 		false // disable multi-select
 		);
 
-	ENIGMA_TRACE("Selecting a location to save encrypted file to...");
+	ENIGMA_TRACE("Selecting a location to save decrypted file to...");
 	const String selected_location = ofd->Show();
 	if (selected_location.empty())
 	{

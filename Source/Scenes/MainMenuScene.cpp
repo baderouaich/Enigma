@@ -212,7 +212,11 @@ void MainMenuScene::OnDestroy()
 
 void MainMenuScene::LoadImGuiFonts()
 {
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+
 	static const auto& io = ImGui::GetIO();
+
+	ENIGMA_TRACE("Loading Fonts...");
 
 	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 60.0f);
 	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
@@ -239,6 +243,8 @@ void MainMenuScene::LoadImGuiFonts()
 			this->EndScene();
 			break;
 		}
+		else
+			ENIGMA_TRACE("Loaded {0}", font_name);
 	}
 }
 
