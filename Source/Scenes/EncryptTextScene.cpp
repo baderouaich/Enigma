@@ -289,12 +289,12 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		catch (const CryptoPP::Exception& e)
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-			ENIGMA_ERROR("Decryption Failure: {}", err_msg);
+			ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
 			(void)DialogUtils::Error("Decryption Failure", err_msg);
 		}
 		catch (const std::exception& e)
 		{
-			ENIGMA_ERROR("Decryption Failure: {}", e.what());
+			ENIGMA_ERROR("Decryption Failure: {0}", e.what());
 			(void)DialogUtils::Error("Decryption Failure", e.what());
 		}
 		catch (...)

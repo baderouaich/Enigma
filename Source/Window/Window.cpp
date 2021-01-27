@@ -302,9 +302,9 @@ bool Window::InitOpenGLOptions()
 	/// Log OpenGL Info
 	ENIGMA_INFO(
 		"[ OpenGL Info ]\n"
-		"\t\tManufacturer: {}\n"
-		"\t\tRenderer: {}\n"
-		"\t\tVersion: {}\n",
+		"\t\tManufacturer: {0}\n"
+		"\t\tRenderer: {1}\n"
+		"\t\tVersion: {2}\n",
 		glGetString(GL_VENDOR),
 		glGetString(GL_RENDERER),
 		glGetString(GL_VERSION)

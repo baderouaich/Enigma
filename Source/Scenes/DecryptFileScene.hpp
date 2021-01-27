@@ -24,6 +24,16 @@ private: /* Callbacks */
 	void OnDecryptButtonPressed();
 	void OnBackButtonPressed();
 
+#if 0
+private:
+	void ResetFields() {
+		m_in_filename.clear();
+		m_out_filename.clear();
+		m_password.clear();
+
+	}
+#endif 
+
 private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to decrypt File with

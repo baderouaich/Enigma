@@ -36,7 +36,7 @@
 		{ \
 			if(!(x)) \
 			{ \
-				ENIGMA_ERROR("Assertion Failed: {}", __VA_ARGS__); \
+				ENIGMA_ERROR("Assertion Failed: {0}", __VA_ARGS__); \
 				ENIGMA_DEBUG_BREAK(); \
 			} \
 		} while(false) 

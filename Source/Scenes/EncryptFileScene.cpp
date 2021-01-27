@@ -392,12 +392,12 @@ void EncryptFileScene::OnEncryptButtonPressed()
 		catch (const CryptoPP::Exception& e)
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-			ENIGMA_ERROR("Encryption Failure: {}", err_msg);
+			ENIGMA_ERROR("Encryption Failure: {0}", err_msg);
 			(void)DialogUtils::Error("Encryption Failure", err_msg);
 		}
 		catch (const std::exception& e)
 		{
-			ENIGMA_ERROR("Encryption Failure: {}", e.what());
+			ENIGMA_ERROR("Encryption Failure: {0}", e.what());
 			(void)DialogUtils::Error("Encryption Failure", e.what());
 		}
 		catch (...)

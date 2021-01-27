@@ -294,18 +294,18 @@ void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
 		// if alles gut, create polymorphic algorithm decryptor
 		m_algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), Algorithm::Intent::Decrypt);
 		// little happy info dialog
-		ENIGMA_INFO("Successfully detected algorithm used for encryption which is: {0}" + m_algorithm->GetTypeString());
+		ENIGMA_INFO("Successfully detected algorithm used for encryption which is: {0}", m_algorithm->GetTypeString());
 		(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + m_algorithm->GetTypeString());	
 	}
 	catch (const CryptoPP::Exception& e)
 	{
 		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-		ENIGMA_ERROR("Auto-detect algorithm Failure: {}", err_msg);
+		ENIGMA_ERROR("Auto-detect algorithm Failure: {0}", err_msg);
 		(void)DialogUtils::Error("Decryption Failure", err_msg);
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Auto-detect algorithm Failure: {}", e.what());
+		ENIGMA_ERROR("Auto-detect algorithm Failure: {0}", e.what());
 		(void)DialogUtils::Error("Auto-detect algorithm Failure", e.what());
 	}
 	catch (...)
@@ -370,10 +370,6 @@ void DecryptFileScene::OnDecryptButtonPressed()
 	{
 		(void)DialogUtils::Warn("Out File location is empty");
 	}
-	else if (!fs::path(m_out_filename).has_filename() || !fs::path(m_out_filename).has_extension())
-	{
-		(void)DialogUtils::Warn("Please specify a filename and extension to Out File");
-	}
 	else if (!fs::exists(m_in_filename) || !fs::is_regular_file(m_in_filename))
 	{
 		(void)DialogUtils::Warn("In File does not exist");
@@ -432,12 +428,12 @@ void DecryptFileScene::OnDecryptButtonPressed()
 		catch (const CryptoPP::Exception& e)
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-			ENIGMA_ERROR("Decryption Failure: {}", err_msg);
+			ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
 			(void)DialogUtils::Error("Decryption Failure", err_msg);
 		}
 		catch (const std::exception& e)
 		{
-			ENIGMA_ERROR("Decryption Failure: {}", e.what());
+			ENIGMA_ERROR("Decryption Failure: {0}", e.what());
 			(void)DialogUtils::Error("Decryption Failure", e.what());
 		}
 		catch (...)
