@@ -52,23 +52,23 @@ Usage:
 ```
 - Example encypting a text with AES-GCM:<br>
 ```text
-enigma -e --mode=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
-output: cekP1lnUL/aJ9ZDNDzgpIuNAfvN5Oe0DOospT80XnocgKRI6OMDTQ5UydUyfnGgb9EcQQAcR8bksN/lBxabSCyujT3c=
+./Enigma -e --mode=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
+output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT
 ```
 - Example decrypting a text with AES-GCM:<br>
 ```text
-enigma -d --mode=aes --password="My@pa$$W0rd" --text="cekP1lnUL/aJ9ZDNDzgpIuNAfvN5Oe0DOospT80XnocgKRI6OMDTQ5UydUyfnGgb9EcQQAcR8bksN/lBxabSCyujT3c="
+./Enigma -d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
 output: my important data securly encrypted!
 ```
 <image src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>
 
 - Example encypting a file with AES-GCM:<br>
 ```text
-enigma -e --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data.txt" --outfile="C:/Users/bader/Desktop/data-encrypted.txt"
+./Enigma -e --mode=aes --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data" --outfile="/home/bader/Desktop/Data-encrypted.enigma" --compress
 ```
 - Example decypting a file with AES-GCM:<br>
 ```text
-enigma -d --mode=aes --password="My@pa$$W0rd" --infile="C:/Users/bader/Desktop/data-encrypted.txt" --outfile="C:/Users/bader/Desktop/data-decrypted.txt"
+./Enigma -d --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data-encrypted.enigma" --outfile="/home/bader/Desktop/Data-decrypted" --decompress
 ```
 <image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br>
 
