@@ -289,7 +289,6 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			{
 				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
 			}
-
 		}
 		catch (const CryptoPP::Exception& e)
 		{

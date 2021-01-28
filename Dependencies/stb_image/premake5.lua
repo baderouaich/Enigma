@@ -1,6 +1,7 @@
 project "stb_image"
 	kind "StaticLib"
 	language "C"
+	cdialect "C11"
 	staticruntime "on"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")

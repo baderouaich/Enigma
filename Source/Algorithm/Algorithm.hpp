@@ -1,9 +1,11 @@
 #pragma once
 #ifndef ENIGMA_ALGORITHM_H
 #define ENIGMA_ALGORITHM_H
+//#define CRYPTOPP_DEFAULT_NO_DLL 1
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include <Utility/CryptoPPUtils.hpp>
+
 
 // Crypto++
 #pragma warning(push, 0) // This ignores all warnings raised inside External headers

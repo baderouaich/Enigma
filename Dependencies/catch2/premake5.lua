@@ -1,6 +1,7 @@
 project "catch2"
 	kind "StaticLib"
     language "C++"
+    cppdialect "C++17"
 	staticruntime "on"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")

@@ -9,7 +9,6 @@ Scene::Scene() noexcept
 	m_quit(false)
 	//,m_isPaused(false)
 {
-
 }
 
 #if 0
@@ -56,7 +55,7 @@ void Scene::EndScene() noexcept
 	this->m_quit = true;
 }
 
-Scene::~Scene()  noexcept
+Scene::~Scene() noexcept
 {
 }
 

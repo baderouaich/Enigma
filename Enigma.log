@@ -1,20 +1,25 @@
-[2021-01-28 18:19:40] [info] Enigma: [ OpenGL Info ]
+[2021-01-28 19:37:40] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-01-28 18:19:40] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[2021-01-28 18:19:40] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-01-28 18:19:40] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-01-28 18:19:40] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-01-28 18:19:40] [trace] Enigma: Loading Fonts...
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Montserrat-Medium-18
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Audiowide-Regular-60
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Audiowide-Regular-45
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Audiowide-Regular-20
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Montserrat-Medium-12
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Montserrat-Medium-45
-[2021-01-28 18:19:41] [trace] Enigma: Loaded Montserrat-Medium-20
-[2021-01-28 18:19:42] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
-[2021-01-28 18:19:44] [error] Enigma: GFLW ERROR #65545: Win32: Failed to convert clipboard to string: The operation completed successfully. 
-[2021-01-28 18:19:53] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
+[2021-01-28 19:37:40] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[2021-01-28 19:37:40] [trace] Enigma: __cdecl Enigma::Scene::Scene(void) noexcept
+[2021-01-28 19:37:40] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-01-28 19:37:40] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-01-28 19:37:40] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-01-28 19:37:40] [trace] Enigma: Loading Fonts...
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Montserrat-Medium-18
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Audiowide-Regular-60
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Audiowide-Regular-45
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Audiowide-Regular-20
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Montserrat-Medium-12
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Montserrat-Medium-45
+[2021-01-28 19:37:40] [trace] Enigma: Loaded Montserrat-Medium-20
+[2021-01-28 19:37:50] [trace] Enigma: __cdecl Enigma::Scene::Scene(void) noexcept
+[2021-01-28 19:37:50] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
+[2021-01-28 19:37:54] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
+[2021-01-28 19:37:54] [trace] Enigma: __cdecl Enigma::Scene::~Scene(void) noexcept
+[2021-01-28 19:38:24] [trace] Enigma: __cdecl Enigma::Scene::Scene(void) noexcept
+[2021-01-28 19:38:24] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
+[2021-01-28 19:38:28] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)

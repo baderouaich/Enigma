@@ -3,6 +3,7 @@
 project "cryptopp"
 	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
 	staticruntime "on"
 	
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
@@ -13,6 +14,7 @@ project "cryptopp"
 		"CRYPTOPP_DISABLE_ASM", -- disable assembly files x64dll.asm, x64masm.asm and rdrand.as
 		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
+		--"CRYPTOPP_EXPORTS",  -- for dynamic build
 		--"CRYPTOPP_DLL",  -- for dynamic build
 	}
 

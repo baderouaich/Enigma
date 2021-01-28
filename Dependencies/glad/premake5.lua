@@ -1,6 +1,7 @@
 project "glad"
 	kind "StaticLib"
 	language "C"
+	cdialect "C11"
 	staticruntime "on"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")

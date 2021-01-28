@@ -1,6 +1,7 @@
 project "glfw"
 	kind "StaticLib"
 	language "C"
+	cdialect "C11"
 	staticruntime "on"
 	systemversion "latest"
 
