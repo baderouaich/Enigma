@@ -15,7 +15,7 @@ public:
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit IDEA(Algorithm::Intent intent) noexcept;
-	virtual ~IDEA() = default;
+	virtual ~IDEA() noexcept;
 
 public:
 	String Encrypt(const String& password, const String& buffer) noexcept(false) override;

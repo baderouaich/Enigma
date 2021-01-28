@@ -11,6 +11,9 @@ IDEA::IDEA(Algorithm::Intent intent) noexcept
 {
 }
 
+IDEA::~IDEA() noexcept
+{
+}
 
 String IDEA::Encrypt(const String& password, const String& buffer)
 {

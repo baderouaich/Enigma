@@ -56,15 +56,16 @@ void Application::InitImGuiRenderer()
 	m_imgui_renderer = std::make_unique<ImGuiRenderer>();
 }
 
+
 void Application::PushScene(const std::shared_ptr<Scene>& scene)
 {
-	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
+	ENIGMA_ASSERT(scene.get() , "Scene is nullptr");
 
 	// Push scene & Notify user on scene created
-	this->m_scenes.emplace_back(scene); 
+	this->m_scenes.emplace_back(scene);
 	
 	// Notify user on scene created
-	scene->OnCreate();
+	this->m_scenes.back()->OnCreate();
 }
 
 void Application::OnEvent(Event& event)
@@ -85,7 +86,6 @@ void Application::OnEvent(Event& event)
 		if (event.IsHandled())
 			break;
 	}
-	
 }
 
 bool Application::OnWindowClose(WindowCloseEvent& event)
@@ -94,7 +94,7 @@ bool Application::OnWindowClose(WindowCloseEvent& event)
 
 	this->EndApplication();
 	
-	return true; //the end of the app, all events are handled.
+	return true; // the end of the app, all events are handled.
 }
 
 bool Application::OnWindowResize(WindowResizeEvent& event)

@@ -1,21 +1,18 @@
 #pragma once
 #ifndef ENIGMA_ALGORITHM_H
 #define ENIGMA_ALGORITHM_H
-//#define CRYPTOPP_DEFAULT_NO_DLL 1
+
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include <Utility/CryptoPPUtils.hpp>
-
 
 // Crypto++
 #pragma warning(push, 0) // This ignores all warnings raised inside External headers
 #include <cryptlib.h> // HexEncoder, HexDecoder
 #include <filters.h> // StringSink, StringSource, StreamTransformationFilter
-#include <ccm.h> // CBC_Mode
 #include <osrng.h> // AutoSeededRandomPool
 #include <sha.h> // SHA256
-#include <hkdf.h> // KeyDerivationFunction
-#include <modes.h> // Classes for block cipher modes of operation
+#include <modes.h> // Paddings CBC, GCM...
 
 #include <aes.h> // AES
 #include <gcm.h> // GCM Mode
@@ -23,10 +20,9 @@
 #include <des.h> // TripleDES
 #include <twofish.h> // Twofish
 #include <idea.h> // IDEA
-#include <rsa.h> // RSA
-#include <pssr.h> // RSA PSSR
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
+
 
 
 NS_ENIGMA_BEGIN

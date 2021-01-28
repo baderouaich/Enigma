@@ -10,7 +10,9 @@ TripleDES::TripleDES(Algorithm::Intent intent) noexcept
 	m_tripledes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
 {
 }
-
+TripleDES::~TripleDES() noexcept
+{
+}
 
 String TripleDES::Encrypt(const String& password, const String& buffer)
 {

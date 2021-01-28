@@ -15,7 +15,7 @@ public:
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit AES(Algorithm::Intent intent) noexcept;
-	virtual ~AES() = default;
+	virtual ~AES() noexcept; // in MSVC it is necessary for std::unique_ptr<Bass> ptr(new Derived()); where derived class must have a virtual destructor https://developercommunity.visualstudio.com/content/problem/341397/crash-when-deleting-from-stdunique-ptr.html
 
 public:
 	String Encrypt(const String& password, const String& buffer) noexcept(false) override;

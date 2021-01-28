@@ -15,7 +15,7 @@ public:
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit Twofish(Algorithm::Intent intent) noexcept;
-	virtual ~Twofish() = default;
+	virtual ~Twofish() noexcept;
 
 public:
 	String Encrypt(const String& password, const String& buffer) noexcept(false) override;

@@ -10,9 +10,10 @@ NS_ENIGMA_BEGIN
 EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
 	:
 	Enigma::Scene(),
-	m_fonts(fonts),
+	m_type(Algorithm::Type::AES), // default
+	m_fonts(fonts)
 	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
-	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
+	//,m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
 {
 }
 
@@ -91,11 +92,21 @@ void EncryptTextScene::OnImGuiDraw()
 			{
 				inline_dummy(6.0f, 0.0f);
 				ImGui::SameLine();
+				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
+				{
+					m_type = algo_type;
+				}
+			}
+			/*const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
+			for (const auto& [algo_name, algo_type] : supported_algorithms)
+			{
+				inline_dummy(6.0f, 0.0f);
+				ImGui::SameLine();
 				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm->GetType() == algo_type))
 				{
 					m_algorithm->SetType(algo_type);
 				}
-			}
+			}*/
 		}
 		ImGui::PopFont();
 
@@ -273,6 +284,25 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		try
 		{
 			// Create encryptor based on selected algorithm type
+			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
+			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
+
+			// Encrypt text
+			m_cipher = algorithm->Encrypt(m_password, m_text);
+			ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to encrypt text");
+
+			// Encode cipher to Base64
+			m_cipher_base64 = Base64::Encode(m_cipher);
+			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), "Failed to encode cipher text to Base64");
+
+			// Spawn notification alert if window is not focused
+			if (!Application::GetInstance()->GetWindow()->IsFocused())
+			{
+				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
+			}
+
+#if 0
+			// Create encryptor based on selected algorithm type
 			m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Encrypt);
 			ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
 
@@ -289,6 +319,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			{
 				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
 			}
+#endif 
 		}
 		catch (const CryptoPP::Exception& e)
 		{

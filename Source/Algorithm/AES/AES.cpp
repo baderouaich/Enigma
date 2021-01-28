@@ -11,6 +11,11 @@ AES::AES(Algorithm::Intent intent) noexcept
 {
 }
 
+AES::~AES() noexcept
+{
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+}
+
 
 String AES::Encrypt(const String& password, const String& buffer)
 {    
@@ -105,5 +110,6 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 
 	return decrypted;
 }
+
 
 NS_ENIGMA_END

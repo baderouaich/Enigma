@@ -15,7 +15,7 @@ public:
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit TripleDES(Algorithm::Intent intent) noexcept;
-	virtual ~TripleDES() = default;
+	virtual ~TripleDES() noexcept;
 
 public:
 	String Encrypt(const String& password, const String& buffer) noexcept(false) override;

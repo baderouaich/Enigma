@@ -12,6 +12,9 @@ ChaCha20::ChaCha20(Algorithm::Intent intent) noexcept
 {
 }
 
+ChaCha20::~ChaCha20() noexcept
+{
+}
 
 String ChaCha20::Encrypt(const String& password, const String& buffer)
 {

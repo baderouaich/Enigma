@@ -15,7 +15,7 @@ public:
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit ChaCha20(Algorithm::Intent intent) noexcept;
-	virtual ~ChaCha20() = default;
+	virtual ~ChaCha20() noexcept;
 
 public:
 	String Encrypt(const String& password, const String& buffer) noexcept(false) override;

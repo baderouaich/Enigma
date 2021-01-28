@@ -10,7 +10,9 @@ Twofish::Twofish(Algorithm::Intent intent) noexcept
 	m_twofish_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>() : nullptr)
 {
 }
-
+Twofish::~Twofish() noexcept
+{
+}
 
 String Twofish::Encrypt(const String& password, const String& buffer)
 {
