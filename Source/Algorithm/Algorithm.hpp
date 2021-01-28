@@ -26,6 +26,7 @@
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
+
 NS_ENIGMA_BEGIN
 
 class AES;
@@ -34,6 +35,138 @@ class TripleDES;
 class Twofish;
 class IDEA;
 
+/*
+*	Algorithm abstract class
+*/
+class ENIGMA_API Algorithm
+{
+public:
+	enum class Intent : byte 
+	{
+		Encrypt = 0x0,
+		Decrypt
+	};
+	enum class Type : byte
+	{
+		AES = 0x01,
+		ChaCha20 = 0x02,
+		TripleDES = 0x03,
+		Twofish = 0x04,
+		IDEA = 0x05,
+
+		First = AES,
+		Last = IDEA
+	};
+
+public:
+	explicit Algorithm(Type type, Intent intent) noexcept;
+	virtual ~Algorithm() noexcept;
+
+public:
+	/*
+	*	Encrypts buffer with password
+	* @param password: Encryption password
+	* @param buffer: Buffer to encrypt (text, binary...)
+	* @return (Algo type enum id + IV + Cipher)
+	* @throws CryptoPP::Exception, std::exception on failure
+	*/
+	virtual String Encrypt(const String& password, const String& buffer) noexcept(false) = 0;
+	/*
+	*	Decrypts cipher with password
+	* @param password: Password used to Encyrpt buffer
+	* @param iv_cipher: (Algo type enum id + IV + Cipher)
+	* @return Recovered Buffer
+	* @throws CryptoPP::Exception, std::exception on failure
+	*/
+	virtual String Decrypt(const String& password, const String& iv_cipher) noexcept(false) = 0;
+
+
+public: /* Create polymorphic algorithm by either mode name or type*/
+	static std::unique_ptr<Algorithm> CreateFromName(const String& mode, const Intent& intent);
+	static std::unique_ptr<Algorithm> CreateFromType(const Type& type, const Intent& intent);
+
+public:
+	const Type& GetType() const noexcept { return m_type; }
+	void SetType(const Type& type) noexcept { this->m_type = type; }
+	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
+
+protected:
+	String GenerateRandomIV(const size_t& size);
+
+public:
+	static String AlgoTypeEnumToStr(const Algorithm::Type& e) noexcept;
+	static String GetSupportedAlgorithmsStr() noexcept;
+	static std::vector<std::pair<String, Algorithm::Type>> GetSupportedAlgorithms() noexcept;
+
+protected:
+	Type m_type; // Algorithm type: AES, ChaCha, TripleDES...
+	Intent m_intent; // Operation, Encrypt or Decrypt
+	std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
+
+};
+
+
+NS_ENIGMA_END
+
+
+
+#endif // !ENIGMA_ALGORITHM_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
+#pragma once
+#ifndef ENIGMA_ALGORITHM_H
+#define ENIGMA_ALGORITHM_H
+#include <Core/Core.hpp>
+#include <Logger/Logger.hpp>
+#include <Utility/CryptoPPUtils.hpp>
+
+// Crypto++
+#pragma warning(push, 0) // This ignores all warnings raised inside External headers
+#include <cryptlib.h> // HexEncoder, HexDecoder
+#include <filters.h> // StringSink, StringSource, StreamTransformationFilter
+#include <ccm.h> // CBC_Mode
+#include <osrng.h> // AutoSeededRandomPool
+#include <sha.h> // SHA256
+#include <hkdf.h> // KeyDerivationFunction
+#include <modes.h> // Classes for block cipher modes of operation
+
+#include <aes.h> // AES
+#include <gcm.h> // GCM Mode
+#include <chacha.h> // ChaCha/Salsa20
+#include <des.h> // TripleDES
+#include <twofish.h> // Twofish
+#include <idea.h> // IDEA
+#include <rsa.h> // RSA
+#include <pssr.h> // RSA PSSR
+#pragma warning(pop)
+static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
+
+
+NS_ENIGMA_BEGIN
+
+class AES;
+class ChaCha20;
+class TripleDES;
+class Twofish;
+class IDEA;
 /*
 *	Algorithm abstract class
 */
@@ -104,12 +237,14 @@ public: /* Create polymorphic algorithm by either mode name or type*/
 		else
 			throw std::runtime_error("Unsupported algorithm mode: " + mode);
 	}
+
 	static std::unique_ptr<Algorithm> CreateFromType(const Type& type, const Intent& intent)
 	{
 		String mode = AlgoTypeEnumToStr(type);
 		StringUtils::Lower(mode);
 		return CreateFromName(mode, intent);
 	}
+
 
 
 public:
@@ -159,6 +294,7 @@ public:
 		}
 		return out;
 	}
+
 protected:
 	Type m_type; // Algorithm type: AES, ChaCha, TripleDES...
 	Intent m_intent; // Operation, Encrypt or Decrypt
@@ -172,3 +308,4 @@ NS_ENIGMA_END
 
 
 #endif // !ENIGMA_ALGORITHM_H
+#endif

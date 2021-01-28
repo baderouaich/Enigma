@@ -25,7 +25,7 @@ public: /* Accessors */
 	static const std::shared_ptr<spdlog::logger>& GetLogger() noexcept { return m_logger; }
 
 private:
-    static std::shared_ptr<spdlog::logger> m_logger;
+	inline static std::shared_ptr<spdlog::logger> m_logger{ nullptr };
 };
 
 

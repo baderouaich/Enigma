@@ -3,9 +3,6 @@
 
 NS_ENIGMA_BEGIN
 
-// static members
-std::shared_ptr<spdlog::logger> Logger::m_logger;
-
 void Logger::Initialize()
 {
 	std::array<std::shared_ptr<spdlog::sinks::sink>, 2> log_sinks;

@@ -51,16 +51,6 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	}
 }
 
-/*
-void Application::InitSceneData()
-{
-	m_scene_data.window = &(*m_window);
-	m_scene_data.delta_time = &m_delta_time;
-	m_scene_data.scenes = &m_scenes;
-	m_scene_data.FPS = &m_FPS;
-}
-*/
-
 void Application::InitImGuiRenderer()
 {
 	m_imgui_renderer = std::make_unique<ImGuiRenderer>();
@@ -71,10 +61,10 @@ void Application::PushScene(const std::shared_ptr<Scene>& scene)
 	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
 
 	// Push scene & Notify user on scene created
-	this->m_scenes.emplace_back(scene)->OnCreate(); // c++17 only emplace_back returns inserted item
+	this->m_scenes.emplace_back(scene); 
 	
 	// Notify user on scene created
-	//scene->OnCreate();
+	scene->OnCreate();
 }
 
 void Application::OnEvent(Event& event)

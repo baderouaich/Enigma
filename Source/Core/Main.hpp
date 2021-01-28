@@ -43,7 +43,6 @@ int main(int argc, char* argv[])
 	// Run Tests
 	return Catch::Session().run(argc, argv);
 #endif
-
 }
 
 
