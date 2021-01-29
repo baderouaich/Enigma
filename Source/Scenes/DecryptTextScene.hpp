@@ -25,7 +25,7 @@ private: /* Callbacks */
 private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
-	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm used to encrypt text with
+	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
 	String m_recovered_text; // Decrypted Text
 	String m_cipher; // Encrypted text
 	String m_cipher_base64; // Encrypted text in Base64 to be Decrypted

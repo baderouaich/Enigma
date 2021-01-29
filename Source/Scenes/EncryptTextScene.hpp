@@ -28,8 +28,6 @@ private:
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
-	
-	//std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to encrypt text with
 	String m_text; // Text to encrypt
 	String m_cipher; // Encrypted text
 	String m_cipher_base64; // Encrypted text in Base64

@@ -13,8 +13,7 @@ EncryptFileScene::EncryptFileScene(const std::unordered_map<std::string_view, Im
 	:
 	Enigma::Scene(),
 	m_fonts(fonts),
-	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
-	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
+	m_type(Algorithm::Type::AES) // default
 {
 }
 
@@ -95,9 +94,9 @@ void EncryptFileScene::OnImGuiDraw()
 			{
 				inline_dummy(6.0f, 0.0f);
 				ImGui::SameLine();
-				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm->GetType() == algo_type))
+				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
-					m_algorithm->SetType(algo_type);
+					m_type = algo_type;
 				}
 			}
 		}
@@ -347,8 +346,8 @@ void EncryptFileScene::OnEncryptButtonPressed()
 		try
 		{
 			// Create encryptor based on selected algorithm type
-			m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Encrypt);
-			ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
+			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
+			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
 
 			// Read in file buffer
 			String buffer{};
@@ -369,7 +368,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			}
 
 			// Encrypt file buffer
-			String cipher = m_algorithm->Encrypt(m_password, buffer);
+			String cipher = algorithm->Encrypt(m_password, buffer);
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file buffer");
 
 			// Save cipher to out file encrypted
@@ -379,14 +378,9 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write cipher to file " + m_out_filename);
 
 			// Alert user that encryption was successfull
-			(void)Enigma::MessageBox
-			{
-				"Enigma", "Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
+			(void)DialogUtils::Info("Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
 				(m_compress ? (decreased_bytes ? ("Compression Status: File size decreased by " +
-					std::to_string(ENIGMA_BYTES_TO_MB(decreased_bytes)) +  " MB") : "") : ""),
-				Enigma::MessageBox::Icon::Info,
-				Enigma::MessageBox::Choice::Ok
-			}.Show();
+					std::to_string(ENIGMA_BYTES_TO_MB(decreased_bytes)) + " MB") : "") : ""));
 		
 		}
 		catch (const CryptoPP::Exception& e)

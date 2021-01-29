@@ -13,8 +13,7 @@ DecryptFileScene::DecryptFileScene(const std::unordered_map<std::string_view, Im
 	:
 	Enigma::Scene(),
 	m_fonts(fonts),
-	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
-	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Decrypt))
+	m_type(Algorithm::Type::AES)
 {
 }
 
@@ -95,9 +94,9 @@ void DecryptFileScene::OnImGuiDraw()
 			{
 				inline_dummy(6.0f, 0.0f);
 				ImGui::SameLine();
-				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm->GetType() == algo_type))
+				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
-					m_algorithm->SetType(algo_type);
+					m_type = algo_type;
 				}
 			}
 			ImGui::NewLine();
@@ -291,11 +290,12 @@ void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
 			(void)DialogUtils::Error("Could not auto-detect algorithm mode used for encryption");
 			return;
 		}
-		// if alles gut, create polymorphic algorithm decryptor
-		m_algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), Algorithm::Intent::Decrypt);
+		// if alles gut, set type
+		m_type = static_cast<Algorithm::Type>(cipher_first_byte);
 		// little happy info dialog
-		ENIGMA_INFO("Successfully detected algorithm used for encryption which is: {0}", m_algorithm->GetTypeString());
-		(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + m_algorithm->GetTypeString());	
+		ENIGMA_INFO("Successfully detected algorithm used for encryption which is: {0}", Algorithm::AlgoTypeEnumToStr(m_type));
+		(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type));
+
 	}
 	catch (const CryptoPP::Exception& e)
 	{
@@ -383,8 +383,8 @@ void DecryptFileScene::OnDecryptButtonPressed()
 		try
 		{
 			// Create decryptor based on selected algorithm type
-			m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Decrypt);
-			ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
+			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
+			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
 
 			// Read in file cipher
 			String cipher{};
@@ -393,7 +393,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "File " + m_in_filename + " is empty");
 
 			// Decrypt file cipher
-			String buffer = m_algorithm->Decrypt(m_password, cipher);
+			String buffer = algorithm->Decrypt(m_password, cipher);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file cipher");
 
 			// Decompression (if used in encryption)
@@ -415,14 +415,9 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write buffer to file " + m_out_filename);
 
 			// Alert user that encryption was successfull
-			(void)Enigma::MessageBox
-			{
-				"Enigma", "Decrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
+			(void)DialogUtils::Info("Decrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
 				(m_decompress ? (increased_bytes ? ("Decompression Status: File size increased by " +
-					std::to_string(ENIGMA_BYTES_TO_MB(increased_bytes)) + " MB") : "") : ""),
-				Enigma::MessageBox::Icon::Info,
-				Enigma::MessageBox::Choice::Ok
-			}.Show();
+					std::to_string(ENIGMA_BYTES_TO_MB(increased_bytes)) + " MB") : "") : ""));
 
 		}
 		catch (const CryptoPP::Exception& e)

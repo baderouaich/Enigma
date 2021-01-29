@@ -24,7 +24,9 @@ private: /* Callbacks */
 
 private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
-	std::unique_ptr<Enigma::Algorithm> m_algorithm; // selected algorithm to encrypt File with
+	
+private:
+	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
 	String m_in_filename; // In File to encrypt
 	String m_out_filename; // Out File encrypted location
 	String m_password, m_confirm_password;

@@ -9,8 +9,7 @@ DecryptTextScene::DecryptTextScene(const std::unordered_map<std::string_view, Im
 	:
 	Enigma::Scene(),
 	m_fonts(fonts),
-	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
-	m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Decrypt))
+	m_type(Algorithm::Type::AES) // default
 {
 }
 
@@ -88,9 +87,9 @@ void DecryptTextScene::OnImGuiDraw()
 			{
 				inline_dummy(6.0f, 0.0f);
 				ImGui::SameLine();
-				if (ImGui::RadioButton(algo_name.c_str(), m_algorithm->GetType() == algo_type))
+				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
-					m_algorithm->SetType(algo_type);
+					m_type = algo_type;
 				}
 			}
 			ImGui::NewLine();
@@ -261,10 +260,10 @@ void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 		(void)DialogUtils::Error("Could not auto-detect algorithm mode used for encryption");
 		return;
 	}
-	// if alles gut, create polymorphic algorithm decryptor
-	m_algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), Algorithm::Intent::Decrypt);
+	// if alles gut, set type
+	m_type = static_cast<Algorithm::Type>(cipher_first_byte);
 	// little happy info dialog
-	(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + m_algorithm->GetTypeString());
+	(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type));
 }
 
 void DecryptTextScene::OnBackButtonPressed()
@@ -300,10 +299,10 @@ void DecryptTextScene::OnDecryptButtonPressed()
 		ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
 	
 		// Create encryptor based on selected algorithm type
-		m_algorithm = Algorithm::CreateFromType(m_algorithm->GetType(), Algorithm::Intent::Decrypt);
-		ENIGMA_ASSERT_OR_THROW(m_algorithm, "Failed to create algorithm from type");
+		const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
+		ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
 		
-		m_recovered_text = m_algorithm->Decrypt(m_password, m_cipher);
+		m_recovered_text = algorithm->Decrypt(m_password, m_cipher);
 		ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to recover encrypted text");
 
 		// Spawn notification alert if window is not focused

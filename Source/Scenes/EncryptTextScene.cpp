@@ -12,8 +12,6 @@ EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, Im
 	Enigma::Scene(),
 	m_type(Algorithm::Type::AES), // default
 	m_fonts(fonts)
-	//AES will be first selected in Radio buttons as default, must be initialized for apply algo->GetType()
-	//,m_algorithm(Algorithm::CreateFromType(Algorithm::Type::AES, Algorithm::Intent::Encrypt))
 {
 }
 
