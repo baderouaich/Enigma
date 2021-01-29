@@ -4,10 +4,13 @@
 
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
-#include <Utility/CryptoPPUtils.hpp>
+
+//#pragma push_macro("new")
+//#undef new
 
 // Crypto++
 #pragma warning(push, 0) // This ignores all warnings raised inside External headers
+#include <Utility/CryptoPPUtils.hpp>
 #include <cryptlib.h> // HexEncoder, HexDecoder
 #include <filters.h> // StringSink, StringSource, StreamTransformationFilter
 #include <osrng.h> // AutoSeededRandomPool
@@ -23,6 +26,7 @@
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
+//#pragma pop_macro("new")
 
 
 NS_ENIGMA_BEGIN

@@ -18,11 +18,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Generate Project Files
-      run: ./Gen-Windows-vs2019.bat
-
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
+      #with:
+        #vs-version: '[16.4,16.5)'
+
+
+    - name: Generate Project Files
+      run: ./Gen-Windows-vs2019.bat
 
     - name: Build Solution
       run: msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo 
