@@ -20,8 +20,9 @@ jobs:
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
-      #with:
-        #vs-version: '[16.4,16.5)'
+      with: 
+        #using vs 16.8.3 in my local machine Help -> About Visual Studio
+        vs-version: '16.8'
 
 
     - name: Generate Project Files
