@@ -18,8 +18,8 @@ project "cryptopp"
 		--"CRYPTOPP_DLL",  -- for dynamic build
 	}
 
-	-- Enable SSE2 vector processing
-	--vectorextensions "SSE2"
+	-- Enable SSE2 vector processing https://github.com/premake/premake-core/wiki/vectorextensions
+	vectorextensions "SSE2"	--sse2 to cover most processors  
 
 	
 	files
