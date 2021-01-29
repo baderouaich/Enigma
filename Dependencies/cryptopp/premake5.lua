@@ -11,17 +11,17 @@ project "cryptopp"
 
 	defines 
 	{
-		--"CRYPTOPP_DISABLE_ASM", -- disable assembly files x64dll.asm, x64masm.asm and rdrand.as
+		"CRYPTOPP_DISABLE_ASM", -- disable assembly files x64dll.asm, x64masm.asm and rdrand.as
 		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
 		--"CRYPTOPP_EXPORTS",  -- for dynamic build
 		--"CRYPTOPP_DLL",  -- for dynamic build
 	}
 
-	-- Enable SSE2 vector processing https://github.com/premake/premake-core/wiki/vectorextensions
-	vectorextensions "SSE2"	--sse2 to cover most processors  
+	-- Enable SSSE3 vector processing https://github.com/premake/premake-core/wiki/vectorextensions
+	vectorextensions "SSSE3"
 
-	
+
 	files
 	{
 
@@ -83,7 +83,7 @@ project "cryptopp"
 		--"rdrand.asm","rdseed.asm",
 
 		 -- Enable if CRYPTOPP_DISABLE_ASM not defined above
-		"x64dll.asm", "x64masm.asm"
+		--"x64dll.asm", "x64masm.asm"
 	}
 
 
