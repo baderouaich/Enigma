@@ -122,6 +122,7 @@ project "cryptopp"
 	filter "system:linux"
 		defines
 		{
+			"rdrand.asm","rdseed.asm"
 		}
 		links 
 	 	{
