@@ -9,3 +9,4 @@ When storing something particularly sensitive, perhaps archives of tax documents
 contain personal details like your social-security number, in online storage or emailing it
 to someone, you may want to use encryption. Almost all of your personal files likely don't
 require this sort of encryption, though.
+

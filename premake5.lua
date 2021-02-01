@@ -5,7 +5,7 @@ include "./Premake/premake_customization/solution_items.lua"
 workspace "Enigma"  -- Workspace which is the solution in windows, in xcode will be something else
 	architecture "x86_64" -- Targeted architecture x64
 	startproject "Enigma" -- Set 'Enigma Application' project as start up project
-
+	
 	configurations
 	{
 		"Debug", 
@@ -63,6 +63,7 @@ project "Enigma"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "on"
+	rtti "On"
 
 	---[[ Binary Output dirs ]]---
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")

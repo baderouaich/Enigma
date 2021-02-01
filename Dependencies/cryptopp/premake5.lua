@@ -11,7 +11,14 @@ project "cryptopp"
 
 	defines 
 	{
-		--"CRYPTOPP_DISABLE_ASM", -- disable assembly files x64dll.asm, x64masm.asm and rdrand.as
+		--[[
+		Define this to disable ASM, intrinsics and built-ins. The code will be 
+		compiled using C++ only. The library code will not include SSE2 (and above),
+		NEON, Aarch32, Aarch64, Power4, Power7 or Power8.
+		#define CRYPTOPP_DISABLE_ASM 1
+		]] 
+		--"CRYPTOPP_DISABLE_ASM=1",
+
 		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
 		--"CRYPTOPP_EXPORTS",  -- for dynamic build
@@ -21,6 +28,12 @@ project "cryptopp"
 	vectorextensions "SSE2"
 
 
+	files
+	{
+		"*.h",
+		"*.cpp",
+	}
+--[[
 	files
 	{
 
@@ -84,16 +97,22 @@ project "cryptopp"
 		 -- Enable if CRYPTOPP_DISABLE_ASM not defined above
 		"x64masm.asm", "x64dll.asm"
 	}
-
+--]]
 
 	filter "system:windows"
 		systemversion "latest"
+		files
+		{
+			"x64masm.asm", 
+			"x64dll.asm"
+		}
 		defines
 		{
 			"_WINSOCK_DEPRECATED_NO_WARNINGS",
 		}
 		links 
 	 	{
+	 		"ws2_32",
 	      --[["advapi32", "kernel32", "user32", "gdi32", "comdlg32",
 	      "shell32", "windowscodecs", "comctl32", "msimg32",
 	      "winspool", "wininet", "urlmon", "gdiplus", "ole32",
