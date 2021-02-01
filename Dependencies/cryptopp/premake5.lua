@@ -3,7 +3,7 @@
 project "cryptopp"
 	kind "StaticLib"
 	language "C++"
-	cppdialect "C++17"
+	cppdialect "C++11"
 	staticruntime "on"
 	
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
@@ -17,7 +17,7 @@ project "cryptopp"
 		NEON, Aarch32, Aarch64, Power4, Power7 or Power8.
 		#define CRYPTOPP_DISABLE_ASM 1
 		]] 
-		--"CRYPTOPP_DISABLE_ASM=1",
+		"CRYPTOPP_DISABLE_ASM=1",
 
 		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
@@ -103,8 +103,6 @@ project "cryptopp"
 		systemversion "latest"
 		files
 		{
-			"x64masm.asm", 
-			"x64dll.asm"
 		}
 		defines
 		{
@@ -122,7 +120,6 @@ project "cryptopp"
 	filter "system:linux"
 		defines
 		{
-			"rdrand.asm","rdseed.asm"
 		}
 		links 
 	 	{
