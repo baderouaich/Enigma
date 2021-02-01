@@ -3,7 +3,7 @@
 project "cryptopp"
 	kind "StaticLib"
 	language "C++"
-	cppdialect "C++11"
+	cppdialect "C++11" -- requires c++11 to build correctly
 	staticruntime "on"
 	
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
@@ -25,7 +25,7 @@ project "cryptopp"
 	}
 
 	-- Enable SSE2 vector processing https://github.com/premake/premake-core/wiki/vectorextensions
-	vectorextensions "SSE2"
+	--vectorextensions "SSE2"
 
 
 	files
