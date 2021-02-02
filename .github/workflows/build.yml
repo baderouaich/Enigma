@@ -1,5 +1,5 @@
-# Enigma Build workflow task
-name: build
+# Enigma Build workflow task for linux & windows
+name: Build
 
 # build on pushs and pull requests on master branch
 on:
@@ -10,12 +10,15 @@ on:
 
 # platform tasks
 jobs:
+
+  ### WINDOWS ###
   Windows:
     runs-on: windows-latest
     strategy:
       matrix:
         architecture: [x64] #architecture: [x86, x64]
         build-platform: [x64] #build-platform: [Win32, x64]
+
     defaults:
       run:
         shell: cmd
@@ -35,8 +38,14 @@ jobs:
     - name: Build Solution
       run: msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo 
 
+  ### LINUX ###
   Linux:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: [x64] #architecture: [x86, x64]
+        build-platform: [x64] #build-platform: [x86, x64]
+
     steps:
     - uses: actions/checkout@v2
 
@@ -56,7 +65,7 @@ jobs:
       run: sudo bash ./Gen-Linux-Makefile.sh
 
     - name: Make Enigma
-      run: make config=release CC=gcc-10 CPP=g++-10
+      run: make config=release CC=gcc-10 CPP=g++-10 -j$(nproc) #$(nproc) available cpus in the machine
 
 
 #    - name: Generate Project Make Files
