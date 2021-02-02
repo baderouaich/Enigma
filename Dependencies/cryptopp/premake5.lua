@@ -29,7 +29,10 @@ project "cryptopp"
 	{
 		"*.h",
 		"*.cpp",
-		"*.asm" -- !!! NOTE !!!: make sure you include asm files when pushing to github (configure .gitignore) otherwise workflow wont find them
+		 
+		-- !!! NOTE !!!: make sure you include asm files when pushing to github (configure .gitignore) otherwise workflow wont find them
+		"x64masm.asm",
+		"x64dll.asm",
 	}
 
 
