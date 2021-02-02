@@ -65,7 +65,7 @@ jobs:
       run: sudo bash ./Gen-Linux-Makefile.sh
 
     - name: Make Enigma
-      run: make config=release CC=gcc-10 CPP=g++-10 -j$(nproc) #$(nproc) available cpus in the machine
+      run: make config=release CC=gcc-10 CPP=g++-10 -j$(nproc) #$(nproc) will return the number of cores on the machine
 
 
 #    - name: Generate Project Make Files
