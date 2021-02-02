@@ -63,7 +63,6 @@ project "Enigma"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "on"
-	rtti "On"
 
 	---[[ Binary Output dirs ]]---
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
