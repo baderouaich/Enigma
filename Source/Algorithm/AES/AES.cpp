@@ -13,7 +13,6 @@ AES::AES(Algorithm::Intent intent) noexcept
 
 AES::~AES() noexcept
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 }
 
 
