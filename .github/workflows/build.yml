@@ -12,6 +12,10 @@ on:
 jobs:
   Windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        architecture: x64 #architecture: [x86, x64]
+        build-platform: x64 #build-platform: [Win32, x64]
     defaults:
       run:
         shell: cmd

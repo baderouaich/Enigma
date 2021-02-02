@@ -25,7 +25,7 @@ project "cryptopp"
 	}
 
 	-- Enable SSE2 vector processing https://github.com/premake/premake-core/wiki/vectorextensions
-	--vectorextensions "SSE2"
+	vectorextensions "SSE2"
 
 
 	files
@@ -34,7 +34,7 @@ project "cryptopp"
 		"*.cpp",
 
 		--"rdrand.asm","rdseed.asm",
-		--"x64masm.asm", "x64dll.asm"
+		"x64masm.asm", "x64dll.asm"
 	}
 --[[
 	files
@@ -106,7 +106,7 @@ project "cryptopp"
 		systemversion "latest"
 		files
 		{
-			"x64masm.asm", "x64dll.asm"
+			--"x64masm.asm", "x64dll.asm"
 		}
 		defines
 		{
@@ -126,7 +126,7 @@ project "cryptopp"
 	filter "system:linux"
 		defines
 		{
-			"CRYPTOPP_DISABLE_ASM=1",
+			--"CRYPTOPP_DISABLE_ASM=1",
 		}
 		links 
 	 	{
