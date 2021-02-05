@@ -1,3 +1,4 @@
+-- Thanks to https://github.com/danielga/gm_crypt which helped with project setup
 project "cryptopp"
 	kind "StaticLib"
 	language "C++"
@@ -21,20 +22,16 @@ project "cryptopp"
 		--"CRYPTOPP_EXPORTS",  -- for dynamic build
 	}
 
-	-- Enable SSE2 vector processing https://github.com/premake/premake-core/wiki/vectorextensions
-	vectorextensions "SSE2"
-
-
-	files
-	{
-		"*.h",
-		"*.cpp",
-		 
-		-- !!! NOTE !!!: make sure you include asm files when pushing to github (configure .gitignore) otherwise workflow wont find them
-		"x64masm.asm",
-		"x64dll.asm",
-	}
-
+	includedirs 
+    {
+     	"include/cryptopp/" -- for the project's own includes in cpp
+    }
+    files
+    {
+    	"src/*.cpp",
+    	"src/x64masm.asm", 
+    	"src/x64dll.asm",
+    }
 
 	filter "system:windows"
 		systemversion "latest"

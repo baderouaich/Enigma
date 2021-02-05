@@ -5,7 +5,7 @@
 #include <Core/Core.hpp>
 
 // Crypto++ GZip Ref: https://www.cryptopp.com/wiki/Gzip && https://www.cryptopp.com/wiki/Gunzip
-#include <gzip.h>	// Gzip & Gunzip
+#include <cryptopp/gzip.h>	// Gzip & Gunzip
 
 NS_ENIGMA_BEGIN
 

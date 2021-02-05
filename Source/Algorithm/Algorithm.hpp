@@ -8,18 +8,19 @@
 // Crypto++
 #pragma warning(push, 0) // This ignores all warnings raised inside External headers
 #include <Utility/CryptoPPUtils.hpp>
-#include <cryptlib.h> // HexEncoder, HexDecoder
-#include <filters.h> // StringSink, StringSource, StreamTransformationFilter
-#include <osrng.h> // AutoSeededRandomPool
-#include <sha.h> // SHA256
-#include <modes.h> // Paddings CBC, GCM...
+#include <cryptopp/cryptlib.h> // HexEncoder, HexDecoder
+#include <cryptopp/filters.h> // StringSink, StringSource, StreamTransformationFilter
+#include <cryptopp/osrng.h> // AutoSeededRandomPool
+#include <cryptopp/hkdf.h> // HKDF
+#include <cryptopp/sha.h> // SHA256
+#include <cryptopp/modes.h> // Paddings CBC, GCM...
 
-#include <aes.h> // AES
-#include <gcm.h> // GCM Mode
-#include <chacha.h> // ChaCha/Salsa20
-#include <des.h> // TripleDES
-#include <twofish.h> // Twofish
-#include <idea.h> // IDEA
+#include <cryptopp/aes.h> // AES
+#include <cryptopp/gcm.h> // GCM Mode
+#include <cryptopp/chacha.h> // ChaCha/Salsa20
+#include <cryptopp/des.h> // TripleDES
+#include <cryptopp/twofish.h> // Twofish
+#include <cryptopp/idea.h> // IDEA
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
