@@ -41,7 +41,7 @@ IncludeDir["imgui"]			= "%{wks.location}/Dependencies/imgui"
 IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include" 
 IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include" 
 IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" 
-IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp/include" 
+IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp" 
 IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" 
 IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src" 
 

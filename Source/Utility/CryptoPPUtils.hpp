@@ -2,7 +2,7 @@
 #ifndef ENIGMA_CRYPTOPP_UTILS_H
 #define ENIGMA_CRYPTOPP_UTILS_H
 #include <Core/Core.hpp>
-#include <cryptopp/cryptlib.h>
+#include <cryptlib.h>
 
 NS_ENIGMA_BEGIN
 
