@@ -20,7 +20,6 @@ project "cryptopp"
 		NEON, Aarch32, Aarch64, Power4, Power7 or Power8.
 		#define CRYPTOPP_DISABLE_ASM 1
 		]] 
-		--"CRYPTOPP_DISABLE_SHA",
 		--"CRYPTOPP_DISABLE_ASM=1",
 		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
@@ -91,7 +90,7 @@ project "cryptopp"
 	 	{
 	 		"ws2_32"
 	    }
-
+        --vectorextensions "SSE2"
 
 	filter "system:linux"
 		defines
@@ -100,6 +99,12 @@ project "cryptopp"
 		links 
 	 	{
 	    }
+        buildoptions
+        {
+            "-march=native", --compile for machine processor # https://stackoverflow.com/questions/18868235/preventing-gcc-from-automatically-using-avx-and-fma-instructions-when-compiled-w/25911959#25911959
+            "-msha", -- # https://github.com/weidai11/cryptopp/issues/834
+        }
+        --vectorextensions "AVX"
 
 	filter "system:macosx"
 		defines

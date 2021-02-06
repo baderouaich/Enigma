@@ -10,3 +10,7 @@ contain personal details like your social-security number, in online storage or 
 to someone, you may want to use encryption. Almost all of your personal files likely don't
 require this sort of encryption, though.
 
+
+- exclude catch sources on release & dist
+Fixed Linux compilation issue
+- by adding buildoptions -march=native and -msha
