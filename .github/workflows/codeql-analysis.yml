@@ -3,19 +3,13 @@ name: codeql-analysis
 on:
   push:
     branches: [ master ]
-    paths:
-      - './Source/'
-    paths-ignore:
-      - './Dependencies/'
-      - './Resources/'
-      
   pull_request:
     branches: [ master ]
-    paths:
-      - './Source/'
-    paths-ignore:
-      - './Dependencies/'
-      - './Resources/'
+  paths:
+    - Source
+  paths-ignore:
+    - Dependencies
+    - Resources
 
 jobs:
   CodeQL-Build:
