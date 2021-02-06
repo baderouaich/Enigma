@@ -1,5 +1,5 @@
 # Enigma Build workflow task for linux & windows
-name: Build
+name: build
 
 # build on pushs and pull requests on master branch
 on:
