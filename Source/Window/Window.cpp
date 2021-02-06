@@ -20,6 +20,7 @@ Window::Window(const WindowSettings& window_settings)
 	m_frame_buffer_size(0, 0),
 	m_vsync(window_settings.is_vsync),
 	m_is_show_fps(window_settings.is_show_fps),
+	m_is_show_ram_usage(window_settings.is_show_ram_usage),
 	m_GLFWwindow(nullptr),
 	m_monitor(nullptr),
 	m_video_mode(nullptr),
@@ -525,6 +526,26 @@ void Window::SetShouldClose(const bool close) const noexcept
 
 void Window::SetTitle(const String& title) noexcept
 {
+	std::ostringstream oss{};
+	oss << title;
+
+	//FPS
+	if (m_is_show_fps)
+	{
+		const ui32& FPS = Application::GetInstance()->GetFPS();
+		oss << " - FPS: " << FPS;
+	}
+	//RAM Usage
+	if (m_is_show_ram_usage)
+	{
+		const auto& ram_info = Application::GetInstance()->GetRAMInfo();
+		ram_info->Update();
+		const f32 percentage = ram_info->GetRAMUsage();
+		oss << " - Memory Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
+	}
+
+	glfwSetWindowTitle(m_GLFWwindow, oss.str().c_str());
+#if 0
 	// title - FPS: x
 	if (m_is_show_fps)
 	{
@@ -532,13 +553,23 @@ void Window::SetTitle(const String& title) noexcept
 		const String title_with_fps = title + " - FPS: " + std::to_string(FPS);
 		glfwSetWindowTitle(m_GLFWwindow, title_with_fps.c_str());
 	}
+	// title - FPS: x
+	else if (m_is_show_ram_usage)
+	{
+		RAMInfo& ram_info = Application::GetInstance()->GetRAMInfo();
+		ram_info.Update();
+		const f32 percentage = ram_info.GetRAMUsage();
+
+		const String title_with_ram_usage = title + " - " + std::to_string(percentage) + "% Memory";
+		glfwSetWindowTitle(m_GLFWwindow, title_with_ram_usage.c_str());
+	}
 	else
 	{
 		glfwSetWindowTitle(m_GLFWwindow, title.c_str());
 	}
 
 	m_title = title; // no worries, string::operator= has check if (this != _STD addressof(_Right))
-	
+#endif
 }
 
 void Window::SetPosition(const i32& x, const i32& y) const noexcept

@@ -6,6 +6,7 @@
 #include <Window/WindowSettings.hpp>
 #include <UI/ImGui/ImGuiRenderer.hpp>
 #include <Utility/DialogUtils.hpp>
+#include <Analytics/Hardware/RAM/RAMInfo.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -20,8 +21,9 @@ Application::Application(const WindowSettings& window_settings)
 	m_delta_time(0.0f),
 	//FPS
 	m_FPS_timer(0.0f),
-	m_FPS(0)
+	m_FPS(0),
 	//,m_max_FPS(window_settings.maximum_fps)
+	m_ram_info(window_settings.is_show_ram_usage ? new RAMInfo() : nullptr)
 {
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
@@ -123,7 +125,6 @@ bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 
 void Application::Run()
 {
-	//TODO: MORE WORK
 	while (! m_window->ShouldClose())
 	{
 		// Poll Events
@@ -225,7 +226,7 @@ void Application::UpdateFPS() noexcept
 	///
 #endif
 	/// Update Frames per second & set to window title
-	if (m_window->m_is_show_fps)
+	if (m_window->m_is_show_fps || m_window->m_is_show_ram_usage) // take the change to refresh title if ram usage is enabled
 	{
 		m_FPS++;
 		m_FPS_timer += m_delta_time;
@@ -236,6 +237,7 @@ void Application::UpdateFPS() noexcept
 			m_FPS_timer = 0.0f;
 		}
 	}
+
 	///
 }
 

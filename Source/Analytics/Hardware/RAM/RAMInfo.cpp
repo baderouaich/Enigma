@@ -55,4 +55,14 @@ size_t RAMInfo::GetAvailableRAM() const noexcept
 #endif
 }
 
+f32 RAMInfo::GetRAMUsage() noexcept
+{
+	f32 percentage = Map(
+		static_cast<f32>(this->GetUsedRAM()), // value
+		0.0f, static_cast<f32>(this->GetAvailableRAM()), // from 0 to whatever ram available
+		0.0f, 100.0f // to 0 to 100 percentage range
+	);
+	return percentage;
+}
+
 NS_ENIGMA_END

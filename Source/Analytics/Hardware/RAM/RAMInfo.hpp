@@ -29,28 +29,51 @@ class ENIGMA_API RAMInfo
 {
 public: /* Constructors / Destructor */
 	RAMInfo() noexcept;
-	~RAMInfo() = default;
+	~RAMInfo() noexcept = default;
+
+	ENIGMA_NON_COPYABLE(RAMInfo);
+	ENIGMA_NON_MOVEABLE(RAMInfo);
 
 public:
 	/*
-	*	Update the RAMInfo at runtime
+	*	Updates the RAM status at runtime
 	*/
 	void Update();
 
 	/*
-	*	Return the total physical memory reserved (in bytes)
+	*	Returns the total physical memory reserved (in bytes)
 	*/
 	size_t GetUsedRAM() const noexcept;
 
 	/*
-	*	Return the total physical memory free (in bytes)
+	*	Returns the total physical memory free (in bytes)
 	*/
 	size_t GetFreeRAM() const noexcept;
 
 	/*
-	*	Return the max available memory on the system (in bytes)
+	*	Returns the max available memory on the system (in bytes)
 	*/
 	size_t GetAvailableRAM() const noexcept;
+
+	/*
+	*	Returns memory usage (in percentage [0% -> 100%])
+	*/
+	f32 GetRAMUsage() noexcept;
+
+private:
+	/*
+	*	Maps value from a range to another
+	*	@param value: the incoming value to be converted
+	*	@param start1: lower bound of the value's current range
+	*	@param stop1: upper bound of the value's current range
+	*	@param start2: lower bound of the value's target range
+	*	@param stop2: upper bound of the value's target range
+	*/
+	template<typename T>
+	constexpr inline const T Map(const T& value, const T& start1, const T& stop1, const T& start2, const T& stop2)
+	{
+		return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+	}
 
 private:
 	 memory_status_t m_memory_status;

@@ -107,6 +107,11 @@ struct ENIGMA_API WindowSettings
 	bool is_show_fps = false;
 
 	/*
+	*	Show realtime RAM usage in percentage
+	*/
+	bool is_show_ram_usage = false;
+
+	/*
 	*	 Specifies the desired refresh rate for full screen windows. If set to -1, the highest
 	*	 available refresh rate will be used. This hint is ignored for windowed mode windows.
 	*/

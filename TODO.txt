@@ -12,5 +12,3 @@ require this sort of encryption, though.
 
 
 - exclude catch sources on release & dist
-Fixed Linux compilation issue
-- by adding buildoptions -march=native and -msha

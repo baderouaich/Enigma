@@ -25,6 +25,7 @@ NS_ENIGMA_BEGIN
 struct WindowSettings;
 class Window;
 class ImGuiRenderer;
+class RAMInfo;
 
 class ENIGMA_API Application
 {
@@ -89,6 +90,12 @@ public: /*Accessors*/
 	*/
 	constexpr const f32& GetDeltaTime() const noexcept { return m_delta_time; }
 
+
+	/*
+	*	Returns Realtime RAM usage informations
+	*/
+	constexpr const std::unique_ptr<RAMInfo>& GetRAMInfo() const noexcept { return m_ram_info; }
+
 private: /* Updaters */
 	void UpdateDeltaTime() noexcept;
 	void UpdateFPS() noexcept;
@@ -116,6 +123,9 @@ private: /* FPS */
 	f32 m_FPS_timer;
 	ui32 m_FPS;
 	//ui32 m_max_FPS;
+
+private: /* Realtime Hardware Info */
+	std::unique_ptr<RAMInfo> m_ram_info;
 
 private: /* ImGui */
 	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;

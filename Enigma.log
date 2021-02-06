@@ -1,0 +1,157 @@
+[2021-02-06 21:09:14] [info] Enigma: [ OpenGL Info ]
+		Manufacturer: Intel
+		Renderer: Intel(R) HD Graphics 4600
+		Version: 3.3.0 - Build 20.19.15.5126
+
+[2021-02-06 21:09:14] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[2021-02-06 21:09:14] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-02-06 21:09:14] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-02-06 21:09:14] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-02-06 21:09:14] [trace] Enigma: Loading Fonts...
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Montserrat-Medium-18
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Audiowide-Regular-60
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Audiowide-Regular-45
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Audiowide-Regular-20
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Montserrat-Medium-12
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Montserrat-Medium-45
+[2021-02-06 21:09:14] [trace] Enigma: Loaded Montserrat-Medium-20
+[2021-02-06 21:09:31] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
+[2021-02-06 21:09:32] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
+[2021-02-06 21:09:33] [trace] Enigma: void __cdecl Enigma::EncryptFileScene::OnCreate(void)
+[2021-02-06 21:09:34] [trace] Enigma: Selecting a file to encrypt...
+[2021-02-06 21:09:45] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
+[2021-02-06 21:09:45] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
+[2021-02-06 21:09:47] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 600
+[2021-02-06 21:09:47] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 600
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 598
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 598
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 591
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 591
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 587
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 587
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 569
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 569
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 562
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 562
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 535
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 535
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 528
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 528
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 513
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 513
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 509
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 509
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 507
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 507
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 506
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 506
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 508
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 508
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 511
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 511
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 515
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 515
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 520
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 520
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 529
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 529
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 533
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 533
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 537
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 537
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 539
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 539
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 540
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 540
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 542
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 542
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 543
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 543
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 544
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 544
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 545
+[2021-02-06 21:09:49] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 545
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 547
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 547
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 548
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 548
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 550
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 550
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 552
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 552
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 553
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 553
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 554
+[2021-02-06 21:09:50] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 554
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 553
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 553
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 547
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 547
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 541
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 541
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 535
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 535
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 525
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 525
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 516
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 516
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 504
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 504
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 495
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 495
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 483
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 483
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 473
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 473
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 466
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 466
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 461
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 461
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 452
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 452
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 448
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 448
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 447
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 447
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 446
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 446
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 447
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 447
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 451
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 451
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 465
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 465
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 485
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 485
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 520
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 520
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 531
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 531
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 546
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 546
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 553
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 553
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 554
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 554
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 556
+[2021-02-06 21:09:53] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 556
+[2021-02-06 21:10:03] [trace] Enigma: void __cdecl Enigma::EncryptFileScene::OnDestroy(void)
+[2021-02-06 21:10:04] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
+[2021-02-06 21:10:39] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
+[2021-02-06 21:10:39] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
+[2021-02-06 21:10:39] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 556
+[2021-02-06 21:10:39] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 556
+[2021-02-06 21:10:57] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
+[2021-02-06 21:11:00] [info] Enigma: 
+# Github Repository
+https://github.com/BaderEddineOuaich/Enigma
+	
+# License:
+The MIT License (MIT)
+Copyright (c) Bader Eddine Ouaich and other contributors
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+[2021-02-06 21:11:05] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
