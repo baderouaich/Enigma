@@ -5,17 +5,17 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  paths:
-    - './Source/'
-  paths-ignore:
-    - './Dependencies/'
-    - './Resources/'
 
 jobs:
   CodeQL-Build:
     # CodeQL runs on ubuntu-latest, windows-latest, and macos-latest
     runs-on: ubuntu-latest
-
+    paths:
+      - './Source/'
+    paths-ignore:
+      - './Dependencies/'
+      - './Resources/'
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
