@@ -2,12 +2,12 @@ name: codeql-analysis
 
 on:
   push:
-    branches: [main]
+    branches: [ master ]
   pull_request:
-    branches: [main]
+    branches: [ master ]
     paths-ignore:
-      - ./Dependencies/
-      - ./Resources/
+      - './Dependencies/'
+      - './Resources/'
 
 jobs:
   CodeQL-Build:
@@ -23,7 +23,7 @@ jobs:
         uses: github/codeql-action/init@v1
         # Override language selection by uncommenting this and choosing your languages
         with:
-          languages: cpp
+          languages: cpp, c
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
