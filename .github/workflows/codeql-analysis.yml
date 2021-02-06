@@ -1,4 +1,4 @@
-name: "Code Scanning - Action"
+name: codeql-analysis
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [main]
     paths-ignore:
-      - './Dependencies/'
-      - './Resources/'
+      - ./Dependencies/
+      - ./Resources/
 
 jobs:
   CodeQL-Build:
@@ -24,6 +24,6 @@ jobs:
         # Override language selection by uncommenting this and choosing your languages
         with:
           languages: cpp
-          
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
