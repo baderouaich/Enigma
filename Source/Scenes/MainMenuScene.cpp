@@ -78,6 +78,12 @@ void MainMenuScene::OnImGuiDraw()
 					if (ImGui::MenuItem("Exit")) { this->EndScene(); }
 					ImGui::EndMenu();
 				}
+				if (ImGui::BeginMenu("Help"))
+				{
+					if (ImGui::MenuItem("Report issue")) { this->OnReportIssueMenuButtonPressed(); }
+					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
+					ImGui::EndMenu();
+				}
 				/*if (ImGui::BeginMenu("Examples"))
 				{
 					ImGui::MenuItem("Example 1");
@@ -86,12 +92,6 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::MenuItem("Example 4");
 					ImGui::EndMenu();
 				}*/
-				if (ImGui::BeginMenu("Help"))
-				{
-					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
-					ImGui::EndMenu();
-				}
-
 				ImGui::EndMenuBar();
 			}
 			ImGui::PopFont();
@@ -267,6 +267,26 @@ void MainMenuScene::OnEncryptTextButtonPressed()
 void MainMenuScene::OnDecryptTextButtonPressed()
 {
 	Application::GetInstance()->PushScene(std::make_shared<DecryptTextScene>(m_fonts));
+}
+
+void MainMenuScene::OnReportIssueMenuButtonPressed()
+{
+	ENIGMA_TRACE("Reporting issue to {0}/issues", Constants::Links::ENIGMA_GITHUB_REPOSITORY);
+
+	// Open Enigma's github repository issues page in a browser
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+	
+	ShellExecuteA(nullptr, "open", (Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues").c_str() , nullptr, nullptr, SW_SHOWNORMAL);
+
+#elif defined(ENIGMA_PLATFORM_LINUX)
+
+	std::system(("xdg-open " + Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues").c_str());
+
+#else
+
+	DialogUtils::Info("If you face any problems feel free to open an issue at " + Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues");
+
+#endif
 }
 
 void MainMenuScene::OnAboutMenuButtonPressed()

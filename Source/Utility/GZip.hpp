@@ -10,7 +10,7 @@
 NS_ENIGMA_BEGIN
 
 /*
-*	.gz Compressor/Decompressor
+*	.gz Compressor & Decompressor
 */
 class ENIGMA_API GZip
 {

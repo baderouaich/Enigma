@@ -67,15 +67,19 @@ namespace Enigma
 
 		namespace ErrorMessages
 		{
-			static constexpr const auto WEAK_PASSWORD_ERROR_MESSAGE = "Password is too weak! consider using 9 characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\";
+			static const String WEAK_PASSWORD = String("Password is too weak! consider using ") + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\";
 		}
 
+		namespace Links
+		{
+			static const String ENIGMA_GITHUB_REPOSITORY = "https://github.com/BaderEddineOuaich/Enigma";
+		}
 
 		namespace Resources
 		{
 			namespace Textures
 			{
-				// window icon
+				// window runtime icon
 				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf.png";
 			}
 

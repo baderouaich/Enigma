@@ -271,7 +271,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 	}
 	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 	{
-		(void)DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD_ERROR_MESSAGE);
+		(void)DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD);
 	}
 	else if (m_password != m_confirm_password)
 	{
