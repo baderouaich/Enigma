@@ -4,15 +4,13 @@
 
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
-#include <Scenes/Scene.hpp>
-#include <Events/Event.hpp>
+
+#include <Window/Window.hpp>
+
 #include <Events/ApplicationEvent.hpp>
 #include <Events/KeyEvent.hpp>
 #include <Events/MouseEvent.hpp>
 
-#include <GLFW/glfw3.h>
-
-#include <string>
 
 /*
 *	main entry point is handled by the Enigma::Application
@@ -22,10 +20,10 @@ extern int main(int argc, char* argv[]);
 NS_ENIGMA_BEGIN
 
 // Forward Declarations
-struct WindowSettings;
-class Window;
 class ImGuiRenderer;
+class Scene;
 class RAMInfo;
+
 
 class ENIGMA_API Application
 {

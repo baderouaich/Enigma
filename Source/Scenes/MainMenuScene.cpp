@@ -244,7 +244,7 @@ void MainMenuScene::LoadImGuiFonts()
 			break;
 		}
 		else
-			ENIGMA_TRACE("Loaded {0}", font_name);
+			ENIGMA_TRACE("Loaded {0}", font->ConfigData->Name);
 	}
 }
 

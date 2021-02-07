@@ -1,12 +1,12 @@
 #include <pch.hpp>
-#include <Core/Main.hpp> // Entry point
 #include "Application.hpp"
+#include <Core/Main.hpp> // ::main Entry point
 
-#include <Window/Window.hpp>
-#include <Window/WindowSettings.hpp>
+#include <Scenes/Scene.hpp>
 #include <UI/ImGui/ImGuiRenderer.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
+
 
 NS_ENIGMA_BEGIN
 

@@ -13,6 +13,7 @@
 #pragma warning(pop)
 
 NS_ENIGMA_BEGIN
+
 class ENIGMA_API Logger
 {
 public:
@@ -21,13 +22,17 @@ public:
 	*/
 	static void Initialize();
 
+	/*
+	*	Shutdown Enigma Logger (cleans up spdlog stuff, remains optional to call at the exit of the app)
+	*/
+	static void Shutdown();
+
 public: /* Accessors */
 	static const std::shared_ptr<spdlog::logger>& GetLogger() noexcept { return m_logger; }
 
 private:
 	inline static std::shared_ptr<spdlog::logger> m_logger{ nullptr };
 };
-
 
 
 /// Enigma Log 

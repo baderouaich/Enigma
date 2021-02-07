@@ -113,7 +113,7 @@ project "Enigma"
 	---[[ Platform ]]---
 	filter "system:windows"
 		systemversion "latest"
-		--executable icon
+		-- .exe icon
 	    files { 'resources.rc', '**.ico' }
 	    vpaths 
 	    {
@@ -165,6 +165,7 @@ project "Enigma"
 		runtime "Debug"
 		symbols "On"
 		optimize "Off" -- No optimization will be performed.
+				
 		includedirs
 		{
 			"%{IncludeDir.catch2}", -- we use catch2 tests only in debug
@@ -174,6 +175,7 @@ project "Enigma"
 			"catch2", -- we use catch2 tests only in debug
 		}
 
+
 	filter "configurations:Release"
 		kind "ConsoleApp" -- we need console for logging in CLI
 		--kind "WindowedApp" -- Release as windowed application
@@ -181,6 +183,7 @@ project "Enigma"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.
 		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
+
 
 	filter "configurations:Dist"
 		kind "ConsoleApp" -- we need console for logging in CLI

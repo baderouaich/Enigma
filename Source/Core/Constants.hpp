@@ -71,17 +71,12 @@ namespace Enigma
 		}
 
 
-		namespace Utility
-		{
-			static constexpr const byte BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-		}
-
 		namespace Resources
 		{
 			namespace Textures
 			{
 				// window icon
-				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf2.png";
+				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf.png";
 			}
 
 			namespace Fonts

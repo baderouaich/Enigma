@@ -24,6 +24,12 @@ void Logger::Initialize()
 	spdlog::register_logger(m_logger);
 	m_logger->set_level(spdlog::level::trace);
 	m_logger->flush_on(spdlog::level::trace);
+
+}
+
+void Logger::Shutdown()
+{
+	spdlog::shutdown();
 }
 
 NS_ENIGMA_END

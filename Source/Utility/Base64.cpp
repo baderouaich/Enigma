@@ -6,8 +6,6 @@ NS_ENIGMA_BEGIN
 
 String Base64::Encode(const std::string_view& buffer)
 {
-	using Constants::Utility::BASE64_CHARACTERS;
-
 	const size_t in_length = buffer.size();
 	// Should be enough to store 8-bit buffers in 6-bit buffers
 	const size_t out_length = ((in_length * 4) / 3) + (in_length % 3 > 0 ? 4 : 0);
@@ -65,8 +63,6 @@ String Base64::Encode(const std::string_view& buffer)
 
 String Base64::Decode(const std::string_view& encoded_buffer)
 {
-	using Constants::Utility::BASE64_CHARACTERS;
-
 	const size_t in_length = encoded_buffer.size();
 	// Should be enough to store 6-bit buffers in 8-bit buffers
 	const size_t out_length = ((in_length * 3) / 4) + 1;

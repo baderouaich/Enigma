@@ -4,11 +4,12 @@
 
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
-#include <Window/Window.hpp>
 #include <Events/Event.hpp>
 
 NS_ENIGMA_BEGIN
-
+/*
+*	Scene Abstract class
+*/
 class ENIGMA_API Scene
 {
 public:
@@ -19,7 +20,6 @@ public:
 
 public:
     Scene() noexcept;
-   // Scene(SceneData& scene_data)  noexcept;
     virtual ~Scene() noexcept;
 
 	/* Scene Life Cicle */
@@ -30,29 +30,15 @@ public:
 	virtual void OnImGuiDraw() = 0;
 	virtual void OnDestroy() = 0;
 
-public: /* Controlls */
-	/* Ends current Scene */
-	void EndScene() noexcept;
-	
-	/* Pauses current Scene */
-	//void PauseScene() noexcept;
-	
-	/* Resumes current Scene */
-	//void ResumeScene() noexcept;
-
 public: /*Accessors*/
-	constexpr const bool& WantsToQuit() const noexcept { return m_quit; }
-	//constexpr const bool& IsPaused() const noexcept { return m_isPaused; }
-	//constexpr const SceneData& GetSceneData() const noexcept { return *m_scene_data; }
-
+	const bool& WantsToQuit() const noexcept { return m_quit; }
 
 public: /*Modifiers*/
+	void EndScene() noexcept { m_quit = true; }
 
 
 protected:
 	bool m_quit;
-    //SceneData* m_scene_data;
-	//bool m_isPaused;
 };
 
 NS_ENIGMA_END
