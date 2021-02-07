@@ -1,19 +1,27 @@
-[2021-02-07 14:35:45] [info] Enigma: [ OpenGL Info ]
+[2021-02-07 14:47:00] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-02-07 14:35:45] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[2021-02-07 14:35:45] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-02-07 14:35:45] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-02-07 14:35:45] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-02-07 14:35:45] [trace] Enigma: Loading Fonts...
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-02-07 14:35:45] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-02-07 14:35:47] [trace] Enigma: Reporting issue to https://github.com/BaderEddineOuaich/Enigma/issues
-[2021-02-07 14:35:57] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-02-07 14:47:00] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[2021-02-07 14:47:00] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-02-07 14:47:00] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-02-07 14:47:00] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-02-07 14:47:00] [trace] Enigma: Loading Fonts...
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-02-07 14:47:00] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-02-07 14:47:14] [trace] Enigma: # Version: 1.0.0
+
+# Github Repository: https://github.com/BaderEddineOuaich/Enigma
+
+# Licence: The MIT License (MIT)
+Copyright (c) Bader Eddine Ouaich and other contributors
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+[2021-02-07 14:47:16] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)

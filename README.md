@@ -8,7 +8,7 @@
 <!--LOGO-->
 <!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
 <!-- <img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
-<img src="Resources/Branding/Wolf2.png" width="333"/>
+<img src="Resources/Branding/Wolf.png" width="333"/>
 
 <!--DESCRIOTION-->
 A Simple, Reliable and Efficient UI + CLI Encryption Tool

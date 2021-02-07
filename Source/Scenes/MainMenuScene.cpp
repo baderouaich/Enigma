@@ -291,9 +291,13 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 
 void MainMenuScene::OnAboutMenuButtonPressed()
 {
-	ENIGMA_INFO(ENIGMA_ABOUT);
 	// Show about dialog
-	(void)DialogUtils::Info("Version: " + String(ENIGMA_VERSION) + '\n' + String(ENIGMA_ABOUT));
+	std::ostringstream oss{};
+	oss << "# Version: " << ENIGMA_VERSION << "\n\n"
+		<< "# Github Repository: " << Constants::Links::ENIGMA_GITHUB_REPOSITORY << "\n\n"
+		<< "# Licence: " << ENIGMA_LICENCE;
+	(void)DialogUtils::Info(oss.str());
+	
 }
 
 
