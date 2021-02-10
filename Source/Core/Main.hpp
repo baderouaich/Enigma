@@ -12,10 +12,11 @@
 	//#include <Tests/Algorithm/TwofishTests.hpp>
 	//#include <Tests/Algorithm/IDEATests.hpp>
 	//#include <Tests/Utils/Base64Tests.hpp>
-	#include <Tests/Utils/GZipTests.hpp>
+	//#include <Tests/Utils/GZipTests.hpp>
 #else
 	#include <Enigma.hpp>
 #endif
+
 
 int main(int argc, char* argv[])
 {

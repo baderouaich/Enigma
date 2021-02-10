@@ -1,6 +1,7 @@
 #pragma once
 #include <catch2/catch_all.hpp>
 #include <Algorithm/IDEA/IDEA.hpp>
+#include <Tests/TestData.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
 using namespace std;
@@ -13,11 +14,11 @@ TEST_CASE("IDEA Encryption and Decryption")
 	std::unique_ptr<Enigma::IDEA> idea_encryptor = std::make_unique<Enigma::IDEA>(Enigma::IDEA::Intent::Encrypt);
 	std::unique_ptr<Enigma::IDEA> idea_decryptor = std::make_unique<Enigma::IDEA>(Enigma::IDEA::Intent::Decrypt);
 
-	String buffer, password;
+	String buffer = LoremIpsum(2), password;
 	String encrypted, decrypted;
 
-	cout << "\nEnter buffer to encrypt: ";
-	getline(cin, buffer);
+	//cout << "\nEnter buffer to encrypt: ";
+	//getline(cin, buffer);
 	cout << "\nEnter password (encryption key): ";
 	getline(cin, password);
 
@@ -29,7 +30,6 @@ TEST_CASE("IDEA Encryption and Decryption")
 
 	REQUIRE_THAT(buffer, !Equals(encrypted)); // buffer must not equal cipher
 	REQUIRE_THAT(buffer, Equals(decrypted)); // buffer must equal decrypted cipher
-
 
 	SECTION("Clearing buffers")
 	{

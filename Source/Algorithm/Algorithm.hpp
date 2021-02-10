@@ -13,7 +13,7 @@
 #include <osrng.h> // AutoSeededRandomPool
 #include <hkdf.h> // HKDF
 #include <sha.h> // SHA256
-#include <modes.h> // Paddings CBC, GCM...
+#include <modes.h> // Paddings CBC, EBC...
 
 #include <aes.h> // AES
 #include <gcm.h> // GCM Mode

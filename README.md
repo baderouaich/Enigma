@@ -14,7 +14,7 @@
 A Simple, Reliable and Efficient UI + CLI Encryption Tool
 
 
-## Supported Algorithm
+## Supported Algorithms
 - :white_check_mark: <strong>AES-GCM</strong> (Recommended)
 - :white_check_mark: <strong>ChaCha20</strong>
 - :white_check_mark: <strong>TripleDES-CBC</strong>

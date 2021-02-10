@@ -23,7 +23,7 @@ typedef struct vm_statistics_data_t memory_status_t;
 
 NS_ENIGMA_BEGIN
 /*
-*	RAMInfo class will gather informations about the RAM usage at runtime
+*	RAMInfo class will gather informations about the RAM at runtime
 */
 class ENIGMA_API RAMInfo
 {
