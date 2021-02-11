@@ -293,9 +293,9 @@ void MainMenuScene::OnAboutMenuButtonPressed()
 {
 	// Show about dialog
 	std::ostringstream oss{};
-	oss << "# Version: " << ENIGMA_VERSION << "\n\n"
-		<< "# Github Repository: " << Constants::Links::ENIGMA_GITHUB_REPOSITORY << "\n\n"
-		<< "# Licence: " << ENIGMA_LICENCE;
+	oss << "# Version: \n" << ENIGMA_VERSION << "\n\n"
+		<< "# Github Repository: \n" << Constants::Links::ENIGMA_GITHUB_REPOSITORY << "\n\n"
+		<< "# Licence: \n" << ENIGMA_LICENCE;
 	(void)DialogUtils::Info(oss.str());
 	
 }

@@ -12,7 +12,7 @@ TEST_CASE("Compress & Decompress Buffer", "GZip")
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
 	String compressed, decompressed;
-	String buffer = LoremIpsum(3000); // 3000 paragraphs of lorem ipsum dummy text
+	String buffer = LOREM_IPSUM * 3000; // 3000 paragraphs of lorem ipsum dummy text
 	cout << "Buffer Size: " << ENIGMA_BYTES_TO_MB( buffer.size() ) << "mb\n";
 	compressed = GZip::Compress(buffer);
 	cout << "Compressed Size: " << ENIGMA_BYTES_TO_MB(compressed.size()) << "mb\n";

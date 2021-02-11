@@ -14,7 +14,7 @@ TEST_CASE("IDEA Encryption and Decryption")
 	std::unique_ptr<Enigma::IDEA> idea_encryptor = std::make_unique<Enigma::IDEA>(Enigma::IDEA::Intent::Encrypt);
 	std::unique_ptr<Enigma::IDEA> idea_decryptor = std::make_unique<Enigma::IDEA>(Enigma::IDEA::Intent::Decrypt);
 
-	String buffer = LoremIpsum(2), password;
+	String buffer = LOREM_IPSUM * 2, password;
 	String encrypted, decrypted;
 
 	//cout << "\nEnter buffer to encrypt: ";

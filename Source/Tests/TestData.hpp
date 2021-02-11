@@ -8,8 +8,8 @@ namespace Enigma
 	String operator*(const String& str, const size_t& mult)
 	{
 		String out(str.size() * mult, '\000');
-		size_t i{ 0 }, j{ 0 };
-		for (i; i < mult; ++i)
+		size_t j{ 0 };
+		for (size_t i{ 0 }; i < mult; ++i)
 			for (const auto& c : str)
 				out[j++] = c;
 		return out;
@@ -25,10 +25,5 @@ eu malesuada erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Quisque vehicula id enim ut vulputate. Sed vitae nisl ac orci vehicula porttitor
 vitae sit amet nunc.)";
 
-
-	String LoremIpsum(const size_t mul)
-	{
-		return LOREM_IPSUM * mul;
-	}
 
 }

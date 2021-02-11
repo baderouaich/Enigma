@@ -46,6 +46,7 @@ TEST_CASE("Encode_And_Decode_Text", "Base64")
 {
 	using std::cout, std::cin, std::endl;
 
+	String buffer = LOREM_IPSUM * 300;
 
 	BEGIN_TIMER(t1);
     String base64_encoded = Base64::Encode(buffer);

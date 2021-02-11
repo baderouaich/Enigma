@@ -65,6 +65,7 @@
 
 //Analytocs: Hardware usage RAM, CPU, GPU, Profiler
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
+#include <Analytics/Hardware/CPU/CPUInfo.hpp>
 //
 
 //Enigma Command line interface

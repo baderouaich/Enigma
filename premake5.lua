@@ -26,7 +26,7 @@ workspace "Enigma"  -- Workspace which is the solution in windows, in xcode will
 	--https://github.com/premake/premake-core/wiki/flags
 	flags
 	{
-		"MultiProcessorCompile" -- Speed up compile time, Enable Visual Studio to use multiple compiler processes when building.
+		"MultiProcessorCompile", -- Speed up compile time, Enable Visual Studio to use multiple compiler processes when building.
 	}
 
 
@@ -123,7 +123,10 @@ project "Enigma"
 		defines
 		{
 			"ENIGMA_PLATFORM_WINDOWS",
-			"_CRT_SECURE_NO_WARNINGS", -- disable MSVC std warnings
+
+			"_CRT_SECURE_NO_DEPRECATE",
+			"_CRT_SECURE_NO_WARNINGS",
+			"_CRT_NONSTDC_NO_WARNINGS"
 		}
 		links
 		{
@@ -183,7 +186,12 @@ project "Enigma"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.
 		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
-
+		
+		flags
+		{
+			-- Only applicable in Release configurations
+			"LinkTimeOptimization" -- Link Time Optimization (LTO) refers to program optimization during linking. The linker pulls all object files together and combines them into one program. The linker can see the whole of the program, and can therefore do whole-program analysis and optimization.
+		}
 
 	filter "configurations:Dist"
 		kind "ConsoleApp" -- we need console for logging in CLI
@@ -192,4 +200,9 @@ project "Enigma"
 		runtime "Release"
 		optimize "Full" -- Full optimization.
 		inlining "Auto" -- Inline any suitable function for full performance
-
+		
+		flags
+		{
+			-- Only applicable in Release configurations
+			"LinkTimeOptimization" -- Link Time Optimization (LTO) refers to program optimization during linking. The linker pulls all object files together and combines them into one program. The linker can see the whole of the program, and can therefore do whole-program analysis and optimization.
+		}
