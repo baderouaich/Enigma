@@ -76,6 +76,7 @@
 #include <future>
 #include <functional>
 #include <iomanip>
+#include <numeric>
 
 #include <cstdio>
 #include <cstdlib>

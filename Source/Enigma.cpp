@@ -39,8 +39,9 @@ extern std::unique_ptr<Application> CreateApplication()
 	window_settings.height = 600;
 	window_settings.is_resizable = true;
 	window_settings.is_vsync = true;
-	//window_settings.is_show_fps = true;
+	window_settings.is_show_fps = true;
 	window_settings.is_show_ram_usage = true;
+	window_settings.is_show_cpu_usage = true;
 	return std::make_unique<EnigmaApplication>(std::move(window_settings));
 }
 

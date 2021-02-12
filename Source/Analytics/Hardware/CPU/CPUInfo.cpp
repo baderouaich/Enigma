@@ -51,9 +51,16 @@ f32 CPUInfo::GetCPUUsage() noexcept
 	m_last_total_idle = total_idle;
 
 #elif defined(ENIGMA_PLATFORM_MACOS)
-
-	//TODO
-
+		if (host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, (host_info_t)&m_cpu_info, &m_count) == KERN_SUCCESS)
+		{
+			ui64 total_ticks{0};
+			for (auto i = 0; i < CPU_STATE_MAX; ++i) 
+				total_ticks += m_cpu_info.cpu_ticks[i];
+			const ui64 idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];
+			percentage = this->CalculateCPULoad(idle_ticks, total_ticks);
+		}
+		else
+			percentage = -100.0f;
 #endif
 
 	return percentage;

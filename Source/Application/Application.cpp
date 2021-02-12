@@ -6,6 +6,7 @@
 #include <UI/ImGui/ImGuiRenderer.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
+#include <Analytics/Hardware/CPU/CPUInfo.hpp>
 
 
 NS_ENIGMA_BEGIN
@@ -20,10 +21,12 @@ Application::Application(const WindowSettings& window_settings)
 	m_current_frame_time(0.0f),
 	m_delta_time(0.0f),
 	//FPS
-	m_FPS_timer(0.0f),
+	//m_FPS_timer(0.0f),
 	m_FPS(0),
 	//,m_max_FPS(window_settings.maximum_fps)
-	m_ram_info(window_settings.is_show_ram_usage ? new RAMInfo() : nullptr)
+	m_ram_info(window_settings.is_show_ram_usage ? new RAMInfo() : nullptr),
+	m_cpu_info(window_settings.is_show_cpu_usage ? new CPUInfo() : nullptr),
+	m_hardware_info_timer(0.0f)
 {
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
@@ -137,8 +140,8 @@ void Application::Run()
 			{
 				// Delta time
 				UpdateDeltaTime();
-				// FPS
-				UpdateFPS();
+				// Hardware Info (FPS & CPU & RAM usage)
+				UpdateHardwareInfo();
 				// Update back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnUpdate(m_delta_time);
 			}
@@ -201,6 +204,7 @@ void Application::UpdateDeltaTime() noexcept
 	m_last_frame_time = m_current_frame_time;
 }
 
+#if 0
 void Application::UpdateFPS() noexcept
 {
 #if 0
@@ -226,7 +230,7 @@ void Application::UpdateFPS() noexcept
 	///
 #endif
 	/// Update Frames per second & set to window title
-	if (m_window->m_is_show_fps || m_window->m_is_show_ram_usage) // take the change to refresh title if ram usage is enabled
+	if (m_window->m_is_show_fps)
 	{
 		m_FPS++;
 		m_FPS_timer += m_delta_time;
@@ -237,8 +241,30 @@ void Application::UpdateFPS() noexcept
 			m_FPS_timer = 0.0f;
 		}
 	}
-
 	///
+}
+#endif
+
+void Application::UpdateHardwareInfo() noexcept
+{
+	if (m_window->m_is_show_fps || m_window->m_is_show_ram_usage || m_window->m_is_show_cpu_usage)
+	{
+		// update fps if enabled
+		if (m_window->m_is_show_fps)
+			m_FPS++;
+		// if any of hardware info enabled, update timer
+		m_hardware_info_timer += m_delta_time;
+		// see if we waited 1 second
+		if (m_hardware_info_timer >= 1.0f)
+		{
+			// if so, refresh title to show new hardware info data
+			m_window->SetTitle(m_window->GetTitle()); // refresh title
+			// reset fps
+			m_FPS = 0;
+			// reset timer
+			m_hardware_info_timer = 0.0f;
+		}
+	}
 }
 
 

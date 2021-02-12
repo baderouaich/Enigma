@@ -299,6 +299,7 @@ private: /* Properties */
 	bool m_vsync;
 	bool m_is_show_fps;
 	bool m_is_show_ram_usage;
+	bool m_is_show_cpu_usage;
 
 	GLFWwindow* m_GLFWwindow; // GLFW window
 	GLFWmonitor* m_monitor;

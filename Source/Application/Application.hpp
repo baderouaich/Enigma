@@ -23,6 +23,7 @@ NS_ENIGMA_BEGIN
 class ImGuiRenderer;
 class Scene;
 class RAMInfo;
+class CPUInfo;
 
 
 class ENIGMA_API Application
@@ -94,9 +95,15 @@ public: /*Accessors*/
 	*/
 	constexpr const std::unique_ptr<RAMInfo>& GetRAMInfo() const noexcept { return m_ram_info; }
 
+	/*
+	*	Returns Realtime CPU usage informations
+	*/
+	constexpr const std::unique_ptr<CPUInfo>& GetCPUInfo() const noexcept { return m_cpu_info; }
+
 private: /* Updaters */
 	void UpdateDeltaTime() noexcept;
-	void UpdateFPS() noexcept;
+	//void UpdateFPS() noexcept;
+	void UpdateHardwareInfo() noexcept;
 
 private: /* Initializer Functions */
 	void InitWindow(const WindowSettings& window_settings);
@@ -117,13 +124,11 @@ private: /* Delta time */
 	f32 m_current_frame_time;
 	f32 m_delta_time;
 
-private: /* FPS */
-	f32 m_FPS_timer;
+private: /* Realtime Hardware Info (FPS, CPU, RAM info...) */
+	f32 m_hardware_info_timer; // timer to update info each second
 	ui32 m_FPS;
-	//ui32 m_max_FPS;
-
-private: /* Realtime Hardware Info */
 	std::unique_ptr<RAMInfo> m_ram_info;
+	std::unique_ptr<CPUInfo> m_cpu_info;
 
 private: /* ImGui */
 	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;
