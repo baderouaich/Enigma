@@ -41,8 +41,11 @@ f32 CPUInfo::GetCPUUsage() noexcept
 	}
 	else 
 	{
-		total = (total_user - m_last_total_user) + (total_user_low - m_last_total_user_low) + (total_sys - m_last_total_sys) + (total_idle - m_last_total_idle);
-		percentage = (percentage / total) * 100.0f;
+		total = (total_user - m_last_total_user) + (total_user_low - m_last_total_user_low) + (total_sys - m_last_total_sys);
+        	percentage = static_cast<f32>(total);
+        	total += (total_idle - m_last_total_idle);
+        	percentage /= total;
+        	percentage *= 100.0f;
 	}
 
 	m_last_total_user = total_user;
