@@ -60,6 +60,10 @@ namespace Enigma
 			}
 		}
 
+		namespace Config
+		{
+			static constexpr const auto ENIGMA_CONFIG_PATH = "./Resources/Config/Enigma.ini";
+		}
 		namespace CLI
 		{
 			constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help to display available options";

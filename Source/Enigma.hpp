@@ -11,6 +11,10 @@
 #include <Window/Window.hpp>
 //
 
+//Enigma Config
+#include <Config/Config.hpp>
+//
+
 
 //System Dialogs, Notification, Clipboard
 #include <System/Dialogs/MessageBox.hpp>
@@ -71,5 +75,7 @@
 //Enigma Command line interface
 #include <CLI/CLI.hpp>
 //
+
+
 
 #endif // !ENIGMA_H

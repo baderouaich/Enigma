@@ -1,24 +1,20 @@
-[2021-02-12 13:10:42] [info] Enigma: [ OpenGL Info ]
+[2021-02-13 00:18:43] [trace] Enigma: Loading window config from ./Resources/Config/Enigma.ini...
+[2021-02-13 00:18:43] [debug] Enigma: Window Settings: [ title:Enigma, width:800, height:600, minimum_width:-1, minimum_height:-1, maximum_width:-1, maximum_height:-1, refresh_rate:-1, is_vsync:1, is_resizable:1, is_decorated:1, is_fullscreen:0, samples:4, is_focused:1, is_maximized:0, is_floating:0, is_visible:1, is_auto_iconify:1, is_show_fps:1 ]
+[2021-02-13 00:18:43] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-02-12 13:10:42] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
-[2021-02-12 13:10:42] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-02-12 13:10:42] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-02-12 13:10:42] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-02-12 13:10:42] [trace] Enigma: Loading Fonts...
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-02-12 13:10:43] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-02-12 13:10:49] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
-[2021-02-12 13:11:08] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
-[2021-02-12 13:11:10] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
-[2021-02-12 13:11:11] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
-[2021-02-12 13:11:12] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnCreate(void)
-[2021-02-12 13:11:24] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnDestroy(void)
-[2021-02-12 13:11:46] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-02-13 00:18:43] [trace] Enigma: __cdecl Enigma::EnigmaApplication::EnigmaApplication(const struct Enigma::WindowSettings &)
+[2021-02-13 00:18:43] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-02-13 00:18:43] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-02-13 00:18:43] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-02-13 00:18:43] [trace] Enigma: Loading Fonts...
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-02-13 00:18:44] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-02-13 00:18:50] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)

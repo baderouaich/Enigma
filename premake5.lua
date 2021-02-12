@@ -43,6 +43,7 @@ IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include"
 IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" 
 IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp" 
 IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" 
+IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" 
 IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src" 
 
 -- Organize libs solution in a single filtered directory 
@@ -55,6 +56,7 @@ group "Dependencies"
 	include "Dependencies/stb_image"
 	include "Dependencies/cryptopp"
 	include "Dependencies/cxxopts"
+	include "Dependencies/inih"
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
 group ""
 
@@ -94,6 +96,7 @@ project "Enigma"
 		"%{IncludeDir.stb_image}", -- stb_image
 		"%{IncludeDir.cxxopts}", -- cxxopts
 		"%{IncludeDir.cryptopp}", -- cryptopp
+		"%{IncludeDir.inih}", -- inih
 	}
 
 
@@ -107,6 +110,7 @@ project "Enigma"
 		"stb_image", -- links stb_image lib
 		"cxxopts", -- links cxxopts lib
 		"cryptopp", -- links cryptopp lib
+		"inih", -- links inih lib
 	}
 
 

@@ -50,6 +50,18 @@ struct ENIGMA_API WindowSettings
 	//ui32 maximum_fps = 60;
 
 	/*
+	*	 Specifies the desired refresh rate for full screen windows. If set to -1, the highest
+	*	 available refresh rate will be used. This hint is ignored for windowed mode windows.
+	*/
+	i32 refresh_rate = GLFW_DONT_CARE;
+
+	/*
+	*	 Defines the number of samples to use (For anti-aliasing)
+	*/
+	ui32 samples = 4;
+
+
+	/*
 	*	Enable/Disable vertical sync
 	*/
 	bool is_vsync = false;
@@ -116,16 +128,25 @@ struct ENIGMA_API WindowSettings
 	*/
 	bool is_show_cpu_usage = false;
 
-	/*
-	*	 Specifies the desired refresh rate for full screen windows. If set to -1, the highest
-	*	 available refresh rate will be used. This hint is ignored for windowed mode windows.
-	*/
-	i32 refresh_rate = GLFW_DONT_CARE;
 
-	/*
-	*	 Defines the number of samples to use (For anti-aliasing)
-	*/
-	ui32 samples = 4;
+
+
+	String toString() noexcept
+	{
+		std::ostringstream oss{};
+		oss << "[ title:" << title << ", width:" << width << ", height:" << height
+			<< ", minimum_width:" << minimum_width << ", minimum_height:" << minimum_height
+			<< ", maximum_width:" << maximum_width << ", maximum_height:" << maximum_height
+			<< ", refresh_rate:" << refresh_rate << ", is_vsync:" << is_vsync
+			<< ", is_resizable:" << is_resizable << ", is_decorated:" << is_decorated
+			<< ", is_fullscreen:" << is_fullscreen << ", samples:" << samples
+			<< ", is_focused:" << is_focused << ", is_maximized:" << is_maximized
+			<< ", is_floating:" << is_floating << ", is_visible:" << is_visible
+			<< ", is_auto_iconify:" << is_auto_iconify << ", is_show_fps:" << is_show_fps
+			<< " ]";
+		return oss.str();
+			
+	}
 };
 
 NS_ENIGMA_END

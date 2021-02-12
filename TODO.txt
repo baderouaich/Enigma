@@ -1,0 +1,2 @@
+- Config/Config.hpp which laods config ini file Resources/Config/Config.ini which has window settings and other stuff
+- 

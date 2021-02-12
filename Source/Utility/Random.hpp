@@ -13,7 +13,8 @@ public:
 	*	Returns a Random Real between min and max
 	*/
 	template<typename T>
-	static T Real(T min, T max) noexcept
+	static typename std::enable_if<std::is_floating_point<T>::value, T>::type
+	Real(T min, T max) noexcept
 	{
 		ENIGMA_ASSERT(min < max, "min is >= max");
 		std::uniform_real_distribution<T> dist(min, max);
@@ -25,7 +26,8 @@ public:
 	*	Returns a Random Integer between min and max
 	*/
 	template<typename T>
-	static T Int(T min, T max) noexcept
+	static typename std::enable_if<std::is_integral<T>::value && !std::is_floating_point<T>::value, T>::type
+	Int(T min, T max) noexcept
 	{
 		ENIGMA_ASSERT(min < max, "min is >= max");
 		std::uniform_int_distribution<T> dist(min, max);
@@ -40,7 +42,7 @@ public:
 	{
 		std::bernoulli_distribution dist(chance);
 		auto& mt = GetEngine();
-		return dist(mt);
+		return !!dist(mt);
 	}
 	
 private:
