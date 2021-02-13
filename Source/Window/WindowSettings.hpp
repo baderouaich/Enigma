@@ -3,6 +3,7 @@
 #define ENIGMA_WINDOW_SETTINGS_H
 
 #include <Core/Core.hpp>
+#include <Config/Config.hpp>
 #include <GLFW/glfw3.h>		//GLFW_DONT_CARE
 
 NS_ENIGMA_BEGIN
@@ -129,6 +130,33 @@ struct ENIGMA_API WindowSettings
 	bool is_show_cpu_usage = false;
 
 
+public:
+	static WindowSettings FromConfig(const Config& config)
+	{
+		WindowSettings window_settings{};
+		window_settings.title = config.Get<String>("window", "title", "Enigma");
+		window_settings.width = config.Get<decltype(WindowSettings::width)>("window", "width", 800);
+		window_settings.height = config.Get<decltype(WindowSettings::height)>("window", "height", 600);
+		window_settings.minimum_width = config.Get<decltype(WindowSettings::minimum_width)>("window", "minimum_width", -1);
+		window_settings.minimum_height = config.Get<decltype(WindowSettings::minimum_height)>("window", "minimum_height", -1);
+		window_settings.maximum_width = config.Get<decltype(WindowSettings::maximum_width)>("window", "maximum_width", -1);
+		window_settings.maximum_height = config.Get<decltype(WindowSettings::maximum_height)>("window", "maximum_height", -1);
+		window_settings.refresh_rate = config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1);
+		window_settings.samples = config.Get<decltype(WindowSettings::samples)>("window", "samples", 4);
+		window_settings.is_resizable = config.Get<bool>("window", "resizable", true);
+		window_settings.is_vsync = config.Get<bool>("window", "vsync", true);
+		window_settings.is_fullscreen = config.Get<bool>("window", "fullscreen", false);
+		window_settings.is_decorated = config.Get<bool>("window", "decorated", true);
+		window_settings.is_focused = config.Get<bool>("window", "focused", true);
+		window_settings.is_maximized = config.Get<bool>("window", "maximized", false);
+		window_settings.is_floating = config.Get<bool>("window", "floating", false);
+		window_settings.is_visible = config.Get<bool>("window", "visible", true);
+		window_settings.is_auto_iconify = config.Get<bool>("window", "auto_iconify", true);
+		window_settings.is_show_fps = config.Get<bool>("window", "show_fps", true);
+		window_settings.is_show_ram_usage = config.Get<bool>("window", "show_ram_usage", true);
+		window_settings.is_show_cpu_usage = config.Get<bool>("window", "show_cpu_usage", true);
+		return window_settings;
+	}
 
 
 	String toString() noexcept
@@ -145,7 +173,6 @@ struct ENIGMA_API WindowSettings
 			<< ", is_auto_iconify:" << is_auto_iconify << ", is_show_fps:" << is_show_fps
 			<< " ]";
 		return oss.str();
-			
 	}
 };
 
