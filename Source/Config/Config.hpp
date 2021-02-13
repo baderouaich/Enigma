@@ -55,7 +55,6 @@ public: /* Function template specializations */
 	typename std::enable_if<std::is_same<S, String>::value, S>::type
 	Get(const String& section, const String& name, const S& default_value) const
 	{
-		m_ini_reader->GetInteger(std::string_view("qsdsqdeq"), std::string_view("qsdsqdeq"), 64);
 		return m_ini_reader->GetString(section, name, default_value);
 	}
 
