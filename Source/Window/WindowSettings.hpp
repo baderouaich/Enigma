@@ -63,9 +63,14 @@ struct ENIGMA_API WindowSettings
 
 
 	/*
-	*	Enable/Disable vertical sync
+	*	Vertical sync swap interval
+	* 	
+	*	Interval 0: unlimited FPS
+	*	Interval 1: 60 FPS
+	*	Interval 2: 30 FPS
 	*/
-	bool is_vsync = false;
+	i32 swap_interval = 2;
+
 
 	/*
 	*	Specifies if the window is by default in fullscreen or windowed mode
@@ -134,7 +139,7 @@ public:
 	static WindowSettings FromConfig(const Config& config)
 	{
 		WindowSettings window_settings{};
-		window_settings.title = config.Get<String>("window", "title", "Enigma");
+		window_settings.title = config.Get<decltype(WindowSettings::title)>("window", "title", "Enigma");
 		window_settings.width = config.Get<decltype(WindowSettings::width)>("window", "width", 800);
 		window_settings.height = config.Get<decltype(WindowSettings::height)>("window", "height", 600);
 		window_settings.minimum_width = config.Get<decltype(WindowSettings::minimum_width)>("window", "minimum_width", -1);
@@ -143,18 +148,18 @@ public:
 		window_settings.maximum_height = config.Get<decltype(WindowSettings::maximum_height)>("window", "maximum_height", -1);
 		window_settings.refresh_rate = config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1);
 		window_settings.samples = config.Get<decltype(WindowSettings::samples)>("window", "samples", 4);
-		window_settings.is_resizable = config.Get<bool>("window", "resizable", true);
-		window_settings.is_vsync = config.Get<bool>("window", "vsync", true);
-		window_settings.is_fullscreen = config.Get<bool>("window", "fullscreen", false);
-		window_settings.is_decorated = config.Get<bool>("window", "decorated", true);
-		window_settings.is_focused = config.Get<bool>("window", "focused", true);
-		window_settings.is_maximized = config.Get<bool>("window", "maximized", false);
-		window_settings.is_floating = config.Get<bool>("window", "floating", false);
-		window_settings.is_visible = config.Get<bool>("window", "visible", true);
-		window_settings.is_auto_iconify = config.Get<bool>("window", "auto_iconify", true);
-		window_settings.is_show_fps = config.Get<bool>("window", "show_fps", true);
-		window_settings.is_show_ram_usage = config.Get<bool>("window", "show_ram_usage", true);
-		window_settings.is_show_cpu_usage = config.Get<bool>("window", "show_cpu_usage", true);
+		window_settings.swap_interval = config.Get<decltype(WindowSettings::swap_interval)>("window", "swap_interval", 2);
+		window_settings.is_resizable = config.Get<decltype(WindowSettings::is_resizable)>("window", "resizable", true);
+		window_settings.is_fullscreen = config.Get<decltype(WindowSettings::is_fullscreen)>("window", "fullscreen", false);
+		window_settings.is_decorated = config.Get<decltype(WindowSettings::is_decorated)>("window", "decorated", true);
+		window_settings.is_focused = config.Get<decltype(WindowSettings::is_focused)>("window", "focused", true);
+		window_settings.is_maximized = config.Get<decltype(WindowSettings::is_maximized)>("window", "maximized", false);
+		window_settings.is_floating = config.Get<decltype(WindowSettings::is_floating)>("window", "floating", false);
+		window_settings.is_visible = config.Get<decltype(WindowSettings::is_visible)>("window", "visible", true);
+		window_settings.is_auto_iconify = config.Get<decltype(WindowSettings::is_auto_iconify)>("window", "auto_iconify", true);
+		window_settings.is_show_fps = config.Get<decltype(WindowSettings::is_show_fps)>("window", "show_fps", true);
+		window_settings.is_show_ram_usage = config.Get<decltype(WindowSettings::is_show_ram_usage)>("window", "show_ram_usage", true);
+		window_settings.is_show_cpu_usage = config.Get<decltype(WindowSettings::is_show_cpu_usage)>("window", "show_cpu_usage", true);
 		return window_settings;
 	}
 
@@ -165,7 +170,7 @@ public:
 		oss << "[ title:" << title << ", width:" << width << ", height:" << height
 			<< ", minimum_width:" << minimum_width << ", minimum_height:" << minimum_height
 			<< ", maximum_width:" << maximum_width << ", maximum_height:" << maximum_height
-			<< ", refresh_rate:" << refresh_rate << ", is_vsync:" << is_vsync
+			<< ", refresh_rate:" << refresh_rate << ", swap_interval:" << swap_interval
 			<< ", is_resizable:" << is_resizable << ", is_decorated:" << is_decorated
 			<< ", is_fullscreen:" << is_fullscreen << ", samples:" << samples
 			<< ", is_focused:" << is_focused << ", is_maximized:" << is_maximized

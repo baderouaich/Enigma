@@ -18,7 +18,7 @@ Window::Window(const WindowSettings& window_settings)
 	m_minimum_size(window_settings.minimum_width, window_settings.minimum_height),
 	m_maximum_size(window_settings.maximum_width, window_settings.maximum_height),
 	m_frame_buffer_size(0, 0),
-	m_vsync(window_settings.is_vsync),
+	m_swap_interval(window_settings.swap_interval),
 	m_is_show_fps(window_settings.is_show_fps),
 	m_is_show_ram_usage(window_settings.is_show_ram_usage),
 	m_is_show_cpu_usage(window_settings.is_show_cpu_usage),
@@ -94,7 +94,12 @@ bool Window::InitGLFW(const WindowSettings& window_settings)
 	glfwMakeContextCurrent(m_GLFWwindow); // !! IMPORTANT FOR GLAD TO WORK !!
 
 	//Enable/Disable vsync
-	glfwSwapInterval(m_vsync);
+	/*
+		Interval 0: unlimited FPS
+		Interval 1: 60 FPS
+		Interval 2: 30 FPS
+	*/
+	glfwSwapInterval(m_swap_interval);
 
 	//Set this window as data ptr to access in callbacks to avoid static funcs headaches
 	glfwSetWindowUserPointer(m_GLFWwindow, this);
@@ -438,9 +443,9 @@ bool Window::IsMaximized() const noexcept
 	return glfwGetWindowAttrib(m_GLFWwindow, GLFW_MAXIMIZED) == GLFW_TRUE;
 }
 
-const bool& Window::IsVSync() const noexcept
+const i32& Window::GetSwapInterval() const noexcept
 {
-	return m_vsync;
+	return m_swap_interval;
 }
 
 bool Window::IsFullscreen() const noexcept
@@ -487,10 +492,10 @@ void Window::SetRefreshRate(const i32& refresh_rate) noexcept
 	glfwWindowHint(GLFW_REFRESH_RATE, refresh_rate);
 }
 
-void Window::SetVsync(bool vsync) noexcept
+void Window::SetSwapInterval(const i32& interval) noexcept
 {
-	m_vsync = vsync;
-	glfwSwapInterval(vsync);
+	m_swap_interval = interval;
+	glfwSwapInterval(interval);
 }
 
 void Window::SetEventCallback(const EventCallback& callback) noexcept

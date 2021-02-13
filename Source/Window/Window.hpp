@@ -110,6 +110,14 @@ public:	/* Accessors */
 	*	Returns window top left position
 	*/
 	const std::pair<i32, i32>& GetPosition() const noexcept;
+	
+	/*
+	*	Returns vsync swap interval level
+	* 	Interval 0: unlimited FPS
+	*	Interval 1: 60 FPS
+	*	Interval 2: 30 FPS
+	*/
+	const i32& GetSwapInterval() const noexcept;
 
 	/*
 	*	Returns true if the window should be closed
@@ -152,11 +160,6 @@ public:	/* Accessors */
 	bool IsDecorated() const noexcept;
 
 	/*
-	*	Returns true if vertical sync is enabled
-	*/
-	const bool& IsVSync() const noexcept;
-
-	/*
 	*	Returns true if the window is fullscreen mode
 	*/
 	bool IsFullscreen() const noexcept;
@@ -189,9 +192,12 @@ public: /* Modifiers */
 	void SetShouldClose(const bool close) const noexcept;
 	
 	/*
-	*	Enable / Disable Vertical Sync
+	*	Sets Vertical Sync swap interval 
+	* 	Interval 0: unlimited FPS
+	*	Interval 1: 60 FPS
+	*	Interval 2: 30 FPS
 	*/
-	void SetVsync(bool vsync) noexcept;
+	void SetSwapInterval(const i32& interval) noexcept;
 	
 	/*
 	*	Set Window Title
@@ -296,7 +302,7 @@ private: /* Properties */
 	std::pair<i32, i32> m_minimum_size;
 	std::pair<i32, i32> m_maximum_size;
 	std::pair<i32, i32> m_frame_buffer_size;
-	bool m_vsync;
+	i32 m_swap_interval;
 	bool m_is_show_fps;
 	bool m_is_show_ram_usage;
 	bool m_is_show_cpu_usage;

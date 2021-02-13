@@ -16,7 +16,10 @@ project "cxxopts"
     	"src/cxxopts.cpp" -- has the header only include, to compile project as static lib 
     }
 
-    
+    defines	
+    {
+    	--"CXXOPTS_NO_RTTI" -- enable if rtti disabled
+    }
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"

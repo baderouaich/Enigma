@@ -102,16 +102,16 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Copy `Resources/` folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it
 
 ### Linux
- - Install Latest gcc & g++ Compiler<br>
+ - Install Latest gcc or clang Compiler<br>
   `sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
 	`sudo apt update`<br>
-	`sudo apt install gcc-10 g++-10`<br>
+	gcc `sudo apt install gcc-10 g++-10` or clang `sudo apt install clang-10 clang++-10`<br>
  - Install necessary libs<br>
   `sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
  - Extract premake5 binary <br>
   `tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/`
  - Run `sudo bash ./Gen-Linux-Makefile.sh` to generate project Makefiles
- - `make config=release CC=gcc-10 CPP=g++-10 -j X` <br> 
+ - Compile with gcc `make config=release CC=gcc-10 CPP=g++-10 -j X` or clang `make config=release CC=clang-10 CPP=clang++-10 -j X` <br> 
    replace X with number of threads to use for compilation, the more the faster<br>
    replace release with dist for full performance
  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma`
