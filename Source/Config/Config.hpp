@@ -52,20 +52,6 @@ public:
 		return m_ini_reader->GetString(section, name, default_value);
 	}
 
-
-
-	// Others, just return default value for now
-	template<typename T>
-	inline typename std::enable_if<
-		!std::is_integral<T>::value &&
-		!std::is_floating_point<T>::value &&
-		!std::is_same<T, bool>::value &&
-		!std::is_same<T, String>::value, T>::type
-	Get(const String& section, const String& name, const T& default_value) const
-	{
-		static_assert(false, "Unsupported config field type");
-		return default_value;
-	}
 private:
 	std::unique_ptr<INIReader> m_ini_reader;
 
