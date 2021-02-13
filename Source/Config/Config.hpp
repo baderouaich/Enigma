@@ -57,7 +57,7 @@ public:
 	// Others, just return default value for now
 	template<typename T>
 	inline typename std::enable_if<
-		!(std::is_integral<T>::value && !std::is_same<T, bool>::value) &&
+		!std::is_integral<T>::value &&
 		!std::is_floating_point<T>::value &&
 		!std::is_same<T, bool>::value &&
 		!std::is_same<T, String>::value, T>::type
