@@ -62,11 +62,11 @@ namespace Enigma
 
 		namespace Config
 		{
-			static constexpr const auto ENIGMA_CONFIG_PATH = "./Resources/Config/Enigma.ini";
+			static constexpr const auto ENIGMA_WINDOW_SETTINGS_CONFIG_PATH = "./Resources/Config/WindowSettings.ini";
 		}
 		namespace CLI
 		{
-			constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help to display available options";
+			static constexpr const auto CLI_HELP_MESSAGE = "Say -h or --help to display available options";
 		}
 
 		namespace ErrorMessages

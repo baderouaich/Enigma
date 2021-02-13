@@ -35,9 +35,9 @@ extern std::unique_ptr<Application> CreateApplication()
 	//Construct Window by Config file
 	try
 	{
-		ENIGMA_TRACE("Loading window config from {0}...", Constants::Config::ENIGMA_CONFIG_PATH);
+		ENIGMA_TRACE("Loading window config from {0}...", Constants::Config::ENIGMA_WINDOW_SETTINGS_CONFIG_PATH);
 		
-		Config config(Constants::Config::ENIGMA_CONFIG_PATH);
+		Config config(Constants::Config::ENIGMA_WINDOW_SETTINGS_CONFIG_PATH);
 		WindowSettings window_settings = WindowSettings::FromConfig(config);
 		
 		ENIGMA_LOG("Window Settings: {0}", window_settings.toString());
