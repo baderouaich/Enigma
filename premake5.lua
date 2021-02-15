@@ -45,7 +45,7 @@ IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp"  -- cryptograp
 IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- arguments parser lib
 IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config file loader lib
 IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
-IncludeDir["asio"]	= "%{wks.location}/Dependencies/asio/include" -- Boost.asio standalone networking lib
+IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
 IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests lib
 
 -- Organize libs solution in a single filtered directory 
@@ -60,7 +60,7 @@ group "Dependencies"
 	include "Dependencies/cxxopts"
 	include "Dependencies/inih"
 	include "Dependencies/json"
-	include "Dependencies/asio"
+	include "Dependencies/curl"
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
 group ""
 
@@ -102,7 +102,7 @@ project "Enigma"
 		"%{IncludeDir.cryptopp}",
 		"%{IncludeDir.inih}",
 		"%{IncludeDir.json}",
-		"%{IncludeDir.asio}",
+		"%{IncludeDir.curl}",
 	}
 
 
@@ -118,7 +118,7 @@ project "Enigma"
 		"cryptopp",
 		"inih", 
 		"json",
-		"asio",
+		"curl"
 	}
 
 

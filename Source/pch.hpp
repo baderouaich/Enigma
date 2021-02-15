@@ -20,9 +20,6 @@
 #ifndef WIN32_LEAN_AND_MEAN
 	#define WIN32_LEAN_AND_MEAN
 #endif
-#if defined(ASIO_STANDALONE) // For Boost.asio
-	#define _WIN32_WINNT 0x0A00
-#endif
 #include <Windows.h>
 #endif
 ///

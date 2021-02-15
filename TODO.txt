@@ -1,2 +1,12 @@
 - Config/Config.hpp which laods config ini file Resources/Config/Config.ini which has window settings and other stuff
 - Add rpc & nlohmann json to check latest enigma release if updates are available https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest
+s/*
+Github api ports
+---------------
+Port	Service
+---------------
+443		HTTPS
+80		HTTP
+22		SSH
+9418	Git
+*/

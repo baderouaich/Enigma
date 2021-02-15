@@ -17,8 +17,124 @@
 	#include <Enigma.hpp>
 #endif
 
+#if 0
+#include "HTTPRequest.hpp"
+constexpr const auto URL = "api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest";
+
+try
+{
+	// you can pass http::InternetProtocol::V6 to Request to make an IPv6 request
+	http::Request request(URL);
+
+	// send a get request
+	const http::Response response = request.send("GET");
+	if (response.status == http::Response::Status::Ok)
+	{
+		std::cout << std::string(response.body.begin(), response.body.end()) << '\n'; // print the result
+	}
+	else
+	{
+		std::string err;
+#define CASE(e) case http::Response::Status::e:  err = #e; break;
+		switch (response.status)
+		{
+			CASE(Continue)
+				CASE(SwitchingProtocol)
+				CASE(Processing)
+				CASE(EarlyHints)
+
+				CASE(Ok)
+				CASE(Created)
+				CASE(Accepted)
+				CASE(NonAuthoritativeInformation)
+				CASE(NoContent)
+				CASE(ResetContent)
+				CASE(PartialContent)
+				CASE(MultiStatus)
+				CASE(AlreadyReported)
+				CASE(ImUsed)
+
+				CASE(MultipleChoice)
+				CASE(MovedPermanently)
+				CASE(Found)
+				CASE(SeeOther)
+				CASE(NotModified)
+				CASE(UseProxy)
+				CASE(TemporaryRedirect)
+				CASE(PermanentRedirect)
+
+				CASE(BadRequest)
+				CASE(Unauthorized)
+				CASE(PaymentRequired)
+				CASE(Forbidden)
+				CASE(NotFound)
+				CASE(MethodNotAllowed)
+				CASE(NotAcceptable)
+				CASE(ProxyAuthenticationRequired)
+				CASE(RequestTimeout)
+				CASE(Conflict)
+				CASE(Gone)
+				CASE(LengthRequired)
+				CASE(PreconditionFailed)
+				CASE(PayloadTooLarge)
+				CASE(UriTooLong)
+				CASE(UnsupportedMediaType)
+				CASE(RangeNotSatisfiable)
+				CASE(ExpectationFailed)
+				CASE(MisdirectedRequest)
+				CASE(UnprocessableEntity)
+				CASE(Locked)
+				CASE(FailedDependency)
+				CASE(TooEarly)
+				CASE(UpgradeRequired)
+				CASE(PreconditionRequired)
+				CASE(TooManyRequests)
+				CASE(RequestHeaderFieldsTooLarge)
+				CASE(UnavailableForLegalReasons)
+
+				CASE(InternalServerError)
+				CASE(NotImplemented)
+				CASE(BadGateway)
+				CASE(ServiceUnavailable)
+				CASE(GatewayTimeout)
+				CASE(HttpVersionNotSupported)
+				CASE(VariantAlsoNegotiates)
+				CASE(InsufficientStorage)
+				CASE(LoopDetected)
+				CASE(NotExtended)
+				CASE(NetworkAuthenticationRequired)
+		default: err = "unknown";
+		}
+		std::cerr << "Error: " << err;
+	}
+}
+catch (const std::exception& e)
+{
+	std::cerr << "Request failed, error: " << e.what() << '\n';
+}
+return 0;
+#endif
+
+//#pragma comment(lib, "wldap32.lib" )
+//#pragma comment(lib, "crypt32.lib" )
+//#pragma comment(lib, "Ws2_32.lib")
+
+#ifndef CURL_STATICLIB
+	#define CURL_STATICLIB
+#endif
+#include <curl/curl.h>
+
+constexpr const auto URL = "https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest";
+
 int main(int argc, char* argv[])
 {
+	//TODO use cpr :))
+	CURL* curl = curl_easy_init();
+
+	std::cout << curl;
+	curl_easy_cleanup(curl);
+	return 0;
+
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 #if !ENIGMA_TEST
