@@ -35,16 +35,18 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
-IncludeDir["glfw"]			= "%{wks.location}/Dependencies/glfw/include"
-IncludeDir["glad"]			= "%{wks.location}/Dependencies/glad/include"
-IncludeDir["imgui"]			= "%{wks.location}/Dependencies/imgui" 
-IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include" 
-IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include" 
-IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" 
-IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp" 
-IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" 
-IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" 
-IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src" 
+IncludeDir["glfw"]			= "%{wks.location}/Dependencies/glfw/include"  -- Graphics Library Framework lib
+IncludeDir["glad"]			= "%{wks.location}/Dependencies/glad/include"-- OpenGL lib
+IncludeDir["imgui"]			= "%{wks.location}/Dependencies/imgui" 	-- UI lib
+IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include" -- logging lib
+IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include"  -- portable-file-dialog lib
+IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" -- image loading lib
+IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp"  -- cryptography lib 
+IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- arguments parser lib
+IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config file loader lib
+IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
+IncludeDir["asio"]	= "%{wks.location}/Dependencies/asio/include" -- Boost.asio standalone networking lib
+IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests lib
 
 -- Organize libs solution in a single filtered directory 
 group "Dependencies"
@@ -57,6 +59,8 @@ group "Dependencies"
 	include "Dependencies/cryptopp"
 	include "Dependencies/cxxopts"
 	include "Dependencies/inih"
+	include "Dependencies/json"
+	include "Dependencies/asio"
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
 group ""
 
@@ -88,15 +92,17 @@ project "Enigma"
 	includedirs
 	{
 		"Source", -- include Source/ dir so we can include e.g "Enigma/Core/Core.hpp" directly, not to keep going back steps e.g "../../Core/Core.hpp"
-		"%{IncludeDir.spdlog}", -- spdlog
-		"%{IncludeDir.glfw}", -- GLFW
-		"%{IncludeDir.glad}", -- Glad
-		"%{IncludeDir.imgui}", -- ImGui
-		"%{IncludeDir.pfd}", -- pfd
-		"%{IncludeDir.stb_image}", -- stb_image
-		"%{IncludeDir.cxxopts}", -- cxxopts
-		"%{IncludeDir.cryptopp}", -- cryptopp
-		"%{IncludeDir.inih}", -- inih
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glfw}",
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.pfd}",
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.cxxopts}",
+		"%{IncludeDir.cryptopp}",
+		"%{IncludeDir.inih}",
+		"%{IncludeDir.json}",
+		"%{IncludeDir.asio}",
 	}
 
 
@@ -104,13 +110,15 @@ project "Enigma"
 	links
 	{
 		"glfw", --links GLFW .lib
-		"glad", -- links Glad lib
-		"imgui", -- links ImGui lib
-		"spdlog", -- links SpdLog lib
-		"stb_image", -- links stb_image lib
-		"cxxopts", -- links cxxopts lib
-		"cryptopp", -- links cryptopp lib
-		"inih", -- links inih lib
+		"glad", 
+		"imgui",
+		"spdlog",
+		"stb_image",
+		"cxxopts",
+		"cryptopp",
+		"inih", 
+		"json",
+		"asio",
 	}
 
 
