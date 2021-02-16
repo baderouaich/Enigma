@@ -1,34 +1,7 @@
-#***************************************************************************
-#                                  _   _ ____  _
-#  Project                     ___| | | |  _ \| |
-#                             / __| | | | |_) | |
-#                            | (__| |_| |  _ <| |___
-#                             \___|\___/|_| \_\_____|
-#
-# Copyright (C) 1998 - 2020, Daniel Stenberg, <daniel@haxx.se>, et al.
-#
-# This software is licensed as described in the file COPYING, which
-# you should have received as part of this distribution. The terms
-# are also available at https://curl.se/docs/copyright.html.
-#
-# You may opt to use, copy, modify, merge, publish, distribute and/or sell
-# copies of the Software, and permit persons to whom the Software is
-# furnished to do so, under the terms of the COPYING file.
-#
-# This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
-# KIND, either express or implied.
-#
-###########################################################################
 set(LIB_NAME libcurl)
 
-if(BUILD_SHARED_LIBS)
-  set(CURL_STATICLIB NO)
-else()
-  set(CURL_STATICLIB YES)
-endif()
-
-# Use:
-# * CURL_STATICLIB
+configure_file(${CURL_SOURCE_DIR}/include/curl/curlbuild.h.cmake
+  ${CURL_BINARY_DIR}/include/curl/curlbuild.h)
 configure_file(curl_config.h.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/curl_config.h)
 
@@ -37,9 +10,10 @@ include(${CMAKE_CURRENT_BINARY_DIR}/Makefile.inc.cmake)
 
 list(APPEND HHEADERS
   ${CMAKE_CURRENT_BINARY_DIR}/curl_config.h
+  ${CURL_BINARY_DIR}/include/curl/curlbuild.h
   )
 
-if(WIN32)
+if(MSVC)
   list(APPEND CSOURCES libcurl.rc)
 endif()
 
@@ -49,6 +23,15 @@ endif()
 # # strtok.c - specify later
 # # strtoofft.c - specify later
 # )
+
+# # if we have Kerberos 4, right now this is never on
+# #OPTION(CURL_KRB4 "Use Kerberos 4" OFF)
+# IF(CURL_KRB4)
+# SET(CSOURCES ${CSOURCES}
+# krb4.c
+# security.c
+# )
+# ENDIF(CURL_KRB4)
 
 # #OPTION(CURL_MALLOC_DEBUG "Debug mallocs in Curl" OFF)
 # MARK_AS_ADVANCED(CURL_MALLOC_DEBUG)
@@ -78,24 +61,28 @@ if(USE_ARES)
   include_directories(${CARES_INCLUDE_DIR})
 endif()
 
+if(CURL_STATICLIB)
+  # Static lib
+  set(CURL_USER_DEFINED_DYNAMIC_OR_STATIC STATIC)
+else()
+  # DLL / so dynamic lib
+  set(CURL_USER_DEFINED_DYNAMIC_OR_STATIC SHARED)
+endif()
+
 add_library(
   ${LIB_NAME}
+  ${CURL_USER_DEFINED_DYNAMIC_OR_STATIC}
   ${HHEADERS} ${CSOURCES}
   )
 
-add_library(
-  ${PROJECT_NAME}::${LIB_NAME}
-  ALIAS ${LIB_NAME}
-  )
-
-if(NOT BUILD_SHARED_LIBS)
-    set_target_properties(${LIB_NAME} PROPERTIES INTERFACE_COMPILE_DEFINITIONS CURL_STATICLIB)
+if(MSVC AND CURL_STATICLIB)
+  set_target_properties(${LIB_NAME} PROPERTIES STATIC_LIBRARY_FLAGS ${CMAKE_EXE_LINKER_FLAGS})
 endif()
 
 target_link_libraries(${LIB_NAME} ${CURL_LIBS})
 
 if(WIN32)
-  add_definitions(-D_USRDLL)
+  add_definitions( -D_USRDLL )
 endif()
 
 set_target_properties(${LIB_NAME} PROPERTIES COMPILE_DEFINITIONS BUILDING_LIBCURL)
@@ -109,31 +96,14 @@ endif()
 set_target_properties(${LIB_NAME} PROPERTIES PREFIX "")
 set_target_properties(${LIB_NAME} PROPERTIES IMPORT_PREFIX "")
 
-if(CURL_HAS_LTO)
-  set_target_properties(${LIB_NAME} PROPERTIES
-    INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE
-    INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO TRUE)
-endif()
-
 if(WIN32)
-  if(BUILD_SHARED_LIBS)
+  if(NOT CURL_STATICLIB)
     # Add "_imp" as a suffix before the extension to avoid conflicting with the statically linked "libcurl.lib"
     set_target_properties(${LIB_NAME} PROPERTIES IMPORT_SUFFIX "_imp.lib")
   endif()
 endif()
 
-target_include_directories(${LIB_NAME} INTERFACE
-  $<INSTALL_INTERFACE:include>
-  $<BUILD_INTERFACE:${CURL_SOURCE_DIR}/include>)
-
 install(TARGETS ${LIB_NAME}
-  EXPORT ${TARGETS_EXPORT_NAME}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-export(TARGETS ${LIB_NAME}
-       APPEND FILE ${PROJECT_BINARY_DIR}/libcurl-target.cmake
-       NAMESPACE ${PROJECT_NAME}::
-)
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)

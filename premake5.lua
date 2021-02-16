@@ -45,8 +45,12 @@ IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp"  -- cryptograp
 IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- arguments parser lib
 IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config file loader lib
 IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
-IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
-IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests lib
+
+IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
+IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
+IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL and mbedtls depend on it (will be included and linked in curl & mbedtls project for linux, see Dependencies/curl/premake.lua)
+
+IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests libIncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
 
 -- Organize libs solution in a single filtered directory 
 group "Dependencies"
@@ -60,8 +64,14 @@ group "Dependencies"
 	include "Dependencies/cxxopts"
 	include "Dependencies/inih"
 	include "Dependencies/json"
+	
 	include "Dependencies/curl"
+	include "Dependencies/mbedtls"-- (will be included and linked in curl project)
+	include "Dependencies/zlib" -- (will be included and linked in curl project)
+
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
+
+
 group ""
 
 -- Include Enigma Application project solution

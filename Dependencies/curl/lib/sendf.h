@@ -7,11 +7,11 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2021, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2014, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
- * are also available at https://curl.se/docs/copyright.html.
+ * are also available at https://curl.haxx.se/docs/copyright.html.
  *
  * You may opt to use, copy, modify, merge, publish, distribute and/or sell
  * copies of the Software, and permit persons to whom the Software is
@@ -24,6 +24,8 @@
 
 #include "curl_setup.h"
 
+CURLcode Curl_sendf(curl_socket_t sockfd, struct connectdata *,
+                    const char *fmt, ...);
 void Curl_infof(struct Curl_easy *, const char *fmt, ...);
 void Curl_failf(struct Curl_easy *, const char *fmt, ...);
 
@@ -34,7 +36,7 @@ void Curl_failf(struct Curl_easy *, const char *fmt, ...);
 #elif defined(HAVE_VARIADIC_MACROS_GCC)
 #define infof(x...)  Curl_nop_stmt
 #else
-#error "missing VARIADIC macro define, fix and rebuild!"
+#define infof (void)
 #endif
 
 #else /* CURL_DISABLE_VERBOSE_STRINGS */
@@ -49,7 +51,9 @@ void Curl_failf(struct Curl_easy *, const char *fmt, ...);
 #define CLIENTWRITE_HEADER (1<<1)
 #define CLIENTWRITE_BOTH   (CLIENTWRITE_BODY|CLIENTWRITE_HEADER)
 
-CURLcode Curl_client_write(struct Curl_easy *data, int type, char *ptr,
+CURLcode Curl_client_chop_write(struct connectdata *conn, int type, char *ptr,
+                                size_t len) WARN_UNUSED_RESULT;
+CURLcode Curl_client_write(struct connectdata *conn, int type, char *ptr,
                            size_t len) WARN_UNUSED_RESULT;
 
 bool Curl_recv_has_postponed_data(struct connectdata *conn, int sockindex);
@@ -60,31 +64,31 @@ CURLcode Curl_read_plain(curl_socket_t sockfd,
                          size_t bytesfromsocket,
                          ssize_t *n);
 
-ssize_t Curl_recv_plain(struct Curl_easy *data, int num, char *buf,
+ssize_t Curl_recv_plain(struct connectdata *conn, int num, char *buf,
                         size_t len, CURLcode *code);
-ssize_t Curl_send_plain(struct Curl_easy *data, int num,
+ssize_t Curl_send_plain(struct connectdata *conn, int num,
                         const void *mem, size_t len, CURLcode *code);
 
 /* internal read-function, does plain socket, SSL and krb4 */
-CURLcode Curl_read(struct Curl_easy *data, curl_socket_t sockfd,
+CURLcode Curl_read(struct connectdata *conn, curl_socket_t sockfd,
                    char *buf, size_t buffersize,
                    ssize_t *n);
-
 /* internal write-function, does plain socket, SSL, SCP, SFTP and krb4 */
-CURLcode Curl_write(struct Curl_easy *data,
+CURLcode Curl_write(struct connectdata *conn,
                     curl_socket_t sockfd,
                     const void *mem, size_t len,
                     ssize_t *written);
 
 /* internal write-function, does plain sockets ONLY */
-CURLcode Curl_write_plain(struct Curl_easy *data,
+CURLcode Curl_write_plain(struct connectdata *conn,
                           curl_socket_t sockfd,
                           const void *mem, size_t len,
                           ssize_t *written);
 
 /* the function used to output verbose information */
-int Curl_debug(struct Curl_easy *data, curl_infotype type,
-               char *ptr, size_t size);
+int Curl_debug(struct Curl_easy *handle, curl_infotype type,
+               char *data, size_t size,
+               struct connectdata *conn);
 
 
 #endif /* HEADER_CURL_SENDF_H */

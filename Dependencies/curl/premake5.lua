@@ -2,9 +2,9 @@
 project "curl"
 	kind "StaticLib"
     language "C"
-    cdialect "C11"
 	staticruntime "on"
-	
+	warnings "off"
+
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
@@ -12,19 +12,20 @@ project "curl"
     {
      	"include/", 
      	"lib/",
-    }
-	files
+	}
+
+    files
 	{
 		"**.h",
 		"**.c"
 	}
-    defines	
+	defines    
     {
-		"BUILDING_LIBCURL",
-		"CURL_STATICLIB",
-		--"HTTP_ONLY"
+        "BUILDING_LIBCURL",
+        "CURL_STATICLIB",
+        "USE_ZLIB", 
+        "HTTP_ONLY" 
     }
-	warnings "off"
 
 	--- Platform ---
 	filter "system:windows"
@@ -41,16 +42,26 @@ project "curl"
 	 		"Wldap32",
 	 		"Crypt32"
 	    }
- 
- 
+	    
 	filter "system:linux or bsd or solaris"
-		defines
-		{
-			"CURL_HIDDEN_SYMBOLS"
+		defines 
+		{ 
+			"CURL_HIDDEN_SYMBOLS",
+			"USE_MBEDTLS"
 		}
-		links
+		includedirs
 		{
+			-- Only include mbedtls & zlib on linux based systems
+			"%{IncludeDir.mbedtls}",
+			"%{IncludeDir.zlib}",
 		}
+	    links
+	    {
+	    	-- Only link mbedtls & zlib on linux based systems
+	    	"mbedtls",
+	    	"zlib"
+	    }
+
 		-- find the location of the ca bundle
 		local ca = nil
 		for _, f in ipairs {
@@ -72,12 +83,9 @@ project "curl"
 
 
 	filter "system:macosx"
-		defines
-		{
-			"USE_DARWINSSL"
-		}	
-		links
-		{
+		defines 
+		{ 
+			"USE_DARWINSSL" 
 		}
 
 
