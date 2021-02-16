@@ -162,6 +162,9 @@ project "Enigma"
 		}
 		links
 		{
+			"zlib",	-- link zlib for curl lib on linux
+			"mbedtls", -- link mbedtls for curl lib on linux
+
 			"X11", -- x11 Linux gui libs
 			"dl", -- dynamic loader interface
 			"GL", -- unix based systems opengl lib
