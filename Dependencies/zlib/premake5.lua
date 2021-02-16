@@ -1,6 +1,7 @@
 project "zlib"
-	language    "C"
-	kind        "StaticLib"
+	kind "StaticLib"
+    language "C"
+	staticruntime "on"
 	defines     { "N_FSEEKO" }
 	warnings    "off"
 

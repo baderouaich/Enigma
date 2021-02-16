@@ -1,7 +1,8 @@
 project "mbedtls"
-	language    "C"
-	kind        "StaticLib"
-	warnings    "off"
+	kind "StaticLib"
+    language "C"
+	staticruntime "on"
+	warnings "off"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
@@ -14,7 +15,8 @@ project "mbedtls"
 
 	defines 
 	{
-		 'MBEDTLS_ZLIB_SUPPORT' 
+		 "MBEDTLS_ZLIB_SUPPORT",
+
 	}
 	
 	files
@@ -33,6 +35,7 @@ project "mbedtls"
 		runtime "Debug"
 		symbols "On"
 		optimize "Off" -- No optimization will be performed.
+
 
 	filter "configurations:Release"
 		runtime "Release"
