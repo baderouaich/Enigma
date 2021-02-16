@@ -11,5 +11,5 @@
 "Modern graphics drivers have settings that allow users to override an application’s request for (among other things) swap interval. 
 If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 
-
-
+# 1.1.1
+- Added networking libraries curl, cpr (additional zlib, mbedtls for linux builds)

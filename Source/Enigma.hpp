@@ -76,6 +76,8 @@
 #include <CLI/CLI.hpp>
 //
 
-
+//Networking
+#include <Networking/CheckForUpdates.hpp>
+//
 
 #endif // !ENIGMA_H

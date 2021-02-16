@@ -2,7 +2,7 @@
 #ifndef ENIGMA_VERSION_H
 #define ENIGMA_VERSION_H
 
-static constexpr const char ENIGMA_VERSION[] = "1.0.1";
+static constexpr const char ENIGMA_VERSION[] = "1.1.1";
 
 static constexpr const char ENIGMA_LICENCE[] = 
 "The MIT License (MIT)\n"

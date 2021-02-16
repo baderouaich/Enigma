@@ -1,6 +1,9 @@
 - Config/Config.hpp which laods config ini file Resources/Config/Config.ini which has window settings and other stuff
-- Add rpc & nlohmann json to check latest enigma release if updates are available https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest
-s/*
+- Add rpc & nlohmann json to check latest enigma release if updates are available https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latestS
+- Added Check for updates menu item which checks enigma repository releases for latests
+- Added CLI option  --check-for-updates 
+
+/*
 Github api ports
 ---------------
 Port	Service

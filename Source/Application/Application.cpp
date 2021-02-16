@@ -1,6 +1,6 @@
 #include <pch.hpp>
 #include "Application.hpp"
-#include <Core/Main.hpp> // ::main Entry point
+#include <Core/Main.hpp> // ::main Entry point (for extern definition)
 
 #include <Scenes/Scene.hpp>
 #include <UI/ImGui/ImGuiRenderer.hpp>

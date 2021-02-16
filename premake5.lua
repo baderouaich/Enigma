@@ -49,6 +49,7 @@ IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann j
 IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
 IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
 IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL and mbedtls depend on it (will be included and linked in curl & mbedtls project for linux, see Dependencies/curl/premake.lua)
+IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking library wrapper around cURL (will include and link to curl)
 
 IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests libIncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
 
@@ -68,9 +69,9 @@ group "Dependencies"
 	include "Dependencies/curl"
 	include "Dependencies/mbedtls"-- (will be included and linked in curl project)
 	include "Dependencies/zlib" -- (will be included and linked in curl project)
+	include "Dependencies/cpr"
 
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
-
 
 group ""
 
@@ -113,6 +114,7 @@ project "Enigma"
 		"%{IncludeDir.inih}",
 		"%{IncludeDir.json}",
 		"%{IncludeDir.curl}",
+		"%{IncludeDir.cpr}",
 	}
 
 
@@ -128,7 +130,8 @@ project "Enigma"
 		"cryptopp",
 		"inih", 
 		"json",
-		"curl"
+		"curl",
+		"cpr"
 	}
 
 
@@ -148,7 +151,7 @@ project "Enigma"
 
 			"_CRT_SECURE_NO_DEPRECATE",
 			"_CRT_SECURE_NO_WARNINGS",
-			"_CRT_NONSTDC_NO_WARNINGS"
+			"_CRT_NONSTDC_NO_WARNINGS",
 		}
 		links
 		{
@@ -162,9 +165,6 @@ project "Enigma"
 		}
 		links
 		{
-			"zlib",	-- link zlib for curl lib on linux
-			"mbedtls", -- link mbedtls for curl lib on linux
-
 			"X11", -- x11 Linux gui libs
 			"dl", -- dynamic loader interface
 			"GL", -- unix based systems opengl lib
