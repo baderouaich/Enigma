@@ -12,15 +12,7 @@
 /// Platform specific includes ///
 /// Platform Windows include
 #if defined(ENIGMA_PLATFORM_WINDOWS)
-#ifndef NOMINMAX
-	// On Windows, a header file defines two macros min and max which may result in 
-	// conflicts with their counterparts in the standard library and therefore in errors during compilation.
-#define NOMINMAX
-#endif
-#ifndef WIN32_LEAN_AND_MEAN
-	#define WIN32_LEAN_AND_MEAN
-#endif
-#include <Windows.h>
+	#include <Windows.h>
 #endif
 ///
 
