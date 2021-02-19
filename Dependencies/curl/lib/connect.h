@@ -7,11 +7,11 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2016, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2020, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
- * are also available at https://curl.haxx.se/docs/copyright.html.
+ * are also available at https://curl.se/docs/copyright.html.
  *
  * You may opt to use, copy, modify, merge, publish, distribute and/or sell
  * copies of the Software, and permit persons to whom the Software is
@@ -25,6 +25,7 @@
 
 #include "nonblock.h" /* for curlx_nonblock(), formerly Curl_nonblock() */
 #include "sockaddr.h"
+#include "timeval.h"
 
 CURLcode Curl_is_connected(struct connectdata *conn,
                            int sockindex,
@@ -35,13 +36,11 @@ CURLcode Curl_connecthost(struct connectdata *conn,
 
 /* generic function that returns how much time there's left to run, according
    to the timeouts set */
-time_t Curl_timeleft(struct Curl_easy *data,
-                     struct timeval *nowp,
-                     bool duringconnect);
+timediff_t Curl_timeleft(struct Curl_easy *data,
+                         struct curltime *nowp,
+                         bool duringconnect);
 
 #define DEFAULT_CONNECT_TIMEOUT 300000 /* milliseconds == five minutes */
-#define HAPPY_EYEBALLS_TIMEOUT     200 /* milliseconds to wait between
-                                          IPv4/IPv6 connection attempts */
 
 /*
  * Used to extract socket and connectdata struct for the most recent
@@ -51,6 +50,9 @@ time_t Curl_timeleft(struct Curl_easy *data,
  */
 curl_socket_t Curl_getconnectinfo(struct Curl_easy *data,
                                   struct connectdata **connp);
+
+bool Curl_addr2string(struct sockaddr *sa, curl_socklen_t salen,
+                      char *addr, long *port);
 
 /*
  * Check if a connection seems to be alive.
@@ -73,6 +75,8 @@ void Curl_sndbufset(curl_socket_t sockfd);
 #endif
 
 void Curl_updateconninfo(struct connectdata *conn, curl_socket_t sockfd);
+void Curl_conninfo_remote(struct connectdata *conn, curl_socket_t sockfd);
+void Curl_conninfo_local(struct connectdata *conn, curl_socket_t sockfd);
 void Curl_persistconninfo(struct connectdata *conn);
 int Curl_closesocket(struct connectdata *conn, curl_socket_t sock);
 
@@ -103,11 +107,9 @@ struct Curl_sockaddr_ex {
  *
  */
 CURLcode Curl_socket(struct connectdata *conn,
-                     const Curl_addrinfo *ai,
+                     const struct Curl_addrinfo *ai,
                      struct Curl_sockaddr_ex *addr,
                      curl_socket_t *sockfd);
-
-void Curl_tcpnodelay(struct connectdata *conn, curl_socket_t sockfd);
 
 /*
  * Curl_conncontrol() marks the end of a connection/stream. The 'closeit'
@@ -127,16 +129,16 @@ void Curl_tcpnodelay(struct connectdata *conn, curl_socket_t sockfd);
 
 void Curl_conncontrol(struct connectdata *conn,
                       int closeit
-#ifdef DEBUGBUILD
+#if defined(DEBUGBUILD) && !defined(CURL_DISABLE_VERBOSE_STRINGS)
                       , const char *reason
 #endif
   );
 
-#ifdef DEBUGBUILD
+#if defined(DEBUGBUILD) && !defined(CURL_DISABLE_VERBOSE_STRINGS)
 #define streamclose(x,y) Curl_conncontrol(x, CONNCTRL_STREAM, y)
 #define connclose(x,y) Curl_conncontrol(x, CONNCTRL_CONNECTION, y)
 #define connkeep(x,y) Curl_conncontrol(x, CONNCTRL_KEEP, y)
-#else /* if !CURLDEBUG */
+#else /* if !DEBUGBUILD || CURL_DISABLE_VERBOSE_STRINGS */
 #define streamclose(x,y) Curl_conncontrol(x, CONNCTRL_STREAM)
 #define connclose(x,y) Curl_conncontrol(x, CONNCTRL_CONNECTION)
 #define connkeep(x,y) Curl_conncontrol(x, CONNCTRL_KEEP)

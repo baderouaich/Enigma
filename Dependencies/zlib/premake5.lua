@@ -2,23 +2,49 @@ project "zlib"
 	kind "StaticLib"
     language "C"
 	staticruntime "on"
-	defines     { "N_FSEEKO" }
-	warnings    "off"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
-		"**.h",
-		"**.c"
+		"*.h",
+		"*.c"
 	}
 
-	filter "system:windows"
-		defines { "_WINDOWS" }
+	defines
+	{
+		"N_FSEEKO",
+		"verbose=-1" -- Stop "bit length overflow" warning
+	}
 
-	filter "system:not windows"
-		defines { 'HAVE_UNISTD_H' }
+
+	--- Platform ---
+	filter "system:windows"
+		systemversion "latest"
+		defines
+		{
+		}
+		links
+		{
+		}
+
+
+	filter "system:linux"
+		links
+		{
+		}
+		defines
+		{
+		}
+
+	filter "system:macosx"
+		defines
+		{
+		}	
+		links
+		{
+		}
 
 
 	--- Configurations ---

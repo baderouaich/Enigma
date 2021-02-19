@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 		std::cout << "r.header " << r.header["content-type"] << std::endl;       // application/json; charset=utf-8
 		std::cout << "r.text " << r.text << std::endl;
 	}
-	//return 0;
+	return 0;
 
 	
 	// Initialize Enigma Logger

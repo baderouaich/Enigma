@@ -24,6 +24,11 @@ project "cryptopp"
 		--"CRYPTOPP_ENABLE_NAMESPACE_WEAK", -- enable only when using MD5 to disable warning 'You may be using a weak algorithm that has been retained for backwards compatibility...'
 		--"CRYPTOPP_IMPORTS", -- for static build
 		--"CRYPTOPP_EXPORTS",  -- for dynamic build
+		--"CRYPTOPP_DISABLE_CLMUL",
+		--"CRYPTOPP_DISABLE_AESNI",
+		--"CRYPTOPP_DISABLE_SSE4",
+		--"CRYPTOPP_DISABLE_SSSE3",
+
 	}
 
 	includedirs 
@@ -109,6 +114,7 @@ project "cryptopp"
 	filter "system:macosx"
 		defines
 		{
+			"CRYPTOPP_DISABLE_ASM"
 		}
 		links 
 	 	{

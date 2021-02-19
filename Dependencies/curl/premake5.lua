@@ -12,21 +12,47 @@ project "curl"
     {
      	"include/", 
      	"lib/",
-	}
+	    "%{IncludeDir.zlib}"
+    }
 
     files
 	{
 		"**.h",
 		"**.c"
 	}
+
+	excludes 
+	{
+		"lib/amigaos.c",
+		"lib/amigaos.h",
+		"lib/config-amigaos.h",
+		"lib/config-dos.h",
+		"lib/config-mac.h",
+		"lib/config-os400.h",
+		"lib/config-riscos.h",
+		"lib/config-symbian.h",
+		"lib/config-tpf.h",
+		"lib/config-win32ce.h",
+		"lib/config-vxworks.h",
+		"lib/setup-os400.h",
+		"lib/setup-vms.h"
+	}
+
 	defines    
     {
         "BUILDING_LIBCURL",
-        "CURL_STATICLIB",
+        "CURL_STATICLIB", 
+        "HTTP_ONLY", 
         "USE_ZLIB", 
-        "HTTP_ONLY" 
+        "HAVE_LIBZ", 
+        "HAVE_ZLIB_H", 
+        "HAVE_CONFIG_H"
     }
 
+    links
+    {
+    	"zlib"
+    }
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
@@ -34,13 +60,17 @@ project "curl"
 		{
 			"_WINSOCK_DEPRECATED_NO_WARNINGS",
 			"USE_SCHANNEL", 
-			"USE_WINDOWS_SSPI"
+			"USE_WINDOWS_SSPI",
+			"USE_WIN32_IDN", 
+			"WANT_IDN_PROTOTYPES"
 		}
 		links 
 	 	{
-	 		"Ws2_32",
-	 		"Wldap32",
-	 		"Crypt32"
+	 		"Crypt32",
+	 		"Normaliz",
+	 		--"Ws2_32",
+	 		--"Wldap32",
+	 		
 	    }
 	    
 	filter "system:linux or bsd or solaris"
@@ -49,17 +79,9 @@ project "curl"
 			"CURL_HIDDEN_SYMBOLS",
 			"USE_MBEDTLS"
 		}
-		includedirs
-		{
-			-- Only include mbedtls & zlib on linux based systems
-			"%{IncludeDir.mbedtls}",
-			"%{IncludeDir.zlib}",
-		}
+		
 	    links
 	    {
-	    	-- Only link mbedtls & zlib on linux based systems
-	    	"mbedtls",
-	    	"zlib"
 	    }
 
 		-- find the location of the ca bundle
