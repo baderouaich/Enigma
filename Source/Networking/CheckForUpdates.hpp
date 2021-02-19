@@ -33,7 +33,7 @@ public:
 		);
 		if (r.status_code == cpr::status::HTTP_OK)
 		{
-			ENIGMA_INFO("");
+			//ENIGMA_INFO("");
 			//std::cout << "r.status_code" << r.status_code << std::endl;                  // 200
 			//std::cout << "r.header" << r.header["content-type"] << std::endl;       // application/json; charset=utf-8
 			//std::cout << "r.text" << r.text << std::endl;

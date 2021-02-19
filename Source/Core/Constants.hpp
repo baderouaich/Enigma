@@ -76,6 +76,8 @@ namespace Enigma
 
 		namespace Links
 		{
+			static const String ENIGMA_GITHUB_API = "https://api.github.com/repos/BaderEddineOuaich/Enigma";
+			static const String ENIGMA_GITHUB_API_LATEST_RELEASE = ENIGMA_GITHUB_API + "/releases/latest";
 			static const String ENIGMA_GITHUB_REPOSITORY = "https://github.com/BaderEddineOuaich/Enigma";
 		}
 

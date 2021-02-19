@@ -11,7 +11,7 @@
 #include <Window/Window.hpp>
 //
 
-//Enigma Config
+//Enigma Config Loader
 #include <Config/Config.hpp>
 //
 
@@ -67,7 +67,7 @@
 //
 
 
-//Analytocs: Hardware usage RAM, CPU, GPU, Profiler
+//Analytics: Hardware info RAM, CPU
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
 //

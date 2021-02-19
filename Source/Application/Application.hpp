@@ -12,11 +12,6 @@
 #include <Events/MouseEvent.hpp>
 
 
-/*
-*	main entry point is handled by the Enigma::Application
-*/
-extern int main(int argc, char* argv[]);
-
 NS_ENIGMA_BEGIN
 
 // Forward Declarations
@@ -28,13 +23,9 @@ class CPUInfo;
 
 class ENIGMA_API Application
 {
-private:
-	/*
-	*	ENTRY POINT
-	*	Making the main function a friend so we can access
-	*	private function app->Run(); from it
-	*/
-	friend int ::main(int argc, char* argv[]);
+public: /* Constructor / Destructors */
+	Application(const WindowSettings& window_settings = WindowSettings());
+	virtual ~Application();
 
 	/*
 	*	Application Main Loop
@@ -42,14 +33,9 @@ private:
 	void Run();
 
 	/*
-	*	Immediate exit from application without waiting for GL flushes or scenes to be destroyed. 
+	*	Immediate exit from application without waiting for GL flushes or scenes to be destroyed.
 	*/
 	void Exit(const String& message, i32 exit_code) noexcept;
-	
-
-public: /* Constructor / Destructors */
-	Application(const WindowSettings& window_settings = WindowSettings());
-	virtual ~Application();
 
 public: /* Events */
 	void OnEvent(Event& event);

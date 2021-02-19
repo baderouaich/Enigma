@@ -165,6 +165,10 @@ project "Enigma"
 		}
 		links
 		{
+			-- static libraries do not include their dependencies => https://stackoverflow.com/questions/58118344/transitive-library-dependency-in-premake
+			"zlib",
+			"mbedtls",
+
 			"X11", -- x11 Linux gui libs
 			"dl", -- dynamic loader interface
 			"GL", -- unix based systems opengl lib

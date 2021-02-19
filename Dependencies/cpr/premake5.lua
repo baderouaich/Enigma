@@ -25,7 +25,7 @@ project "cpr"
 
     links
     {
-    	"curl" -- link curl .lib
+    	--"curl" -- link curl .lib
     }
 
 	--- Platform ---
@@ -42,8 +42,8 @@ project "cpr"
 	filter "system:linux"
 		links
 		{
-			"zlib",	-- link zlib for curl lib on linux
-			"mbedtls", -- link mbedtls for curl lib on linux
+			--"zlib",	-- link zlib for curl lib on linux
+			--"mbedtls", -- link mbedtls for curl lib on linux
 		}
 		defines
 		{

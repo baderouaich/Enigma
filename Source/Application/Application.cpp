@@ -1,6 +1,5 @@
 #include <pch.hpp>
 #include "Application.hpp"
-#include <Core/Main.hpp> // ::main Entry point (for extern definition)
 
 #include <Scenes/Scene.hpp>
 #include <UI/ImGui/ImGuiRenderer.hpp>
@@ -8,6 +7,7 @@
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
 
+#include <Scenes/MainMenuScene.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -21,18 +21,26 @@ Application::Application(const WindowSettings& window_settings)
 	m_current_frame_time(0.0f),
 	m_delta_time(0.0f),
 	//FPS
-	//m_FPS_timer(0.0f),
 	m_FPS(0),
-	//,m_max_FPS(window_settings.maximum_fps)
+	//Analytics
 	m_ram_info(window_settings.is_show_ram_usage ? new RAMInfo() : nullptr),
 	m_cpu_info(window_settings.is_show_cpu_usage ? new CPUInfo() : nullptr),
 	m_hardware_info_timer(0.0f)
 {
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
 
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
+
+	// Set Window runtime icon
+	const auto& window = this->GetWindow();
+	//window->SetCursor(CursorMode::Arrow);
+	window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
+	// Push Main Menu scene as an entry point
+	this->PushScene(std::make_unique<MainMenuScene>());
 }
 
 void Application::InitWindow(const WindowSettings& window_settings)
