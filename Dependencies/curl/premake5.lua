@@ -82,6 +82,7 @@ project "curl"
 		
 	    links
 	    {
+	    	"mbedtls"
 	    }
 
 		-- find the location of the ca bundle
