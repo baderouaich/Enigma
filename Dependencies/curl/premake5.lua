@@ -12,7 +12,7 @@ project "curl"
     {
      	"include/", 
      	"lib/",
-	    "%{IncludeDir.zlib}"
+	    "%{IncludeDir.zlib}",
     }
 
     files
@@ -78,6 +78,10 @@ project "curl"
 		{ 
 			"CURL_HIDDEN_SYMBOLS",
 			"USE_MBEDTLS"
+		}
+		includedirs
+		{
+	    	"%{IncludeDir.mbedtls}",
 		}
 		
 	    links
