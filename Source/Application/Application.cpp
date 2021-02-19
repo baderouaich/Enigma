@@ -27,8 +27,6 @@ Application::Application(const WindowSettings& window_settings)
 	m_cpu_info(window_settings.is_show_cpu_usage ? new CPUInfo() : nullptr),
 	m_hardware_info_timer(0.0f)
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
 

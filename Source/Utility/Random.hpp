@@ -26,7 +26,7 @@ public:
 	*	Returns a Random Integer between min and max
 	*/
 	template<typename T>
-	static typename std::enable_if<std::is_integral<T>::value && !std::is_floating_point<T>::value, T>::type
+	static typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value, T>::type
 	Int(T min, T max) noexcept
 	{
 		ENIGMA_ASSERT(min < max, "min is >= max");
