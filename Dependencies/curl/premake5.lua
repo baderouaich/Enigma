@@ -1,4 +1,4 @@
--- # Thanks to premake5 again <3 https://github.com/premake/premake-core/blob/master/contrib/curl/premake5.lua
+-- # Thanks to premake5 https://github.com/premake/premake-core/blob/master/contrib/curl/premake5.lua AND https://github.com/multitheftauto/mtasa-blue/tree/master/vendor/curl
 project "curl"
 	kind "StaticLib"
     language "C"
