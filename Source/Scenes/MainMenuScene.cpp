@@ -7,6 +7,7 @@
 #include "DecryptTextScene.hpp"
 
 #include <Utility/DialogUtils.hpp>
+#include <Networking/CheckForUpdates.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -81,6 +82,7 @@ void MainMenuScene::OnImGuiDraw()
 				if (ImGui::BeginMenu("Help"))
 				{
 					if (ImGui::MenuItem("Report issue")) { this->OnReportIssueMenuButtonPressed(); }
+					if (ImGui::MenuItem("Check for updates")) { this->OnCheckForUpdatesMenuButtonPressed(); }
 					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
 					ImGui::EndMenu();
 				}
@@ -289,13 +291,43 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 #endif
 }
 
+void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
+{
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	
+	ENIGMA_TRACE("Getting latest release info...");
+	const auto info = CheckForUpdates::GetLatestReleaseInfo();
+	if (!info) 
+		return;
+	
+	const auto current_version = "v" + String(Enigma::ENIGMA_VERSION);
+	std::ostringstream oss{};
+	if (info->tag_name == current_version)
+	{
+		oss << "You are using the latest Enigma version " << current_version;
+	}
+	else
+	{
+		oss << "New version is available!\n"
+			<< "# Name: " << info->name << '\n'
+			<< "# Version: " << info->tag_name << '\n'
+			<< "# Created At: " << info->created_at << '\n'
+			<< "# Published At: " << info->published_at << '\n'
+			<< "# What's new ?: " << info->body << '\n'
+			<< "# .tar release download url: " << info->tarball_url << '\n'
+			<< "# .zip release download url: " << info->zipball_url << '\n';
+	}
+	(void)DialogUtils::Info(oss.str());
+	ENIGMA_INFO(oss.str());
+}
+
 void MainMenuScene::OnAboutMenuButtonPressed()
 {
 	// Show about dialog
 	std::ostringstream oss{};
 	oss << "# Version: \n" << ENIGMA_VERSION << "\n\n"
 		<< "# Github Repository: \n" << Constants::Links::ENIGMA_GITHUB_REPOSITORY << "\n\n"
-		<< "# Licence: \n" << ENIGMA_LICENCE;
+		<< "# License: \n" << ENIGMA_LICENSE;
 	(void)DialogUtils::Info(oss.str());
 	
 }

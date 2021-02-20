@@ -13,3 +13,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 
 # 1.1.1
 - Added networking libraries curl, cpr (additional zlib, mbedtls for linux builds)
+
+# 1.2.1
+- Added Check for updates functionality in menu bar help -> Check for updates
+- Preparing for release v1.2.1 (which has all above features since v1.0.1)

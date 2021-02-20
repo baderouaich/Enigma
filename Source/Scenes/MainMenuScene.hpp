@@ -25,6 +25,7 @@ private: /* Callbacks */
 	void OnDecryptTextButtonPressed();
 	// Menu
 	void OnReportIssueMenuButtonPressed();
+	void OnCheckForUpdatesMenuButtonPressed();
 	void OnAboutMenuButtonPressed();
 
 private: /* Initializers */

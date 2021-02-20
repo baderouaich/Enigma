@@ -15,24 +15,8 @@
 	#include <Enigma.hpp>
 #endif
 
-//#include <Networking/CheckForUpdates.hpp>
-#include <cpr/cpr.h>
-//
-
 int main(int argc, char* argv[])
 {	
-	//Test 
-	const auto& current_version = Enigma::ENIGMA_VERSION;
-	cpr::Response r = cpr::Get(cpr::Url{ Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE });
-	if (r.status_code == cpr::status::HTTP_OK)
-	{
-		std::cout << "r.status_code " << r.status_code << std::endl;                  // 200
-		std::cout << "r.header " << r.header["content-type"] << std::endl;       // application/json; charset=utf-8
-		std::cout << "r.text " << r.text << std::endl;
-	}
-	return 0;
-
-	
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 #if !ENIGMA_TEST
@@ -40,9 +24,7 @@ int main(int argc, char* argv[])
 	if (argc > 1)
 	{
 		std::unique_ptr<Enigma::CLI> _Cli = std::make_unique<Enigma::CLI>(argc, argv);
-		auto ret = _Cli->Run();
-		Enigma::Logger::Shutdown();
-		return ret;
+		return _Cli->Run();
 	}
 	// Application Entry
 	else
@@ -55,8 +37,6 @@ int main(int argc, char* argv[])
 			std::unique_ptr<Enigma::Application> _App = std::make_unique<Enigma::Application>(window_settings);
 			// Run Application
 			_App->Run();
-			// Shutdown Logger
-			Enigma::Logger::Shutdown();
 			// Exit
 			return EXIT_SUCCESS;
 		}
@@ -64,9 +44,6 @@ int main(int argc, char* argv[])
 		{
 			// Exit abnormally 
 			ENIGMA_CRITICAL(e.what());
-			// Shutdown Logger
-			Enigma::Logger::Shutdown();
-			// Exit
 			return EXIT_FAILURE;
 		}
 
