@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 
 /*
 *	Windows Entry Point (for Release & Distribution)
-*	Note: even when using WinMain, release & dist are exported as ConsoleApp for CLI to work.
+*	Note: even when using WinMain, release & dist are built as ConsoleApp so CLI will work properly.
 */
 #if defined(ENIGMA_PLATFORM_WINDOWS) && (defined(ENIGMA_RELEASE) || defined(ENIGMA_DIST))
 

@@ -28,12 +28,12 @@ project "inih"
 		{
 		}
 
-
 	filter "system:linux"
-		defines
+	    pic "On"
+		links
 		{
 		}
-		links
+		defines
 		{
 		}
 
@@ -44,7 +44,6 @@ project "inih"
 		links
 		{
 		}
-
 
 	--- Configurations ---
 	filter "configurations:Debug"

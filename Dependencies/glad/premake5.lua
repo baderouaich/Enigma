@@ -20,9 +20,33 @@ project "glad"
 		"include"
 	}
 
-	--[[ For Windows --]]
+	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
+		defines
+		{
+		}
+		links
+		{
+		}
+
+
+	filter "system:linux"
+	    pic "On"
+		links
+		{
+		}
+		defines
+		{
+		}
+
+	filter "system:macosx"
+		defines
+		{
+		}	
+		links
+		{
+		}
 	
 
 	--- Configurations ---

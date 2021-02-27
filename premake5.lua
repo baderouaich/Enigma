@@ -113,6 +113,7 @@ project "Enigma"
 		"%{IncludeDir.cryptopp}",
 		"%{IncludeDir.inih}",
 		"%{IncludeDir.json}",
+		"%{IncludeDir.zlib}",
 		"%{IncludeDir.curl}",
 		"%{IncludeDir.cpr}",
 	}
@@ -130,8 +131,8 @@ project "Enigma"
 		"cryptopp",
 		"inih", 
 		"json",
-		"curl",
 		"zlib",
+		"curl",
 		"cpr"
 	}
 

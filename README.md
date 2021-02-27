@@ -49,6 +49,7 @@ Usage:
   -u, --decompress              Decompress File After Decrypting
   -h, --help                    Displays help message
   -v, --version                 Displays Enigma's version
+  -n, --updates                 Check for updates
 ```
 - Example encypting a text with AES-GCM:<br>
 ```text

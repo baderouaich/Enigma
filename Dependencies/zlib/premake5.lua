@@ -29,8 +29,8 @@ project "zlib"
 		{
 		}
 
-
 	filter "system:linux"
+		pic "On"
 		links
 		{
 		}

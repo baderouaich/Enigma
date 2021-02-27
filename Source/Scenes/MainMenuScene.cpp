@@ -295,7 +295,7 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 {
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 	
-	ENIGMA_TRACE("Getting latest release info...");
+	ENIGMA_TRACE("Retrieving Enigma's latest release info from {0}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
 	const auto info = CheckForUpdates::GetLatestReleaseInfo();
 	if (!info) 
 		return;
@@ -318,7 +318,7 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 			<< "# .zip release download url: " << info->zipball_url << '\n';
 	}
 	(void)DialogUtils::Info(oss.str());
-	ENIGMA_INFO(oss.str());
+	ENIGMA_LOG(oss.str());
 }
 
 void MainMenuScene::OnAboutMenuButtonPressed()

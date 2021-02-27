@@ -74,6 +74,7 @@ project "curl"
 	    }
 	    
 	filter "system:linux or bsd or solaris"
+		pic "On"
 		defines 
 		{ 
 			"CURL_HIDDEN_SYMBOLS",

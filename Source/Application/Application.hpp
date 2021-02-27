@@ -20,7 +20,6 @@ class Scene;
 class RAMInfo;
 class CPUInfo;
 
-
 class ENIGMA_API Application
 {
 public: /* Constructor / Destructors */

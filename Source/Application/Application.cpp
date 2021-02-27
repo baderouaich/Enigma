@@ -34,11 +34,10 @@ Application::Application(const WindowSettings& window_settings)
 	this->InitImGuiRenderer();
 
 	// Set Window runtime icon
-	const auto& window = this->GetWindow();
+	m_window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 	//window->SetCursor(CursorMode::Arrow);
-	window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 	// Push Main Menu scene as an entry point
-	this->PushScene(std::make_unique<MainMenuScene>());
+	this->PushScene(std::make_shared<MainMenuScene>());
 }
 
 void Application::InitWindow(const WindowSettings& window_settings)

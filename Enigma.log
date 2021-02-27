@@ -1,20 +1,27 @@
-[2021-02-20 20:04:55] [info] Enigma: [ OpenGL Info ]
+[2021-02-20 23:05:49] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-02-20 20:04:55] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-02-20 20:04:55] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-02-20 20:04:55] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-02-20 20:04:55] [trace] Enigma: Loading Fonts...
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-02-20 20:04:55] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-02-20 20:04:56] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCheckForUpdatesMenuButtonPressed(void)
-[2021-02-20 20:04:56] [trace] Enigma: Getting latest release info...
-[2021-02-20 20:05:00] [info] Enigma: You are using the latest Enigma version v1.0.0
-[2021-02-20 20:05:01] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-02-20 23:05:50] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-02-20 23:05:50] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-02-20 23:05:50] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-02-20 23:05:50] [trace] Enigma: Loading Fonts...
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-02-20 23:05:51] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-02-20 23:06:01] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 598
+[2021-02-20 23:06:01] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 598
+[2021-02-20 23:06:02] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 800, 563
+[2021-02-20 23:06:02] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 800, 563
+[2021-02-20 23:06:04] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
+[2021-02-20 23:06:16] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
+[2021-02-20 23:06:17] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCheckForUpdatesMenuButtonPressed(void)
+[2021-02-20 23:06:17] [trace] Enigma: Retrieving Enigma's latest release info from https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest...
+[2021-02-20 23:06:24] [debug] Enigma: You are using the latest Enigma version v1.2.1
+[2021-02-20 23:06:44] [info] Enigma: bool __cdecl Enigma::Application::OnWindowClose(class Enigma::WindowCloseEvent &): Closing Window due WindowCloseEvent
+[2021-02-20 23:06:45] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)

@@ -31,6 +31,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("u,decompress", "Decompress File After Decrypting") // -u | --decompress 
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma's version")  // VERSION
+			("n, updates", "Check for updates")  // Check for enigma updates from github api
 			;
 
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));
@@ -65,13 +66,19 @@ i32 CLI::Run()
 	// Handle --help & -h options
 	if (r.count("h") || r.count("help")) // u can also check only r.count("h"), cxxopts will check the second pair item "help" if the first one isnt there
 	{
-		ENIGMA_INFO(m_options->help());
+		this->OnHelp();
 		return EXIT_SUCCESS;
 	}
 	// Handle --version & -v options
 	if (r.count("v") || r.count("version"))
 	{
-		ENIGMA_INFO(ENIGMA_VERSION);
+		this->OnVersion();
+		return EXIT_SUCCESS;
+	}
+	// Handle --updates & -n options
+	if (r.count("n") || r.count("updates"))
+	{
+		this->OnCheckForUpdates();
 		return EXIT_SUCCESS;
 	}
 
@@ -400,6 +407,45 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 	cipher.clear();
 	buffer.clear();
+}
+
+
+void CLI::OnHelp()
+{
+	ENIGMA_INFO(m_options->help());
+}
+
+void CLI::OnVersion()
+{
+	ENIGMA_INFO(Enigma::ENIGMA_VERSION);
+}
+
+void CLI::OnCheckForUpdates()
+{
+	// Check for enigma updates from github api --updates | -n 
+	ENIGMA_TRACE("Retrieving Enigma's latest release info from {0}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
+	const auto info = CheckForUpdates::GetLatestReleaseInfo();
+	if (!info)
+		return;
+
+	const auto current_version = "v" + String(Enigma::ENIGMA_VERSION);
+	std::ostringstream oss{};
+	if (info->tag_name == current_version)
+	{
+		oss << "You are using the latest Enigma version " << current_version;
+	}
+	else
+	{
+		oss << "New version is available!\n"
+			<< "# Name: " << info->name << '\n'
+			<< "# Version: " << info->tag_name << '\n'
+			<< "# Created At: " << info->created_at << '\n'
+			<< "# Published At: " << info->published_at << '\n'
+			<< "# What's new ?: " << info->body << '\n'
+			<< "# .tar release download url: " << info->tarball_url << '\n'
+			<< "# .zip release download url: " << info->zipball_url << '\n';
+	}
+	ENIGMA_LOG(oss.str());
 }
 
 

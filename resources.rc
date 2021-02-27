@@ -1,1 +1,42 @@
-id ICON "./Resources/Branding/Wolf.ico"
+// Ref: https://stackoverflow.com/questions/1903702/associate-file-type-and-icon
+
+#include <windows.h>
+
+#define ENIGMA_VERSION_STR "1.2.1"	// major, minor, patch
+#define ENIGMA_VERSION_DIV  1, 2, 1	// major, minor, patch
+#define ENIGMA_ASSOCIATE_FILE_VERSION  ENIGMA_VERSION_DIV // associate .enigma file extension version
+#define ENIGMA_OWNER "Bader-Eddine Ouaich"
+#define ENIGMA_DESCRIPTION "A Simple, Reliable and Efficient UI + CLI Encryption Tool (made for personal use, feel free to utilize)"
+
+#define IDI_APP    100
+#define IDI_FILE   200
+#define ID_VERSION   1
+
+IDI_APP  ICON ".\\Resources\\Branding\\Wolf.ico" // Executable icon
+IDI_FILE ICON ".\\Resources\\Branding\\Wolf.ico" // Associate files icon
+
+ID_VERSION VERSIONINFO
+    FILEVERSION ENIGMA_ASSOCIATE_FILE_VERSION // change this to your version
+    PRODUCTVERSION ENIGMA_VERSION_DIV  // change this to your version
+    FILEOS VOS__WINDOWS32
+    FILETYPE VFT_APP 
+    {
+        BLOCK "StringFileInfo" 
+		{
+			BLOCK "040904B0"  // 0x409 = U.S. English, 0x04B0 = dec 1200 = Unicode
+			{ 
+				VALUE "CompanyName",      ENIGMA_OWNER ", Inc." //"Bader-Eddine Ouaich, Inc."
+				VALUE "FileDescription",  ENIGMA_DESCRIPTION //"Bader-Eddine Ouaich's App"
+				VALUE "FileVersion",      ENIGMA_VERSION_STR // change this to your version
+				VALUE "InternalName",     ENIGMA_OWNER
+				VALUE "LegalCopyright",   "Copyright \xA9 " ENIGMA_OWNER " and other contributors"
+				VALUE "OriginalFilename", "Enigma.exe"
+				VALUE "ProductName",      "Enigma"
+				VALUE "ProductVersion",   ENIGMA_VERSION_STR // change this to your version
+			}
+		}
+        BLOCK "VarFileInfo" 
+		{
+				VALUE "Translation", 0x409 /*U.S. English*/, 1200 /*Unicode*/
+		}
+	}

@@ -4,6 +4,7 @@
 
 namespace Enigma
 {
+	// Reminder: if version upgraded, change it in resources.rc as well
 	static constexpr const char ENIGMA_VERSION[] = "1.2.1";
 
 	static constexpr const char* ENIGMA_LICENSE =

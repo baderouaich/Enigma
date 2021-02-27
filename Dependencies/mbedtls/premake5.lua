@@ -245,6 +245,7 @@ project "mbedtls"
 
 
 	filter "system:linux"
+	    pic "On"
 		links
 		{
 		}
