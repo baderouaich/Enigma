@@ -30,7 +30,7 @@ project "zlib"
 		}
 
 	filter "system:linux"
-		pic "On"
+	    pic "On" -- required fo clang-10
 		links
 		{
 		}

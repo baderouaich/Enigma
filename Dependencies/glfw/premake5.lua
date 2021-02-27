@@ -44,7 +44,7 @@ project "glfw"
 
 	--[[ Linux --]]
 	filter "system:linux"
-		pic "on"
+	    pic "On"
 		files
 		{
 			"src/x11_init.c",

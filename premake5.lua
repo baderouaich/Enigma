@@ -45,11 +45,13 @@ IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp"  -- cryptograp
 IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- arguments parser lib
 IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config file loader lib
 IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
+IncludeDir["sqlitecpp"]		= "%{wks.location}/Dependencies/sqlitecpp/include" -- sqlite3 cpp wrapper
 
 IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
-IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
-IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL and mbedtls depend on it (will be included and linked in curl & mbedtls project for linux, see Dependencies/curl/premake.lua)
 IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking library wrapper around cURL (will include and link to curl)
+IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
+IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL a depend on it (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
+
 
 IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests libIncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
 
@@ -65,11 +67,12 @@ group "Dependencies"
 	include "Dependencies/cxxopts"
 	include "Dependencies/inih"
 	include "Dependencies/json"
-	
+	include "Dependencies/sqlitecpp"
+
 	include "Dependencies/curl"
+	include "Dependencies/cpr"
 	include "Dependencies/mbedtls"-- (will be included and linked in curl project)
 	include "Dependencies/zlib" -- (will be included and linked in curl project)
-	include "Dependencies/cpr"
 
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
 
@@ -102,7 +105,7 @@ project "Enigma"
 	---[[ Add Libraries include directories ]]---	
 	includedirs
 	{
-		"Source", -- include Source/ dir so we can include e.g "Enigma/Core/Core.hpp" directly, not to keep going back steps e.g "../../Core/Core.hpp"
+		"Source", -- include Source/ dir so we can include e.g "Core/Core.hpp" directly, not to keep going back steps e.g "../../Core/Core.hpp"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
@@ -113,16 +116,17 @@ project "Enigma"
 		"%{IncludeDir.cryptopp}",
 		"%{IncludeDir.inih}",
 		"%{IncludeDir.json}",
-		"%{IncludeDir.zlib}",
+		"%{IncludeDir.sqlitecpp}",
 		"%{IncludeDir.curl}",
 		"%{IncludeDir.cpr}",
+		"%{IncludeDir.zlib}",
 	}
 
 
-	---[[ Link Libraries ]]---
+	---[[ Link Libraries (Order Matters) ]]---
 	links
 	{
-		"glfw", --links GLFW .lib
+		"glfw", -- Links glfw.lib
 		"glad", 
 		"imgui",
 		"spdlog",
@@ -131,9 +135,10 @@ project "Enigma"
 		"cryptopp",
 		"inih", 
 		"json",
+		"sqlitecpp",
+		"curl", -- Order matter, Link curl before zlib
+		"cpr",
 		"zlib",
-		"curl",
-		"cpr"
 	}
 
 
