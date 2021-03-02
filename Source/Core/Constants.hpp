@@ -62,11 +62,28 @@ namespace Enigma
 
 		namespace Config
 		{
-			static constexpr const auto ENIGMA_WINDOW_SETTINGS_CONFIG_PATH = "./Resources/Config/WindowSettings.ini";
+			static constexpr const char* ENIGMA_WINDOW_SETTINGS_CONFIG_PATH = "./Resources/Config/WindowSettings.ini";
 		}
+		namespace Database
+		{
+			//https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
+			static constexpr const char* DATABASE_FILE_PATH = "./Resources/Database/Enigma.db";
+			static constexpr const char* CREATE_TABLES_QUERY =
+			R"(
+			CREATE TABLE IF NOT EXISTS Encryptions
+			(
+				id              INTEGER PRIMARY KEY AUTOINCREMENT,
+				title           VARCHAR(255) NOT NULL,
+				cipher          TEXT NOT NULL,              
+				date_time       DATETIME NOT NULL,
+				is_file			BOOLEAN NOT NULL
+			);
+			)";
+		}
+
 		namespace CLI
 		{
-			static constexpr const auto CLI_HELP_MESSAGE = "Say -h or --help to display available options";
+			static constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help to display available options";
 		}
 
 		namespace ErrorMessages
@@ -86,13 +103,13 @@ namespace Enigma
 			namespace Textures
 			{
 				// window runtime icon
-				static constexpr const auto ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf.png";
+				static constexpr const char* ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf.png";
 			}
 
 			namespace Fonts
 			{
-				static constexpr const auto AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
-				static constexpr const auto MONTSERRAT_FONT_PATH = "./Resources/Fonts/Montserrat-Medium.ttf";
+				static constexpr const char* AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
+				static constexpr const char* MONTSERRAT_FONT_PATH = "./Resources/Fonts/Montserrat-Medium.ttf";
 			}
 		}
 

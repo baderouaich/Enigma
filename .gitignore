@@ -1,3 +1,6 @@
+# Enigma.db & Databases
+Resources/Database/*.db
+
 # Ignore visual studio .sln .vcxproj...
 *.sln
 *.vcxproj

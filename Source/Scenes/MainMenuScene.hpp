@@ -23,6 +23,7 @@ private: /* Callbacks */
 	void OnDecryptFileButtonPressed();
 	void OnEncryptTextButtonPressed();
 	void OnDecryptTextButtonPressed();
+	void OnMyEncryptionsButtonPressed();
 	// Menu
 	void OnReportIssueMenuButtonPressed();
 	void OnCheckForUpdatesMenuButtonPressed();

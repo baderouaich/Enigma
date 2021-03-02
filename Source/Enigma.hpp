@@ -80,4 +80,8 @@
 #include <Networking/CheckForUpdates.hpp>
 //
 
+//Database
+#include <Database/Database.hpp>
+//
+
 #endif // !ENIGMA_H

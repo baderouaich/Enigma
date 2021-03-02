@@ -110,8 +110,8 @@ String Base64::Decode(const std::string_view& encoded_buffer)
 		{
 		case 1:
 			//errors++;
-			//break;
 			ENIGMA_ERROR("Base64 Decode invalid character");
+			break;
 		case 2:
 			output[output_idx++] = (bits >> 10);
 			break;
@@ -135,7 +135,7 @@ String Base64::Decode(const std::string_view& encoded_buffer)
 	return output;
 }
 
-inline const bool Base64::IsBase64(const ui8& c) noexcept
+inline const bool Base64::IsBase64(const byte& c) noexcept
 {
 	return std::isalnum(c) || (c == '+') || (c == '/');
 }

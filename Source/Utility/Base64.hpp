@@ -21,7 +21,7 @@ public:
 	/*
 	*	Checks if a byte is base64
 	*/
-	static inline const bool IsBase64(const ui8& c) noexcept;
+	static inline const bool IsBase64(const byte& c) noexcept;
 
 private:
 	inline static constexpr const byte BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

@@ -5,6 +5,7 @@
 #include "DecryptFileScene.hpp"
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
+#include "MyEncryptionsScene.hpp"
 
 #include <Utility/DialogUtils.hpp>
 #include <Networking/CheckForUpdates.hpp>
@@ -149,6 +150,12 @@ void MainMenuScene::OnImGuiDraw()
 				{
 					this->OnDecryptTextButtonPressed();
 				}
+				spacing(6);
+				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+				if (ImGui::Button("My Encryptions", button_size))
+				{
+					this->OnMyEncryptionsButtonPressed();
+				}
 				spacing(9);
 				{
 					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
@@ -269,6 +276,11 @@ void MainMenuScene::OnEncryptTextButtonPressed()
 void MainMenuScene::OnDecryptTextButtonPressed()
 {
 	Application::GetInstance()->PushScene(std::make_shared<DecryptTextScene>(m_fonts));
+}
+
+void MainMenuScene::OnMyEncryptionsButtonPressed()
+{
+	Application::GetInstance()->PushScene(std::make_shared<MyEncryptionsScene>(m_fonts));
 }
 
 void MainMenuScene::OnReportIssueMenuButtonPressed()

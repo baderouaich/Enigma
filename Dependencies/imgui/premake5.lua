@@ -10,8 +10,18 @@ project "imgui"
 
     --warnings "Off" -- turn off warnings for this library
 
+    includedirs
+    {
+    	"./",
+    	"%{IncludeDir.glad}", -- tell imgui where is OpenGL loader lib include located
+        "%{IncludeDir.glfw}", -- tell imgui where is glfw include located
+    }
+
 	files
 	{
+		"*.h",
+		"*.cpp", -- Dont include backends/*, use only *.cpp instead of **.cpp (recurse)
+		--[[
 		"imconfig.h",
 		"imgui.h",
 		"imgui.cpp",
@@ -22,13 +32,35 @@ project "imgui"
 		"imstb_textedit.h",
 		"imstb_truetype.h",
 		"imgui_demo.cpp"
+		--]]
 	}
 
 	-- Platform --
-	--[[ Windows --]]
 	filter "system:windows"
 		systemversion "latest"
-	
+		defines
+		{
+		}
+		links
+		{
+		}
+
+	filter "system:linux"
+		links
+		{
+		}
+		defines
+		{
+		}
+
+	filter "system:macosx"
+		defines
+		{
+		}	
+		links
+		{
+		}	
+
 
 	--- Configurations ---
 	filter "configurations:Debug"
