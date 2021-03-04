@@ -7,6 +7,8 @@ project "cpr"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
     includedirs 
     {
      	"include/",
@@ -20,7 +22,7 @@ project "cpr"
 
     defines	
     {
-    	"CURL_STATICLIB"
+    	"CURL_STATICLIB",
     }
 
     links
@@ -33,6 +35,7 @@ project "cpr"
 		systemversion "latest"
 		defines
 		{
+			"_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS"
 		}
 		links
 		{
@@ -61,7 +64,7 @@ project "cpr"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 

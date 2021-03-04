@@ -25,6 +25,7 @@ project "sqlitecpp"
 		systemversion "latest"
 		defines
 		{
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 		links
 		{
@@ -51,7 +52,7 @@ project "sqlitecpp"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"

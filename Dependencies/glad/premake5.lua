@@ -52,7 +52,7 @@ project "glad"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"

@@ -6,7 +6,7 @@
 
 
 NS_ENIGMA_BEGIN
-enum class EventType
+enum class EventType : ui32
 {
 	NONE = 0,
 
@@ -41,22 +41,26 @@ enum class EventType
 	JOYSTICK_CONNECTED,
 	JOYSTICK_DISCONNECTED
 };
+inline ui32 operator |(const EventType& a, EventType b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
+inline ui32 operator &(const EventType& a, EventType b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
 
-enum EventCategory
+enum class EventCategory : ui32
 {
-	EC_NONE = 0,
-	EC_APPLICATION = BIT(0),
-	EC_INPUT = BIT(1),
-	EC_KEYBOARD = BIT(2),
-	EC_MOUSE = BIT(3),
-	EC_MOUSE_BUTTON = BIT(4),
-	EC_JOYSTICK = BIT(5)
+	NONE = 0,
+	APPLICATION = BIT(0),
+	INPUT = BIT(1),
+	KEYBOARD = BIT(2),
+	MOUSE = BIT(3),
+	MOUSE_BUTTON = BIT(4),
+	JOYSTICK = BIT(5)
 };
+inline ui32 operator |(const EventCategory& a, EventCategory b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
+inline ui32 operator &(const EventCategory& a, EventCategory b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
-								virtual EventType GetEventType() const override { return GetStaticType(); }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return type; } \
+								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override { return #type; }
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+#define EVENT_CLASS_CATEGORY(category) virtual i32 GetCategoryFlags() const override { return static_cast<i32>(category); }
 
 class ENIGMA_API Event
 {
@@ -68,7 +72,7 @@ public:
 
 	const bool IsInCategory(EventCategory category) const noexcept
 	{
-		return GetCategoryFlags() & category;
+		return GetCategoryFlags() & static_cast<i32>(category);
 	}
 
 	const bool& IsHandled() const noexcept { return m_isHandled; }

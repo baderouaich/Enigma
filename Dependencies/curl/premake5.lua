@@ -2,11 +2,13 @@
 project "curl"
 	kind "StaticLib"
     language "C"
+    cdialect "C11"
 	staticruntime "on"
-	warnings "off"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
+
+	warnings "Off"
 
     includedirs 
     {
@@ -70,8 +72,8 @@ project "curl"
 	 		"Normaliz",
 	 		--"Ws2_32",
 	 		--"Wldap32",
-	 		
 	    }
+
 	    
 	filter "system:linux or bsd or solaris"
 	    pic "On" -- required fo clang-10
@@ -120,7 +122,7 @@ project "curl"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"

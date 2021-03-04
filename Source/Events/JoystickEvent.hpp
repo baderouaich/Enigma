@@ -23,13 +23,13 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "Joystick Connected, ID: " << m_joystick_id;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(JOYSTICK_CONNECTED);
-	EVENT_CLASS_CATEGORY(EC_JOYSTICK);
+	EVENT_CLASS_TYPE(EventType::JOYSTICK_CONNECTED);
+	EVENT_CLASS_CATEGORY(EventCategory::JOYSTICK);
 private:
 	i32 m_joystick_id;
 };
@@ -46,13 +46,13 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "Joystick Disconnected, ID: " << m_joystick_id;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(JOYSTICK_DISCONNECTED);
-	EVENT_CLASS_CATEGORY(EC_JOYSTICK);
+	EVENT_CLASS_TYPE(EventType::JOYSTICK_DISCONNECTED);
+	EVENT_CLASS_CATEGORY(EventCategory::JOYSTICK);
 private:
 	i32 m_joystick_id;
 };

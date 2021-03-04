@@ -26,13 +26,13 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss; 
+		std::ostringstream ss;
 		ss << "MouseMotionEvent: " << m_mouseX << ", " << m_mouseY;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(MOUSE_MOTION)
-	EVENT_CLASS_CATEGORY(EC_MOUSE | EC_INPUT)
+	EVENT_CLASS_TYPE(EventType::MOUSE_MOTION)
+	EVENT_CLASS_CATEGORY(EventCategory::MOUSE | EventCategory::INPUT)
 
 private:
 	f32 m_mouseX, m_mouseY;
@@ -52,13 +52,13 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "MouseWheelEvent: " << GetXOffset() << ", " << GetYOffset();
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(MOUSE_WHEEL)
-	EVENT_CLASS_CATEGORY(EC_MOUSE | EC_INPUT)
+	EVENT_CLASS_TYPE(EventType::MOUSE_WHEEL)
+	EVENT_CLASS_CATEGORY(EventCategory::MOUSE | EventCategory::INPUT)
 
 private:
 	f32 m_XOffset, m_YOffset;
@@ -71,7 +71,7 @@ public:
 
 	virtual String ToString() const override = 0;
 
-	EVENT_CLASS_CATEGORY(EC_MOUSE | EC_INPUT)
+	EVENT_CLASS_CATEGORY(EventCategory::MOUSE | EventCategory::INPUT)
 protected:
 	explicit MouseButtonEvent(const MouseCode button)
 		:
@@ -91,12 +91,12 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "MouseButtonPressedEvent: " << m_button;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(MOUSE_BUTTON_PRESSED)
+	EVENT_CLASS_TYPE(EventType::MOUSE_BUTTON_PRESSED)
 };
 
 class MouseButtonReleasedEvent : public MouseButtonEvent
@@ -109,12 +109,12 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "MouseButtonReleasedEvent: " << m_button;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(MOUSE_BUTTON_RELEASED)
+	EVENT_CLASS_TYPE(EventType::MOUSE_BUTTON_RELEASED)
 };
 
 NS_ENIGMA_END

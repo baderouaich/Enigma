@@ -23,13 +23,13 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "WindowResizeEvent: " << m_width << ", " << m_height;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(WINDOW_RESIZE);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::WINDOW_RESIZE);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 
 
 private:
@@ -54,8 +54,8 @@ public:
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(FRAME_BUFFER_RESIZE);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::FRAME_BUFFER_RESIZE);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 
 
 private:
@@ -75,13 +75,13 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "WindowMoveEvent: (" << m_xPos << ", " << m_yPos << ")";
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(WINDOW_MOVED);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::WINDOW_MOVED);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 
 private:
 	i32 m_xPos, m_yPos;
@@ -103,8 +103,8 @@ public:
 		return String("WindowMaximizeEvent: unmaximized");
 	}
 
-	EVENT_CLASS_TYPE(WINDOW_MAXIMIZED);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::WINDOW_MAXIMIZED);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 
 private:
 	bool m_isMaximized;
@@ -114,16 +114,16 @@ class WindowFocusLostEvent : public Event
 {
 public:
 	WindowFocusLostEvent() {}
-	EVENT_CLASS_TYPE(WINDOW_LOST_FOCUS);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::WINDOW_LOST_FOCUS);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
 class WindowFocusEvent : public Event
 {
 public:
 	WindowFocusEvent() {}
-	EVENT_CLASS_TYPE(WINDOW_FOCUS);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::WINDOW_FOCUS);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
 class WindowCloseEvent : public Event
@@ -131,8 +131,8 @@ class WindowCloseEvent : public Event
 public:
 	WindowCloseEvent() {}
 
-	EVENT_CLASS_TYPE(WINDOW_CLOSE);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::WINDOW_CLOSE);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
 class AppUpdateEvent : public Event
@@ -140,8 +140,8 @@ class AppUpdateEvent : public Event
 public:
 	AppUpdateEvent() {}
 
-	EVENT_CLASS_TYPE(APP_UPDATE);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::APP_UPDATE);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
 class AppRenderEvent : public Event
@@ -149,8 +149,8 @@ class AppRenderEvent : public Event
 public:
 	AppRenderEvent() {}
 
-	EVENT_CLASS_TYPE(APP_RENDER);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::APP_RENDER);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
 class AppTickEvent : public Event
@@ -158,8 +158,8 @@ class AppTickEvent : public Event
 public:
 	AppTickEvent() {}
 
-	EVENT_CLASS_TYPE(APP_TICK);
-	EVENT_CLASS_CATEGORY(EC_APPLICATION);
+	EVENT_CLASS_TYPE(EventType::APP_TICK);
+	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
 

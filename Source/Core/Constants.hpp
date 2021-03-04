@@ -67,6 +67,7 @@ namespace Enigma
 		namespace Database
 		{
 			//https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
+			static constexpr const char* DATABASE_FILE_DIR = "./Resources/Database/";
 			static constexpr const char* DATABASE_FILE_PATH = "./Resources/Database/Enigma.db";
 			static constexpr const char* CREATE_TABLES_QUERY =
 			R"(

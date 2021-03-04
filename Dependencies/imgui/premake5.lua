@@ -1,4 +1,4 @@
--- imgui 1.79 release
+-- imgui 1.81 release
 project "imgui"
 	kind "StaticLib"
 	language "C++"
@@ -8,7 +8,7 @@ project "imgui"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
-    --warnings "Off" -- turn off warnings for this library
+    warnings "Off" -- turn off warnings for this library
 
     includedirs
     {
@@ -65,7 +65,7 @@ project "imgui"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"

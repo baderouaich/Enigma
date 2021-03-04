@@ -1,35 +1,25 @@
-[2021-03-02 20:00:20] [info] Enigma: SQLite3 version 3.32.3
-[2021-03-02 20:00:23] [info] Enigma: [ OpenGL Info ]
+[2021-03-04 23:15:01] [info] Enigma: SQLite3 version 3.32.3
+[2021-03-04 23:15:03] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-03-02 20:00:23] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-03-02 20:00:23] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-03-02 20:00:23] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-03-02 20:00:23] [trace] Enigma: Loading Fonts...
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-03-02 20:00:23] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-03-02 20:00:25] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
-[2021-03-02 20:00:25] [debug] Enigma: SQL: INSERT INTO Encryptions(title, cipher, date_time, is_file) VALUES(?, ?, DATETIME(), ?)
-[2021-03-02 20:00:25] [debug] Enigma: SQL: INSERT INTO Encryptions(title, cipher, date_time, is_file) VALUES(?, ?, DATETIME(), ?)
-[2021-03-02 20:00:25] [debug] Enigma: SQL: INSERT INTO Encryptions(title, cipher, date_time, is_file) VALUES(?, ?, DATETIME(), ?)
-[2021-03-02 20:00:25] [info] Enigma: Getting all encryptions from database...
-[2021-03-02 20:00:25] [debug] Enigma: SQL: SELECT id, title, date_time, is_file FROM Encryptions ORDER BY id ASC
-[2021-03-02 20:00:25] [info] Enigma: Got 153 Encryption records.
-[2021-03-02 20:00:29] [info] Enigma: Getting all encryptions from database...
-[2021-03-02 20:00:29] [debug] Enigma: SQL: SELECT id, title, date_time, is_file FROM Encryptions ORDER BY id DESC
-[2021-03-02 20:00:29] [info] Enigma: Got 153 Encryption records.
-[2021-03-02 20:00:31] [trace] Enigma: View 153
-[2021-03-02 20:00:31] [trace] Enigma: View 152
-[2021-03-02 20:00:32] [trace] Enigma: View 151
-[2021-03-02 20:00:34] [trace] Enigma: Delete 152
-[2021-03-02 20:00:34] [trace] Enigma: Delete 151
-[2021-03-02 20:00:35] [trace] Enigma: Delete 153
-[2021-03-02 20:00:43] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
-[2021-03-02 20:00:43] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-03-04 23:15:03] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-03-04 23:15:03] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-03-04 23:15:03] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-03-04 23:15:03] [trace] Enigma: Loading Fonts...
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-03-04 23:15:03] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-03-04 23:15:05] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
+[2021-03-04 23:15:05] [info] Enigma: Getting all encryptions from database...
+[2021-03-04 23:15:05] [debug] Enigma: SQL: SELECT id, title, date_time, is_file FROM Encryptions ORDER BY id ASC
+[2021-03-04 23:15:05] [info] Enigma: Got 153 Encryption records.
+[2021-03-04 23:15:07] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
+[2021-03-04 23:15:07] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
+[2021-03-04 23:15:13] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
+[2021-03-04 23:15:13] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)

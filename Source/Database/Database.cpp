@@ -8,6 +8,17 @@ void Database::Initialize()
 	ENIGMA_INFO("SQLite3 version {0}", SQLite::VERSION);
 	try
 	{
+		//Create dir if not exists
+		if (!fs::exists(Constants::Database::DATABASE_FILE_DIR))
+		{
+			ENIGMA_INFO("Creating Database Directory {0} ...", Constants::Database::DATABASE_FILE_DIR);
+			if (!fs::create_directory(Constants::Database::DATABASE_FILE_DIR))
+			{
+				ENIGMA_CRITICAL("Failed to create database directory: {0}", Constants::Database::DATABASE_FILE_DIR);
+				std::exit(EXIT_FAILURE);
+			}
+		}
+
 		m_database = std::make_unique<SQLite::Database>(
 			Constants::Database::DATABASE_FILE_PATH,
 			SQLite::OPEN_CREATE | SQLite::OPEN_READWRITE // create if not exists
@@ -22,7 +33,7 @@ void Database::Initialize()
 		if (status != SQLite::OK)
 		{
 			ENIGMA_CRITICAL("Database failed to create tables with error code: {0} | msg: {1}", query->getErrorCode(), query->getErrorMsg());
-			std::exit(EXIT_SUCCESS);
+			std::exit(EXIT_FAILURE);
 		}
 	}
 	catch (const SQLite::Exception& e)

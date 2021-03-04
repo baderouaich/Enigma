@@ -1,6 +1,7 @@
 project "zlib"
 	kind "StaticLib"
     language "C"
+    cdialect "C11"
 	staticruntime "on"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
@@ -24,10 +25,12 @@ project "zlib"
 		systemversion "latest"
 		defines
 		{
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 		links
 		{
 		}
+		disablewarnings {"4996"}
 
 	filter "system:linux"
 	    pic "On" -- required fo clang-10
@@ -50,7 +53,7 @@ project "zlib"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"

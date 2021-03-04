@@ -98,7 +98,7 @@ void Application::OnEvent(Event& event)
 	}
 }
 
-bool Application::OnWindowClose(WindowCloseEvent& event)
+bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 {
 	ENIGMA_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
 

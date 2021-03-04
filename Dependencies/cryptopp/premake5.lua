@@ -12,6 +12,8 @@ project "cryptopp"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
 	defines 
 	{
 		--[[
@@ -124,7 +126,7 @@ project "cryptopp"
 	--- Configurations ---
 	filter "configurations:Debug"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
 	filter "configurations:Release"

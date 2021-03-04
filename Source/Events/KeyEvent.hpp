@@ -15,7 +15,7 @@ class KeyEvent : public Event
 public:
 	const KeyCode& GetKeyCode() const noexcept { return m_key_code; }
 
-	EVENT_CLASS_CATEGORY(EC_KEYBOARD | EC_INPUT)
+	EVENT_CLASS_CATEGORY(EventCategory::KEYBOARD | EventCategory::INPUT)
 	
 protected:
 	explicit KeyEvent(const KeyCode keyCode)
@@ -38,12 +38,12 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "KeyPressedEvent: " << m_key_code << " (" << m_repeat_count << " repeats)";
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(KEY_PRESSED)
+	EVENT_CLASS_TYPE(EventType::KEY_PRESSED)
 
 private:
 	ui16 m_repeat_count;
@@ -59,12 +59,12 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "KeyReleasedEvent: " << m_key_code;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(KEY_RELEASED)
+	EVENT_CLASS_TYPE(EventType::KEY_RELEASED)
 };
 
 class KeyTypedEvent : public KeyEvent
@@ -76,12 +76,12 @@ public:
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "KeyTypedEvent: " << m_key_code;
 		return ss.str();
 	}
 
-	EVENT_CLASS_TYPE(KEY_TYPED)
+	EVENT_CLASS_TYPE(EventType::KEY_TYPED)
 };
 
 

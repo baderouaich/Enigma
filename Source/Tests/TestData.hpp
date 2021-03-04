@@ -5,7 +5,7 @@
 namespace Enigma
 {
 	// multiple string
-	String operator*(const String& str, const size_t& mult)
+	String operator*(const String& str, const size_t mult)
 	{
 		String out(str.size() * mult, '\000');
 		size_t j{ 0 };

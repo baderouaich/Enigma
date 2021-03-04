@@ -87,13 +87,14 @@ project "Enigma"
 	---[[ Binary Output dirs ]]---
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
-	--debugdir ("%{wks.location}") -- where we can access Resources/
+	--debugdir ("%{wks.location}/Debug/")
 
 	---[[ Precompiled Header ]]---
 	pchheader "pch.hpp"
 	pchsource "Source/pch.cpp"
 
-	--warnings "Extra"
+	---[[ Enable the toolset's maximum warning level ]]---
+	warnings "Extra"
 	
 	---[[ Source files ]]---
 	files
@@ -156,9 +157,11 @@ project "Enigma"
 		{
 			"ENIGMA_PLATFORM_WINDOWS",
 
+			-- Common MSVC warnings defines
 			"_CRT_SECURE_NO_DEPRECATE",
 			"_CRT_SECURE_NO_WARNINGS",
 			"_CRT_NONSTDC_NO_WARNINGS",
+			"_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS"
 		}
 		links
 		{
@@ -201,7 +204,7 @@ project "Enigma"
 		kind "ConsoleApp" -- Debug we need console for logging
 		defines "ENIGMA_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 				
 		includedirs
