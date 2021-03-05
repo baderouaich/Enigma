@@ -1,8 +1,8 @@
--- # Thanks to premake5 https://github.com/premake/premake-core/blob/master/contrib/curl/premake5.lua AND https://github.com/multitheftauto/mtasa-blue/tree/master/vendor/curl
+-- # This file is inspired from premake5 https://github.com/premake/premake-core/blob/master/contrib/curl/premake5.lua AND https://github.com/multitheftauto/mtasa-blue/tree/master/vendor/curl
 project "curl"
 	kind "StaticLib"
     language "C"
-    cdialect "C11"
+    --cdialect "C11" [C11 result in error: lib/hostip.h:205:8: error: unknown type name ‘sigjmp_buf’  205 | extern sigjmp_buf curl_jmpenv; | see https://github.com/BaderEddineOuaich/Enigma/runs/2035170343]
 	staticruntime "on"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
