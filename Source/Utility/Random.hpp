@@ -14,12 +14,11 @@ public:
 	*/
 	template<typename T>
 	static typename std::enable_if<std::is_floating_point<T>::value, T>::type
-	Real(T min, T max) noexcept
+	Real(const T min, const T max) noexcept
 	{
 		ENIGMA_ASSERT(min < max, "min is >= max");
 		std::uniform_real_distribution<T> dist(min, max);
-		auto& mt = GetEngine();
-		return dist(mt);
+		return dist(m_engine);
 	}
 
 	/*
@@ -27,26 +26,50 @@ public:
 	*/
 	template<typename T>
 	static typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value, T>::type
-	Int(T min, T max) noexcept
+	Int(const T min, const T max) noexcept
 	{
 		ENIGMA_ASSERT(min < max, "min is >= max");
 		std::uniform_int_distribution<T> dist(min, max);
-		auto& mt = GetEngine();
-		return dist(mt);
+		return dist(m_engine);
 	}
 
 	/*
     *	Returns a Random bool value, either 'true' or 'false' 
 	*/
-	static bool Bool(f64 chance = 0.5 /*50% 50% chance*/) noexcept
+	static bool Bool(const f64 chance = 0.5 /*50% 50% chance*/) noexcept
 	{
 		std::bernoulli_distribution dist(chance);
-		auto& mt = GetEngine();
-		return !!dist(mt);
+		return !!dist(m_engine);
 	}
-	
+
+	/*
+	*	Returns a Random String(length) consists of alphanumeric characters
+	*/
+	static String Str(const size_t length) noexcept
+	{
+		String str(length, '\000');
+		for (char& c : str)
+		{
+			const ui16 i = Int(ui16(1), ui16(3));
+			switch (i)
+			{
+			case 1: // a-z
+				c = Int(static_cast<ui16>('a'), static_cast<ui16>('z'));
+				break;
+			case 2: // A-Z
+				c = Int(static_cast<ui16>('A'), static_cast<ui16>('Z'));
+				break;
+			case 3: // 0-9
+				c = Int(static_cast<ui16>('0'), static_cast<ui16>('9')); // ascii 0 = 48 | 9 = 57
+				break;
+			}
+		}
+		return str;
+	}
+
 private:
-	static std::mt19937& GetEngine();
+	inline static std::random_device m_seed{};
+	inline static std::default_random_engine m_engine{ m_seed() };
 };
 NS_ENIGMA_END
 

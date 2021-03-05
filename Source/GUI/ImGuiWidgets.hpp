@@ -1,16 +1,16 @@
 #pragma once
-#ifndef ENIGMA_IMGUI_UTILS_H
-#define ENIGMA_IMGUI_UTILS_H
+#ifndef ENIGMA_IMGUI_WIDGETS_H
+#define ENIGMA_IMGUI_WIDGETS_H
 
 #include <Core/Core.hpp>
 #include <imgui.h>
 
 NS_ENIGMA_BEGIN
-class ENIGMA_API ImGuiUtils
+
+namespace ImGuiWidgets
 {
-public:
 	/*
-	*	InputTextMultiline with container std::string instread of char* 
+	*	InputTextMultiline with container std::string instread of char*
 	*	https://github.com/ocornut/imgui/issues/2035
 	*/
 	static int InputTextCallback(ImGuiInputTextCallbackData* data)
@@ -39,7 +39,28 @@ public:
 		return ret;
 	}
 
-};
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static bool Button(const char* text,
+		const ImVec2& size = ImVec2(0.0f, 0.0f),
+		const ImVec4& color = Constants::Colors::BUTTON_COLOR,
+		const ImVec4& color_hover = Constants::Colors::BUTTON_COLOR_HOVER,
+		const ImVec4& color_active = Constants::Colors::BUTTON_COLOR_ACTIVE)
+	{
+		ImGui::PushStyleColor(ImGuiCol_Button, color); // buttons color idle
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, color_hover);  // buttons color hover
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, color_active); // buttons color pressed
+			bool pressed_or_selected = ImGui::Button(text, size);
+		ImGui::PopStyleColor(3);
+
+		return pressed_or_selected;
+	}
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}
+
 NS_ENIGMA_END
 
-#endif // !ENIGMA_IMGUI_UTILS_H
+#endif // !ENIGMA_IMGUI_WIDGETS_H

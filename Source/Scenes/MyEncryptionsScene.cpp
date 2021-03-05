@@ -117,74 +117,101 @@ void MyEncryptionsScene::OnImGuiDraw()
 
 		// Encryptions records Table 
 		// https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp#L5024
-		ImGui::PushFont(font_montserrat_medium_18); // text font
-		static constexpr const auto table_flags = 
-			ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable |
-			ImGuiTableFlags_Hideable | ImGuiTableFlags_Borders | 
-			ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_NoSavedSettings |
-		    ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY;
-		static constexpr const auto NUM_COLUMNS = 4 + 1; // id, title... + 1 field has 2 buttons Operation(View|Delete)
-		if (ImGui::BeginTable("Encryptions", NUM_COLUMNS, table_flags, ImVec2(win_w - 20.0f, win_h / 1.60f)))
+		if (!m_encryptions.empty())
 		{
-			// Columns header
-			static constexpr const auto header_columns_flags = ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_WidthFixed | ImGuiTableColumnFlags_NoHide;
-			ImGui::TableSetupColumn("ID", header_columns_flags);
-			ImGui::TableSetupColumn("Title", header_columns_flags); // no need to specify title width fixed size, since table can can scroll x and y
-			ImGui::TableSetupColumn("Date Time", header_columns_flags);
-			ImGui::TableSetupColumn("Type", header_columns_flags);
-			ImGui::TableSetupColumn("Operation", header_columns_flags);
-			ImGui::TableHeadersRow(); // show headers
-
-			// Rows
-			for (const auto& enc_ptr : m_encryptions)
+			ImGui::PushFont(font_montserrat_medium_18); // text font
+			// settings inspired from https://github.com/ocornut/imgui/issues/2957 # https://user-images.githubusercontent.com/8225057/71590710-dd057f80-2b29-11ea-8c1f-d827c008e050.png
+		
+			static constexpr const auto table_flags =
+				ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable |
+				ImGuiTableFlags_RowBg | // i % 2 ? dark row : light row
+				ImGuiTableFlags_Hideable | ImGuiTableFlags_BordersV |
+				ImGuiTableFlags_BordersOuterV | ImGuiTableFlags_BordersInnerV |
+				ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersOuterH |
+				ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_SizingStretchProp |
+				ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY;
+			//ScrollFreezeTopRow
+			/*
+			static constexpr const auto table_flags =
+				ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable |
+				ImGuiTableFlags_Hideable | ImGuiTableFlags_Borders |
+				ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_NoSavedSettings |
+				ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY | 
+				ImGuiTableFlags_RowBg | // i % 2 ? dark row : light row
+				;
+			*/
+			static constexpr const auto NUM_COLUMNS = 4 + 1; // id, title... + 1 field has 2 buttons Operation(View|Delete)
+			if (ImGui::BeginTable("Encryptions", NUM_COLUMNS, table_flags, ImVec2(win_w - 20.0f, win_h / 1.60f)))
 			{
-				const auto& [id, title, _, date_time, is_file] = *enc_ptr;
+				ImGui::TableSetupScrollFreeze(0, 1); // Make top row always visible
 
-				// id, title, date_time, is_file
-				ImGui::TableNextRow();
-				ImGui::TableSetColumnIndex(0);
-				ImGui::Text("%d", id);
-				ImGui::TableSetColumnIndex(1);
-				ImGui::Text("%s", title.c_str());
-				ImGui::TableSetColumnIndex(2);
-				ImGui::Text("%s", date_time.c_str());
-				ImGui::TableSetColumnIndex(3);
-				ImGui::Text("%s", is_file ? "File" : "Text");
-				// Operation (View|delete...)
-				ImGui::TableSetColumnIndex(4);
+				// Columns header
+				static constexpr const auto header_columns_flags = 
+					ImGuiTableColumnFlags_DefaultSort | //  // Default as a sorting column
+					ImGuiTableColumnFlags_NoHide | // Disable ability to hide / disable this column
+					ImGuiTableColumnFlags_WidthStretch; // Column will stretch
+
+				ImGui::TableSetupColumn("ID", header_columns_flags);
+				ImGui::TableSetupColumn("Title", header_columns_flags); // no need to specify title width fixed size, since table can can scroll x and y
+				ImGui::TableSetupColumn("Date Time", header_columns_flags);
+				ImGui::TableSetupColumn("Type", header_columns_flags);
+				ImGui::TableSetupColumn("Operation", header_columns_flags);
+				ImGui::TableHeadersRow(); // show headers
+
+				// Rows
+				for (const auto& enc_ptr : m_encryptions)
 				{
-					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-					
-					ImGui::PushID(id); // Special id for button
-					if (ImGui::Button("View"))
+					const auto& [id, title, _, date_time, is_file] = *enc_ptr;
+
+					// id, title, date_time, is_file
+					ImGui::TableNextRow();
+					ImGui::TableSetColumnIndex(0);
+					ImGui::Text("%d", id);
+					ImGui::TableSetColumnIndex(1);
+					ImGui::Text("%s", title.c_str());
+					ImGui::TableSetColumnIndex(2);
+					ImGui::Text("%s", date_time.c_str());
+					ImGui::TableSetColumnIndex(3);
+					ImGui::Text("%s", is_file ? "File" : "Text");
+					// Operation (View|delete...)
+					ImGui::TableSetColumnIndex(4);
 					{
-						this->OnViewEncryptionButtonPressed(id);
+						ImGui::PushID(id); // Special id for button
+						if (ImGuiWidgets::Button("View"))
+						{
+							this->OnViewEncryptionButtonPressed(id);
+						}
+						ImGui::PopID();
+
+						ImGui::SameLine();
+
+						ImGui::PushID(id); // Special id for button
+						if (ImGuiWidgets::Button("Delete", ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+						{
+							this->OnDeleteEncryptionButtonPressed(id);
+						}
+						ImGui::PopID();
+
 					}
-					ImGui::PopID();
-
-					ImGui::PopStyleColor(3);
-
-					ImGui::SameLine();
-
-					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
-					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
-					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
-					
-					ImGui::PushID(id); // Special id for button
-					if (ImGui::Button("Delete"))
-					{
-						this->OnDeleteEncryptionButtonPressed(id);
-					}
-					ImGui::PopID();
-					
-					ImGui::PopStyleColor(3);
 				}
+				ImGui::EndTable();
 			}
-			ImGui::EndTable();
+			ImGui::PopFont();
 		}
-		ImGui::PopFont();
+		else // No Encryption records saved yet.
+		{
+			// Centre text no saved encryption records
+			ImGui::PushFont(font_montserrat_medium_18); // text font
+			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
+			{
+				static constexpr const auto text = "No Encryption records saved yet.";
+				static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
+				ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
+				ImGui::Text(text);
+			}
+			ImGui::PopStyleColor(1);
+			ImGui::PopFont();
+		}
 
 #if 0
 		if (ImGui::BeginTable("Encryptions", NUM_COLUMNS, table_flags))
@@ -249,21 +276,11 @@ void MyEncryptionsScene::OnImGuiDraw()
 		// Back Button 
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
-			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+			if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 			{
-				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
-				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
-				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
-				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button("Back", button_size))
-				{
-					this->OnBackButtonPressed();
-				}
-				ImGui::PopStyleColor(3);
+				this->OnBackButtonPressed();
 			}
-			ImGui::PopStyleColor(3);
 			ImGui::PopFont();
 		}
 
@@ -318,11 +335,18 @@ void MyEncryptionsScene::OnBackButtonPressed()
 void MyEncryptionsScene::OnViewEncryptionButtonPressed(const size_t id)
 {
 	ENIGMA_TRACE("View {0}", id);
+
 }
 
 void MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const size_t id)
 {
 	ENIGMA_TRACE("Delete {0}", id);
+	//Dummy
+	m_encryptions.erase(std::remove_if(m_encryptions.begin(), m_encryptions.end(),
+		[&id](const std::unique_ptr<Encryption>& encryption)
+		{
+			return encryption->id == id;
+		}), m_encryptions.end());
 }
 
 

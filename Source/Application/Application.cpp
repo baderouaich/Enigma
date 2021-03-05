@@ -2,7 +2,7 @@
 #include "Application.hpp"
 
 #include <Scenes/Scene.hpp>
-#include <UI/ImGui/ImGuiRenderer.hpp>
+#include <GUI/ImGuiRenderer.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
@@ -100,7 +100,9 @@ void Application::OnEvent(Event& event)
 
 bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 {
+#ifdef ENIGMA_DEBUG
 	ENIGMA_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
+#endif
 
 	this->EndApplication();
 	
@@ -109,7 +111,9 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 
 bool Application::OnWindowResize(WindowResizeEvent& event)
 {
+#ifdef ENIGMA_DEBUG
 	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString());
+#endif
 
 	// Update OpenGL Viewport
 	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
@@ -121,7 +125,9 @@ bool Application::OnWindowResize(WindowResizeEvent& event)
 
 bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 {
+#ifdef ENIGMA_DEBUG
 	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString());
+#endif
 
 	// Update OpenGL Viewport
 	glAssert( glViewport(0, 0, event.GetWidth(), event.GetHeight()) );
@@ -209,58 +215,20 @@ void Application::UpdateDeltaTime() noexcept
 	m_last_frame_time = m_current_frame_time;
 }
 
-#if 0
-void Application::UpdateFPS() noexcept
-{
-#if 0
-	/// Limit FPS
-	while (static_cast<f32>(glfwGetTime()) < m_last_frame_time + (1.0f / m_max_FPS))
-	{
-		// TODO: whats the best to use in this case, yield or sleep_for?
-		// Put the thread to sleep
-		std::this_thread::yield();
-
-		//const auto sleep_millis = static_cast<i64>(((1.0 / m_max_FPS) - m_delta_time) * 1000.0);
-		//std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
-		/*
-		yield()
-		will stop the execution of the current thread and give priority to other process/threads
-		(if there are other process/threads waiting in the queue). 
-		The execution of the thread is not stopped. (it just release the CPU).
-
-		sleep_for()
-		will make your thread sleep for a given time (the thread is stopped for a given time).
-		*/
-	}
-	///
-#endif
-	/// Update Frames per second & set to window title
-	if (m_window->m_is_show_fps)
-	{
-		m_FPS++;
-		m_FPS_timer += m_delta_time;
-		if (m_FPS_timer >= 1.0f)
-		{
-			m_window->SetTitle(m_window->GetTitle()); // refresh title
-			m_FPS = 0;
-			m_FPS_timer = 0.0f;
-		}
-	}
-	///
-}
-#endif
 
 void Application::UpdateHardwareInfo() noexcept
 {
 	if (m_window->m_is_show_fps || m_window->m_is_show_ram_usage || m_window->m_is_show_cpu_usage)
 	{
+		// update timer
+		m_hardware_info_timer += m_delta_time;
+
 		// update fps if enabled
 		if (m_window->m_is_show_fps)
 			m_FPS++;
-		// if any of hardware info enabled, update timer
-		m_hardware_info_timer += m_delta_time;
-		// see if we waited 1 second
-		if (m_hardware_info_timer >= 1.0f)
+
+		// see if we waited HARWARE_INFO_UPDATE_TIME seconds for next update
+		if (m_hardware_info_timer >= HARWARE_INFO_UPDATE_TIME)
 		{
 			// if so, refresh title to show new hardware info data
 			m_window->SetTitle(m_window->GetTitle()); // refresh title

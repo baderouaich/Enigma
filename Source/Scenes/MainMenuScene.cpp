@@ -7,6 +7,7 @@
 #include "DecryptTextScene.hpp"
 #include "MyEncryptionsScene.hpp"
 
+#include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Networking/CheckForUpdates.hpp>
 
@@ -158,15 +159,11 @@ void MainMenuScene::OnImGuiDraw()
 				}
 				spacing(9);
 				{
-					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
-					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
-					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-					if (ImGui::Button("Exit", button_size))
+					if (ImGuiWidgets::Button("Exit", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 					{
 						this->EndScene();
 					}
-					ImGui::PopStyleColor(3);
 				}
 			}
 			ImGui::PopStyleColor(3);

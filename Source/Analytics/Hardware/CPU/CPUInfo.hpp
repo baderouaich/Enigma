@@ -39,23 +39,22 @@ public:
 	f32 GetCPUUsage() noexcept;
 
 
-
 private: /* Platform Functions */
 #if defined(ENIGMA_PLATFORM_WINDOWS) || defined(ENIGMA_PLATFORM_MACOS)
 	/*
 	*	Calculates CPU Load percentage by idle and total ticks for (used for Windows & MacOS)
 	*/
-	f32 CalculateCPULoad(const ui64& idle_ticks, const ui64& total_ticks)
+	f32 CalculateCPULoad(const ui64 idle_ticks, const ui64 total_ticks)
 	{
 		const ui64 total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
 		const ui64 idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
 
-		f32 ret = 1.0f - ((total_ticks_since_last_time > 0) ? ((f32)idle_ticks_since_last_time) / total_ticks_since_last_time : 0);
+		const f32 rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<f32>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
 
 		m_cpu_previous_total_ticks = total_ticks;
 		m_cpu_previous_idle_ticks = idle_ticks;
 
-		return (ret * 100.0f);
+		return (rate * 100.0f);
 	}
 #endif
 

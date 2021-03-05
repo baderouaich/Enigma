@@ -45,7 +45,7 @@ private:
 	{
 		Ascending,
 		Descending,
-	} m_order = Order::Ascending;
+	} m_order = Order::Descending;
 };
 
 NS_ENIGMA_END

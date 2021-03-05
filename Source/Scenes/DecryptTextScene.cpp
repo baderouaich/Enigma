@@ -1,6 +1,6 @@
 #include "pch.hpp"
 #include "DecryptTextScene.hpp"
-#include <Utility/ImGuiUtils.hpp>
+#include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
 
 NS_ENIGMA_BEGIN
@@ -121,7 +121,7 @@ void DecryptTextScene::OnImGuiDraw()
 
 			// Input text
 			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 2.0f);
-			ImGuiUtils::InputTextMultiline("##text1", &m_cipher_base64, input_text_size);
+			ImGuiWidgets::InputTextMultiline("##text1", &m_cipher_base64, input_text_size);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -141,7 +141,7 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::Text("Password:");
 
 			// Input text
-			ImGuiUtils::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -165,7 +165,7 @@ void DecryptTextScene::OnImGuiDraw()
 
 				// Input text
 				const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
-				ImGuiUtils::InputTextMultiline("##text3", &m_recovered_text, input_text_size);
+				ImGuiWidgets::InputTextMultiline("##text3", &m_recovered_text, input_text_size);
 
 				// Bytes count
 				ImGui::PushFont(font_montserrat_medium_12);
@@ -188,15 +188,12 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
-				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
-				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
-				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
-				if (ImGui::Button("Back", button_size))
+				if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 				{
 					this->OnBackButtonPressed();
 				}
-				ImGui::PopStyleColor(3);
+
 
 				ImGui::SameLine();
 				if (ImGui::Button("Decrypt", button_size))

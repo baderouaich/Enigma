@@ -46,7 +46,8 @@
 
 
 //GUI 
-#include <UI/ImGui/ImGuiRenderer.hpp>
+#include <GUI/ImGuiRenderer.hpp>
+#include <GUI/ImGuiWidgets.hpp>
 //
 
 //Scene
@@ -60,7 +61,6 @@
 #include <Utility/StringUtils.hpp>
 #include <Utility/OpenGLUtils.hpp>
 #include <Utility/CryptoPPUtils.hpp>
-#include <Utility/ImGuiUtils.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Utility/GZip.hpp>
 //

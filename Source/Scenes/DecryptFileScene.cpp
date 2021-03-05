@@ -1,6 +1,6 @@
 #include "pch.hpp"
 #include "DecryptFileScene.hpp"
-#include <Utility/ImGuiUtils.hpp>
+#include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <System/Dialogs/MessageBox.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
@@ -127,7 +127,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::Text("File To Decrypt:");
 			// Encrypted text
 			static const ImVec2 browse_button_size(45.0f, 25.0f);
-			ImGuiUtils::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
+			ImGuiWidgets::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
 			ImGui::PushFont(font_montserrat_medium_12);
 			ImGui::SameLine();
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
@@ -166,7 +166,7 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGui::Text("Decrypted File Location:");
 				// Encrypted text
 				static const ImVec2 browse_button_size(45.0f, 25.0f);
-				ImGuiUtils::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
+				ImGuiWidgets::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
 				ImGui::PushFont(font_montserrat_medium_12);
 				ImGui::SameLine();
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
@@ -194,7 +194,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::Text("Password:");
 
 			// Input text
-			ImGuiUtils::InputText("##text3", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text3", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -214,15 +214,12 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
-				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BACK_BUTTON_COLOR); // buttons color idle
-				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BACK_BUTTON_COLOR_HOVER);  // buttons color hover
-				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE); // buttons color pressed
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
-				if (ImGui::Button("Back", button_size))
+				if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 				{
 					this->OnBackButtonPressed();
 				}
-				ImGui::PopStyleColor(3);
+
 
 				ImGui::SameLine();
 				if (ImGui::Button("Decrypt", button_size))

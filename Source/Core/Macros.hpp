@@ -162,4 +162,5 @@
 #define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
 ///
 
+
 #endif // !ENIGMA_MACROS_H

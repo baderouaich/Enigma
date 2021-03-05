@@ -7,6 +7,8 @@ project "pfd"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
 	files
 	{
 		"include/portable-file-dialogs.h",
@@ -23,10 +25,32 @@ project "pfd"
 		"include"
 	}
 
-	-- Platform --
-	--[[ Windows ]]--
+	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
+		defines
+		{
+		}
+		links
+		{
+		}
+
+
+	filter "system:linux"
+		links
+		{
+		}
+		defines
+		{
+		}
+
+	filter "system:macosx"
+		defines
+		{
+		}	
+		links
+		{
+		}
 
 
 	--- Configurations ---

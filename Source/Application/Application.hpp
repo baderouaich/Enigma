@@ -110,7 +110,8 @@ private: /* Delta time */
 	f32 m_delta_time;
 
 private: /* Realtime Hardware Info (FPS, CPU, RAM info...) */
-	f32 m_hardware_info_timer; // timer to update info each second
+	static constexpr f32 HARWARE_INFO_UPDATE_TIME = 1.0f; // time to wait for each hardware info update -> 1 second
+	f32 m_hardware_info_timer; // timer to update info each HARWARE_INFO_UPDATE_TIME
 	ui32 m_FPS;
 	std::unique_ptr<RAMInfo> m_ram_info;
 	std::unique_ptr<CPUInfo> m_cpu_info;
