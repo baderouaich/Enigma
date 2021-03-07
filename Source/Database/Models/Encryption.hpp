@@ -3,28 +3,30 @@
 #define ENIGMA_MODELS_ENCRYPTION_H
 
 #include <Core/Core.hpp>
+#include "Cipher.hpp"
 
 NS_ENIGMA_BEGIN
-// Encryption Model | table: Encryptions
+// Encryption Model | table: Encryption
 struct Encryption
 {
-	size_t id{}; // auto incremental id 0 -> SIZE_MAX
+	i64 ide{}; // auto incremental id 0 -> SIZE_MAX
 	String title{}; // E.G: "this is my gmail password"
-	String cipher{}; // BLOB
+	Cipher cipher{}; 
 	String date_time{}; // date & time saved by sqlite3
 	bool is_file{}; // whether its a text or file encryption
 
+
+public:
 	friend std::ostream& operator<<(std::ostream& os, const Encryption& e) noexcept 
 	{
 		return os
-			<< "id: " << e.id << ","
-			<< "title: " << e.title << ","
-			<< "cipher: " << e.cipher << ","
-			<< "date_time: " << e.date_time << ","
-			<< "is_file: "<< std::boolalpha << e.is_file;
+			<< "Encryption(ide: " << e.ide << ','
+			<< "title: " << e.title << ','
+			<< "cipher: " << e.cipher << ','
+			<< "date_time: " << e.date_time << ','
+			<< "is_file: "<< std::boolalpha << e.is_file << ')';
 		
 	}
-
 	String toString() noexcept
 	{
 		std::ostringstream oss{};

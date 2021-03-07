@@ -20,28 +20,141 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API Database final
 {
 public:
+	enum class OrderBy : byte
+	{
+		ID,
+		Title,
+		DateTime,
+	};
+	friend std::ostream& operator<<(std::ostream& os, OrderBy order_by) noexcept
+	{
+		switch (order_by)
+		{
+			case OrderBy::ID: os << " e.ide"; break;
+			case OrderBy::Title: os << " e.title"; break;
+			case OrderBy::DateTime: os << " e.date_time"; break;
+		}
+		return os;
+	}
+	enum class Order : byte
+	{
+		Ascending,
+		Descending,
+	};
+	friend std::ostream& operator<<(std::ostream& os, Order order) noexcept
+	{
+		switch (order)
+		{
+			case Order::Ascending: os << " ASC"; break;
+			case Order::Descending: os << " DESC"; break;
+		}
+		return os;
+	}
+
+public:
 	static void Initialize();
 
 public: // Encryption Operations
-
-	// Add Encryption to Encryptions table
+	// Add Encryption to Encryptions table, returns true on success
 	static bool AddEncryption(const std::unique_ptr<Encryption>& e);
+
+
+	// Get an Encyrption by id with desired columns for optimization
+	template<const bool title, const bool cipher, const bool date_time, const bool is_file>
+	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
+	{
+#ifdef ENIGMA_DEBUG
+		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+#endif
+		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", nullptr);
+		try
+		{
+			// Select e.id, e.title, c.data, e.date_time, e.is_file from Encryptions e JOIN Ciphers c ON e.id = c.id_enc
+			
+			// Construct SQL
+			std::ostringstream sql{};
+			{
+				sql << "SELECT e.ide";
+				if constexpr (title) sql << ", e.title";
+				if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
+				if constexpr (date_time) sql << ", e.date_time";
+				if constexpr (is_file) sql << ", e.is_file";
+				sql << " FROM Encryption e";
+				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.ide";
+				sql << " WHERE e.ide = " << ide;
+				ENIGMA_LOG("SQL: {0}", sql.str());
+			}
+
+			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
+			auto e = std::make_unique<Encryption>();
+
+			if (query->executeStep())
+			{
+				i32 i{ 0 }; // for getColumn, use index starts by 0
+				e->ide = query->getColumn(i++).getInt64();
+				if constexpr (title) e->title = query->getColumn(i++).getString();
+				if constexpr (cipher)
+				{
+					e->cipher.idc  = query->getColumn(i++).getInt64();
+					e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					e->cipher.ide  = query->getColumn(i++).getInt64();
+				}
+				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
+				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
+			}
+
+			return e;
+		}
+		catch (const SQLite::Exception& e)
+		{
+			ENIGMA_ERROR("{0}", e.what());
+			return nullptr;
+		}
+	}
+
 
 	// Get all Encryptions with desired columns for optimization
 	template<const bool title, const bool cipher, const bool date_time, const bool is_file>
-	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(const String& order_by)
+	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
+#ifdef ENIGMA_DEBUG
+		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+#endif
+		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});
+
 		std::vector<std::unique_ptr<Encryption>> encryptions{};
 		try
 		{
 			// Construct SQL
 			std::ostringstream sql{};
-			sql << "SELECT id";
-			if constexpr (title) sql << ", title";
-			if constexpr (cipher) sql << ", cipher";
-			if constexpr (date_time) sql << ", date_time";
-			if constexpr (is_file) sql << ", is_file";
-			sql << " FROM Encryptions ORDER BY " << order_by;
+			{
+				sql << "SELECT e.ide";
+				if constexpr (title) sql << ", e.title";
+				if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
+				if constexpr (date_time) sql << ", e.date_time";
+				if constexpr (is_file) sql << ", e.is_file";
+				sql << " FROM Encryption e";
+				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
+				sql << " ORDER BY" << order_by << order;
+			}
+			
+			// Construct Order & Order by string
+			/*std::ostringstream oss{};
+			{
+				switch (order_by)
+				{
+					case OrderBy::ID: oss << " e.ide"; break;
+					case OrderBy::Title: oss << " e.title"; break;
+					case OrderBy::DateTime: oss << " e.date_time"; break;
+				}
+				switch (order)
+				{
+					case Order::Ascending: oss << " ASC"; break;
+					case Order::Descending: oss << " DESC"; break;
+				}
+			}
+			sql << " ORDER BY" << oss.str();
+			*/
 			ENIGMA_LOG("SQL: {0}", sql.str());
 
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
@@ -50,71 +163,53 @@ public: // Encryption Operations
 			while (query->executeStep())
 			{
 				auto e = std::make_unique<Encryption>();
-				
-				e->id = static_cast<decltype(Encryption::id)>(query->getColumn(0).getInt64()); // either use index or column name
-				if constexpr (title) e->title = query->getColumn("title").getString();
-				if constexpr (cipher) e->cipher = query->getColumn("cipher").getString();
-				if constexpr (date_time) e->date_time = query->getColumn("date_time").getString();
-				if constexpr (is_file) e->is_file =static_cast<decltype(Encryption::is_file)>(query->getColumn("is_file").getInt());
+
+				i32 i{ 0 }; // for getColumn, use index starts by 0
+				e->ide = query->getColumn(i++).getInt64();
+				if constexpr (title) e->title = query->getColumn(i++).getString();
+				if constexpr (cipher)
+				{
+					e->cipher.idc  = query->getColumn(i++).getInt64();
+					e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					e->cipher.ide  = query->getColumn(i++).getInt64();
+				}
+				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
+				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
 
 				encryptions.emplace_back(std::move(e));
 			}
 		}
 		catch (const SQLite::Exception& e)
 		{
-			ENIGMA_ERROR(e.what());
+			ENIGMA_ERROR("{0}", e.what());
 		}
 		return encryptions;
 	}
 
 
-	// Get an Encyrption by id with desired columns for optimization
-	template<const bool title, const bool cipher, const bool date_time, const bool is_file>
-	inline static std::unique_ptr<Encryption> GetEncryptionByID(const size_t id)
+	// Delete Encryption record by id, returns true if successfully deleted
+	static bool DeleteEncryption(const i64 ide);
+
+
+#if 0
+public:
+	// Export database backup
+	static bool SaveBackup(const char* file_name)
 	{
-		try
-		{
-			// Construct SQL
-			std::ostringstream sql{};
-			sql << "SELECT id";
-			if constexpr (title) sql << ", title";
-			if constexpr (cipher) sql << ", cipher";
-			if constexpr (date_time) sql << ", date_time";
-			if constexpr (is_file) sql << ", is_file";
-			sql << " FROM Encryptions where id = " << id;
-			ENIGMA_LOG("SQL: {0}", sql.str());
-
-			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-			auto e = std::make_unique<Encryption>();
-
-			if (query->executeStep())
-			{
-				e->id = static_cast<decltype(Encryption::id)>(query->getColumn(0).getInt64());
-				if constexpr (title) e->title = query->getColumn("title").getString();
-				if constexpr (cipher) e->cipher = query->getColumn("cipher").getString();
-				if constexpr (date_time) e->date_time = query->getColumn("date_time").getString();
-				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn("is_file").getInt());
-			}
-
-			return e;
-		}
-		catch (const SQLite::Exception& e)
-		{
-			ENIGMA_ERROR(e.what());
-			return nullptr;
-		}
+		m_database->backup(file_name, SQLite::Database::BackupType::Save);
+		return true;
 	}
+#endif
 
 private:
 	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr };
 
 };
-
-NS_ENIGMA_END
 /*
-Notes: 
+Notes:
 for bind, use index starts by 1
 for getColumn, use index starts by 0
 */
+NS_ENIGMA_END
 #endif // !ENIGMA_DATABASE_H
 

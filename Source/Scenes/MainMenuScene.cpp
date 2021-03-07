@@ -39,7 +39,7 @@ void MainMenuScene::OnCreate()
 	ImGui::PushStyleColor(ImGuiCol_MenuBarBg, Constants::Colors::MENUBAR_BACKGROUND_COLOR);
 }
 
-void MainMenuScene::OnUpdate(const f32& dt) {}
+void MainMenuScene::OnUpdate(const f32&) {}
 
 void MainMenuScene::OnDraw()
 {
@@ -175,7 +175,7 @@ void MainMenuScene::OnImGuiDraw()
 
 }
 
-void MainMenuScene::OnEvent(Enigma::Event& event)
+void MainMenuScene::OnEvent(Enigma::Event&)
 {
 	/*
 	//Listening to specific event

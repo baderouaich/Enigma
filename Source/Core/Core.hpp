@@ -80,5 +80,4 @@
 ///
 
 
-
 #endif // !ENIGMA_CORE_H

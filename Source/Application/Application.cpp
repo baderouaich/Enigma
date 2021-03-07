@@ -69,7 +69,7 @@ void Application::InitImGuiRenderer()
 
 void Application::PushScene(const std::shared_ptr<Scene>& scene)
 {
-	ENIGMA_ASSERT(scene.get() , "Scene is nullptr");
+	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
 
 	// Push scene & Notify user on scene created
 	this->m_scenes.emplace_back(scene);
@@ -249,7 +249,7 @@ void Application::EndApplication() noexcept
 
 Application::~Application()
 {
-	// OnDestroy() alert scenes
+	// Alert scenes OnDestroy()
 	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const auto& scene)
 	{
 		// Notify scenes OnDestroy before closing application

@@ -34,11 +34,12 @@ public:
 	}
 
 	/*
-    *	Returns a Random bool value, either 'true' or 'false' 
+	*	Returns a Random bool value, either 'true' or 'false'
+	*	@param p: Probability of true (50% by default)
 	*/
-	static bool Bool(const f64 chance = 0.5 /*50% 50% chance*/) noexcept
+	static bool Bool(const f64 p = 0.5) noexcept
 	{
-		std::bernoulli_distribution dist(chance);
+		std::bernoulli_distribution dist(p);
 		return !!dist(m_engine);
 	}
 
@@ -50,17 +51,17 @@ public:
 		String str(length, '\000');
 		for (char& c : str)
 		{
-			const ui16 i = Int(ui16(1), ui16(3));
+			const i16 i = Int(i16(1), i16(3));
 			switch (i)
 			{
 			case 1: // a-z
-				c = Int(static_cast<ui16>('a'), static_cast<ui16>('z'));
+				c = Int(static_cast<i16>('a'), static_cast<i16>('z'));
 				break;
 			case 2: // A-Z
-				c = Int(static_cast<ui16>('A'), static_cast<ui16>('Z'));
+				c = Int(static_cast<i16>('A'), static_cast<i16>('Z'));
 				break;
 			case 3: // 0-9
-				c = Int(static_cast<ui16>('0'), static_cast<ui16>('9')); // ascii 0 = 48 | 9 = 57
+				c = Int(static_cast<i16>('0'), static_cast<i16>('9')); // ascii 0 = 48 | 9 = 57
 				break;
 			}
 		}

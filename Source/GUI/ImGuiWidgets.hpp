@@ -28,13 +28,13 @@ namespace ImGuiWidgets
 	static bool InputTextMultiline(const char* label, std::string* str, const ImVec2& size = ImVec2(0, 0), ImGuiInputTextFlags flags = 0)
 	{
 		flags |= ImGuiInputTextFlags_CallbackResize;
-		return ImGui::InputTextMultiline(label, (char*)str->c_str(), str->capacity() + 1, size, flags, InputTextCallback, (void*)str);
+		return ImGui::InputTextMultiline(label, (char*)str->c_str(), str->capacity() + 1, size, flags, ImGuiWidgets::InputTextCallback, (void*)str);
 	}
 	static bool InputText(const char* label, std::string* str, const float& width, ImGuiInputTextFlags flags = 0)
 	{
 		ImGui::PushItemWidth(width);
 		flags |= ImGuiInputTextFlags_CallbackResize;
-		bool ret = ImGui::InputText(label, (char*)str->c_str(), str->capacity() + 1, flags, InputTextCallback, (void*)str);
+		bool ret = ImGui::InputText(label, (char*)str->c_str(), str->capacity() + 1, flags, ImGuiWidgets::InputTextCallback, (void*)str);
 		ImGui::PopItemWidth();
 		return ret;
 	}

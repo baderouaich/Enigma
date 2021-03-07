@@ -100,10 +100,6 @@ private: /* Window */
 private: /* Scenes */
 	std::vector<std::shared_ptr<Scene>> m_scenes;
 
-	//TODO: maybe not needed, since we can access everything from Application::GetInstance()
-	//Scene data, to access everything we need (window, settings, other scenes...) from all scenes
-	//SceneData m_scene_data;
-
 private: /* Delta time */
 	f32 m_last_frame_time;
 	f32 m_current_frame_time;
@@ -116,18 +112,13 @@ private: /* Realtime Hardware Info (FPS, CPU, RAM info...) */
 	std::unique_ptr<RAMInfo> m_ram_info;
 	std::unique_ptr<CPUInfo> m_cpu_info;
 
-private: /* ImGui */
+private: /* GUI */
 	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;
 
 private: /* Instance */
 	static Application* m_instance;
 
 };
-
-/*
-*	Entry Point to be defined in user side
-*/
-extern std::unique_ptr<Enigma::Application> CreateApplication();
 
 NS_ENIGMA_END
 

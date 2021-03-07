@@ -82,6 +82,7 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			// Label
+			//ImGui::LabelText("##label", "Algorithm:");
 			ImGui::Text("Algorithm:");
 
 			// Algo types radio buttons

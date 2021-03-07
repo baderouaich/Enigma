@@ -3,6 +3,7 @@
 #define ENIGMA_CONSTANTS_H
 
 #include "Types.hpp"
+#include <array>
 
 namespace Enigma
 {
@@ -68,19 +69,52 @@ namespace Enigma
 		{
 			//https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
 			static constexpr const char* DATABASE_FILE_DIR = "./Resources/Database/";
-			static constexpr const char* DATABASE_FILE_PATH = "./Resources/Database/Enigma.db";
+			static constexpr const char* DATABASE_FILE_NAME = "./Resources/Database/Enigma.db";
+			// Unfortunetly u cant create multiple tables at once..
+			static constexpr const std::array<const char*, 2> CREATE_TABLES_QUERIES =
+			{
+				// Encryptions table
+				R"(
+					CREATE TABLE IF NOT EXISTS Encryption
+					(
+						ide				INTEGER PRIMARY KEY AUTOINCREMENT,
+						title			VARCHAR(255) NOT NULL,
+						date_time		DATETIME NOT NULL,
+						is_file			BOOLEAN NOT NULL,
+
+						CHECK(LENGTH(title) <= 255) -- check title length <= 255
+					);
+				)",
+
+				// Ciphers table holds either cipher text or file binary cipher for optimization
+				R"(
+					CREATE TABLE IF NOT EXISTS Cipher
+					(
+						idc				INTEGER PRIMARY KEY AUTOINCREMENT,
+						data			BLOB NOT NULL, -- cipher text or file binary cipher compressed             
+						ide				INTEGER,
+
+						FOREIGN KEY(ide) REFERENCES Encryptions(ide) -- ON DELETE CASCADE
+					);
+				)"
+			};
+			
+
+			/*
 			static constexpr const char* CREATE_TABLES_QUERY =
 			R"(
+			-- Encryptions table
 			CREATE TABLE IF NOT EXISTS Encryptions
 			(
 				id              INTEGER PRIMARY KEY AUTOINCREMENT,
 				title           VARCHAR(255) NOT NULL,
-				cipher          TEXT NOT NULL,              
+				cipher			BLOB NOT NULL, -- cipher text or file binary cipher compressed             
 				date_time       DATETIME NOT NULL,
 				is_file			BOOLEAN NOT NULL
 			);
 			)";
-		}
+			*/
+	}
 
 		namespace CLI
 		{

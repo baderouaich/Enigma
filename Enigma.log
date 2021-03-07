@@ -1,31 +1,77 @@
-[2021-03-05 23:57:14] [info] Enigma: SQLite3 version 3.32.3
-[2021-03-05 23:57:15] [info] Enigma: [ OpenGL Info ]
+[2021-03-07 14:09:23] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
+[2021-03-07 14:09:23] [info] Enigma: SQLite3 version 3.32.3
+[2021-03-07 14:09:24] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-03-05 23:57:15] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-03-05 23:57:15] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-03-05 23:57:15] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-03-05 23:57:15] [trace] Enigma: Loading Fonts...
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-03-05 23:57:15] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-03-05 23:57:16] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
-[2021-03-05 23:57:16] [info] Enigma: Getting all encryptions from database...
-[2021-03-05 23:57:16] [debug] Enigma: SQL: SELECT id, title, date_time, is_file FROM Encryptions ORDER BY id DESC
-[2021-03-05 23:57:16] [info] Enigma: Got 153 Encryption records.
-[2021-03-05 23:57:21] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 1680, 987
-[2021-03-05 23:57:21] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 1680, 987
-[2021-03-05 23:57:30] [info] Enigma: Getting all encryptions from database...
-[2021-03-05 23:57:30] [debug] Enigma: SQL: SELECT id, title, date_time, is_file FROM Encryptions ORDER BY id ASC
-[2021-03-05 23:57:30] [info] Enigma: Got 153 Encryption records.
-[2021-03-05 23:57:30] [info] Enigma: Getting all encryptions from database...
-[2021-03-05 23:57:30] [debug] Enigma: SQL: SELECT id, title, date_time, is_file FROM Encryptions ORDER BY title ASC
-[2021-03-05 23:57:30] [info] Enigma: Got 153 Encryption records.
-[2021-03-05 23:57:33] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
-[2021-03-05 23:57:33] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-03-07 14:09:24] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-03-07 14:09:24] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-03-07 14:09:24] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-03-07 14:09:24] [trace] Enigma: Loading Fonts...
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-03-07 14:09:24] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-03-07 14:09:29] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
+[2021-03-07 14:09:29] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:29] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:29] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-03-07 14:09:30] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:32] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:32] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:32] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide ASC
+[2021-03-07 14:09:32] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:34] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:34] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:34] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-03-07 14:09:34] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:34] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:34] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:34] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide ASC
+[2021-03-07 14:09:34] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:35] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:35] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:35] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.date_time ASC
+[2021-03-07 14:09:35] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:36] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:36] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:36] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.title ASC
+[2021-03-07 14:09:36] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:37] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:37] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:37] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.title DESC
+[2021-03-07 14:09:37] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:38] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:38] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:38] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-03-07 14:09:38] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:39] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:39] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:39] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide ASC
+[2021-03-07 14:09:39] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:41] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:41] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:41] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-03-07 14:09:41] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:43] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:43] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:43] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.date_time DESC
+[2021-03-07 14:09:43] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:43] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:43] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:43] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.date_time ASC
+[2021-03-07 14:09:43] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:45] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
+[2021-03-07 14:09:48] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
+[2021-03-07 14:09:48] [info] Enigma: Getting all encryptions from database...
+[2021-03-07 14:09:48] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-03-07 14:09:48] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-03-07 14:09:48] [info] Enigma: Got 735 Encryption records.
+[2021-03-07 14:09:50] [trace] Enigma: View 693
+[2021-03-07 14:09:50] [trace] Enigma: Gettings encryption's data id 693 from database
+[2021-03-07 14:09:50] [trace] Enigma: class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > __cdecl Enigma::Database::GetEncryptionByID<true,true,true,true>(const __int64)
+[2021-03-07 14:09:50] [debug] Enigma: SQL: SELECT e.ide, e.title, c.idc, c.data, c.ide, e.date_time, e.is_file FROM Encryption e JOIN Cipher c ON e.ide = c.ide WHERE e.ide = 693

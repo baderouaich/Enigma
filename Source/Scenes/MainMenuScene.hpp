@@ -11,10 +11,10 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32& dt) override;
+	[[maybe_unused]] void OnUpdate(const f32&) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
-	void OnEvent(Enigma::Event& event) override;
+	[[maybe_unused]] void OnEvent(Enigma::Event&) override;
 	void OnDestroy() override;
 	
 private: /* Callbacks */

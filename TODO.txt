@@ -1,4 +1,4 @@
 - CPU Usage is not accurate on windows
 - Add Database system to save encrypted text or maybe files too, user can export/import database
-- Add Search textfield feature in MyEncryptionsScene 
+- Add Search textfield feature in MyEncryptionsScene  with Like %%
 - Add CLi option --save -s to database if selected, and --list to show all encryption records

@@ -14,13 +14,13 @@
 #else
 	#include <Enigma.hpp>
 #endif
-
 int main(int argc, char* argv[])
 {	
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 	// Initialize SQLite3 Database
 	Enigma::Database::Initialize();
+	
 #if !ENIGMA_TEST
 	// Command Line Interface Entry
 	if (argc > 1)

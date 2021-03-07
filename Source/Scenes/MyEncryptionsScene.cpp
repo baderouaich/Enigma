@@ -1,5 +1,7 @@
 #include <pch.hpp>
 #include "MyEncryptionsScene.hpp"
+#include "ViewEncryptionScene.hpp"
+#include <Utility/DialogUtils.hpp>
 
 #include <imgui.h>
 
@@ -28,7 +30,7 @@ void MyEncryptionsScene::OnCreate()
 	this->GetAllEncryptions();
 }
 
-void MyEncryptionsScene::OnUpdate(const f32& dt)
+void MyEncryptionsScene::OnUpdate(const f32&)
 {}
 
 void MyEncryptionsScene::OnDraw()
@@ -79,34 +81,34 @@ void MyEncryptionsScene::OnImGuiDraw()
 		// Order By 
 		ImGui::PushFont(font_montserrat_medium_18); // text font
 		ImGui::Text("Order By "); ImGui::SameLine();
-		if (ImGui::RadioButton("ID", m_order_by == OrderBy::ID))
+		if (ImGui::RadioButton("ID", m_order_by == Database::OrderBy::ID))
 		{
-			m_order_by = OrderBy::ID;
+			m_order_by = Database::OrderBy::ID;
 			this->GetAllEncryptions();
 		}
 		ImGui::SameLine();
-		if (ImGui::RadioButton("Title", m_order_by == OrderBy::Title))
+		if (ImGui::RadioButton("Title", m_order_by == Database::OrderBy::Title))
 		{
-			m_order_by = OrderBy::Title;
+			m_order_by = Database::OrderBy::Title;
 			this->GetAllEncryptions();
 		}	
 		ImGui::SameLine();
-		if (ImGui::RadioButton("Date Time", m_order_by == OrderBy::DateTime))
+		if (ImGui::RadioButton("Date Time", m_order_by == Database::OrderBy::DateTime))
 		{
-			m_order_by = OrderBy::DateTime;
+			m_order_by = Database::OrderBy::DateTime;
 			this->GetAllEncryptions();
 		}		
 		// Order ASC DESC
 		ImGui::Text("Order "); ImGui::SameLine();
-		if (ImGui::RadioButton("Ascending", m_order == Order::Ascending))
+		if (ImGui::RadioButton("Ascending", m_order == Database::Order::Ascending))
 		{
-			m_order = Order::Ascending;
+			m_order = Database::Order::Ascending;
 			this->GetAllEncryptions();
 		}
 		ImGui::SameLine();
-		if (ImGui::RadioButton("Descending", m_order == Order::Descending))
+		if (ImGui::RadioButton("Descending", m_order == Database::Order::Descending))
 		{
-			m_order = Order::Descending;
+			m_order = Database::Order::Descending;
 			this->GetAllEncryptions();
 		}
 		ImGui::PopFont();
@@ -128,7 +130,8 @@ void MyEncryptionsScene::OnImGuiDraw()
 				ImGuiTableFlags_Hideable | ImGuiTableFlags_BordersV |
 				ImGuiTableFlags_BordersOuterV | ImGuiTableFlags_BordersInnerV |
 				ImGuiTableFlags_BordersH | ImGuiTableFlags_BordersOuterH |
-				ImGuiTableFlags_BordersInnerH | ImGuiTableFlags_SizingStretchProp |
+				ImGuiTableFlags_BordersInnerH |
+				ImGuiTableFlags_SizingStretchSame |
 				ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY;
 			//ScrollFreezeTopRow
 			/*
@@ -146,16 +149,24 @@ void MyEncryptionsScene::OnImGuiDraw()
 				ImGui::TableSetupScrollFreeze(0, 1); // Make top row always visible
 
 				// Columns header
+				/*
 				static constexpr const auto header_columns_flags = 
 					ImGuiTableColumnFlags_DefaultSort | //  // Default as a sorting column
 					ImGuiTableColumnFlags_NoHide | // Disable ability to hide / disable this column
 					ImGuiTableColumnFlags_WidthStretch; // Column will stretch
-
-				ImGui::TableSetupColumn("ID", header_columns_flags);
-				ImGui::TableSetupColumn("Title", header_columns_flags); // no need to specify title width fixed size, since table can can scroll x and y
-				ImGui::TableSetupColumn("Date Time", header_columns_flags);
-				ImGui::TableSetupColumn("Type", header_columns_flags);
-				ImGui::TableSetupColumn("Operation", header_columns_flags);
+				*/
+				static constexpr const auto header_columns_flags =
+					ImGuiTableColumnFlags_NoSort |    // disable sorting (right click on header column)
+					ImGuiTableColumnFlags_NoHide |    // disable hiding (right click to select which column to hide/show)
+					ImGuiTableColumnFlags_NoReorder | // disable column reordering
+					ImGuiTableColumnFlags_NoResize    // disable column resize
+					;
+				
+				ImGui::TableSetupColumn("ID", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+				ImGui::TableSetupColumn("Title", header_columns_flags | ImGuiTableColumnFlags_WidthStretch); // no need to specify title width fixed size, since table can can scroll x and y
+				ImGui::TableSetupColumn("Date Time", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+				ImGui::TableSetupColumn("Type", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+				ImGui::TableSetupColumn("Operation", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
 				ImGui::TableHeadersRow(); // show headers
 
 				// Rows
@@ -168,7 +179,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 					ImGui::TableSetColumnIndex(0);
 					ImGui::Text("%d", id);
 					ImGui::TableSetColumnIndex(1);
-					ImGui::Text("%s", title.c_str());
+					ImGui::TextWrapped("%s", title.c_str());
 					ImGui::TableSetColumnIndex(2);
 					ImGui::Text("%s", date_time.c_str());
 					ImGui::TableSetColumnIndex(3);
@@ -188,7 +199,12 @@ void MyEncryptionsScene::OnImGuiDraw()
 						ImGui::PushID(id); // Special id for button
 						if (ImGuiWidgets::Button("Delete", ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 						{
-							this->OnDeleteEncryptionButtonPressed(id);
+							// if item is deleted, vector size is changed so break loop.
+							if (this->OnDeleteEncryptionButtonPressed(id))
+							{
+								ImGui::PopID(); // unregister button id after deletion
+								break;
+							}
 						}
 						ImGui::PopID();
 
@@ -304,26 +320,9 @@ void MyEncryptionsScene::GetAllEncryptions()
 	m_encryptions.clear();
 
 	ENIGMA_INFO("Getting all encryptions from database...");
-	
-	// Get only title, date_time (no cipher for optimization)
-	std::ostringstream oss{};
-	{
-		//CONSTRUCT ORDER BY & ORDER
-		switch (m_order_by)
-		{
-			case OrderBy::ID: oss << "id"; break;
-			case OrderBy::Title: oss << "title"; break;
-			case OrderBy::DateTime: oss << "date_time"; break;
-		}
-		switch (m_order)
-		{
-			case Order::Ascending: oss << " ASC"; break;
-			case Order::Descending: oss << " DESC"; break;
-		}
-	}
-	
-	m_encryptions = Database::GetAllEncryptions<true, false, true, true>(oss.str());
+	m_encryptions = Database::GetAllEncryptions<true, false, true, true>(m_order_by, m_order);
 	ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
+
 }
 
 
@@ -332,21 +331,46 @@ void MyEncryptionsScene::OnBackButtonPressed()
 	this->EndScene();
 }
 
-void MyEncryptionsScene::OnViewEncryptionButtonPressed(const size_t id)
+void MyEncryptionsScene::OnViewEncryptionButtonPressed(const size_t ide)
 {
-	ENIGMA_TRACE("View {0}", id);
+	ENIGMA_TRACE("View {0}", ide);
 
+	Application::GetInstance()->PushScene(std::make_shared<ViewEncryptionScene>(ide, m_fonts));
 }
 
-void MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const size_t id)
+// returns true if item deleted successfully to notify draw loop that vector range changed
+bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const size_t ide)
 {
-	ENIGMA_TRACE("Delete {0}", id);
-	//Dummy
-	m_encryptions.erase(std::remove_if(m_encryptions.begin(), m_encryptions.end(),
-		[&id](const std::unique_ptr<Encryption>& encryption)
+	ENIGMA_TRACE("Delete {0}", ide);
+	ENIGMA_TRACE("Confirming deletion of encryption with id {0}", ide);
+
+	const auto action = DialogUtils::Warn("Are you sure you want to delete encryption?", MessageBox::Choice::Yes_No_Cancel);
+	if (action == MessageBox::Action::Yes)
+	{
+		ENIGMA_TRACE("Deleting encryption with id {0} from database", ide);
+		// Remove from database
+		const bool deleted = Database::DeleteEncryption(ide);
+		if (deleted)
 		{
-			return encryption->id == id;
-		}), m_encryptions.end());
+			ENIGMA_TRACE("Deleting encryption with id {0} from vector", ide);
+			// Remove from m_encryptions vector
+			for (auto it = m_encryptions.begin(); it != m_encryptions.end(); ++it)
+			{
+				if ((*it)->ide == ide)
+				{
+					m_encryptions.erase(it);
+					break;
+				}
+			}
+			return true;
+		}
+		else
+		{
+			(void)DialogUtils::Error("Couldn't delete encryption record with id " + std::to_string(ide) + " from database");
+			return false;
+		}
+	}
+	return false;
 }
 
 
