@@ -92,9 +92,9 @@ String Base64::Decode(const std::string_view& encoded_buffer)
 		i8_count++;
 		if (i8_count == 4)
 		{
-			output[output_idx++] = (bits >> 16);
-			output[output_idx++] = ((bits >> 8) & 0xff);
-			output[output_idx++] = (bits & 0xff);
+			output[output_idx++] = static_cast<i8>(bits >> 16);
+			output[output_idx++] = static_cast<i8>((bits >> 8) & 0xff);
+			output[output_idx++] = static_cast<i8>(bits & 0xff);
 			bits = 0;
 			i8_count = 0;
 		}
@@ -113,11 +113,11 @@ String Base64::Decode(const std::string_view& encoded_buffer)
 			ENIGMA_ERROR("Base64 Decode invalid character");
 			break;
 		case 2:
-			output[output_idx++] = (bits >> 10);
+			output[output_idx++] = static_cast<i8>(bits >> 10);
 			break;
 		case 3:
-			output[output_idx++] = (bits >> 16);
-			output[output_idx++] = ((bits >> 8) & 0xff);
+			output[output_idx++] = static_cast<i8>(bits >> 16);
+			output[output_idx++] = static_cast<i8>((bits >> 8) & 0xff);
 			break;
 		}
 	}

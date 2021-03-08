@@ -125,7 +125,7 @@ void EncryptTextScene::OnImGuiDraw()
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%llu bytes", m_text.size());
+			ImGui::Text("%d bytes", m_text.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -156,7 +156,7 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-				ImGui::Text("%llu bytes", m_password.size());
+				ImGui::Text("%d bytes", m_password.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -198,10 +198,12 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(3);
 
+
 		// Encrypt & Back Button
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
+			ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 			if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 			{
 				this->OnBackButtonPressed();

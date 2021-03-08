@@ -21,9 +21,9 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnBackButtonPressed();
-	void OnViewEncryptionButtonPressed(const size_t ide);
+	void OnViewEncryptionButtonPressed(const i64 ide);
 	// returns true if item deleted successfully to notify draw loop that vector range changed
-	bool OnDeleteEncryptionButtonPressed(const size_t ide); 
+	bool OnDeleteEncryptionButtonPressed(const i64 ide);
 
 private: /* Initializers */
 	// Get all Encryptions from database

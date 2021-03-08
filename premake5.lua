@@ -107,10 +107,10 @@ project "Enigma"
 	includedirs
 	{
 		"Source", -- include Source/ dir so we can include e.g "Core/Core.hpp" directly, not to keep going back steps e.g "../../Core/Core.hpp"
-		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
+		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.pfd}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.cxxopts}",
@@ -131,6 +131,7 @@ project "Enigma"
 		"glad", 
 		"imgui",
 		"spdlog",
+		"pfd",
 		"stb_image",
 		"cxxopts",
 		"cryptopp",

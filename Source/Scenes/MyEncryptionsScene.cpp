@@ -220,7 +220,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_18); // text font
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			{
-				static constexpr const auto text = "No Encryption records saved yet.";
+				static constexpr const auto text = "No Encryptions saved yet.";
 				static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
 				ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
 				ImGui::Text(text);
@@ -293,6 +293,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+			ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 			if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 			{
 				this->OnBackButtonPressed();
@@ -331,7 +332,7 @@ void MyEncryptionsScene::OnBackButtonPressed()
 	this->EndScene();
 }
 
-void MyEncryptionsScene::OnViewEncryptionButtonPressed(const size_t ide)
+void MyEncryptionsScene::OnViewEncryptionButtonPressed(const i64 ide)
 {
 	ENIGMA_TRACE("View {0}", ide);
 
@@ -339,7 +340,7 @@ void MyEncryptionsScene::OnViewEncryptionButtonPressed(const size_t ide)
 }
 
 // returns true if item deleted successfully to notify draw loop that vector range changed
-bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const size_t ide)
+bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 {
 	ENIGMA_TRACE("Delete {0}", ide);
 	ENIGMA_TRACE("Confirming deletion of encryption with id {0}", ide);

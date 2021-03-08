@@ -103,6 +103,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 		{
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+			ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 			if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 			{
 				this->OnBackButtonPressed();

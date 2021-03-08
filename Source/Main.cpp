@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
 	Enigma::Logger::Initialize();
 	// Initialize SQLite3 Database
 	Enigma::Database::Initialize();
-	
 #if !ENIGMA_TEST
 	// Command Line Interface Entry
 	if (argc > 1)

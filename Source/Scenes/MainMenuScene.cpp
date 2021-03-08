@@ -160,6 +160,7 @@ void MainMenuScene::OnImGuiDraw()
 				spacing(9);
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+					ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
 					if (ImGuiWidgets::Button("Exit", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 					{
 						this->EndScene();
