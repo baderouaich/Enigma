@@ -14,6 +14,7 @@
 #else
 	#include <Enigma.hpp>
 #endif
+
 int main(int argc, char* argv[])
 {	
 	// Initialize Enigma Logger

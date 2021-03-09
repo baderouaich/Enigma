@@ -26,7 +26,7 @@ public:
 		Title,
 		DateTime,
 	};
-	friend std::ostream& operator<<(std::ostream& os, OrderBy order_by) noexcept
+	friend std::ostream& operator<<(std::ostream& os, OrderBy order_by) noexcept // for constructing sql
 	{
 		switch (order_by)
 		{
@@ -41,7 +41,7 @@ public:
 		Ascending,
 		Descending,
 	};
-	friend std::ostream& operator<<(std::ostream& os, Order order) noexcept
+	friend std::ostream& operator<<(std::ostream& os, Order order) noexcept // for constructing sql
 	{
 		switch (order)
 		{
@@ -138,23 +138,6 @@ public: // Encryption Operations
 				sql << " ORDER BY" << order_by << order;
 			}
 			
-			// Construct Order & Order by string
-			/*std::ostringstream oss{};
-			{
-				switch (order_by)
-				{
-					case OrderBy::ID: oss << " e.ide"; break;
-					case OrderBy::Title: oss << " e.title"; break;
-					case OrderBy::DateTime: oss << " e.date_time"; break;
-				}
-				switch (order)
-				{
-					case Order::Ascending: oss << " ASC"; break;
-					case Order::Descending: oss << " DESC"; break;
-				}
-			}
-			sql << " ORDER BY" << oss.str();
-			*/
 			ENIGMA_LOG("SQL: {0}", sql.str());
 
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
@@ -191,19 +174,13 @@ public: // Encryption Operations
 	static bool DeleteEncryption(const i64 ide);
 
 
-#if 0
-public:
-	// Export database backup
-	static bool SaveBackup(const char* file_name)
-	{
-		m_database->backup(file_name, SQLite::Database::BackupType::Save);
-		return true;
-	}
-#endif
-
 private:
 	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr };
 
+
+public:
+	ENIGMA_NON_COPYABLE(Database);
+	ENIGMA_NON_MOVEABLE(Database);
 };
 /*
 Notes:

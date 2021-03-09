@@ -151,6 +151,7 @@
 /// Begin and end timer with a unit
 #define ENIGMA_BEGIN_TIMER(var) const auto var = std::chrono::steady_clock::now()
 #define ENIGMA_END_TIMER(var, type, unit) std::chrono::duration_cast<std::chrono::duration<type, unit>>(std::chrono::steady_clock::now() - var).count()
+// example: double ms = ENIGMA_END_TIMER(t1, double, std::milli);
 ///
 
 

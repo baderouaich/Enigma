@@ -78,38 +78,54 @@ void MyEncryptionsScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(2);
 
-		// Order By 
+		// Order By
 		ImGui::PushFont(font_montserrat_medium_18); // text font
 		ImGui::Text("Order By "); ImGui::SameLine();
 		if (ImGui::RadioButton("ID", m_order_by == Database::OrderBy::ID))
 		{
-			m_order_by = Database::OrderBy::ID;
-			this->GetAllEncryptions();
+			if (m_order_by != Database::OrderBy::ID) // avoid exhausting database
+			{
+				m_order_by = Database::OrderBy::ID;
+				this->GetAllEncryptions();
+			}
+
 		}
 		ImGui::SameLine();
 		if (ImGui::RadioButton("Title", m_order_by == Database::OrderBy::Title))
 		{
-			m_order_by = Database::OrderBy::Title;
-			this->GetAllEncryptions();
+			if (m_order_by != Database::OrderBy::Title) // avoid exhausting database
+			{
+				m_order_by = Database::OrderBy::Title;
+				this->GetAllEncryptions();
+			}
 		}	
 		ImGui::SameLine();
 		if (ImGui::RadioButton("Date Time", m_order_by == Database::OrderBy::DateTime))
 		{
-			m_order_by = Database::OrderBy::DateTime;
-			this->GetAllEncryptions();
-		}		
+			if (m_order_by != Database::OrderBy::DateTime) // avoid exhausting database
+			{
+				m_order_by = Database::OrderBy::DateTime;
+				this->GetAllEncryptions();
+			}
+		}	
 		// Order ASC DESC
 		ImGui::Text("Order "); ImGui::SameLine();
 		if (ImGui::RadioButton("Ascending", m_order == Database::Order::Ascending))
 		{
-			m_order = Database::Order::Ascending;
-			this->GetAllEncryptions();
+			if (m_order != Database::Order::Ascending) // avoid exhausting database
+			{
+				m_order = Database::Order::Ascending;
+				this->GetAllEncryptions();
+			}
 		}
 		ImGui::SameLine();
 		if (ImGui::RadioButton("Descending", m_order == Database::Order::Descending))
 		{
-			m_order = Database::Order::Descending;
-			this->GetAllEncryptions();
+			if (m_order != Database::Order::Descending) // avoid exhausting database
+			{
+				m_order = Database::Order::Descending;
+				this->GetAllEncryptions();
+			}
 		}
 		ImGui::PopFont();
 
@@ -367,7 +383,9 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 		}
 		else
 		{
-			(void)DialogUtils::Error("Couldn't delete encryption record with id " + std::to_string(ide) + " from database");
+			const String msg = "Couldn't delete encryption record with id " + std::to_string(ide) + " from database";
+			ENIGMA_ERROR(msg);
+			(void)DialogUtils::Error(msg);
 			return false;
 		}
 	}
