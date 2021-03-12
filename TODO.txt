@@ -2,3 +2,4 @@
 - Add Database system to save encrypted text or maybe files too, user can export/import database
 - Add Search textfield feature in MyEncryptionsScene  with Like %%
 - Add CLi option --save -s to database if selected, and --list to show all encryption records
+- Make cli options --updates only -- without single char 
