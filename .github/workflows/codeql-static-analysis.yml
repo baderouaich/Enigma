@@ -15,14 +15,14 @@ on:
   push:
     branches: [ master ]
     paths-ignore: # ignore 
-      - Dependencies
-      - Resources
+      - 'Dependencies'
+      - 'Resources'
   pull_request:
     branches: [ master ]
-      - Dependencies
-      - Resources
+      - 'Dependencies'
+      - 'Resources'
   schedule:
-    - cron: '25 4 * * 2'
+    - cron: '24 8 * * 5'
 
 jobs:
   analyze:
