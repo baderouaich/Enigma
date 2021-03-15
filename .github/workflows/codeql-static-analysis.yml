@@ -1,3 +1,4 @@
+## This workflow will add Security tab to the repository, which has all analysis details ##
 name: "CodeQL"
 
 on:
