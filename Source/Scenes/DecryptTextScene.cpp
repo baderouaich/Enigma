@@ -125,7 +125,7 @@ void DecryptTextScene::OnImGuiDraw()
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%d bytes", m_cipher_base64.size());
+			ImGui::Text("%zu bytes", m_cipher_base64.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -145,7 +145,7 @@ void DecryptTextScene::OnImGuiDraw()
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%d bytes", m_password.size());
+			ImGui::Text("%zu bytes", m_password.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -169,7 +169,7 @@ void DecryptTextScene::OnImGuiDraw()
 
 				// Bytes count
 				ImGui::PushFont(font_montserrat_medium_12);
-				ImGui::Text("%d bytes", m_recovered_text.size());
+				ImGui::Text("%zu bytes", m_recovered_text.size());
 				ImGui::PopFont();
 
 			}

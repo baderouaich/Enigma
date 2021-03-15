@@ -125,7 +125,7 @@ void EncryptTextScene::OnImGuiDraw()
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%d bytes", m_text.size());
+			ImGui::Text("%zu bytes", m_text.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -156,7 +156,7 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-				ImGui::Text("%d bytes", m_password.size());
+				ImGui::Text("%zu bytes", m_password.size());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
