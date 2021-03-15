@@ -28,7 +28,7 @@ jobs:
       uses: github/codeql-action/init@v1
       with:
         languages: ${{ matrix.language }}
-        config-file: ./.github/codeql/codeql-config.yaml
+        config-file: ./.github/codeql/codeql-config.yml
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
@@ -53,7 +53,7 @@ jobs:
         sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev
         tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/
         sudo bash ./Gen-Linux-Makefile.sh
-        make config=release CC=gcc-10 CPP=g++-10 -j$(nproc) #$(nproc) will return the number of cores on the machine
-        
+        make config=release CC=gcc-10 CPP=g++-10 -j$(nproc)
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
