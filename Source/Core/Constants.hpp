@@ -94,7 +94,7 @@ namespace Enigma
 						data			BLOB NOT NULL, -- cipher text or file binary cipher compressed             
 						ide				INTEGER,
 
-						FOREIGN KEY(ide) REFERENCES Encryptions(ide) -- ON DELETE CASCADE
+						FOREIGN KEY(ide) REFERENCES Encryption(ide) -- ON DELETE CASCADE
 					);
 				)"
 			};
