@@ -54,6 +54,7 @@ void EncryptTextScene::OnImGuiDraw()
 	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 	static ImFont* const& font_montserrat_medium_20 = m_fonts.at("Montserrat-Medium-20");
+	static ImFont* const& font_montserrat_medium_16 = m_fonts.at("Montserrat-Medium-16");
 	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
 
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
@@ -194,7 +195,23 @@ void EncryptTextScene::OnImGuiDraw()
 
 
 
-		spacing(3);
+		spacing(1);
+		ImGui::Separator();
+		spacing(1);	
+
+		// Save to database widget
+		ImGui::PushFont(font_montserrat_medium_16);
+		{
+			ImGui::Checkbox("Save to database", &m_save_to_database);
+			if (m_save_to_database)
+			{
+				ImGui::Text("Encryption Title:");
+				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My Github Password) helps with searching through encryption records in the future", &m_db_title, win_w /1.3f);
+			}
+		}
+		ImGui::PopFont();
+		
+		spacing(1);
 		ImGui::Separator();
 		spacing(3);
 
@@ -292,11 +309,24 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			m_cipher_base64 = Base64::Encode(m_cipher);
 			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), "Failed to encode cipher text to Base64");
 
+			// Save to database
+			if (m_save_to_database)
+			{
+				ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), "Encryption title is too long or short, must be between 3 and 255 characters");
+				auto e = std::make_unique<Encryption>();
+				e->title = m_db_title;
+				e->is_file = false;
+				e->cipher.data = GZip::Compress(m_cipher);
+				e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
+				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+			}
+
 			// Spawn notification alert if window is not focused
 			if (!Application::GetInstance()->GetWindow()->IsFocused())
 			{
 				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
 			}
+
 
 #if 0
 			// Create encryptor based on selected algorithm type

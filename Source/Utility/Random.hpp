@@ -51,7 +51,7 @@ public:
 		String str(length, '\000');
 		for (char& c : str)
 		{
-			const i16 i = Int(i16(1), i16(3));
+			const i16 i = Int(static_cast<i16>(1), static_cast<i16>(3));
 			switch (i)
 			{
 			case 1: // a-z

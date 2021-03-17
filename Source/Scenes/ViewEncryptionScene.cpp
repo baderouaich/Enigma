@@ -13,7 +13,7 @@ ViewEncryptionScene::ViewEncryptionScene(const size_t encryption_id, const std::
 	ENIGMA_TRACE("Gettings encryption's data id {0} from database", encryption_id);
 	
 	// Get Encryption record with all cipher and is_file properties which matter in this case
-	m_encryption = Database::GetEncryptionByID<true, true, true, true>(encryption_id);
+	m_encryption = Database::GetEncryptionByID<true, true, true, true, true>(encryption_id);
 	if (!m_encryption)
 	{
 		(void)DialogUtils::Error("Couldn't get encryption record from database");

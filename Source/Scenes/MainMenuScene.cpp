@@ -152,11 +152,15 @@ void MainMenuScene::OnImGuiDraw()
 					this->OnDecryptTextButtonPressed();
 				}
 				spacing(6);
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR); // buttons color idle
+				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER);  // buttons color hover
+				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				if (ImGui::Button("My Encryptions", button_size))
 				{
 					this->OnMyEncryptionsButtonPressed();
 				}
+				ImGui::PopStyleColor(3);
 				spacing(9);
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
@@ -233,6 +237,7 @@ void MainMenuScene::LoadImGuiFonts()
 	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 20.0f);
 	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 18.0f);
 	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 12.0f);
+	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 16.0f);
 
 	io.Fonts->Build(); //Build added fonts atlas --> imgui issue #3643
 

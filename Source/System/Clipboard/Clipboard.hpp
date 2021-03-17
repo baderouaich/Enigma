@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ENIGMA_CLIPBOARD_H
 #define ENIGMA_CLIPBOARD_H
 

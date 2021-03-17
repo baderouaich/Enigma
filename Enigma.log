@@ -1,37 +1,44 @@
-[2021-03-09 20:43:52] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
-[2021-03-09 20:43:52] [info] Enigma: SQLite3 version 3.32.3
-[2021-03-09 20:43:52] [info] Enigma: [ OpenGL Info ]
+[2021-03-17 15:47:37] [info] Enigma: SQLite3 version 3.32.3
+[2021-03-17 15:47:37] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-03-09 20:43:52] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-03-09 20:43:52] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-03-09 20:43:52] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
-[2021-03-09 20:43:52] [trace] Enigma: Loading Fonts...
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-03-09 20:43:52] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-03-09 20:43:54] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
-[2021-03-09 20:43:54] [info] Enigma: Getting all encryptions from database...
-[2021-03-09 20:43:54] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
-[2021-03-09 20:43:54] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide DESC
-[2021-03-09 20:43:54] [info] Enigma: Got 0 Encryption records.
-[2021-03-09 20:44:08] [info] Enigma: Getting all encryptions from database...
-[2021-03-09 20:44:08] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
-[2021-03-09 20:44:08] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.ide ASC
-[2021-03-09 20:44:08] [info] Enigma: Got 0 Encryption records.
-[2021-03-09 20:44:09] [info] Enigma: Getting all encryptions from database...
-[2021-03-09 20:44:09] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
-[2021-03-09 20:44:09] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.date_time ASC
-[2021-03-09 20:44:09] [info] Enigma: Got 0 Encryption records.
-[2021-03-09 20:44:10] [info] Enigma: Getting all encryptions from database...
-[2021-03-09 20:44:10] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
-[2021-03-09 20:44:10] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.is_file FROM Encryption e ORDER BY e.title ASC
-[2021-03-09 20:44:10] [info] Enigma: Got 0 Encryption records.
-[2021-03-09 20:44:11] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
-[2021-03-09 20:44:11] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-03-17 15:47:37] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-03-17 15:47:37] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-03-17 15:47:37] [trace] Enigma: void __cdecl Enigma::MainMenuScene::LoadImGuiFonts(void)
+[2021-03-17 15:47:37] [trace] Enigma: Loading Fonts...
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-03-17 15:47:37] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
+[2021-03-17 15:47:39] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
+[2021-03-17 15:47:39] [info] Enigma: Getting all encryptions from database...
+[2021-03-17 15:47:39] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-03-17 15:47:39] [info] Enigma: Got 4 Encryption records.
+[2021-03-17 15:47:40] [trace] Enigma: Delete 4
+[2021-03-17 15:47:40] [trace] Enigma: Confirming deletion of encryption with id 4
+[2021-03-17 15:47:43] [trace] Enigma: Deleting encryption with id 4 from database
+[2021-03-17 15:47:43] [debug] Enigma: SQL: DELETE FROM Cipher WHERE ide = ?
+[2021-03-17 15:47:43] [debug] Enigma: SQL: DELETE FROM Encryption WHERE ide = ?
+[2021-03-17 15:47:43] [trace] Enigma: Deleting encryption with id 4 from vector
+[2021-03-17 15:47:45] [trace] Enigma: Delete 3
+[2021-03-17 15:47:45] [trace] Enigma: Confirming deletion of encryption with id 3
+[2021-03-17 15:47:46] [trace] Enigma: Deleting encryption with id 3 from database
+[2021-03-17 15:47:46] [debug] Enigma: SQL: DELETE FROM Cipher WHERE ide = ?
+[2021-03-17 15:47:46] [debug] Enigma: SQL: DELETE FROM Encryption WHERE ide = ?
+[2021-03-17 15:47:46] [trace] Enigma: Deleting encryption with id 3 from vector
+[2021-03-17 15:47:47] [trace] Enigma: Delete 2
+[2021-03-17 15:47:47] [trace] Enigma: Confirming deletion of encryption with id 2
+[2021-03-17 15:47:47] [trace] Enigma: Deleting encryption with id 2 from database
+[2021-03-17 15:47:47] [debug] Enigma: SQL: DELETE FROM Cipher WHERE ide = ?
+[2021-03-17 15:47:47] [debug] Enigma: SQL: DELETE FROM Encryption WHERE ide = ?
+[2021-03-17 15:47:47] [trace] Enigma: Deleting encryption with id 2 from vector
+[2021-03-17 15:47:48] [trace] Enigma: Delete 1
+[2021-03-17 15:47:48] [trace] Enigma: Confirming deletion of encryption with id 1
+[2021-03-17 15:47:50] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
+[2021-03-17 15:47:57] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)

@@ -33,5 +33,9 @@ private:
 	String m_cipher_base64; // Encrypted text in Base64
 	String m_password, m_confirm_password; // Encryption password
 
+	// Save to database 
+	String m_db_title;
+	bool m_save_to_database{ false };
+
 };
 NS_ENIGMA_END

@@ -99,6 +99,7 @@ project "Enigma"
 	---[[ Source files ]]---
 	files
 	{
+		"premake5.lua",
 		"Source/**.hpp",
 		"Source/**.cpp"
 	}

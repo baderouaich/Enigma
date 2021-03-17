@@ -38,7 +38,15 @@ namespace ImGuiWidgets
 		ImGui::PopItemWidth();
 		return ret;
 	}
+	static bool InputTextWithHint(const char* label, const char* hint, std::string* str, const float& width, ImGuiInputTextFlags flags = 0)
+	{
+		ImGui::PushItemWidth(width);
+		flags |= ImGuiInputTextFlags_CallbackResize;
+		bool ret = ImGui::InputTextWithHint(label, hint, (char*)str->c_str(), str->capacity() + 1, flags, ImGuiWidgets::InputTextCallback, (void*)str);
+		ImGui::PopItemWidth();
+		return ret;
 
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	static bool Button(const char* text,

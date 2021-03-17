@@ -50,6 +50,15 @@ void Database::Initialize()
 
 }
 
+void Database::Shutdown()
+{
+#ifdef ENIGMA_DEBUG
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+#endif
+	// Cleanup Database file Fragments caused by large deletions..
+	Vacuum();
+}
+
 // Add Encryption to Encryptions table, returns true on success
 bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 {
@@ -60,20 +69,21 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 	try
 	{
 		auto transaction = std::make_unique<SQLite::Transaction>(*m_database);
-
 		// Insert encryption
 		{
-			constexpr char* sql = "INSERT INTO Encryption(title, date_time, is_file) VALUES(?, DATETIME(), ?)";
+			constexpr char* sql = "INSERT INTO Encryption(title, date_time, size, is_file) VALUES(?, DATETIME(), ?, ?)";
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->title);
-			query->bind(2, static_cast<i32>(e->is_file));
+			ENIGMA_INFO("size from query {0}", e->size);
+			query->bind(2, e->size);
+			query->bind(3, static_cast<i32>(e->is_file));
 			i32 r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert encyption record");
 		}
 		
 		// Get inserted encryption id
-		const i64 encryption_last_inserted_id = m_database->getLastInsertRowid();
+		const i64 last_inserted_encryption_id = m_database->getLastInsertRowid();
 		
 		// Insert cipher
 		{
@@ -81,13 +91,12 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->cipher.data.data(), e->cipher.data.size()); // bind blob
-			query->bind(2, encryption_last_inserted_id);
+			query->bind(2, last_inserted_encryption_id);
 			i32 r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert cipher record");
 		}
 		
-		
-		// OK
+		// OK (transaction will rollback when it goes out of scope)
 		transaction->commit();
 
 		return true;

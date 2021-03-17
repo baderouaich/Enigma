@@ -53,7 +53,7 @@ public:
 	}
 
 private:
-	std::unique_ptr<INIReader> m_ini_reader;
+	std::unique_ptr<INIReader> m_ini_reader{};
 
 };
 NS_ENIGMA_END

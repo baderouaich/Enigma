@@ -31,7 +31,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("u,decompress", "Decompress File After Decrypting") // -u | --decompress 
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma's version")  // VERSION
-			("n, updates", "Check for updates")  // Check for enigma updates from github api
+			("check-for-updates", "Check for new version releases")  // Check for enigma updates from github api
 			;
 
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));
@@ -75,8 +75,8 @@ i32 CLI::Run()
 		this->OnVersion();
 		return EXIT_SUCCESS;
 	}
-	// Handle --updates & -n options
-	if (r.count("n") || r.count("updates"))
+	// Handle --check-for-updates
+	if (r.count("check-for-updates"))
 	{
 		this->OnCheckForUpdates();
 		return EXIT_SUCCESS;

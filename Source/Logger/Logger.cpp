@@ -9,8 +9,12 @@ void Logger::Initialize()
 
 	// console logger
 	log_sinks[0] = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+
 	// file logger
-	log_sinks[1] = std::make_shared<spdlog::sinks::basic_file_sink_mt>("Enigma.log", true);
+	const String enigma_dir = ENV::Get("ENIGMA_DIR");
+	fs::path log_file_path = fs::path(enigma_dir) / "Enigma.log";
+	//std::printf("Enigma: Logs file path: %s\n", log_file_path.string().c_str()); 
+	log_sinks[1] = std::make_shared<spdlog::sinks::basic_file_sink_mt>(log_file_path.string(), true);
 
 	// set pattern of the console logger
 	log_sinks[0]->set_pattern("%^[%T] %n: %v%$"); // regex like pattern output format https://github.com/gabime/spdlog/wiki/3.-Custom-formatting

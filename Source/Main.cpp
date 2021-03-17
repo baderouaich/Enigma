@@ -16,29 +16,45 @@
 #endif
 
 int main(int argc, char* argv[])
-{	
+{
+	// Set ENIGMA_DIR environment variable value (will help CLI detect Enigma directory to use Database and other resources externally)
+	Enigma::ENV::Set(Enigma::Constants::ENV::ENIGMA_DIR_ENV_KEY, fs::current_path().string());
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 	// Initialize SQLite3 Database
-	Enigma::Database::Initialize();
+	//Enigma::Database::Initialize();
 #if !ENIGMA_TEST
 	// Command Line Interface Entry
 	if (argc > 1)
 	{
+		// ======================== CLI ======================== //
 		std::unique_ptr<Enigma::CLI> _Cli = std::make_unique<Enigma::CLI>(argc, argv);
-		return _Cli->Run();
+		auto exit_status =  _Cli->Run();
+		// Shutdown Enigma Logger
+		Enigma::Logger::Shutdown();
+		// Shutdown SQLite3 Database
+		Enigma::Database::Shutdown();
+		// Exit
+		return exit_status;
 	}
 	// Application Entry
 	else
 	{
+		// ======================== UI ======================== //
 		try
-		{
-			// Create Enigma UI Application
+		{		
+			// Load Window Configuration (title, width, height...)
 			Enigma::Config window_config(Enigma::Constants::Config::ENIGMA_WINDOW_SETTINGS_CONFIG_PATH);
+			// Construct WindowSettings from loaded Config
 			Enigma::WindowSettings window_settings = Enigma::WindowSettings::FromConfig(window_config);
+			// Create Enigma UI Application
 			std::unique_ptr<Enigma::Application> _App = std::make_unique<Enigma::Application>(window_settings);
 			// Run Application
 			_App->Run();
+			// Shutdown Enigma Logger
+			Enigma::Logger::Shutdown();
+			// Shutdown SQLite3 Database
+			Enigma::Database::Shutdown();
 			// Exit
 			return EXIT_SUCCESS;
 		}
@@ -46,13 +62,23 @@ int main(int argc, char* argv[])
 		{
 			// Exit abnormally 
 			ENIGMA_CRITICAL(e.what());
+			// Shutdown Enigma Logger
+			Enigma::Logger::Shutdown();
+			// Exit
 			return EXIT_FAILURE;
 		}
 
 	}
 #else
+	// ======================== Tests ======================== //
 	// Run Tests
-	return Catch::Session().run(argc, argv);
+	auto exit_status = Catch::Session().run(argc, argv);
+	// Shutdown Enigma Logger
+	Enigma::Logger::Shutdown();
+	// Shutdown SQLite3 Database
+	Enigma::Database::Shutdown();
+	// Exit
+	return exit_status;
 #endif
 }
 
@@ -70,7 +96,7 @@ int WINAPI WinMain(
 	_In_ LPSTR cmd_line, 
 	_In_ int cmd_show) 
 {
-	return main(__argc, __argv);
+	return ::main(__argc, __argv);
 }
 
 #endif

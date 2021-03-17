@@ -43,16 +43,12 @@ public:
 	};
 	friend std::ostream& operator<<(std::ostream& os, Order order) noexcept // for constructing sql
 	{
-		switch (order)
-		{
-			case Order::Ascending: os << " ASC"; break;
-			case Order::Descending: os << " DESC"; break;
-		}
-		return os;
+		return os << (order == Order::Ascending ? " ASC" : " DESC");
 	}
 
 public:
 	static void Initialize();
+	static void Shutdown();
 
 public: // Encryption Operations
 	// Add Encryption to Encryptions table, returns true on success
@@ -60,7 +56,7 @@ public: // Encryption Operations
 
 
 	// Get an Encyrption by id with desired columns for optimization
-	template<const bool title, const bool cipher, const bool date_time, const bool is_file>
+	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
 	{
 #ifdef ENIGMA_DEBUG
@@ -78,6 +74,7 @@ public: // Encryption Operations
 				if constexpr (title) sql << ", e.title";
 				if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
 				if constexpr (date_time) sql << ", e.date_time";
+				if constexpr (size) sql << ", e.size";
 				if constexpr (is_file) sql << ", e.is_file";
 				sql << " FROM Encryption e";
 				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.ide";
@@ -100,6 +97,7 @@ public: // Encryption Operations
 					e->cipher.ide  = query->getColumn(i++).getInt64();
 				}
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
+				if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
 				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
 			}
 
@@ -114,7 +112,7 @@ public: // Encryption Operations
 
 
 	// Get all Encryptions with desired columns for optimization
-	template<const bool title, const bool cipher, const bool date_time, const bool is_file>
+	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
 #ifdef ENIGMA_DEBUG
@@ -132,6 +130,7 @@ public: // Encryption Operations
 				if constexpr (title) sql << ", e.title";
 				if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
 				if constexpr (date_time) sql << ", e.date_time";
+				if constexpr (size) sql << ", e.size";
 				if constexpr (is_file) sql << ", e.is_file";
 				sql << " FROM Encryption e";
 				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
@@ -157,6 +156,7 @@ public: // Encryption Operations
 					e->cipher.ide  = query->getColumn(i++).getInt64();
 				}
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
+				if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
 				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
 
 				encryptions.emplace_back(std::move(e));
@@ -174,8 +174,84 @@ public: // Encryption Operations
 	static bool DeleteEncryption(const i64 ide);
 
 
+	// Search Encryptions by title using keyword LIKE %QUERY%
+	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file> // select which columns to return (for optimization)
+	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
+	{
+#ifdef ENIGMA_DEBUG
+		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+#endif
+		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});
+
+		std::vector<std::unique_ptr<Encryption>> encryptions{};
+		try
+		{
+			// Construct SQL
+			std::ostringstream sql{};
+			{
+				sql << "SELECT e.ide";
+				if constexpr (title) sql << ", e.title";
+				if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
+				if constexpr (date_time) sql << ", e.date_time";
+				if constexpr (size) sql << ", e.size";
+				if constexpr (is_file) sql << ", e.is_file";
+				sql << " FROM Encryption e";
+				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
+				sql << " WHERE LOWER(e.title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%'";
+				sql << " ORDER BY" << order_by << order;
+			}
+
+			ENIGMA_LOG("SQL: {0}", sql.str());
+
+			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
+
+			// Loop to execute the query step by step, to get rows of result
+			while (query->executeStep())
+			{
+				auto e = std::make_unique<Encryption>();
+
+				i32 i{ 0 }; // for getColumn, use index starts by 0
+				e->ide = query->getColumn(i++).getInt64();
+				if constexpr (title) e->title = query->getColumn(i++).getString();
+				if constexpr (cipher)
+				{
+					e->cipher.idc = query->getColumn(i++).getInt64();
+					e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					e->cipher.ide = query->getColumn(i++).getInt64();
+				}
+				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
+				if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
+				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
+
+				encryptions.emplace_back(std::move(e));
+			}
+		}
+		catch (const SQLite::Exception& e)
+		{
+			ENIGMA_ERROR("{0}", e.what());
+		}
+		return encryptions;
+	}
+
+
+public: // Accessors
+	static const std::unique_ptr<SQLite::Database>& GetInstance() noexcept { return m_database; }
+
+public: // Modifiers
+	/*
+	*	https://www.sqlitetutorial.net/sqlite-vacuum/
+	*	Cleans up allocated disk space for deleted data, blob...
+	*	When you insert or delete data from the tables, the indexes and tables become fragmented, 
+	*	especially for the database that has a high number of inserts, updates, and deletes.
+	*/
+	static void Vacuum() noexcept 
+	{
+		ENIGMA_INFO("Vacuuming SQLite3 Database...");
+		(void)m_database->exec("VACUUM");
+	}
+
 private:
-	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr };
+	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; // Database connection configuered on Initialize()
 
 
 public:

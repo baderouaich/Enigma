@@ -58,6 +58,7 @@ void EncryptFileScene::OnImGuiDraw()
 	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
 	static ImFont* const& font_montserrat_medium_20 = m_fonts.at("Montserrat-Medium-20");
 	static ImFont* const& font_montserrat_medium_18 = m_fonts.at("Montserrat-Medium-18");
+	static ImFont* const& font_montserrat_medium_16 = m_fonts.at("Montserrat-Medium-16");
 	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
 
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
@@ -198,9 +199,27 @@ void EncryptFileScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
-		spacing(3);
+
+		spacing(1);
+		ImGui::Separator();
+		spacing(1);
+
+		// Save to database widget
+		ImGui::PushFont(font_montserrat_medium_16);
+		{
+			ImGui::Checkbox("Save to database", &m_save_to_database);
+			if (m_save_to_database)
+			{
+				ImGui::Text("Encryption Title:");
+				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My ID card image) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
+			}
+		}
+		ImGui::PopFont();
+
+		spacing(1);
 		ImGui::Separator();
 		spacing(3);
+
 
 		// Encrypt & Back Button 
 		{
@@ -354,8 +373,10 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			
 			// Compression
 			size_t old_buffer_size{ 0 }, new_buffer_size{ 0 }, decreased_bytes{ 0 };
-			if (m_compress)
+			if (m_compress || m_save_to_database)  // Force file buffer to be compressed to reduce size of the database even if user doesnt check m_compress
 			{
+				if (m_save_to_database) ENIGMA_INFO("Forcing file buffer to be compressed to reduce size of the database");
+
 				ENIGMA_TRACE("Compressing file buffer {0} ...", m_in_filename);
 				old_buffer_size = buffer.size();
 				buffer = GZip::Compress(buffer);
@@ -373,6 +394,18 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			// Write cipher to out file
 			const bool file_written_success = FileUtils::Write(m_out_filename, cipher);
 			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write cipher to file " + m_out_filename);
+
+			// Save to database (Note: file buffer forced to be compressed above if saving to database)
+			if (m_save_to_database)
+			{
+				ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), "Encryption title is too long or short, must be between 3 and 255 characters");
+				auto e = std::make_unique<Encryption>();
+				e->title = m_db_title;
+				e->is_file = true;
+				e->cipher.data = cipher; // already compressed above
+				e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
+				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+			}
 
 			// Alert user that encryption was successfull
 			(void)DialogUtils::Info("Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +

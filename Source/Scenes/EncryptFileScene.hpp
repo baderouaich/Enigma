@@ -32,5 +32,9 @@ private:
 	String m_password, m_confirm_password;
 	bool m_compress{ true }; // Whether to compress file with Gzip before encrypting 
 
+	// Save to database 
+	String m_db_title;
+	bool m_save_to_database{ false };
+
 };
 NS_ENIGMA_END

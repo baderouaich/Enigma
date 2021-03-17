@@ -43,6 +43,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 {
 	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
 	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
+
 	static const auto& io = ImGui::GetIO();
 
 	const auto button_size = Vec2f(win_w / 2.6f, 40.0f);
@@ -76,7 +77,8 @@ void MyEncryptionsScene::OnImGuiDraw()
 
 		spacing(2);
 		ImGui::Separator();
-		spacing(2);
+		spacing(2);	
+
 
 		// Order By
 		ImGui::PushFont(font_montserrat_medium_18); // text font
@@ -133,6 +135,45 @@ void MyEncryptionsScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(2);
 
+		// Search Query
+		ImGui::PushFont(font_montserrat_medium_18); // text font
+		ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+		{
+			ImGui::LabelText("##label", "Search by title...");
+			if (ImGuiWidgets::InputText("##inputtext", &m_query, win_w / 2.0f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
+			{
+				// Enable searching
+				m_isSearching = true;
+
+				if (!m_query.empty())
+				{
+					this->OnSearchEncryptionsByTitle();
+				}
+			}
+			else // Button is not being edited now
+			{
+				m_isSearching = false;
+			}
+			ImGui::SameLine();
+			
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
+			if (ImGui::Button("Reset"))
+			{
+				m_isSearching = false;
+				m_query.clear();
+				this->GetAllEncryptions();
+			}
+			ImGui::PopStyleColor(3);
+		}
+		ImGui::PopStyleColor(3);
+		ImGui::PopFont();
+
+		spacing(2);
+
 		// Encryptions records Table 
 		// https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp#L5024
 		if (!m_encryptions.empty())
@@ -159,8 +200,8 @@ void MyEncryptionsScene::OnImGuiDraw()
 				ImGuiTableFlags_RowBg | // i % 2 ? dark row : light row
 				;
 			*/
-			static constexpr const auto NUM_COLUMNS = 4 + 1; // id, title... + 1 field has 2 buttons Operation(View|Delete)
-			if (ImGui::BeginTable("Encryptions", NUM_COLUMNS, table_flags, ImVec2(win_w - 20.0f, win_h / 1.60f)))
+			static constexpr const auto NUM_COLUMNS = 5 + 1; // id, title... + 1 field has 2 buttons Operation(View|Delete)
+			if (ImGui::BeginTable("Encryptions", NUM_COLUMNS, table_flags, ImVec2(win_w - 20.0f, win_h / 1.6f)))
 			{
 				ImGui::TableSetupScrollFreeze(0, 1); // Make top row always visible
 
@@ -181,27 +222,31 @@ void MyEncryptionsScene::OnImGuiDraw()
 				ImGui::TableSetupColumn("ID", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
 				ImGui::TableSetupColumn("Title", header_columns_flags | ImGuiTableColumnFlags_WidthStretch); // no need to specify title width fixed size, since table can can scroll x and y
 				ImGui::TableSetupColumn("Date Time", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+				ImGui::TableSetupColumn("Size", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
 				ImGui::TableSetupColumn("Type", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
 				ImGui::TableSetupColumn("Operation", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
 				ImGui::TableHeadersRow(); // show headers
 
 				// Rows
+				//for (const auto& enc_ptr : m_isSearching ? m_search_encryptions : m_encryptions)
 				for (const auto& enc_ptr : m_encryptions)
 				{
-					const auto& [id, title, _, date_time, is_file] = *enc_ptr;
+					const auto& [id, title, _, date_time, size, is_file] = *enc_ptr;
 
-					// id, title, date_time, is_file
+					// id, title, date_time, size, is_file
 					ImGui::TableNextRow();
 					ImGui::TableSetColumnIndex(0);
-					ImGui::Text("%d", id);
+					ImGui::Text("%zd", id);
 					ImGui::TableSetColumnIndex(1);
 					ImGui::TextWrapped("%s", title.c_str());
 					ImGui::TableSetColumnIndex(2);
 					ImGui::Text("%s", date_time.c_str());
 					ImGui::TableSetColumnIndex(3);
+					ImGui::Text("%s", ENIGMA_FRIENDLY_BYTES_SIZE(size));
+					ImGui::TableSetColumnIndex(4);
 					ImGui::Text("%s", is_file ? "File" : "Text");
 					// Operation (View|delete...)
-					ImGui::TableSetColumnIndex(4);
+					ImGui::TableSetColumnIndex(5);
 					{
 						ImGui::PushID(id); // Special id for button
 						if (ImGuiWidgets::Button("View"))
@@ -236,7 +281,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_18); // text font
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			{
-				static constexpr const auto text = "No Encryptions saved yet.";
+				static const auto text = m_isSearching ? "No Encryptions found." : "No Encryptions saved yet.";
 				static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
 				ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
 				ImGui::Text(text);
@@ -337,7 +382,7 @@ void MyEncryptionsScene::GetAllEncryptions()
 	m_encryptions.clear();
 
 	ENIGMA_INFO("Getting all encryptions from database...");
-	m_encryptions = Database::GetAllEncryptions<true, false, true, true>(m_order_by, m_order);
+	m_encryptions = Database::GetAllEncryptions<true, false, true, true, true>(m_order_by, m_order);
 	ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
 
 }
@@ -390,6 +435,15 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 		}
 	}
 	return false;
+}
+
+void MyEncryptionsScene::OnSearchEncryptionsByTitle()
+{
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+
+	m_encryptions.clear();
+	m_encryptions = Database::SearchEncryptionsByTitle<true, false, true, true, true>(m_query);
+
 }
 
 

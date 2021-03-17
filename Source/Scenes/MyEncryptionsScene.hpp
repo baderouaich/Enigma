@@ -24,6 +24,7 @@ private: /* Callbacks */
 	void OnViewEncryptionButtonPressed(const i64 ide);
 	// returns true if item deleted successfully to notify draw loop that vector range changed
 	bool OnDeleteEncryptionButtonPressed(const i64 ide);
+	void OnSearchEncryptionsByTitle();
 
 private: /* Initializers */
 	// Get all Encryptions from database
@@ -33,11 +34,13 @@ private:
 	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
 private:
-	std::vector<std::unique_ptr<Encryption>> m_encryptions;
-
-	Database::OrderBy m_order_by = Database::OrderBy::ID;
-	Database::Order m_order = Database::Order::Descending;
-
+	std::vector<std::unique_ptr<Encryption>> m_encryptions{}; // encryption records from database
+	Database::OrderBy m_order_by = Database::OrderBy::ID; // order by column
+	Database::Order m_order = Database::Order::Descending; // order desc/asc
+	
+	
+	String m_query{}; // title search query
+	bool m_isSearching{ false };
 };
 
 NS_ENIGMA_END

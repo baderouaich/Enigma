@@ -65,6 +65,12 @@ namespace Enigma
 		{
 			static constexpr const char* ENIGMA_WINDOW_SETTINGS_CONFIG_PATH = "./Resources/Config/WindowSettings.ini";
 		}
+
+		namespace ENV // Environment Variable
+		{
+			static constexpr const char* ENIGMA_DIR_ENV_KEY = "ENIGMA_DIR"; // Holds the directory path of Enigma
+		}
+
 		namespace Database
 		{
 			//https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
@@ -80,6 +86,7 @@ namespace Enigma
 						ide				INTEGER PRIMARY KEY AUTOINCREMENT,
 						title			VARCHAR(255) NOT NULL,
 						date_time		DATETIME NOT NULL,
+						size			INTEGER NOT NULL,   -- size of compressed cipher in bytes
 						is_file			BOOLEAN NOT NULL,
 
 						CHECK(LENGTH(title) <= 255) -- check title length <= 255
@@ -205,7 +212,9 @@ namespace Enigma
 
 			static const Color4f MENUBAR_BACKGROUND_COLOR = Color4f{1.0f, 1.0f, 1.0f, 0.06f}; // WHITE TRANSPARENT
 #endif
-			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(43, 43, 43, 255);
+			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(43, 43, 43, 255); // brown dark gray
+			//static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(46, 53, 56, 255); // cyan dark gray
+			//static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(46, 51, 56, 255); // blue dark gray
 
 			static const Color4f TEXT_COLOR = COLOR4I_TO_COLOR4F(242, 242, 243, 225);
 			static const Color4f ERROR_TEXT_COLOR = COLOR4I_TO_COLOR4F(201, 46, 64, 255);
@@ -221,6 +230,11 @@ namespace Enigma
 			static const Color4f BACK_BUTTON_COLOR = COLOR4I_TO_COLOR4F(209, 61, 86, 255);
 			static const Color4f BACK_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(232, 81, 107, 255);
 			static const Color4f BACK_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(150, 41, 59, 255);
+
+			static const Color4f MY_ENCRYPTIONS_BUTTON_COLOR = COLOR4I_TO_COLOR4F(26, 72, 97, 255);
+			static const Color4f MY_ENCRYPTIONS_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(38, 91, 120, 255);
+			static const Color4f MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(10, 132, 199, 255);
+
 
 		}
 	}

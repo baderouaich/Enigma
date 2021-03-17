@@ -1,9 +1,6 @@
 # codeql config file
 
 # DO NOT ANALYZE THESE FOLDERS
-paths: #for entire dirs
+paths-ignore:
   - Dependencies
   - Resources
-
-#paths-ignore: # for specific files
-  #- '**/*.lua'

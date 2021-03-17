@@ -13,6 +13,7 @@ struct Encryption
 	String title{}; // E.G: "this is my gmail password"
 	Cipher cipher{}; 
 	String date_time{}; // date & time saved by sqlite3
+	i64 size{}; // size of compressed cipher in bytes
 	bool is_file{}; // whether its a text or file encryption
 
 

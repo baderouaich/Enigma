@@ -50,6 +50,19 @@ public:
 	}
 
 	/*
+	*   Lowercase a string and return a copy of it
+	*/
+	static String LowerCopy(const String& str)
+	{
+		String cstr = str;
+		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const char& c)
+			{
+				return static_cast<char>(std::tolower(c));
+			});
+		return cstr;
+	}
+
+	/*
 	*   Uppercase a string
 	*/
 	static void Upper(String& str)
@@ -61,16 +74,16 @@ public:
 	}
 
 	/*
-	*	Check whether all string characters are the same. 
-	*	used to check if string is empty when memory is allocated with '\000' and size is not 0 (or use strlen())
+	*   Uppercase a string and return a copy of it
 	*/
-	template<typename T>
-	static bool IsAll(String& str, const T& v)
+	static String UpperCopy(const String& str)
 	{
-		return std::all_of(str.begin(), str.end(), [&v](const auto& c)
+		String cstr = str;
+		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const char& c)
 			{
-				return c == v;
+				return static_cast<char>(std::toupper(c));
 			});
+		return cstr;
 	}
 };
 NS_ENIGMA_END
