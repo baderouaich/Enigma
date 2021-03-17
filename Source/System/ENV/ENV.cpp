@@ -9,7 +9,7 @@ void ENV::Set(const std::string_view& key, const std::string_view& value)
 #if defined(ENIGMA_PLATFORM_WINDOWS)
     success = ::SetEnvironmentVariableA(key.data(), value.data());
 #else
-	success = std::setenv(key.data(), value.data(), true) == 0; // https://pubs.opengroup.org/onlinepubs/009604499/functions/setenv.html
+	success = setenv(key.data(), value.data(), true) == 0; // https://pubs.opengroup.org/onlinepubs/009604499/functions/setenv.html
 #endif
 	if(!success)
 		// Since ENV is used in the initialization of Logger, we cant use ENIGMA_ERROR here, printf will do.
@@ -28,7 +28,7 @@ const String ENV::Get(const std::string_view& key)
 	else
 		value.clear();
 #else
-	value = std::strdup(std::getenv(key.data())); // shall not return pointer to env, make a copy instead
+	value = strdup(getenv(key.data())); // shall not return pointer to env, make a copy instead
 #endif
 	if (value.empty())
 		std::printf("Couldn't Get Environment Variable %s\n", key.data());
@@ -43,7 +43,7 @@ void ENV::Delete(const std::string_view& key)
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	success = ::SetEnvironmentVariableA(key.data(), nullptr);
 #else
-	success = std::unsetenv(key.data()) == 0;
+	success = unsetenv(key.data()) == 0;
 #endif
 	if (!success)
 		std::printf("Couldn't Delete Environment Variable %s\n", key.data());

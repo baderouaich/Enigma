@@ -22,14 +22,14 @@ int main(int argc, char* argv[])
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 	// Initialize SQLite3 Database
-	//Enigma::Database::Initialize();
+	Enigma::Database::Initialize();
 #if !ENIGMA_TEST
 	// Command Line Interface Entry
 	if (argc > 1)
 	{
 		// ======================== CLI ======================== //
 		std::unique_ptr<Enigma::CLI> _Cli = std::make_unique<Enigma::CLI>(argc, argv);
-		auto exit_status =  _Cli->Run();
+		const auto exit_status =  _Cli->Run();
 		// Shutdown Enigma Logger
 		Enigma::Logger::Shutdown();
 		// Shutdown SQLite3 Database
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 #else
 	// ======================== Tests ======================== //
 	// Run Tests
-	auto exit_status = Catch::Session().run(argc, argv);
+	const auto exit_status = Catch::Session().run(argc, argv);
 	// Shutdown Enigma Logger
 	Enigma::Logger::Shutdown();
 	// Shutdown SQLite3 Database
