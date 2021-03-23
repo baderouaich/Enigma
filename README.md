@@ -27,11 +27,10 @@ A Simple, Reliable and Efficient UI + CLI Encryption Tool
 - :zap: Very fast encryption & decryption
 - :computer: User Interface & Command-Line Interface support
 - :shield: Strongest encryption algorithms of the decade
-<!--- :detective: Auto-detect algorithm used for encryption (no need to keep remembering which algorithm you used, just remember your password, and store cipher base64-text or encrypted file somewhere preferably clouds)-->
 - :package:	GZip compression to reduce size of files if sharing or uploading to clouds
 - :briefcase: SQLite3 Database system to save, import and export encryption records
 - :octocat: Open Source of course!
-
+<!--- :detective: Auto-detect algorithm used for encryption (no need to keep remembering which algorithm you used, just remember your password, and store cipher base64-text or encrypted file somewhere preferably clouds)-->
 
 ## Enigma CLI
 ```text

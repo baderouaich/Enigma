@@ -20,13 +20,13 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Preparing for release v1.2.1 (which has all above features since v1.0.1)
 
 
-<!-- In Progress
+<!-- In Progress...
 # 1.3.2
 - Fixed Clang compilation issue on linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
 - Added CLI option  (--updates | -n)  which checks for updates when using CLI
-- Added Database system to save encryption records
 - Upgraded imgui library from 1.79 to 1.81 (master branch)
 - Upgraded spdlog library from 1.8.0 to 1.8.2
 - Upgraded curl library from 7.74.0 to 7.75.0
 - Upgraded glfw library from 3.3.0 to 3.3.3
+- Added SQLite3 Database system to save, import and export encryption records
 -->

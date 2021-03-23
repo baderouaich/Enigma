@@ -21,8 +21,8 @@ public:
 	ENIGMA_NON_MOVEABLE(Scene);
 
 public:
-    Scene() noexcept;
-    virtual ~Scene() noexcept;
+	Scene() noexcept;
+	virtual ~Scene() noexcept;
 
 	/* Scene Life Cicle */
 	virtual void OnCreate() = 0;

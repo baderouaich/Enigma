@@ -90,7 +90,7 @@ namespace ImGuiWidgets
 		window->DrawList->PathClear();
 
 		int num_segments = 30;
-		int start = (int)std::abs(std::sinf(g.Time * 1.8f) * (num_segments - 5));
+		int start = (int)std::abs(sinf(g.Time * 1.8f) * (num_segments - 5));
 
 		const float a_min = IM_PI * 2.0f * ((float)start) / (float)num_segments;
 		const float a_max = IM_PI * 2.0f * ((float)num_segments - 3) / (float)num_segments;
@@ -99,8 +99,8 @@ namespace ImGuiWidgets
 
 		for (int i = 0; i < num_segments; i++) {
 			const float a = a_min + ((float)i / (float)num_segments) * (a_max - a_min);
-			window->DrawList->PathLineTo(ImVec2(centre.x + std::cosf(a + g.Time * 8.0f) * radius,
-				centre.y + std::sinf(a + g.Time * 8.0f) * radius));
+			window->DrawList->PathLineTo(ImVec2(centre.x + cosf(a + g.Time * 8.0f) * radius,
+				centre.y + sinf(a + g.Time * 8.0f) * radius));
 		}
 
 		window->DrawList->PathStroke(color, false, thickness);

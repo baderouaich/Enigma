@@ -11,7 +11,9 @@ debugger with ui, but when calling cli, it doesnt seem to be set or get)
 
 - DONE check why loadingscene's bg color doesnt work
 - DONE LoadingScene if(scene.isLoading()) render it over main scene.back
-- on action performed (onclick..) spawn detached thread r scene's worker thread seperated from ui 
+
+- halfway done... on action performed (onclick..) spawn detached thread r scene's worker thread seperated from ui 
+- modify readme.md's enigma --help section, --check-for-updates still hase -u
 
 #if 0
 #pragma region Populate Database With Random Data
