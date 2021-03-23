@@ -167,7 +167,6 @@ public:
 	{
 		using convert_type = std::codecvt_utf8<wchar_t>;
 		std::wstring_convert<convert_type, wchar_t> converter;
-
 		return converter.from_bytes(str);
 	}
 
@@ -178,7 +177,6 @@ public:
 	{
 		using convert_type = std::codecvt_utf8<wchar_t>;
 		std::wstring_convert<convert_type, wchar_t> converter;
-		sizeof convert_type;
 		return converter.to_bytes(wstr);
 	}
 
