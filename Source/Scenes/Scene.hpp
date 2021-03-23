@@ -6,6 +6,8 @@
 #include <Logger/Logger.hpp>
 #include <Events/Event.hpp>
 
+#include <mutex>
+
 NS_ENIGMA_BEGIN
 /*
 *	Scene Abstract class
@@ -31,14 +33,19 @@ public:
 	virtual void OnDestroy() = 0;
 
 public: /*Accessors*/
-	const bool& WantsToQuit() const noexcept { return m_quit; }
+	const bool WantsToQuit() const noexcept { return m_quit; }
+	const bool IsLoading() const noexcept { return m_isLoading; }
+	std::mutex& GetMutex() noexcept { return m_mutex; }
 
 public: /*Modifiers*/
 	void EndScene() noexcept { m_quit = true; }
+	void SetLoading(const bool loading) noexcept { m_isLoading = loading; }
 
 
 protected:
-	bool m_quit;
+	std::mutex m_mutex{}; // each scene has a mutex, which will guard code running by worker thread seperated from UI main thread. | used by std::scoped_lock
+	bool m_quit{};
+	bool m_isLoading{};
 };
 
 NS_ENIGMA_END

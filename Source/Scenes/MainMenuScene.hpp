@@ -28,12 +28,6 @@ private: /* Callbacks */
 	void OnReportIssueMenuButtonPressed();
 	void OnCheckForUpdatesMenuButtonPressed();
 	void OnAboutMenuButtonPressed();
-
-private: /* Initializers */
-	void LoadImGuiFonts();
-
-private:
-	std::unordered_map<std::string_view, ImFont*> m_fonts;
 };
 
 NS_ENIGMA_END

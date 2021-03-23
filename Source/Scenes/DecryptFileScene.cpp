@@ -9,10 +9,9 @@
 
 NS_ENIGMA_BEGIN
 
-DecryptFileScene::DecryptFileScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
+DecryptFileScene::DecryptFileScene()
 	:
 	Enigma::Scene(),
-	m_fonts(fonts),
 	m_type(Algorithm::Type::AES)
 {
 }
@@ -21,13 +20,13 @@ void DecryptFileScene::OnCreate()
 {
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
-	// Set background clear color
-	glAssert(glClearColor(
-		Constants::Colors::BACKGROUND_COLOR.x,
-		Constants::Colors::BACKGROUND_COLOR.y,
-		Constants::Colors::BACKGROUND_COLOR.z,
-		Constants::Colors::BACKGROUND_COLOR.w
-	));
+	// Explicit OpenGL old method to et background clear color
+	//glAssert(glClearColor(
+	//	Constants::Colors::BACKGROUND_COLOR.x,
+	//	Constants::Colors::BACKGROUND_COLOR.y,
+	//	Constants::Colors::BACKGROUND_COLOR.z,
+	//	Constants::Colors::BACKGROUND_COLOR.w
+	//));
 
 	// Set default m_in_filename as enigma exe path
 	//m_in_filename = fs::current_path().string();
@@ -40,7 +39,7 @@ void DecryptFileScene::OnUpdate(const f32& dt)
 void DecryptFileScene::OnDraw()
 {
 	// Clear GL buffers
-	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+	//glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
 void DecryptFileScene::OnImGuiDraw()
@@ -54,13 +53,17 @@ void DecryptFileScene::OnImGuiDraw()
 	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 
-	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
-	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
-	static ImFont* const& font_montserrat_medium_20 = m_fonts.at("Montserrat-Medium-20");
-	static ImFont* const& font_montserrat_medium_18 = m_fonts.at("Montserrat-Medium-18");
-	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
+	const auto& fonts = Application::GetInstance()->GetFonts();
+	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
+	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
+	static ImFont* const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
+	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
 
-	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
+	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;// | ImGuiWindowFlags_NoBackground;
+
+	// Push window's background color
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
@@ -235,6 +238,10 @@ void DecryptFileScene::OnImGuiDraw()
 
 	}
 	ImGui::End();
+
+	// Pop window's background color
+	ImGui::PopStyleColor(1);
+
 }
 
 void DecryptFileScene::OnEvent(Event& event)
@@ -446,11 +453,11 @@ void DecryptFileScene::OnBackButtonPressed()
 		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
 		if (action == Enigma::MessageBox::Action::Yes)
 		{
-			this->EndScene();
+			Scene::EndScene();
 		}
 	}
 	else
-		this->EndScene();
+		Scene::EndScene();
 }
 
 

@@ -8,7 +8,7 @@ NS_ENIGMA_BEGIN
 class MyEncryptionsScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	explicit MyEncryptionsScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
+	explicit MyEncryptionsScene();
 	virtual ~MyEncryptionsScene() noexcept = default;
 
 private: /* Overrides */
@@ -29,9 +29,6 @@ private: /* Callbacks */
 private: /* Initializers */
 	// Get all Encryptions from database
 	void GetAllEncryptions();
-
-private:
-	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
 private:
 	std::vector<std::unique_ptr<Encryption>> m_encryptions{}; // encryption records from database

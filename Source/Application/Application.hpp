@@ -85,6 +85,11 @@ public: /*Accessors*/
 	*/
 	constexpr const std::unique_ptr<CPUInfo>& GetCPUInfo() const noexcept { return m_cpu_info; }
 
+	/*
+	*	Returns Loaded Fonts map
+	*/
+	constexpr const std::unordered_map<std::string_view, ImFont*>& GetFonts() const noexcept { return m_fonts; }
+
 private: /* Updaters */
 	void UpdateDeltaTime() noexcept;
 	//void UpdateFPS() noexcept;
@@ -93,12 +98,14 @@ private: /* Updaters */
 private: /* Initializer Functions */
 	void InitWindow(const WindowSettings& window_settings);
 	void InitImGuiRenderer();
+	void LoadImGuiFonts();
 
 private: /* Window */
 	std::unique_ptr<Window> m_window;
 
 private: /* Scenes */
 	std::vector<std::shared_ptr<Scene>> m_scenes;
+	std::unique_ptr<Scene> m_loading_scene; // loading scene overlay
 
 private: /* Delta time */
 	f32 m_last_frame_time;
@@ -114,6 +121,10 @@ private: /* Realtime Hardware Info (FPS, CPU, RAM info...) */
 
 private: /* GUI */
 	std::unique_ptr<ImGuiRenderer> m_imgui_renderer;
+
+private: /* Fonts */
+	std::unordered_map<std::string_view, ImFont*> m_fonts;
+
 
 private: /* Instance */
 	static Application* m_instance;

@@ -149,12 +149,16 @@ project "Enigma"
 	filter "system:windows"
 		systemversion "latest"
 		-- .exe icon
-	    files { 'resources.rc', '**.ico' }
+	    files 
+	    {
+			'Enigma.rc', '**.ico' 
+	 	}
 	    vpaths 
 	    {
 	  	  ['Resources/*'] = { '*.rc', '**.ico' } 
 	    }
 		--
+
 		defines
 		{
 			"ENIGMA_PLATFORM_WINDOWS",
@@ -167,7 +171,6 @@ project "Enigma"
 		}
 		links
 		{
-			"opengl32" -- Loads windows opengl32 kernel .lib
 		}
 
 	filter "system:linux"
@@ -180,9 +183,7 @@ project "Enigma"
 			-- static libraries do not include their dependencies => https://stackoverflow.com/questions/58118344/transitive-library-dependency-in-premake
 			"mbedtls",
 
-			"X11", -- x11 Linux gui libs
 			"dl", -- dynamic loader interface
-			"GL", -- unix based systems opengl lib
 			"pthread", -- std::thread
 			"stdc++fs" -- std::filesystem
 		}
@@ -195,7 +196,6 @@ project "Enigma"
 		links
 		{
 			-- TODO
-			"GL", -- unix based systems opengl
 			"pthread", -- std::thread
 			"stdc++fs" -- std::filesystem
 		}

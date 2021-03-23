@@ -21,8 +21,7 @@ project "glfw"
 		"src/window.c"
 	}
 
-	-- Platform --
-	--[[ Windows --]]
+	--- Platform ---
 	filter "system:windows"
 		files
 		{
@@ -42,7 +41,7 @@ project "glfw"
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 
-	--[[ Linux --]]
+
 	filter "system:linux"
 	    pic "On"
 		files
@@ -62,8 +61,21 @@ project "glfw"
 		{
 			"_GLFW_X11"
 		}
+		links
+		{
+			"X11", -- x11 Linux gui libs
+		}
+		
 
+	filter "system:macosx" -- TODO
+		defines
+		{
+		}	
+		links
+		{
 
+		}
+	
 
 	--- Configurations ---
 	filter "configurations:Debug"

@@ -77,7 +77,7 @@ namespace Enigma
 			static constexpr const char* DATABASE_FILE_DIR = "./Resources/Database/";
 			static constexpr const char* DATABASE_FILE_NAME = "./Resources/Database/Enigma.db";
 			// Unfortunetly u cant create multiple tables at once..
-			static constexpr const std::array<const char*, 2> CREATE_TABLES_QUERIES =
+			static constexpr const std::array<const char*, 2> CREATE_TABLES_SQL =
 			{
 				// Encryptions table
 				R"(
@@ -101,12 +101,11 @@ namespace Enigma
 						data			BLOB NOT NULL, -- cipher text or file binary cipher compressed             
 						ide				INTEGER,
 
-						FOREIGN KEY(ide) REFERENCES Encryption(ide) -- ON DELETE CASCADE
+						FOREIGN KEY(ide) REFERENCES Encryption(ide) ON DELETE CASCADE --  when an Encryption record is deleted, all associated Cipher records will also be auto deleted.
 					);
 				)"
 			};
 			
-
 			/*
 			static constexpr const char* CREATE_TABLES_QUERY =
 			R"(
@@ -234,6 +233,10 @@ namespace Enigma
 			static const Color4f MY_ENCRYPTIONS_BUTTON_COLOR = COLOR4I_TO_COLOR4F(26, 72, 97, 255);
 			static const Color4f MY_ENCRYPTIONS_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(38, 91, 120, 255);
 			static const Color4f MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(10, 132, 199, 255);
+
+			static const Color4f LOADING_SPINNER_COLOR = BACK_BUTTON_COLOR;
+			//static const Color4f LOADING_BACKGROUND_COLOR = { BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 0.6f };
+			static const Color4f LOADING_BACKGROUND_COLOR = {0.0f, 0.0f, 0.0f, 0.8f };
 
 
 		}

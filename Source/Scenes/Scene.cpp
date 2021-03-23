@@ -6,7 +6,9 @@ NS_ENIGMA_BEGIN
 
 Scene::Scene() noexcept
 	:
-	m_quit(false)
+	m_quit(false),
+	m_isLoading(false),
+	m_mutex()
 {
 }
 

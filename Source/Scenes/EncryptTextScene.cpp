@@ -7,11 +7,10 @@
 
 NS_ENIGMA_BEGIN
 
-EncryptTextScene::EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts)
+EncryptTextScene::EncryptTextScene()
 	:
 	Enigma::Scene(),
-	m_type(Algorithm::Type::AES), // default
-	m_fonts(fonts)
+	m_type(Algorithm::Type::AES) // default
 {
 }
 
@@ -19,23 +18,23 @@ void EncryptTextScene::OnCreate()
 {
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
-	// Set background clear color
-	glAssert(glClearColor(
-		Constants::Colors::BACKGROUND_COLOR.x,
-		Constants::Colors::BACKGROUND_COLOR.y,
-		Constants::Colors::BACKGROUND_COLOR.z,
-		Constants::Colors::BACKGROUND_COLOR.w
-	));
+	// Explicit OpenGL old method to et background clear color
+	//glAssert(glClearColor(
+	//	Constants::Colors::BACKGROUND_COLOR.x,
+	//	Constants::Colors::BACKGROUND_COLOR.y,
+	//	Constants::Colors::BACKGROUND_COLOR.z,
+	//	Constants::Colors::BACKGROUND_COLOR.w
+	//));
 
 }
 
-void EncryptTextScene::OnUpdate(const f32& /*dt*/s)
+void EncryptTextScene::OnUpdate(const f32& /*dt*/)
 {}
 
 void EncryptTextScene::OnDraw()
 {
 	// Clear GL buffers
-	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+	//glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
 void EncryptTextScene::OnImGuiDraw()
@@ -51,14 +50,18 @@ void EncryptTextScene::OnImGuiDraw()
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 	static constexpr const auto inline_spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); } };
 
-	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
-	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
-	static ImFont* const& font_montserrat_medium_20 = m_fonts.at("Montserrat-Medium-20");
-	static ImFont* const& font_montserrat_medium_16 = m_fonts.at("Montserrat-Medium-16");
-	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
+	const auto& fonts = Application::GetInstance()->GetFonts();
+	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
+	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
+	static ImFont* const& font_montserrat_medium_16 = fonts.at("Montserrat-Medium-16");
+	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
 
-	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
-	//static constexpr const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
+	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;// | ImGuiWindowFlags_NoBackground;
+
+	// Push window's background color
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
+
 	ImGui::Begin("Container", nullptr, container_flags);
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
@@ -237,7 +240,22 @@ void EncryptTextScene::OnImGuiDraw()
 				ImGui::SameLine();
 				if (ImGui::Button("Encrypt", button_size))
 				{
-					this->OnEncryptButtonPressed();
+
+					std::thread worker_thread([this]() -> void
+						{
+							std::scoped_lock guard{ Scene::GetMutex() };
+							ENIGMA_LOG("Launching worker thread id #{0}", std::this_thread::get_id());
+							Scene::SetLoading(true);
+							//std::this_thread::sleep_for(std::chrono::seconds(10));
+							this->OnEncryptButtonPressed();
+							Scene::SetLoading(false);
+							ENIGMA_LOG("Finished worker thread id #{0}", std::this_thread::get_id());
+
+						});
+					worker_thread.detach();
+
+
+					//this->OnEncryptButtonPressed();
 				}
 
 			}
@@ -248,6 +266,10 @@ void EncryptTextScene::OnImGuiDraw()
 
 	}
 	ImGui::End();
+
+	// Pop window's background color
+	ImGui::PopStyleColor(1);
+
 }
 
 void EncryptTextScene::OnEvent(Event& /*event*/)
@@ -322,10 +344,10 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			}
 
 			// Spawn notification alert if window is not focused
-			if (!Application::GetInstance()->GetWindow()->IsFocused())
-			{
-				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
-			}
+			//if (!Application::GetInstance()->GetWindow()->IsFocused())
+			//{
+			//	Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
+			//}
 
 
 #if 0
@@ -342,10 +364,10 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), "Failed to encode cipher text to Base64");
 
 			// Spawn notification alert if window is not focused
-			if (! Application::GetInstance()->GetWindow()->IsFocused())
-			{
-				Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
-			}
+			//if (! Application::GetInstance()->GetWindow()->IsFocused())
+			//{
+			//	Notification{ "Enigma", "Successfully Encrypted Text" }.Show();
+			//}
 #endif 
 		}
 		catch (const CryptoPP::Exception& e)
@@ -362,7 +384,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		catch (...)
 		{
 			const String err_msg = "Encryption Failure: Unknown Error";
-			ENIGMA_ERROR("Encryption Failure: Unknown Error");
+			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}
 	}
@@ -375,11 +397,11 @@ void EncryptTextScene::OnBackButtonPressed()
 		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
 		if (action == Enigma::MessageBox::Action::Yes)
 		{
-			this->EndScene();
+			Scene::EndScene();
 		}
 	}
 	else
-		this->EndScene();
+		Scene::EndScene();
 }
 
 void EncryptTextScene::OnCopyEncryptedBase64TextButtonPressed()

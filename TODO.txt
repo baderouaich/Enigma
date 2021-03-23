@@ -6,24 +6,30 @@ DONE - Add Search textfield feature in MyEncryptionsScene  with Like %%
 - DONE added VACUUM sqlite command to defragment disk
 - DONE (issue was argv[0] returns enigma.exe only) Investigate why ENV doesnt work on CLI (it works when running it from local 
 debugger with ui, but when calling cli, it doesnt seem to be set or get)
+- CodeQL still doesnt ignore Dependencies
+- Use std::thread to vacuum sqlite database https://www.sqlite.org/pragma.html#pragma_auto_vacuum
 
+- DONE check why loadingscene's bg color doesnt work
+- DONE LoadingScene if(scene.isLoading()) render it over main scene.back
+- on action performed (onclick..) spawn detached thread r scene's worker thread seperated from ui 
 
-	#if 0
-	#pragma region Populate Database With Random Data
-		using namespace Enigma;
-		auto e = std::make_unique<Encryption>();
-		for (int i = 1; i <= 10000; i++)
-		{
-			e->title = Random::Str(Random::Int(3, 255));
-			e->cipher.data = Random::Str(Random::Int(1024, 2048));
-			Database::AddEncryption(e);
-			//if (Database::AddEncryption(e))
-			//	std::printf("Added Encryption #%d\n", i);
-			//else
-			//	std::printf("Failed to add Encryptionn #%d\n", i);
-		}
-		std::cout << "Database total changes since connection: " << Database::GetInstance()->getTotalChanges() << std::endl;
-		std::cout << "Database headerStr: " << Database::GetInstance()->getHeaderInfo().headerStr << std::endl;
-		return 0;
-	#pragma endregion
-	#endif
+#if 0
+#pragma region Populate Database With Random Data
+	using namespace Enigma;
+	auto e = std::make_unique<Encryption>();
+	for (int i = 1; i <= 10000; i++)
+	{
+		e->title = Random::Str(Random::Int(3, 255));
+		e->cipher.data = Random::Str(Random::Int(1024, 1024 * 1024 * 10));
+		e->size = e->cipher.data.size();
+		Database::AddEncryption(e);
+		//if (Database::AddEncryption(e))
+		//	std::printf("Added Encryption #%d\n", i);
+		//else
+		//	std::printf("Failed to add Encryptionn #%d\n", i);
+	}
+	std::cout << "Database total changes since connection: " << Database::GetInstance()->getTotalChanges() << std::endl;
+	std::cout << "Database headerStr: " << Database::GetInstance()->getHeaderInfo().headerStr << std::endl;
+	return 0;
+#pragma endregion
+#endif

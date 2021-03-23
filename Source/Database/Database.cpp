@@ -28,7 +28,7 @@ void Database::Initialize()
 			);
 
 		// Create Tables If Not Exists
-		for (const auto& create_table_sql : Constants::Database::CREATE_TABLES_QUERIES)
+		for (const auto& create_table_sql : Constants::Database::CREATE_TABLES_SQL)
 		{
 			//ENIGMA_LOG("SQL: {0}", create_table_sql);
 			const auto query = std::make_unique<SQLite::Statement>(
@@ -41,6 +41,7 @@ void Database::Initialize()
 				std::to_string(query->getErrorCode()) + 
 				" and message: " + String(query->getErrorMsg()));
 		}
+	
 	}
 	catch (const SQLite::Exception& e)
 	{
@@ -55,7 +56,6 @@ void Database::Shutdown()
 #ifdef ENIGMA_DEBUG
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 #endif
-	// Cleanup Database file Fragments caused by large deletions..
 	Vacuum();
 }
 
@@ -90,7 +90,8 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			constexpr char* sql = "INSERT INTO Cipher(data, ide) VALUES(?, ?)";
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
-			query->bindNoCopy(1, e->cipher.data.data(), e->cipher.data.size()); // bind blob
+			query->bindNoCopy(1, e->cipher.data.data(), static_cast<i32>(e->cipher.data.size())); // bind blob
+			//query->bindNoCopy(1, e->cipher.data); // bind blob (same as bindText..)
 			query->bind(2, last_inserted_encryption_id);
 			i32 r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert cipher record");
@@ -120,7 +121,7 @@ bool Database::DeleteEncryption(const i64 ide)
 	{
 		auto transaction = std::make_unique<SQLite::Transaction>(*m_database);
 
-		// Delete cipher
+		// Delete cipher (Optional, since ON DELETE CASCADE is enabled in Cipher.ide, cipher record will be deleted automatically)
 		{
 			constexpr char* sql = "DELETE FROM Cipher WHERE ide = ?";
 			ENIGMA_LOG("SQL: {0}", sql);

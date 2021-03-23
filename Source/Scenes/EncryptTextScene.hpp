@@ -7,7 +7,7 @@ NS_ENIGMA_BEGIN
 class EncryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	explicit EncryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
+	explicit EncryptTextScene();
 	virtual ~EncryptTextScene() noexcept = default;
 
 private: /* Overrides */
@@ -22,9 +22,6 @@ private: /* Callbacks */
 	void OnEncryptButtonPressed();
 	void OnBackButtonPressed();
 	void OnCopyEncryptedBase64TextButtonPressed();
-
-private:
-	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm

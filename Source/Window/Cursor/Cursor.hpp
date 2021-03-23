@@ -8,7 +8,7 @@
 NS_ENIGMA_BEGIN
 
 /*Ref https://www.glfw.org/docs/3.4/group__shapes.html */
-enum class CursorMode : ui8
+enum class CursorMode : byte
 {
 	Arrow	= 0,
 	IBeam,
@@ -41,7 +41,7 @@ public:
 	*/
 	explicit Cursor(const String& image_path, const i32& xhot = 0, const i32& yhot = 0);
 
-	virtual ~Cursor();
+	~Cursor();
 
 	void Destroy();
 

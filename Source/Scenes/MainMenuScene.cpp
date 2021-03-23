@@ -24,19 +24,14 @@ void MainMenuScene::OnCreate()
 {
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
 
-	// Set background clear color
-	glAssert(glClearColor(
-		Constants::Colors::BACKGROUND_COLOR.x,
-		Constants::Colors::BACKGROUND_COLOR.y,
-		Constants::Colors::BACKGROUND_COLOR.z,
-		Constants::Colors::BACKGROUND_COLOR.w
-	));
+	// Explicit OpenGL old method to et background clear color
+	//glAssert(glClearColor(
+	//	Constants::Colors::BACKGROUND_COLOR.x,
+	//	Constants::Colors::BACKGROUND_COLOR.y,
+	//	Constants::Colors::BACKGROUND_COLOR.z,
+	//	Constants::Colors::BACKGROUND_COLOR.w
+	//));
 
-	// Load dear fonts
-	this->LoadImGuiFonts();
-
-	// ImGui Push Menu bar background color, see issue #3637
-	ImGui::PushStyleColor(ImGuiCol_MenuBarBg, Constants::Colors::MENUBAR_BACKGROUND_COLOR);
 }
 
 void MainMenuScene::OnUpdate(const f32&) {}
@@ -44,7 +39,7 @@ void MainMenuScene::OnUpdate(const f32&) {}
 void MainMenuScene::OnDraw()
 {
 	// Clear GL buffers
-	glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
+	//glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
 
 
@@ -58,18 +53,24 @@ void MainMenuScene::OnImGuiDraw()
 
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 
-	static ImFont* const& font_montserrat_medium_12 = m_fonts.at("Montserrat-Medium-12");
-	static ImFont* const& font_audiowide_regular_60 = m_fonts.at("Audiowide-Regular-60");
-	static ImFont* const& font_audiowide_regular_45 = m_fonts.at("Audiowide-Regular-45");
-	static ImFont* const& font_audiowide_regular_20 = m_fonts.at("Audiowide-Regular-20");
+	const auto& fonts = Application::GetInstance()->GetFonts();
+	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+	static ImFont* const& font_audiowide_regular_60 = fonts.at("Audiowide-Regular-60");
+	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
 
-	static constexpr const auto container_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
-	//static constexpr const auto container_flags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_MenuBar;
-	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	static constexpr const auto container_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;// | ImGuiWindowFlags_NoBackground;
+	
+	// Push window's background color
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
+	// Push Menu bar background color, see issue #3637
+	ImGui::PushStyleColor(ImGuiCol_MenuBarBg, Constants::Colors::MENUBAR_BACKGROUND_COLOR);
+
+
+	ImGui::Begin("MainMenuContainer", nullptr, container_flags);
+	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as main app window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
-
 		// Menu bar
 		{
 			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 22.0f)); // 16.0f Menu bar padding
@@ -78,7 +79,7 @@ void MainMenuScene::OnImGuiDraw()
 			{
 				if (ImGui::BeginMenu("Menu"))
 				{
-					if (ImGui::MenuItem("Exit")) { this->EndScene(); }
+					if (ImGui::MenuItem("Exit")) { Scene::EndScene(); }
 					ImGui::EndMenu();
 				}
 				if (ImGui::BeginMenu("Help"))
@@ -152,22 +153,24 @@ void MainMenuScene::OnImGuiDraw()
 					this->OnDecryptTextButtonPressed();
 				}
 				spacing(6);
-				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR); // buttons color idle
-				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER);  // buttons color hover
-				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
-				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button("My Encryptions", button_size))
 				{
-					this->OnMyEncryptionsButtonPressed();
+					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR); // buttons color idle
+					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER);  // buttons color hover
+					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
+					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+					if (ImGui::Button("My Encryptions", button_size))
+					{
+						this->OnMyEncryptionsButtonPressed();
+					}
+					ImGui::PopStyleColor(3);
 				}
-				ImGui::PopStyleColor(3);
 				spacing(9);
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 					ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
 					if (ImGuiWidgets::Button("Exit", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 					{
-						this->EndScene();
+						Scene::EndScene();
 					}
 				}
 			}
@@ -177,7 +180,10 @@ void MainMenuScene::OnImGuiDraw()
 	}
 	ImGui::End();
 
-
+	// Pop Menu bar background color, see issue #3637
+	ImGui::PopStyleColor(1);
+	// Pop window's background color
+	ImGui::PopStyleColor(1);
 }
 
 void MainMenuScene::OnEvent(Enigma::Event&)
@@ -212,96 +218,51 @@ void MainMenuScene::OnEvent(Enigma::Event&)
 void MainMenuScene::OnDestroy()
 {
 	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-
-	// ImGui Pop Menu bar background color, see issue #3637
-	ImGui::PopStyleColor(1); 
-
-	m_fonts.clear();
-
 }
-
-
-void MainMenuScene::LoadImGuiFonts()
-{
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-
-	static const auto& io = ImGui::GetIO();
-
-	ENIGMA_TRACE("Loading Fonts...");
-
-	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 60.0f);
-	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
-	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20.0f);
-	
-	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 45.0f);
-	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 20.0f);
-	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 18.0f);
-	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 12.0f);
-	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 16.0f);
-
-	io.Fonts->Build(); //Build added fonts atlas --> imgui issue #3643
-
-	// Check if fonts are loaded
-	for (const auto& [font_name, font] : m_fonts)
-	{
-		if (!font->IsLoaded())
-		{
-			const String err_msg = "Failed to load font " + String(font_name);
-			// console alert
-			ENIGMA_ERROR(err_msg);
-			// ui alert
-			(void)DialogUtils::Error("Resource Loading Error", err_msg);
-			// no further without dear fonts :c
-			this->EndScene();
-			break;
-		}
-		else
-			ENIGMA_TRACE("Loaded {0}", font->ConfigData->Name);
-	}
-}
-
 
 void MainMenuScene::OnEncryptFileButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<EncryptFileScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<EncryptFileScene>());
 }
 
 void MainMenuScene::OnDecryptFileButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<DecryptFileScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<DecryptFileScene>());
 }
 
 void MainMenuScene::OnEncryptTextButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<EncryptTextScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<EncryptTextScene>());
 }
 
 void MainMenuScene::OnDecryptTextButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<DecryptTextScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<DecryptTextScene>());
 }
 
 void MainMenuScene::OnMyEncryptionsButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<MyEncryptionsScene>(m_fonts));
+	Application::GetInstance()->PushScene(std::make_shared<MyEncryptionsScene>());
 }
 
 void MainMenuScene::OnReportIssueMenuButtonPressed()
 {
-	ENIGMA_TRACE("Reporting issue to {0}/issues", Constants::Links::ENIGMA_GITHUB_REPOSITORY);
-
 	// Open Enigma's github repository issues page in a browser
+	const String url = Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues";
+	ENIGMA_TRACE("Reporting issue to {0}", url);
+
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	
-	ShellExecuteA(nullptr, "open", (Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues").c_str() , nullptr, nullptr, SW_SHOWNORMAL);
+	(void)ShellExecuteA(nullptr, "open", url.c_str() , nullptr, nullptr, SW_SHOWNORMAL);
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-	std::system(("xdg-open " + Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues").c_str());
+	const String cmd = "xdg-open " + url;
+	(void)std::system(cmd.c_str());
 
 #else
 
-	DialogUtils::Info("If you face any problems feel free to open an issue at " + Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues");
+	(void)DialogUtils::Info("If you face any problems feel free to open an issue at " + url);
 
 #endif
 }

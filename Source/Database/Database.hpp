@@ -246,9 +246,19 @@ public: // Modifiers
 	*/
 	static void Vacuum() noexcept 
 	{
-		ENIGMA_INFO("Vacuuming SQLite3 Database...");
+		ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
 		(void)m_database->exec("VACUUM");
+
+		/*int total_changes = m_database->getTotalChanges();
+		if (total_changes > 0)
+		{
+			ENIGMA_INFO("{0} database changes were made, Vacuuming Database...", total_changes);
+			(void)m_database->exec("VACUUM");
+		}*/
+
 	}
+
+	
 
 private:
 	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; // Database connection configuered on Initialize()

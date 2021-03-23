@@ -8,6 +8,7 @@
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
 
 #include <Scenes/MainMenuScene.hpp>
+#include <Scenes/LoadingScene.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -32,12 +33,14 @@ Application::Application(const WindowSettings& window_settings)
 
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
+	this->LoadImGuiFonts();	
 
-	// Set Window runtime icon
-	m_window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
-	//window->SetCursor(CursorMode::Arrow);
 	// Push Main Menu scene as an entry point
 	this->PushScene(std::make_shared<MainMenuScene>());
+
+	// Init loading scene
+	m_loading_scene = std::make_unique<LoadingScene>();
+	m_loading_scene->OnCreate();
 }
 
 void Application::InitWindow(const WindowSettings& window_settings)
@@ -46,8 +49,20 @@ void Application::InitWindow(const WindowSettings& window_settings)
 	{
 		// Create Window
 		m_window = std::make_unique<Window>(window_settings);
+		
 		// Set Window Events callback
 		m_window->SetEventCallback(ENIGMA_BIND_FUN(Application::OnEvent));
+		
+		// Set Window runtime icon
+		m_window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
+		
+		// Set window top left position at center
+		const auto [monitor_width, monitor_height] = m_window->GetMonitorSize();
+		const auto [window_width, window_height] = m_window->GetSize();
+		m_window->SetPosition(static_cast<i32>((monitor_width - window_width) / 2), static_cast<i32>((monitor_height - window_height) / 2));
+
+		// Set window's default cursor mode
+		//m_window->SetCursor(CursorMode::CrossHair);
 	}
 	catch (const std::exception& e)
 	{
@@ -67,6 +82,48 @@ void Application::InitImGuiRenderer()
 }
 
 
+void Application::LoadImGuiFonts()
+{
+#ifdef ENIGMA_DEBUG
+	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+#endif
+
+	static const auto& io = ImGui::GetIO();
+
+	ENIGMA_TRACE("Loading Fonts...");
+
+	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 60.0f);
+	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
+	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20.0f);
+
+	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 45.0f);
+	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 20.0f);
+	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 18.0f);
+	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 12.0f);
+	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 16.0f);
+
+	io.Fonts->Build(); // Build added fonts atlas --> imgui issue #3643
+
+	// Check if fonts are loaded
+	for (const auto& [font_name, font] : m_fonts)
+	{
+		if (!font->IsLoaded())
+		{
+			const String err_msg = "Failed to load font " + String(font_name);
+			// console alert
+			ENIGMA_ERROR(err_msg);
+			// ui alert
+			(void)DialogUtils::Error("Resource Loading Error", err_msg);
+			// no further app without dear fonts :c
+			this->EndApplication();
+			break;
+		}
+		else
+			ENIGMA_TRACE("Loaded {0}", font->ConfigData->Name);
+	}
+}
+
+
 void Application::PushScene(const std::shared_ptr<Scene>& scene)
 {
 	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
@@ -82,6 +139,9 @@ void Application::OnEvent(Event& event)
 {
 	// Listen for WindowClose, WindowResize and FrameBufferResizeEvent Events
 	EventDispatcher dispatcher(event);
+	/*dispatcher.Dispatch<WindowCloseEvent>([this](WindowCloseEvent& e) -> bool
+	{
+	});*/
 	dispatcher.Dispatch<WindowCloseEvent>(ENIGMA_BIND_FUN(Application::OnWindowClose));
 	dispatcher.Dispatch<WindowResizeEvent>(ENIGMA_BIND_FUN(Application::OnWindowResize));
 	dispatcher.Dispatch<FrameBufferResizeEvent>(ENIGMA_BIND_FUN(Application::OnFrameBufferResize));
@@ -89,12 +149,15 @@ void Application::OnEvent(Event& event)
 	// Alert All Scenes OnEvent
 	for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
 	{
-		// Alert each scene with the triggered event
-		(*it)->OnEvent(event);
+		if(!(*it)->IsLoading()) // Only pass events to scenes which are not in progress of doing some work. to disable buttons clicking interactions...
+		{
+			// Alert each scene with the triggered event
+			(*it)->OnEvent(event);
 
-		// if event is handled, stop passing it to other scenes
-		if (event.IsHandled())
-			break;
+			// if event is handled, stop passing it to other scenes
+			if (event.IsHandled())
+				break;
+		}
 	}
 }
 
@@ -104,9 +167,30 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 	ENIGMA_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
 #endif
 
-	this->EndApplication();
+
+	// check if there is a scene doing some work in progress...
+	bool there_is_still_scene_doing_some_work{ false }; // long name i know XD  
+	for (const auto& scene : m_scenes)
+	{
+		if (scene->IsLoading())
+		{
+			there_is_still_scene_doing_some_work = true;
+			break;
+		}
+	}
 	
-	return true; // the end of the app, all events are handled.
+	if (there_is_still_scene_doing_some_work)
+	{
+		(void)DialogUtils::Warn("Warning!", "There is a scene still doing some work currently! Please wait little more...");
+		m_window->SetShouldClose(false); // force GLFW to keep window open. GLFW will close the window when a close window event received.
+		return true; // handled.
+	}
+	else
+	{
+		this->EndApplication();
+		return true; // the end of the app, all events are handled.
+	}
+	
 }
 
 bool Application::OnWindowResize(WindowResizeEvent& event)
@@ -155,22 +239,29 @@ void Application::Run()
 				UpdateHardwareInfo();
 				// Update back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnUpdate(m_delta_time);
+				if (m_scenes.back()->IsLoading()) 
+					m_loading_scene->OnUpdate(m_delta_time); // Update Loading scene over current active scene if its loading (doing some work in parallel)
 			}
 			
 			//Draw
 			{
 				// Draw back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnDraw();
+				if (m_scenes.back()->IsLoading()) 
+					m_loading_scene->OnDraw(); // Draw Loading scene over current active scene if its loading (doing some work in parallel)
 
 				// ImGui
 				m_imgui_renderer->Begin();
 					m_scenes.back()->OnImGuiDraw();
+					if (m_scenes.back()->IsLoading())
+						m_loading_scene->OnImGuiDraw(); // Draw GUI Loading scene over current active scene if its loading (doing some work in parallel)
 				m_imgui_renderer->End();
 
 				// Force execution of GL commands in finite time 
 				glAssert( glFlush() );
 			}
 
+		
 			// Swap Buffers
 			m_window->SwapBuffers();
 
@@ -249,13 +340,24 @@ void Application::EndApplication() noexcept
 
 Application::~Application()
 {
+	/*for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
+	{
+		// Notify scenes OnDestroy before closing application
+		const std::shared_ptr<Scene>& scene = *it;
+		scene->OnDestroy();
+	}*/
+
 	// Alert scenes OnDestroy()
-	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const auto& scene)
+	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const std::shared_ptr<Scene>& scene)
 	{
 		// Notify scenes OnDestroy before closing application
 		scene->OnDestroy();
 	});
+	
+	m_loading_scene->OnDestroy(); // Don't forget the loading scene
+
 	m_scenes.clear();
+	m_fonts.clear();
 }
 NS_ENIGMA_END
 

@@ -22,17 +22,9 @@ namespace Enigma
 	using f64	= double;
 	using byte	= ui8;
 	using size_t	= std::size_t;
-	using String	= std::string;
+	using String	= std::string;	// UTF-8 string (std::uint8_t)
+	using WString	= std::wstring;	// UTF-16 string (std::uint16_t)
 
-//#if defined(ENIGMA_PLATFORM_WINDOWS)
-//	using String	= std::wstring;
-//	using StringStream	= std::wstringstream;
-//	using StringView	= std::wstring_view;
-//#else
-//	using String	= std::string;
-//	using StringStream	= std::stringstream;
-//	using StringView	= std::string_view;
-//#endif
 
 	using Color4f	= ImVec4;
 	using Vec2f		= ImVec2;

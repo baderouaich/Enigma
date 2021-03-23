@@ -168,6 +168,11 @@ public:	/* Accessors */
 	*	Returns refresh rate of this window
 	*/
 	const i32& GetRefreshRate() noexcept;
+	
+	/*
+	*	Returns size (width, height) of the primary monitor
+	*/
+	const std::pair<i32, i32> GetMonitorSize() noexcept;
 
 public: /* Modifiers */
 	using EventCallback = std::function<void(Event&)>;

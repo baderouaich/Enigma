@@ -162,21 +162,16 @@
 #define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
 #define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
 #define ENIGMA_FRIENDLY_BYTES_SIZE(bytes) \
-[](auto bytes) -> const char* \
+[](const size_t bytes) -> std::string \
 { \
-	const char* suffix[5] = { "B", "KB", "MB", "GB", "TB" }; \
-	double dblBytes = static_cast<double>(bytes); \
-	int i=0; \
-	if (bytes > 1024) { \
-		for (i = 0; (bytes / 1024) > 0 && i < 5 - 1; i++, bytes /= 1024) \
-			dblBytes = bytes / 1024.0; \
-	} \
-	char output[16]; \
-	std::sprintf(output, "%.02lf %s", dblBytes, suffix[i]); \
-	return output; \
+	if (bytes == 0) return std::string("0 Bytes"); \
+	std::ostringstream oss{}; \
+	constexpr const int KB = 1024; \
+	const char* sizes[] = { "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }; \
+	const int i = static_cast<int>(std::floor(std::log(bytes) / std::log(KB))); \
+	oss << std::fixed << std::setprecision(2) \
+		<< static_cast<float>(bytes / std::pow(KB, i)) << ' ' << sizes[i]; \
+	return oss.str(); \
 }(bytes)
-
-
-
 
 #endif // !ENIGMA_MACROS_H

@@ -6,7 +6,7 @@ NS_ENIGMA_BEGIN
 class DecryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
-	explicit DecryptTextScene(const std::unordered_map<std::string_view, ImFont*>& fonts);
+	explicit DecryptTextScene();
 	virtual ~DecryptTextScene() = default;
 
 private: /* Overrides */
@@ -23,8 +23,6 @@ private: /* Callbacks */
 	void OnBackButtonPressed();
 
 private:
-	const std::unordered_map<std::string_view, ImFont*>& m_fonts; // from MainMenuScene where fonts are loaded
-
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
 	String m_recovered_text; // Decrypted Text
 	String m_cipher; // Encrypted text

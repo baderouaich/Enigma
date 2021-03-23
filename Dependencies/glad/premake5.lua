@@ -28,16 +28,18 @@ project "glad"
 		}
 		links
 		{
+			"opengl32" -- Loads windows opengl32 kernel .lib
 		}
 
 
 	filter "system:linux"
 	    pic "On" -- required fo clang-10
-		links
-		{
-		}
 		defines
 		{
+		}
+		links
+		{
+			"GL", -- link opengl lib
 		}
 
 	filter "system:macosx"
@@ -46,6 +48,7 @@ project "glad"
 		}	
 		links
 		{
+			"GL", -- link opengl lib
 		}
 	
 
