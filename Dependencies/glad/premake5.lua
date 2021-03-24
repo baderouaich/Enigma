@@ -28,7 +28,6 @@ project "glad"
 		}
 		links
 		{
-			"opengl32" -- Loads windows opengl32 kernel .lib
 		}
 
 
@@ -39,7 +38,6 @@ project "glad"
 		}
 		links
 		{
-			"GL", -- link opengl lib
 		}
 
 	filter "system:macosx"
@@ -48,7 +46,6 @@ project "glad"
 		}	
 		links
 		{
-			"GL", -- link opengl lib
 		}
 	
 

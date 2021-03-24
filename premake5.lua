@@ -171,6 +171,7 @@ project "Enigma"
 		}
 		links
 		{
+			"opengl32" -- Loads windows opengl32 kernel .lib
 		}
 
 	filter "system:linux"
@@ -183,6 +184,8 @@ project "Enigma"
 			-- static libraries do not include their dependencies => https://stackoverflow.com/questions/58118344/transitive-library-dependency-in-premake
 			"mbedtls",
 
+			"GL", -- link opengl lib
+			"X11", -- x11 Linux gui libs
 			"dl", -- dynamic loader interface
 			"pthread", -- std::thread
 			"stdc++fs" -- std::filesystem
@@ -196,6 +199,7 @@ project "Enigma"
 		links
 		{
 			-- TODO
+			"GL", -- link opengl lib
 			"pthread", -- std::thread
 			"stdc++fs" -- std::filesystem
 		}

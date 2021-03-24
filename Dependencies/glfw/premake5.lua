@@ -61,11 +61,7 @@ project "glfw"
 		{
 			"_GLFW_X11"
 		}
-		links
-		{
-			"X11", -- x11 Linux gui libs
-		}
-		
+
 
 	filter "system:macosx" -- TODO
 		defines
