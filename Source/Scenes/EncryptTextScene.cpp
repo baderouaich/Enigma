@@ -114,8 +114,29 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PopFont();
 
 		spacing(2);
+
+		// Save to database widget
+		ImGui::PushFont(font_montserrat_medium_16);
+		{
+			ImGui::PushFont(font_audiowide_regular_20);
+				ImGui::Text("Save to database:");
+			ImGui::PopFont();
+			inline_dummy(6.0f, 0.0f);
+			ImGui::SameLine();
+			ImGui::Checkbox("##checkbox", &m_save_to_database);
+
+			if (m_save_to_database)
+			{
+				ImGui::Text("Encryption Title:");
+				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My Github Password) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
+			}
+		}
+		ImGui::PopFont();
+
+		spacing(2);
 		ImGui::Separator();
 		spacing(2);
+
 
 		// Text to encrypt
 		ImGui::PushFont(font_montserrat_medium_20);
@@ -165,6 +186,8 @@ void EncryptTextScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
+
+
 		// Encrypted text in Base64 output
 		if (!m_cipher.empty())
 		{
@@ -198,25 +221,6 @@ void EncryptTextScene::OnImGuiDraw()
 
 
 
-		spacing(1);
-		ImGui::Separator();
-		spacing(1);	
-
-		// Save to database widget
-		ImGui::PushFont(font_montserrat_medium_16);
-		{
-			ImGui::Checkbox("Save to database", &m_save_to_database);
-			if (m_save_to_database)
-			{
-				ImGui::Text("Encryption Title:");
-				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My Github Password) helps with searching through encryption records in the future", &m_db_title, win_w /1.3f);
-			}
-		}
-		ImGui::PopFont();
-		
-		spacing(1);
-		ImGui::Separator();
-		spacing(3);
 
 
 		// Encrypt & Back Button
@@ -236,28 +240,35 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
-				
 				ImGui::SameLine();
 				if (ImGui::Button("Encrypt", button_size))
 				{
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnEncryptButtonPressed();
+					});
 
-					std::thread worker_thread([this]() -> void
+					/*std::thread working_thread([this]() -> void
 						{
-							std::scoped_lock guard{ Scene::GetMutex() };
+							std::scoped_lock<std::mutex> guard{ Scene::GetMutex() };
+
 							ENIGMA_LOG("Launching worker thread id #{0}", std::this_thread::get_id());
+
 							Scene::SetLoading(true);
-							//std::this_thread::sleep_for(std::chrono::seconds(10));
-							this->OnEncryptButtonPressed();
+								this->OnEncryptButtonPressed();
 							Scene::SetLoading(false);
+
 							ENIGMA_LOG("Finished worker thread id #{0}", std::this_thread::get_id());
-
 						});
-					worker_thread.detach();
-
+					working_thread.detach();*/
+					/*Application::GetInstance()->LaunchWorkerThread(this,
+					[this]() -> void
+					{
+						this->OnEncryptButtonPressed();
+					});*/
 
 					//this->OnEncryptButtonPressed();
 				}
-
 			}
 			ImGui::PopStyleColor(3);
 			ImGui::PopFont();

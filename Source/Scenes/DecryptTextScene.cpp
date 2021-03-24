@@ -202,7 +202,11 @@ void DecryptTextScene::OnImGuiDraw()
 				ImGui::SameLine();
 				if (ImGui::Button("Decrypt", button_size))
 				{
-					this->OnDecryptButtonPressed();
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnDecryptButtonPressed();
+					});
+
 				}
 
 			}

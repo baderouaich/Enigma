@@ -106,6 +106,26 @@ void EncryptFileScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
+		spacing(2);
+
+		// Save to database widget
+		ImGui::PushFont(font_montserrat_medium_16);
+		{
+			ImGui::PushFont(font_audiowide_regular_20);
+			ImGui::Text("Save to database:");
+			ImGui::PopFont();
+			inline_dummy(6.0f, 0.0f);
+			ImGui::SameLine();
+			ImGui::Checkbox("##checkbox", &m_save_to_database);
+
+			if (m_save_to_database)
+			{
+				ImGui::Text("Encryption Title:");
+				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My Image) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
+			}
+		}
+		ImGui::PopFont();
+
 		spacing(3);
 		ImGui::Separator();
 		spacing(3);
@@ -125,7 +145,10 @@ void EncryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				if (ImGui::Button("Browse", browse_button_size))
 				{
-					this->OnBrowseInFileButtonPressed();
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnBrowseInFileButtonPressed();
+					});
 				}
 				ImGui::PopStyleColor(3);
 			ImGui::PopFont();
@@ -164,7 +187,10 @@ void EncryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				if (ImGui::Button("Browse ", browse_button_size))
 				{
-					this->OnBrowseOutFileButtonPressed();
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnBrowseOutFileButtonPressed();
+					});
 				}
 				ImGui::PopFont();
 				ImGui::PopStyleColor(3);
@@ -241,7 +267,10 @@ void EncryptFileScene::OnImGuiDraw()
 				ImGui::SameLine();
 				if (ImGui::Button("Encrypt", button_size))
 				{
-					this->OnEncryptButtonPressed();
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnEncryptButtonPressed();
+					});
 				}
 
 			}

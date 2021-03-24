@@ -36,7 +36,7 @@ Application::Application(const WindowSettings& window_settings)
 	this->LoadImGuiFonts();	
 
 	// Push Main Menu scene as an entry point
-	this->PushScene(std::make_shared<MainMenuScene>());
+	this->PushScene(std::make_unique<MainMenuScene>());
 
 	// Init loading scene
 	m_loading_scene = std::make_unique<LoadingScene>();
@@ -57,8 +57,8 @@ void Application::InitWindow(const WindowSettings& window_settings)
 		m_window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 		
 		// Set window top left position at center
-		const auto [monitor_width, monitor_height] = m_window->GetMonitorSize();
-		const auto [window_width, window_height] = m_window->GetSize();
+		const auto  [monitor_width, monitor_height] = m_window->GetMonitorSize();
+		const auto& [window_width, window_height] = m_window->GetSize();
 		m_window->SetPosition(static_cast<i32>((monitor_width - window_width) / 2), static_cast<i32>((monitor_height - window_height) / 2));
 
 		// Set window's default cursor mode
@@ -124,16 +124,39 @@ void Application::LoadImGuiFonts()
 }
 
 
-void Application::PushScene(const std::shared_ptr<Scene>& scene)
+void Application::PushScene(std::unique_ptr<Scene> scene)
 {
 	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
 
 	// Push scene & Notify user on scene created
-	this->m_scenes.emplace_back(scene);
+	this->m_scenes.emplace_back(std::move(scene));
 	
 	// Notify user on scene created
 	this->m_scenes.back()->OnCreate();
 }
+
+
+void Application::LaunchWorkerThread(Scene* scene, const std::function<void()>& func)
+{
+	ENIGMA_ASSERT(scene, "Scene is nullptr!");
+	ENIGMA_ASSERT(func, "Function is empty!");
+
+	std::thread worker_thread([scene, func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
+		{
+			std::scoped_lock<std::mutex> guard{ scene->GetMutex() };
+
+			ENIGMA_LOG("Launching Worker Thread ID #{0}", std::this_thread::get_id());
+
+			scene->SetLoading(true);
+				func();
+			scene->SetLoading(false);
+
+			ENIGMA_LOG("Finished Worker Thread ID #{0}", std::this_thread::get_id());
+		});
+	worker_thread.detach();
+}
+
+
 
 void Application::OnEvent(Event& event)
 {
@@ -348,7 +371,7 @@ Application::~Application()
 	}*/
 
 	// Alert scenes OnDestroy()
-	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const std::shared_ptr<Scene>& scene)
+	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const std::unique_ptr<Scene>& scene)
 	{
 		// Notify scenes OnDestroy before closing application
 		scene->OnDestroy();

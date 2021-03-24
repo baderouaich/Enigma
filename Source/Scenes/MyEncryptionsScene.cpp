@@ -28,6 +28,7 @@ void MyEncryptionsScene::OnCreate()
 
 	// Get all Encryptions from database
 	this->GetAllEncryptions();
+
 }
 
 void MyEncryptionsScene::OnUpdate(const f32&)
@@ -82,6 +83,46 @@ void MyEncryptionsScene::OnImGuiDraw()
 		spacing(2);
 		ImGui::Separator();
 		spacing(2);	
+
+		// Search Query
+		ImGui::PushFont(font_montserrat_medium_18); // text font
+		ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+		{
+			ImGui::LabelText("##label", "Search by title...");
+			if (ImGuiWidgets::InputText("##inputtext", &m_query, win_w / 2.0f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
+			{
+				// Enable searching
+				m_isSearching = true;
+
+				if (!m_query.empty())
+				{
+					this->OnSearchEncryptionsByTitle();
+				}
+			}
+			else // Button is not being edited now
+			{
+				m_isSearching = false;
+			}
+			ImGui::SameLine();
+
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+			if (ImGui::Button("Reset"))
+			{
+				m_isSearching = false;
+				m_query.clear();
+				this->GetAllEncryptions();
+			}
+			ImGui::PopStyleColor(3);
+		}
+		ImGui::PopStyleColor(3);
+		ImGui::PopFont();
+
+		spacing(2);
+
 
 		if (!m_encryptions.empty())
 		{
@@ -140,44 +181,6 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::Separator();
 			spacing(2);
 
-			// Search Query
-			ImGui::PushFont(font_montserrat_medium_18); // text font
-			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			{
-				ImGui::LabelText("##label", "Search by title...");
-				if (ImGuiWidgets::InputText("##inputtext", &m_query, win_w / 2.0f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
-				{
-					// Enable searching
-					m_isSearching = true;
-
-					if (!m_query.empty())
-					{
-						this->OnSearchEncryptionsByTitle();
-					}
-				}
-				else // Button is not being edited now
-				{
-					m_isSearching = false;
-				}
-				ImGui::SameLine();
-
-				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-				if (ImGui::Button("Reset"))
-				{
-					m_isSearching = false;
-					m_query.clear();
-					this->GetAllEncryptions();
-				}
-				ImGui::PopStyleColor(3);
-			}
-			ImGui::PopStyleColor(3);
-			ImGui::PopFont();
-
-			spacing(2);
 
 			// Encryptions records Table 
 			// https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp#L5024
@@ -375,7 +378,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 	ImGui::PopStyleColor(1);
 }
 
-void MyEncryptionsScene::OnEvent(Event& event)
+void MyEncryptionsScene::OnEvent(Event& /*event*/)
 {}
 
 void MyEncryptionsScene::OnDestroy()
@@ -406,7 +409,7 @@ void MyEncryptionsScene::OnViewEncryptionButtonPressed(const i64 ide)
 {
 	ENIGMA_TRACE("View {0}", ide);
 
-	Application::GetInstance()->PushScene(std::make_shared<ViewEncryptionScene>(ide));
+	Application::GetInstance()->PushScene(std::make_unique<ViewEncryptionScene>(ide));
 }
 
 // returns true if item deleted successfully to notify draw loop that vector range changed

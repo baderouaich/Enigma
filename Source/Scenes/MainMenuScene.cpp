@@ -84,8 +84,20 @@ void MainMenuScene::OnImGuiDraw()
 				}
 				if (ImGui::BeginMenu("Help"))
 				{
-					if (ImGui::MenuItem("Report issue")) { this->OnReportIssueMenuButtonPressed(); }
-					if (ImGui::MenuItem("Check for updates")) { this->OnCheckForUpdatesMenuButtonPressed(); }
+					if (ImGui::MenuItem("Report issue")) 
+					{
+						Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+						{
+							this->OnReportIssueMenuButtonPressed(); 
+						});
+					}
+					if (ImGui::MenuItem("Check for updates")) 
+					{
+						Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+						{
+							this->OnCheckForUpdatesMenuButtonPressed();
+						});
+					}
 					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
 					ImGui::EndMenu();
 				}
@@ -222,27 +234,27 @@ void MainMenuScene::OnDestroy()
 
 void MainMenuScene::OnEncryptFileButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<EncryptFileScene>());
+	Application::GetInstance()->PushScene(std::make_unique<EncryptFileScene>());
 }
 
 void MainMenuScene::OnDecryptFileButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<DecryptFileScene>());
+	Application::GetInstance()->PushScene(std::make_unique<DecryptFileScene>());
 }
 
 void MainMenuScene::OnEncryptTextButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<EncryptTextScene>());
+	Application::GetInstance()->PushScene(std::make_unique<EncryptTextScene>());
 }
 
 void MainMenuScene::OnDecryptTextButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<DecryptTextScene>());
+	Application::GetInstance()->PushScene(std::make_unique<DecryptTextScene>());
 }
 
 void MainMenuScene::OnMyEncryptionsButtonPressed()
 {
-	Application::GetInstance()->PushScene(std::make_shared<MyEncryptionsScene>());
+	Application::GetInstance()->PushScene(std::make_unique<MyEncryptionsScene>());
 }
 
 void MainMenuScene::OnReportIssueMenuButtonPressed()

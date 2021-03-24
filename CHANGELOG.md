@@ -29,4 +29,5 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Upgraded curl library from 7.74.0 to 7.75.0
 - Upgraded glfw library from 3.3.0 to 3.3.3
 - Added SQLite3 Database system to save, import and export encryption records
+- Now heavy work is being done in background (parallel)
 -->

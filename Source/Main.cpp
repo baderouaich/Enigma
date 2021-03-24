@@ -64,6 +64,8 @@ int main(int argc, char* argv[])
 			ENIGMA_CRITICAL(e.what());
 			// Shutdown Enigma Logger
 			Enigma::Logger::Shutdown();
+			// Shutdown SQLite3 Database
+			Enigma::Database::Shutdown();
 			// Exit
 			return EXIT_FAILURE;
 		}

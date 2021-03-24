@@ -138,7 +138,10 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			if (ImGui::Button("Browse", browse_button_size))
 			{
-				this->OnBrowseInFileButtonPressed();
+				Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+				{
+					this->OnBrowseInFileButtonPressed();
+				});
 			}
 			ImGui::PopStyleColor(3);
 			ImGui::PopFont();
@@ -177,7 +180,10 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				if (ImGui::Button("Browse ", browse_button_size))
 				{
-					this->OnBrowseOutFileButtonPressed();
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnBrowseOutFileButtonPressed();
+					});
 				}
 				ImGui::PopStyleColor(3);
 				ImGui::PopFont();
@@ -228,7 +234,10 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGui::SameLine();
 				if (ImGui::Button("Decrypt", button_size))
 				{
-					this->OnDecryptButtonPressed();
+					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+					{
+						this->OnDecryptButtonPressed();
+					});
 				}
 
 			}

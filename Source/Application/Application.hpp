@@ -36,6 +36,14 @@ public: /* Constructor / Destructors */
 	*/
 	void Exit(const String& message, i32 exit_code) noexcept;
 
+	/*
+	*	Launches detached thread seperated from main UI thread
+	*	@param scene: pointer to scene which spawns the worker thread
+	*	@param func: function has code to run in parallel
+	*/
+	void LaunchWorkerThread(Scene* scene, const std::function<void()>& func);
+
+
 public: /* Events */
 	void OnEvent(Event& event);
 	bool OnWindowClose(WindowCloseEvent& event);
@@ -62,7 +70,7 @@ public: /*Accessors*/
 	*	Pushes new Scene to the stack
 	*	Cleans memory when scene ends
 	*/
-	void PushScene(const std::shared_ptr<Scene>& scene);
+	void PushScene(std::unique_ptr<Scene> scene);
 
 	/*
 	*	Returns FPS (Frames Per Second) count
@@ -104,7 +112,7 @@ private: /* Window */
 	std::unique_ptr<Window> m_window;
 
 private: /* Scenes */
-	std::vector<std::shared_ptr<Scene>> m_scenes;
+	std::vector<std::unique_ptr<Scene>> m_scenes;
 	std::unique_ptr<Scene> m_loading_scene; // loading scene overlay
 
 private: /* Delta time */
