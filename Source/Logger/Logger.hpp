@@ -3,6 +3,7 @@
 #define ENIGMA_LOGGER_H
 
 #include <Core/Core.hpp>
+#include <Utility/StringUtils.hpp> // StringUtils::Cleanup to remove __FUNCTION__'s __cdecl
 
 //Logging Library
 // This ignores all warnings raised inside External headers

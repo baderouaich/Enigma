@@ -17,8 +17,6 @@
 
 int main(int argc, char* argv[])
 {
-	// Set ENIGMA_DIR environment variable value (will help CLI detect Enigma directory to use Database and other resources externally)
-	Enigma::ENV::Set(Enigma::Constants::ENV::ENIGMA_DIR_ENV_KEY, fs::current_path().string());
 	// Initialize Enigma Logger
 	Enigma::Logger::Initialize();
 	// Initialize SQLite3 Database
@@ -44,7 +42,7 @@ int main(int argc, char* argv[])
 		try
 		{		
 			// Load Window Configuration (title, width, height...)
-			Enigma::Config window_config(Enigma::Constants::Config::ENIGMA_WINDOW_SETTINGS_CONFIG_PATH);
+			Enigma::Config window_config(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
 			// Construct WindowSettings from loaded Config
 			Enigma::WindowSettings window_settings = Enigma::WindowSettings::FromConfig(window_config);
 			// Create Enigma UI Application

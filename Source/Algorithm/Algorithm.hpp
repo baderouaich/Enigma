@@ -66,7 +66,7 @@ public:
 	* @param password: Encryption password
 	* @param buffer: Buffer to encrypt (text, binary...)
 	* @return (Algo type enum id + IV + Cipher)
-	* @throws CryptoPP::Exception, std::exception on failure
+	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
 	virtual String Encrypt(const String& password, const String& buffer) noexcept(false) = 0;
 	/*
@@ -74,7 +74,7 @@ public:
 	* @param password: Password used to Encyrpt buffer
 	* @param iv_cipher: (Algo type enum id + IV + Cipher)
 	* @return Recovered Buffer
-	* @throws CryptoPP::Exception, std::exception on failure
+	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
 	virtual String Decrypt(const String& password, const String& iv_cipher) noexcept(false) = 0;
 
@@ -200,7 +200,7 @@ public:
 	* @param password: Encryption password
 	* @param buffer: Buffer to encrypt (text, binary...)
 	* @return (Algo type enum id + IV + Cipher)
-	* @throws CryptoPP::Exception, std::exception on failure
+	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
 	virtual String Encrypt(const String& password, const String& buffer) noexcept(false) = 0;
 	/*
@@ -208,7 +208,7 @@ public:
 	* @param password: Password used to Encyrpt buffer
 	* @param iv_cipher: (Algo type enum id + IV + Cipher)
 	* @return Recovered Buffer
-	* @throws CryptoPP::Exception, std::exception on failure
+	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
 	virtual String Decrypt(const String& password, const String& iv_cipher) noexcept(false) = 0;
 

@@ -18,7 +18,7 @@ DecryptFileScene::DecryptFileScene()
 
 void DecryptFileScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Explicit OpenGL old method to et background clear color
 	//glAssert(glClearColor(
@@ -258,7 +258,7 @@ void DecryptFileScene::OnEvent(Event& event)
 
 void DecryptFileScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 }
 

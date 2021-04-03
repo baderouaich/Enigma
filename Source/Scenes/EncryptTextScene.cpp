@@ -16,7 +16,7 @@ EncryptTextScene::EncryptTextScene()
 
 void EncryptTextScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Explicit OpenGL old method to et background clear color
 	//glAssert(glClearColor(
@@ -298,7 +298,7 @@ void EncryptTextScene::OnEvent(Event& /*event*/)
 
 void EncryptTextScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	m_password.clear();
 	m_confirm_password.clear();

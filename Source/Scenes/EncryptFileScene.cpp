@@ -18,7 +18,7 @@ EncryptFileScene::EncryptFileScene()
 
 void EncryptFileScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Explicit OpenGL old method to et background clear color
 	//glAssert(glClearColor(
@@ -112,7 +112,7 @@ void EncryptFileScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_16);
 		{
 			ImGui::PushFont(font_audiowide_regular_20);
-			ImGui::Text("Save to database:");
+				ImGui::Text("Save to database:");
 			ImGui::PopFont();
 			inline_dummy(6.0f, 0.0f);
 			ImGui::SameLine();
@@ -229,25 +229,10 @@ void EncryptFileScene::OnImGuiDraw()
 		ImGui::PopFont();
 
 
-		spacing(1);
-		ImGui::Separator();
-		spacing(1);
 
-		// Save to database widget
-		ImGui::PushFont(font_montserrat_medium_16);
-		{
-			ImGui::Checkbox("Save to database", &m_save_to_database);
-			if (m_save_to_database)
-			{
-				ImGui::Text("Encryption Title:");
-				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My ID card image) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
-			}
-		}
-		ImGui::PopFont();
-
-		spacing(1);
+		spacing(2);
 		ImGui::Separator();
-		spacing(3);
+		spacing(2);
 
 
 		// Encrypt & Back Button 
@@ -310,7 +295,7 @@ void EncryptFileScene::OnEvent(Event& event)
 
 void EncryptFileScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 }
 

@@ -2,6 +2,7 @@
 #include "DecryptTextScene.hpp"
 #include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
+#include <Utility/Base64.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -14,7 +15,7 @@ DecryptTextScene::DecryptTextScene()
 
 void DecryptTextScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Explicit OpenGL old method to et background clear color
 	//glAssert(glClearColor(
@@ -235,7 +236,7 @@ void DecryptTextScene::OnEvent(Event& event)
 
 void DecryptTextScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	m_recovered_text.clear(); 
 	m_cipher.clear();
@@ -249,6 +250,11 @@ void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 	if (m_cipher_base64.empty())
 	{
 		(void)DialogUtils::Warn("Cannot auto-detect algorithm without cipher base64 text");
+		return;
+	}
+	if (!Base64::IsBase64(m_cipher_base64))
+	{
+		(void)DialogUtils::Warn("Cipher base64 you entered is not a valid Base64 text");
 		return;
 	}
 
@@ -299,6 +305,11 @@ void DecryptTextScene::OnDecryptButtonPressed()
 	if (m_password.empty())
 	{
 		(void)DialogUtils::Warn("Password is empty");
+		return;
+	}
+	if (!Base64::IsBase64(m_cipher_base64))
+	{
+		(void)DialogUtils::Warn("Cipher base64 you entered is not a valid Base64 text");
 		return;
 	}
 

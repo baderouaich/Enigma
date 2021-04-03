@@ -29,6 +29,8 @@ namespace Enigma
 	*/
 	namespace Constants
 	{
+		using std::operator""s;
+
 		namespace Algorithm
 		{
 			// Notes:
@@ -63,7 +65,7 @@ namespace Enigma
 
 		namespace Config
 		{
-			static constexpr const char* ENIGMA_WINDOW_SETTINGS_CONFIG_PATH = "./Resources/Config/WindowSettings.ini";
+			static constexpr const char* WINDOW_CONFIG_FILE_PATH = "./Resources/Config/WindowSettings.ini";
 		}
 
 		namespace ENV // Environment Variable
@@ -71,11 +73,16 @@ namespace Enigma
 			static constexpr const char* ENIGMA_DIR_ENV_KEY = "ENIGMA_DIR"; // Holds the directory path of Enigma
 		}
 
+		namespace Logger
+		{
+			static constexpr const char* LOG_FILE_PATH = "./Enigma.log";
+		}
+
 		namespace Database
 		{
 			//https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
 			static constexpr const char* DATABASE_FILE_DIR = "./Resources/Database/";
-			static constexpr const char* DATABASE_FILE_NAME = "./Resources/Database/Enigma.db";
+			static constexpr const char* DATABASE_FILE_PATH = "./Resources/Database/Enigma.db";
 			// Unfortunetly u cant create multiple tables at once..
 			static constexpr const std::array<const char*, 2> CREATE_TABLES_SQL =
 			{
@@ -129,18 +136,20 @@ namespace Enigma
 
 		namespace ErrorMessages
 		{
-			static const String WEAK_PASSWORD = String("Password is too weak! consider using ") + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\";
+			static const auto WEAK_PASSWORD = "Password is too weak! consider using "s + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\"s;
 		}
 
 		namespace Links
 		{
-			static const String ENIGMA_GITHUB_API = "https://api.github.com/repos/BaderEddineOuaich/Enigma";
-			static const String ENIGMA_GITHUB_API_LATEST_RELEASE = ENIGMA_GITHUB_API + "/releases/latest";
-			static const String ENIGMA_GITHUB_REPOSITORY = "https://github.com/BaderEddineOuaich/Enigma";
+			static const auto ENIGMA_GITHUB_API = "https://api.github.com/repos/BaderEddineOuaich/Enigma"s;
+			static const auto ENIGMA_GITHUB_API_LATEST_RELEASE = ENIGMA_GITHUB_API + "/releases/latest"s;
+			static const auto ENIGMA_GITHUB_REPOSITORY = "https://github.com/BaderEddineOuaich/Enigma"s;
 		}
 
 		namespace Resources
 		{
+			static constexpr const char* RESOURCES_DIR = "./Resources/";
+
 			namespace Textures
 			{
 				// window runtime icon

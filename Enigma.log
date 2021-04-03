@@ -1,49 +1,23 @@
-[2021-03-24 19:31:22] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
-[2021-03-24 19:31:22] [info] Enigma: SQLite3 version 3.32.3
-[2021-03-24 19:31:22] [info] Enigma: [ OpenGL Info ]
+[2021-04-03 23:43:21] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
+[2021-04-03 23:43:21] [info] Enigma: SQLite3 version 3.32.3
+[2021-04-03 23:43:21] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-03-24 19:31:22] [trace] Enigma: void __cdecl Enigma::Application::LoadImGuiFonts(void)
-[2021-03-24 19:31:22] [trace] Enigma: Loading Fonts...
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-03-24 19:31:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
-[2021-03-24 19:31:22] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-03-24 19:31:22] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-03-24 19:31:22] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnCreate(void)
-[2021-03-24 19:31:24] [trace] Enigma: void __cdecl Enigma::EncryptFileScene::OnCreate(void)
-[2021-03-24 19:31:25] [debug] Enigma: Launching Worker Thread ID #16212
-[2021-03-24 19:31:25] [trace] Enigma: Selecting a file to encrypt...
-[2021-03-24 19:31:27] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 0, 0
-[2021-03-24 19:31:27] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 0, 0
-[2021-03-24 19:31:29] [info] Enigma: bool __cdecl Enigma::Application::OnFrameBufferResize(class Enigma::FrameBufferResizeEvent &): FrameBufferResizeEvent: 960, 800
-[2021-03-24 19:31:29] [info] Enigma: bool __cdecl Enigma::Application::OnWindowResize(class Enigma::WindowResizeEvent &): WindowResizeEvent: 960, 800
-[2021-03-24 19:31:31] [info] Enigma: bool __cdecl Enigma::Application::OnWindowClose(class Enigma::WindowCloseEvent &): Closing Window due WindowCloseEvent
-[2021-03-24 19:31:42] [trace] Enigma: Nothing is selected.
-[2021-03-24 19:31:42] [debug] Enigma: Finished Worker Thread ID #16212
-[2021-03-24 19:32:35] [trace] Enigma: void __cdecl Enigma::EncryptFileScene::OnDestroy(void)
-[2021-03-24 19:32:37] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnCreate(void)
-[2021-03-24 19:32:38] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnDestroy(void)
-[2021-03-24 19:32:40] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnCreate(void)
-[2021-03-24 19:32:42] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnDestroy(void)
-[2021-03-24 19:32:44] [trace] Enigma: void __cdecl Enigma::DecryptFileScene::OnCreate(void)
-[2021-03-24 19:32:44] [debug] Enigma: Launching Worker Thread ID #17000
-[2021-03-24 19:32:44] [trace] Enigma: Selecting a file to decrypt...
-[2021-03-24 19:32:47] [trace] Enigma: Nothing is selected.
-[2021-03-24 19:32:47] [debug] Enigma: Finished Worker Thread ID #17000
-[2021-03-24 19:32:48] [debug] Enigma: Launching Worker Thread ID #6796
-[2021-03-24 19:32:48] [trace] Enigma: Selecting a file to decrypt...
-[2021-03-24 19:33:01] [trace] Enigma: Nothing is selected.
-[2021-03-24 19:33:01] [debug] Enigma: Finished Worker Thread ID #6796
-[2021-03-24 19:33:02] [trace] Enigma: void __cdecl Enigma::DecryptFileScene::OnDestroy(void)
-[2021-03-24 19:33:03] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
-[2021-03-24 19:33:03] [trace] Enigma: void __cdecl Enigma::Database::Shutdown(void)
-[2021-03-24 19:33:03] [info] Enigma: Vacuuming SQLite3 database to optimize disk space...
-[2021-03-24 19:33:03] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnDestroy(void)
+[2021-04-03 23:43:21] [trace] Enigma: void __cdecl Enigma::Application::LoadImGuiFonts(void)
+[2021-04-03 23:43:21] [trace] Enigma: Loading Fonts...
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-04-03 23:43:21] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
+[2021-04-03 23:43:21] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-04-03 23:43:21] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-04-03 23:43:21] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnCreate(void)
+[2021-04-03 23:43:24] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-04-03 23:43:24] [trace] Enigma: void __cdecl Enigma::Database::Shutdown(void)
+[2021-04-03 23:43:24] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnDestroy(void)

@@ -22,7 +22,7 @@ ViewEncryptionScene::ViewEncryptionScene(const i64 encryption_id)
 
 void ViewEncryptionScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Set background clear color
 	//glAssert(glClearColor(
@@ -127,7 +127,7 @@ void ViewEncryptionScene::OnEvent(Event&)
 
 void ViewEncryptionScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
 

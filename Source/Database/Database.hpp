@@ -59,9 +59,8 @@ public: // Encryption Operations
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
 	{
-#ifdef ENIGMA_DEBUG
-		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+		ENIGMA_TRACE_CURRENT_FUNCTION();
+
 		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", nullptr);
 		try
 		{
@@ -115,9 +114,8 @@ public: // Encryption Operations
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
-#ifdef ENIGMA_DEBUG
-		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+		ENIGMA_TRACE_CURRENT_FUNCTION();
+
 		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});
 
 		std::vector<std::unique_ptr<Encryption>> encryptions{};
@@ -178,9 +176,8 @@ public: // Encryption Operations
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file> // select which columns to return (for optimization)
 	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
-#ifdef ENIGMA_DEBUG
-		ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+		ENIGMA_TRACE_CURRENT_FUNCTION();
+
 		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});
 
 		std::vector<std::unique_ptr<Encryption>> encryptions{};

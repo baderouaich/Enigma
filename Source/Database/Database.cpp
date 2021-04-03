@@ -5,9 +5,19 @@ NS_ENIGMA_BEGIN
 
 void Database::Initialize()
 {
-#ifdef ENIGMA_DEBUG
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+	// Check first if we are next to ./Resources/ folder for CLI to work
+	{
+		const fs::path resources_dir(Constants::Resources::RESOURCES_DIR);
+		if (!fs::exists(resources_dir) || !fs::is_directory(resources_dir))
+		{
+			ENIGMA_CRITICAL("Couldn't find {0} folder next to Enigma executable, if you running CLI please make sure you put {1} Directory next to Enigma executable.", resources_dir.string(), resources_dir.string());
+			std::exit(EXIT_FAILURE);
+		}
+
+	}
+
+
 	ENIGMA_INFO("SQLite3 version {0}", SQLite::VERSION);
 	try
 	{
@@ -23,7 +33,7 @@ void Database::Initialize()
 		}
 
 		m_database = std::make_unique<SQLite::Database>(
-			Constants::Database::DATABASE_FILE_NAME,
+			Constants::Database::DATABASE_FILE_PATH,
 			SQLite::OPEN_CREATE | SQLite::OPEN_READWRITE // create if not exists
 			);
 
@@ -41,7 +51,6 @@ void Database::Initialize()
 				std::to_string(query->getErrorCode()) + 
 				" and message: " + String(query->getErrorMsg()));
 		}
-	
 	}
 	catch (const SQLite::Exception& e)
 	{
@@ -53,18 +62,23 @@ void Database::Initialize()
 
 void Database::Shutdown()
 {
-#ifdef ENIGMA_DEBUG
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
-	Vacuum();
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
+	if (m_database) // Only vacuum if there were changes done to the database.
+	{
+		const i32 total_changes = m_database->getTotalChanges();
+		if (total_changes > 0)
+		{
+			Vacuum();
+		}
+	}
 }
 
 // Add Encryption to Encryptions table, returns true on success
 bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 {
-#ifdef ENIGMA_DEBUG
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
 	try
 	{
@@ -113,9 +127,8 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 // Delete Encryption record by id, returns true if successfully deleted
 bool Database::DeleteEncryption(const i64 ide)
 {
-#ifdef ENIGMA_DEBUG
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
 	try
 	{

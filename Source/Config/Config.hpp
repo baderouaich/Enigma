@@ -14,7 +14,7 @@ class ENIGMA_API Config
 public:
 	/*
 	* @param file_name: config ini file name
-	* @throws std::runtime_error on failure
+	* @exception std::runtime_error on failure
 	*/
 	Config(const String& file_name) noexcept(false);
 	~Config() noexcept;

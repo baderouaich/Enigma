@@ -17,12 +17,12 @@ MainMenuScene::MainMenuScene() noexcept
 	:
 	Enigma::Scene()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
 void MainMenuScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Explicit OpenGL old method to et background clear color
 	//glAssert(glClearColor(
@@ -229,7 +229,7 @@ void MainMenuScene::OnEvent(Enigma::Event&)
 
 void MainMenuScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
 void MainMenuScene::OnEncryptFileButtonPressed()
@@ -281,8 +281,8 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 
 void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-	
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	ENIGMA_TRACE("Retrieving Enigma's latest release info from {0}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
 	const auto info = CheckForUpdates::GetLatestReleaseInfo();
 	if (!info) 

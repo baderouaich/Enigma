@@ -16,7 +16,7 @@ MyEncryptionsScene::MyEncryptionsScene()
 
 void MyEncryptionsScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// Explicit OpenGL old method to et background clear color
 	//glAssert(glClearColor(
@@ -383,14 +383,16 @@ void MyEncryptionsScene::OnEvent(Event& /*event*/)
 
 void MyEncryptionsScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-	
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	// Cleanup
 	m_encryptions.clear();
 }
 
 void MyEncryptionsScene::GetAllEncryptions()
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	m_encryptions.clear();
 
 	ENIGMA_INFO("Getting all encryptions from database...");
@@ -407,6 +409,8 @@ void MyEncryptionsScene::OnBackButtonPressed()
 
 void MyEncryptionsScene::OnViewEncryptionButtonPressed(const i64 ide)
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	ENIGMA_TRACE("View {0}", ide);
 
 	Application::GetInstance()->PushScene(std::make_unique<ViewEncryptionScene>(ide));
@@ -415,6 +419,8 @@ void MyEncryptionsScene::OnViewEncryptionButtonPressed(const i64 ide)
 // returns true if item deleted successfully to notify draw loop that vector range changed
 bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	ENIGMA_TRACE("Delete {0}", ide);
 	ENIGMA_TRACE("Confirming deletion of encryption with id {0}", ide);
 
@@ -451,7 +457,7 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 
 void MyEncryptionsScene::OnSearchEncryptionsByTitle()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	m_encryptions.clear();
 	m_encryptions = Database::SearchEncryptionsByTitle<true, false, true, true, true>(m_query);

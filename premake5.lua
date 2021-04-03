@@ -99,6 +99,8 @@ project "Enigma"
 	---[[ Source files ]]---
 	files
 	{
+		"Resources/**.*",
+
 		"premake5.lua",
 		"Source/**.hpp",
 		"Source/**.cpp"
@@ -155,7 +157,10 @@ project "Enigma"
 	 	}
 	    vpaths 
 	    {
-	  	  ['Resources/*'] = { '*.rc', '**.ico' } 
+	    	--[[
+				uncomment if files{ "Resources/**.*" } is deleted above
+	    	--]]
+	  	 	--['Resources/*'] = { '*.rc', '**.ico' } 
 	    }
 		--
 

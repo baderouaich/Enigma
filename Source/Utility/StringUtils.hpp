@@ -2,7 +2,7 @@
 #ifndef ENIGMA_STRING_UTILS_H
 #define ENIGMA_STRING_UTILS_H
 
-#include <Core/Core.hpp>	// Enigma Types
+#include <Core/Types.hpp>	// Enigma Types
 
 #include <string>		// std::string, std::string_view
 #include <algorithm>	// std::all_of
@@ -180,6 +180,80 @@ public:
 		return converter.to_bytes(wstr);
 	}
 
+
+#if 0
+
+	/*
+	*	Cleanup a string (remove string from string)
+	*/
+	static String Cleanup(const String& expr, const String& remove)
+	{
+		const size_t N = expr.size();
+		const size_t K = remove.size();
+		String result(N, '\000');
+		size_t srcIndex = 0;
+		size_t dstIndex = 0;
+		while (srcIndex < N)
+		{
+			size_t matchIndex = 0;
+			while (matchIndex < K - 1 && srcIndex + matchIndex < N - 1 && expr[srcIndex + matchIndex] == remove[matchIndex])
+			{
+				matchIndex++;
+				if (matchIndex == K - 1)
+					srcIndex += matchIndex;
+			}
+			result[dstIndex++] = expr[srcIndex] == '"' ? '\'' : expr[srcIndex];
+			srcIndex++;
+		}
+		result.resize(dstIndex, '\000'); // resize to fit string after removing other str
+		return result;
+	}
+	static WString Cleanup(const WString& expr, const WString& remove)
+	{
+		const size_t N = expr.size();
+		const size_t K = remove.size();
+		WString result(N, L'\000');
+		size_t srcIndex = 0;
+		size_t dstIndex = 0;
+		while (srcIndex < N)
+		{
+			size_t matchIndex = 0;
+			while (matchIndex < K - 1 && srcIndex + matchIndex < N - 1 && expr[srcIndex + matchIndex] == remove[matchIndex])
+				matchIndex++;
+			if (matchIndex == K - 1)
+				srcIndex += matchIndex;
+			result[dstIndex++] = expr[srcIndex] == '"' ? '\'' : expr[srcIndex];
+			srcIndex++;
+		}
+		result.resize(dstIndex, L'\000'); // resize to fit string after removing other str
+		return result;
+	}
+
+	template <size_t N>
+	struct CleanupResult // wrapper to keep data variable alive in the stack after going out of scope of Cleanup function
+	{
+		char data[N];
+	};
+	template <size_t N, size_t K>
+	static auto Cleanup(const char(&expr)[N], const char(&remove)[K])
+	{
+		CleanupResult<N> result{};
+		size_t srcIndex = 0;
+		size_t dstIndex = 0;
+		//while constexpr (srcIndex < N)
+		while (srcIndex < N)
+		{
+			size_t matchIndex = 0;
+			while (matchIndex < K - 1 && srcIndex + matchIndex < N - 1 && expr[srcIndex + matchIndex] == remove[matchIndex])
+				matchIndex++;
+			if (matchIndex == K - 1)
+				srcIndex += matchIndex;
+			result.data[dstIndex++] = expr[srcIndex] == '"' ? '\'' : expr[srcIndex];
+			srcIndex++;
+		}
+		return result;
+	}
+#endif
 };
 NS_ENIGMA_END
 

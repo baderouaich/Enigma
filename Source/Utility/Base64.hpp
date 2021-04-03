@@ -22,9 +22,11 @@ public:
 	*	Checks if a byte is base64
 	*/
 	static inline const bool IsBase64(const byte& c) noexcept;
-
-private:
-	inline static constexpr const byte BASE64_CHARACTERS[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	
+	/*
+	*	Checks if a string is base64
+	*/
+	static const bool IsBase64(const std::string_view& str) noexcept;
 
 };
 NS_ENIGMA_END

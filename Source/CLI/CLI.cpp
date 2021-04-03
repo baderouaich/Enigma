@@ -29,6 +29,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
 			("c,compress", "Compress File Before Encrypting") // -c | --compress 
 			("u,decompress", "Decompress File After Decrypting") // -u | --decompress 
+			("s,save", "Save encryption record to database")  // save to database
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma's version")  // VERSION
 			("check-for-updates", "Check for new version releases")  // Check for enigma updates from github api
@@ -91,7 +92,9 @@ i32 CLI::Run()
 	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
 	String infilename{}; // In file to encrypt if mode is --encrypt, otherwise file to be decrypted
 	String outfilename{}; // Out file to ouput encrypted cipher to if mode is --encrypt, otherwise decrypted file
-	bool compress{ false }, decompress{ false }; // Compress/Decompress File Before Encrypting/Decrypting
+	const bool compress = r.count("compress"); // Compress File Before Encrypting
+	const bool decompress = r.count("decompress"); // Decompress File After Decrypting
+	const bool save_to_database = r.count("save"); // Save encryption record to database
 	try
 	{
 		// Encrypting or Decrypting ?
@@ -158,9 +161,6 @@ i32 CLI::Run()
 			//LOG("Out File name: {0}", outfilename);
 		}
 
-		// Check if file compression/decompression enabled
-		compress = r.count("c") || r.count("compress");
-		decompress = r.count("u") || r.count("decompress");
 
 
 		///============ Call Scenarios ============///
@@ -210,7 +210,7 @@ i32 CLI::Run()
 			switch (intent)
 			{
 			case Intent::Encrypt:
-				this->OnEncryptText(algorithm, password, text);
+				this->OnEncryptText(algorithm, password, text, save_to_database);
 				break;
 			case Intent::Decrypt:
 				this->OnDecryptText(algorithm, password, text);
@@ -224,7 +224,7 @@ i32 CLI::Run()
 			switch (intent)
 			{
 			case Intent::Encrypt:
-				this->OnEncryptFile(algorithm, password, infilename, outfilename, compress);
+				this->OnEncryptFile(algorithm, password, infilename, outfilename, compress, save_to_database);
 				break;
 			case Intent::Decrypt:
 				this->OnDecryptFile(algorithm, password, infilename, outfilename, decompress);
@@ -253,7 +253,7 @@ i32 CLI::Run()
 	return EXIT_SUCCESS;
 }
 
-void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text)
+void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool& save_to_database)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -274,9 +274,29 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 
+
 	ENIGMA_INFO(cipher_base64);
 	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
 		text.size(), elapsed_seconds);
+
+	// Save encryption record to database on option -s | --save 
+	if(save_to_database)
+	{
+		String title{};
+		ENIGMA_LOG("Save encryption to database, please enter encryption title (e.g: My Github Password): ");
+		std::cout << "> ";
+		std::getline(std::cin, title);
+
+		ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(title.size(), 3, 255), "Encryption title is too long or short, must be between 3 and 255 characters");
+		auto e = std::make_unique<Encryption>();
+		e->title = title;
+		e->is_file = false;
+		e->cipher.data = GZip::Compress(cipher);
+		e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
+		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+
+		ENIGMA_INFO("Encryption saved successfully.");
+	}
 	
 	cipher.clear();
 	cipher_base64.clear();
@@ -309,7 +329,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	decrypted_text.clear();
 }
 
-void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool& compress)
+void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool& compress, const bool& save_to_database)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -328,14 +348,14 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(successfully_read_file, "Failed to read file content " + in_filename);
 
 	// Compression (if needed)
-	if (compress)
+	if (compress || save_to_database)  // Force file buffer to be compressed to reduce size of the database even if user doesnt check m_compress (also same is done in EncryptFileScene.cpp)
 	{
 		ENIGMA_TRACE("Compressing file buffer {0} ...", in_filename);
 		const size_t old_buffer_size = buffer.size();
 		buffer = GZip::Compress(buffer);
 		const size_t new_buffer_size = buffer.size();
 		const size_t decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
-		ENIGMA_LOG("File size decreased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(decreased_bytes));
+		ENIGMA_LOG("File size decreased by {0}", ENIGMA_FRIENDLY_BYTES_SIZE(decreased_bytes));
 	}
 
 	// Encrypt
@@ -354,6 +374,26 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save cipher to file " + out_filename_encypted);
 
 	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
+
+	// Save encryption record to database on option -s | --save (Note: file buffer forced to be compressed above if saving to database)
+	if (save_to_database)
+	{
+		String title{};
+		ENIGMA_LOG("Save encryption to database, please enter encryption title (e.g: My Image): ");
+		std::cout << "> ";
+		std::getline(std::cin, title);
+		
+		ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(title.size(), 3, 255), "Encryption title is too long or short, must be between 3 and 255 characters");
+		auto e = std::make_unique<Encryption>();
+		e->title = title;
+		e->is_file = true;
+		e->cipher.data = cipher; // already compressed above
+		e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
+		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+
+		ENIGMA_INFO("Encryption saved successfully.");
+	}
+
 
 	buffer.clear();
 	cipher.clear();

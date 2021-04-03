@@ -84,9 +84,7 @@ void Application::InitImGuiRenderer()
 
 void Application::LoadImGuiFonts()
 {
-#ifdef ENIGMA_DEBUG
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
-#endif
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	static const auto& io = ImGui::GetIO();
 
@@ -186,8 +184,10 @@ void Application::OnEvent(Event& event)
 
 bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 #ifdef ENIGMA_DEBUG
-	ENIGMA_INFO("{0}: Closing Window due WindowCloseEvent", ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_INFO("Closing Window due WindowCloseEvent");
 #endif
 
 
@@ -218,8 +218,10 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 
 bool Application::OnWindowResize(WindowResizeEvent& event)
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 #ifdef ENIGMA_DEBUG
-	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString());
+	ENIGMA_INFO(event.ToString());
 #endif
 
 	// Update OpenGL Viewport
@@ -232,8 +234,10 @@ bool Application::OnWindowResize(WindowResizeEvent& event)
 
 bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 #ifdef ENIGMA_DEBUG
-	ENIGMA_INFO("{0}: {1}", ENIGMA_CURRENT_FUNCTION, event.ToString());
+	ENIGMA_INFO(event.ToString());
 #endif
 
 	// Update OpenGL Viewport

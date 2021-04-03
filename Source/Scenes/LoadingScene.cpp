@@ -13,7 +13,7 @@ LoadingScene::LoadingScene()
 
 void LoadingScene::OnCreate()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 }
 
@@ -71,7 +71,7 @@ void LoadingScene::OnEvent(Event& /*event*/)
 
 void LoadingScene::OnDestroy()
 {
-	ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION);
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
 NS_ENIGMA_END

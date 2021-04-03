@@ -129,7 +129,7 @@
 #elif defined(__cplusplus) && (__cplusplus >= 201103)
 	#define ENIGMA_CURRENT_FUNCTION __func__
 #elif defined(_MSC_VER)
-	#define ENIGMA_CURRENT_FUNCTION __FUNCTION__ 
+	#define ENIGMA_CURRENT_FUNCTION __FUNCTION__
 #else
 	#define ENIGMA_CURRENT_FUNCTION "<unknown function>"
 #endif
@@ -156,22 +156,33 @@
 
 
 
+/// Logs current function for debugging
+#if defined(ENIGMA_DEBUG)
+//#define ENIGMA_TRACE_CURRENT_FUNCTION() ENIGMA_TRACE(::Enigma::StringUtils::Cleanup(::Enigma::StringUtils::Cleanup(::Enigma::StringUtils::Cleanup(ENIGMA_CURRENT_FUNCTION, " __cdecl"), "struct"), "class"))
+#define ENIGMA_TRACE_CURRENT_FUNCTION() ENIGMA_TRACE(ENIGMA_CURRENT_FUNCTION)
+#else
+#define ENIGMA_TRACE_CURRENT_FUNCTION()
+#endif
+///
+
 /// Convert bytes to kb, mb, gb, tb
 #define ENIGMA_BYTES_TO_KB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f)
 #define ENIGMA_BYTES_TO_MB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f)
 #define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
 #define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
-#define ENIGMA_FRIENDLY_BYTES_SIZE(bytes) \
-[](const size_t bytes) -> std::string \
+#define ENIGMA_FRIENDLY_BYTES_SIZE(bytes) [](const size_t bytes) -> std::string \
 { \
 	if (bytes == 0) return std::string("0 Bytes"); \
 	std::ostringstream oss{}; \
-	constexpr const int KB = 1024; \
-	const char* sizes[] = { "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }; \
+	static constexpr const int KB = 1024; \
+	static constexpr const char* sizes[] = { "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }; \
 	const int i = static_cast<int>(std::floor(std::log(bytes) / std::log(KB))); \
 	oss << std::fixed << std::setprecision(2) \
 		<< static_cast<float>(bytes / std::pow(KB, i)) << ' ' << sizes[i]; \
 	return oss.str(); \
 }(bytes)
+
+
+
 
 #endif // !ENIGMA_MACROS_H
