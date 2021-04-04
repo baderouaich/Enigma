@@ -1,3 +1,4 @@
+========================= IN PROGRESS =============================
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
 - Add Database system to save encrypted text or maybe files too, user can export/import database
 - Add CLi option --save -s to database if selected, and --list to show all encryption records
@@ -8,15 +9,46 @@
 - modify readme.md's enigma --help section, --check-for-updates still hase -u
 - check if it is possible not to use zlib with curl to reduce libraries links therefor small binary size
 - Fix CLI couldn't launch due database path (CLI must work good only when releasing Enigma.exe with Resources/ dir next to it to apply ./ path)
-- irrelevant lines
-https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L298
-https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L348
+- Make checks here https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L348
 - Replace all ENIGMA_MB_TO_BYTES With ENIGMA_FRIENDLY_BYTES_SIZE 
 
+- Encrypt file scene, use fs::path(dir) / filename + ".enigma"; instead
 
 
 
 
+
+
+
+
+============================== DONE ===============================
+- DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
+- DONE added VACUUM sqlite command to defragment disk
+- DONE (issue was argv[0] returns enigma.exe only) Investigate why ENV doesnt work on CLI (it works when running it from local 
+debugger with ui, but when calling cli, it doesnt seem to be set or get)
+- DONE check why loadingscene's bg color doesnt work
+- DONE LoadingScene if(scene.isLoading()) render it over main scenes.back()
+
+- DONE ... on action performed (onclick..) spawn detached thread r scene's worker thread seperated from ui 
+- DONE use crypto++'s base64 encoder/decoder
+- DONE irrelevant lines
+https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L298
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================================================================
 #if 0
 #pragma region Populate Database With Random Data
 	using namespace Enigma;
@@ -37,15 +69,3 @@ https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Appli
 	return 0;
 #pragma endregion
 #endif
-
-
-
-- DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
-- DONE added VACUUM sqlite command to defragment disk
-- DONE (issue was argv[0] returns enigma.exe only) Investigate why ENV doesnt work on CLI (it works when running it from local 
-debugger with ui, but when calling cli, it doesnt seem to be set or get)
-- DONE check why loadingscene's bg color doesnt work
-- DONE LoadingScene if(scene.isLoading()) render it over main scene.back
-
-- DONE ... on action performed (onclick..) spawn detached thread r scene's worker thread seperated from ui 
-- DONE use crypto++'s base64 encoder/decoder

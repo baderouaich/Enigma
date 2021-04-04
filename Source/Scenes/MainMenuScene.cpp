@@ -53,7 +53,7 @@ void MainMenuScene::OnImGuiDraw()
 
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 
-	const auto& fonts = Application::GetInstance()->GetFonts();
+	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
 	static ImFont* const& font_audiowide_regular_60 = fonts.at("Audiowide-Regular-60");
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -86,14 +86,14 @@ void MainMenuScene::OnImGuiDraw()
 				{
 					if (ImGui::MenuItem("Report issue")) 
 					{
-						Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread("Reporting issue...", this, [this]() -> void
 						{
 							this->OnReportIssueMenuButtonPressed(); 
 						});
 					}
 					if (ImGui::MenuItem("Check for updates")) 
 					{
-						Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread("Checking for updates...", this, [this]() -> void
 						{
 							this->OnCheckForUpdatesMenuButtonPressed();
 						});
@@ -176,10 +176,12 @@ void MainMenuScene::OnImGuiDraw()
 					}
 					ImGui::PopStyleColor(3);
 				}
+
 				spacing(9);
+
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-					ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
+					//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
 					if (ImGuiWidgets::Button("Exit", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 					{
 						Scene::EndScene();

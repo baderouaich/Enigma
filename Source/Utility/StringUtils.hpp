@@ -8,6 +8,7 @@
 #include <algorithm>	// std::all_of
 #include <utility>		// std::transform
 #include <codecvt>		// helps converting between UTF-X strings
+#include <locale>		// required for linux & darwin causes error: ‘wstring_convert’ is not a member of ‘std’
 
 NS_ENIGMA_BEGIN
 /*
@@ -134,7 +135,6 @@ public:
 		return cwstr;
 	}
 
-
 	/*
 	*   Check if a string starts with a prefix
 	*/
@@ -159,6 +159,17 @@ public:
 		return wstr.size() >= wsuffix.size() && wstr.compare(wstr.size() - wsuffix.size(), wsuffix.size(), wsuffix) == 0;
 	}
 
+	/*
+	*   Check if a string contains another
+	*/
+	static bool Contains(const String& str, const String& other)
+	{
+		return str.find(other) != String::npos;
+	}
+	static bool Contains(const WString& str, const WString& other)
+	{
+		return str.find(other) != WString::npos;
+	}
 
 	/*
 	*	Converts UTF-8 std::string to UTF-16 std::wstring
@@ -166,7 +177,7 @@ public:
 	static WString StringToWString(const String& str)
 	{
 		using convert_type = std::codecvt_utf8<wchar_t>;
-		std::wstring_convert<convert_type, wchar_t> converter;
+		static std::wstring_convert<convert_type, wchar_t> converter;
 		return converter.from_bytes(str);
 	}
 
@@ -176,7 +187,7 @@ public:
 	static String WStringToString(const WString& wstr)
 	{
 		using convert_type = std::codecvt_utf8<wchar_t>;
-		std::wstring_convert<convert_type, wchar_t> converter;
+		static std::wstring_convert<convert_type, wchar_t> converter;
 		return converter.to_bytes(wstr);
 	}
 

@@ -50,7 +50,7 @@ void EncryptTextScene::OnImGuiDraw()
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 	static constexpr const auto inline_spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); } };
 
-	const auto& fonts = Application::GetInstance()->GetFonts();
+	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
 	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
@@ -66,6 +66,16 @@ void EncryptTextScene::OnImGuiDraw()
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
+		// Back Button [<]
+		ImGui::PushFont(font_montserrat_medium_20); // < arrow is a text too
+		if (ImGuiWidgets::BackButton("##back", ImVec2(45.0f, 45.0f)))
+		{
+			this->OnBackButtonPressed();
+		}
+		ImGui::PopFont();
+
+		ImGui::SameLine();
+
 		// Scene Title
 		ImGui::PushFont(font_audiowide_regular_45); // text font
 		ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
@@ -219,12 +229,31 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PopFont();
 		}
 
+		spacing(3);
+		ImGui::Separator();
+		spacing(3);
 
-
-
-
-		// Encrypt & Back Button
+		// Encrypt Button
 		{
+			ImGui::PushFont(font_audiowide_regular_20); // buttons font
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+			{
+				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
+				if (ImGui::Button("Encrypt", button_size))
+				{
+					Application::GetInstance()->LaunchWorkerThread("Encrypting text...", this, [this]() -> void
+						{
+							this->OnEncryptButtonPressed();
+						});
+				}
+
+			}
+			ImGui::PopStyleColor(3);
+			ImGui::PopFont();
+#if 0
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
 			ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
@@ -271,7 +300,7 @@ void EncryptTextScene::OnImGuiDraw()
 				}
 			}
 			ImGui::PopStyleColor(3);
-			ImGui::PopFont();
+#endif
 		}
 		
 

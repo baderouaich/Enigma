@@ -41,7 +41,6 @@ public: /*Modifiers*/
 	void EndScene() noexcept { m_quit = true; }
 	void SetLoading(const bool loading) noexcept { m_isLoading = loading; }
 
-
 protected:
 	std::mutex m_mutex{}; // each scene has a mutex, which will guard code running by worker thread seperated from UI main thread. | used by std::scoped_lock
 	bool m_quit{};

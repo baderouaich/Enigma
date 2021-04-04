@@ -38,10 +38,11 @@ public: /* Constructor / Destructors */
 
 	/*
 	*	Launches detached thread seperated from main UI thread
+	*	@param loading_text: thee reason behind launching this worker thread, will appear bellow loading spinner e.g: "Browsing input file..."
 	*	@param scene: pointer to scene which spawns the worker thread
 	*	@param func: function has code to run in parallel
 	*/
-	void LaunchWorkerThread(Scene* scene, const std::function<void()>& func);
+	void LaunchWorkerThread(const std::string_view& loading_text, Scene* scene, const std::function<void()>& func);
 
 
 public: /* Events */
@@ -75,12 +76,12 @@ public: /*Accessors*/
 	/*
 	*	Returns FPS (Frames Per Second) count
 	*/
-	constexpr const ui32& GetFPS() const noexcept { return m_FPS; }
+	const ui32 GetFPS() const noexcept { return *m_FPS; }
 
 	/*
 	*	Returns delta time value (the time difference between the previous frame that was drawn and the current frame)
 	*/
-	constexpr const f32& GetDeltaTime() const noexcept { return m_delta_time; }
+	constexpr const f32 GetDeltaTime() const noexcept { return m_delta_time; }
 
 
 	/*
@@ -106,7 +107,8 @@ private: /* Updaters */
 private: /* Initializer Functions */
 	void InitWindow(const WindowSettings& window_settings);
 	void InitImGuiRenderer();
-	void LoadImGuiFonts();
+	void InitHardwareInfo(const WindowSettings& window_settings);
+	void InitImGuiFonts();
 
 private: /* Window */
 	std::unique_ptr<Window> m_window;
@@ -120,10 +122,10 @@ private: /* Delta time */
 	f32 m_current_frame_time;
 	f32 m_delta_time;
 
-private: /* Realtime Hardware Info (FPS, CPU, RAM info...) */
+private: /* Realtime Hardware Info (FPS, CPU, RAM info...), if its enabled, it will not be nullptr */
 	static constexpr f32 HARWARE_INFO_UPDATE_TIME = 1.0f; // time to wait for each hardware info update -> 1 second
 	f32 m_hardware_info_timer; // timer to update info each HARWARE_INFO_UPDATE_TIME
-	ui32 m_FPS;
+	std::unique_ptr<ui32> m_FPS;
 	std::unique_ptr<RAMInfo> m_ram_info;
 	std::unique_ptr<CPUInfo> m_cpu_info;
 

@@ -18,12 +18,15 @@
 
 
 NS_ENIGMA_BEGIN
-
+class RAMInfo;
+class CPUInfo;
 /*
 *	OpenGL Based Window
 */
 class ENIGMA_API Window
 {
+	using EventCallback = std::function<void(Event&)>;
+
 public:
 	Window(const WindowSettings& window_settings = WindowSettings());
 	virtual ~Window();
@@ -53,12 +56,12 @@ public:	/* Accessors */
 	/*
 	*	Returns the width of this window
 	*/
-	const i32& GetWidth() const noexcept;
+	const i32 GetWidth() const noexcept;
 
 	/*
 	*	Returns the height of this window
 	*/
-	const i32& GetHeight() const noexcept;
+	const i32 GetHeight() const noexcept;
 
 	/*
 	*	Returns frame buffer size of this window
@@ -68,12 +71,12 @@ public:	/* Accessors */
 	/*
 	*	Returns frame buffer width of this window
 	*/
-	const i32& GetFrameBufferWidth() noexcept;
+	const i32 GetFrameBufferWidth() noexcept;
 	
 	/*
 	*	Returns frame buffer height of this window
 	*/
-	const i32& GetFrameBufferHeight() noexcept;
+	const i32 GetFrameBufferHeight() noexcept;
 
 	/*
 	*	Returns the aspect ratio ( width / height ) of this window
@@ -117,7 +120,7 @@ public:	/* Accessors */
 	*	Interval 1: 60 FPS
 	*	Interval 2: 30 FPS
 	*/
-	const i32& GetSwapInterval() const noexcept;
+	const i32 GetSwapInterval() const noexcept;
 
 	/*
 	*	Returns true if the window should be closed
@@ -167,7 +170,7 @@ public:	/* Accessors */
 	/*
 	*	Returns refresh rate of this window
 	*/
-	const i32& GetRefreshRate() noexcept;
+	const i32 GetRefreshRate() noexcept;
 	
 	/*
 	*	Returns size (width, height) of the primary monitor
@@ -175,7 +178,6 @@ public:	/* Accessors */
 	const std::pair<i32, i32> GetMonitorSize() noexcept;
 
 public: /* Modifiers */
-	using EventCallback = std::function<void(Event&)>;
 	/*
 	*	Sets event callback function
 	*/
@@ -184,12 +186,12 @@ public: /* Modifiers */
 	/*
 	*	Set window minimum width, height
 	*/
-	void SetMinimumSize(const i32& minimum_width, const i32& minimum_height) noexcept;
+	void SetMinimumSize(const i32 minimum_width, const i32 minimum_height) noexcept;
 
 	/*
 	*	Set window maximum width, height
 	*/
-	void SetMaximumSize(const i32& maximum_width, const i32& maximum_height) noexcept;
+	void SetMaximumSize(const i32 maximum_width, const i32 maximum_height) noexcept;
 
 	/*
 	*	Close Window
@@ -202,17 +204,18 @@ public: /* Modifiers */
 	*	Interval 1: 60 FPS
 	*	Interval 2: 30 FPS
 	*/
-	void SetSwapInterval(const i32& interval) noexcept;
+	void SetSwapInterval(const i32 interval) noexcept;
 	
 	/*
 	*	Set Window Title
 	*/
-	void SetTitle(const String& title) noexcept;
+	//void SetTitle(const String& title) noexcept;
+	void SetTitle(const String& title, const std::unique_ptr<ui32>& fps, const std::unique_ptr<RAMInfo>& ram_info, const std::unique_ptr<CPUInfo>& cpu_info) noexcept;
 	
 	/*
 	*	Set window top left position
 	*/
-	void SetPosition(const i32& x, const i32& y) const noexcept;
+	void SetPosition(const i32 x, const i32 y) const noexcept;
 
 	/*
 	*	Set Window runtime icon
@@ -227,7 +230,7 @@ public: /* Modifiers */
 	/*
 	*	Set Window cursor image
 	*/
-	void SetCursor(const String& image_path, const i32& xhot, const i32& yhot) noexcept;
+	void SetCursor(const String& image_path, const i32 xhot, const i32 yhot) noexcept;
 
 	/*
 	*	Disable Window Cursor
@@ -247,7 +250,7 @@ public: /* Modifiers */
 	/*
 	*	Sets cursor position at given point
 	*/
-	void SetCursorPosition(const f64& xPos, const f64& yPos) const noexcept;
+	void SetCursorPosition(const f64 xPos, const f64 yPos) const noexcept;
 	
 	/*
 	*	Minimize Window
@@ -287,7 +290,7 @@ public: /* Modifiers */
 	/*
 	*	Set window refresh rate
 	*/
-	void SetRefreshRate(const i32& refresh_rate) noexcept;
+	void SetRefreshRate(const i32 refresh_rate) noexcept;
 
 private: /* Initializer Functions */
 	bool InitGLFW(const WindowSettings& window_settings);
@@ -301,6 +304,7 @@ private: /* Events */
 
 
 private: /* Properties */
+	// Window properties
 	String m_title;
 	std::pair<i32, i32> m_position;
 	std::pair<i32, i32> m_size;
@@ -308,15 +312,19 @@ private: /* Properties */
 	std::pair<i32, i32> m_maximum_size;
 	std::pair<i32, i32> m_frame_buffer_size;
 	i32 m_swap_interval;
+
+	// Hardware info flags
 	bool m_is_show_fps;
 	bool m_is_show_ram_usage;
 	bool m_is_show_cpu_usage;
 
-	GLFWwindow* m_GLFWwindow; // GLFW window
+	// Monitor & Video Mode
+	GLFWwindow* m_GLFWwindow;
 	GLFWmonitor* m_monitor;
 	const GLFWvidmode* m_video_mode;
 
-	std::unique_ptr<Cursor> m_cursor;	// Window cursor
+	// Window Cursor
+	std::unique_ptr<Cursor> m_cursor;
 
 public: /* Good Friends :) */
 	friend class Application;

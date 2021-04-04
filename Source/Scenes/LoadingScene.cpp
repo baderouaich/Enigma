@@ -28,6 +28,7 @@ void LoadingScene::OnImGuiDraw()
 	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
 	static const auto& io = ImGui::GetIO();
 
+
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;
 	
 	// Push window's background color
@@ -47,7 +48,15 @@ void LoadingScene::OnImGuiDraw()
 		*/
 		
 		const ImVec2 spinner_position = { (io.DisplaySize.x - ((SPINNER_RADIUS * SPINNER_THICKNESS) / 2.0f)) / 2.0f,  (io.DisplaySize.y - ((SPINNER_RADIUS * SPINNER_THICKNESS) / 2.0f)) / 2.0f };
-		ImGuiWidgets::LoadingDialog(spinner_position, SPINNER_RADIUS, SPINNER_THICKNESS, Constants::Colors::LOADING_SPINNER_COLOR, static_cast<f32>(win_w), static_cast<f32>(win_h));
+		ImGuiWidgets::LoadingDialog(
+			m_loading_text.empty() ? "Loading..." : m_loading_text.data(),
+			spinner_position, 
+			SPINNER_RADIUS, 
+			SPINNER_THICKNESS,
+			Constants::Colors::LOADING_SPINNER_COLOR,
+			static_cast<f32>(win_w), 
+			static_cast<f32>(win_h)
+		);
 		
 		/*
 		static constexpr const float RADIUS = 45;

@@ -1,9 +1,9 @@
 #include <pch.hpp>
 #include "Application.hpp"
 
-#include <Scenes/Scene.hpp>
 #include <GUI/ImGuiRenderer.hpp>
 #include <Utility/DialogUtils.hpp>
+
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
 
@@ -17,23 +17,24 @@ Application* Application::m_instance = nullptr;
 
 Application::Application(const WindowSettings& window_settings)
 	:
-	//Delta time
+	// Delta time
 	m_last_frame_time(0.0f),
 	m_current_frame_time(0.0f),
 	m_delta_time(0.0f),
-	//FPS
-	m_FPS(0),
-	//Analytics
-	m_ram_info(window_settings.is_show_ram_usage ? new RAMInfo() : nullptr),
-	m_cpu_info(window_settings.is_show_cpu_usage ? new CPUInfo() : nullptr),
+	// Analytics
+	m_FPS(nullptr),
+	m_ram_info(nullptr),
+	m_cpu_info(nullptr),
 	m_hardware_info_timer(0.0f)
 {
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
 
+	// Initializers
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
-	this->LoadImGuiFonts();	
+	this->InitHardwareInfo(window_settings);
+	this->InitImGuiFonts();
 
 	// Push Main Menu scene as an entry point
 	this->PushScene(std::make_unique<MainMenuScene>());
@@ -81,8 +82,18 @@ void Application::InitImGuiRenderer()
 	m_imgui_renderer = std::make_unique<ImGuiRenderer>();
 }
 
+void Application::InitHardwareInfo(const WindowSettings& window_settings)
+{
+	if (window_settings.is_show_fps)
+		m_FPS = std::make_unique<ui32>(0);
+	if (window_settings.is_show_ram_usage)
+		m_ram_info = std::make_unique<RAMInfo>();
+	if (window_settings.is_show_cpu_usage)
+		m_cpu_info = std::make_unique<CPUInfo>();
+}
 
-void Application::LoadImGuiFonts()
+
+void Application::InitImGuiFonts()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -134,20 +145,22 @@ void Application::PushScene(std::unique_ptr<Scene> scene)
 }
 
 
-void Application::LaunchWorkerThread(Scene* scene, const std::function<void()>& func)
+void Application::LaunchWorkerThread(const std::string_view& loading_text, Scene* scene, const std::function<void()>& func)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr!");
 	ENIGMA_ASSERT(func, "Function is empty!");
 
-	std::thread worker_thread([scene, func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
+	std::thread worker_thread([this, loading_text, scene, func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
 		{
 			std::scoped_lock<std::mutex> guard{ scene->GetMutex() };
 
 			ENIGMA_LOG("Launching Worker Thread ID #{0}", std::this_thread::get_id());
-
+			
+			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(loading_text); // set loading status description text will appear bellow loading spinner
 			scene->SetLoading(true);
 				func();
 			scene->SetLoading(false);
+			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(""); // reset loading text
 
 			ENIGMA_LOG("Finished Worker Thread ID #{0}", std::this_thread::get_id());
 		});
@@ -266,22 +279,28 @@ void Application::Run()
 				UpdateHardwareInfo();
 				// Update back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnUpdate(m_delta_time);
-				if (m_scenes.back()->IsLoading()) 
+				if (m_scenes.back()->IsLoading())
+				{
 					m_loading_scene->OnUpdate(m_delta_time); // Update Loading scene over current active scene if its loading (doing some work in parallel)
+				}
 			}
 			
 			//Draw
 			{
 				// Draw back scene (last pushed scene which is the active one)
 				m_scenes.back()->OnDraw();
-				if (m_scenes.back()->IsLoading()) 
+				if (m_scenes.back()->IsLoading())
+				{
 					m_loading_scene->OnDraw(); // Draw Loading scene over current active scene if its loading (doing some work in parallel)
+				}
 
 				// ImGui
 				m_imgui_renderer->Begin();
 					m_scenes.back()->OnImGuiDraw();
 					if (m_scenes.back()->IsLoading())
+					{
 						m_loading_scene->OnImGuiDraw(); // Draw GUI Loading scene over current active scene if its loading (doing some work in parallel)
+					}
 				m_imgui_renderer->End();
 
 				// Force execution of GL commands in finite time 
@@ -297,9 +316,7 @@ void Application::Run()
 			{
 				// Notify user before ending scene
 				m_scenes.back()->OnDestroy();
-				
 				// Destroy Scene
-				m_scenes.back()->EndScene(); // just to make sure, even if m_quit is true (who knows what can happen in OnDestroy)
 				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~shared_ptr to cleanup memory)
 			}
 
@@ -336,6 +353,32 @@ void Application::UpdateDeltaTime() noexcept
 
 void Application::UpdateHardwareInfo() noexcept
 {
+	if (m_FPS || m_ram_info || m_cpu_info)
+	{
+		// update timer for anyone enabled
+		m_hardware_info_timer += m_delta_time;
+
+		// update fps if enabled
+		if(m_FPS) 
+			(*m_FPS)++;
+
+		// see if we waited HARWARE_INFO_UPDATE_TIME seconds for next hardware info update...
+		if (m_hardware_info_timer >= HARWARE_INFO_UPDATE_TIME)
+		{
+
+			// ... if so, refresh to show new hardware info data
+			m_window->SetTitle(m_window->GetTitle(), m_FPS, m_ram_info, m_cpu_info);
+
+			// reset fps if enabled
+			if (m_FPS)
+				*m_FPS = 0;
+
+			// reset hardware update timer
+			m_hardware_info_timer = 0.0f;
+		}
+
+	}
+#if 0
 	if (m_window->m_is_show_fps || m_window->m_is_show_ram_usage || m_window->m_is_show_cpu_usage)
 	{
 		// update timer
@@ -343,9 +386,9 @@ void Application::UpdateHardwareInfo() noexcept
 
 		// update fps if enabled
 		if (m_window->m_is_show_fps)
-			m_FPS++;
+			(*m_FPS)++;
 
-		// see if we waited HARWARE_INFO_UPDATE_TIME seconds for next update
+		// see if we waited HARWARE_INFO_UPDATE_TIME seconds for next hardware info update
 		if (m_hardware_info_timer >= HARWARE_INFO_UPDATE_TIME)
 		{
 			// if so, refresh title to show new hardware info data
@@ -356,6 +399,7 @@ void Application::UpdateHardwareInfo() noexcept
 			m_hardware_info_timer = 0.0f;
 		}
 	}
+#endif
 }
 
 

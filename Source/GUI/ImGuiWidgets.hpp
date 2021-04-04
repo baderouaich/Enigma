@@ -65,6 +65,20 @@ namespace ImGuiWidgets
 		return pressed_or_selected;
 	}
 
+	static bool BackButton(const char* str_id,
+		const ImVec2& size = ImVec2(0.0f, 0.0f),
+		const ImVec4& color = Constants::Colors::BACK_BUTTON_COLOR,
+		const ImVec4& color_hover = Constants::Colors::BACK_BUTTON_COLOR_HOVER,
+		const ImVec4& color_active = Constants::Colors::BACK_BUTTON_COLOR_ACTIVE)
+	{
+		ImGui::PushStyleColor(ImGuiCol_Button, color); // buttons color idle
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, color_hover);  // buttons color hover
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, color_active); // buttons color pressed
+		bool pressed_or_selected = ImGui::ArrowButtonEx(str_id, ImGuiDir_Left, size);
+		ImGui::PopStyleColor(3);
+
+		return pressed_or_selected;
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -159,11 +173,15 @@ namespace ImGuiWidgets
 	
 	//https://github.com/ocornut/imgui/issues/249
 	// Popup dialog has spinner loading inside it
-	static void LoadingDialog(const ImVec2& spinner_position, const float spinner_radius, const int spinner_thickness, const ImVec4& spinner_color, 
+	static void LoadingDialog(const char* text, const ImVec2& spinner_position, const float spinner_radius, const int spinner_thickness, const ImVec4& spinner_color, 
 		const float container_width = (float)Application::GetInstance()->GetWindow()->GetSize().first,
 		const float container_height = (float)Application::GetInstance()->GetWindow()->GetSize().second)
 	{
 		static constexpr auto popup_id = "loadingDialog";
+
+		const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
+		static const auto& fonts = Application::GetInstance()->GetFonts();
+		static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
 
 		ImGui::OpenPopup(popup_id, ImGuiPopupFlags_AnyPopup);
 		static constexpr const auto popup_window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
@@ -175,6 +193,11 @@ namespace ImGuiWidgets
 			static const ui32 COLOR = ImGui::GetColorU32(spinner_color);  // 0xrrggbbaa
 			ImGui::SetCursorPos(spinner_position);
 			ImGuiWidgets::LoadingSpinner("##spinner", spinner_radius, spinner_thickness, COLOR);
+				ImGui::PushFont(font_audiowide_regular_20); // text font
+					const auto text_size = ImGui::CalcTextSize(text);
+					ImGui::SetCursorPosX((win_w - text_size.x) / 2.0f);
+					ImGui::TextWrapped(text);
+				ImGui::PopFont();
 			ImGui::EndPopup();
 
 		}
