@@ -98,7 +98,7 @@ project "curl"
 		
 	    links
 	    {
-    		"zlib" -- Required on Linux
+    		"zlib", -- Required on Linux
 	    	"mbedtls",
 	    }
 

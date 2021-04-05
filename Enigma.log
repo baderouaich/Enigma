@@ -1,23 +1,44 @@
-[2021-04-04 23:05:21] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
-[2021-04-04 23:05:21] [info] Enigma: SQLite3 version 3.32.3
-[2021-04-04 23:05:22] [info] Enigma: [ OpenGL Info ]
+[2021-04-05 23:26:48] [info] Enigma: SQLite3 version 3.32.3
+[2021-04-05 23:27:00] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-04-04 23:05:22] [trace] Enigma: void __cdecl Enigma::Application::InitImGuiFonts(void)
-[2021-04-04 23:05:22] [trace] Enigma: Loading Fonts...
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
-[2021-04-04 23:05:22] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-04-04 23:05:22] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-04-04 23:05:22] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnCreate(void)
-[2021-04-04 23:05:23] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
-[2021-04-04 23:05:23] [trace] Enigma: void __cdecl Enigma::Database::Shutdown(void)
-[2021-04-04 23:05:23] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnDestroy(void)
+[2021-04-05 23:27:01] [trace] Enigma: Loading Fonts...
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-04-05 23:27:01] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
+[2021-04-05 23:27:05] [debug] Enigma: Launching Worker Thread ID #12892
+[2021-04-05 23:27:05] [trace] Enigma: Retrieving Enigma's latest release info from https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest...
+[2021-04-05 23:27:08] [debug] Enigma: You are using the latest Enigma version v1.2.1
+[2021-04-05 23:27:08] [debug] Enigma: Finished Worker Thread ID #12892
+[2021-04-05 23:27:12] [info] Enigma: Getting all encryptions from database...
+[2021-04-05 23:27:12] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-04-05 23:27:12] [info] Enigma: Got 140 Encryption records.
+[2021-04-05 23:27:34] [debug] Enigma: Launching Worker Thread ID #7516
+[2021-04-05 23:27:34] [trace] Enigma: Reporting issue to https://github.com/BaderEddineOuaich/Enigma/issues
+[2021-04-05 23:27:35] [debug] Enigma: Finished Worker Thread ID #7516
+[2021-04-05 23:28:48] [info] Enigma: Getting all encryptions from database...
+[2021-04-05 23:28:48] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-04-05 23:28:48] [info] Enigma: Got 140 Encryption records.
+[2021-04-05 23:28:59] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%1%' ORDER BY e.ide DESC
+[2021-04-05 23:29:00] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%12%' ORDER BY e.ide DESC
+[2021-04-05 23:29:02] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%120%' ORDER BY e.ide DESC
+[2021-04-05 23:29:02] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%1201%' ORDER BY e.ide DESC
+[2021-04-05 23:29:03] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%120%' ORDER BY e.ide DESC
+[2021-04-05 23:29:04] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%12%' ORDER BY e.ide DESC
+[2021-04-05 23:29:04] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%1%' ORDER BY e.ide DESC
+[2021-04-05 23:29:04] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%a%' ORDER BY e.ide DESC
+[2021-04-05 23:29:05] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%as%' ORDER BY e.ide DESC
+[2021-04-05 23:29:05] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%asd%' ORDER BY e.ide DESC
+[2021-04-05 23:29:06] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%as%' ORDER BY e.ide DESC
+[2021-04-05 23:29:06] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e WHERE LOWER(e.title) LIKE '%a%' ORDER BY e.ide DESC
+[2021-04-05 23:29:38] [debug] Enigma: Launching Worker Thread ID #8528
+[2021-04-05 23:29:38] [trace] Enigma: Retrieving Enigma's latest release info from https://api.github.com/repos/BaderEddineOuaich/Enigma/releases/latest...
+[2021-04-05 23:29:41] [debug] Enigma: You are using the latest Enigma version v1.2.1
+[2021-04-05 23:29:41] [debug] Enigma: Finished Worker Thread ID #8528
