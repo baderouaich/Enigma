@@ -14,7 +14,6 @@ project "curl"
     {
      	"include/", 
      	"lib/",
-	    --"%{IncludeDir.zlib}",
     }
 
     files
@@ -46,14 +45,11 @@ project "curl"
         "CURL_STATICLIB", 
         "HTTP_ONLY", 
         "HAVE_CONFIG_H"
-        --"USE_ZLIB", 
-        --"HAVE_LIBZ", 
-        --"HAVE_ZLIB_H", 
+
     }
 
     links
     {
-    	--"zlib"
     }
 
     
@@ -88,16 +84,22 @@ project "curl"
 		defines 
 		{ 
 			"CURL_HIDDEN_SYMBOLS",
-			"USE_MBEDTLS"
+			"USE_MBEDTLS",
+
+	        "USE_ZLIB", 
+	        "HAVE_LIBZ", 
+	        "HAVE_ZLIB_H", 
 		}
 		includedirs
 		{
+	    	"%{IncludeDir.zlib}", -- Required on Linux
 	    	"%{IncludeDir.mbedtls}",
 		}
 		
 	    links
 	    {
-	    	"mbedtls"
+    		"zlib" -- Required on Linux
+	    	"mbedtls",
 	    }
 
 		-- find the location of the ca bundle

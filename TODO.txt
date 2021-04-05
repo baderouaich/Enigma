@@ -10,7 +10,7 @@
 - Replace all ENIGMA_MB_TO_BYTES With ENIGMA_FRIENDLY_BYTES_SIZE 
 
 - Encrypt file scene, use fs::path(dir) / filename + ".enigma"; instead
-
+- remove const from no-reference returns in window & application to remove gcc warning [-Wignored-qualifiers]
 
 
 
