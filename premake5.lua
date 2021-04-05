@@ -51,7 +51,7 @@ IncludeDir["tabulate"]		= "%{wks.location}/Dependencies/tabulate/include" -- cmd
 IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
 IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking library wrapper around cURL (will include and link to curl)
 IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
-IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL a depend on it (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
+--IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL a depend on it (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
 
 
 IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests libIncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
@@ -74,7 +74,7 @@ group "Dependencies"
 	include "Dependencies/curl"
 	include "Dependencies/cpr"
 	include "Dependencies/mbedtls"-- (will be included and linked in curl project)
-	include "Dependencies/zlib" -- (will be included and linked in curl project)
+	--include "Dependencies/zlib" -- (will be included and linked in curl project)
 
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
 
@@ -125,7 +125,7 @@ project "Enigma"
 		"%{IncludeDir.sqlitecpp}",
 		"%{IncludeDir.curl}",
 		"%{IncludeDir.cpr}",
-		"%{IncludeDir.zlib}",
+		--"%{IncludeDir.zlib}",
 		"%{IncludeDir.tabulate}",
 	}
 
@@ -146,7 +146,7 @@ project "Enigma"
 		"sqlitecpp",
 		"curl", -- Order matter, Link curl before zlib
 		"cpr",
-		"zlib",
+		--"zlib",
 		"tabulate",
 	}
 

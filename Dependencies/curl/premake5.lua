@@ -14,7 +14,7 @@ project "curl"
     {
      	"include/", 
      	"lib/",
-	    "%{IncludeDir.zlib}",
+	    --"%{IncludeDir.zlib}",
     }
 
     files
@@ -45,16 +45,18 @@ project "curl"
         "BUILDING_LIBCURL",
         "CURL_STATICLIB", 
         "HTTP_ONLY", 
-        "USE_ZLIB", 
-        "HAVE_LIBZ", 
-        "HAVE_ZLIB_H", 
         "HAVE_CONFIG_H"
+        --"USE_ZLIB", 
+        --"HAVE_LIBZ", 
+        --"HAVE_ZLIB_H", 
     }
 
     links
     {
-    	"zlib"
+    	--"zlib"
     }
+
+    
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
@@ -66,12 +68,18 @@ project "curl"
 			"USE_WIN32_IDN", 
 			"WANT_IDN_PROTOTYPES"
 		}
-		links 
+
+		linkoptions 
+		{
+			"/ignore:4006" -- "/ignore:4006,4006,..." -- Normaliz.lib has already linked to all bellow, this will give warning LNK4006: __NULL_IMPORT_DESCRIPTOR, ignore it
+		}
+
+		links  -- WARNING! Order Matters. --
 	 	{
+	 		"Normaliz", 
+	 		"Ws2_32", 
 	 		"Crypt32",
-	 		"Normaliz",
-	 		--"Ws2_32",
-	 		--"Wldap32",
+	 		"Wldap32",
 	    }
 
 	    
