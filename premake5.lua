@@ -73,8 +73,8 @@ group "Dependencies"
 
 	include "Dependencies/curl"
 	include "Dependencies/cpr"
-	include "Dependencies/mbedtls"-- (will be included and linked in curl project)
-	--include "Dependencies/zlib" -- (will be included and linked in curl project)
+	include "Dependencies/mbedtls"-- (will be included and linked in curl lib project Linux only)
+	include "Dependencies/zlib" -- (will be included and linked in curl lib project for Linux only)
 
 	include "Dependencies/catch2" -- will be included and linked only in debug mode
 group ""
@@ -124,7 +124,7 @@ project "Enigma"
 		"%{IncludeDir.sqlitecpp}",
 		"%{IncludeDir.curl}",
 		"%{IncludeDir.cpr}",
-		"%{IncludeDir.zlib}",
+		--"%{IncludeDir.zlib}",
 		"%{IncludeDir.tabulate}",
 	}
 
@@ -145,7 +145,7 @@ project "Enigma"
 		"sqlitecpp",
 		"curl", -- Order matter, Link curl before zlib
 		"cpr",
-		"zlib",
+		--"zlib",
 		"tabulate",
 	}
 
@@ -190,6 +190,7 @@ project "Enigma"
 		links
 		{
 			-- static libraries do not include their dependencies => https://stackoverflow.com/questions/58118344/transitive-library-dependency-in-premake
+			"zlib",
 			"mbedtls",
 
 			"GL", -- link opengl lib
