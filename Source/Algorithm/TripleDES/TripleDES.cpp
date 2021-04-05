@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 TripleDES::TripleDES(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::TripleDES, intent),
-	m_tripledes_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Encryption>() : nullptr),
-	m_tripledes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
+	m_tripledes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Encryption>() : nullptr),
+	m_tripledes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
 {
 }
 TripleDES::~TripleDES() noexcept
@@ -18,8 +18,8 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT_OR_THROW(m_tripledes_encryption, "TripleDES Encryption is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "TripleDES Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_tripledes_encryptor, "TripleDES Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "TripleDES Encryptor seeder is not initialized properly");
 	}
 
 	// Validate Arguments
@@ -46,21 +46,22 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	);
 
 	// Set Key and IV to the encryptor
-	m_tripledes_encryption->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_tripledes_encryptor->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		buffer,
 		true,
 		new CryptoPP::StreamTransformationFilter(
-			*m_tripledes_encryption,
+			*m_tripledes_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
 		);
 	//NOTE: StringSource will auto clean the allocated memory
 
 	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-	output.append(std::move(iv + cipher));
+	output += iv; // Append IV
+	output += cipher; // Append Cipher
 
 	return output;
 }
@@ -68,7 +69,7 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 String TripleDES::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_tripledes_decryption, "TripleDES Decryption is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_tripledes_decryptor, "TripleDES Decryptor is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::DES_EDE3::BLOCKSIZE);
@@ -91,14 +92,14 @@ String TripleDES::Decrypt(const String& password, const String& iv_cipher)
 		nullptr, 0);
 
 	// Set Key and IV to the decryptor
-	m_tripledes_decryption->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_tripledes_decryptor->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource decryptor(
 		cipher,
 		true,
 		new CryptoPP::StreamTransformationFilter(
-			*m_tripledes_decryption,
+			*m_tripledes_decryptor, 
 			new CryptoPP::StringSink(decrypted)
 		)
 	);

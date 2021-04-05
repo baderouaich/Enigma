@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 AES::AES(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::AES, intent),
-	m_aes_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>() : nullptr),
-	m_aes_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>() : nullptr)
+	m_aes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>() : nullptr),
+	m_aes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>() : nullptr)
 {
 }
 
@@ -20,8 +20,8 @@ String AES::Encrypt(const String& password, const String& buffer)
 {    
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT_OR_THROW(m_aes_encryption, "AES Encryption is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "AES Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_aes_encryptor, "AES Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "AES Encryptor seeder is not initialized properly");
 	}
 
 	// Validate Arguments
@@ -48,21 +48,22 @@ String AES::Encrypt(const String& password, const String& buffer)
 	);
 
 	// Set Key and IV to the encryptor
-	m_aes_encryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_aes_encryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
 	
 	// Encrypt
-	std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
+	 const CryptoPP::StringSource ss(
 		buffer,
 		true,
 		new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
-			*m_aes_encryption, 
+			*m_aes_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
 	);
 	//NOTE: StringSource will auto clean the allocated memory
 
 	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-	output.append(std::move(iv + cipher));
+	 output += iv; // Append IV
+	 output += cipher; // Append Cipher
 
 	return output;
 }
@@ -70,7 +71,7 @@ String AES::Encrypt(const String& password, const String& buffer)
 String AES::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT(m_aes_decryption, "AES Decryption is not initialized properly");
+	ENIGMA_ASSERT(m_aes_decryptor, "AES Decryptor is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
@@ -93,17 +94,18 @@ String AES::Decrypt(const String& password, const String& iv_cipher)
 		nullptr, 0);
 		
 	// Set Key and IV to the decryptor
-	m_aes_decryption->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_aes_decryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
 
-	// Decrypt
-	std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
+	 // Decrypt
+	 const CryptoPP::StringSource ss(
 		cipher,
 		true,
 		new CryptoPP::AuthenticatedDecryptionFilter(
-			*m_aes_decryption,
+			*m_aes_decryptor,
 			new CryptoPP::StringSink(decrypted)
 		)
 	);
+	 
 
 	//NOTE: StringSource will auto clean the allocated memory
 

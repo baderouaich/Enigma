@@ -21,9 +21,6 @@ Window::Window(const WindowSettings& window_settings)
 	m_maximum_size(window_settings.maximum_width, window_settings.maximum_height),
 	m_frame_buffer_size(0, 0),
 	m_swap_interval(window_settings.swap_interval),
-	m_is_show_fps(window_settings.is_show_fps),
-	m_is_show_ram_usage(window_settings.is_show_ram_usage),
-	m_is_show_cpu_usage(window_settings.is_show_cpu_usage),
 	m_GLFWwindow(nullptr),
 	m_monitor(nullptr),
 	m_video_mode(nullptr),
@@ -552,15 +549,13 @@ void Window::SetTitle(const String& title,
 	//FPS
 	if (fps)
 	{
-		const ui32& FPS = Application::GetInstance()->GetFPS();
-		oss << " - FPS: " << FPS;
+		oss << " - FPS: " << *fps;
 		//oss << " - FPS: " << FPS << " (" << std::fixed << std::setprecision(3) << Application::GetInstance()->GetDeltaTime() << "ms)";
 	}
 
 	//RAM Usage
 	if (ram_info)
 	{
-		const auto& ram_info = Application::GetInstance()->GetRAMInfo();
 		ram_info->Update();
 		const f32 percentage = ram_info->GetRAMUsage();
 		oss << " - RAM Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
@@ -569,7 +564,6 @@ void Window::SetTitle(const String& title,
 	//CPU Usage
 	if (cpu_info)
 	{
-		const auto& cpu_info = Application::GetInstance()->GetCPUInfo();
 		const f32 percentage = cpu_info->GetCPUUsage();
 		oss << " - CPU Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
 	}

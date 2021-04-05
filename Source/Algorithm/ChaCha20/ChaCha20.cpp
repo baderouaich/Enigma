@@ -7,8 +7,8 @@ NS_ENIGMA_BEGIN
 ChaCha20::ChaCha20(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::ChaCha20, intent),
-	m_chacha_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::ChaCha::Encryption>() : nullptr),
-	m_chacha_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::ChaCha::Decryption>() : nullptr)
+	m_chacha_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::ChaCha::Encryption>() : nullptr),
+	m_chacha_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::ChaCha::Decryption>() : nullptr)
 {
 }
 
@@ -20,8 +20,8 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT_OR_THROW(m_chacha_encryption, "ChaCha20 Encryption is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "ChaCha20 Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_chacha_encryptor, "ChaCha20 Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "ChaCha20 Encryptor seeder is not initialized properly");
 	}
 
 	// Validate Arguments
@@ -51,21 +51,22 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 		0);
 
 	// Set Key and IV to the encryptor
-	m_chacha_encryption->SetKeyWithIV(key, CryptoPP::ChaCha::MAX_KEYLENGTH, key + CryptoPP::ChaCha::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_chacha_encryptor->SetKeyWithIV(key, CryptoPP::ChaCha::MAX_KEYLENGTH, key + CryptoPP::ChaCha::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		buffer,
 		true,
 		new CryptoPP::StreamTransformationFilter(
-			*m_chacha_encryption,
+			*m_chacha_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
 		);
 	//NOTE: StringSource will auto clean the allocated memory
 
 	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-	output.append(std::move(iv + cipher));
+	output += iv; // Append IV
+	output += cipher; // Append Cipher
 
 	return output;
 }
@@ -73,7 +74,7 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 String ChaCha20::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_chacha_decryption, "ChaCha20 Decryption is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, "ChaCha20 Decryptor is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::ChaCha::IV_LENGTH);
@@ -99,14 +100,14 @@ String ChaCha20::Decrypt(const String& password, const String& iv_cipher)
 		0);
 
 	// Set Key and IV to the decryptor
-	m_chacha_decryption->SetKeyWithIV(key, CryptoPP::ChaCha::MAX_KEYLENGTH, key + CryptoPP::ChaCha::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_chacha_decryptor->SetKeyWithIV(key, CryptoPP::ChaCha::MAX_KEYLENGTH, key + CryptoPP::ChaCha::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		cipher,
 		true,
 		new CryptoPP::StreamTransformationFilter(
-			*m_chacha_decryption,
+			*m_chacha_decryptor,
 			new CryptoPP::StringSink(decrypted)
 		)
 		);

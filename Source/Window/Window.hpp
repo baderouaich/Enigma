@@ -313,11 +313,6 @@ private: /* Properties */
 	std::pair<i32, i32> m_frame_buffer_size;
 	i32 m_swap_interval;
 
-	// Hardware info flags
-	bool m_is_show_fps;
-	bool m_is_show_ram_usage;
-	bool m_is_show_cpu_usage;
-
 	// Monitor & Video Mode
 	GLFWwindow* m_GLFWwindow;
 	GLFWmonitor* m_monitor;

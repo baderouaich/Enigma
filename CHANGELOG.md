@@ -30,4 +30,6 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Upgraded glfw library from 3.3.0 to 3.3.3
 - Added SQLite3 Database system to save, import and export encryption records
 - Now heavy work is being done in background (parallel)
+- Now Back button for each scene is placed in the top left instead of bottom to save space
+- New CLI Option `--list` or `-l` which lists all saved encryption records in a table
 -->

@@ -46,6 +46,7 @@ IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- argum
 IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config file loader lib
 IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
 IncludeDir["sqlitecpp"]		= "%{wks.location}/Dependencies/sqlitecpp/include" -- sqlite3 cpp wrapper
+IncludeDir["tabulate"]		= "%{wks.location}/Dependencies/tabulate/include" -- cmd table maker lib for CLI
 
 IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
 IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking library wrapper around cURL (will include and link to curl)
@@ -68,6 +69,7 @@ group "Dependencies"
 	include "Dependencies/inih"
 	include "Dependencies/json"
 	include "Dependencies/sqlitecpp"
+	include "Dependencies/tabulate"
 
 	include "Dependencies/curl"
 	include "Dependencies/cpr"
@@ -124,6 +126,7 @@ project "Enigma"
 		"%{IncludeDir.curl}",
 		"%{IncludeDir.cpr}",
 		"%{IncludeDir.zlib}",
+		"%{IncludeDir.tabulate}",
 	}
 
 
@@ -144,6 +147,7 @@ project "Enigma"
 		"curl", -- Order matter, Link curl before zlib
 		"cpr",
 		"zlib",
+		"tabulate",
 	}
 
 

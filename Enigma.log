@@ -1,74 +1,23 @@
-[2021-04-04 14:44:28] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
-[2021-04-04 14:44:28] [info] Enigma: SQLite3 version 3.32.3
-[2021-04-04 14:44:28] [info] Enigma: [ OpenGL Info ]
+[2021-04-04 23:05:21] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
+[2021-04-04 23:05:21] [info] Enigma: SQLite3 version 3.32.3
+[2021-04-04 23:05:22] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-04-04 14:44:29] [trace] Enigma: void __cdecl Enigma::Application::InitImGuiFonts(void)
-[2021-04-04 14:44:29] [trace] Enigma: Loading Fonts...
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-04-04 14:44:29] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
-[2021-04-04 14:44:29] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
-[2021-04-04 14:44:29] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
-[2021-04-04 14:44:29] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnCreate(void)
-[2021-04-04 14:44:30] [trace] Enigma: void __cdecl Enigma::EncryptFileScene::OnCreate(void)
-[2021-04-04 14:44:30] [debug] Enigma: Launching Worker Thread ID #12952
-[2021-04-04 14:44:30] [trace] Enigma: Selecting a file to encrypt...
-[2021-04-04 14:44:33] [trace] Enigma: Nothing is selected.
-[2021-04-04 14:44:33] [debug] Enigma: Finished Worker Thread ID #12952
-[2021-04-04 14:44:35] [debug] Enigma: Launching Worker Thread ID #14888
-[2021-04-04 14:44:37] [debug] Enigma: Finished Worker Thread ID #14888
-[2021-04-04 14:44:38] [trace] Enigma: void __cdecl Enigma::EncryptFileScene::OnDestroy(void)
-[2021-04-04 14:44:39] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnCreate(void)
-[2021-04-04 14:44:42] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnDestroy(void)
-[2021-04-04 14:44:43] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
-[2021-04-04 14:44:43] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::GetAllEncryptions(void)
-[2021-04-04 14:44:43] [info] Enigma: Getting all encryptions from database...
-[2021-04-04 14:44:43] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
-[2021-04-04 14:44:43] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e ORDER BY e.ide DESC
-[2021-04-04 14:44:43] [info] Enigma: Got 120 Encryption records.
-[2021-04-04 14:44:44] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::GetAllEncryptions(void)
-[2021-04-04 14:44:44] [info] Enigma: Getting all encryptions from database...
-[2021-04-04 14:44:44] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
-[2021-04-04 14:44:44] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e ORDER BY e.ide DESC
-[2021-04-04 14:44:44] [info] Enigma: Got 120 Encryption records.
-[2021-04-04 14:44:45] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
-[2021-04-04 14:44:47] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnCreate(void)
-[2021-04-04 14:44:48] [debug] Enigma: Launching Worker Thread ID #15692
-[2021-04-04 14:44:51] [debug] Enigma: Finished Worker Thread ID #15692
-[2021-04-04 14:44:51] [trace] Enigma: void __cdecl Enigma::EncryptTextScene::OnDestroy(void)
-[2021-04-04 14:44:52] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnCreate(void)
-[2021-04-04 14:44:53] [debug] Enigma: Launching Worker Thread ID #15672
-[2021-04-04 14:44:56] [debug] Enigma: Finished Worker Thread ID #15672
-[2021-04-04 14:44:56] [trace] Enigma: void __cdecl Enigma::DecryptTextScene::OnDestroy(void)
-[2021-04-04 14:44:57] [trace] Enigma: void __cdecl Enigma::DecryptFileScene::OnCreate(void)
-[2021-04-04 14:44:58] [debug] Enigma: Launching Worker Thread ID #14288
-[2021-04-04 14:44:58] [trace] Enigma: Selecting a file to decrypt...
-[2021-04-04 14:45:01] [trace] Enigma: Nothing is selected.
-[2021-04-04 14:45:01] [debug] Enigma: Finished Worker Thread ID #14288
-[2021-04-04 14:45:02] [debug] Enigma: Launching Worker Thread ID #11880
-[2021-04-04 14:45:02] [trace] Enigma: Selecting a file to decrypt...
-[2021-04-04 14:45:05] [debug] Enigma: Finished Worker Thread ID #11880
-[2021-04-04 14:45:07] [trace] Enigma: auto-detecting algorithm used for encryption...
-[2021-04-04 14:45:07] [info] Enigma: Successfully detected algorithm used for encryption which is: AES
-[2021-04-04 14:45:09] [debug] Enigma: Launching Worker Thread ID #13708
-[2021-04-04 14:45:09] [trace] Enigma: Selecting a location to save decrypted file to...
-[2021-04-04 14:45:13] [debug] Enigma: Finished Worker Thread ID #13708
-[2021-04-04 14:45:15] [debug] Enigma: Launching Worker Thread ID #11484
-[2021-04-04 14:45:15] [error] Enigma: Decryption Failure: Error Type: DATA_INTEGRITY_CHECK_FAILED
-Message: HashVerificationFilter: message hash or MAC not valid
-Reason: Data integerity check, such as CRC or MAC, failed
-D:\C++\Projects\TopFormal\Enigma\Enigma\Source\Scenes\DecryptFileScene.cpp:443
-void __cdecl Enigma::DecryptFileScene::OnDecryptButtonPressed(void)
-[2021-04-04 14:45:20] [debug] Enigma: Finished Worker Thread ID #11484
-[2021-04-04 14:45:22] [trace] Enigma: void __cdecl Enigma::DecryptFileScene::OnDestroy(void)
-[2021-04-04 14:45:24] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
-[2021-04-04 14:45:24] [trace] Enigma: void __cdecl Enigma::Database::Shutdown(void)
-[2021-04-04 14:45:24] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnDestroy(void)
+[2021-04-04 23:05:22] [trace] Enigma: void __cdecl Enigma::Application::InitImGuiFonts(void)
+[2021-04-04 23:05:22] [trace] Enigma: Loading Fonts...
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-04-04 23:05:22] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
+[2021-04-04 23:05:22] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-04-04 23:05:22] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-04-04 23:05:22] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnCreate(void)
+[2021-04-04 23:05:23] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-04-04 23:05:23] [trace] Enigma: void __cdecl Enigma::Database::Shutdown(void)
+[2021-04-04 23:05:23] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnDestroy(void)

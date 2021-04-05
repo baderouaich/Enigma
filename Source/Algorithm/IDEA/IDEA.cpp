@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 IDEA::IDEA(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::IDEA, intent),
-	m_idea_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption>() : nullptr),
-	m_idea_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption>() : nullptr)
+	m_idea_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption>() : nullptr),
+	m_idea_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption>() : nullptr)
 {
 }
 
@@ -19,8 +19,8 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT_OR_THROW(m_idea_encryption, "IDEA Encryption is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "IDEA Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_idea_encryptor, "IDEA Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "IDEA Encryptor seeder is not initialized properly");
 	}
 
 	// Validate Arguments
@@ -47,21 +47,22 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	);
 
 	// Set Key and IV to the encryptor
-	m_idea_encryption->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_idea_encryptor->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		buffer,
 		true,
 		new CryptoPP::StreamTransformationFilter(
-			*m_idea_encryption,
+			*m_idea_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
 		);
 	//NOTE: StringSource will auto clean the allocated memory
 
 	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-	output.append(std::move(iv + cipher));
+	output += iv; // Append IV
+	output += cipher; // Append Cipher
 
 	return output;
 }
@@ -69,7 +70,7 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 String IDEA::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_idea_decryption, "IDEA Decryption is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_idea_decryptor, "IDEA Decryptor is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
@@ -92,14 +93,14 @@ String IDEA::Decrypt(const String& password, const String& iv_cipher)
 		nullptr, 0);
 
 	// Set Key and IV to the decryptor
-	m_idea_decryption->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_idea_decryptor->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		cipher,
 		true,
 		new CryptoPP::StreamTransformationFilter(
-			*m_idea_decryption,
+			*m_idea_decryptor,
 			new CryptoPP::StringSink(decrypted)
 		)
 		);

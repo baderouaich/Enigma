@@ -47,9 +47,11 @@ Usage:
   -o, --outfile arg             Output File to Encrypt/Decrypt
   -c, --compress                Compress File Before Encrypting
   -u, --decompress              Decompress File After Decrypting
+  -s, --save                    Save encryption record to database
+  -l, --list                    List saved encryption records from database
   -h, --help                    Displays help message
   -v, --version                 Displays Enigma's version
-  -n, --updates                 Check for updates
+      --check-for-updates       Check for new version releases
 ```
 - Example encypting a text with AES-GCM:<br>
 ```text
@@ -58,7 +60,7 @@ output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1Srgl
 ```
 - Example decrypting a text with AES-GCM:<br>
 ```text
-./Enigma -d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
+./Enigma --d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
 output: my important data securly encrypted!
 ```
 <image src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>

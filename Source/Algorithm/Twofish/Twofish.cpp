@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 Twofish::Twofish(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::Twofish, intent),
-	m_twofish_encryption(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>() : nullptr),
-	m_twofish_decryption(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>() : nullptr)
+	m_twofish_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>() : nullptr),
+	m_twofish_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>() : nullptr)
 {
 }
 Twofish::~Twofish() noexcept
@@ -18,8 +18,8 @@ String Twofish::Encrypt(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized
 	{
-		ENIGMA_ASSERT_OR_THROW(m_twofish_encryption, "Twofish Encryption is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Twofish Encryption seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_twofish_encryptor, "Twofish Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Twofish Encryptor seeder is not initialized properly");
 	}
 
 	// Validate Arguments
@@ -46,21 +46,22 @@ String Twofish::Encrypt(const String& password, const String& buffer)
 	);
 
 	// Set Key and IV to the encryptor
-	m_twofish_encryption->SetKeyWithIV(key, CryptoPP::Twofish::MAX_KEYLENGTH, key + CryptoPP::Twofish::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_twofish_encryptor->SetKeyWithIV(key, CryptoPP::Twofish::MAX_KEYLENGTH, key + CryptoPP::Twofish::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	std::unique_ptr<CryptoPP::StringSource> encryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		buffer,
 		true,
 		new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
-			*m_twofish_encryption,
+			*m_twofish_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
 		);
 	//NOTE: StringSource will auto clean the allocated memory
 
 	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-	output.append(std::move(iv + cipher));
+	output += iv; // Append IV
+	output += cipher; // Append Cipher
 
 	return output;
 }
@@ -68,7 +69,7 @@ String Twofish::Encrypt(const String& password, const String& buffer)
 String Twofish::Decrypt(const String& password, const String& iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_twofish_decryption, "Twofish Decryption is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_twofish_decryptor, "Twofish Decryptor is not initialized properly");
 
 	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
 	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::Twofish::BLOCKSIZE);
@@ -91,14 +92,14 @@ String Twofish::Decrypt(const String& password, const String& iv_cipher)
 		nullptr, 0);
 
 	// Set Key and IV to the decryptor
-	m_twofish_decryption->SetKeyWithIV(key, CryptoPP::Twofish::MAX_KEYLENGTH, key + CryptoPP::Twofish::MAX_KEYLENGTH); // key, kl, iv, ivl
+	m_twofish_decryptor->SetKeyWithIV(key, CryptoPP::Twofish::MAX_KEYLENGTH, key + CryptoPP::Twofish::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	std::unique_ptr<CryptoPP::StringSource> decryptor = std::make_unique<CryptoPP::StringSource>(
+	const CryptoPP::StringSource ss(
 		cipher,
 		true,
 		new CryptoPP::AuthenticatedDecryptionFilter(
-			*m_twofish_decryption,
+			*m_twofish_decryptor,
 			new CryptoPP::StringSink(decrypted)
 		)
 		);

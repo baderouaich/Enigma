@@ -22,8 +22,8 @@ public:
 	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
 
 private:
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Encryption> m_twofish_encryption; // Twofish-GCM encryptor
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Decryption> m_twofish_decryption; // Twofish-GCM decryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Encryption> m_twofish_encryptor; // Twofish-GCM encryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Decryption> m_twofish_decryptor; // Twofish-GCM decryptor
 };
 
 NS_ENIGMA_END

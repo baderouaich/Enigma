@@ -100,8 +100,8 @@ void MyEncryptionsScene::OnImGuiDraw()
 		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 		{
-			ImGui::LabelText("##label", "Search by title...");
-			if (ImGuiWidgets::InputText("##inputtext", &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
+			//ImGui::LabelText("##label", "Search by title...");
+			if (ImGuiWidgets::InputTextWithHint("##inputtext", "Search an encryption by title...", &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
 			{
 				// Enable searching
 				m_isSearching = true;
@@ -111,7 +111,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 					this->OnSearchEncryptionsByTitle();
 				}
 			}
-			else // Button is not being edited now
+			else // InputText is not being edited now
 			{
 				m_isSearching = false;
 			}

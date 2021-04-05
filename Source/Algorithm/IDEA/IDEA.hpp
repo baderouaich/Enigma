@@ -22,8 +22,8 @@ public:
 	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
 
 private:
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption> m_idea_encryption; // IDEA-CBC encryptor
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption> m_idea_decryption; // IDEA-CBC decryptor
+	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption> m_idea_encryptor; // IDEA-CBC encryptor
+	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption> m_idea_decryptor; // IDEA-CBC decryptor
 };
 
 NS_ENIGMA_END

@@ -23,8 +23,8 @@ public:
 
 private:
 	// AES symmetric cipher is recommended to be used with GCM mode
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryption; // AES-GCM encryptor
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryption; // AES-GCM decryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryptor; // AES-GCM encryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryptor; // AES-GCM decryptor
 };
 
 NS_ENIGMA_END

@@ -2,12 +2,14 @@
 #include "CLI.hpp"
 #include <Utility/DialogUtils.hpp>
 
+#include <tabulate.hpp> // Table Maker for Modern C++ library
+
 NS_ENIGMA_BEGIN
 
 
 CLI::CLI(const i32& argc, const char* const* argv)
 {
-
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 	try
 	{
 		m_options = std::make_unique<cxxopts::Options>("Enigma", Constants::CLI::CLI_HELP_MESSAGE);
@@ -30,6 +32,7 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("c,compress", "Compress File Before Encrypting") // -c | --compress 
 			("u,decompress", "Decompress File After Decrypting") // -u | --decompress 
 			("s,save", "Save encryption record to database")  // save to database
+			("l,list", "List saved encryption records from database")  // show saved encryption records
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma's version")  // VERSION
 			("check-for-updates", "Check for new version releases")  // Check for enigma updates from github api
@@ -64,6 +67,12 @@ i32 CLI::Run()
 {
 	const auto& r = *m_parse_result;
 
+	// Handle -l & --list options (Show saved encryption records)
+	if (r.count("l") || r.count("list"))
+	{
+		this->OnListEncryptionRecords();
+		return EXIT_SUCCESS;
+	}
 	// Handle --help & -h options
 	if (r.count("h") || r.count("help")) // u can also check only r.count("h"), cxxopts will check the second pair item "help" if the first one isnt there
 	{
@@ -86,7 +95,7 @@ i32 CLI::Run()
 	ENIGMA_LOG("Processing arguments...");
 
 	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
-	Intent intent{}; // Encrypt or Decrypt?
+	Algorithm::Intent intent{}; // Encrypt or Decrypt?
 	String mode{}; // "aes", "tripledes"..
 	String password{}; // Encryption password 
 	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
@@ -209,10 +218,10 @@ i32 CLI::Run()
 			// Check intention
 			switch (intent)
 			{
-			case Intent::Encrypt:
+			case Algorithm::Intent::Encrypt:
 				this->OnEncryptText(algorithm, password, text, save_to_database);
 				break;
-			case Intent::Decrypt:
+			case Algorithm::Intent::Decrypt:
 				this->OnDecryptText(algorithm, password, text);
 				break;
 			}
@@ -223,10 +232,10 @@ i32 CLI::Run()
 			// Check intention
 			switch (intent)
 			{
-			case Intent::Encrypt:
+			case Algorithm::Intent::Encrypt:
 				this->OnEncryptFile(algorithm, password, infilename, outfilename, compress, save_to_database);
 				break;
-			case Intent::Decrypt:
+			case Algorithm::Intent::Decrypt:
 				this->OnDecryptFile(algorithm, password, infilename, outfilename, decompress);
 				break;
 			}
@@ -253,7 +262,7 @@ i32 CLI::Run()
 	return EXIT_SUCCESS;
 }
 
-void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool& save_to_database)
+void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool save_to_database)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -329,7 +338,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	decrypted_text.clear();
 }
 
-void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool& compress, const bool& save_to_database)
+void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool compress, const bool save_to_database)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -399,7 +408,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	cipher.clear();
 }
 
-void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted, const bool& decompress)
+void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted, const bool decompress)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -449,6 +458,51 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	buffer.clear();
 }
 
+void CLI::OnListEncryptionRecords()
+{
+	const std::vector<std::unique_ptr<Encryption>> encryptions =
+		Database::GetAllEncryptions<true, false, true, true, true>(
+			Database::OrderBy::DateTime,
+			Database::Order::Ascending);
+
+	if (encryptions.empty())
+	{
+		ENIGMA_TRACE("No Encryption records saved yet.");
+		return;
+	}
+
+	using namespace tabulate;
+
+	Table table{};
+	table.add_row({ "ID", "Title", "Date Time", "Size", "Format" });
+
+	// Style table header
+	for (size_t i = 0; i < table.row(0).size(); i++)
+		table
+		.column(i)
+		.format()
+		.background_color(Color::cyan)
+		.font_color(Color::white)
+		.font_align(FontAlign::center)
+		.font_style({ FontStyle::bold, FontStyle::italic });
+
+	std::for_each(encryptions.begin(), encryptions.end(), [&table](const std::unique_ptr<Encryption>& e)
+	{
+		const auto& [ide, title, cipher, date_time, size, is_file] = *e;
+		ENIGMA_UNUSED(cipher);
+
+		//substr title to 50 chars only
+		String sub_title = title;
+		if (sub_title.size() > 50)
+			sub_title = sub_title.substr(0, 50) + "...";
+
+		table.add_row({ std::to_string(ide), sub_title, date_time, ENIGMA_FRIENDLY_BYTES_SIZE(size), (is_file ? "File" : "Text") })
+			.format()
+			.font_align(FontAlign::left);
+	});	 
+	std::cout << table << std::endl;
+}
+
 
 void CLI::OnHelp()
 {
@@ -491,6 +545,7 @@ void CLI::OnCheckForUpdates()
 
 CLI::~CLI() noexcept
 {
+	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
 NS_ENIGMA_END

@@ -37,8 +37,9 @@ namespace Enigma
 			// GCM is defined for block ciphers with a block size of 128 bits. https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
 			// No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 			
-			static constexpr const size_t MINIMUM_PASSWORD_LENGTH = 9; // AT LEAST 9 CHARACTERS, FOR SECURITY REASONS.
-			
+			static constexpr const size_t MINIMUM_PASSWORD_LENGTH = 6; // AT LEAST 6 CHARACTERS, FOR SECURITY REASONS.
+			static constexpr const char* SPECIAL_CHARACTERS = "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~";
+
 			namespace AES
 			{
 				//https://www.cryptopp.com/wiki/GCM_Mode
@@ -136,7 +137,7 @@ namespace Enigma
 
 		namespace ErrorMessages
 		{
-			static const auto WEAK_PASSWORD = "Password is too weak! consider using "s + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like :!@#$%^&*()_+-=[]{};'\",./?\\"s;
+			static const auto WEAK_PASSWORD = "Password is too weak! consider using "s + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like: " + Constants::Algorithm::SPECIAL_CHARACTERS;
 		}
 
 		namespace Links

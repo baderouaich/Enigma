@@ -205,18 +205,16 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 
 
 	// check if there is a scene doing some work in progress...
-	bool there_is_still_scene_doing_some_work{ false }; // long name i know XD  
-	for (const auto& scene : m_scenes)
-	{
-		if (scene->IsLoading())
-		{
-			there_is_still_scene_doing_some_work = true;
-			break;
-		}
-	}
+	const bool there_is_a_scene_still_doing_some_work = // long name i know XD  
+		std::any_of(m_scenes.rbegin(), m_scenes.rend(),
+			[](const auto& scene) 
+			{
+				return scene->IsLoading();
+			});
 	
-	if (there_is_still_scene_doing_some_work)
+	if (there_is_a_scene_still_doing_some_work)
 	{
+
 		(void)DialogUtils::Warn("Warning!", "There is a scene still doing some work currently! Please wait little more...");
 		m_window->SetShouldClose(false); // force GLFW to keep window open. GLFW will close the window when a close window event received.
 		return true; // handled.

@@ -1,32 +1,26 @@
-project "pfd"
+project "tabulate"
 	kind "StaticLib"
-	language "C++"
-	cppdialect "C++17"
+    language "C++"
+    cppdialect "C++17"
 	staticruntime "on"
-
+	
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
-	warnings "Off"
+    includedirs 
+    {
+     	"include/",  -- header only
+    }
+    files
+    {
+    	"include/tabulate.hpp",
+    	"src/tabulate.cpp" -- has the header only include, to compile project as static lib 
+    }
 
-
-	includedirs
-	{
-		"include/"
-	}
-
-	files
-	{
-		"include/portable-file-dialogs.h",
-		"src/portable-file-dialogs.cpp"
-	}
-
-	defines
-	{
-		
-	}
-
-
+    defines	
+    {
+    }
+    
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
@@ -39,10 +33,10 @@ project "pfd"
 
 
 	filter "system:linux"
-		links
+		defines
 		{
 		}
-		defines
+		links
 		{
 		}
 
@@ -65,6 +59,7 @@ project "pfd"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.
 		inlining "Explicit" -- Only inline functions explicitly marked with the inline keyword.
+
 
 	filter "configurations:Dist"
 		runtime "Release"
