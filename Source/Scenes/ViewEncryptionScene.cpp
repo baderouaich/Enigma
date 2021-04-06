@@ -55,6 +55,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
 	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
 	static ImFont* const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
@@ -69,27 +70,38 @@ void ViewEncryptionScene::OnImGuiDraw()
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
-		// Back Button [<]
-		ImGui::PushFont(font_montserrat_medium_20); // < arrow is a text too
-		if (ImGuiWidgets::BackButton("##back", ImVec2(45.0f, 45.0f)))
+		// Back button [<] & Title
 		{
-			this->OnBackButtonPressed();
-		}
-		ImGui::PopFont();
+			static const auto& title_font = font_audiowide_regular_30;
+			static constexpr const auto title = "View Encryption";
+			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
+			static const ImVec2 back_button_size(45.0f, title_size.y);
 
-		ImGui::SameLine();
+			// Back Button [<]
+			{
+				ImGui::PushFont(font_montserrat_medium_18); // < arrow is a text too
+				if (ImGuiWidgets::BackButton("##back", back_button_size))
+				{
+					this->OnBackButtonPressed();
+				}
+				ImGui::PopFont();
+			}
 
-		// Scene Title as encryption title
-		ImGui::PushFont(font_audiowide_regular_20); // text font
-		ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
-		{
-			//static constexpr const auto title = "View Encryption #";
-			static const ImVec2 title_size(ImGui::CalcTextSize(m_encryption->title.c_str()).x * font_audiowide_regular_45->Scale, ImGui::CalcTextSize(m_encryption->title.c_str()).y * font_audiowide_regular_45->Scale);
-			ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x - 45.0f) / 2.0f);
-			ImGui::TextWrapped(m_encryption->title.c_str());
+			ImGui::SameLine();
+
+			// Scene Title
+			{
+				ImGui::PushFont(title_font); // text font
+				ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
+				{
+					(void)ImGui::ButtonEx(title, ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiButtonFlags_Disabled);
+				}
+				ImGui::PopStyleColor(2);
+				ImGui::PopFont();
+			}
 		}
-		ImGui::PopStyleColor(1);
-		ImGui::PopFont();
+
 
 		spacing(2);
 		ImGui::Separator();

@@ -3,7 +3,7 @@
 
 NS_ENIGMA_BEGIN
 
-Config::Config(const String& file_name) noexcept(false)
+Config::Config(const String& file_name)
 	:
 	m_ini_reader(new INIReader(file_name))
 {

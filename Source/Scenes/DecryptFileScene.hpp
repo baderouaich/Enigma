@@ -6,7 +6,7 @@ NS_ENIGMA_BEGIN
 class DecryptFileScene : public Scene
 {
 public:	/* Constructors / Destructor */
-	explicit DecryptFileScene();
+	DecryptFileScene();
 	virtual ~DecryptFileScene() = default;
 
 private: /* Overrides */
@@ -19,8 +19,10 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnAutoDetectAlgorithmButtonPressed();
-	void OnBrowseInFileButtonPressed();
-	void OnBrowseOutFileButtonPressed();
+	//void OnBrowseInFileButtonPressed();
+	//void OnBrowseOutFileButtonPressed();
+	void OnBrowseInFileButtonPressed(); // browse file to decrypt
+	void OnBrowseOutFileLocationButtonPressed(); // browse decrypted file location
 	void OnDecryptButtonPressed();
 	void OnBackButtonPressed();
 

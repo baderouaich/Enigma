@@ -8,7 +8,7 @@ NS_ENIGMA_BEGIN
 /* Static Functions Begin */
 static void GLFWErrorCallback(int error, const char* message)
 {
-	ENIGMA_ERROR("GFLW ERROR #{0}: {1}", error, message);
+	ENIGMA_ERROR("[GFLW ERROR]: #{0} {1}", error, message);
 }
 /* Static Functions End */
 
@@ -282,9 +282,17 @@ bool Window::InitGLFWCallbacks()
 bool Window::InitGLAD()
 {
 	/* Init Glad OpenGL */
+	// Method 2, to resolve conversion warning C4191: 'type cast': unsafe conversion from 'GLFWglproc (__cdecl *)(const char *)' to 'GLADloadproc'
+	auto glfw_gl_proc = glfwGetProcAddress;
+	auto glad_proc = *static_cast<GLADloadproc*>((void*)&glfw_gl_proc);
+	const bool loaded = !!gladLoadGLLoader(glad_proc);
+	return loaded;
+#if 0
+	/* Init Glad OpenGL */
 	if (!gladLoadGLLoader((GLADloadproc)(glfwGetProcAddress)))
 		return false;
 	return true;
+#endif
 }
 
 bool Window::InitOpenGLOptions()
@@ -335,12 +343,12 @@ const std::pair<i32, i32>& Window::GetSize() const noexcept
 	return m_size;
 }
 
-const i32 Window::GetWidth() const noexcept
+i32 Window::GetWidth() const noexcept
 {
 	return m_size.first;
 }
 
-const i32 Window::GetHeight() const noexcept
+i32 Window::GetHeight() const noexcept
 {
 	return m_size.second;
 }
@@ -442,7 +450,7 @@ bool Window::IsMaximized() const noexcept
 	return glfwGetWindowAttrib(m_GLFWwindow, GLFW_MAXIMIZED) == GLFW_TRUE;
 }
 
-const i32 Window::GetSwapInterval() const noexcept
+i32 Window::GetSwapInterval() const noexcept
 {
 	return m_swap_interval;
 }
@@ -452,7 +460,7 @@ bool Window::IsFullscreen() const noexcept
 	return glfwGetWindowMonitor(m_GLFWwindow) != nullptr;
 }
 
-const i32 Window::GetRefreshRate() noexcept
+i32 Window::GetRefreshRate() noexcept
 {
 	// Get resolution of monitor
 	m_monitor = glfwGetPrimaryMonitor();
@@ -460,7 +468,7 @@ const i32 Window::GetRefreshRate() noexcept
 	return m_video_mode->refreshRate;
 }
 
-const std::pair<i32, i32> Window::GetMonitorSize() noexcept
+std::pair<i32, i32> Window::GetMonitorSize() noexcept
 {
 	// Get resolution of monitor
 	m_monitor = glfwGetPrimaryMonitor();

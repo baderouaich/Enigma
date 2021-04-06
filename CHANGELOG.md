@@ -32,5 +32,4 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Now heavy work is being done in background (parallel)
 - Now Back button for each scene is placed in the top left instead of bottom to save space
 - New CLI Option `--list` or `-l` which lists all saved encryption records in a table
-- Removed zlib library since its not required by cURL
 -->

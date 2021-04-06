@@ -16,7 +16,7 @@ public:
 	* @param file_name: config ini file name
 	* @exception std::runtime_error on failure
 	*/
-	explicit Config(const String& file_name) noexcept(false);
+	explicit Config(const String& file_name);
 	~Config() noexcept;
 
 public:

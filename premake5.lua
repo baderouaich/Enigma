@@ -95,7 +95,7 @@ project "Enigma"
 	pchsource "Source/pch.cpp"
 
 	---[[ Enable the toolset's maximum warning level ]]---
-	warnings "Extra"
+	--warnings "Extra"
 	
 	---[[ Source files ]]---
 	files

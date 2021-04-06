@@ -29,7 +29,7 @@ namespace Enigma
 	*/
 	namespace Constants
 	{
-		using std::operator""s;
+		using namespace std::string_literals; // using std::operator""s;
 
 		namespace Algorithm
 		{
@@ -247,6 +247,9 @@ namespace Enigma
 			static const Color4f LOADING_SPINNER_COLOR = BACK_BUTTON_COLOR;
 			//static const Color4f LOADING_BACKGROUND_COLOR = { BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 0.6f };
 			static const Color4f LOADING_BACKGROUND_COLOR = {0.0f, 0.0f, 0.0f, 0.8f };
+
+
+			static const Color4f& SCENE_TITLE_BACKGROUND_COLOR = MENUBAR_BACKGROUND_COLOR;
 
 
 		}

@@ -55,9 +55,11 @@ void DecryptFileScene::OnImGuiDraw()
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
+	static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
 	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
 	static ImFont* const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
+	static ImFont* const& font_montserrat_medium_16 = fonts.at("Montserrat-Medium-16");
 	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
 
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;// | ImGuiWindowFlags_NoBackground;
@@ -69,27 +71,37 @@ void DecryptFileScene::OnImGuiDraw()
 	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
-		// Back Button [<]
-		ImGui::PushFont(font_montserrat_medium_20); // < arrow is a text too
-		if (ImGuiWidgets::BackButton("##back", ImVec2(45.0f, 45.0f)))
+		// Back button [<] & Title
 		{
-			this->OnBackButtonPressed();
-		}
-		ImGui::PopFont();
-
-		ImGui::SameLine();
-
-		// Scene Title
-		ImGui::PushFont(font_audiowide_regular_45); // text font
-		ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
-		{
+			static const auto& title_font = font_audiowide_regular_30;
 			static constexpr const auto title = "Decrypt File";
-			static const ImVec2 title_size(ImGui::CalcTextSize(title).x * font_audiowide_regular_45->Scale, ImGui::CalcTextSize(title).y * font_audiowide_regular_45->Scale);
-			ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x) / 2.0f);
-			ImGui::Text(title);
+			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
+			static const ImVec2 back_button_size(45.0f, title_size.y);
+
+			// Back Button [<]
+			{
+				ImGui::PushFont(font_montserrat_medium_18); // < arrow is a text too
+				if (ImGuiWidgets::BackButton("##back", back_button_size))
+				{
+					this->OnBackButtonPressed();
+				}
+				ImGui::PopFont();
+			}
+
+			ImGui::SameLine();
+
+			// Scene Title
+			{
+				ImGui::PushFont(title_font); // text font
+				ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
+				{
+					(void)ImGui::ButtonEx(title, ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiButtonFlags_Disabled);
+				}
+				ImGui::PopStyleColor(2);
+				ImGui::PopFont();
+			}
 		}
-		ImGui::PopStyleColor(1);
-		ImGui::PopFont();
 
 		spacing(3);
 		ImGui::Separator();
@@ -129,6 +141,20 @@ void DecryptFileScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
+		spacing(2);
+
+		// Decompression widget
+		ImGui::PushFont(font_montserrat_medium_16);
+		{
+			ImGui::PushFont(font_audiowide_regular_20);
+			ImGui::Text("Decompress file with gzip after decrypting:");
+			ImGui::PopFont();
+			inline_dummy(6.0f, 0.0f);
+			ImGui::SameLine();
+			ImGui::Checkbox("##decompress_checkbox", &m_decompress);
+		}
+		ImGui::PopFont();
+
 		spacing(3);
 		ImGui::Separator();
 		spacing(3);
@@ -146,28 +172,17 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			if (ImGui::Button("Browse", browse_button_size))
-			{
-				Application::GetInstance()->LaunchWorkerThread("Browsing input file...", this, [this]() -> void
+			ImGui::PushID(1);
+				if (ImGui::Button("Browse", browse_button_size))
 				{
-					this->OnBrowseInFileButtonPressed();
-				});
-			}
+					Application::GetInstance()->LaunchWorkerThread("Browsing input file...", this, [this]() -> void
+					{
+						this->OnBrowseInFileButtonPressed();
+					});
+				}
+			ImGui::PopID();
 			ImGui::PopStyleColor(3);
 			ImGui::PopFont();
-
-			spacing(1);
-
-			// Decompression (if used in encryption)
-			ImGui::PushFont(font_montserrat_medium_18);
-			{
-				// Label
-				ImGui::Text("Decompress file with gzip after decrypting:");
-				ImGui::SameLine();
-				ImGui::Checkbox(" ", &m_decompress);
-			}
-			ImGui::PopFont();
-
 		}
 		ImGui::PopFont();
 
@@ -188,13 +203,15 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-				if (ImGui::Button("Browse ", browse_button_size))
-				{
-					Application::GetInstance()->LaunchWorkerThread("Browsing output file location...", this, [this]() -> void
+				ImGui::PushID(2);
+					if (ImGui::Button("Browse", browse_button_size))
 					{
-						this->OnBrowseOutFileButtonPressed();
-					});
-				}
+						Application::GetInstance()->LaunchWorkerThread("Browsing output file location...", this, [this]() -> void
+						{
+							this->OnBrowseOutFileLocationButtonPressed();
+						});
+					}
+				ImGui::PopID();
 				ImGui::PopStyleColor(3);
 				ImGui::PopFont();
 			}
@@ -353,11 +370,11 @@ void DecryptFileScene::OnBrowseInFileButtonPressed()
 
 }
 
-void DecryptFileScene::OnBrowseOutFileButtonPressed()
+void DecryptFileScene::OnBrowseOutFileLocationButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::SelectFolderDialog>(
 		"Select A Location To Save Decrypted File To",
-		m_in_filename, // initial path
+		fs::path(m_in_filename).has_parent_path() ? fs::path(m_in_filename).parent_path().string() : m_in_filename, // in file location as an initial path
 		false // disable multi-select
 		);
 
@@ -369,10 +386,25 @@ void DecryptFileScene::OnBrowseOutFileButtonPressed()
 		return;
 	}
 
+	// check if file ends with .enigma extension, if so, remove that extention to recover default file's one.
+	if (StringUtils::LowerCopy(fs::path(m_in_filename).extension().string()) == ".enigma")
+	{ 
+		ENIGMA_TRACE("in file ends with .enigma ext. removing it...");
+		// file ends with .enigma ext, remove it.
+		m_out_filename = (fs::path(selected_location) / fs::path(m_in_filename).replace_extension("").filename()).string();
+	}
+	else
+	{
+		// file doesnt end with .enigma ext, assume it is its original ext.
+		m_out_filename = (fs::path(selected_location) / fs::path(m_in_filename)).string();
+	}
+
+#if 0
 	if (fs::path(m_in_filename).extension().string() == ".enigma")
 		m_out_filename = selected_location + '/' + fs::path(m_in_filename).replace_extension("").filename().string();
 	else
 		m_out_filename = selected_location;
+#endif
 
 }
 

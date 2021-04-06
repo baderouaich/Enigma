@@ -56,12 +56,12 @@ public:	/* Accessors */
 	/*
 	*	Returns the width of this window
 	*/
-	const i32 GetWidth() const noexcept;
+	i32 GetWidth() const noexcept;
 
 	/*
 	*	Returns the height of this window
 	*/
-	const i32 GetHeight() const noexcept;
+	i32 GetHeight() const noexcept;
 
 	/*
 	*	Returns frame buffer size of this window
@@ -120,7 +120,7 @@ public:	/* Accessors */
 	*	Interval 1: 60 FPS
 	*	Interval 2: 30 FPS
 	*/
-	const i32 GetSwapInterval() const noexcept;
+	i32 GetSwapInterval() const noexcept;
 
 	/*
 	*	Returns true if the window should be closed
@@ -170,12 +170,12 @@ public:	/* Accessors */
 	/*
 	*	Returns refresh rate of this window
 	*/
-	const i32 GetRefreshRate() noexcept;
+	i32 GetRefreshRate() noexcept;
 	
 	/*
 	*	Returns size (width, height) of the primary monitor
 	*/
-	const std::pair<i32, i32> GetMonitorSize() noexcept;
+	std::pair<i32, i32> GetMonitorSize() noexcept;
 
 public: /* Modifiers */
 	/*

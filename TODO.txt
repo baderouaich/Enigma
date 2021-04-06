@@ -1,16 +1,13 @@
 ========================= IN PROGRESS =============================
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
-- Add Database system to save encrypted text or maybe files too, user can export/import database
-
-- Make cli options --updates only -- without single char 
 - CodeQL still doesnt ignore Dependencies
-- Use std::thread to vacuum sqlite database https://www.sqlite.org/pragma.html#pragma_auto_vacuum
 - check if it is possible not to use zlib with curl to reduce libraries links therefor small binary size
 - Make checks here https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L348
 - Replace all ENIGMA_MB_TO_BYTES With ENIGMA_FRIENDLY_BYTES_SIZE 
+- CppCheck good command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
+try adding --force option to cppaction repo pullrequest and --std= with check if its cpp & add it to Readme
 
-- Encrypt file scene, use fs::path(dir) / filename + ".enigma"; instead
-- remove const from no-reference returns in window & application to remove gcc warning [-Wignored-qualifiers]
+- Add Algorithm::DetectFromBase64Cipher & DetectFromFile
 
 
 
@@ -29,10 +26,10 @@ debugger with ui, but when calling cli, it doesnt seem to be set or get)
 https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L298
 - DONE Add CLI option --list to show encryption records
 - DONE Add CLi option --save -s to database if selected, and --list to show all encryption records
-
-
-
-
+- DONE fixed warning C4191: 'type cast': unsafe conversion from 'GLFWglproc (__cdecl *)(const char *)' to 'GLADloadproc'
+- DONE remove const from non-reference returns in window & application to resolve gcc warning [-Wignored-qualifiers]
+- DONE Encrypt file scene, use fs::path(dir) / filename + ".enigma"; instead
+- DONE Add Database system to save encrypted text or maybe files too, user can export/import database
 
 
 

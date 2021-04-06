@@ -18,7 +18,7 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnBrowseInFileButtonPressed();
-	void OnBrowseOutFileButtonPressed();
+	void OnBrowseOutFileLocationButtonPressed();
 	void OnEncryptButtonPressed();
 	void OnBackButtonPressed();
 

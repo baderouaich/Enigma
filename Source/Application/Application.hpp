@@ -76,12 +76,12 @@ public: /*Accessors*/
 	/*
 	*	Returns FPS (Frames Per Second) count
 	*/
-	const ui32 GetFPS() const noexcept { return *m_FPS; }
+	ui32 GetFPS() const noexcept { return *m_FPS; }
 
 	/*
 	*	Returns delta time value (the time difference between the previous frame that was drawn and the current frame)
 	*/
-	constexpr const f32 GetDeltaTime() const noexcept { return m_delta_time; }
+	f32 GetDeltaTime() const noexcept { return m_delta_time; }
 
 
 	/*
