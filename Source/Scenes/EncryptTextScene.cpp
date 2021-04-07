@@ -172,7 +172,7 @@ void EncryptTextScene::OnImGuiDraw()
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%zu bytes", m_text.size());
+			ImGui::Text("%s", SizeUtils::FriendlySize( m_text.size() ).c_str());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -203,7 +203,8 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-				ImGui::Text("%zu bytes", m_password.size());
+				//ImGui::Text("%zu bytes", m_password.size());
+				ImGui::Text("%s", SizeUtils::FriendlySize( m_password.size() ).c_str());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -234,7 +235,7 @@ void EncryptTextScene::OnImGuiDraw()
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
 					//ImGui::NewLine();
-					ImGui::Text("%llu bytes (Please save cipher base64 text above in a safe place)", m_cipher_base64.size());
+					ImGui::Text("%s (Please save cipher base64 text above in a safe place)", SizeUtils::FriendlySize(m_cipher_base64.size()).c_str());
 					ImGui::PopStyleColor(3);
 				ImGui::PopFont();
 			}

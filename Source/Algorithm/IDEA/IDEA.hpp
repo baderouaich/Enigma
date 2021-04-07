@@ -18,8 +18,8 @@ public:
 	virtual ~IDEA() noexcept;
 
 public:
-	String Encrypt(const String& password, const String& buffer) noexcept(false) override;
-	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
+	String Encrypt(const String& password, const String& buffer) override;
+	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
 	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption> m_idea_encryptor; // IDEA-CBC encryptor

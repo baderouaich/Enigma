@@ -1,13 +1,11 @@
 ========================= IN PROGRESS =============================
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
 - CodeQL still doesnt ignore Dependencies
-- check if it is possible not to use zlib with curl to reduce libraries links therefor small binary size
 - Make checks here https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L348
-- Replace all ENIGMA_MB_TO_BYTES With ENIGMA_FRIENDLY_BYTES_SIZE 
 - CppCheck good command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
 try adding --force option to cppaction repo pullrequest and --std= with check if its cpp & add it to Readme
+if it merged, add it to cppcheck.yml 
 
-- Add Algorithm::DetectFromBase64Cipher & DetectFromFile
 
 
 
@@ -30,15 +28,9 @@ https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Appli
 - DONE remove const from non-reference returns in window & application to resolve gcc warning [-Wignored-qualifiers]
 - DONE Encrypt file scene, use fs::path(dir) / filename + ".enigma"; instead
 - DONE Add Database system to save encrypted text or maybe files too, user can export/import database
-
-
-
-
-
-
-
-
-
+- DONE Add Algorithm::DetectFromBase64Cipher & DetectFromFile
+- DONE Replace all ENIGMA_MB_TO_BYTES With ENIGMA_FRIENDLY_BYTES_SIZE 
+- DONE check if it is possible not to use zlib with curl to reduce libraries links therefor small binary size [yes, only in windows, now zlib is linked for linux only]
 =============================================================================
 #if 0
 #pragma region Populate Database With Random Data

@@ -234,7 +234,8 @@ void DecryptFileScene::OnImGuiDraw()
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%zu bytes", m_password.size());
+			//ImGui::Text("%zu bytes", m_password.size());
+			ImGui::Text("%s", SizeUtils::FriendlySize( m_password.size() ).c_str());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -283,29 +284,23 @@ void DecryptFileScene::OnDestroy()
 }
 
 void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
-{
-	if (m_in_filename.empty())
+{	
+	try
 	{
-		(void)DialogUtils::Warn("Cannot auto-detect algorithm without file to decrypt");
-		return;
-	}
-	if (!fs::exists(m_in_filename))
-	{
-		(void)DialogUtils::Warn(m_in_filename + " does not exist");
-		return;
-	}
-	if (!fs::is_regular_file(m_in_filename))
-	{
-		(void)DialogUtils::Warn(m_in_filename + " is not a regular file");
-		return;
-	}
-	if (fs::is_empty(m_in_filename))
-	{
-		(void)DialogUtils::Warn(m_in_filename + " is empty");
-		return;
-	}
-	
+		// Auto detect encryption algorithm
+		m_type = Algorithm::DetectFromFile(m_in_filename);
 
+		// little happy msg for user
+		const String happy_msg = "Successfully auto-detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type);
+		ENIGMA_INFO(happy_msg);
+		(void)DialogUtils::Info(happy_msg);
+	}
+	catch (const std::exception& e)
+	{
+		(void)DialogUtils::Error(e.what());
+	}
+
+#if 0
 	try
 	{
 		// Auto detect algorithm used for encrypting
@@ -329,7 +324,6 @@ void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
 		// little happy info dialog
 		ENIGMA_INFO("Successfully detected algorithm used for encryption which is: {0}", Algorithm::AlgoTypeEnumToStr(m_type));
 		(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type));
-
 	}
 	catch (const CryptoPP::Exception& e)
 	{
@@ -348,6 +342,7 @@ void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
+#endif
 }
 
 
@@ -454,7 +449,8 @@ void DecryptFileScene::OnDecryptButtonPressed()
 				buffer = GZip::Decompress(buffer);
 				new_buffer_size = buffer.size();
 				increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
-				ENIGMA_TRACE("File size increased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(increased_bytes));
+				//ENIGMA_TRACE("File size increased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(increased_bytes));
+				ENIGMA_TRACE("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
 			}
 
 			// Save buffer to out file decrypted
@@ -463,10 +459,20 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			const bool file_written_success = FileUtils::Write(m_out_filename, buffer);
 			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write buffer to file " + m_out_filename);
 
-			// Alert user that encryption was successfull
-			(void)DialogUtils::Info("Decrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
-				(m_decompress ? (increased_bytes ? ("Decompression Status: File size increased by " +
-					std::to_string(ENIGMA_BYTES_TO_MB(increased_bytes)) + " MB") : "") : ""));
+			// Alert user that decryption was successfull
+			std::ostringstream msg{};
+			{
+				msg << "Decrypted " << fs::path(m_in_filename).filename() << " to "
+					<< fs::path(m_out_filename).filename() << " Successfully!\n";
+				if (m_decompress)
+				{
+					if (increased_bytes)
+						msg << "Decompression Status: File size increased by " << SizeUtils::FriendlySize(increased_bytes);
+				}
+
+			}
+			ENIGMA_INFO(msg.str());
+			(void)DialogUtils::Info(msg.str());
 
 		}
 		catch (const CryptoPP::Exception& e)

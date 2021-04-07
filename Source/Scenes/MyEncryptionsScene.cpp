@@ -272,7 +272,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 						ImGui::TableSetColumnIndex(2);
 						ImGui::Text("%s", date_time.c_str());
 						ImGui::TableSetColumnIndex(3);
-						ImGui::Text("%s", ENIGMA_FRIENDLY_BYTES_SIZE(size).c_str());
+						ImGui::Text("%s", SizeUtils::FriendlySize(size).c_str());
 						ImGui::TableSetColumnIndex(4);
 						ImGui::Text("%s", is_file ? "File" : "Text");
 						// Operation (View|delete...)

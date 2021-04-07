@@ -18,8 +18,8 @@ public:
 	virtual ~ChaCha20() noexcept;
 
 public:
-	String Encrypt(const String& password, const String& buffer) noexcept(false) override;
-	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
+	String Encrypt(const String& password, const String& buffer) override;
+	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
 	// The ChaCha20 algorithm is a stream cipher using a key of 256 bit size.

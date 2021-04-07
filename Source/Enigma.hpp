@@ -64,6 +64,7 @@
 #include <Utility/CryptoPPUtils.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Utility/GZip.hpp>
+#include <Utility/SizeUtils.hpp>
 //
 
 

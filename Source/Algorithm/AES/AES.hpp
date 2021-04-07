@@ -18,8 +18,8 @@ public:
 	virtual ~AES() noexcept; // in MSVC it is necessary for std::unique_ptr<Bass> ptr(new Derived()); where derived class must have a virtual destructor https://developercommunity.visualstudio.com/content/problem/341397/crash-when-deleting-from-stdunique-ptr.html
 
 public:
-	String Encrypt(const String& password, const String& buffer) noexcept(false) override;
-	String Decrypt(const String& password, const String& iv_cipher) noexcept(false) override;
+	String Encrypt(const String& password, const String& buffer) override;
+	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
 	// AES symmetric cipher is recommended to be used with GCM mode

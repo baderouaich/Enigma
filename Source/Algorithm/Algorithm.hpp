@@ -42,7 +42,7 @@ public:
 	enum class Intent : byte 
 	{
 		Encrypt = 0x0,
-		Decrypt
+		Decrypt = 0x1
 	};
 	enum class Type : byte
 	{
@@ -68,7 +68,7 @@ public:
 	* @return (Algo type enum id + IV + Cipher)
 	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Encrypt(const String& password, const String& buffer) noexcept(false) = 0;
+	virtual String Encrypt(const String& password, const String& buffer) = 0;
 	/*
 	*	Decrypts cipher with password
 	* @param password: Password used to Encyrpt buffer
@@ -76,24 +76,48 @@ public:
 	* @return Recovered Buffer
 	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Decrypt(const String& password, const String& iv_cipher) noexcept(false) = 0;
+	virtual String Decrypt(const String& password, const String& iv_cipher) = 0;
 
 
 public: /* Create polymorphic algorithm by either mode name or type*/
-	static std::unique_ptr<Algorithm> CreateFromName(const String& mode, const Intent& intent);
-	static std::unique_ptr<Algorithm> CreateFromType(const Type& type, const Intent& intent);
+	static std::unique_ptr<Algorithm> CreateFromName(const String& mode, const Intent intent);
+	static std::unique_ptr<Algorithm> CreateFromType(const Type type, const Intent intent);
 
 public:
-	const Type& GetType() const noexcept { return m_type; }
-	void SetType(const Type& type) noexcept { this->m_type = type; }
+	Type GetType() const noexcept { return m_type; }
+	void SetType(const Type type) noexcept { this->m_type = type; }
 	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
 
 protected:
-	String GenerateRandomIV(const size_t& size);
+	/*
+	*	Generates random IV with specified length
+	*/
+	String GenerateRandomIV(const size_t size);
 
 public:
-	static String AlgoTypeEnumToStr(const Algorithm::Type& e) noexcept;
+	/*
+	*	Auto detect algorithm used for encryption from cipher base64 text
+	*/
+	static Type DetectFromCipherBase64(const String& cipher_base64);
+
+	/*
+	*	Auto detect algorithm used for encryption from encrypted file
+	*/
+	static Type DetectFromFile(const String& filename);
+
+	/*
+	*	Converts Algorithm::Type to String
+	*/
+	static String AlgoTypeEnumToStr(const Algorithm::Type e) noexcept;
+
+	/*
+	*	Returns a string of supported algorithms represented as "[Algo1, Algo2, Algo3...]"
+	*/
 	static String GetSupportedAlgorithmsStr() noexcept;
+
+	/*
+	*	Returns a vector of supported algorithms represented as pair of algo name string, algo type
+	*/
 	static std::vector<std::pair<String, Algorithm::Type>> GetSupportedAlgorithms() noexcept;
 
 protected:

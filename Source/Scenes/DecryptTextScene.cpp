@@ -148,12 +148,13 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::Text("Cipher (in base64):");
 
 			// Input text
-			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 2.0f);
-			ImGuiWidgets::InputTextMultiline("##text1", &m_cipher_base64, input_text_size);
+			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 2.5f);
+			ImGuiWidgets::InputTextMultiline("##cipher_base64", &m_cipher_base64, input_text_size);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%zu bytes", m_cipher_base64.size());
+			//ImGui::Text("%zu bytes", m_cipher_base64.size());
+			ImGui::Text("%s", SizeUtils::FriendlySize( m_cipher_base64.size() ).c_str());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -169,11 +170,12 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::Text("Password:");
 
 			// Input text
-			ImGuiWidgets::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##password", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%zu bytes", m_password.size());
+			//ImGui::Text("%zu bytes", m_password.size());
+			ImGui::Text("%s", SizeUtils::FriendlySize( m_password.size() ).c_str());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -193,11 +195,12 @@ void DecryptTextScene::OnImGuiDraw()
 
 				// Input text
 				const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
-				ImGuiWidgets::InputTextMultiline("##text3", &m_recovered_text, input_text_size);
+				ImGuiWidgets::InputTextMultiline("##recovered_text", &m_recovered_text, input_text_size);
 
 				// Bytes count
 				ImGui::PushFont(font_montserrat_medium_12);
-				ImGui::Text("%zu bytes", m_recovered_text.size());
+				//ImGui::Text("%zu bytes", m_recovered_text.size());
+				ImGui::Text("%s", SizeUtils::FriendlySize(m_recovered_text.size()).c_str());
 				ImGui::PopFont();
 
 			}
@@ -264,38 +267,20 @@ void DecryptTextScene::OnDestroy()
 
 void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 {
-	if (m_cipher_base64.empty())
+	try
 	{
-		(void)DialogUtils::Warn("Cannot auto-detect algorithm without cipher base64 text");
-		return;
-	}
-	if (!Base64::IsBase64(m_cipher_base64))
-	{
-		(void)DialogUtils::Warn("Cipher base64 you entered is not a valid Base64 text");
-		return;
-	}
+		// Auto detect encryption algorithm
+		m_type = Algorithm::DetectFromCipherBase64(m_cipher_base64);
 
-	// Decode base64 to cipher
-	m_cipher = Base64::Decode(m_cipher_base64);
-	// check if successfully decoded
-	if (m_cipher.empty())
-	{
-		(void)DialogUtils::Error("Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
-		return;
+		// little happy msg for user
+		const String happy_msg = "Successfully auto-detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type);
+		ENIGMA_INFO(happy_msg);
+		(void)DialogUtils::Info(happy_msg);
 	}
-
-	// extract first byte from cipher which must be the mode type used in encryption
-	const byte& cipher_first_byte = *m_cipher.begin();
-	// Check if detected mode is valid
-	if (!ENIGMA_IS_BETWEEN(cipher_first_byte, (byte)Algorithm::Type::First, (byte)Algorithm::Type::Last))
+	catch (const std::exception& e)
 	{
-		(void)DialogUtils::Error("Could not auto-detect algorithm mode used for encryption");
-		return;
+		(void)DialogUtils::Error(e.what());
 	}
-	// if alles gut, set type
-	m_type = static_cast<Algorithm::Type>(cipher_first_byte);
-	// little happy info dialog
-	(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type));
 }
 
 void DecryptTextScene::OnBackButtonPressed()
@@ -322,11 +307,6 @@ void DecryptTextScene::OnDecryptButtonPressed()
 	if (m_password.empty())
 	{
 		(void)DialogUtils::Warn("Password is empty");
-		return;
-	}
-	if (!Base64::IsBase64(m_cipher_base64))
-	{
-		(void)DialogUtils::Warn("Cipher base64 you entered is not a valid Base64 text");
 		return;
 	}
 

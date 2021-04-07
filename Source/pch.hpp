@@ -72,6 +72,7 @@
 #include <functional>
 #include <iomanip>
 #include <numeric>
+#include <regex>
 
 #include <cstdio>
 #include <cstdlib>

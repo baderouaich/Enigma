@@ -250,7 +250,8 @@ void EncryptFileScene::OnImGuiDraw()
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
-			ImGui::Text("%zu bytes", m_password.size());
+			//ImGui::Text("%zu bytes", m_password.size());
+			ImGui::Text("%s", SizeUtils::FriendlySize( m_password.size() ).c_str());
 			ImGui::PopFont();
 		}
 		ImGui::PopFont();
@@ -424,7 +425,8 @@ void EncryptFileScene::OnEncryptButtonPressed()
 				buffer = GZip::Compress(buffer);
 				new_buffer_size = buffer.size();
 				decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
-				ENIGMA_TRACE("File size decreased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(decreased_bytes));
+				//ENIGMA_TRACE("File size decreased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(decreased_bytes));
+				ENIGMA_TRACE("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
 			}
 
 			// Encrypt file buffer
@@ -450,10 +452,20 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			}
 
 			// Alert user that encryption was successfull
-			(void)DialogUtils::Info("Encrypted " + m_in_filename + " => " + m_out_filename + " Successfully!\n" +
-				(m_compress ? (decreased_bytes ? ("Compression Status: File size decreased by " +
-					std::to_string(ENIGMA_BYTES_TO_MB(decreased_bytes)) + " MB") : "") : ""));
-		
+			std::ostringstream msg{};
+			{
+				msg << "Encrypted " << fs::path(m_in_filename).filename() << " to "
+					<< fs::path(m_out_filename).filename() << " Successfully!\n";
+				if (m_compress)
+				{
+					if (decreased_bytes)
+						msg << "Compression Status: File size decreased by " << SizeUtils::FriendlySize(decreased_bytes);
+				}
+
+			}
+			ENIGMA_INFO(msg.str());
+			(void)DialogUtils::Info(msg.str());
+
 		}
 		catch (const CryptoPP::Exception& e)
 		{

@@ -20,39 +20,51 @@ public:
     /*
     *   Removes leading and trailing spaces from a string
     */
-    static void Trim(String& str, const char t[] = " \t\n\r\f\v")
+    static void Trim(String& str)
     {
-        TrimLeft(str, t);
-        TrimRight(str, t);
+        TrimLeft(str);
+		TrimRight(str);
     }
-	static void Trim(WString& wstr, const wchar_t t[] = L" \t\n\r\f\v")
+	static void Trim(WString& wstr)
 	{
-		TrimLeft(wstr, t);
-		TrimRight(wstr, t);
+		TrimLeft(wstr);
+		TrimRight(wstr);
 	}
 
     /*
     *   Trim string from left
     */
-    static void TrimLeft(String& str, const char t[] = " \t\n\r\f\v")
+    static void TrimLeft(String& str)
     {
-        str.erase(0, str.find_first_not_of(t));
-    }
-	static void TrimLeft(WString& wstr, const wchar_t t[] = L" \t\n\r\f\v")
+		str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](const char& c)
+		{
+			return !std::isspace(c);
+		}));
+	}
+	static void TrimLeft(WString& wstr)
 	{
-		wstr.erase(0, wstr.find_first_not_of(t));
+		wstr.erase(wstr.begin(), std::find_if(wstr.begin(), wstr.end(), [](const wchar_t& c)
+		{
+			return !std::isspace(c);
+		}));
 	}
 
     /*
     *   Trim string from right
     */
-    static void TrimRight(String& str, const char t[] = " \t\n\r\f\v")
+    static void TrimRight(String& str)
     {
-        str.erase(str.find_last_not_of(t) + 1);
+		str.erase(std::find_if(str.rbegin(), str.rend(), [](const char& c)
+		{
+			return !std::isspace(c);
+		}).base(), str.end());
     }
-	static void TrimRight(WString& wstr, const wchar_t t[] = L" \t\n\r\f\v")
+	static void TrimRight(WString& wstr)
 	{
-		wstr.erase(wstr.find_last_not_of(t) + 1);
+		wstr.erase(std::find_if(wstr.rbegin(), wstr.rend(), [](const wchar_t& c)
+		{
+			return !std::isspace(c);
+		}).base(), wstr.end());
 	}
 
 	/*

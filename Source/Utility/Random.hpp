@@ -74,7 +74,7 @@ public:
 				break;
 			case 4: // special characters
 				using Constants::Algorithm::SPECIAL_CHARACTERS;
-				c = SPECIAL_CHARACTERS[Int(static_cast<size_t>(0), ENIGMA_ARRAY_SIZE(SPECIAL_CHARACTERS))];
+				c = SPECIAL_CHARACTERS[Int(static_cast<size_t>(0), ENIGMA_ARRAY_SIZE(SPECIAL_CHARACTERS) - 1)];
 				break;
 			}
 		}

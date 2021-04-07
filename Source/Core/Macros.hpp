@@ -167,24 +167,6 @@
 #endif
 ///
 
-/// Convert bytes to kb, mb, gb, tb
-#define ENIGMA_BYTES_TO_KB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f)
-#define ENIGMA_BYTES_TO_MB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f)
-#define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
-#define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
-#define ENIGMA_FRIENDLY_BYTES_SIZE(bytes) [](const size_t bytes) -> std::string \
-{ \
-	if (bytes == 0) return std::string("0 Bytes"); \
-	std::ostringstream oss{}; \
-	static constexpr const int KB = 1024; \
-	static constexpr const char* sizes[] = { "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" }; \
-	const int i = static_cast<int>(std::floor(std::log(bytes) / std::log(KB))); \
-	oss << std::fixed << std::setprecision(2) \
-		<< static_cast<float>(bytes / std::pow(KB, i)) << ' ' << sizes[i]; \
-	return oss.str(); \
-}(bytes)
-
-
 
 
 #endif // !ENIGMA_MACROS_H

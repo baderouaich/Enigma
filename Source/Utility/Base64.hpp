@@ -20,16 +20,6 @@ public:
     */
 	static String Decode(const std::string_view& encoded_buffer);
 
-	/*
-	*	Checks if a byte is base64
-	*/
-	static inline const bool IsBase64(const byte& c) noexcept;
-	
-	/*
-	*	Checks if a string is base64
-	*/
-	static const bool IsBase64(const std::string_view& str) noexcept;
-
 };
 NS_ENIGMA_END
 

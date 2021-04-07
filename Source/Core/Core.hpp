@@ -41,10 +41,10 @@
 #ifdef ENIGMA_DEBUG
 	//Break debug
 #if defined(ENIGMA_PLATFORM_WINDOWS)
-	#define ENIGMA_DEBUG_BREAK() __debugbreak()
+	#define ENIGMA_DEBUG_BREAK() ::__debugbreak()
 #elif defined(ENIGMA_PLATFORM_LINUX)
 #include <signal.h>
-	#define ENIGMA_DEBUG_BREAK() raise(SIGTRAP)
+	#define ENIGMA_DEBUG_BREAK() std::raise(SIGTRAP)
 #else
 	#define ENIGMA_DEBUG_BREAK() std::abort()
 #endif
