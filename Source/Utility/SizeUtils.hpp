@@ -60,39 +60,6 @@ public:
 #define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
 #define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
 
-/// Helper operators for compile time inline conversion e.g( size_t three_mb = 3_MB; ...)
-constexpr size_t operator""_KB(const size_t N) noexcept
-{
-	return N * 1024;
-}
-constexpr size_t operator""_MB(const size_t N) noexcept
-{
-	return N * 1024_KB;
-}
-constexpr size_t operator""_GB(const size_t N) noexcept
-{
-	return N * 1024_MB;
-}
-constexpr size_t operator""_TB(const size_t N) noexcept
-{
-	return N * 1024_GB;
-}
-constexpr size_t operator""_PB(const size_t N) noexcept
-{
-	return N * 1024_TB;
-}
-constexpr size_t operator""_EB(const size_t N) noexcept
-{
-	return N * 1024_PB;
-}
-constexpr size_t operator""_ZB(const size_t N) noexcept
-{
-	return N * 1024_EB;
-}
-constexpr size_t operator""_YB(const size_t N) noexcept
-{
-	return N * 1024_ZB;
-}
 
 NS_ENIGMA_END
 
