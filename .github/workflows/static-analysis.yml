@@ -30,7 +30,7 @@ jobs:
           force_language: c++
           force: enable
           max_ctu_depth: 12
-          platform: unspecified
+          #platform: 
           std: c++17
           output_file: ./CppCheckReport.txt
           

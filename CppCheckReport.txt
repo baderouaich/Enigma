@@ -1,0 +1,9 @@
+Source\System\ENV\ENV.cpp:13:8: portability: %d in format string (no. 2) requires 'int' but the argument type is 'DWORD {aka unsigned long}'. [invalidPrintfArgType_sint]
+  std::printf("%s: SetEnvironmentVariable failed (%d)\n", ENIGMA_CURRENT_FUNCTION, ::GetLastError());
+       ^
+Source\System\ENV\ENV.cpp:33:8: portability: %d in format string (no. 2) requires 'int' but the argument type is 'DWORD {aka unsigned long}'. [invalidPrintfArgType_sint]
+  std::printf("%s: GetEnvironmentVariableA failed (%d)\n", ENIGMA_CURRENT_FUNCTION, ::GetLastError());
+       ^
+Source\System\ENV\ENV.cpp:50:8: portability: %d in format string (no. 2) requires 'int' but the argument type is 'DWORD {aka unsigned long}'. [invalidPrintfArgType_sint]
+  std::printf("%s: SetEnvironmentVariable failed (%d)\n", ENIGMA_CURRENT_FUNCTION, ::GetLastError());
+       ^
