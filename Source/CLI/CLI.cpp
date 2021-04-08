@@ -176,7 +176,6 @@ i32 CLI::Run()
 
 		// Create polymorphic Algorithm type
 		// if mode is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
-		// if mode is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
 		if (mode.empty())
 		{
 			Algorithm::Type type{};

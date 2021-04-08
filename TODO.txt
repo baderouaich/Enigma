@@ -1,12 +1,11 @@
 ========================= IN PROGRESS =============================
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
 - CodeQL still doesnt ignore Dependencies
-- Make checks here https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Application.cpp#L348
-- CppCheck good command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
-try adding --force option to cppaction repo pullrequest and --std= with check if its cpp & add it to Readme
+- Make checks in Application::UpdateHardwareInfo()
+- CppCheck working command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
 if it merged, add it to cppcheck.yml 
 
-
+- Use SizeUtils::FriendlyBytesSize in CLI.cpp too
 
 
 

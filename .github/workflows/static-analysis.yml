@@ -21,18 +21,19 @@ jobs:
         uses: deep5050/cppcheck-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          #commit_msg: "<optional commit message>" # commit msg when file is generated, not editable anymore.
-          #check_library:
-          skip_preprocessor: enable
-          enable: warning,style,performance,portability,missingInclude #default is all
+          check_library: disable
+          skip_preprocessor: disable
+          enable: performance,portability,warning
           exclude_check: ./Dependencies/
-          #inconclusive:
-          #inline_suppression:
+          inconclusive: disable
+          inline_suppression: disable
           force_language: c++
-          max_ctu_depth: 9 #default 2
-          #platform:
-          output_file: ./CppCheck-Static-Analysis-Report.txt #(default cppcheck_report.txt)
-
+          force: enable
+          max_ctu_depth: 12
+          platform: unspecified
+          std: c++17
+          output_file: ./CppCheckReport.txt
+          
       # Report generating task
       - name: publish report    
         uses: mikeal/publish-to-github-action@master
