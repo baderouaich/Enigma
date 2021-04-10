@@ -354,7 +354,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 	ENIGMA_INFO(decrypted_text);
-	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", decrypted_text.size(), elapsed_seconds);
+	ENIGMA_LOG("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds);
 
 	cipher.clear();
 	decrypted_text.clear();
@@ -404,7 +404,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	const bool successfully_written_file = FileUtils::Write(out_filename_encypted, cipher);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save cipher to file " + out_filename_encypted);
 
-	ENIGMA_LOG("Encrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
+	ENIGMA_LOG("Encrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(buffer.size()), elapsed_seconds);
 
 	// Save encryption record to database on option -s | --save (Note: file buffer forced to be compressed above if saving to database)
 	if (save_to_database)
@@ -475,7 +475,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	const bool successfully_written_file = FileUtils::Write(out_filename_decrypted, buffer);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save decrypted cipher to file " + out_filename_decrypted);
 
-	ENIGMA_LOG("Decrypted {0} bytes in {1:0.3f} seconds.", buffer.size(), elapsed_seconds);
+	ENIGMA_LOG("Decrypted in {1:0.3f} seconds.", SizeUtils::FriendlySize(buffer.size()), elapsed_seconds);
 
 	cipher.clear();
 	buffer.clear();
