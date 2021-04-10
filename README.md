@@ -60,10 +60,10 @@ output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1Srgl
 ```
 - Example decrypting a text with AES-GCM:<br>
 ```text
-./Enigma --d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
+./Enigma -d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
 output: my important data securly encrypted!
 ```
-<image src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>
+<!--<image src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>-->
 
 - Example encypting a file with AES-GCM:<br>
 ```text
@@ -73,7 +73,8 @@ output: my important data securly encrypted!
 ```text
 ./Enigma -d --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data-encrypted.enigma" --outfile="/home/bader/Desktop/Data-decrypted" --decompress
 ```
-<image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br>
+<!-- <image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
+<image src="Resources/ScreenShots/4.png"/><br>
 
 
 

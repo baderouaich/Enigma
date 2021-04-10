@@ -5,7 +5,7 @@
 - CppCheck working command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
 if it merged, add it to cppcheck.yml 
 
-
+-  Use [[maybe_unused]] instead of void for all std::system..etc to avoid warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
 
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
