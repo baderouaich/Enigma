@@ -83,7 +83,7 @@ namespace ImGuiWidgets
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Loading spinner https://github.com/ocornut/imgui/issues/1901
-	static bool LoadingSpinner(const char* label, float radius, int thickness, const ImU32& color) {
+	static bool LoadingSpinner(const char* label, float radius, float thickness, const ImU32& color) {
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
 			return false;
@@ -104,7 +104,7 @@ namespace ImGuiWidgets
 		window->DrawList->PathClear();
 
 		int num_segments = 30;
-		int start = (int)std::abs(sinf(g.Time * 1.8f) * (num_segments - 5));
+		int start = (int)std::abs(sinf((float)g.Time * 1.8f) * (num_segments - 5));
 
 		const float a_min = IM_PI * 2.0f * ((float)start) / (float)num_segments;
 		const float a_max = IM_PI * 2.0f * ((float)num_segments - 3) / (float)num_segments;
@@ -113,8 +113,8 @@ namespace ImGuiWidgets
 
 		for (int i = 0; i < num_segments; i++) {
 			const float a = a_min + ((float)i / (float)num_segments) * (a_max - a_min);
-			window->DrawList->PathLineTo(ImVec2(centre.x + cosf(a + g.Time * 8.0f) * radius,
-				centre.y + sinf(a + g.Time * 8.0f) * radius));
+			window->DrawList->PathLineTo(ImVec2(centre.x + cosf(a + (float)g.Time * 8.0f) * radius,
+				centre.y + sinf(a + (float)g.Time * 8.0f) * radius));
 		}
 
 		window->DrawList->PathStroke(color, false, thickness);
@@ -150,7 +150,7 @@ namespace ImGuiWidgets
 		window->DrawList->AddRectFilled(bb.Min, ImVec2(pos.x + circleStart, bb.Max.y), bg_col);
 		window->DrawList->AddRectFilled(bb.Min, ImVec2(pos.x + circleStart * value, bb.Max.y), fg_col);
 
-		const float t = g.Time;
+		const float t = static_cast<float>(g.Time);
 		const float r = size.y / 2;
 		const float speed = 1.5f;
 
@@ -173,7 +173,7 @@ namespace ImGuiWidgets
 	
 	//https://github.com/ocornut/imgui/issues/249
 	// Popup dialog has spinner loading inside it
-	static void LoadingDialog(const char* text, const ImVec2& spinner_position, const float spinner_radius, const int spinner_thickness, const ImVec4& spinner_color, 
+	static void LoadingDialog(const char* text, const ImVec2& spinner_position, const float spinner_radius, const float spinner_thickness, const ImVec4& spinner_color, 
 		const float container_width = (float)Application::GetInstance()->GetWindow()->GetSize().first,
 		const float container_height = (float)Application::GetInstance()->GetWindow()->GetSize().second)
 	{

@@ -5,13 +5,9 @@
 #include <Core/Core.hpp>
 #include <Utility/StringUtils.hpp> // StringUtils::Cleanup to remove __FUNCTION__'s __cdecl
 
-//Logging Library
-// This ignores all warnings raised inside External headers
-// https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
-#pragma warning(push, 0)
+// Logging Library
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
-#pragma warning(pop)
 
 NS_ENIGMA_BEGIN
 

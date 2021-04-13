@@ -14,7 +14,6 @@ LoadingScene::LoadingScene()
 void LoadingScene::OnCreate()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
-
 }
 
 void LoadingScene::OnUpdate(const f32& /*dt*/)

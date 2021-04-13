@@ -512,7 +512,6 @@ void CLI::OnListEncryptionRecords()
 	std::for_each(encryptions.begin(), encryptions.end(), [&table](const std::unique_ptr<Encryption>& e)
 	{
 		const auto& [ide, title, cipher, date_time, size, is_file] = *e;
-		ENIGMA_UNUSED(cipher);
 
 		//substr title to 50 chars only
 		String sub_title = title;
