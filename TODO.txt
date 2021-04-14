@@ -5,11 +5,13 @@
 - CppCheck working command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
 if it merged, add it to cppcheck.yml 
 
+
+- Maybe add some space to center title scene like "My Encryptions         "
 - Use ENIGMA_UNUSED [[maybe_unused]] instead of void for all std::system..etc to avoid warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
 
 - Complete ViewEncryptionScene
 - disallow multiple enigma app instance,  https://stackoverflow.com/questions/8799646/preventing-multiple-instances-of-my-application
-
+- fix typo https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Algorithm/AES/AES.cpp#L31
 
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene  with Like %%

@@ -17,6 +17,7 @@ Application* Application::m_instance = nullptr;
 
 Application::Application(const WindowSettings& window_settings)
 	:
+	SingleInstance(Constants::ENIGMA_PACKAGE_NAME), 
 	// Delta time
 	m_last_frame_time(0.0f),
 	m_current_frame_time(0.0f),

@@ -31,6 +31,8 @@ namespace Enigma
 	{
 		using namespace std::string_literals; // using std::operator""s;
 
+		static constexpr const auto ENIGMA_PACKAGE_NAME = "com.badereddineouaich.enigma"; // unique app id to avoid multiple instances
+		
 		namespace Algorithm
 		{
 			// Notes:

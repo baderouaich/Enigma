@@ -11,6 +11,7 @@
 #include <Events/KeyEvent.hpp>
 #include <Events/MouseEvent.hpp>
 
+#include "SingleInstance.hpp"
 
 NS_ENIGMA_BEGIN
 
@@ -20,7 +21,7 @@ class Scene;
 class RAMInfo;
 class CPUInfo;
 
-class ENIGMA_API Application
+class ENIGMA_API Application final : public SingleInstance
 {
 public: /* Constructor / Destructors */
 	Application(const WindowSettings& window_settings = WindowSettings());
