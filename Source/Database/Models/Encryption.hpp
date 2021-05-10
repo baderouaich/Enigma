@@ -18,6 +18,11 @@ struct Encryption
 	i64 size{}; // size of compressed cipher in bytes
 	bool is_file{}; // whether its a text or file encryption
 
+	~Encryption() noexcept
+	{
+		title.clear();
+		date_time.clear();
+	}
 
 public:
 	friend std::ostream& operator<<(std::ostream& os, const Encryption& e) noexcept 

@@ -82,8 +82,10 @@ void ImGuiRenderer::End()
   );
 
   // Rendering
+  // ImGui::EndFrame(); is called by ImGui::Render() bellow
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 
 
  // for docking branch

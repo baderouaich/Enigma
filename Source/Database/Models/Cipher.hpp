@@ -12,6 +12,11 @@ struct Cipher
 	String data{}; // BLOB compressed text or file binary cipher
 	i64 ide{}; // foreign key references Encryption(id)
 
+	~Cipher() noexcept
+	{
+		data.clear();
+	}
+
 public:
 	friend std::ostream& operator<<(std::ostream& os, const Cipher& c) noexcept
 	{

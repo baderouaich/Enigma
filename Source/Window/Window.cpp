@@ -565,15 +565,16 @@ void Window::SetTitle(const String& title,
 	if (ram_info)
 	{
 		ram_info->Update();
-		const f32 percentage = ram_info->GetRAMUsage();
-		oss << " - RAM Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
+		const f32 used_ram_percentage_by_me = ram_info->GetProcessRAMUsage();
+		const size_t used_ram_bytes_by_me = ram_info->GetProcessUsedRAM();
+		oss << " - RAM Usage: " << SizeUtils::FriendlySize(used_ram_bytes_by_me) << " (" << std::fixed << std::setprecision(2) << used_ram_percentage_by_me << "%)";
 	}
 
 	//CPU Usage
 	if (cpu_info)
 	{
-		const f32 percentage = cpu_info->GetCPUUsage();
-		oss << " - CPU Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
+		const f32 used_cpu_percentage_by_me = cpu_info->GetProcessCPUUsage();
+		oss << " - CPU Usage: " << std::fixed << std::setprecision(2) << used_cpu_percentage_by_me << '%';
 	}
 
 	glfwSetWindowTitle(m_GLFWwindow, oss.str().c_str());

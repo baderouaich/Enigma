@@ -33,10 +33,10 @@ void MainMenuScene::OnCreate()
 	//));
 
 	// Load logo image
-	m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_256x144_PNG_PATH);
+	m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_192x108_PNG_PATH);
 }
 
-void MainMenuScene::OnUpdate(const f32&) {}
+void MainMenuScene::OnUpdate(const [[maybe_unused]] f32&) {}
 
 void MainMenuScene::OnDraw()
 {
@@ -117,7 +117,7 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopStyleVar(1);
 		}
 
-		spacing(3);
+		spacing(6);
 
 #if 0
 		// Enigma Version
@@ -143,11 +143,11 @@ void MainMenuScene::OnImGuiDraw()
 			const f32 logo_width = static_cast<f32>(m_logo->GetWidth());
 			const f32 logo_height = static_cast<f32>(m_logo->GetHeight());
 			const f32 logo_x = (win_w - logo_width) / 2.0f;
-			const f32 logo_y = ImGui::GetFrameHeight(); // GetFrameHeight ~=> Menubar height
+			const f32 logo_y = ImGui::GetFrameHeight() + 9.0f; // GetFrameHeight ~=> Menubar height
 			m_logo->Draw({ logo_x,  logo_y }, logo_width, logo_height);
 		}
 
-		spacing(3);
+		spacing(6);
 
 		// Buttons
 		{

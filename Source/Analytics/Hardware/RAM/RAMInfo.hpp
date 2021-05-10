@@ -8,15 +8,19 @@
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	//https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex
 	#include <Windows.h>
+	#include <psapi.h>
 typedef MEMORYSTATUSEX memory_status_t;
 #elif defined(ENIGMA_PLATFORM_LINUX)
 	//https://man7.org/linux/man-pages/man2/sysinfo.2.html
+	#include <stdio.h>  // fopen
 	#include <sys/sysinfo.h>
+	#include <unistd.h> // syscall
+	#include <sys/syscall.h>
 typedef struct sysinfo memory_status_t;
 #elif defined(ENIGMA_PLATFORM_MACOS)
 	//https://stackoverflow.com/questions/5012886/determining-the-available-amount-of-ram-on-an-ios-device
 	#include <mach/vm_statistics.h>
-	#include <mach/mach.h>
+	#include <mach/mach.h>  // mach_task_basic_info
 	#include <mach/mach_host.h>
 typedef struct vm_statistics_data_t memory_status_t;
 #endif
@@ -41,9 +45,14 @@ public:
 	void Update();
 
 	/*
-	*	Returns the total physical memory reserved (in bytes)
+	*	Returns the total physical memory reserved by all processes (in bytes)
 	*/
 	size_t GetUsedRAM() const noexcept;
+
+	/*
+	*	Returns the total physical memory used by this process (in bytes)
+	*/
+	size_t GetProcessUsedRAM() const noexcept;
 
 	/*
 	*	Returns the total physical memory free (in bytes)
@@ -56,9 +65,14 @@ public:
 	size_t GetAvailableRAM() const noexcept;
 
 	/*
-	*	Returns memory usage (in percentage [0% -> 100%])
+	*	Returns memory usage by all processes (in percentage [0% -> 100%])
 	*/
 	f32 GetRAMUsage() noexcept;
+
+	/*
+	*	Returns memory usage by current process (in percentage [0% -> 100%])
+	*/
+	f32 GetProcessRAMUsage() noexcept;
 
 private:
 	/*
