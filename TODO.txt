@@ -1,9 +1,4 @@
 ========================= IN PROGRESS =============================
-- Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet)
-issue is the '\000' ate of string
-https://stackoverflow.com/questions/35114277/ciphertext-length-is-not-a-multiple-of-block-size-in-cryptopp
-
-
 - Encrypt & Decrypt Files using Chunks 
 while(!eof())
 	ifs.read(chunk_size, buff)
@@ -24,16 +19,9 @@ while(!eof())
 
 - made encrypt/decrypt text compressed by default.
 
-- Add hint (note: password is not saved) to Save to db [x]
-
 
 - remove json_type and add decltype()
 https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Networking/CheckForUpdates.hpp#L55
-
-- put FriendlyFileSize in FileUtils
-
-- better err msg
-https://github.com/mck182/kasa/blob/master/src/database/db.cpp#L85
 
 
 - ViewEncryptionScene get only lightweight info about encryption until decryption made and retrieve other data.
@@ -41,6 +29,8 @@ https://github.com/mck182/kasa/blob/master/src/database/db.cpp#L85
 - Maybe always detect algorithm from cipher, no need to make it an option
 
 - always compress buffer before encrypting, remove --compress & --decompress CLI options as well as from readme
+
+
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
 - DONE added VACUUM sqlite command to defragment disk
@@ -67,6 +57,8 @@ https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Appli
 https://github.com/DanLangas/Enigma/blob/master/Source/Algorithm/Algorithm.cpp#L102
 - DONE Perfrorm compressio by default, remove --compress and --decompress, aswell as Compress radio button
 - DONE Investigate why GZip doesnt work,tests work but cipher compression is messed up over actual size.  (issue was i was compressing after encrypting which isnt right, see NOTES.txt)
+DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet) issue is the '\000' ate of string, when getting cipher blob from sqlite3, sqlite3 seem to add extra \000 to end of string https://stackoverflow.com/questions/35114277/ciphertext-length-is-not-a-multiple-of-block-size-in-cryptopp
+- Add README Notes hint (note: password is not saved) to Save to db [x]
 
 =============================================================================
 

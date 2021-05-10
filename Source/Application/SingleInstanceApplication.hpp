@@ -55,68 +55,13 @@ public:
 			WarnAndExit();
 		}
 #elif defined(ENIGMA_PLATFORM_LINUX)
-		int cond_id, mutex_id;
-		int mode = S_IRWXU | S_IRWXG;
-		int readMutex = false;
-		/* Initialise attribute to mutex. */
-		pthread_mutexattr_init(&attrmutex);
-		pthread_mutexattr_setpshared(&attrmutex, PTHREAD_PROCESS_SHARED);
-
-		/* Allocate memory to pmutex here. */
-		mutex_id = shm_open(MYMUTEX, O_RDWR, mode);
-		if (mutex_id < 0) {
-
-			std::cout << "Creating New mutex" << std::endl;
-			mutex_id = shm_open(MYMUTEX, O_CREAT | O_RDWR | O_TRUNC, mode);
-			if (mutex_id < 0) {
-				std::cout << "shm_open failed with " << MYMUTEX << " ,Error: " << mutex_id << std::endl;
-				return false;
-			}
-	}
-		else {
-			std::cout << "Reading existing mutex" << std::endl;
-			readMutex = true;
-		}
-
-		if (ftruncate(mutex_id, sizeof(pthread_mutex_t)) == -1) {
-			std::cout << "ftruncate failed with " << MYMUTEX << std::endl;
-			return false;
-		}
-		pmutex = (pthread_mutex_t*)mmap(NULL, sizeof(pthread_mutex_t), PROT_READ | PROT_WRITE, MAP_SHARED, mutex_id, 0);
-		if (pmutex == MAP_FAILED) {
-			std::cout << "mmap failed with " << MYMUTEX << std::endl;
-			return false;
-		}
-
-		/* Initialise mutex. */
-		if (!readMutex) {
-			pthread_mutex_init(pmutex, &attrmutex);
-		}
-
-		if (pthread_mutex_trylock(pmutex) == 0) {
-			lockflag = true;
-			RunEndless();
-		}
-		else {
-			std::cout << "Application instance already running" << std::endl;
-			return false;
-		}
-		/* Use the mutex. */
-		/*auto fname = "/var/run/" + package_name + ".pid";
-		m_handle = open(fname.c_str(), O_CREAT | O_RDWR, 0666);
-		auto rc = flock(m_handle, LOCK_EX | LOCK_NB);
-		if (rc && errno == EWOULDBLOCK)
-		{
-			// another instance is running
-			WarnAndExit();
-		}*/
 #endif
 	}
 
 	void WarnAndExit()
 	{	
+		DialogUtils::Warn("Another instance of Enigma is already running.");
 		Shutdown();
-		DialogUtils::Warn("Another instance of " + m_package_name + " is already running.");
 		std::exit(EXIT_SUCCESS);
 	}
 
@@ -126,11 +71,6 @@ public:
 		::ReleaseMutex(m_handle); // Explicitly release mutex
 		::CloseHandle(m_handle); // close handle before terminating
 #elif defined(ENIGMA_PLATFORM_LINUX)
-		shm_unlink(MYMUTEX);
-		if (lockflag)
-			pthread_mutex_unlock(pmutex);
-		pthread_mutex_destroy(pmutex);
-		pthread_mutexattr_destroy(&attrmutex);
 #endif
 
 		ENIGMA_INFO("Unregistered single application instance");
@@ -150,13 +90,6 @@ private:
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	HANDLE m_handle{};
 #elif defined(ENIGMA_PLATFORM_LINUX)
-	i32 m_handle{};
-
-	pthread_mutex_t* pmutex;
-	pthread_mutexattr_t attrmutex;
-	bool lockflag = false;
-#define MYMUTEX "mymutex"
-
 #endif
 };
 
