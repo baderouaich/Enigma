@@ -58,7 +58,7 @@ jobs:
       run: sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev
 
     - name: Extracting premake5 binary
-      run: tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/
+      run: tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/
 
     - name: Generating Makefiles
       run: sudo bash ./Gen-Linux-Makefile.sh
