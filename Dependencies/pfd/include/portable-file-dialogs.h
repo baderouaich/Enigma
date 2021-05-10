@@ -31,6 +31,9 @@
 #ifndef _POSIX_C_SOURCE
 #   define _POSIX_C_SOURCE 2 // for popen()
 #endif
+#ifdef __APPLE__
+#   define _DARWIN_C_SOURCE
+#endif
 #include <cstdio>     // popen()
 #include <cstdlib>    // std::getenv()
 #include <fcntl.h>    // fcntl()
@@ -215,6 +218,18 @@ protected:
 
     private:
         HMODULE handle;
+    };
+
+    // Helper class around CoInitialize() and CoUnInitialize()
+    class ole32_dll : public dll
+    {
+    public:
+        ole32_dll();
+        ~ole32_dll();
+        bool is_initialized();
+
+    private:
+        HRESULT m_state;
     };
 
     // Helper class around CreateActCtx() and ActivateActCtx()
@@ -747,6 +762,30 @@ inline internal::platform::dll::~dll()
 }
 #endif // _WIN32
 
+// ole32_dll implementation
+
+#if _WIN32
+inline internal::platform::ole32_dll::ole32_dll()
+    : dll("ole32.dll")
+{
+    // Use COINIT_MULTITHREADED because COINIT_APARTMENTTHREADED causes crashes.
+    // See https://github.com/samhocevar/portable-file-dialogs/issues/51
+    auto coinit = proc<HRESULT WINAPI (LPVOID, DWORD)>(*this, "CoInitializeEx");
+    m_state = coinit(nullptr, COINIT_MULTITHREADED);
+}
+
+inline internal::platform::ole32_dll::~ole32_dll()
+{
+    if (is_initialized())
+        proc<void WINAPI ()>(*this, "CoUninitialize")();
+}
+
+inline bool internal::platform::ole32_dll::is_initialized()
+{
+    return m_state == S_OK || m_state == S_FALSE;
+}
+#endif
+
 // new_style_context implementation
 
 #if _WIN32
@@ -912,13 +951,15 @@ inline internal::file_dialog::file_dialog(type in_type,
         m_wdefault_path = internal::str2wstr(default_path);
         auto wfilter_list = internal::str2wstr(filter_list);
 
+        // Initialise COM. This is required for the new folder selection window,
+        // (see https://github.com/samhocevar/portable-file-dialogs/pull/21)
+        // and to avoid random crashes with GetOpenFileNameW() (see
+        // https://github.com/samhocevar/portable-file-dialogs/issues/51)
+        ole32_dll ole32;
+
         // Folder selection uses a different method
         if (in_type == type::folder)
         {
-            dll ole32("ole32.dll");
-
-            auto status = dll::proc<HRESULT WINAPI (LPVOID, DWORD)>(ole32, "CoInitializeEx")
-                              (nullptr, COINIT_APARTMENTTHREADED);
             if (flags(flag::is_vista))
             {
                 // On Vista and higher we should be able to use IFileDialog for folder selection
@@ -939,9 +980,7 @@ inline internal::file_dialog::file_dialog(type in_type,
 
             if (flags(flag::is_vista))
             {
-                // This hangs on Windows XP, as reported here:
-                // https://github.com/samhocevar/portable-file-dialogs/pull/21
-                if (status == S_OK)
+                if (ole32.is_initialized())
                     bi.ulFlags |= BIF_NEWDIALOGSTYLE;
                 bi.ulFlags |= BIF_EDITBOX;
                 bi.ulFlags |= BIF_STATUSTEXT;
@@ -957,8 +996,6 @@ inline internal::file_dialog::file_dialog(type in_type,
                 ret = internal::wstr2str(buffer);
                 delete[] buffer;
             }
-            if (status == S_OK)
-                dll::proc<void WINAPI ()>(ole32, "CoUninitialize")();
             return ret;
         }
 
@@ -994,30 +1031,29 @@ inline internal::file_dialog::file_dialog(type in_type,
 
         dll comdlg32("comdlg32.dll");
 
+        // Apply new visual style (required for windows XP)
+        new_style_context ctx;
+
         if (in_type == type::save)
         {
             if (!(options & opt::force_overwrite))
                 ofn.Flags |= OFN_OVERWRITEPROMPT;
-
-            // using set context to apply new visual style (required for windows XP)
-            new_style_context ctx;
 
             dll::proc<BOOL WINAPI (LPOPENFILENAMEW)> get_save_file_name(comdlg32, "GetSaveFileNameW");
             if (get_save_file_name(&ofn) == 0)
                 return "";
             return internal::wstr2str(woutput.c_str());
         }
+        else
+        {
+            if (options & opt::multiselect)
+                ofn.Flags |= OFN_ALLOWMULTISELECT;
+            ofn.Flags |= OFN_PATHMUSTEXIST;
 
-        if (options & opt::multiselect)
-            ofn.Flags |= OFN_ALLOWMULTISELECT;
-        ofn.Flags |= OFN_PATHMUSTEXIST;
-
-        // using set context to apply new visual style (required for windows XP)
-        new_style_context ctx;
-
-        dll::proc<BOOL WINAPI (LPOPENFILENAMEW)> get_open_file_name(comdlg32, "GetOpenFileNameW");
-        if (get_open_file_name(&ofn) == 0)
-            return "";
+            dll::proc<BOOL WINAPI (LPOPENFILENAMEW)> get_open_file_name(comdlg32, "GetOpenFileNameW");
+            if (get_open_file_name(&ofn) == 0)
+                return "";
+        }
 
         std::string prefix;
         for (wchar_t const *p = woutput.c_str(); *p; )
@@ -1167,8 +1203,8 @@ inline std::string internal::file_dialog::string_result()
     auto ret = m_async->result();
     // Strip potential trailing newline (zenity). Also strip trailing slash
     // added by osascript for consistency with other backends.
-    while (ret.back() == '\n' || ret.back() == '/')
-        ret = ret.substr(0, ret.size() - 1);
+    while (!ret.empty() && (ret.back() == '\n' || ret.back() == '/'))
+        ret.pop_back();
     return ret;
 #endif
 }
@@ -1260,8 +1296,7 @@ inline std::string internal::file_dialog::select_folder_vista(IFileDialog *ifd, 
             if (wselected)
             {
                 result = internal::wstr2str(std::wstring(wselected));
-                dll ole32("ole32.dll");
-                dll::proc<void WINAPI (LPVOID)>(ole32, "CoTaskMemFree")(wselected);
+                dll::proc<void WINAPI (LPVOID)>(ole32_dll(), "CoTaskMemFree")(wselected);
             }
         }
     }
@@ -1385,6 +1420,8 @@ inline message::message(std::string const &title,
                         icon _icon /* = icon::info */)
 {
 #if _WIN32
+    // Use MB_SYSTEMMODAL rather than MB_TOPMOST to ensure the message window is brought
+    // to front. See https://github.com/samhocevar/portable-file-dialogs/issues/52
     UINT style = MB_SYSTEMMODAL;
     switch (_icon)
     {
@@ -1412,11 +1449,11 @@ inline message::message(std::string const &title,
     m_mappings[IDRETRY] = button::retry;
     m_mappings[IDIGNORE] = button::ignore;
 
-    m_async->start_func([this, text, title, style](int* exit_code) -> std::string
+    m_async->start_func([text, title, style](int* exit_code) -> std::string
     {
         auto wtext = internal::str2wstr(text);
         auto wtitle = internal::str2wstr(title);
-        // using set context to apply new visual style (required for all windows versions)
+        // Apply new visual style (required for all Windows versions)
         new_style_context ctx;
         *exit_code = MessageBoxW(GetActiveWindow(), wtext.c_str(), wtitle.c_str(), style);
         return "";

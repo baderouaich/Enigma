@@ -8,19 +8,18 @@ using namespace Catch::Matchers;
 
 TEST_CASE("Compress & Decompress Buffer", "GZip")
 {
-	using std::cout, std::cin, std::endl;
-	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
+	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
+	const String buffer = LOREM_IPSUM * 10000; // 10000 paragraphs of lorem ipsum dummy text about ~6MB
 	String compressed, decompressed;
-	String buffer = LOREM_IPSUM * 3000; // 3000 paragraphs of lorem ipsum dummy text
-	cout << "Buffer Size: " << ENIGMA_BYTES_TO_MB( buffer.size() ) << "mb\n";
+	std::cout << "Buffer Size: " << SizeUtils::FriendlySize( buffer.size() ) << std::endl;
 	compressed = GZip::Compress(buffer);
-	cout << "Compressed Size: " << ENIGMA_BYTES_TO_MB(compressed.size()) << "mb\n";
+	std::cout << "Compressed Size: " << SizeUtils::FriendlySize(compressed.size()) << std::endl;
 	decompressed = GZip::Decompress(compressed);
-	cout << "Decompressed Size: " << ENIGMA_BYTES_TO_MB(decompressed.size()) << "mb\n";
+	std::cout << "Decompressed Size: " << SizeUtils::FriendlySize(decompressed.size()) << std::endl;
 	
 	REQUIRE_THAT(compressed, !Equals(buffer));
-	REQUIRE(compressed.size() < buffer.size());
+	REQUIRE(compressed.size() <= buffer.size());
 	REQUIRE_THAT(decompressed, Equals(buffer));
 	REQUIRE(decompressed.size() == buffer.size());
 }

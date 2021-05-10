@@ -1,18 +1,46 @@
 ========================= IN PROGRESS =============================
+- Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet)
+issue is the '\000' ate of string
+https://stackoverflow.com/questions/35114277/ciphertext-length-is-not-a-multiple-of-block-size-in-cryptopp
+
+
+- Encrypt & Decrypt Files using Chunks 
+while(!eof())
+	ifs.read(chunk_size, buff)
+	cipher += encrypt(pass, buff)
+
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
+
 - CodeQL still doesnt ignore Dependencies
-- Make checks in Application::UpdateHardwareInfo()
-- CppCheck working command: `cppcheck --enable=performance,portability,warning -i./Dependencies/ --language=c++ --max-ctu-depth=12 --std=c++17 --output-file=./CppCheck.txt . --force`
-if it merged, add it to cppcheck.yml 
 
 
-- Maybe add some space to center title scene like "My Encryptions         "
 - Use ENIGMA_UNUSED [[maybe_unused]] instead of void for all std::system..etc to avoid warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
 
-- Complete ViewEncryptionScene
-- disallow multiple enigma app instance,  https://stackoverflow.com/questions/8799646/preventing-multiple-instances-of-my-application
-- fix typo https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Algorithm/AES/AES.cpp#L31
 
+- disallow multiple enigma app instance,  https://stackoverflow.com/questions/8799646/preventing-multiple-instances-of-my-application (DONE for Windows)
+
+- Add copy button to output texts in DecryptTextScene & ViewEncryptionScene
+
+
+- made encrypt/decrypt text compressed by default.
+
+- Add hint (note: password is not saved) to Save to db [x]
+
+
+- remove json_type and add decltype()
+https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Networking/CheckForUpdates.hpp#L55
+
+- put FriendlyFileSize in FileUtils
+
+- better err msg
+https://github.com/mck182/kasa/blob/master/src/database/db.cpp#L85
+
+
+- ViewEncryptionScene get only lightweight info about encryption until decryption made and retrieve other data.
+
+- Maybe always detect algorithm from cipher, no need to make it an option
+
+- always compress buffer before encrypting, remove --compress & --decompress CLI options as well as from readme
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
 - DONE added VACUUM sqlite command to defragment disk
@@ -34,35 +62,13 @@ https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Appli
 - DONE Add Algorithm::DetectFromBase64Cipher & DetectFromFile
 - DONE Replace all ENIGMA_MB_TO_BYTES With ENIGMA_FRIENDLY_BYTES_SIZE 
 - DONE check if it is possible not to use zlib with curl to reduce libraries links therefor small binary size [yes, only in windows, now zlib is linked for linux only]
+- DONE fix typo https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Algorithm/AES/AES.cpp#L31
+- DONE remove extra msg ,"please specify --mode..."
+https://github.com/DanLangas/Enigma/blob/master/Source/Algorithm/Algorithm.cpp#L102
+- DONE Perfrorm compressio by default, remove --compress and --decompress, aswell as Compress radio button
+- DONE Investigate why GZip doesnt work,tests work but cipher compression is messed up over actual size.  (issue was i was compressing after encrypting which isnt right, see NOTES.txt)
+
 =============================================================================
-#if 0
-#pragma region Populate Database With Random Data
-	using namespace Enigma;
-	auto e = std::make_unique<Encryption>();
-	for (int i = 1; i <= 10000; i++)
-	{
-		e->title = Random::Str(Random::Int(3, 255));
-		e->cipher.data = Random::Str(Random::Int(1024, 1024 * 1024 * 10));
-		e->size = e->cipher.data.size();
-		Database::AddEncryption(e);
-		//if (Database::AddEncryption(e))
-		//	std::printf("Added Encryption #%d\n", i);
-		//else
-		//	std::printf("Failed to add Encryptionn #%d\n", i);
-	}
-	std::cout << "Database total changes since connection: " << Database::GetInstance()->getTotalChanges() << std::endl;
-	std::cout << "Database headerStr: " << Database::GetInstance()->getHeaderInfo().headerStr << std::endl;
-	return 0;
-#pragma endregion
-#endif
-
-
-
-
-
-
-
-
 
 
 
@@ -73,4 +79,4 @@ https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Application/Appli
 
 
 - CppCheck Static Analysis Command: 
-cppcheck --enable=performance,portability,warning --force -i./Dependencies/ --language=c++ --max-ctu-depth=24 --std=c++17 --output-file=./CppCheckReport.txt .
+cppcheck --enable=performance,portability,warning  -i./Dependencies/ --language=c++ --std=c++17 --max-ctu-depth=12 --output-file=./CppCheckReport.txt --force .

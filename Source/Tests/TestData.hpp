@@ -26,4 +26,30 @@ Quisque vehicula id enim ut vulputate. Sed vitae nisl ac orci vehicula porttitor
 vitae sit amet nunc.)";
 
 
+
+#if 0
+#pragma region Populate Database With Random Data For Testing
+	using namespace Enigma;
+	auto e = std::make_unique<Encryption>();
+	for (int i = 1; i <= 10000; i++)
+	{
+		e->title = Random::Str(Random::Int(3, 255));
+		e->cipher.data = Random::Str(Random::Int(1024, 1024 * 1024 * 10));
+		e->size = e->cipher.data.size();
+		Database::AddEncryption(e);
+		//if (Database::AddEncryption(e))
+		//	std::printf("Added Encryption #%d\n", i);
+		//else
+		//	std::printf("Failed to add Encryptionn #%d\n", i);
+	}
+	std::cout << "Database total changes since connection: " << Database::GetInstance()->getTotalChanges() << std::endl;
+	std::cout << "Database headerStr: " << Database::GetInstance()->getHeaderInfo().headerStr << std::endl;
+	return 0;
+#pragma endregion
+#endif
+
+
+
+
+
 }

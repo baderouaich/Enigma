@@ -12,10 +12,10 @@ public:
 	/*
 	*	Converts Crypto++ ErrorType into String
 	*/
-	static const String GetErrorString(const enum CryptoPP::Exception::ErrorType& _enum) noexcept
+	static const String GetErrorString(const enum CryptoPP::Exception::ErrorType error_type) noexcept
 	{
 #define CASE_RETURN(e) case CryptoPP::Exception::ErrorType::e: return #e
-		switch (_enum)
+		switch (error_type)
 		{
 			/// \brief A method was called which was not implemented
 			CASE_RETURN(NOT_IMPLEMENTED);
@@ -47,17 +47,18 @@ public:
 			CASE_RETURN(ErrorType::DATA_INTEGRITY_CHECK_FAILED, "Data integerity check, such as CRC or MAC, failed");
 			CASE_RETURN(ErrorType::INVALID_DATA_FORMAT, "Input data was received that did not conform to expected format");
 			CASE_RETURN(ErrorType::IO_ERROR, "Error reading from input device or writing to output device");
-			default: return "Unknown Error";
+			default: return "<unknown crypto++ error>";
 		}
 #undef CASE_RETURN
 	}
 	
 	static const String GetFullErrorMessage(const CryptoPP::Exception& e)
 	{
-		return  
-			"Error Type: " + GetErrorString(e.GetErrorType()) + '\n' +
-			"Message: " + e.GetWhat() + '\n' +
-			"Reason: " + GetErrorReason(e.GetErrorType());
+		std::ostringstream oss{};
+		oss << "Error Type: " << GetErrorString(e.GetErrorType()) << '\n'
+			<< "Message: " << e.GetWhat() << '\n' 
+			<< "Reason: " << GetErrorReason(e.GetErrorType());
+		return oss.str();
 	}
 };
 

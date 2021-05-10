@@ -43,8 +43,8 @@ public:
 private: /* Scenarios (divide and conquer) */
 	void OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool save_to_database);
 	void OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& cipher_base64);
-	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool compress, const bool save_to_database);
-	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted, const bool decompress);
+	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool save_to_database);
+	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted);
 
 	void OnListEncryptionRecords();
 

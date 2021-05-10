@@ -376,8 +376,20 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
 			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
 
+
+			/*
+			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
+				 usually indistinguishable from a random stream. Compression relies on patterns in order to gain
+				 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+				 unable to give you much (if any) reduction in size if you apply it to encrypted data.
+			*/
+
+			// Compress text before encrypting
+			const String compressed_text = GZip::Compress(m_text);
+			ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), "Failed to compress text");
+
 			// Encrypt text
-			m_cipher = algorithm->Encrypt(m_password, m_text);
+			m_cipher = algorithm->Encrypt(m_password, compressed_text);
 			ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to encrypt text");
 
 			// Encode cipher to Base64
@@ -391,8 +403,8 @@ void EncryptTextScene::OnEncryptButtonPressed()
 				auto e = std::make_unique<Encryption>();
 				e->title = m_db_title;
 				e->is_file = false;
-				e->cipher.data = GZip::Compress(m_cipher);
-				e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
+				e->cipher.data = m_cipher;
+				e->size = e->cipher.data.size();
 				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
 			}
 

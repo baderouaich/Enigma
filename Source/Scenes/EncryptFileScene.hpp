@@ -27,7 +27,7 @@ private:
 	String m_in_filename; // In File to encrypt
 	String m_out_filename; // Out File encrypted location
 	String m_password, m_confirm_password;
-	bool m_compress{ true }; // Whether to compress file with Gzip before encrypting 
+	//unused, by default compression is enabled now. bool m_compress{ true }; // Whether to compress file with Gzip before encrypting 
 
 	// Save to database 
 	String m_db_title;
@@ -35,3 +35,11 @@ private:
 
 };
 NS_ENIGMA_END
+/*
+Note:
+	 # Compression
+	 - You should compress before encrypting. Encryption turns your data into high-entropy data,
+	 usually indistinguishable from a random stream. Compression relies on patterns in order to gain
+	 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+	 unable to give you much (if any) reduction in size if you apply it to encrypted data.
+*/

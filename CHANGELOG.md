@@ -32,4 +32,6 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Now heavy work is being done in background (parallel)
 - Now Back button for each scene is placed in the top left instead of bottom to save space
 - New CLI Option `--list` or `-l` which lists all saved encryption records in a table
+- Ability to decrypt encryption record from database
+- Upgraded premake5 from 5.0.0-alpha15 to 5.0.0-alpha16
 -->

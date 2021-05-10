@@ -51,7 +51,7 @@ public:	/* Accessors */
 	/*
 	*	Returns size (width, height) of this window
 	*/
-	const std::pair<i32, i32>& GetSize() const noexcept;
+	[[nodiscard]] const std::pair<i32, i32>& GetSize() const noexcept;
 
 	/*
 	*	Returns the width of this window
@@ -66,7 +66,7 @@ public:	/* Accessors */
 	/*
 	*	Returns frame buffer size of this window
 	*/
-	const std::pair<i32, i32>& GetFrameBufferSize() noexcept;
+	[[nodiscard]] const std::pair<i32, i32>& GetFrameBufferSize() noexcept;
 
 	/*
 	*	Returns frame buffer width of this window
@@ -97,22 +97,22 @@ public:	/* Accessors */
 	/*
 	*	Returns the title of this window
 	*/
-	const String& GetTitle() const noexcept;
+	[[nodiscard]] const String& GetTitle() const noexcept;
 	
 	/*
 	*	Returns minimum width, height of this window
 	*/
-	const std::pair<i32, i32>& GetMinimumSize() const noexcept;
+	[[nodiscard]] const std::pair<i32, i32>& GetMinimumSize() const noexcept;
 
 	/*
 	*	Returns maximum width, height of this window
 	*/
-	const std::pair<i32, i32>& GetMaximumSize() const noexcept;
+	[[nodiscard]] const std::pair<i32, i32>& GetMaximumSize() const noexcept;
 
 	/*
 	*	Returns window top left position
 	*/
-	const std::pair<i32, i32>& GetPosition() const noexcept;
+	[[nodiscard]] const std::pair<i32, i32>& GetPosition() const noexcept;
 	
 	/*
 	*	Returns vsync swap interval level

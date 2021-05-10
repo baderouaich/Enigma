@@ -9,7 +9,7 @@ NS_ENIGMA_BEGIN
 const String Clipboard::Get()
 {
 	auto glfw_window = Application::GetInstance()->GetWindow()->GetGLFWwindow();
-	return glfwGetClipboardString(glfw_window);
+	return String(glfwGetClipboardString(glfw_window));
 }
 
 void Clipboard::Set(const String& buffer)

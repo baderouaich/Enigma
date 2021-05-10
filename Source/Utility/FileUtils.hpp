@@ -21,7 +21,7 @@ class ENIGMA_API FileUtils
 public:
 	static bool Read(const String& filename, String& buffer)
 	{
-		if (std::ifstream ifs{ filename, std::ios::binary | std::ios::ate }) // ate: open & seek end 
+		if (std::ifstream ifs{ filename, std::ios::binary | std::ios::ate }) // ate: open at the end
 		{
 			const size_t file_size = static_cast<size_t>(ifs.tellg());
 			buffer.resize(file_size, '\000');

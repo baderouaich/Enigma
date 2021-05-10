@@ -43,7 +43,7 @@
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	#define ENIGMA_DEBUG_BREAK() ::__debugbreak()
 #elif defined(ENIGMA_PLATFORM_LINUX)
-#include <signal.h>
+#include <csignal>
 	#define ENIGMA_DEBUG_BREAK() std::raise(SIGTRAP)
 #else
 	#define ENIGMA_DEBUG_BREAK() std::abort()

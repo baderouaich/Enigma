@@ -46,14 +46,14 @@ public:
 	};
 	enum class Type : byte
 	{
-		AES = 0x01,
-		ChaCha20 = 0x02,
-		TripleDES = 0x03,
-		Twofish = 0x04,
-		IDEA = 0x05,
+		AES			= 0x01,
+		ChaCha20	= 0x02,
+		TripleDES	= 0x03,
+		Twofish		= 0x04,
+		IDEA		= 0x05,
 
 		First = AES,
-		Last = IDEA
+		Last  = IDEA
 	};
 
 public:
@@ -80,7 +80,7 @@ public:
 
 
 public: /* Create polymorphic algorithm by either mode name or type*/
-	static std::unique_ptr<Algorithm> CreateFromName(const String& mode, const Intent intent);
+	static std::unique_ptr<Algorithm> CreateFromName(const String& name, const Intent intent);
 	static std::unique_ptr<Algorithm> CreateFromType(const Type type, const Intent intent);
 
 public:
@@ -95,6 +95,11 @@ protected:
 	String GenerateRandomIV(const size_t size);
 
 public:
+	/*
+	*	Auto detect algorithm used for encryption from cipher text
+	*/
+	static Type DetectFromCipher(const String& cipher);
+
 	/*
 	*	Auto detect algorithm used for encryption from cipher base64 text
 	*/

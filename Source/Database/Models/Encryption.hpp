@@ -5,6 +5,8 @@
 #include <Core/Core.hpp>
 #include "Cipher.hpp"
 
+#include <sstream>	//	std::ostringstream
+
 NS_ENIGMA_BEGIN
 // Encryption Model | table: Encryption
 struct Encryption

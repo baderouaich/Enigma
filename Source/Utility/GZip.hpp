@@ -15,8 +15,18 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API GZip
 {
 public:
-	static String Compress(const std::string_view& buffer) noexcept(false);
-	static String Decompress(const std::string_view& buffer) noexcept(false);
+	enum class DeflateLevel
+	{
+		/// \brief Minimum deflation level, fastest speed (0)
+		MIN = CryptoPP::Gzip::MIN_DEFLATE_LEVEL,
+		/// \brief Default deflation level, compromise between speed (6)
+		DEFAULT = CryptoPP::Gzip::DEFAULT_DEFLATE_LEVEL,
+		/// \brief Minimum deflation level, slowest speed (9)
+		MAX = CryptoPP::Gzip::MAX_DEFLATE_LEVEL
+	};
+public:
+	static String Compress(const String& buffer, const DeflateLevel level = DeflateLevel::MAX);
+	static String Decompress(const String& buffer);
 
 private:
 	inline static std::unique_ptr<CryptoPP::Gzip> m_zipper{ nullptr };

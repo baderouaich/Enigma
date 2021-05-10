@@ -1,4 +1,4 @@
-require("premake", ">=5.0.0-alpha15")
+require("premake", ">=5.0.0-alpha15") -- allow premake 5.0.0 alpha15 and up only 
 
 include "./Premake/premake_customization/solution_items.lua"
 
@@ -72,7 +72,7 @@ group "Dependencies"
 
 	include "Dependencies/curl"
 	include "Dependencies/cpr"
-	include "Dependencies/mbedtls"-- (will be included and linked in curl lib project Linux only)
+	include "Dependencies/mbedtls"-- (will be included and linked in curl lib project for Linux only)
 	include "Dependencies/zlib" -- (will be included and linked in curl lib project for Linux only)
 
 	include "Dependencies/catch2" -- will be included and linked only in debug mode

@@ -17,7 +17,7 @@ Application* Application::m_instance = nullptr;
 
 Application::Application(const WindowSettings& window_settings)
 	:
-	SingleInstance(Constants::ENIGMA_PACKAGE_NAME), 
+	SingleInstanceApplication(Constants::ENIGMA_PACKAGE_NAME), 
 	// Delta time
 	m_last_frame_time(0.0f),
 	m_current_frame_time(0.0f),
@@ -37,12 +37,12 @@ Application::Application(const WindowSettings& window_settings)
 	this->InitHardwareInfo(window_settings);
 	this->InitImGuiFonts();
 
-	// Push Main Menu scene as an entry point
-	this->PushScene(std::make_unique<MainMenuScene>());
-
 	// Init loading scene
 	m_loading_scene = std::make_unique<LoadingScene>();
 	m_loading_scene->OnCreate();
+
+	// Push Main Menu scene as an entry point
+	this->PushScene(std::make_unique<MainMenuScene>());
 }
 
 void Application::InitWindow(const WindowSettings& window_settings)

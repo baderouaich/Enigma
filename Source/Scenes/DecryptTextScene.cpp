@@ -319,8 +319,12 @@ void DecryptTextScene::OnDecryptButtonPressed()
 		const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
 		ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
 		
+		// Decrypt text
 		m_recovered_text = algorithm->Decrypt(m_password, m_cipher);
 		ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to recover encrypted text");
+
+		// Decompress text
+		m_recovered_text = GZip::Decompress(m_recovered_text);
 
 		// Spawn notification alert if window is not focused
 		//if (!Application::GetInstance()->GetWindow()->IsFocused())
@@ -345,8 +349,6 @@ void DecryptTextScene::OnDecryptButtonPressed()
 		ENIGMA_ERROR("Decryption Failure: Unknown Error");
 		(void)DialogUtils::Error(err_msg);
 	}
-	
-	//TODO: handle decryption failure in a better way.
-}
+	}
 
 NS_ENIGMA_END

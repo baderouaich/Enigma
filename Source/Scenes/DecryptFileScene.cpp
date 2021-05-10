@@ -141,6 +141,8 @@ void DecryptFileScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
+
+#if 0
 		spacing(2);
 
 		// Decompression widget
@@ -154,6 +156,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::Checkbox("##decompress_checkbox", &m_decompress);
 		}
 		ImGui::PopFont();
+#endif
 
 		spacing(3);
 		ImGui::Separator();
@@ -440,18 +443,36 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			String buffer = algorithm->Decrypt(m_password, cipher);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file cipher");
 
+			/*
+			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
+				 usually indistinguishable from a random stream. Compression relies on patterns in order to gain
+				 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+				 unable to give you much (if any) reduction in size if you apply it to encrypted data.
+			*/
+
+			// Decompression 
+			ENIGMA_TRACE("Decompressing file buffer {0} ...", m_in_filename);
+			auto old_buffer_size = buffer.size();
+			buffer = GZip::Decompress(buffer);
+			auto new_buffer_size = buffer.size();
+			auto increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
+			ENIGMA_TRACE("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
+			
+
+#if 0
 			// Decompression (if used in encryption)
-			size_t old_buffer_size{ 0 }, new_buffer_size{ 0 }, increased_bytes{ 0 };
+			size_t increased_bytes{ 0 };
 			if (m_decompress)
 			{
 				ENIGMA_TRACE("Decompressing file buffer {0} ...", m_in_filename);
-				old_buffer_size = buffer.size();
+				auto old_buffer_size = buffer.size();
 				buffer = GZip::Decompress(buffer);
-				new_buffer_size = buffer.size();
+				auto new_buffer_size = buffer.size();
 				increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
 				//ENIGMA_TRACE("File size increased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(increased_bytes));
 				ENIGMA_TRACE("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
 			}
+#endif
 
 			// Save buffer to out file decrypted
 			ENIGMA_ASSERT_OR_THROW(!m_out_filename.empty(), "Invalid output file name");
@@ -464,11 +485,10 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			{
 				msg << "Decrypted " << fs::path(m_in_filename).filename() << " to "
 					<< fs::path(m_out_filename).filename() << " Successfully!\n";
-				if (m_decompress)
-				{
-					if (increased_bytes)
+					
+				if (increased_bytes)
 						msg << "Decompression Status: File size increased by " << SizeUtils::FriendlySize(increased_bytes);
-				}
+				
 
 			}
 			ENIGMA_INFO(msg.str());

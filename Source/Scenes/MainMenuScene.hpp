@@ -28,6 +28,9 @@ private: /* Callbacks */
 	void OnReportIssueMenuButtonPressed();
 	void OnCheckForUpdatesMenuButtonPressed();
 	void OnAboutMenuButtonPressed();
+
+private:
+	std::unique_ptr<ImGuiWidgets::Image> m_logo{};
 };
 
 NS_ENIGMA_END

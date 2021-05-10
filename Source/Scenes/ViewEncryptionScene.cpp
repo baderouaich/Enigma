@@ -23,14 +23,6 @@ ViewEncryptionScene::ViewEncryptionScene(const i64 encryption_id)
 void ViewEncryptionScene::OnCreate()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
-
-	// Set background clear color
-	//glAssert(glClearColor(
-	//	Constants::Colors::BACKGROUND_COLOR.x,
-	//	Constants::Colors::BACKGROUND_COLOR.y,
-	//	Constants::Colors::BACKGROUND_COLOR.z,
-	//	Constants::Colors::BACKGROUND_COLOR.w
-	//));
 }
 
 void ViewEncryptionScene::OnUpdate(const f32&)
@@ -50,7 +42,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 
 	const auto button_size = Vec2f(win_w / 2.6f, 40.0f);
 
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); ImGui::SameLine(); };
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
@@ -107,15 +99,114 @@ void ViewEncryptionScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(2);
 
-		if (m_encryption->is_file)
+		// Encryption info (title \n Date time  - size)
 		{
-			// Cipher is file binary
-			ImGui::Text("File");
+			// title
+			ImGui::PushFont(font_audiowide_regular_20); 
+			ImGui::TextWrapped(m_encryption->title.c_str());
+			ImGui::PopFont();  
+
+			spacing(2);
+
+			// Date time  - size
+			ImGui::PushFont(font_montserrat_medium_18);
+			{
+				static const String format = String("Format: ") + (m_encryption->is_file ? "File" : "Text");
+				ImGui::ButtonEx(format.c_str(), { 0.0f, 0.0f }, ImGuiButtonFlags_Disabled);
+				inline_dummy(6.0f, 0.0f);
+
+				static const String date_time = String("Date Time: ") + m_encryption->date_time;
+				ImGui::ButtonEx(date_time.c_str(), { 0.0f, 0.0f }, ImGuiButtonFlags_Disabled);
+				inline_dummy(6.0f, 0.0f);
+
+				static const String size = SizeUtils::FriendlySize(m_encryption->size);
+				ImGui::ButtonEx(size.c_str(), { 0.0f, 0.0f }, ImGuiButtonFlags_Disabled);
+
+			}
+			//const auto text_size = ImGui::CalcTextSize(text.c_str());
+			//ImGui::SetCursorPosX((win_w - (text_size.x)) / 2.0f);
+			//ImGui::TextWrapped(text.c_str());
+			//ImGui::TextWrapped("%s\t-\t%s", m_encryption->date_time.c_str(), SizeUtils::FriendlySize(m_encryption->size).c_str());
+			ImGui::PopFont();
 		}
-		else
+
+		spacing(2);
+		ImGui::Separator();
+		spacing(2);
+
+		// Password used for encryption
+		ImGui::PushFont(font_montserrat_medium_20);
 		{
-			// Cipher is text
-			ImGui::Text("Text");
+			// Label
+			ImGui::Text("Password:");
+
+			// Input text
+			ImGuiWidgets::InputText("##password", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+
+			// Bytes count
+			ImGui::PushFont(font_montserrat_medium_12);
+			//ImGui::Text("%zu bytes", m_password.size());
+			ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
+			ImGui::PopFont();
+		}
+		ImGui::PopFont();
+
+
+		// Decrypted/Recovered Text
+		if (!m_recovered_text.empty() && !m_encryption->is_file)
+		{
+			spacing(3);
+			ImGui::Separator();
+			spacing(3);
+
+			ImGui::PushFont(font_montserrat_medium_20);
+			{
+				// Label
+				ImGui::Text("Recovered Text: ");
+				// Encrypted text
+				static const ImVec2 copy_button_size(45.0f, 25.0f);
+				ImGuiWidgets::InputTextMultiline("##enc_txt", &m_recovered_text, ImVec2(win_w - (copy_button_size.x * 1.5f), 63.0f));
+				ImGui::PushFont(font_montserrat_medium_12);
+				ImGui::SameLine();
+				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+				if (ImGui::Button("Copy", copy_button_size))
+				{
+					this->OnCopyRecoveredTextButtonPressed();
+				}
+				ImGui::PopStyleColor(3);
+				ImGui::PopFont();
+			}
+			ImGui::PopFont();
+		}
+
+		spacing(3);
+		ImGui::Separator();
+		spacing(3);
+
+		// Decrypt Button
+		{
+			ImGui::PushFont(font_audiowide_regular_20); // buttons font
+			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
+			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+			{
+				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
+				if (ImGui::Button("Decrypt", button_size))
+				{
+					Application::GetInstance()->LaunchWorkerThread(std::string_view{ m_encryption->is_file ? "Decrypting file..." : "Decrypting text..." },
+						this, [this]() -> void
+						{
+							this->OnDecryptButtonPressed();
+						});
+
+				}
+
+			}
+			ImGui::PopStyleColor(3);
+			ImGui::PopFont();
 		}
 
 	}
@@ -141,4 +232,100 @@ void ViewEncryptionScene::OnBackButtonPressed()
 }
 
 
+void ViewEncryptionScene::OnDecryptButtonPressed()
+{
+	if (m_password.empty())
+	{
+		(void)DialogUtils::Warn("Password is empty");
+		return;
+	}
+
+
+	try
+	{
+		// Auto detect algorithm used for encryption
+		Algorithm::Type algo_type = Algorithm::DetectFromCipher(m_encryption->cipher.data);
+		ENIGMA_INFO("Detected algorithm is {0}", Algorithm::AlgoTypeEnumToStr(algo_type));
+
+		// Create encryptor based on selected algorithm type
+		const auto algorithm = Algorithm::CreateFromType(algo_type, Algorithm::Intent::Decrypt);
+		ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
+		
+
+		// Decrypt either file or text ...
+		// ... case file
+		if (m_encryption->is_file) 
+		{
+			// Decrypt cipher
+			String buffer = algorithm->Decrypt(m_password, m_encryption->cipher.data);
+			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file");
+
+			// Decompress buffer
+			/*
+			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
+					usually indistinguishable from a random stream. Compression relies on patterns in order to gain
+					any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+					unable to give you much (if any) reduction in size if you apply it to encrypted data.
+			*/
+			buffer = GZip::Decompress(buffer);
+			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decompress file buffer");
+
+			// Ask where to save decrypted file ?
+			// Get path to where decrypted file should be saved
+			if (const String output_filename = SaveFileDialog{"Save Decrypted File To"}.Show(); !output_filename.empty())
+			{
+				// Write file recovered content to output file
+				const bool saved = FileUtils::Write(output_filename, buffer);
+				ENIGMA_ASSERT_OR_THROW(saved, "Failed to save decrypted file");
+
+				// little happy msg
+				DialogUtils::Info("Successfully decrypted file to " + output_filename);
+			}
+
+		}
+		// ... case text
+		else
+		{
+			// Decrypt cipher text
+			m_recovered_text = algorithm->Decrypt(m_password, m_encryption->cipher.data);
+			ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to decrypt text");
+
+			// Decompress recovered text
+			/*
+			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
+					usually indistinguishable from a random stream. Compression relies on patterns in order to gain
+					any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+					unable to give you much (if any) reduction in size if you apply it to encrypted data.
+			*/
+			//ENIGMA_LOG("m_recovered_text size before {0}", m_recovered_text.size());
+			m_recovered_text = GZip::Decompress(m_recovered_text);
+			//ENIGMA_LOG("m_recovered_text size after {0}", m_recovered_text.size());
+			ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to decompress recovered text");
+		}
+
+	}
+	catch (const CryptoPP::Exception& e)
+	{
+		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+		ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
+		(void)DialogUtils::Error("Decryption Failure", err_msg);
+	}
+	catch (const std::exception& e)
+	{
+		ENIGMA_ERROR("Decryption Failure: {0}", e.what());
+		(void)DialogUtils::Error("Decryption Failure", e.what());
+	}
+	catch (...)
+	{
+		const String err_msg = "Decryption Failure: Unknown Error";
+		ENIGMA_ERROR("Decryption Failure: Unknown Error");
+		(void)DialogUtils::Error(err_msg);
+	}
+}
+
+void ViewEncryptionScene::OnCopyRecoveredTextButtonPressed()
+{
+	Clipboard::Set(m_recovered_text);
+}
 NS_ENIGMA_END
+

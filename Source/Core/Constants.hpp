@@ -18,14 +18,20 @@ namespace Enigma
 	- When encrypting a file, cipher is outputed in binary to the outfile specified by the user without any encoding.
 	- When decrypting a file, recovered binary is outputed to outfile specified by the user.
 
-	Crypto++ Important Usage Notes *
-
+	# Crypto++ Important Usage Notes:
 	 - If a constructor for A takes a pointer to an object B (except primitive types such as int and char),
 	 then A owns B and will delete B at A's destruction. If a constructor for A takes a reference to an object B,
 	 then the caller retains ownership of B and should not destroy it until A no longer needs it.
 
 	 - Crypto++ is thread safe at the class level. This means you can use Crypto++ safely in a multithreaded
 	 application, but you must provide synchronization when multiple threads access a common Crypto++ object.
+
+
+	 # Compression  https://security.stackexchange.com/questions/19969/encryption-and-compression-of-data
+	 - You should compress before encrypting. Encryption turns your data into high-entropy data, 
+	 usually indistinguishable from a random stream. Compression relies on patterns in order to gain 
+	 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+	 unable to give you much (if any) reduction in size if you apply it to encrypted data.
 	*/
 	namespace Constants
 	{
@@ -139,7 +145,7 @@ namespace Enigma
 
 		namespace ErrorMessages
 		{
-			static const auto WEAK_PASSWORD = "Password is too weak! consider using "s + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like: " + Constants::Algorithm::SPECIAL_CHARACTERS;
+			static const auto WEAK_PASSWORD = "Password is too weak! consider using "s + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like: "s + Constants::Algorithm::SPECIAL_CHARACTERS;
 		}
 
 		namespace Links
@@ -156,7 +162,10 @@ namespace Enigma
 			namespace Textures
 			{
 				// window runtime icon
-				static constexpr const char* ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Wolf.png";
+				static constexpr const char* ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Logo.png";
+				static constexpr const char* ENIGMA_LOGO_512x288_PNG_PATH = "./Resources/Branding/Logo512x288.png";
+				static constexpr const char* ENIGMA_LOGO_256x144_PNG_PATH = "./Resources/Branding/Logo256x144.png";
+				static constexpr const char* ENIGMA_LOGO_192x108_PNG_PATH = "./Resources/Branding/Logo192x108.png";
 			}
 
 			namespace Fonts

@@ -29,8 +29,6 @@ CLI::CLI(const i32& argc, const char* const* argv)
 			("t,text", "Text to Encrypt/Decrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
 			("i,infile", "Input File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
 			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
-			("c,compress", "Compress File Before Encrypting") // -c | --compress 
-			("u,decompress", "Decompress File After Decrypting") // -u | --decompress 
 			("s,save", "Save encryption record to database")  // save to database
 			("l,list", "List saved encryption records from database")  // show saved encryption records
 			("h,help", "Displays help message")  // HELP
@@ -101,9 +99,7 @@ i32 CLI::Run()
 	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
 	String infilename{}; // In file to encrypt if mode is --encrypt, otherwise file to be decrypted
 	String outfilename{}; // Out file to ouput encrypted cipher to if mode is --encrypt, otherwise decrypted file
-	const bool compress = r.count("compress"); // Compress File Before Encrypting
-	const bool decompress = r.count("decompress"); // Decompress File After Decrypting
-	const bool save_to_database = r.count("save"); // Save encryption record to database
+	const bool save_to_database = !!r.count("save"); // Save encryption record to database
 	try
 	{
 		// Encrypting or Decrypting ?
@@ -196,43 +192,7 @@ i32 CLI::Run()
 		{
 			algorithm = Algorithm::CreateFromName(mode, intent);
 		}
-#if 0
-		// if mode is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
-		if (mode.empty())
-		{
-			byte cipher_first_byte{(byte)Algorithm::Type::Last + 1};
-			if (!text.empty())
-			{
-				// extract first byte from cipher which must be the mode type used in encryption
-				cipher_first_byte = *std::make_unique<String>(Base64::Decode(text))->begin();
-			}
-			else
-			{
-				// check if the infile exists
-				ENIGMA_ASSERT_OR_THROW(fs::exists(infilename), "infile does not exist.");
-				ENIGMA_ASSERT_OR_THROW(!fs::is_empty(infilename), "infile is empty.");
-				ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(infilename), "infile is not a regular file.");
 
-				// extract first byte from infile cipher which must be the mode type used in encryption
-				if (std::ifstream ifs{ infilename, std::ios_base::binary | std::ios_base::in })
-				{
-					ifs >> cipher_first_byte;
-					ifs.close();
-				}
-				
-			}
-			// Check if detected mode is valid
-			ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, (byte)Algorithm::Type::First, (byte)Algorithm::Type::Last),
-				"Could not auto-detect algorithm mode used for encryption, please set it manually with --mode=" +
-				Algorithm::GetSupportedAlgorithmsStr());
-
-			algorithm = Algorithm::CreateFromType(static_cast<Algorithm::Type>(cipher_first_byte), intent);
-			
-			ENIGMA_INFO("Auto-Detected Algorithm used for encryption => {0}", algorithm->GetTypeString());
-		}
-		else
-			algorithm = Algorithm::CreateFromName(mode, intent);
-#endif
 
 		// Check wether its a text or file encryption/decryption
 		if (!text.empty())
@@ -255,10 +215,10 @@ i32 CLI::Run()
 			switch (intent)
 			{
 			case Algorithm::Intent::Encrypt:
-				this->OnEncryptFile(algorithm, password, infilename, outfilename, compress, save_to_database);
+				this->OnEncryptFile(algorithm, password, infilename, outfilename, save_to_database);
 				break;
 			case Algorithm::Intent::Decrypt:
-				this->OnDecryptFile(algorithm, password, infilename, outfilename, decompress);
+				this->OnDecryptFile(algorithm, password, infilename, outfilename);
 				break;
 			}
 		}
@@ -292,10 +252,14 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	String cipher{}, cipher_base64{};
 	f64 elapsed_seconds{ 0.0 };
 
+	// Compression
+	const String compressed_text = GZip::Compress(text);
+	ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), "Failed to compress text");
+
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Encrypting Text with " + algorithm->GetTypeString() + " Algorithm ...");
-		cipher = algorithm->Encrypt(password, text);
+		cipher = algorithm->Encrypt(password, compressed_text);
 		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt text");
 
 		ENIGMA_TRACE("Encoding Cipher to Base64...");
@@ -304,7 +268,6 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
-
 
 	ENIGMA_INFO(cipher_base64);
 	ENIGMA_LOG("Encrypted {0} in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
@@ -322,7 +285,7 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		auto e = std::make_unique<Encryption>();
 		e->title = title;
 		e->is_file = false;
-		e->cipher.data = GZip::Compress(cipher);
+		e->cipher.data = cipher; // already compressed above
 		e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
 		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
 
@@ -353,14 +316,18 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
-	ENIGMA_INFO(decrypted_text);
+	// Decompress 
+	const String recovered_text = GZip::Decompress(decrypted_text);
+	ENIGMA_ASSERT_OR_THROW(!recovered_text.empty(), "Failed to decompress recovered text");
+
+	ENIGMA_INFO(recovered_text);
 	ENIGMA_LOG("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds);
 
 	cipher.clear();
 	decrypted_text.clear();
 }
 
-void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool compress, const bool save_to_database)
+void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool save_to_database)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -378,16 +345,14 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	const bool successfully_read_file = FileUtils::Read(in_filename, buffer);
 	ENIGMA_ASSERT_OR_THROW(successfully_read_file, "Failed to read file content " + in_filename);
 
-	// Compression (if needed)
-	if (compress || save_to_database)  // Force file buffer to be compressed to reduce size of the database even if user doesnt check m_compress (also same is done in EncryptFileScene.cpp)
-	{
-		ENIGMA_TRACE("Compressing file buffer {0} ...", in_filename);
-		const size_t old_buffer_size = buffer.size();
-		buffer = GZip::Compress(buffer);
-		const size_t new_buffer_size = buffer.size();
-		const size_t decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
-		ENIGMA_LOG("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
-	}
+	// Compression
+	ENIGMA_TRACE("Compressing file buffer {0} ...", in_filename);
+	auto old_buffer_size = buffer.size();
+	buffer = GZip::Compress(buffer); ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to compress file content");
+	auto new_buffer_size = buffer.size();
+	auto decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
+	ENIGMA_LOG("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
+	
 
 	// Encrypt
 	ENIGMA_BEGIN_TIMER(t1);
@@ -430,7 +395,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	cipher.clear();
 }
 
-void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted, const bool decompress)
+void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::ErrorMessages::WEAK_PASSWORD);
@@ -438,7 +403,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename_encrypted), "Input file " + in_filename_encrypted + " does not exist");
 	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(in_filename_encrypted), "Input file " + in_filename_encrypted + " is not a regular file");
 	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(in_filename_encrypted), "Input file " + in_filename_encrypted + " is empty");
-
+	 
 
 	String cipher{}, buffer{}; // buffer: recovered file content
 	f64 elapsed_seconds{ 0.0 };
@@ -457,17 +422,13 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 
-	// Decompression (if needed)
-	if (decompress)
-	{
-		ENIGMA_TRACE("Decompressing file buffer {0} ...", in_filename_encrypted);
-		const size_t old_buffer_size = buffer.size();
-		buffer = GZip::Decompress(buffer);
-		const size_t new_buffer_size = buffer.size();
-		const size_t increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
-		//ENIGMA_LOG("File size increased by {0:0.3f} MB", (f32(increased_bytes) / 1024.0f / 1024.0f));
-		ENIGMA_LOG("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
-	}
+	// Decompression 	
+	ENIGMA_TRACE("Decompressing file buffer {0} ...", in_filename_encrypted);
+	auto old_buffer_size = buffer.size();
+	buffer = GZip::Decompress(buffer); ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decompress recovered file content");
+	auto new_buffer_size = buffer.size();
+	auto increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
+	ENIGMA_LOG("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
 
 
 	// Write recovered buffer to file
@@ -499,7 +460,7 @@ void CLI::OnListEncryptionRecords()
 	Table table{};
 	table.add_row({ "ID", "Title", "Date Time", "Size", "Format" });
 
-	// Style table header
+	// Make table header
 	for (size_t i = 0; i < table.row(0).size(); i++)
 		table
 		.column(i)
@@ -509,6 +470,7 @@ void CLI::OnListEncryptionRecords()
 		.font_align(FontAlign::center)
 		.font_style({ FontStyle::bold, FontStyle::italic });
 
+	// Make table body
 	std::for_each(encryptions.begin(), encryptions.end(), [&table](const std::unique_ptr<Encryption>& e)
 	{
 		const auto& [ide, title, cipher, date_time, size, is_file] = *e;
@@ -522,7 +484,12 @@ void CLI::OnListEncryptionRecords()
 			.format()
 			.font_align(FontAlign::left);
 	});	 
-	std::cout << table << std::endl;
+
+	// Display table
+	if (std::cout)
+		std::cout << table << std::endl;
+	else
+		std::printf("%s\n", table.str().c_str());
 }
 
 

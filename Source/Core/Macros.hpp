@@ -27,11 +27,6 @@
 //
 
 
-/// Unused macro helper c++17
-#define ENIGMA_UNUSED [[maybe_unused]]
-//#define ENIGMA_UNUSED(v) ((void)v)
-///
-
 ///Asserts
 #ifdef ENIGMA_ENABLE_ASSERTS
 #define ENIGMA_ASSERT(x, ...) \

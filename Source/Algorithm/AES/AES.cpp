@@ -9,6 +9,7 @@ AES::AES(Algorithm::Intent intent) noexcept
 	m_aes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>() : nullptr),
 	m_aes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>() : nullptr)
 {
+	
 }
 
 AES::~AES() noexcept
@@ -26,7 +27,7 @@ String AES::Encrypt(const String& password, const String& buffer)
 
 	// Validate Arguments
 	{
-		// AES password length must be at least 9 for security reasons
+		// AES password length must be at least 6 for security reasons
 		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, this allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}

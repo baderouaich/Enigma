@@ -21,9 +21,14 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnBackButtonPressed();
+	void OnDecryptButtonPressed();
+	void OnCopyRecoveredTextButtonPressed();
 
 private:
 	std::unique_ptr<Encryption> m_encryption{};
+
+	String m_password{}; // password used for encryption text or file
+	String m_recovered_text{}; // to be assigned Decrypted/Recovered Text after decryption success
 };
 
 NS_ENIGMA_END

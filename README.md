@@ -8,10 +8,17 @@
 <!--LOGO-->
 <!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
 <!-- <img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
-<img src="Resources/Branding/Wolf.png" width="333"/>
+<img src="Resources/Branding/Logo.png"/>
 
 <!--DESCRIOTION-->
-A Simple, Reliable and Efficient UI + CLI Encryption Tool
+A Simple, Reliable and Efficient UI + CLI Encryption Tool<br>
+<!--
+Built to solve 3 problems i had:
+- huge personal files take too much space in storage clouds <strong>(Solved by Compression)</strong>
+- if someone accessed my storage's account, you know. <strong>(Solved by Encryption)</strong>
+- just can't trust other programs to do the above two for me plus Enigma and is a cool name to waste (in memory of Alan Turing)
+-->
+
 
 
 ## Supported Algorithms
@@ -24,13 +31,18 @@ A Simple, Reliable and Efficient UI + CLI Encryption Tool
 
 
 ## Features
-- :zap: Very fast encryption & decryption
+- :zap: Very fast Encryption & Decryption
 - :computer: User Interface & Command-Line Interface support
-- :shield: Strongest encryption algorithms of the decade
-- :package:	GZip compression to reduce size of files if sharing or uploading to clouds
+- :shield: Strongest Encryption Algorithms of the Decade
+- :package:	GZip Compression by default to reduce cipher size if sharing or uploading to clouds
 - :briefcase: SQLite3 Database system to save, import and export encryption records
 - :octocat: Open Source of course!
 <!--- :detective: Auto-detect algorithm used for encryption (no need to keep remembering which algorithm you used, just remember your password, and store cipher base64-text or encrypted file somewhere preferably clouds)-->
+
+
+## NOTES
+- Encryption passwords are NOT saved in database
+
 
 ## Enigma CLI
 ```text
@@ -39,14 +51,11 @@ Usage:
 
   -e, --encrypt                 Encrypt operation
   -d, --decrypt                 Decrypt operation
-  -m, --mode [AES, ChaCha20, TripleDES, Twofish, IDEA]
-                                Encryption/Decryption mode (default: AES)
+  -m, --mode [AES, ChaCha20, TripleDES, Twofish, IDEA] Encryption/Decryption mode (default: AES)
   -p, --password arg            Encryption password
   -t, --text arg                Text to Encrypt/Decrypt
   -i, --infile arg              Input File to Encrypt/Decrypt
   -o, --outfile arg             Output File to Encrypt/Decrypt
-  -c, --compress                Compress File Before Encrypting
-  -u, --decompress              Decompress File After Decrypting
   -s, --save                    Save encryption record to database
   -l, --list                    List saved encryption records from database
   -h, --help                    Displays help message
@@ -100,7 +109,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git`<br>
 
 ### Windows
- - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha15-windows.zip`<br><br>
+ - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br><br>
 <strong>Method 1: Visual Studio 16 2019</strong>
  - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br> 
  - Open Enigma.sln and Change configuration to Release or Dist
@@ -120,7 +129,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Install necessary libs<br>
   `sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
  - Extract premake5 binary <br>
-  `tar xvzf ./Premake/Linux/premake-5.0.0-alpha15-linux.tar.gz -C ./Premake/Linux/`
+  `tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/`
  - Run `sudo bash ./Gen-Linux-Makefile.sh` to generate project Makefiles
  - Compile with gcc `make config=release CC=gcc-10 CPP=g++-10 -j X` or clang `make config=release CC=clang-10 CPP=clang++-10 -j X` <br> 
    replace X with number of threads to use for compilation, the more the faster<br>

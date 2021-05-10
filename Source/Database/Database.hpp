@@ -92,7 +92,8 @@ public: // Encryption Operations
 				if constexpr (cipher)
 				{
 					e->cipher.idc  = query->getColumn(i++).getInt64();
-					e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					//e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					e->cipher.data = std::move(query->getColumn(i++).getString());
 					e->cipher.ide  = query->getColumn(i++).getInt64();
 				}
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
@@ -150,7 +151,8 @@ public: // Encryption Operations
 				if constexpr (cipher)
 				{
 					e->cipher.idc  = query->getColumn(i++).getInt64();
-					e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					//e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					e->cipher.data = std::move(query->getColumn(i++).getString());
 					e->cipher.ide  = query->getColumn(i++).getInt64();
 				}
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
@@ -213,7 +215,8 @@ public: // Encryption Operations
 				if constexpr (cipher)
 				{
 					e->cipher.idc = query->getColumn(i++).getInt64();
-					e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					//e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
+					e->cipher.data = std::move(query->getColumn(i++).getString());
 					e->cipher.ide = query->getColumn(i++).getInt64();
 				}
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();

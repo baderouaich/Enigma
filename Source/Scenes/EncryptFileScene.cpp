@@ -128,6 +128,7 @@ void EncryptFileScene::OnImGuiDraw()
 		}
 		ImGui::PopFont();
 
+#if 0
 		spacing(2);
 
 		// Compression widget
@@ -141,6 +142,7 @@ void EncryptFileScene::OnImGuiDraw()
 			ImGui::Checkbox("##compress_checkbox", &m_compress);
 		}
 		ImGui::PopFont();
+#endif
 		
 		spacing(2);
 
@@ -410,34 +412,29 @@ void EncryptFileScene::OnEncryptButtonPressed()
 
 			// Read in file buffer
 			String buffer{};
-			const bool file_read_success = FileUtils::Read(m_in_filename, buffer);
-			ENIGMA_ASSERT_OR_THROW(file_read_success, "Failed to read buffer from file " + m_in_filename);
-			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "File " + m_in_filename + " is empty");
+			ENIGMA_ASSERT_OR_THROW(FileUtils::Read(m_in_filename, buffer), "Failed to read buffer from file " + m_in_filename);
+			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Nothing to encrypt! File " + m_in_filename + " is empty.");
 			
+			/*
+			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
+					usually indistinguishable from a random stream. Compression relies on patterns in order to gain
+					any size reduction. Since encryption destroys such patterns, the compression algorithm would be
+					unable to give you much (if any) reduction in size if you apply it to encrypted data.
+			*/
 			// Compression
-			size_t old_buffer_size{ 0 }, new_buffer_size{ 0 }, decreased_bytes{ 0 };
-			if (m_compress || m_save_to_database)  // Force file buffer to be compressed to reduce size of the database even if user doesnt check m_compress
-			{
-				if (m_save_to_database) ENIGMA_INFO("Forcing file buffer to be compressed to reduce size of the database");
-
-				ENIGMA_TRACE("Compressing file buffer {0} ...", m_in_filename);
-				old_buffer_size = buffer.size();
-				buffer = GZip::Compress(buffer);
-				new_buffer_size = buffer.size();
-				decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
-				//ENIGMA_TRACE("File size decreased by {0:0.3f} MB", ENIGMA_BYTES_TO_MB(decreased_bytes));
-				ENIGMA_TRACE("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
-			}
+			ENIGMA_TRACE("Compressing file buffer {0} ...", m_in_filename);
+			auto old_buffer_size = buffer.size();
+			String compressed_buffer = GZip::Compress(buffer);
+			auto new_buffer_size = buffer.size();
+			auto decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
+			ENIGMA_TRACE("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
 
 			// Encrypt file buffer
-			String cipher = algorithm->Encrypt(m_password, buffer);
+			String cipher = algorithm->Encrypt(m_password, compressed_buffer);
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file buffer");
 
-			// Save cipher to out file encrypted
-			ENIGMA_ASSERT_OR_THROW(!m_out_filename.empty(), "Invalid output file name");
 			// Write cipher to out file
-			const bool file_written_success = FileUtils::Write(m_out_filename, cipher);
-			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write cipher to file " + m_out_filename);
+			ENIGMA_ASSERT_OR_THROW(FileUtils::Write(m_out_filename, cipher), "Failed to write cipher to file " + m_out_filename);
 
 			// Save to database (Note: file buffer forced to be compressed above if saving to database)
 			if (m_save_to_database)
@@ -447,7 +444,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 				e->title = m_db_title;
 				e->is_file = true;
 				e->cipher.data = cipher; // already compressed above
-				e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
+				e->size = e->cipher.data.size();
 				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
 			}
 
@@ -456,12 +453,9 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			{
 				msg << "Encrypted " << fs::path(m_in_filename).filename() << " to "
 					<< fs::path(m_out_filename).filename() << " Successfully!\n";
-				if (m_compress)
-				{
-					if (decreased_bytes)
+				
+				if (decreased_bytes)
 						msg << "Compression Status: File size decreased by " << SizeUtils::FriendlySize(decreased_bytes);
-				}
-
 			}
 			ENIGMA_INFO(msg.str());
 			(void)DialogUtils::Info(msg.str());

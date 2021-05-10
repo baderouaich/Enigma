@@ -31,7 +31,7 @@ private:
 	String m_in_filename; // In File to decrypt
 	String m_out_filename; // Out File to be recover
 	String m_password; // encryption password
-	bool m_decompress{ true }; // Whether to deompress file with Gzip after decrypting 
+	//bool m_decompress{ true }; // Whether to deompress file with Gzip after decrypting 
 
 };
 NS_ENIGMA_END

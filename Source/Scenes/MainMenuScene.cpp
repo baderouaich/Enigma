@@ -32,6 +32,8 @@ void MainMenuScene::OnCreate()
 	//	Constants::Colors::BACKGROUND_COLOR.w
 	//));
 
+	// Load logo image
+	m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_256x144_PNG_PATH);
 }
 
 void MainMenuScene::OnUpdate(const f32&) {}
@@ -115,13 +117,15 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopStyleVar(1);
 		}
 
-		spacing(6);
+		spacing(3);
 
+#if 0
 		// Enigma Version
 		{
 			ImGui::PushFont(font_audiowide_regular_60); // text font
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			{
+
 				static constexpr const auto title = "Enigma";
 				static const ImVec2 title_size = { ImGui::CalcTextSize(title).x * font_audiowide_regular_60->Scale,ImGui::CalcTextSize(title).y * font_audiowide_regular_60->Scale };
 				ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x) / 2.0f);
@@ -133,8 +137,17 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopStyleColor(1);
 			ImGui::PopFont();
 		}
+#endif
+		// Enigma Logo
+		{
+			const f32 logo_width = static_cast<f32>(m_logo->GetWidth());
+			const f32 logo_height = static_cast<f32>(m_logo->GetHeight());
+			const f32 logo_x = (win_w - logo_width) / 2.0f;
+			const f32 logo_y = ImGui::GetFrameHeight(); // GetFrameHeight ~=> Menubar height
+			m_logo->Draw({ logo_x,  logo_y }, logo_width, logo_height);
+		}
 
-		spacing(9);
+		spacing(3);
 
 		// Buttons
 		{
@@ -177,7 +190,7 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::PopStyleColor(3);
 				}
 
-				spacing(9);
+				spacing(7);
 
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);

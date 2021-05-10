@@ -3,6 +3,8 @@
 #define ENIGMA_IMGUI_WIDGETS_H
 
 #include <Core/Core.hpp>
+#include <Utility/OpenGLUtils.hpp>
+#include <Utility/SizeUtils.hpp>
 #include <imgui.h>
 #include <imgui_internal.h>
 
@@ -205,7 +207,63 @@ namespace ImGuiWidgets
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	// https://github.com/ocornut/imgui/wiki/Image-Loading-and-Displaying-Examples#Example-for-OpenGL-users
+	class Image
+	{
+	public:
+		Image(const char* file_name)
+		{
+			// Load from file
+			i32 channels{};
+			byte* buffer = stbi_load(file_name, &m_width, &m_height, &channels, 4);
+			ENIGMA_ASSERT(buffer, String("Failed to read image from ") + file_name);
 
+			// Create a OpenGL texture identifier
+			glAssert( glGenTextures(1, &m_id) );
+			glAssert( glBindTexture(GL_TEXTURE_2D, m_id) );
+
+			// Setup filtering parameters for display
+			glAssert( glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR) );
+			glAssert( glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR) );
+			glAssert( glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE) ); // This is required on WebGL for non power-of-two textures
+			glAssert( glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE) ); // Same
+
+			// Upload pixels into texture
+#if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
+			glAssert( glPixelStorei(GL_UNPACK_ROW_LENGTH, 0) );
+#endif
+			ENIGMA_INFO("Storing texture #{0} {1} to GPU Memory", m_id, SizeUtils::FriendlySize(m_width * m_height * sizeof(byte)));
+
+			glAssert( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer) );
+
+			// Buffer uploaded to gpu, no need to stay in the memory anymore
+			stbi_image_free(buffer);
+			buffer = nullptr;
+		}
+
+		~Image()
+		{
+			ENIGMA_INFO("Deleting texture #{0} from GPU Memory", m_id);
+			glAssert( glDeleteTextures(1, &m_id) );
+		}
+
+		void Draw(const ImVec2& position, float width, float height)
+		{
+			ImGui::SetCursorPos(position);
+			ImGui::Image((void*)(std::intptr_t)m_id, ImVec2(width, height));
+		}
+
+	public:
+		i32 GetWidth() const noexcept { return m_width; };
+		i32 GetHeight() const noexcept { return m_height; };
+		GLuint GetID() const noexcept { return m_id; };
+
+	private:
+		GLuint m_id{}; // OpenGL texture id
+		i32 m_width{};
+		i32 m_height{};
+
+	};
 }
 
 NS_ENIGMA_END

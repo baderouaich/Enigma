@@ -12,8 +12,8 @@
 #define IDI_FILE   200
 #define ID_VERSION   1
 
-IDI_APP  ICON ".\\Resources\\Branding\\Wolf.ico" // Executable icon
-IDI_FILE ICON ".\\Resources\\Branding\\Wolf.ico" // Associate files icon
+IDI_APP  ICON ".\\Resources\\Branding\\Logo.ico" // Executable icon
+IDI_FILE ICON ".\\Resources\\Branding\\Logo.ico" // Associate files icon
 
 ID_VERSION VERSIONINFO
     FILEVERSION ENIGMA_ASSOCIATE_FILE_VERSION // change this to your version
