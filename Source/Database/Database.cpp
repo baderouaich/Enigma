@@ -85,7 +85,7 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		auto transaction = std::make_unique<SQLite::Transaction>(*m_database);
 		// Insert encryption
 		{
-			constexpr char* sql = "INSERT INTO Encryption(title, date_time, size, is_file) VALUES(?, DATETIME(), ?, ?)";
+			constexpr const char* sql = "INSERT INTO Encryption(title, date_time, size, is_file) VALUES(?, DATETIME(), ?, ?)";
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->title);
@@ -101,7 +101,7 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		
 		// Insert cipher
 		{
-			constexpr char* sql = "INSERT INTO Cipher(data, ide) VALUES(?, ?)";
+			constexpr const char* sql = "INSERT INTO Cipher(data, ide) VALUES(?, ?)";
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->cipher.data.data(), static_cast<i32>(e->cipher.data.size())); // bind blob
@@ -136,7 +136,7 @@ bool Database::DeleteEncryption(const i64 ide)
 
 		// Delete cipher (Optional, since ON DELETE CASCADE is enabled in Cipher.ide, cipher record will be deleted automatically)
 		{
-			constexpr char* sql = "DELETE FROM Cipher WHERE ide = ?";
+			constexpr const char* sql = "DELETE FROM Cipher WHERE ide = ?";
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bind(1, ide);
@@ -146,7 +146,7 @@ bool Database::DeleteEncryption(const i64 ide)
 
 		// Delete encryption
 		{
-			constexpr char* sql = "DELETE FROM Encryption WHERE ide = ?";
+			constexpr const char* sql = "DELETE FROM Encryption WHERE ide = ?";
 			ENIGMA_LOG("SQL: {0}", sql);
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bind(1, ide);

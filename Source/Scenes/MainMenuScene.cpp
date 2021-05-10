@@ -36,7 +36,7 @@ void MainMenuScene::OnCreate()
 	m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_192x108_PNG_PATH);
 }
 
-void MainMenuScene::OnUpdate(const [[maybe_unused]] f32&) {}
+void MainMenuScene::OnUpdate(const f32&) {}
 
 void MainMenuScene::OnDraw()
 {

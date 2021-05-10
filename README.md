@@ -41,7 +41,9 @@ Built to solve 3 problems i had:
 
 
 ## NOTES
-- Encryption passwords are NOT saved in database
+- Encryption passwords are NOT saved into the database.
+- Export your database by copying `Enigma.db` from `./Resources/Database/`
+- Import your database by replacing `Enigma.db` in `./Resources/Database/`
 
 
 ## Enigma CLI

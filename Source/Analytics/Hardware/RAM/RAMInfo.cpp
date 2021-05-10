@@ -122,5 +122,4 @@ f32 RAMInfo::GetProcessRAMUsage() noexcept
 	return percentage;
 }
 
-
 NS_ENIGMA_END
