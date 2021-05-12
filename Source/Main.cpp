@@ -9,6 +9,7 @@
 	//#include <Tests/Algorithm/TripleDESTests.hpp>
 	//#include <Tests/Algorithm/TwofishTests.hpp>
 	//#include <Tests/Algorithm/IDEATests.hpp>
+	//#include <Tests/Algorithm/BlowfishTests.hpp>
 	//#include <Tests/Utils/Base64Tests.hpp>
 	//#include <Tests/Utils/GZipTests.hpp>
 #else
@@ -28,10 +29,10 @@ int main(int argc, char* argv[])
 		// ======================== CLI ======================== //
 		std::unique_ptr<Enigma::CLI> _Cli = std::make_unique<Enigma::CLI>(argc, argv);
 		const auto exit_status =  _Cli->Run();
-		// Shutdown Enigma Logger
-		Enigma::Logger::Shutdown();
 		// Shutdown SQLite3 Database
 		Enigma::Database::Shutdown();
+		// Shutdown Enigma Logger
+		Enigma::Logger::Shutdown();
 		// Exit
 		return exit_status;
 	}
@@ -49,10 +50,10 @@ int main(int argc, char* argv[])
 			std::unique_ptr<Enigma::Application> _App = std::make_unique<Enigma::Application>(window_settings);
 			// Run Application
 			_App->Run();
-			// Shutdown Enigma Logger
-			Enigma::Logger::Shutdown();
 			// Shutdown SQLite3 Database
 			Enigma::Database::Shutdown();
+			// Shutdown Enigma Logger
+			Enigma::Logger::Shutdown();
 			// Exit
 			return EXIT_SUCCESS;
 		}
@@ -60,10 +61,10 @@ int main(int argc, char* argv[])
 		{
 			// Exit abnormally 
 			ENIGMA_CRITICAL(e.what());
-			// Shutdown Enigma Logger
-			Enigma::Logger::Shutdown();
 			// Shutdown SQLite3 Database
 			Enigma::Database::Shutdown();
+			// Shutdown Enigma Logger
+			Enigma::Logger::Shutdown();
 			// Exit
 			return EXIT_FAILURE;
 		}
@@ -73,10 +74,10 @@ int main(int argc, char* argv[])
 	// ======================== Tests ======================== //
 	// Run Tests
 	const auto exit_status = Catch::Session().run(argc, argv);
-	// Shutdown Enigma Logger
-	Enigma::Logger::Shutdown();
 	// Shutdown SQLite3 Database
 	Enigma::Database::Shutdown();
+	// Shutdown Enigma Logger
+	Enigma::Logger::Shutdown();
 	// Exit
 	return exit_status;
 #endif

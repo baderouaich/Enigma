@@ -39,8 +39,10 @@ size_t RAMInfo::GetProcessUsedRAM() const noexcept
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
 	::PROCESS_MEMORY_COUNTERS pmc{ 0 };
-	::GetProcessMemoryInfo(::GetCurrentProcess(), &pmc, sizeof(pmc));
+	const bool success = !!::GetProcessMemoryInfo(::GetCurrentProcess(), &pmc, sizeof(pmc));
+	ENIGMA_ASSERT(success, "Failed to get process used ram");
 	return pmc.WorkingSetSize;
+
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 

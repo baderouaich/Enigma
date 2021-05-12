@@ -9,15 +9,16 @@ ViewEncryptionScene::ViewEncryptionScene(const i64 encryption_id)
 	:
 	Enigma::Scene()
 {
-	ENIGMA_TRACE("Gettings encryption's data id {0} from database", encryption_id);
+	ENIGMA_TRACE("Gettings encryption#{0}'s data from database...", encryption_id);
 	
-	// Get Encryption record with all cipher and is_file properties which matter in this case
-	m_encryption = Database::GetEncryptionByID<true, true, true, true, true>(encryption_id);
+	// Get Encryption record from database (minus cipher to save up memory)
+	m_encryption = Database::GetEncryptionByID<true, false, true, true, true>(encryption_id);
 	if (!m_encryption)
 	{
 		(void)DialogUtils::Error("Couldn't get encryption record from database");
 		Scene::EndScene();
 	}
+	std::cout << m_encryption->title;
 }
 
 void ViewEncryptionScene::OnCreate()
@@ -26,7 +27,8 @@ void ViewEncryptionScene::OnCreate()
 }
 
 void ViewEncryptionScene::OnUpdate(const f32&)
-{}
+{
+}
 
 void ViewEncryptionScene::OnDraw()
 {
@@ -103,7 +105,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 		{
 			// title
 			ImGui::PushFont(font_audiowide_regular_20); 
-			ImGui::TextWrapped(m_encryption->title.c_str());
+			ImGui::TextWrapped("%s", m_encryption->title.c_str()); // we had an issue here, abort was called because the random generated string contains % confuses imgui which thinks it needs format string, solved by adding %s then text
 			ImGui::PopFont();  
 
 			spacing(2);
@@ -134,6 +136,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(2);
 
+			
 		// Password used for encryption
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
@@ -158,6 +161,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 			spacing(3);
 			ImGui::Separator();
 			spacing(3);
+
 
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
@@ -187,6 +191,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 
 		// Decrypt Button
 		{
+
 			ImGui::PushFont(font_audiowide_regular_20); // buttons font
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
@@ -196,8 +201,8 @@ void ViewEncryptionScene::OnImGuiDraw()
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 				if (ImGui::Button("Decrypt", button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(std::string_view{ m_encryption->is_file ? "Decrypting file..." : "Decrypting text..." },
-						this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, std::string_view{ m_encryption->is_file ? "Decrypting file..." : "Decrypting text..." },
+						[this]() -> void
 						{
 							this->OnDecryptButtonPressed();
 						});
@@ -217,7 +222,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 
 }
 
-void ViewEncryptionScene::OnEvent(Event&)
+void ViewEncryptionScene::OnEvent(Event& /*event*/)
 {}
 
 void ViewEncryptionScene::OnDestroy()
@@ -243,8 +248,12 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 
 	try
 	{
+		// Get encryption cipher from database, we havent got it at the beginning to save up memory
+		auto cipher = Database::GetCipherByEncryptionID(m_encryption->ide);
+		ENIGMA_ASSERT_OR_THROW(cipher, "Failed to get cipher by encryption id");
+
 		// Auto detect algorithm used for encryption
-		Algorithm::Type algo_type = Algorithm::DetectFromCipher(m_encryption->cipher.data);
+		Algorithm::Type algo_type = Algorithm::DetectFromCipher(cipher->data);
 		ENIGMA_INFO("Detected algorithm is {0}", Algorithm::AlgoTypeEnumToStr(algo_type));
 
 		// Create encryptor based on selected algorithm type
@@ -257,7 +266,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 		if (m_encryption->is_file) 
 		{
 			// Decrypt cipher
-			String buffer = algorithm->Decrypt(m_password, m_encryption->cipher.data);
+			String buffer = algorithm->Decrypt(m_password, cipher->data);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file");
 
 			// Decompress buffer
@@ -287,7 +296,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 		else
 		{
 			// Decrypt cipher text
-			m_recovered_text = algorithm->Decrypt(m_password, m_encryption->cipher.data);
+			m_recovered_text = algorithm->Decrypt(m_password, cipher->data);
 			ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to decrypt text");
 
 			// Decompress recovered text

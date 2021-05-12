@@ -7,8 +7,8 @@ NS_ENIGMA_BEGIN
 ChaCha20::ChaCha20(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::ChaCha20, intent),
-	m_chacha_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::ChaCha::Encryption>() : nullptr),
-	m_chacha_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::ChaCha::Decryption>() : nullptr)
+	m_chacha_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::ChaCha20Poly1305::Encryption>() : nullptr),
+	m_chacha_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::ChaCha20Poly1305::Decryption>() : nullptr)
 {
 }
 
@@ -32,7 +32,6 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 	}
 
 	String iv = this->GenerateRandomIV(CryptoPP::ChaCha::IV_LENGTH); // Randomly generated 8 bytes ChaCha20 IV
-	String cipher{}; // Final encrypted buffer
 	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 
 	// Prepare key
@@ -54,10 +53,12 @@ String ChaCha20::Encrypt(const String& password, const String& buffer)
 	m_chacha_encryptor->SetKeyWithIV(key, CryptoPP::ChaCha::MAX_KEYLENGTH, key + CryptoPP::ChaCha::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
+	String cipher{}; // Final encrypted buffer
 	const CryptoPP::StringSource ss(
 		buffer,
 		true,
-		new CryptoPP::StreamTransformationFilter(
+		//new CryptoPP::StreamTransformationFilter(
+		new CryptoPP::AuthenticatedEncryptionFilter(
 			*m_chacha_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
@@ -82,9 +83,6 @@ String ChaCha20::Decrypt(const String& password, const String& iv_cipher)
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::ChaCha::IV_LENGTH, iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from cipher");
 
-	// Recovered buffer
-	String decrypted{};
-
 	// Prepare Key
 	CryptoPP::SecByteBlock key(CryptoPP::ChaCha::MAX_KEYLENGTH + CryptoPP::ChaCha::IV_LENGTH);
 	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
@@ -103,10 +101,12 @@ String ChaCha20::Decrypt(const String& password, const String& iv_cipher)
 	m_chacha_decryptor->SetKeyWithIV(key, CryptoPP::ChaCha::MAX_KEYLENGTH, key + CryptoPP::ChaCha::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
+	String decrypted{}; // Recovered buffer
 	const CryptoPP::StringSource ss(
 		cipher,
 		true,
-		new CryptoPP::StreamTransformationFilter(
+		//new CryptoPP::StreamTransformationFilter(
+		new CryptoPP::AuthenticatedDecryptionFilter(
 			*m_chacha_decryptor,
 			new CryptoPP::StringSink(decrypted)
 		)

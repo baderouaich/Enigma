@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 TripleDES::TripleDES(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::TripleDES, intent),
-	m_tripledes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Encryption>() : nullptr),
-	m_tripledes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
+	m_tripledes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Encryption>() : nullptr),
+	m_tripledes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
 {
 }
 TripleDES::~TripleDES() noexcept
@@ -30,7 +30,6 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	}
 
 	String iv = this->GenerateRandomIV(CryptoPP::DES_EDE3::BLOCKSIZE); // Randomly generated 8 bytes IV
-	String cipher{}; // Final encrypted buffer
 	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 
 	// Prepare key
@@ -49,10 +48,12 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	m_tripledes_encryptor->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
+	String cipher{}; // Final encrypted buffer
 	const CryptoPP::StringSource ss(
 		buffer,
 		true,
-		new CryptoPP::StreamTransformationFilter(
+		//new CryptoPP::StreamTransformationFilter(
+		new CryptoPP::AuthenticatedEncryptionFilter(
 			*m_tripledes_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
@@ -76,9 +77,6 @@ String TripleDES::Decrypt(const String& password, const String& iv_cipher)
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV from cipher");
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::DES_EDE3::BLOCKSIZE, iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from cipher");
-
-	// Recovered buffer
-	String decrypted{};
 	
 	// Prepare Key
 	CryptoPP::SecByteBlock key(CryptoPP::DES_EDE3::MAX_KEYLENGTH + CryptoPP::DES_EDE3::BLOCKSIZE);
@@ -95,10 +93,12 @@ String TripleDES::Decrypt(const String& password, const String& iv_cipher)
 	m_tripledes_decryptor->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
+	String decrypted{}; // Recovered buffer
 	const CryptoPP::StringSource decryptor(
 		cipher,
 		true,
-		new CryptoPP::StreamTransformationFilter(
+		//new CryptoPP::StreamTransformationFilter(
+		new CryptoPP::AuthenticatedDecryptionFilter(
 			*m_tripledes_decryptor, 
 			new CryptoPP::StringSink(decrypted)
 		)

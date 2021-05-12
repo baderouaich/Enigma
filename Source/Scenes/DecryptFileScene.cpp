@@ -178,7 +178,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushID(1);
 				if (ImGui::Button("Browse", browse_button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Browsing input file...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Browsing input file...", [this]() -> void
 					{
 						this->OnBrowseInFileButtonPressed();
 					});
@@ -209,7 +209,7 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGui::PushID(2);
 					if (ImGui::Button("Browse", browse_button_size))
 					{
-						Application::GetInstance()->LaunchWorkerThread("Browsing output file location...", this, [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(this, "Browsing output file location...", [this]() -> void
 						{
 							this->OnBrowseOutFileLocationButtonPressed();
 						});
@@ -258,7 +258,7 @@ void DecryptFileScene::OnImGuiDraw()
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 				if (ImGui::Button("Decrypt", button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Decrypting File...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Decrypting File...", [this]() -> void
 					{
 						this->OnDecryptButtonPressed();
 					});
@@ -518,15 +518,15 @@ void DecryptFileScene::OnDecryptButtonPressed()
 
 void DecryptFileScene::OnBackButtonPressed()
 {
-	if (!m_in_filename.empty() || !m_out_filename.empty() || !m_password.empty())
-	{	// Show alert dialog to user asking whether the operation should be aborted
-		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
-		if (action == Enigma::MessageBox::Action::Yes)
-		{
-			Scene::EndScene();
-		}
-	}
-	else
+	//if (!m_in_filename.empty() || !m_out_filename.empty() || !m_password.empty())
+	//{	// Show alert dialog to user asking whether the operation should be aborted
+	//	const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
+	//	if (action == Enigma::MessageBox::Action::Yes)
+	//	{
+	//		Scene::EndScene();
+	//	}
+	//}
+	//else
 		Scene::EndScene();
 }
 

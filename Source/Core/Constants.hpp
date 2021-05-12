@@ -7,38 +7,13 @@
 
 namespace Enigma
 {
-	/*
-	* Notes
-	* Raw Text:
-	- When encrypting a raw text, cipher is encoded to Base64 to make it readable and copyable to user.
-	- When decrypting a raw text, Base64 text is decoded to cipher, then its decrypted to recovered text.
-	* Binary:
-	- infile can be either encrypted file to be recovered, or a new file to be encrypted
-	- outfile can be either encrypted file or recovered file.
-	- When encrypting a file, cipher is outputed in binary to the outfile specified by the user without any encoding.
-	- When decrypting a file, recovered binary is outputed to outfile specified by the user.
-
-	# Crypto++ Important Usage Notes:
-	 - If a constructor for A takes a pointer to an object B (except primitive types such as int and char),
-	 then A owns B and will delete B at A's destruction. If a constructor for A takes a reference to an object B,
-	 then the caller retains ownership of B and should not destroy it until A no longer needs it.
-
-	 - Crypto++ is thread safe at the class level. This means you can use Crypto++ safely in a multithreaded
-	 application, but you must provide synchronization when multiple threads access a common Crypto++ object.
-
-
-	 # Compression  https://security.stackexchange.com/questions/19969/encryption-and-compression-of-data
-	 - You should compress before encrypting. Encryption turns your data into high-entropy data, 
-	 usually indistinguishable from a random stream. Compression relies on patterns in order to gain 
-	 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
-	 unable to give you much (if any) reduction in size if you apply it to encrypted data.
-	*/
 	namespace Constants
 	{
 		using namespace std::string_literals; // using std::operator""s;
 
-		static constexpr const auto ENIGMA_PACKAGE_NAME = "com.badereddineouaich.enigma"; // unique app id to avoid multiple instances
-		
+		static constexpr const auto ENIGMA_PACKAGE_NAME = "com.badereddineouaich.enigma"; // unique app id used to avoid multiple instances
+		//static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA"
+
 		namespace Algorithm
 		{
 			// Notes:
@@ -163,9 +138,6 @@ namespace Enigma
 			{
 				// window runtime icon
 				static constexpr const char* ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Logo.png";
-				static constexpr const char* ENIGMA_LOGO_512x288_PNG_PATH = "./Resources/Branding/Logo512x288.png";
-				static constexpr const char* ENIGMA_LOGO_256x144_PNG_PATH = "./Resources/Branding/Logo256x144.png";
-				static constexpr const char* ENIGMA_LOGO_192x108_PNG_PATH = "./Resources/Branding/Logo192x108.png";
 			}
 
 			namespace Fonts

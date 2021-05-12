@@ -5,6 +5,7 @@
 #include <Core/Core.hpp>
 
 NS_ENIGMA_BEGIN
+
 // Cipher Model | table: Cipher
 struct Cipher
 {

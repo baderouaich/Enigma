@@ -25,14 +25,32 @@ public:
 		ID,
 		Title,
 		DateTime,
+		Size,
+
+		BEGIN	= ID,
+		END		= Size
 	};
-	friend std::ostream& operator<<(std::ostream& os, OrderBy order_by) noexcept // for constructing sql
+	friend const char* operator *(OrderBy order_by) // operator* to stringify enum OrderBy
+	{
+#define CASE_STR(e) case OrderBy::e: return #e
+		switch (order_by)
+		{
+			CASE_STR(ID);
+			CASE_STR(Title);
+			CASE_STR(DateTime);
+			CASE_STR(Size);
+			default: return "<unknown OrderBy>";
+		}
+#undef CASE_STR
+	}
+	friend std::ostream& operator<<(std::ostream& os, const OrderBy order_by) noexcept // for constructing sql
 	{
 		switch (order_by)
 		{
 			case OrderBy::ID: os << " e.ide"; break;
 			case OrderBy::Title: os << " e.title"; break;
 			case OrderBy::DateTime: os << " e.date_time"; break;
+			case OrderBy::Size: os << " e.size"; break;
 		}
 		return os;
 	}
@@ -40,8 +58,22 @@ public:
 	{
 		Ascending,
 		Descending,
+
+		Begin	= Ascending,
+		End		= Descending
 	};
-	friend std::ostream& operator<<(std::ostream& os, Order order) noexcept // for constructing sql
+	friend const char* operator *(Order order) // operator* to stringify enum Order
+	{
+#define CASE_STR(e) case Order::e: return #e
+		switch (order)
+		{
+			CASE_STR(Ascending);
+			CASE_STR(Descending);
+			default: return "<unknown Order>";
+		}
+#undef CASE_STR
+	}
+	friend std::ostream& operator<<(std::ostream& os, const Order order) noexcept // for constructing sql
 	{
 		return os << (order == Order::Ascending ? " ASC" : " DESC");
 	}
@@ -54,7 +86,13 @@ public: // Encryption Operations
 	// Add Encryption to Encryptions table, returns true on success
 	static bool AddEncryption(const std::unique_ptr<Encryption>& e);
 
+	// Returns cipher from database by encryption id
+	static std::unique_ptr<Cipher> GetCipherByEncryptionID(const i64 ide);
 
+	// Delete Encryption record by id, returns true if successfully deleted
+	static bool DeleteEncryption(const i64 ide);
+
+public:
 	// Get an Encyrption by id with desired columns for optimization
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
@@ -170,10 +208,6 @@ public: // Encryption Operations
 	}
 
 
-	// Delete Encryption record by id, returns true if successfully deleted
-	static bool DeleteEncryption(const i64 ide);
-
-
 	// Search Encryptions by title using keyword LIKE %QUERY%
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file> // select which columns to return (for optimization)
 	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
@@ -237,6 +271,7 @@ public: // Encryption Operations
 public: // Accessors
 	static const std::unique_ptr<SQLite::Database>& GetInstance() noexcept { return m_database; }
 
+
 public: // Modifiers
 	/*
 	*	https://www.sqlitetutorial.net/sqlite-vacuum/
@@ -246,15 +281,16 @@ public: // Modifiers
 	*/
 	static void Vacuum() noexcept 
 	{
-		ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
-		(void)m_database->exec("VACUUM");
+		/*ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
+		(void)m_database->exec("VACUUM");*/
 
-		/*int total_changes = m_database->getTotalChanges();
+		// Only vacuum if changes to the database were made.
+		const i32 total_changes = m_database->getTotalChanges();
 		if (total_changes > 0)
 		{
-			ENIGMA_INFO("{0} database changes were made, Vacuuming Database...", total_changes);
+			ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);
 			(void)m_database->exec("VACUUM");
-		}*/
+		}
 
 	}
 

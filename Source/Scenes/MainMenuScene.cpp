@@ -33,7 +33,7 @@ void MainMenuScene::OnCreate()
 	//));
 
 	// Load logo image
-	m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_192x108_PNG_PATH);
+	//m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 }
 
 void MainMenuScene::OnUpdate(const f32&) {}
@@ -88,14 +88,14 @@ void MainMenuScene::OnImGuiDraw()
 				{
 					if (ImGui::MenuItem("Report issue")) 
 					{
-						Application::GetInstance()->LaunchWorkerThread("Reporting issue...", this, [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(this, "Reporting issue...", [this]() -> void
 						{
 							this->OnReportIssueMenuButtonPressed(); 
 						});
 					}
 					if (ImGui::MenuItem("Check for updates")) 
 					{
-						Application::GetInstance()->LaunchWorkerThread("Checking for updates...", this, [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(this, "Checking for updates...", [this]() -> void
 						{
 							this->OnCheckForUpdatesMenuButtonPressed();
 						});
@@ -117,9 +117,9 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopStyleVar(1);
 		}
 
-		spacing(6);
+		spacing(3);
 
-#if 0
+#if true // use text
 		// Enigma Version
 		{
 			ImGui::PushFont(font_audiowide_regular_60); // text font
@@ -137,15 +137,17 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PopStyleColor(1);
 			ImGui::PopFont();
 		}
-#endif
+#else // use logo
 		// Enigma Logo
 		{
 			const f32 logo_width = static_cast<f32>(m_logo->GetWidth());
 			const f32 logo_height = static_cast<f32>(m_logo->GetHeight());
 			const f32 logo_x = (win_w - logo_width) / 2.0f;
-			const f32 logo_y = ImGui::GetFrameHeight() + 9.0f; // GetFrameHeight ~=> Menubar height
+			const f32 logo_y = ImGui::GetFrameHeight(); // GetFrameHeight ~=> Menubar height
 			m_logo->Draw({ logo_x,  logo_y }, logo_width, logo_height);
 		}
+#endif
+		
 
 		spacing(6);
 

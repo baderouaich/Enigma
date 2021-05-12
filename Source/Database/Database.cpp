@@ -66,11 +66,7 @@ void Database::Shutdown()
 
 	if (m_database) // Only vacuum if there were changes done to the database.
 	{
-		const i32 total_changes = m_database->getTotalChanges();
-		if (total_changes > 0)
-		{
-			Vacuum();
-		}
+		Vacuum();
 	}
 }
 
@@ -87,12 +83,12 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		{
 			constexpr const char* sql = "INSERT INTO Encryption(title, date_time, size, is_file) VALUES(?, DATETIME(), ?, ?)";
 			ENIGMA_LOG("SQL: {0}", sql);
-			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
+			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->title);
 			ENIGMA_INFO("size from query {0}", e->size);
 			query->bind(2, e->size);
 			query->bind(3, static_cast<i32>(e->is_file));
-			i32 r = query->exec(); // returns # of rows effected
+			const i32 r = query->exec(); // returns num rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert encyption record");
 		}
 		
@@ -103,11 +99,11 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		{
 			constexpr const char* sql = "INSERT INTO Cipher(data, ide) VALUES(?, ?)";
 			ENIGMA_LOG("SQL: {0}", sql);
-			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
+			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->cipher.data.data(), static_cast<i32>(e->cipher.data.size())); // bind blob
 			//query->bindNoCopy(1, e->cipher.data); // bind blob (same as bindText..)
 			query->bind(2, last_inserted_encryption_id);
-			i32 r = query->exec(); // returns # of rows effected
+			const i32 r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert cipher record");
 		}
 		
@@ -124,6 +120,37 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 
 }
 
+std::unique_ptr<Cipher> Database::GetCipherByEncryptionID(const i64 ide)
+{
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", nullptr);
+
+	try
+	{
+		// Make sql
+		std::ostringstream sql{};
+		sql << "SELECT * FROM Cipher WHERE ide = " << ide;
+		ENIGMA_LOG("SQL: {0}", sql.str());
+
+		// Execute sql
+		const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
+		ENIGMA_ASSERT_OR_THROW(query->executeStep(), "Failed to execute step");
+
+		// Make and return Cipher
+		auto cipher = std::make_unique<Cipher>();
+		cipher->idc = query->getColumn(0).getInt64(); // getColumn, index starts by 0
+		cipher->data = std::move(query->getColumn(1).getString());
+		cipher->ide = query->getColumn(2);
+
+		return cipher;
+	}
+	catch (const SQLite::Exception& e)
+	{
+		ENIGMA_ERROR("{0}", e.what());
+		return nullptr;
+	}
+
+}
 // Delete Encryption record by id, returns true if successfully deleted
 bool Database::DeleteEncryption(const i64 ide)
 {

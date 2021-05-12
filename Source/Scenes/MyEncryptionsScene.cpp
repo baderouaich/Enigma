@@ -113,7 +113,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 		{
 			//ImGui::LabelText("##label", "Search by title...");
-			if (ImGuiWidgets::InputTextWithHint("##inputtext", "Search an encryption by title...", &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
+			if (ImGuiWidgets::InputTextWithHint("##inputtext", "Search by title...", &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
 			{
 				// Enable searching
 				m_isSearching = true;
@@ -148,6 +148,46 @@ void MyEncryptionsScene::OnImGuiDraw()
 
 		if (!m_encryptions.empty())
 		{
+
+			{
+				// Order By
+				ImGui::PushFont(font_montserrat_medium_18); // text font
+				ImGui::Text("Order By "); ImGui::SameLine();
+				for (byte i = static_cast<byte>(Database::OrderBy::BEGIN); i <= static_cast<byte>(Database::OrderBy::END); i++)
+				{
+					if (ImGui::RadioButton(*static_cast<Database::OrderBy>(i), static_cast<byte>(m_order_by) == i))
+					{
+						if (static_cast<byte>(m_order_by) != i) // avoid exhausting database
+						{
+							m_order_by = static_cast<Database::OrderBy>(i);
+							this->GetAllEncryptions();
+						}
+
+					}
+					ImGui::SameLine();
+				}
+
+				ImGui::NewLine();
+
+				// Order ASC DESC
+				ImGui::Text("Order"); ImGui::SameLine();
+				for (byte i = static_cast<byte>(Database::Order::Begin); i <= static_cast<byte>(Database::Order::End); i++)
+				{
+					if (ImGui::RadioButton(*static_cast<Database::Order>(i), static_cast<byte>(m_order) == i))
+					{
+						if (static_cast<byte>(m_order) != i) // avoid exhausting database
+						{
+							m_order = static_cast<Database::Order>(i);
+							this->GetAllEncryptions();
+						}
+
+					}
+					ImGui::SameLine();
+				}
+				ImGui::PopFont();
+			}
+
+#if 0
 			// Order By
 			ImGui::PushFont(font_montserrat_medium_18); // text font
 			ImGui::Text("Order By "); ImGui::SameLine();
@@ -198,6 +238,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 				}
 			}
 			ImGui::PopFont();
+#endif
 
 			spacing(2);
 			ImGui::Separator();

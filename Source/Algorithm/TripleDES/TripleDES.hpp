@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	TripleDES-CBC Algorithm Encryptor/Decryptor
+*	TripleDES- Algorithm Encryptor/Decryptor
 */
 class TripleDES : public Algorithm
 {
@@ -22,9 +22,12 @@ public:
 	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private: 
-	// Note: using CBC since GCM is defined for block ciphers with a block size of 128 bits https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Encryption> m_tripledes_encryptor; // 3 Key TripleDES-CBC encryptor
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::DES_EDE3>::Decryption> m_tripledes_decryptor; // 3 Key TripleDES-CBC decryptor
+	// TripleDES, TDEA or 3DES, is multiple applications of the DES algorithm to plain text data to increase the security
+	// of the original DES algorithm.As the name implies, the DES algorithm is applied 3 times.There are two variants 
+	// of TripleDES : the first is two key;and the second is three key. 2 - key TDEA provides approximately 80 bits of security,
+	// while 3 - key TDEA provides approximately 112 bits of security.In contrast, AES provides a minimum security level of 128.
+	std::unique_ptr<CryptoPP::EAX<CryptoPP::DES_EDE3>::Encryption> m_tripledes_encryptor; // 3 Key TripleDES-EAX encryptor
+	std::unique_ptr<CryptoPP::EAX<CryptoPP::DES_EDE3>::Decryption> m_tripledes_decryptor; // 3 Key TripleDES-EAX decryptor
 };
 
 NS_ENIGMA_END

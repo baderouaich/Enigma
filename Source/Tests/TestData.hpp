@@ -29,25 +29,36 @@ vitae sit amet nunc.)";
 
 #if 0
 #pragma region Populate Database With Random Data For Testing
+	// Initialize Enigma Logger
+	Enigma::Logger::Initialize();
+	// Initialize SQLite3 Database
+	Enigma::Database::Initialize();
 	using namespace Enigma;
 	auto e = std::make_unique<Encryption>();
-	for (int i = 1; i <= 10000; i++)
+	for (int i = 1; i <= 1000; i++)
 	{
 		e->title = Random::Str(Random::Int(3, 255));
-		e->cipher.data = Random::Str(Random::Int(1024, 1024 * 1024 * 10));
+		e->cipher.data = std::move(Random::Str(Random::Int(256, 1024 * 10)));
 		e->size = e->cipher.data.size();
+
 		Database::AddEncryption(e);
 		//if (Database::AddEncryption(e))
 		//	std::printf("Added Encryption #%d\n", i);
 		//else
 		//	std::printf("Failed to add Encryptionn #%d\n", i);
-	}
+
+		e->title.clear();
+		e->date_time.clear();
+		e->cipher.data.clear();
+}
 	std::cout << "Database total changes since connection: " << Database::GetInstance()->getTotalChanges() << std::endl;
 	std::cout << "Database headerStr: " << Database::GetInstance()->getHeaderInfo().headerStr << std::endl;
+
+	Enigma::Database::Shutdown();
+	Enigma::Logger::Shutdown();
 	return 0;
 #pragma endregion
 #endif
-
 
 
 

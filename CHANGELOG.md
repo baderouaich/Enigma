@@ -34,4 +34,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - New CLI Option `--list` or `-l` which lists all saved encryption records in a table
 - Ability to decrypt encryption record from database
 - Upgraded premake5 from 5.0.0-alpha15 to 5.0.0-alpha16
+- Switched Algorithms from CBC padding to Authentication encyrption EAX (TripleDES-CBC to TripleDES-EAX, IDEA-CBC to IDEA-EAX, ChaCha20 to ChaCha20Poly1305)
+- Added Blowfish-EAX Algorithm
+
 -->

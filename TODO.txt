@@ -1,4 +1,8 @@
 ========================= IN PROGRESS =============================
+- Use magic number static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA" at the start of each enigma cipher to detect validity before performing any operation.
+
+- maybe store file extension in database aswell, can help recover file, pass extension with SaveFileDialog {"."}
+
 - Encrypt & Decrypt Files using Chunks 
 while(!eof())
 	ifs.read(chunk_size, buff)
@@ -58,7 +62,11 @@ https://github.com/DanLangas/Enigma/blob/master/Source/Algorithm/Algorithm.cpp#L
 - DONE Perfrorm compressio by default, remove --compress and --decompress, aswell as Compress radio button
 - DONE Investigate why GZip doesnt work,tests work but cipher compression is messed up over actual size.  (issue was i was compressing after encrypting which isnt right, see NOTES.txt)
 DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet) issue is the '\000' ate of string, when getting cipher blob from sqlite3, sqlite3 seem to add extra \000 to end of string https://stackoverflow.com/questions/35114277/ciphertext-length-is-not-a-multiple-of-block-size-in-cryptopp
-- Add README Notes hint (note: password is not saved) to Save to db [x]
+- DONE Add README Notes hint (note: password is not saved) to Save to db [x]
+- DONE Database records order by Size
+- DONE On View encryption, get encryption from database by worker thread, it takes time to load, or maybe dont get the damn cipher until decrypt pressed to save memory
+- DONE use EAX mode instead of CBC for algorithms with blocksize not equal to 16 (which GCM allows to be applied)
+- DONE Remove annoying dialog asks to confirm abort operation on leaving encrypt decrypt scenes...
 
 =============================================================================
 

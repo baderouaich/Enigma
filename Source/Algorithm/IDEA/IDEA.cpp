@@ -6,8 +6,8 @@ NS_ENIGMA_BEGIN
 IDEA::IDEA(Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::IDEA, intent),
-	m_idea_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption>() : nullptr),
-	m_idea_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption>() : nullptr)
+	m_idea_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>() : nullptr),
+	m_idea_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>() : nullptr)
 {
 }
 
@@ -31,7 +31,6 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	}
 
 	String iv = this->GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE); // Randomly generated 8 bytes IV
-	String cipher{}; // Final encrypted buffer
 	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
 
 	// Prepare key
@@ -50,10 +49,12 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	m_idea_encryptor->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
+	String cipher{}; // Final encrypted buffer
 	const CryptoPP::StringSource ss(
 		buffer,
 		true,
-		new CryptoPP::StreamTransformationFilter(
+		//new CryptoPP::StreamTransformationFilter(
+		new CryptoPP::AuthenticatedEncryptionFilter(
 			*m_idea_encryptor,
 			new CryptoPP::StringSink(cipher)
 		)
@@ -78,9 +79,6 @@ String IDEA::Decrypt(const String& password, const String& iv_cipher)
 	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::IDEA::BLOCKSIZE, iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from cipher");
 
-	// Recovered buffer
-	String decrypted{};
-
 	// Prepare Key
 	CryptoPP::SecByteBlock key(CryptoPP::IDEA::MAX_KEYLENGTH + CryptoPP::IDEA::BLOCKSIZE);
 
@@ -96,10 +94,12 @@ String IDEA::Decrypt(const String& password, const String& iv_cipher)
 	m_idea_decryptor->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
+	String decrypted{}; // Recovered buffer
 	const CryptoPP::StringSource ss(
 		cipher,
 		true,
-		new CryptoPP::StreamTransformationFilter(
+		//new CryptoPP::StreamTransformationFilter(
+		new CryptoPP::AuthenticatedDecryptionFilter(
 			*m_idea_decryptor,
 			new CryptoPP::StringSink(decrypted)
 		)

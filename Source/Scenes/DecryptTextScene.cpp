@@ -223,7 +223,7 @@ void DecryptTextScene::OnImGuiDraw()
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 				if (ImGui::Button("Decrypt", button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Decrypting text...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Decrypting text...", [this]() -> void
 					{
 						this->OnDecryptButtonPressed();
 					});
@@ -285,15 +285,15 @@ void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
 
 void DecryptTextScene::OnBackButtonPressed()
 {
-	if (!m_cipher_base64.empty() || !m_password.empty() || !m_recovered_text.empty())
-	{	// Show alert dialog to user asking whether the operation should be aborted
-		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
-		if (action == Enigma::MessageBox::Action::Yes)
-		{
-			Scene::EndScene();
-		}
-	}
-	else
+	//if (!m_cipher_base64.empty() || !m_password.empty() || !m_recovered_text.empty())
+	//{	// Show alert dialog to user asking whether the operation should be aborted
+	//	const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
+	//	if (action == Enigma::MessageBox::Action::Yes)
+	//	{
+	//		Scene::EndScene();
+	//	}
+	//}
+	//else
 		Scene::EndScene();
 }
 

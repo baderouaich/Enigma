@@ -43,7 +43,7 @@ public: /* Constructor / Destructors */
 	*	@param scene: pointer to scene which spawns the worker thread
 	*	@param func: function has code to run in parallel
 	*/
-	void LaunchWorkerThread(const std::string_view& loading_text, Scene* scene, const std::function<void()>& func);
+	void LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& func);
 
 
 public: /* Events */

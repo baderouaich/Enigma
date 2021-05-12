@@ -113,12 +113,13 @@ void EncryptFileScene::OnImGuiDraw()
 		{
 			// Label
 			ImGui::Text("Algorithm:");
+			ImGui::NewLine();
 
 			// Algo types radio buttons
 			const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
 			for (const auto& [algo_name, algo_type] : supported_algorithms)
 			{
-				inline_dummy(6.0f, 0.0f);
+				inline_dummy(1.0f, 0.0f);
 				ImGui::SameLine();
 				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
@@ -186,7 +187,7 @@ void EncryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				if (ImGui::Button("Browse", browse_button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Browsing input file...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Browsing input file...", [this]() -> void
 					{
 						this->OnBrowseInFileButtonPressed();
 					});
@@ -216,7 +217,7 @@ void EncryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				if (ImGui::Button("Browse ", browse_button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Browsing output file location...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Browsing output file location...", [this]() -> void
 					{
 						this->OnBrowseOutFileLocationButtonPressed();
 					});
@@ -275,7 +276,7 @@ void EncryptFileScene::OnImGuiDraw()
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 				if (ImGui::Button("Encrypt", button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Encrypting file...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Encrypting file...", [this]() -> void
 					{
 						this->OnEncryptButtonPressed();
 					});
@@ -484,15 +485,15 @@ void EncryptFileScene::OnEncryptButtonPressed()
 
 void EncryptFileScene::OnBackButtonPressed()
 {
-	if (!m_in_filename.empty() || !m_out_filename.empty() || !m_password.empty() || !m_confirm_password.empty())
-	{	// Show alert dialog to user asking whether the operation should be aborted
-		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
-		if (action == Enigma::MessageBox::Action::Yes)
-		{
-			Scene::EndScene();
-		}
-	}
-	else
+	//if (!m_in_filename.empty() || !m_out_filename.empty() || !m_password.empty() || !m_confirm_password.empty())
+	//{	// Show alert dialog to user asking whether the operation should be aborted
+	//	const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
+	//	if (action == Enigma::MessageBox::Action::Yes)
+	//	{
+	//		Scene::EndScene();
+	//	}
+	//}
+	//else
 		Scene::EndScene();
 }
 

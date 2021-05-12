@@ -214,8 +214,7 @@ namespace ImGuiWidgets
 		Image(const char* file_name)
 		{
 			// Load from file
-			i32 channels{};
-			byte* buffer = stbi_load(file_name, &m_width, &m_height, &channels, 4);
+			byte* buffer = stbi_load(file_name, &m_width, &m_height, nullptr, 4);
 			ENIGMA_ASSERT(buffer, String("Failed to read image from ") + file_name);
 
 			// Create a OpenGL texture identifier
@@ -236,9 +235,8 @@ namespace ImGuiWidgets
 
 			glAssert( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer) );
 
-			// Buffer uploaded to gpu, no need to stay in the memory anymore
+			// at this point the buffer is uploaded to the gpu, no need to keep in the memory
 			stbi_image_free(buffer);
-			buffer = nullptr;
 		}
 
 		~Image()
@@ -247,7 +245,7 @@ namespace ImGuiWidgets
 			glAssert( glDeleteTextures(1, &m_id) );
 		}
 
-		void Draw(const ImVec2& position, float width, float height)
+		void Draw(const ImVec2& position, const f32 width, const f32 height)
 		{
 			ImGui::SetCursorPos(position);
 			ImGui::Image((void*)(std::intptr_t)m_id, ImVec2(width, height));

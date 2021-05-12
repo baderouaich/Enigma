@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	ChaCha20 Algorithm Encryptor/Decryptor
+*	ChaCha20 or ChaCha20Poly1305 Algorithm Encryptor/Decryptor
 */
 class ChaCha20 : public Algorithm
 {
@@ -22,10 +22,12 @@ public:
 	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
-	// The ChaCha20 algorithm is a stream cipher using a key of 256 bit size.
-	// the ChaCha20 stream cipher does not have a block operation mode therefore it does not use padding.
-	std::unique_ptr<CryptoPP::ChaCha::Encryption> m_chacha_encryptor; // ChaCha20 encryptor
-	std::unique_ptr<CryptoPP::ChaCha::Decryption> m_chacha_decryptor; // ChaCha20 decryptor
+	// ChaCha20Poly1305 is an authenticated encryption scheme that combines ChaChaTLSand Poly1305.
+	// The scheme uses the IETF versions of the ciphers because it is defined in RFC 8439, ChaCha20and Poly1305 for IETF Protocols.
+	// The scheme is somewhat unique because it pairs a stream cipher with an authenticator(most authenticated encryption modes pair a block cipher).
+	std::unique_ptr<CryptoPP::ChaCha20Poly1305::Encryption> m_chacha_encryptor; // ChaCha20Poly1305 encryptor
+	std::unique_ptr<CryptoPP::ChaCha20Poly1305::Decryption> m_chacha_decryptor; // ChaCha20Poly1305 decryptor
+
 };
 
 NS_ENIGMA_END

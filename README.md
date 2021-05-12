@@ -22,11 +22,13 @@ Built to solve 3 problems i had:
 
 
 ## Supported Algorithms
+All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)
 - :white_check_mark: <strong>AES-GCM</strong> (Recommended)
-- :white_check_mark: <strong>ChaCha20</strong>
-- :white_check_mark: <strong>TripleDES-CBC</strong>
 - :white_check_mark: <strong>Twofish-GCM</strong>
-- :white_check_mark: <strong>IDEA-CBC</strong>
+- :white_check_mark: <strong>TripleDES-EAX</strong>
+- :white_check_mark: <strong>Blowfish-EAX</strong>
+- :white_check_mark: <strong>IDEA-EAX</strong>
+- :white_check_mark: <strong>ChaCha20Poly1305</strong>
 <!-- - [ ] algo || [x] algo -->
 
 
@@ -53,7 +55,7 @@ Usage:
 
   -e, --encrypt                 Encrypt operation
   -d, --decrypt                 Decrypt operation
-  -m, --mode [AES, ChaCha20, TripleDES, Twofish, IDEA] Encryption/Decryption mode (default: AES)
+  -m, --mode [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption mode (default: AES)
   -p, --password arg            Encryption password
   -t, --text arg                Text to Encrypt/Decrypt
   -i, --infile arg              Input File to Encrypt/Decrypt

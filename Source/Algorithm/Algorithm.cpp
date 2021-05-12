@@ -6,6 +6,7 @@
 #include "TripleDES/TripleDES.hpp"
 #include "Twofish/Twofish.hpp"
 #include "IDEA/IDEA.hpp"
+#include "Blowfish/Blowfish.hpp"
 
 NS_ENIGMA_BEGIN
 
@@ -33,14 +34,16 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& name, const I
 
 	if (ModeIn({ "aes", "aes-gcm", "aes_gcm", "aesgcm" }))
 		return std::make_unique<AES>(intent);
-	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20" }))
+	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20", "chacha20poly1305", "salsapoly1305", "salsa20poly1305", "poly1305" }))
 		return std::make_unique<ChaCha20>(intent);
-	else if (ModeIn({ "tripledes", "triple-des", "tripledes-cbc", "tripledes_cbc", "tripledescbc", "triple" }))
+	else if (ModeIn({ "tripledes", "triple-des", "tripledes-eax", "tripledes_eax", "tripledeseax", "triple" }))
 		return std::make_unique<TripleDES>(intent);
 	else if (ModeIn({ "twofish", "twofish-gcm", "2fish", "twofish_gcm", "twofishgcm" }))
 		return std::make_unique<Twofish>(intent);
-	else if (ModeIn({ "idea", "idea-cbc", "idea_cbc", "ideacbc" }))
+	else if (ModeIn({ "idea", "idea-eax", "idea_eax", "ideaeax" }))
 		return std::make_unique<IDEA>(intent);
+	else if (ModeIn({ "blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax" }))
+		return std::make_unique<Blowfish>(intent);
 	else
 		throw std::runtime_error("Unsupported algorithm mode: " + mode);
 }
@@ -66,7 +69,7 @@ Algorithm::Type Algorithm::DetectFromCipher(const String& cipher)
 	const byte cipher_first_byte = *cipher.begin();
 
 	// Check if we detected a valid encryption algorithm mode
-	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::First), static_cast<byte>(Algorithm::Type::Last)),
+	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::BEGIN), static_cast<byte>(Algorithm::Type::END)),
 		"Could not auto-detect algorithm mode used for encryption");
 
 	// if alles gut, return type
@@ -102,7 +105,7 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 	//NOTE: no need to decompress, since files and text are encrypted after compressed.
 
 	// extract first byte from infile cipher which must be the mode type used in encryption
-	byte cipher_first_byte = static_cast<byte>(Algorithm::Type::Last) + 1;
+	byte cipher_first_byte = static_cast<byte>(Algorithm::Type::END) + 1;
 	if (std::ifstream ifs{ filename, std::ios::binary | std::ios::in })
 	{
 		ifs >> cipher_first_byte;
@@ -110,7 +113,7 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 	}
 
 	// Check if we detected a valid encryption algorithm mode
-	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::First), static_cast<byte>(Algorithm::Type::Last)),
+	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::BEGIN), static_cast<byte>(Algorithm::Type::END)),
 		"Could not auto-detect algorithm mode used for encryption");
 
 	return static_cast<Algorithm::Type>(cipher_first_byte);
@@ -127,6 +130,7 @@ String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 		CASE_ENUM(TripleDES);
 		CASE_ENUM(Twofish);
 		CASE_ENUM(IDEA);
+		CASE_ENUM(Blowfish);
 		default: return "<unknown algorithm>";
 	}
 #undef CASE_ENUM
@@ -136,9 +140,9 @@ String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 String Algorithm::GetSupportedAlgorithmsStr() noexcept
 {
 	String out = "[";
-	for (byte i = static_cast<byte>(Algorithm::Type::First); i <= static_cast<byte>(Algorithm::Type::Last); i++)
+	for (byte i = static_cast<byte>(Algorithm::Type::BEGIN); i <= static_cast<byte>(Algorithm::Type::END); i++)
 	{
-		out += AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) + (i != static_cast<byte>(Algorithm::Type::Last) ? ", " : "");
+		out += AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) + (i != static_cast<byte>(Algorithm::Type::END) ? ", " : "");
 	}
 	out += ']';
 	return out;
@@ -146,8 +150,8 @@ String Algorithm::GetSupportedAlgorithmsStr() noexcept
 
 std::vector<std::pair<String, Algorithm::Type>> Algorithm::GetSupportedAlgorithms() noexcept
 {
-	std::vector<std::pair<String, Algorithm::Type>> algos(static_cast<size_t>(Algorithm::Type::Last));
-	for (byte i = static_cast<byte>(Algorithm::Type::First); i <= static_cast<byte>(Algorithm::Type::Last); i++)
+	std::vector<std::pair<String, Algorithm::Type>> algos(static_cast<size_t>(Algorithm::Type::END));
+	for (byte i = static_cast<byte>(Algorithm::Type::BEGIN); i <= static_cast<byte>(Algorithm::Type::END); i++)
 	{
 		algos[static_cast<size_t>(i) - 1] = std::make_pair(AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)), static_cast<Algorithm::Type>(i));
 	}

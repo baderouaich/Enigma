@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 /*
-*	IDEA-CBC Algorithm Encryptor/Decryptor
+*	IDEA-EAX Algorithm Encryptor/Decryptor
 */
 class IDEA : public Algorithm
 {
@@ -22,8 +22,10 @@ public:
 	String Decrypt(const String& password, const String& iv_cipher) override;
 
 private:
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Encryption> m_idea_encryptor; // IDEA-CBC encryptor
-	std::unique_ptr<CryptoPP::CBC_Mode<CryptoPP::IDEA>::Decryption> m_idea_decryptor; // IDEA-CBC decryptor
+	// IDEA is the International Data Encryption Standard by Massey and Lai. The cipher is a 64-bit block cipher which uses 126-bit
+	// keys and a 64-bit initialization vector (IV). IDEA is a popular choice in open source projects such as OpenPGP.
+	std::unique_ptr<CryptoPP::EAX<CryptoPP::IDEA>::Encryption> m_idea_encryptor; // IDEA-EAX encryptor
+	std::unique_ptr<CryptoPP::EAX<CryptoPP::IDEA>::Decryption> m_idea_decryptor; // IDEA-EAX decryptor
 };
 
 NS_ENIGMA_END

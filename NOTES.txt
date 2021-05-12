@@ -16,6 +16,7 @@
 	 - Crypto++ is thread safe at the class level. This means you can use Crypto++ safely in a multithreaded
 	 application, but you must provide synchronization when multiple threads access a common Crypto++ object.
 
+# AES-GCM/EAX does not require that the data be padded out to a specific block size, reducing the need to use the padding mechanism provided by RTP. It is RECOMMENDED that the RTP padding mechanism not be used unless it is necessary to disguise the length of the underlying Plaintext.
 
 # Compression  https://security.stackexchange.com/questions/19969/encryption-and-compression-of-data
 	 - You should compress before encrypting. Encryption turns your data into high-entropy data, 
@@ -23,3 +24,18 @@
 	 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
 	 unable to give you much (if any) reduction in size if you apply it to encrypted data.
 	- Enigma performs encrypt/decrypt text with compression by default.
+
+
+# RAMInfo GetProccessUsedRAM may return value other than task manager value in windows, https://stackoverflow.com/questions/42986220/current-memory-usage-display-is-always-14mb-more-than-task-manager
+the workingsetsize is correct (Shared DLLS don't get loaded into every process space. They get mapped in. That's the difference you're seeing). task manager is not a debugging tool.
+
+# Using GCM Auth Mode for Ciphers with 16bytes blocksize, if not so, we're using EAX Auth mode.
+
+
+
+# On new Algorithm added, make sure:
+- add it to Type enum
+- add it to Algorithm::AlgoEnumToStr
+- add to Algorithm::CreateFromName
+- add to README.md
+- make tests

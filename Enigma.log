@@ -1,20 +1,35 @@
-[2021-05-10 18:31:17] [info] Enigma: SQLite3 version 3.32.3
-[2021-05-10 18:31:17] [info] Enigma: Registered single application instance
-[2021-05-10 18:31:17] [info] Enigma: [ OpenGL Info ]
+[2021-05-12 17:42:26] [trace] Enigma: void __cdecl Enigma::Database::Initialize(void)
+[2021-05-12 17:42:26] [info] Enigma: SQLite3 version 3.32.3
+[2021-05-12 17:42:26] [info] Enigma: Registered single application instance
+[2021-05-12 17:42:27] [info] Enigma: [ OpenGL Info ]
 		Manufacturer: Intel
 		Renderer: Intel(R) HD Graphics 4600
 		Version: 3.3.0 - Build 20.19.15.5126
 
-[2021-05-10 18:31:17] [trace] Enigma: Loading Fonts...
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Audiowide-Regular.ttf, 30px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
-[2021-05-10 18:31:17] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
-[2021-05-10 18:31:17] [info] Enigma: Storing texture #1 20.25 KB to GPU Memory
-[2021-05-10 18:31:19] [info] Enigma: Deleting texture #1 from GPU Memory
-[2021-05-10 18:31:19] [info] Enigma: Unregistered single application instance
+[2021-05-12 17:42:27] [trace] Enigma: void __cdecl Enigma::Application::InitImGuiFonts(void)
+[2021-05-12 17:42:27] [trace] Enigma: Loading Fonts...
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Montserrat-Medium.ttf, 18px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Audiowide-Regular.ttf, 60px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Audiowide-Regular.ttf, 45px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Audiowide-Regular.ttf, 30px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Audiowide-Regular.ttf, 20px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Montserrat-Medium.ttf, 12px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Montserrat-Medium.ttf, 45px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Montserrat-Medium.ttf, 20px
+[2021-05-12 17:42:28] [trace] Enigma: Loaded Montserrat-Medium.ttf, 16px
+[2021-05-12 17:42:28] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnCreate(void)
+[2021-05-12 17:42:28] [trace] Enigma: __cdecl Enigma::MainMenuScene::MainMenuScene(void) noexcept
+[2021-05-12 17:42:28] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnCreate(void)
+[2021-05-12 17:42:34] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnCreate(void)
+[2021-05-12 17:42:34] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::GetAllEncryptions(void)
+[2021-05-12 17:42:34] [info] Enigma: Getting all encryptions from database...
+[2021-05-12 17:42:34] [trace] Enigma: class std::vector<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> >,class std::allocator<class std::unique_ptr<struct Enigma::Encryption,struct std::default_delete<struct Enigma::Encryption> > > > __cdecl Enigma::Database::GetAllEncryptions<true,false,true,true,true>(enum Enigma::Database::OrderBy,enum Enigma::Database::Order)
+[2021-05-12 17:42:34] [debug] Enigma: SQL: SELECT e.ide, e.title, e.date_time, e.size, e.is_file FROM Encryption e ORDER BY e.ide DESC
+[2021-05-12 17:42:34] [info] Enigma: Got 288 Encryption records.
+[2021-05-12 17:42:35] [trace] Enigma: void __cdecl Enigma::MyEncryptionsScene::OnDestroy(void)
+[2021-05-12 17:42:49] [trace] Enigma: bool __cdecl Enigma::Application::OnWindowClose(class Enigma::WindowCloseEvent &)
+[2021-05-12 17:42:49] [info] Enigma: Closing Window due WindowCloseEvent
+[2021-05-12 17:42:49] [trace] Enigma: void __cdecl Enigma::Database::Shutdown(void)
+[2021-05-12 17:42:49] [trace] Enigma: void __cdecl Enigma::MainMenuScene::OnDestroy(void)
+[2021-05-12 17:42:49] [trace] Enigma: void __cdecl Enigma::LoadingScene::OnDestroy(void)
+[2021-05-12 17:42:49] [info] Enigma: Unregistered single application instance

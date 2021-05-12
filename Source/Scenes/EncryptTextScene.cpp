@@ -110,12 +110,13 @@ void EncryptTextScene::OnImGuiDraw()
 			// Label
 			//ImGui::LabelText("##label", "Algorithm:");
 			ImGui::Text("Algorithm:");
+			ImGui::NewLine();
 
 			// Algo types radio buttons
 			const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
 			for (const auto& [algo_name, algo_type] : supported_algorithms)
 			{
-				inline_dummy(6.0f, 0.0f);
+				inline_dummy(1.0f, 0.0f);
 				ImGui::SameLine();
 				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
@@ -257,7 +258,7 @@ void EncryptTextScene::OnImGuiDraw()
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 				if (ImGui::Button("Encrypt", button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread("Encrypting text...", this, [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, "Encrypting text...", [this]() -> void
 						{
 							this->OnEncryptButtonPressed();
 						});
@@ -325,7 +326,7 @@ void EncryptTextScene::OnImGuiDraw()
 
 }
 
-void EncryptTextScene::OnEvent(Event& /*event*/)
+void EncryptTextScene::OnEvent(Event& event)
 {
 	//// Go back to main menu scene
 	//if (Input::IsKeyPressed(Enigma::Key::Escape))
@@ -457,15 +458,15 @@ void EncryptTextScene::OnEncryptButtonPressed()
 
 void EncryptTextScene::OnBackButtonPressed()
 {
-	if (!m_text.empty() || !m_password.empty() || !m_confirm_password.empty())
-	{	// Show alert dialog to user asking whether the operation should be aborted
-		const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
-		if (action == Enigma::MessageBox::Action::Yes)
-		{
-			Scene::EndScene();
-		}
-	}
-	else
+	//if (!m_text.empty() || !m_password.empty() || !m_confirm_password.empty())
+	//{	// Show alert dialog to user asking whether the operation should be aborted
+	//	const auto action = DialogUtils::Question("Are you sure you want to cancel the entire operation?");
+	//	if (action == Enigma::MessageBox::Action::Yes)
+	//	{
+	//		Scene::EndScene();
+	//	}
+	//}
+	//else
 		Scene::EndScene();
 }
 

@@ -147,12 +147,12 @@ void Application::PushScene(std::unique_ptr<Scene> scene)
 }
 
 
-void Application::LaunchWorkerThread(const std::string_view& loading_text, Scene* scene, const std::function<void()>& func)
+void Application::LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& func)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr!");
 	ENIGMA_ASSERT(func, "Function is empty!");
 
-	std::thread worker_thread([this, loading_text, scene, func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
+	std::thread worker_thread([this, scene, loading_text, func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
 		{
 			std::scoped_lock<std::mutex> guard{ scene->GetMutex() };
 

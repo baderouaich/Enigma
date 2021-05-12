@@ -20,8 +20,8 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnEncryptButtonPressed();
-	void OnBackButtonPressed();
 	void OnCopyEncryptedBase64TextButtonPressed();
+	void OnBackButtonPressed();
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm

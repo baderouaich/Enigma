@@ -68,7 +68,7 @@ typedef enum class KeyCode : ui16
 
 	/* Function keys */
 	Escape = GLFW_KEY_ESCAPE,
-	Enter = GLFW_KEY_ENTER,
+	Enter = GLFW_KEY_ENTER,	// OR RETURN
 	Tab = GLFW_KEY_TAB,
 	Backspace = GLFW_KEY_BACKSPACE,
 	Insert = GLFW_KEY_INSERT,

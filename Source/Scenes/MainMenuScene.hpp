@@ -30,7 +30,7 @@ private: /* Callbacks */
 	void OnAboutMenuButtonPressed();
 
 private:
-	std::unique_ptr<ImGuiWidgets::Image> m_logo{};
+	//std::unique_ptr<ImGuiWidgets::Image> m_logo{};
 };
 
 NS_ENIGMA_END
