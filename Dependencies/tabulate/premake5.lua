@@ -1,25 +1,25 @@
 project "tabulate"
 	kind "StaticLib"
-    language "C++"
-    cppdialect "C++17"
+	language "C++"
+	cppdialect "C++17"
 	staticruntime "on"
 	
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
-    includedirs 
-    {
-     	"include/",  -- header only
-    }
-    files
-    {
-    	"include/tabulate.hpp",
-    	"src/tabulate.cpp" -- has the header only include, to compile project as static lib 
-    }
+	includedirs 
+	{
+		"include/",  -- header only
+	}
+	files
+	{
+		"include/tabulate.hpp",
+		"src/tabulate.cpp" -- has the header only include, to compile project as static lib 
+	}
 
-    defines	
-    {
-    }
+	defines	
+	{
+	}
     
 	--- Platform ---
 	filter "system:windows"

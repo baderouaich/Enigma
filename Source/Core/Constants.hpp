@@ -19,6 +19,8 @@ namespace Enigma
 			// Notes:
 			// GCM is defined for block ciphers with a block size of 128 bits. https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
 			// No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
+			// Why GCM & EAX Modes: https://crypto.stackexchange.com/questions/18860/choice-of-authenticated-encryption-mode-for-whole-messages
+			// https://i.stack.imgur.com/0hNsK.jpg
 			
 			static constexpr const size_t MINIMUM_PASSWORD_LENGTH = 6; // AT LEAST 6 CHARACTERS, FOR SECURITY REASONS.
 			static constexpr const char* SPECIAL_CHARACTERS = "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~";

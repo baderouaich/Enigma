@@ -231,7 +231,7 @@ namespace ImGuiWidgets
 #if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
 			glAssert( glPixelStorei(GL_UNPACK_ROW_LENGTH, 0) );
 #endif
-			ENIGMA_INFO("Storing texture #{0} {1} to GPU Memory", m_id, SizeUtils::FriendlySize(m_width * m_height * sizeof(byte)));
+			ENIGMA_INFO("Storing texture #{0} {1} to GPU Memory", m_id, SizeUtils::FriendlySize(static_cast<size_t>(m_width * m_height) * sizeof(byte)));
 
 			glAssert( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer) );
 
