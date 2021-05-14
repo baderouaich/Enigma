@@ -8,7 +8,7 @@
 <!--LOGO-->
 <!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
 <!-- <img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
-<img src="Resources/Branding/Logo.png"/>
+<img src="Resources/Branding/Logo.png" width="333" />
 
 <!--DESCRIOTION-->
 A Simple, Reliable and Efficient UI + CLI Encryption Tool<br>
@@ -44,8 +44,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 
 ## NOTES
 - Encryption passwords are NOT saved into the database.
-- Export your database by copying `Enigma.db` from `./Resources/Database/`
-- Import your database by replacing `Enigma.db` in `./Resources/Database/`
+- Import/Export your database by copying or replacing database file `Enigma.db` located in `./Resources/Database/`
 
 
 ## Enigma CLI

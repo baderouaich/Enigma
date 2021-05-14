@@ -1,4 +1,6 @@
 ========================= IN PROGRESS =============================
+- Import/Export database menu button, when imported refresh or reinitialize database.
+
 - Use magic number static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA" at the start of each enigma cipher to detect validity before performing any operation.
 
 - maybe store file extension in database aswell, can help recover file, pass extension with SaveFileDialog {"."}
