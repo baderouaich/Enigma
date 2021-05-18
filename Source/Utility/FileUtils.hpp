@@ -53,6 +53,34 @@ public:
 	}
 
 
+	/*
+	*	Reads a file chunk by chunk
+	*/
+	static void ReadChunks(const String& filename, const size_t max_chunk_size, const std::function<void(std::vector<byte>&&)>& callback)
+	{
+		if (std::ifstream ifs{ filename, std::ios::binary }) 
+		{
+			while (!ifs.eof())
+			{
+				std::vector<std::uint8_t> chunk(max_chunk_size, '\000');
+				ifs.read((char*)chunk.data(), chunk.size());
+
+				// resize chunk if we read bytes less than max_chunk_size
+				const auto bytes_read = ifs.gcount();
+				if (bytes_read < max_chunk_size)
+					chunk.resize(bytes_read);
+
+				// serve chunk
+				callback(std::move(chunk));
+			}
+			ifs.close();
+		}
+		else
+		{
+			ENIGMA_ERROR("Failed to read file chunks {0}", filename);
+		}
+	}
+
 };
 NS_ENIGMA_END
 

@@ -152,6 +152,8 @@ project "Enigma"
 	---[[ Platform ]]---
 	filter "system:windows"
 		systemversion "latest"
+		--entrypoint "WinMainCRTStartup" -- use WinMain as entry point
+
 		-- .exe icon
 	    files 
 	    {
@@ -243,7 +245,6 @@ project "Enigma"
 		{
 			-- Only applicable in Release configurations
 			"LinkTimeOptimization", -- Link Time Optimization (LTO) refers to program optimization during linking. The linker pulls all object files together and combines them into one program. The linker can see the whole of the program, and can therefore do whole-program analysis and optimization.
-			"WinMain", -- Use WinMain() as entry point for Windows applications, rather than the default main().	
 		}
 
 	filter "configurations:Dist"
@@ -258,5 +259,4 @@ project "Enigma"
 		{
 			-- Only applicable in Release configurations
 			"LinkTimeOptimization", -- Link Time Optimization (LTO) refers to program optimization during linking. The linker pulls all object files together and combines them into one program. The linker can see the whole of the program, and can therefore do whole-program analysis and optimization.
-			"WinMain", -- Use WinMain() as entry point for Windows applications, rather than the default main().	
 		}
