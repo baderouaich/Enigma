@@ -62,7 +62,7 @@ public:
 	{
 		std::transform(str.begin(), str.end(), str.begin(), [](const auto& c)
 			{
-				return static_cast<StringType::value_type>(std::tolower(c));
+				return static_cast<typename StringType::value_type>(std::tolower(c));
 			});
 	}
 
@@ -76,7 +76,7 @@ public:
 		StringType cstr = str;
 		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const auto& c)
 			{
-				return static_cast<StringType::value_type>(std::tolower(c));
+				return static_cast<typename StringType::value_type>(std::tolower(c));
 			});
 		return cstr;
 	}
@@ -90,7 +90,7 @@ public:
 	{
 		std::transform(str.begin(), str.end(), str.begin(), [](const auto& c)
 			{
-				return static_cast<StringType::value_type>(std::toupper(c));
+				return static_cast<typename StringType::value_type>(std::toupper(c));
 			});
 	}
 	
@@ -104,7 +104,7 @@ public:
 		StringType cstr = str;
 		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const auto& c)
 			{
-				return static_cast<StringType::value_type>(std::toupper(c));
+				return static_cast<typename StringType::value_type>(std::toupper(c));
 			});
 		return cstr;
 	}
