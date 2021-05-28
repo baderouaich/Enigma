@@ -20,7 +20,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Preparing for release v1.2.1 (which has all above features since v1.0.1)
 
 
-<!-- In Progress...
+
 # 1.3.0
 - Fixed Clang compilation issue on linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
 - Added CLI option  (--updates | -n)  which checks for updates when using CLI
@@ -38,5 +38,4 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Added Blowfish-EAX Algorithm
 - Changed logging format
 - Now buffer is always compressed by default before encrypting
-- TODO: Now algorithm is auto-detected by default when decrypting, which removes the "detect algorithm used for encryption button"
--->
+- Now algorithm is auto-detected by default when decrypting, which removes the "detect algorithm used for encryption button"
