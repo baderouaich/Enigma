@@ -1,7 +1,4 @@
 ========================= IN PROGRESS =============================
-- Maybe always detect algorithm from cipher, no need to make it an option when decrypting.
-
-- ability to cancel check-for-updates ui
 
 - CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
 
@@ -13,9 +10,6 @@
 
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
 
-- Use ENIGMA_UNUSED [[maybe_unused]] instead of void for all std::system..etc to avoid warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
-
-
 - disallow multiple enigma app instance,  https://stackoverflow.com/questions/8799646/preventing-multiple-instances-of-my-application (DONE for Windows)
 
 - Add copy button to output texts in DecryptTextScene & ViewEncryptionScene
@@ -25,6 +19,7 @@
 - Add donate github or menu option (very low priority) if user wants to buy me a coffee.
 - Maybe uplaod enigma release to stores like windows store and linux in such as https://www.linux-apps.com/ for global usage as a free open source project
 
+- ability to cancel check-for-updates ui
 
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
@@ -62,6 +57,7 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE always compress buffer before encrypting, remove --compress & --decompress CLI options as well as from readme
 - DONE Logging instead of [date time] Enigma:  make it [date time] info: or [date time] warn... and more detaied in file
 - DONE use templates in StringUtils instead of writing functions each cases
+- DONE Maybe always detect algorithm from cipher, no need to make it an option when decrypting.
 =============================================================================
 
 
