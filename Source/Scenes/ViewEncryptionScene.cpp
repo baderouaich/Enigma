@@ -18,7 +18,6 @@ ViewEncryptionScene::ViewEncryptionScene(const i64 encryption_id)
 		(void)DialogUtils::Error("Couldn't get encryption record from database");
 		Scene::EndScene();
 	}
-	std::cout << m_encryption->title;
 }
 
 void ViewEncryptionScene::OnCreate()

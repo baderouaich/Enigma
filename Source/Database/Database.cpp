@@ -85,7 +85,6 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			ENIGMA_LOG("SQL: {0}", sql);
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->title);
-			ENIGMA_INFO("size from query {0}", e->size);
 			query->bind(2, e->size);
 			query->bind(3, static_cast<i32>(e->is_file));
 			const i32 r = query->exec(); // returns num rows effected
