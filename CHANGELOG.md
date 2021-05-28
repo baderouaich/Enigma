@@ -23,7 +23,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 
 # 1.3.0
 - Fixed Clang compilation issue on linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
-- Added CLI option  (--updates | -n)  which checks for updates when using CLI
+- Added CLI option `--check-for-updates` which checks for updates when using CLI
 - Upgraded imgui library from 1.79 to 1.81 (master branch)
 - Upgraded spdlog library from 1.8.0 to 1.8.2
 - Upgraded curl library from 7.74.0 to 7.75.0
