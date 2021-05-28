@@ -1,19 +1,17 @@
 ========================= IN PROGRESS =============================
-- Import/Export database menu button, when imported refresh or reinitialize database.
+- Maybe always detect algorithm from cipher, no need to make it an option when decrypting.
+
+- ability to cancel check-for-updates ui
+
+- CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
 
 - Use magic number static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA" at the start of each enigma cipher to detect validity before performing any operation.
 
 - maybe store file extension in database aswell, can help recover file, pass extension with SaveFileDialog {"."}
 
 - Encrypt & Decrypt Files using Chunks 
-while(!eof())
-	ifs.read(chunk_size, buff)
-	cipher += encrypt(pass, buff)
 
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
-
-- CodeQL still doesnt ignore Dependencies
-
 
 - Use ENIGMA_UNUSED [[maybe_unused]] instead of void for all std::system..etc to avoid warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
 
@@ -22,19 +20,10 @@ while(!eof())
 
 - Add copy button to output texts in DecryptTextScene & ViewEncryptionScene
 
+- maybe go further on new updates available, download update, extract binary to "."
 
-- made encrypt/decrypt text compressed by default.
-
-
-- remove json_type and add decltype()
-https://github.com/BaderEddineOuaich/Enigma/blob/master/Source/Networking/CheckForUpdates.hpp#L55
-
-
-- ViewEncryptionScene get only lightweight info about encryption until decryption made and retrieve other data.
-
-- Maybe always detect algorithm from cipher, no need to make it an option
-
-- always compress buffer before encrypting, remove --compress & --decompress CLI options as well as from readme
+- Add donate github or menu option (very low priority) if user wants to buy me a coffee.
+- Maybe uplaod enigma release to stores like windows store and linux in such as https://www.linux-apps.com/ for global usage as a free open source project
 
 
 ============================== DONE ===============================
@@ -66,10 +55,13 @@ https://github.com/DanLangas/Enigma/blob/master/Source/Algorithm/Algorithm.cpp#L
 DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet) issue is the '\000' ate of string, when getting cipher blob from sqlite3, sqlite3 seem to add extra \000 to end of string https://stackoverflow.com/questions/35114277/ciphertext-length-is-not-a-multiple-of-block-size-in-cryptopp
 - DONE Add README Notes hint (note: password is not saved) to Save to db [x]
 - DONE Database records order by Size
+- DONE make encrypt/decrypt text compressed by default.
 - DONE On View encryption, get encryption from database by worker thread, it takes time to load, or maybe dont get the damn cipher until decrypt pressed to save memory
 - DONE use EAX mode instead of CBC for algorithms with blocksize not equal to 16 (which GCM allows to be applied)
 - DONE Remove annoying dialog asks to confirm abort operation on leaving encrypt decrypt scenes...
-
+- DONE always compress buffer before encrypting, remove --compress & --decompress CLI options as well as from readme
+- DONE Logging instead of [date time] Enigma:  make it [date time] info: or [date time] warn... and more detaied in file
+- DONE use templates in StringUtils instead of writing functions each cases
 =============================================================================
 
 

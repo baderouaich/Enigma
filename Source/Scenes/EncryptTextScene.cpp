@@ -151,7 +151,7 @@ void EncryptTextScene::OnImGuiDraw()
 			if (m_save_to_database)
 			{
 				ImGui::Text("Encryption Title:");
-				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: My Github Password) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
+				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: An important message) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
 			}
 		}
 		ImGui::PopFont();

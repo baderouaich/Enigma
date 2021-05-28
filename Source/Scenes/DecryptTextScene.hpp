@@ -18,7 +18,6 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private: /* Callbacks */
-	void OnAutoDetectAlgorithmButtonPressed();
 	void OnDecryptButtonPressed();
 	void OnBackButtonPressed();
 

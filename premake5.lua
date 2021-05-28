@@ -93,6 +93,9 @@ project "Enigma"
 	pchheader "pch.hpp"
 	pchsource "Source/pch.cpp"
 
+	---[[ Disable RTTI to optimize if we're not using dynamic_cast or typeid ]]---
+	--rtti "Off"
+
 	---[[ Enable the toolset's maximum warning level ]]---
 	--warnings "Extra"
 	

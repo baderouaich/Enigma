@@ -103,37 +103,24 @@ void DecryptTextScene::OnImGuiDraw()
 		ImGui::Separator();
 		spacing(3);
 
-		// Algorithm To decrypt text with
+		// Algorithm used in encryption to decrypt text with
 		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			// Label
 			ImGui::Text("Algorithm:");
+			ImGui::NewLine();
 
 			// Algo types radio buttons
 			const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
 			for (const auto& [algo_name, algo_type] : supported_algorithms)
 			{
-				inline_dummy(6.0f, 0.0f);
+				inline_dummy(1.0f, 0.0f);
 				ImGui::SameLine();
 				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
 					m_type = algo_type;
 				}
 			}
-			ImGui::NewLine();
-
-			ImGui::PushFont(font_audiowide_regular_20); // buttons font
-			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			ImGui::Text("Forgot which Algorithm used in encryption ?"); inline_dummy(6.0f, 0.0f); ImGui::SameLine();
-			if (ImGui::Button("Auto-Detect Algorithm"))
-			{
-				this->OnAutoDetectAlgorithmButtonPressed();
-			}
-			ImGui::PopStyleColor(3);
-			ImGui::PopFont();
-
 		}
 		ImGui::PopFont();
 
@@ -265,24 +252,6 @@ void DecryptTextScene::OnDestroy()
 }
 
 
-void DecryptTextScene::OnAutoDetectAlgorithmButtonPressed()
-{
-	try
-	{
-		// Auto detect encryption algorithm
-		m_type = Algorithm::DetectFromCipherBase64(m_cipher_base64);
-
-		// little happy msg for user
-		const String happy_msg = "Successfully auto-detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type);
-		ENIGMA_INFO(happy_msg);
-		(void)DialogUtils::Info(happy_msg);
-	}
-	catch (const std::exception& e)
-	{
-		(void)DialogUtils::Error(e.what());
-	}
-}
-
 void DecryptTextScene::OnBackButtonPressed()
 {
 	//if (!m_cipher_base64.empty() || !m_password.empty() || !m_recovered_text.empty())
@@ -312,6 +281,11 @@ void DecryptTextScene::OnDecryptButtonPressed()
 
 	try
 	{
+		// Auto detect encryption algorithm
+		m_type = Algorithm::DetectFromCipherBase64(m_cipher_base64);
+		ENIGMA_INFO("Successfully auto-detected algorithm used for encryption which is {0}", Algorithm::AlgoTypeEnumToStr(m_type));
+		
+		// Decode base64 to cipher
 		m_cipher = Base64::Decode(m_cipher_base64);
 		ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
 	

@@ -64,7 +64,7 @@ void Database::Shutdown()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
-	if (m_database) // Only vacuum if there were changes done to the database.
+	if (m_database) 
 	{
 		Vacuum();
 	}

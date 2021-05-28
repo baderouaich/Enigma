@@ -305,7 +305,7 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 	if (!info) 
 		return;
 	
-	const auto current_version = "v" + String(Enigma::ENIGMA_VERSION);
+	const auto current_version = "v" + String(ENIGMA_VERSION);
 	std::ostringstream oss{};
 	if (info->tag_name == current_version)
 	{

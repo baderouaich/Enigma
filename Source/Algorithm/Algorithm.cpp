@@ -99,10 +99,10 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(filename), "input file is empty");
 	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(filename), "input file is not a regular file");
 
-	// Read file cipher
-	String cipher{};
-	ENIGMA_ASSERT_OR_THROW(FileUtils::Read(filename, cipher), "Failed to read file " + filename);
-	//NOTE: no need to decompress, since files and text are encrypted after compressed.
+	//// Read file cipher
+	//String cipher{};
+	//ENIGMA_ASSERT_OR_THROW(FileUtils::Read(filename, cipher), "Failed to read file " + filename);
+	////NOTE: no need to decompress, since files and text are encrypted after compressed.
 
 	// extract first byte from infile cipher which must be the mode type used in encryption
 	byte cipher_first_byte = static_cast<byte>(Algorithm::Type::END) + 1;

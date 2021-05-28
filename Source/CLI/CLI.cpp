@@ -93,7 +93,7 @@ i32 CLI::Run()
 	ENIGMA_LOG("Processing arguments...");
 
 	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
-	Algorithm::Intent intent{}; // Encrypt or Decrypt?
+	Algorithm::Intent intent{}; // Encrypt or Decrypt? to save memory resources not needed in a specific operation
 	String mode{}; // "aes", "tripledes"..
 	String password{}; // Encryption password 
 	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
@@ -120,9 +120,8 @@ i32 CLI::Run()
 		if (r.count("m") || r.count("mode")) // --m=aes or --mode=aes or chacha..
 		{
 			mode = r["m"].as<String>();
-			StringUtils::Lower(mode);
 
-			//Hardcoded argh!!
+			// Hardcoded argh!! >_<
 			//if (m == "aes") mode = Algorithm::Type::AES;
 			//else if (m == "chacha") mode = Algorithm::Type::ChaCha20;
 			//else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
@@ -131,7 +130,7 @@ i32 CLI::Run()
 			//LOG("Mode: {0}", m);
 		}
 		else if(intent == Algorithm::Intent::Encrypt) // If intent is encrypting, mode is required, otherwise we can detect which mode used for encryption.
-			throw std::runtime_error("You should specify an encryption mode like: --mode=aes or -m aes, unless you are decrypting, then we can autodetect the mode used for encryption.");
+			throw std::runtime_error("You should specify an encryption mode like: --mode=aes or -m aes, unless you are decrypting, then we can auto-detect the mode used for encryption.");
 
 		// What is the encryption/decryption password?
 		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
@@ -277,7 +276,7 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	if(save_to_database)
 	{
 		String title{};
-		ENIGMA_LOG("Save encryption to database, please enter encryption title (e.g: My Github Password): ");
+		ENIGMA_LOG("Save encryption to database, please enter encryption title (e.g: My Github Password). it helps with searching through encryptions from the database in the future: ");
 		std::cout << "> ";
 		std::getline(std::cin, title);
 
@@ -500,7 +499,7 @@ void CLI::OnHelp()
 
 void CLI::OnVersion()
 {
-	ENIGMA_INFO(Enigma::ENIGMA_VERSION);
+	ENIGMA_INFO(ENIGMA_VERSION);
 }
 
 void CLI::OnCheckForUpdates()
@@ -511,7 +510,7 @@ void CLI::OnCheckForUpdates()
 	if (!info)
 		return;
 
-	const auto current_version = "v" + String(Enigma::ENIGMA_VERSION);
+	const auto current_version = "v" + String(ENIGMA_VERSION);
 	std::ostringstream oss{};
 	if (info->tag_name == current_version)
 	{

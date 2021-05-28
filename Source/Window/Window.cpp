@@ -5,6 +5,7 @@
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
 
 NS_ENIGMA_BEGIN
+
 /* Static Functions Begin */
 static void GLFWErrorCallback(int error, const char* message)
 {

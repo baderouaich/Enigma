@@ -20,168 +20,125 @@ public:
     /*
     *   Removes leading and trailing spaces from a string
     */
-    static void Trim(String& str)
+	template<typename StringType>
+    static void Trim(StringType& str)
     {
         TrimLeft(str);
 		TrimRight(str);
     }
-	static void Trim(WString& wstr)
-	{
-		TrimLeft(wstr);
-		TrimRight(wstr);
-	}
+	
 
     /*
     *   Trim string from left
     */
-    static void TrimLeft(String& str)
+	template<typename StringType>
+    static void TrimLeft(StringType& str)
     {
-		str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](const char& c)
+		str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](const auto& c)
 		{
 			return !std::isspace(c);
 		}));
 	}
-	static void TrimLeft(WString& wstr)
-	{
-		wstr.erase(wstr.begin(), std::find_if(wstr.begin(), wstr.end(), [](const wchar_t& c)
-		{
-			return !std::isspace(c);
-		}));
-	}
+	
 
     /*
     *   Trim string from right
     */
-    static void TrimRight(String& str)
+	template<typename StringType>
+    static void TrimRight(StringType& str)
     {
-		str.erase(std::find_if(str.rbegin(), str.rend(), [](const char& c)
+		str.erase(std::find_if(str.rbegin(), str.rend(), [](const auto& c)
 		{
 			return !std::isspace(c);
 		}).base(), str.end());
     }
-	static void TrimRight(WString& wstr)
-	{
-		wstr.erase(std::find_if(wstr.rbegin(), wstr.rend(), [](const wchar_t& c)
-		{
-			return !std::isspace(c);
-		}).base(), wstr.end());
-	}
+
 
 	/*
 	*   Lowercase a string
 	*/
-	static void Lower(String& str)
+	template<typename StringType>
+	static void Lower(StringType& str)
 	{
-		std::transform(str.begin(), str.end(), str.begin(), [](const char& c)
+		std::transform(str.begin(), str.end(), str.begin(), [](const auto& c)
 			{
-				return static_cast<char>(std::tolower(c));
+				return static_cast<StringType::value_type>(std::tolower(c));
 			});
 	}
-	static void Lower(WString& wstr)
-	{
-		std::transform(wstr.begin(), wstr.end(), wstr.begin(), [](const wchar_t& c)
-			{
-				return static_cast<wchar_t>(std::tolower(c));
-			});
-	}
+
 
 	/*
 	*   Lowercase a string and return a copy of it
 	*/
-	static String LowerCopy(const String& str)
+	template<typename StringType>
+	static auto LowerCopy(const StringType& str)
 	{
-		String cstr = str;
-		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const char& c)
+		StringType cstr = str;
+		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const auto& c)
 			{
-				return static_cast<char>(std::tolower(c));
+				return static_cast<StringType::value_type>(std::tolower(c));
 			});
 		return cstr;
 	}
-	static WString LowerCopy(const WString& wstr)
-	{
-		WString cwstr = wstr;
-		std::transform(cwstr.begin(), cwstr.end(), cwstr.begin(), [](const wchar_t& c)
-			{
-				return static_cast<wchar_t>(std::tolower(c));
-			});
-		return cwstr;
-	}
+	
 
 	/*
 	*   Uppercase a string
 	*/
-	static void Upper(String& str)
+	template<typename StringType>
+	static void Upper(StringType& str)
 	{
-		std::transform(str.begin(), str.end(), str.begin(), [](const char& c)
+		std::transform(str.begin(), str.end(), str.begin(), [](const auto& c)
 			{
-				return static_cast<char>(std::toupper(c));
+				return static_cast<StringType::value_type>(std::toupper(c));
 			});
 	}
-	static void Upper(WString& wstr)
-	{
-		std::transform(wstr.begin(), wstr.end(), wstr.begin(), [](const wchar_t& c)
-			{
-				return static_cast<wchar_t>(std::toupper(c));
-			});
-	}
+	
 
 	/*
 	*   Uppercase a string and return a copy of it
 	*/
-	static String UpperCopy(const String& str)
+	template<typename StringType>
+	static auto UpperCopy(const StringType& str)
 	{
-		String cstr = str;
-		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const char& c)
+		StringType cstr = str;
+		std::transform(cstr.begin(), cstr.end(), cstr.begin(), [](const auto& c)
 			{
-				return static_cast<char>(std::toupper(c));
+				return static_cast<StringType::value_type>(std::toupper(c));
 			});
 		return cstr;
 	}
-	static WString UpperCopy(const WString& wstr)
-	{
-		WString cwstr = wstr;
-		std::transform(cwstr.begin(), cwstr.end(), cwstr.begin(), [](const wchar_t& c)
-			{
-				return static_cast<wchar_t>(std::toupper(c));
-			});
-		return cwstr;
-	}
+
 
 	/*
 	*   Check if a string starts with a prefix
 	*/
-	static bool StartsWith(const String& str, const String& prefix)
+	template<typename StringType>
+	static bool StartsWith(const StringType& str, const StringType& prefix)
 	{
 		return str.size() >= prefix.size() && str.compare(0, prefix.size(), prefix) == 0;
 	}
-	static bool StartsWith(const WString& wstr, const WString& wprefix)
-	{
-		return wstr.size() >= wprefix.size() && wstr.compare(0, wprefix.size(), wprefix) == 0;
-	}
+	
 
 	/*
 	*   Check if a string ends with a suffix
 	*/
-	static bool EndsWith(const String& str, const String& suffix)
+	template<typename StringType>
+	static bool EndsWith(const StringType& str, const StringType& suffix)
 	{
 		return str.size() >= suffix.size() && str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 	}
-	static bool EndsWith(const WString& wstr, const WString& wsuffix)
-	{
-		return wstr.size() >= wsuffix.size() && wstr.compare(wstr.size() - wsuffix.size(), wsuffix.size(), wsuffix) == 0;
-	}
+	
 
 	/*
 	*   Check if a string contains another
 	*/
-	static bool Contains(const String& str, const String& other)
+	template<typename StringType>
+	static bool Contains(const StringType& str, const StringType& other)
 	{
-		return str.find(other) != String::npos;
+		return str.find(other) != StringType::npos;
 	}
-	static bool Contains(const WString& str, const WString& other)
-	{
-		return str.find(other) != WString::npos;
-	}
+	
 
 	/*
 	*	Converts UTF-8 std::string to UTF-16 std::wstring
@@ -192,6 +149,7 @@ public:
 		static std::wstring_convert<convert_type, wchar_t> converter;
 		return converter.from_bytes(str);
 	}
+
 
 	/*
 	*	Converts UTF-16 std::wstring to UTF-8 std::string

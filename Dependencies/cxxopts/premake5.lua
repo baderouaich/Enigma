@@ -11,6 +11,7 @@ project "cxxopts"
     {
      	"include/",  -- header only
     }
+
     files
     {
     	"src/cxxopts.cpp" -- has the header only include, to compile project as static lib 
@@ -18,8 +19,9 @@ project "cxxopts"
 
     defines	
     {
-    	--"CXXOPTS_NO_RTTI" -- enable if rtti disabled
+    	--"CXXOPTS_NO_RTTI" -- enable if rtti is disabled
     }
+
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"

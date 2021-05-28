@@ -11,7 +11,7 @@
 "Modern graphics drivers have settings that allow users to override an application’s request for (among other things) swap interval. 
 If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 
-# 1.1.1
+# 1.1.0
 - Added networking libraries curl, cpr (additional zlib, mbedtls for linux builds)
 - Removed Unused resources
 
@@ -21,7 +21,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 
 
 <!-- In Progress...
-# 1.3.2
+# 1.3.0
 - Fixed Clang compilation issue on linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
 - Added CLI option  (--updates | -n)  which checks for updates when using CLI
 - Upgraded imgui library from 1.79 to 1.81 (master branch)
@@ -36,5 +36,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 - Upgraded premake5 from 5.0.0-alpha15 to 5.0.0-alpha16
 - Switched Algorithms from CBC padding to Authentication encyrption EAX (TripleDES-CBC to TripleDES-EAX, IDEA-CBC to IDEA-EAX, ChaCha20 to ChaCha20Poly1305)
 - Added Blowfish-EAX Algorithm
-
+- Changed logging format
+- Now buffer is always compressed by default before encrypting
+- TODO: Now algorithm is auto-detected by default when decrypting, which removes the "detect algorithm used for encryption button"
 -->

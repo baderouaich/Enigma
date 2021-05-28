@@ -112,34 +112,22 @@ void DecryptFileScene::OnImGuiDraw()
 		{
 			// Label
 			ImGui::Text("Algorithm:");
+			ImGui::NewLine();
 
 			// Algo types radio buttons
 			const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
 			for (const auto& [algo_name, algo_type] : supported_algorithms)
 			{
-				inline_dummy(6.0f, 0.0f);
+				inline_dummy(1.0f, 0.0f);
 				ImGui::SameLine();
 				if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type))
 				{
 					m_type = algo_type;
 				}
 			}
-			ImGui::NewLine();
-
-			ImGui::PushFont(font_audiowide_regular_20); // buttons font
-			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			ImGui::Text("Forgot which Algorithm used in encryption ?"); inline_dummy(6.0f, 0.0f); ImGui::SameLine();
-			if (ImGui::Button("Auto-Detect Algorithm"))
-			{
-				this->OnAutoDetectAlgorithmButtonPressed();
-			}
-			ImGui::PopStyleColor(3);
-			ImGui::PopFont();
-
 		}
 		ImGui::PopFont();
+
 
 
 #if 0
@@ -286,68 +274,6 @@ void DecryptFileScene::OnDestroy()
 
 }
 
-void DecryptFileScene::OnAutoDetectAlgorithmButtonPressed()
-{	
-	try
-	{
-		// Auto detect encryption algorithm
-		m_type = Algorithm::DetectFromFile(m_in_filename);
-
-		// little happy msg for user
-		const String happy_msg = "Successfully auto-detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type);
-		ENIGMA_INFO(happy_msg);
-		(void)DialogUtils::Info(happy_msg);
-	}
-	catch (const std::exception& e)
-	{
-		(void)DialogUtils::Error(e.what());
-	}
-
-#if 0
-	try
-	{
-		// Auto detect algorithm used for encrypting
-		byte cipher_first_byte{ (byte)Algorithm::Type::Last + 1 };
-		ENIGMA_TRACE("auto-detecting algorithm used for encryption...");
-		// extract first byte from infile cipher which must be the mode type used in encryption
-		if (std::ifstream ifs{ m_in_filename, std::ios_base::binary | std::ios_base::in })
-		{
-			ifs >> cipher_first_byte;
-			ifs.close();
-		}
-		
-		// Check if detected mode is valid
-		if (!ENIGMA_IS_BETWEEN(cipher_first_byte, (byte)Algorithm::Type::First, (byte)Algorithm::Type::Last))
-		{
-			(void)DialogUtils::Error("Could not auto-detect algorithm mode used for encryption");
-			return;
-		}
-		// if alles gut, set type
-		m_type = static_cast<Algorithm::Type>(cipher_first_byte);
-		// little happy info dialog
-		ENIGMA_INFO("Successfully detected algorithm used for encryption which is: {0}", Algorithm::AlgoTypeEnumToStr(m_type));
-		(void)DialogUtils::Info("Successfully detected algorithm used for encryption which is: " + Algorithm::AlgoTypeEnumToStr(m_type));
-	}
-	catch (const CryptoPP::Exception& e)
-	{
-		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
-		ENIGMA_ERROR("Auto-detect algorithm Failure: {0}", err_msg);
-		(void)DialogUtils::Error("Decryption Failure", err_msg);
-	}
-	catch (const std::exception& e)
-	{
-		ENIGMA_ERROR("Auto-detect algorithm Failure: {0}", e.what());
-		(void)DialogUtils::Error("Auto-detect algorithm Failure", e.what());
-	}
-	catch (...)
-	{
-		const String err_msg = "Auto-detect algorithm Failure: UNKNOWN ERROR";
-		ENIGMA_ERROR(err_msg);
-		(void)DialogUtils::Error(err_msg);
-	}
-#endif
-}
-
 
 void DecryptFileScene::OnBrowseInFileButtonPressed()
 {
@@ -429,6 +355,10 @@ void DecryptFileScene::OnDecryptButtonPressed()
 	{
 		try
 		{
+			// Auto detect encryption algorithm
+			m_type = Algorithm::DetectFromFile(m_in_filename);
+			ENIGMA_INFO("Successfully auto-detected algorithm used for encryption which is {0}", Algorithm::AlgoTypeEnumToStr(m_type));
+
 			// Create decryptor based on selected algorithm type
 			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
 			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");

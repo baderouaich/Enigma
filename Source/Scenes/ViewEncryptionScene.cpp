@@ -254,7 +254,8 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 
 		// Auto detect algorithm used for encryption
 		Algorithm::Type algo_type = Algorithm::DetectFromCipher(cipher->data);
-		ENIGMA_INFO("Detected algorithm is {0}", Algorithm::AlgoTypeEnumToStr(algo_type));
+		ENIGMA_INFO("Successfully auto-detected algorithm used for encryption which is {0}", Algorithm::AlgoTypeEnumToStr(algo_type));
+
 
 		// Create encryptor based on selected algorithm type
 		const auto algorithm = Algorithm::CreateFromType(algo_type, Algorithm::Intent::Decrypt);

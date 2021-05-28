@@ -17,7 +17,6 @@
 	#include <Enigma.hpp>
 #endif
 
-
 int main(int argc, char* argv[])
 {
 	// Initialize Enigma Logger
@@ -25,8 +24,18 @@ int main(int argc, char* argv[])
 	// Initialize SQLite3 Database
 	Enigma::Database::Initialize();
 
+	ENIGMA_INFO(R"(			
++++++++++++++++++++++++++++++++ {0} ++++++++++++++++++++++++++++++++++
++   _________      _              ___________   _      _       __      +
++  |              / \      /  |  |             | \    / |     /  \     +
++  |_________    /   \    /   |  |      ____   |  \  /  |    /____\    +
++  |            /     \  /    |  |          |  |   \/   |   /      \   +
++  |_________  /       \/     |  |__________|  |    	|  /        \  +
++                                                                      +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++)",
+ENIGMA_VERSION);
 
-	Enigma::i32 exit_status = -1;
+	Enigma::i32 exit_code = -1;
 	try
 	{
 #if ! ENIGMA_TEST
@@ -34,21 +43,21 @@ int main(int argc, char* argv[])
 		if (argc > 1)
 		{
 			const auto _Cli = std::make_unique<Enigma::CLI>(argc, argv);
-			exit_status = _Cli->Run();
+			exit_code = _Cli->Run();
 		}
 		//========= UI Entry =========//
 		else
 		{
 			// Load Window Configuration (title, width, height...)
-			Enigma::Config window_config(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
+			const Enigma::Config window_config(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
 			// Construct WindowSettings from loaded Config
-			Enigma::WindowSettings window_settings = Enigma::WindowSettings::FromConfig(window_config);
+			const Enigma::WindowSettings window_settings = Enigma::WindowSettings::FromConfig(window_config);
 			// Create Enigma UI Application
 			const auto _App = std::make_unique<Enigma::Application>(window_settings);
 			// Run Application
 			_App->Run();
 			// Exit Successfully
-			exit_status = EXIT_SUCCESS;
+			exit_code = EXIT_SUCCESS;
 		}
 #else
 		//========= Tests Entry =========//
@@ -57,9 +66,9 @@ int main(int argc, char* argv[])
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_CRITICAL(e.what());
 		// Exit Abnormally
-		exit_status = EXIT_FAILURE;
+		ENIGMA_CRITICAL(e.what());
+		exit_code = EXIT_FAILURE;
 	}
 	
 
@@ -68,7 +77,7 @@ int main(int argc, char* argv[])
 	// Shutdown Enigma Logger
 	Enigma::Logger::Shutdown();
 
-	return exit_status;
+	return exit_code;
 }
 
 

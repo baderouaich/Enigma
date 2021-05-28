@@ -18,7 +18,6 @@ class ENIGMA_API CheckForUpdates final
 public:
 	struct LatestReleaseInfo
 	{
-
 		String name;   // "name": "Enigma Release (Windows x64, Linux x64)",
 		String tag_name; // version e.g v1.0.0
 		String created_at;//"created_at": "2021-02-06T11:41:26Z",
@@ -27,7 +26,7 @@ public:
 		String tarball_url; // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
 		String zipball_url;	// "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
 
-		LatestReleaseInfo()
+		LatestReleaseInfo() noexcept
 			:
 			tag_name("<unknown>"),
 			name("<unknown>"),
@@ -38,30 +37,24 @@ public:
 			zipball_url("<unknown>")
 		{}
 		
-		~LatestReleaseInfo()
-		{
-			tag_name.clear();
-			created_at.clear();
-			published_at.clear();
-			body.clear();
-		}
+		~LatestReleaseInfo() noexcept = default;
 
 		static std::unique_ptr<LatestReleaseInfo> FromJson(const json& obj)
 		{
 #define CC1(a, b) a##b
 #define CC(a, b) CC1(a, b)
-#define ASSIGN_IF(var, field, get_type, json_type) \
+#define ASSIGN_IF(var, field, json_type) \
 		if(!obj[field].is_null() && CC(obj[field].is_, json_type)()) \
-			(var) = obj[field].get<get_type>(); 
+			(var) = obj[field].get<decltype(var)>(); 
 
 			std::unique_ptr<LatestReleaseInfo> info = std::make_unique<LatestReleaseInfo>();
-			ASSIGN_IF(info->name, "name", String, string);
-			ASSIGN_IF(info->tag_name, "tag_name", String, string);
-			ASSIGN_IF(info->created_at, "created_at", String, string);
-			ASSIGN_IF(info->published_at, "published_at", String, string);
-			ASSIGN_IF(info->body, "body", String, string);
-			ASSIGN_IF(info->tarball_url, "tarball_url", String, string);
-			ASSIGN_IF(info->zipball_url, "zipball_url", String, string);
+			ASSIGN_IF(info->name, "name", string);
+			ASSIGN_IF(info->tag_name, "tag_name", string);
+			ASSIGN_IF(info->created_at, "created_at", string);
+			ASSIGN_IF(info->published_at, "published_at", string);
+			ASSIGN_IF(info->body, "body", string);
+			ASSIGN_IF(info->tarball_url, "tarball_url", string);
+			ASSIGN_IF(info->zipball_url, "zipball_url", string);
 			return info;
 
 #undef ASSIGN_IF

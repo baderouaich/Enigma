@@ -18,7 +18,6 @@ private: /* Overrides */
 	void OnDestroy() override;
 
 private: /* Callbacks */
-	void OnAutoDetectAlgorithmButtonPressed();
 	//void OnBrowseInFileButtonPressed();
 	//void OnBrowseOutFileButtonPressed();
 	void OnBrowseInFileButtonPressed(); // browse file to decrypt

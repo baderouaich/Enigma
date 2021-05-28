@@ -291,6 +291,9 @@ public: // Modifiers
 			ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);
 			(void)m_database->exec("VACUUM");
 		}
+		else
+			ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");
+
 
 	}
 

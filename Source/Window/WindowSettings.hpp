@@ -13,7 +13,7 @@ struct ENIGMA_API WindowSettings
 	/*
 	*	Title of the window (Displayed in the title bar)
 	*/
-	String title = "Enigma Application";
+	String title = "Enigma";
 
 	/*
 	*	Width in pixels of the window
