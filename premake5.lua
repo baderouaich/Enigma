@@ -81,13 +81,24 @@ group ""
 -- Include Enigma Application project solution
 project "Enigma"
 	language "C++"
-	cppdialect "C++17"
+	cppdialect "C++17" --"C++latest" --TODO C++20 
 	staticruntime "on"
 
 	---[[ Binary Output dirs ]]---
 	targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
-	--debugdir ("%{wks.location}/Debug/")
+	--debugdir ("%{wks.location}/")
+
+	--[[ 
+		Command to copy Resources/ folder next to Enigma.exe (targetdir) after each build https://github.com/premake/premake-core/wiki/postbuildcommands 
+	 	Why this?: when Enigma is deployed, we assume Resources/ folder to always be next to the Enigma.exe so it works properly in debug and distribution
+    --]]
+ 	postbuildcommands {
+ 		{ "{MKDIR} %{cfg.targetdir}/Resources" }, -- make Resources dir to copy files into it.
+        { "{COPY} ./Resources/ %{cfg.targetdir}/Resources" } -- copy Resources/** to %{cfg.targetdir}/Resources
+    }			
+
+
 
 	---[[ Precompiled Header ]]---
 	pchheader "pch.hpp"

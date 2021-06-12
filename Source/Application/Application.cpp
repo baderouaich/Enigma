@@ -56,7 +56,7 @@ void Application::InitWindow(const WindowSettings& window_settings)
 		m_window->SetEventCallback(ENIGMA_BIND_FUN(Application::OnEvent));
 		
 		// Set Window runtime icon
-		m_window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
+		m_window->SetIcon((FileUtils::GetEnigmaExecutableDir() / Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH).string());
 		
 		// Set window top left position at center
 		const auto  [monitor_width, monitor_height] = m_window->GetMonitorSize();
@@ -102,16 +102,17 @@ void Application::InitImGuiFonts()
 
 	const auto& io = ImGui::GetIO();
 
-	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 60.0f);
-	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 45.0f);
-	m_fonts["Audiowide-Regular-30"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 30.0f);
-	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH, 20.0f);
-
-	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 45.0f);
-	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 20.0f);
-	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 18.0f);
-	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 12.0f);
-	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF(Constants::Resources::Fonts::MONTSERRAT_FONT_PATH, 16.0f);
+	const auto current_dir = FileUtils::GetEnigmaExecutableDir();
+	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 60.0f);
+	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 45.0f);
+	m_fonts["Audiowide-Regular-30"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 30.0f);
+	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 20.0f);
+																   
+	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 45.0f);
+	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 20.0f);
+	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 18.0f);
+	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 12.0f);
+	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 16.0f);
 	
 	// Build added fonts atlas --> imgui issue #3643
 	io.Fonts->Build();

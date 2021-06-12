@@ -18,7 +18,7 @@ namespace ImGuiWidgets
 	*/
 	static int InputTextCallback(ImGuiInputTextCallbackData* data)
 	{
-		if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+		if (data->EventFlag == static_cast<decltype(data->EventFlag)>(ImGuiInputTextFlags_CallbackResize))
 		{
 			// Resize string callback
 			std::string* str = (std::string*)data->UserData;

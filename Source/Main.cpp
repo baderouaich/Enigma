@@ -24,17 +24,6 @@ int main(int argc, char* argv[])
 	// Initialize SQLite3 Database
 	Enigma::Database::Initialize();
 
-	ENIGMA_INFO(R"(			
-+++++++++++++++++++++++++++++++ {0} ++++++++++++++++++++++++++++++++++
-+   _________      _              ___________   _      _       __      +
-+  |              / \      /  |  |             | \    / |     /  \     +
-+  |_________    /   \    /   |  |      ____   |  \  /  |    /____\    +
-+  |            /     \  /    |  |          |  |   \/   |   /      \   +
-+  |_________  /       \/     |  |__________|  |    	|  /        \  +
-+                                                                      +
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++)",
-ENIGMA_VERSION);
-
 	Enigma::i32 exit_code = -1;
 	try
 	{
@@ -49,7 +38,7 @@ ENIGMA_VERSION);
 		else
 		{
 			// Load Window Configuration (title, width, height...)
-			const Enigma::Config window_config(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
+			const Enigma::Config window_config((Enigma::FileUtils::GetEnigmaExecutableDir() /  fs::path(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH)).string());
 			// Construct WindowSettings from loaded Config
 			const Enigma::WindowSettings window_settings = Enigma::WindowSettings::FromConfig(window_config);
 			// Create Enigma UI Application

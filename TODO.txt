@@ -1,4 +1,5 @@
 ========================= IN PROGRESS =============================
+- Make Reset button invisible or disabled until query is not empty in ViewEncryptions
 
 - CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
 
@@ -10,7 +11,7 @@
 
 - CPU Usage is not accurate on windows | https://github.com/BaderEddineOuaich/Enigma/issues/2
 
-- disallow multiple enigma app instance,  https://stackoverflow.com/questions/8799646/preventing-multiple-instances-of-my-application (DONE for Windows)
+- disallow multiple enigma app instances,  https://stackoverflow.com/questions/8799646/preventing-multiple-instances-of-my-application (DONE for Windows)
 
 - Add copy button to output texts in DecryptTextScene & ViewEncryptionScene
 

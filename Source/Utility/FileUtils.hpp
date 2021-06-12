@@ -6,8 +6,7 @@
 #include <Logger/Logger.hpp>
 
 #include <fstream>
-// Configure std::filesystem for non MSVC compilers
-#if defined(ENIGMA_PLATFORM_WINDOWS)
+#if defined(__cpp_lib_filesystem)
 	#include <filesystem>
 	namespace fs = std::filesystem;
 #else
@@ -18,6 +17,33 @@
 NS_ENIGMA_BEGIN
 class ENIGMA_API FileUtils
 {
+public:
+	/*
+	*	Returns path to Enigma.exe file e.g( "C:/Users/user/Enigma/Enigma.exe" )
+	*/
+	static fs::path GetEnigmaExecutableFilePath()
+	{
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+		wchar_t path[MAX_PATH]{ 0 };
+		::GetModuleFileName(NULL, path, MAX_PATH);
+		return fs::path(path);
+#else
+		char result[PATH_MAX]{ 0 };
+		const ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
+		return fs::path(result, (count > 0) ? count : 0);
+#endif	
+	}
+
+
+	/*
+	*	Returns dir which contains Enigma.exe file e.g( "C:/Users/user/Enigma/" )
+	*/
+	static fs::path GetEnigmaExecutableDir()
+	{
+		return GetEnigmaExecutableFilePath().parent_path();
+	}
+
+
 public:
 	static bool Read(const String& filename, String& buffer)
 	{
@@ -56,7 +82,7 @@ public:
 	/*
 	*	Reads a file chunk by chunk
 	*/
-	static void ReadChunks(const String& filename, const size_t max_chunk_size, const std::function<void(std::vector<byte>&&)>& callback)
+	static void ReadChunks(const String& filename, const std::size_t max_chunk_size, const std::function<void(std::vector<byte>&&)>& callback)
 	{
 		if (std::ifstream ifs{ filename, std::ios::binary }) 
 		{
@@ -66,7 +92,7 @@ public:
 				ifs.read((char*)chunk.data(), chunk.size());
 
 				// resize chunk if we read bytes less than max_chunk_size
-				const auto bytes_read = ifs.gcount();
+				const auto bytes_read = static_cast<std::size_t>(ifs.gcount());
 				if (bytes_read < max_chunk_size)
 					chunk.resize(bytes_read);
 

@@ -51,7 +51,7 @@ namespace Enigma
 
 		namespace Config
 		{
-			static constexpr const char* WINDOW_CONFIG_FILE_PATH = "./Resources/Config/WindowSettings.ini";
+			static constexpr const char* WINDOW_CONFIG_FILE_PATH = "Resources/Config/WindowSettings.ini";
 		}
 
 		namespace ENV // Environment Variable
@@ -61,14 +61,14 @@ namespace Enigma
 
 		namespace Logger
 		{
-			static constexpr const char* LOG_FILE_PATH = "./Enigma.log";
+			static constexpr const char* LOG_FILE_PATH = "Enigma.log";
 		}
 
 		namespace Database
 		{
 			//https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
-			static constexpr const char* DATABASE_FILE_DIR = "./Resources/Database/";
-			static constexpr const char* DATABASE_FILE_PATH = "./Resources/Database/Enigma.db";
+			static constexpr const char* DATABASE_DIR = "Resources/Database/";
+			static constexpr const char* DATABASE_FILE_PATH = "Resources/Database/Enigma.db";
 			// Unfortunetly u cant create multiple tables at once..
 			static constexpr const std::array<const char*, 2> CREATE_TABLES_SQL =
 			{
@@ -134,18 +134,18 @@ namespace Enigma
 
 		namespace Resources
 		{
-			static constexpr const char* RESOURCES_DIR = "./Resources/";
+			static constexpr const char* RESOURCES_DIR = "Resources";
 
 			namespace Textures
 			{
 				// window runtime icon
-				static constexpr const char* ENIGMA_LOGO_PNG_PATH = "./Resources/Branding/Logo.png";
+				static constexpr const char* ENIGMA_LOGO_PNG_PATH = "Resources/Branding/Logo.png";
 			}
 
 			namespace Fonts
 			{
-				static constexpr const char* AUDIOWIDE_FONT_PATH = "./Resources/Fonts/Audiowide-Regular.ttf";
-				static constexpr const char* MONTSERRAT_FONT_PATH = "./Resources/Fonts/Montserrat-Medium.ttf";
+				static constexpr const char* AUDIOWIDE_FONT_PATH = "Resources/Fonts/Audiowide-Regular.ttf";
+				static constexpr const char* MONTSERRAT_FONT_PATH = "Resources/Fonts/Montserrat-Medium.ttf";
 			}
 		}
 

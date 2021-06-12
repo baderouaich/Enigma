@@ -6,14 +6,18 @@ NS_ENIGMA_BEGIN
 void Database::Initialize()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 	// Check first if we are next to ./Resources/ folder for CLI to work
 	{
-		const fs::path resources_dir(Constants::Resources::RESOURCES_DIR);
+		//const fs::path resources_dir(Constants::Resources::RESOURCES_DIR);
+		const fs::path resources_dir = FileUtils::GetEnigmaExecutableDir() / fs::path(Constants::Resources::RESOURCES_DIR);
 		if (!fs::exists(resources_dir) || !fs::is_directory(resources_dir))
 		{
 			ENIGMA_CRITICAL("Couldn't find {0} folder next to Enigma executable, if you running CLI please make sure you put {1} Directory next to Enigma executable.", resources_dir.string(), resources_dir.string());
 			std::exit(EXIT_FAILURE);
 		}
+		else
+			ENIGMA_INFO("Resources Dir Path: {0}", resources_dir.string());
 
 	}
 
@@ -22,20 +26,23 @@ void Database::Initialize()
 	try
 	{
 		//Create dir if not exists
-		if (!fs::exists(Constants::Database::DATABASE_FILE_DIR))
+		const fs::path database_dir = FileUtils::GetEnigmaExecutableDir() / fs::path(Constants::Database::DATABASE_DIR);
+		if (!fs::exists(database_dir))
 		{
-			ENIGMA_INFO("Creating Database Directory {0} ...", Constants::Database::DATABASE_FILE_DIR);
-			if (!fs::create_directory(Constants::Database::DATABASE_FILE_DIR))
+			ENIGMA_INFO("Creating Database Directory {0} ...", database_dir.string());
+			if (!fs::create_directory(database_dir))
 			{
-				ENIGMA_CRITICAL("Failed to create database directory: {0}", Constants::Database::DATABASE_FILE_DIR);
+				ENIGMA_CRITICAL("Failed to create database directory: {0}", database_dir.string());
 				std::exit(EXIT_FAILURE);
 			}
 		}
 
+		const fs::path database_file_path = FileUtils::GetEnigmaExecutableDir() / fs::path(Constants::Database::DATABASE_FILE_PATH);
 		m_database = std::make_unique<SQLite::Database>(
-			Constants::Database::DATABASE_FILE_PATH,
+			database_file_path.string(),
 			SQLite::OPEN_CREATE | SQLite::OPEN_READWRITE // create if not exists
 			);
+		ENIGMA_INFO("Database File Path: {0}", database_file_path.string());
 
 		// Create Tables If Not Exists
 		for (const auto& create_table_sql : Constants::Database::CREATE_TABLES_SQL)

@@ -79,11 +79,11 @@ output: my important data securly encrypted!
 
 - Example encypting a file with AES-GCM:<br>
 ```text
-./Enigma -e --mode=aes --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data" --outfile="/home/bader/Desktop/Data-encrypted.enigma" --compress
+./Enigma -e --mode=aes --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data.txt" --outfile="/home/user/Desktop/Data_encrypted.txt.enigma"
 ```
 - Example decypting a file with AES-GCM:<br>
 ```text
-./Enigma -d --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data-encrypted.enigma" --outfile="/home/bader/Desktop/Data-decrypted" --decompress
+./Enigma -d --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
 ```
 <!-- <image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
 <image src="Resources/ScreenShots/4.png"/><br>
