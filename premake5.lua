@@ -89,15 +89,16 @@ project "Enigma"
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 	--debugdir ("%{wks.location}/")
 
+
 	--[[ 
 		Command to copy Resources/ folder next to Enigma.exe (targetdir) after each build https://github.com/premake/premake-core/wiki/postbuildcommands 
 	 	Why this?: when Enigma is deployed, we assume Resources/ folder to always be next to the Enigma.exe so it works properly in debug and distribution
     --]]
- 	postbuildcommands {
+ 	postbuildmessage "Copying ./Resources dir to %{cfg.targetdir}/ ..."
+	postbuildcommands {
  		{ "{MKDIR} %{cfg.targetdir}/Resources" }, -- make Resources dir to copy files into it.
         { "{COPY} ./Resources/ %{cfg.targetdir}/Resources" } -- copy Resources/** to %{cfg.targetdir}/Resources
     }			
-
 
 
 	---[[ Precompiled Header ]]---

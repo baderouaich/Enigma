@@ -16,16 +16,18 @@ void Database::Initialize()
 			ENIGMA_CRITICAL("Couldn't find {0} folder next to Enigma executable, if you running CLI please make sure you put {1} Directory next to Enigma executable.", resources_dir.string(), resources_dir.string());
 			std::exit(EXIT_FAILURE);
 		}
-		else
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_INFO("Resources Dir Path: {0}", resources_dir.string());
-
+#endif
 	}
 
-
+#if defined(ENIGMA_DEBUG)
 	ENIGMA_INFO("SQLite3 version {0}", SQLite::VERSION);
+#endif
+
 	try
 	{
-		//Create dir if not exists
+		//Create db dir if not exists
 		const fs::path database_dir = FileUtils::GetEnigmaExecutableDir() / fs::path(Constants::Database::DATABASE_DIR);
 		if (!fs::exists(database_dir))
 		{
@@ -37,12 +39,15 @@ void Database::Initialize()
 			}
 		}
 
+		// Create or open db file 
 		const fs::path database_file_path = FileUtils::GetEnigmaExecutableDir() / fs::path(Constants::Database::DATABASE_FILE_PATH);
 		m_database = std::make_unique<SQLite::Database>(
 			database_file_path.string(),
 			SQLite::OPEN_CREATE | SQLite::OPEN_READWRITE // create if not exists
 			);
+#if defined(ENIGMA_DEBUG)
 		ENIGMA_INFO("Database File Path: {0}", database_file_path.string());
+#endif
 
 		// Create Tables If Not Exists
 		for (const auto& create_table_sql : Constants::Database::CREATE_TABLES_SQL)

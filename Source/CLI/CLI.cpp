@@ -499,7 +499,7 @@ void CLI::OnHelp()
 
 void CLI::OnVersion()
 {
-	ENIGMA_INFO(ENIGMA_VERSION);
+	ENIGMA_INFO("Enigma version {0}", ENIGMA_VERSION);
 }
 
 void CLI::OnCheckForUpdates()

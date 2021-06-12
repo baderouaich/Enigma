@@ -211,7 +211,7 @@ namespace ImGuiWidgets
 	class Image
 	{
 	public:
-		Image(const char* file_name)
+		explicit Image(const char* file_name)
 		{
 			// Load from file
 			byte* buffer = stbi_load(file_name, &m_width, &m_height, nullptr, 4);

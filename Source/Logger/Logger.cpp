@@ -37,7 +37,9 @@ void Logger::Initialize()
 	m_logger->flush_on(spdlog::level::trace);
 
 	ENIGMA_TRACE_CURRENT_FUNCTION();
+#if defined(ENIGMA_DEBUG)
 	ENIGMA_INFO("Log File Path: {0}", log_file_path.string());
+#endif
 }
 
 void Logger::Shutdown()

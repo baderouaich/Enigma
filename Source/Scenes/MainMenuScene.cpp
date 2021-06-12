@@ -283,11 +283,11 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	
 	(void)ShellExecuteA(nullptr, "open", url.c_str() , nullptr, nullptr, SW_SHOWNORMAL);
-
+	
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
 	const String cmd = "xdg-open " + url;
-	(void)std::system(cmd.c_str());
+	[[maybe_unused]] auto _ = std::system(cmd.c_str());
 
 #else
 
