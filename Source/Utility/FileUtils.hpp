@@ -30,7 +30,8 @@ public:
 #else
 		char result[PATH_MAX]{ 0 };
 		const ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
-		return fs::path(result, (count > 0) ? count : 0);
+		const std::string path(result, (count > 0) ? count : 0);
+		return fs::path(path);
 #endif	
 	}
 
