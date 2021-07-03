@@ -34,8 +34,8 @@ Application::Application(const WindowSettings& window_settings)
 	// Initializers
 	this->InitWindow(window_settings);
 	this->InitImGuiRenderer();
-	this->InitHardwareInfo(window_settings);
 	this->InitImGuiFonts();
+	this->InitHardwareInfo(window_settings);
 
 	// Init loading scene
 	m_loading_scene = std::make_unique<LoadingScene>();
@@ -138,7 +138,7 @@ void Application::InitImGuiFonts()
 
 void Application::PushScene(std::unique_ptr<Scene> scene)
 {
-	ENIGMA_ASSERT(scene.get(), "Scene is nullptr");
+	ENIGMA_ASSERT(scene, "Scene is nullptr");
 
 	// Push scene & Notify user on scene created
 	this->m_scenes.emplace_back(std::move(scene));
@@ -148,12 +148,12 @@ void Application::PushScene(std::unique_ptr<Scene> scene)
 }
 
 
-void Application::LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& func)
+void Application::LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& work_func)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr!");
-	ENIGMA_ASSERT(func, "Function is empty!");
+	ENIGMA_ASSERT(work_func, "Work function is empty!");
 
-	std::thread worker_thread([this, scene, loading_text, func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
+	std::thread worker_thread([this, scene, loading_text, work_func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
 		{
 			std::scoped_lock<std::mutex> guard{ scene->GetMutex() };
 
@@ -161,7 +161,7 @@ void Application::LaunchWorkerThread(Scene* scene, const std::string_view& loadi
 			
 			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(loading_text); // set loading status description text will appear bellow loading spinner
 			scene->SetLoading(true);
-				func();
+			work_func();
 			scene->SetLoading(false);
 			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(""); // reset loading text
 

@@ -148,11 +148,10 @@ public:
 		}
 	}
 
-
 	// Get all Encryptions with desired columns for optimization
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
-	{
+	{			
 		ENIGMA_TRACE_CURRENT_FUNCTION();
 
 		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});

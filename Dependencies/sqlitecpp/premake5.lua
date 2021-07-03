@@ -55,7 +55,11 @@ project "sqlitecpp"
 		runtime "Debug"
 		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
-
+		defines 
+		{
+			"SQLITE_DEBUG"
+		}
+		
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.

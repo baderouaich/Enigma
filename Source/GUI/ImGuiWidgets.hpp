@@ -15,6 +15,7 @@ namespace ImGuiWidgets
 	/*
 	*	InputTextMultiline with container std::string instread of char*
 	*	https://github.com/ocornut/imgui/issues/2035
+	*   https://github.com/ocornut/imgui/blob/master/misc/cpp/imgui_stdlib.cpp
 	*/
 	static int InputTextCallback(ImGuiInputTextCallbackData* data)
 	{
@@ -33,7 +34,7 @@ namespace ImGuiWidgets
 		flags |= ImGuiInputTextFlags_CallbackResize;
 		return ImGui::InputTextMultiline(label, (char*)str->c_str(), str->capacity() + 1, size, flags, ImGuiWidgets::InputTextCallback, (void*)str);
 	}
-	static bool InputText(const char* label, std::string* str, const float& width, ImGuiInputTextFlags flags = 0)
+	static bool InputText(const char* label, std::string* str, const float width, ImGuiInputTextFlags flags = 0)
 	{
 		ImGui::PushItemWidth(width);
 		flags |= ImGuiInputTextFlags_CallbackResize;
@@ -41,7 +42,7 @@ namespace ImGuiWidgets
 		ImGui::PopItemWidth();
 		return ret;
 	}
-	static bool InputTextWithHint(const char* label, const char* hint, std::string* str, const float& width, ImGuiInputTextFlags flags = 0)
+	static bool InputTextWithHint(const char* label, const char* hint, std::string* str, const float width, ImGuiInputTextFlags flags = 0)
 	{
 		ImGui::PushItemWidth(width);
 		flags |= ImGuiInputTextFlags_CallbackResize;
@@ -51,6 +52,8 @@ namespace ImGuiWidgets
 
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+
 
 	static bool Button(const char* text,
 		const ImVec2& size = ImVec2(0.0f, 0.0f),
@@ -85,7 +88,7 @@ namespace ImGuiWidgets
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// Loading spinner https://github.com/ocornut/imgui/issues/1901
-	static bool LoadingSpinner(const char* label, float radius, float thickness, const ImU32& color) {
+	static bool LoadingSpinner(const char* label, float radius, float thickness, const ImU32 color) {
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
 			return false;
@@ -126,7 +129,7 @@ namespace ImGuiWidgets
 	}
 
 	// Loading bar https://github.com/ocornut/imgui/issues/1901
-	static bool LoadingBar(const char* label, float value, const ImVec2& size_arg, const ImU32& bg_col, const ImU32& fg_col) {
+	static bool LoadingBar(const char* label, float value, const ImVec2& size_arg, const ImU32 bg_col, const ImU32 fg_col) {
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
 			return false;

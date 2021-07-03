@@ -12,6 +12,7 @@
 #include <Networking/CheckForUpdates.hpp>
 
 NS_ENIGMA_BEGIN
+static int* ptr = nullptr;
 
 MainMenuScene::MainMenuScene() noexcept
 	:
@@ -247,6 +248,7 @@ void MainMenuScene::OnEvent(Enigma::Event&)
 void MainMenuScene::OnDestroy()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
+
 }
 
 void MainMenuScene::OnEncryptFileButtonPressed()

@@ -8,7 +8,7 @@
 
 
 # 1.3.0
-- Fixed Clang compilation issue on linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
+- Fixed Clang compilation issue on Linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
 - Added CLI option `--check-for-updates` which checks for updates when using CLI
 - Upgraded imgui library from 1.79 to 1.81 (master branch)
 - Upgraded spdlog library from 1.8.0 to 1.8.2
@@ -20,7 +20,7 @@
 - New CLI Option `--list` or `-l` which lists all saved encryption records in a table
 - Ability to decrypt encryption record from database
 - Upgraded premake5 from 5.0.0-alpha15 to 5.0.0-alpha16
-- Switched Algorithms from CBC padding to Authentication encyrption EAX (TripleDES-CBC to TripleDES-EAX, IDEA-CBC to IDEA-EAX, ChaCha20 to ChaCha20Poly1305)
+- Switched Algorithms from CBC padding to Authentication encryption EAX (TripleDES-CBC to TripleDES-EAX, IDEA-CBC to IDEA-EAX, ChaCha20 to ChaCha20Poly1305)
 - Added Blowfish-EAX Algorithm
 - Changed logging format
 - Now buffer is always compressed by default before encrypting

@@ -1,4 +1,10 @@
 ========================= IN PROGRESS =============================
+- Enable file drop in Encrypt & Decrypt Files using glfwSetDropCallback(onFiledropcallback);
+- vector::shrink_to_fit() in myencryptions
+- Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
+
+- My Encryptions table, display date as Jun, 01 2021 instead of 06 01 2021 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
+
 - Make Reset button invisible or disabled until query is not empty in ViewEncryptions
 
 - CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
@@ -21,6 +27,10 @@
 - Maybe uplaod enigma release to stores like windows store and linux in such as https://www.linux-apps.com/ for global usage as a free open source project
 
 - ability to cancel check-for-updates ui
+
+- add to search utils myencryptions to search encryptions between two dates (or even direct sql query?)
+
+- use enum ColumnFlags { ID = 1 << 0, TITLE = 1 << 1,...}; to filter what columns to get from database instead of constexpr booleans for readability
 
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene  with Like %%

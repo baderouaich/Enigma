@@ -41,9 +41,9 @@ public: /* Constructor / Destructors */
 	*	Launches detached thread seperated from main UI thread
 	*	@param loading_text: thee reason behind launching this worker thread, will appear bellow loading spinner e.g: "Browsing input file..."
 	*	@param scene: pointer to scene which spawns the worker thread
-	*	@param func: function has code to run in parallel
+	*	@param work_func: function has work code to run in parallel
 	*/
-	void LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& func);
+	void LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& work_func);
 
 
 public: /* Events */
