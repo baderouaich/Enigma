@@ -3,7 +3,7 @@
 - Updated portable-file-dialogs library after issue https://github.com/samhocevar/portable-file-dialogs/issues/50 Fixed
 - Upgraded imgui library from 1.81 to 1.83 (master branch)
 - Now file paths are runtime detected (which solves the issue of calling CLI from an external folder doesn't work properly)
-
+- Added ability to drop files in window to Encrypt or Decrypt
 -->
 
 

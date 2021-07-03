@@ -36,7 +36,7 @@ public:
 	*	Register a unique instance
 	*	@param package_name: application's unique package name for example com.badereddineouaich.enigma
 	*/
-	SingleInstanceApplication(const String& package_name)
+	explicit SingleInstanceApplication(const String& package_name)
 		:
 		m_package_name(package_name)
 	{

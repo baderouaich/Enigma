@@ -12,7 +12,6 @@
 #include <Networking/CheckForUpdates.hpp>
 
 NS_ENIGMA_BEGIN
-static int* ptr = nullptr;
 
 MainMenuScene::MainMenuScene() noexcept
 	:

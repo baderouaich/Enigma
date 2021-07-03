@@ -17,6 +17,7 @@ enum class EventType : ui32
 	WINDOW_LOST_FOCUS,
 	WINDOW_MOVED,
 	WINDOW_MAXIMIZED,
+	WINDOW_FILE_DROP,
 
 	//FRAME BUFFER
 	FRAME_BUFFER_RESIZE,
@@ -75,11 +76,11 @@ public:
 		return GetCategoryFlags() & static_cast<i32>(category);
 	}
 
-	const bool& IsHandled() const noexcept { return m_isHandled; }
+	const bool IsHandled() const noexcept { return m_isHandled; }
 	const void SetHandled(const bool handled) noexcept { m_isHandled = handled; }
 
 protected:
-	bool m_isHandled = false;
+	bool m_isHandled{ false };
 };
 
 

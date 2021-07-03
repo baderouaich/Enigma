@@ -64,6 +64,7 @@
 #include <Utility/DialogUtils.hpp>
 #include <Utility/GZip.hpp>
 #include <Utility/SizeUtils.hpp>
+#include <Utility/MathUtils.hpp>
 //
 
 

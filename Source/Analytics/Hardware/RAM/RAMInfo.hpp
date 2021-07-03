@@ -74,20 +74,6 @@ public:
 	*/
 	f32 GetProcessRAMUsage() noexcept;
 
-private:
-	/*
-	*	Maps value from a range to another
-	*	@param value: the incoming value to be converted
-	*	@param start1: lower bound of the value's current range
-	*	@param stop1: upper bound of the value's current range
-	*	@param start2: lower bound of the value's target range
-	*	@param stop2: upper bound of the value's target range
-	*/
-	template<typename T>
-	constexpr inline const T Map(const T& value, const T& start1, const T& stop1, const T& start2, const T& stop2)
-	{
-		return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
-	}
 
 private:
 	 memory_status_t m_memory_status;

@@ -315,7 +315,23 @@ void EncryptFileScene::OnImGuiDraw()
 }
 
 void EncryptFileScene::OnEvent(Event& event)
-{}
+{
+	// Listen to Window File Drop Event for input filename
+	EventDispatcher dispatcher(event);
+	dispatcher.Dispatch<WindowFileDropEvent>([this](const WindowFileDropEvent& e) -> bool
+		{
+			// set dropped file into in filename
+			if (const std::vector<fs::path>& filenames = e.GetFilenames();
+				!filenames.empty() &&
+				fs::exists(filenames[0]) &&
+				fs::is_regular_file(filenames[0]))
+			{
+				this->m_in_filename = filenames[0].string();
+			}
+
+			return true; // handled, return false if other scenes may use the event
+		});
+}
 
 void EncryptFileScene::OnDestroy()
 {

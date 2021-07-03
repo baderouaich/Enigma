@@ -1,5 +1,4 @@
 ========================= IN PROGRESS =============================
-- Enable file drop in Encrypt & Decrypt Files using glfwSetDropCallback(onFiledropcallback);
 - vector::shrink_to_fit() in myencryptions
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
 
@@ -69,6 +68,7 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE Logging instead of [date time] Enigma:  make it [date time] info: or [date time] warn... and more detaied in file
 - DONE use templates in StringUtils instead of writing functions each cases
 - DONE Maybe always detect algorithm from cipher, no need to make it an option when decrypting.
+- DONE Enable file drop in Encrypt & Decrypt Files using glfwSetDropCallback(onFiledropcallback);
 =============================================================================
 
 

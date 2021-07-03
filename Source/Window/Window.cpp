@@ -196,6 +196,22 @@ bool Window::InitGLFWCallbacks()
 			this_window.m_event_callback(event);
 		});
 
+	//Window Files Drop
+	glfwSetDropCallback(m_GLFWwindow, [](GLFWwindow* window, int path_count, const char* paths[])
+		{ 
+			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
+
+			std::vector<fs::path> filenames{};
+			filenames.reserve(path_count);
+			for (int i = 0; i < path_count; i++)
+			{
+				filenames.emplace_back(fs::path(paths[i]));
+			}
+
+			WindowFileDropEvent event(filenames);
+			this_window.m_event_callback(event);
+		});
+
 	//Key
 	glfwSetKeyCallback(m_GLFWwindow, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
