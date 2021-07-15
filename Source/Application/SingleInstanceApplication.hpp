@@ -49,7 +49,7 @@ public:
 	{
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 		m_handle = ::CreateMutexA(NULL, TRUE, m_package_name.c_str());
-		if (m_handle == nullptr || ::GetLastError() == ERROR_ALREADY_EXISTS)
+		if (m_handle == INVALID_HANDLE_VALUE || ::GetLastError() == ERROR_ALREADY_EXISTS)
 		{
 			// another instance is running
 			WarnAndExit();

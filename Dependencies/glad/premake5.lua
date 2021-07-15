@@ -7,6 +7,9 @@ project "glad"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
+
 	--All files GLAD has
 	files
 	{

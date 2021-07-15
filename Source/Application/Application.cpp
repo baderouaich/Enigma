@@ -12,8 +12,6 @@
 
 NS_ENIGMA_BEGIN
 
-Application* Application::m_instance = nullptr;
-
 
 Application::Application(const WindowSettings& window_settings)
 	:

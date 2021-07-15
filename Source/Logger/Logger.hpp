@@ -3,7 +3,6 @@
 #define ENIGMA_LOGGER_H
 
 #include <Core/Core.hpp>
-#include <Utility/StringUtils.hpp> // StringUtils::Cleanup to remove __FUNCTION__'s __cdecl
 
 // Logging Library
 #include <spdlog/spdlog.h>
@@ -40,14 +39,12 @@ private:
 #define ENIGMA_ERROR(...)				::Enigma::Logger::GetLogger()->error("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
 #define ENIGMA_CRITICAL(...)			::Enigma::Logger::GetLogger()->critical("{0}\n{1}:{2}\n{3}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
 
-
 #define ENIGMA_TRACE_IF(condition, ...)    if((condition))  ENIGMA_TRACE(__VA_ARGS__);
 #define ENIGMA_LOG_IF(condition, ...)      if((condition))  ENIGMA_LOG(__VA_ARGS__);
 #define ENIGMA_INFO_IF(condition, ...)     if((condition))  ENIGMA_INFO(__VA_ARGS__);
 #define ENIGMA_WARN_IF(condition, ...)     if((condition))  ENIGMA_WARN(__VA_ARGS__);
 #define ENIGMA_ERROR_IF(condition, ...)    if((condition))  ENIGMA_ERROR(__VA_ARGS__);
 #define ENIGMA_CRITICAL_IF(condition, ...) if((condition))  ENIGMA_CRITICAL(__VA_ARGS__);
-
 
 #define log_trace(...)				ENIGMA_TRACE(__VA_ARGS__)
 #define log_debug(...)				ENIGMA_LOG(__VA_ARGS__)

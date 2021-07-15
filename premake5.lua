@@ -53,7 +53,7 @@ IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking l
 IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
 IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL a depend on it on Linux (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
 
-IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests libIncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- cURL networking lib
+IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests
 
 -- Organize libs solution in a single filtered directory 
 group "Dependencies"
@@ -109,7 +109,7 @@ project "Enigma"
 	--rtti "Off"
 
 	---[[ Enable the toolset's maximum warning level ]]---
-	--warnings "Extra"
+	warnings "Extra"
 	
 	---[[ Source files ]]---
 	files

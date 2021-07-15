@@ -7,6 +7,9 @@ project "sqlitecpp"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
+
     includedirs 
     {
      	"./include/",

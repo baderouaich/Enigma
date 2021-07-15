@@ -7,6 +7,9 @@ project "catch2"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	 warnings "Off"
+
+
     includedirs 
     {
      	"src/", 

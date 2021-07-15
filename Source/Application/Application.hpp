@@ -138,7 +138,7 @@ private: /* Fonts */
 
 
 private: /* Instance */
-	static Application* m_instance;
+	inline static Application* m_instance{ nullptr };
 
 };
 

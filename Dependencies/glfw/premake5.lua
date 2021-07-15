@@ -8,6 +8,9 @@ project "glfw"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
+
 	files
 	{
 		"include/GLFW/glfw3.h",

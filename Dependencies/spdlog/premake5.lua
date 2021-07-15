@@ -7,6 +7,9 @@ project "spdlog"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
+
 	files
 	{
 		"include/spdlog/**.h",

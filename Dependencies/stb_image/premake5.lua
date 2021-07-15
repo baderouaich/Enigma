@@ -7,6 +7,8 @@ project "stb_image"
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 
+	warnings "Off"
+
 	files
 	{
 		"include/stb_image.h",
