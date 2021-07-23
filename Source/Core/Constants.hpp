@@ -11,7 +11,8 @@ namespace Enigma
 	{
 		using namespace std::string_literals; // using std::operator""s;
 
-		static constexpr const auto ENIGMA_PACKAGE_NAME = "com.badereddineouaich.enigma"; // unique app id used to avoid multiple instances
+		static constexpr const ui16 ENIGMA_SINGLE_PROCESS_UNIQUE_PORT = 36363; // unique app socket port used to avoid multiple instances
+		//static constexpr const auto ENIGMA_PACKAGE_NAME = "com.badereddineouaich.enigma"; // unique app id used to avoid multiple instances
 		//static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA"
 
 		namespace Algorithm

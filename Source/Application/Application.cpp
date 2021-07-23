@@ -15,7 +15,7 @@ NS_ENIGMA_BEGIN
 
 Application::Application(const WindowSettings& window_settings)
 	:
-	SingleInstanceApplication(Constants::ENIGMA_PACKAGE_NAME), 
+	SingleProcessInstance(Constants::ENIGMA_SINGLE_PROCESS_UNIQUE_PORT),
 	// Delta time
 	m_last_frame_time(0.0f),
 	m_current_frame_time(0.0f),
@@ -26,6 +26,15 @@ Application::Application(const WindowSettings& window_settings)
 	m_cpu_info(nullptr),
 	m_hardware_info_timer(0.0f)
 {
+	// Check if there is an enigma process already running or not.
+	if (!SingleProcessInstance::IsUnique())
+	{
+		DialogUtils::Warn("Another instance of Enigma is already running!");
+		this->EndApplication(); 
+		return;
+	}
+	
+
 	ENIGMA_ASSERT(!m_instance, "Application Instance already exists");
 	m_instance = this;
 
