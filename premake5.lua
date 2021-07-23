@@ -96,8 +96,7 @@ project "Enigma"
     --]]
  	postbuildmessage "Copying ./Resources dir to %{cfg.targetdir}/ ..."
 	postbuildcommands {
- 		{ "{MKDIR} %{cfg.targetdir}/Resources" }, -- make Resources dir to copy files into it.
-        { "{COPY} ./Resources/ %{cfg.targetdir}/Resources" } -- copy Resources/** to %{cfg.targetdir}/Resources
+        { "{COPY} ./Resources %{cfg.targetdir}/Resources" } -- copy Resources/** to %{cfg.targetdir}/Resources
     }			
 
 

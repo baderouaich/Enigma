@@ -15,7 +15,6 @@
 #include <cstdio>
 #include <cstring>
 #include <sys/times.h>
-#include <sys/vtimes.h>
 #elif defined(ENIGMA_PLATFORM_MACOS)
 // MacOS Includes
 #include <mach/mach_init.h>

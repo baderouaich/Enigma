@@ -65,6 +65,9 @@ jobs:
 
     - name: Make Enigma
       run: make config=release CC=gcc-10 CPP=g++-10 -j$(nproc) #$(nproc) will return the number of cores on the machine
+    
+    - name: Run Enigma
+      run: ./Bin/Release-linux-x86_64/Enigma/Enigma --version
 
 
 #    - name: Generate Project Make Files
