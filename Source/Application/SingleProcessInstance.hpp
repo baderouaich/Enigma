@@ -16,7 +16,7 @@
 #else //#elif defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)
 	// Linux/Unix libraries will work in macos aswell.
 	#include <netinet/in.h>
-	using socket_t = i32;
+	using socket_t = Enigma::i32;
 	constexpr socket_t M_INVALID_SOCKET = -1;
 #endif
 
