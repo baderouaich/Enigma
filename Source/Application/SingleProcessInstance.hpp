@@ -77,6 +77,7 @@ public:
 			if (m_rc < 0)
 			{
 				ENIGMA_ERROR("Failed to bind socket: {}", std::strerror(errno));
+				return;
 			}
 		}
 		else
