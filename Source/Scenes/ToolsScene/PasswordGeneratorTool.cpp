@@ -1,5 +1,5 @@
 #include <pch.hpp>
-#include "PasswordGeneratorTool.h"
+#include "PasswordGeneratorTool.hpp"
 #include <GUI/ImGuiWidgets.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 #include <Utility/Random.hpp>
@@ -42,7 +42,8 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 
 	ImGui::PushFont(font_audiowide_regular_20);
 	{
-		if (ImGui::CollapsingHeader("Password Generator", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) 
+		//if (ImGui::CollapsingHeader("Password Generator", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) 
+		if (ImGui::CollapsingHeader("Password Generator", nullptr)) 
 		{
 			ImGui::PushFont(font_montserrat_medium_18);
 			spacing(3);
@@ -94,6 +95,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			ImGui::PushFont(font_montserrat_medium_14);
 				ImGui::BeginColumns("Password Settings", 5,  ImGuiColumnsFlags_NoResize);
 					// Length Combo Box
+					/*
 					ImGui::Combo("Length", &m_selected_length_index, m_lengths.data(), m_lengths.size(), -1);
 					ImGui::NextColumn();
 					ImGui::Checkbox("Digits (0-9)", &m_digits); 
@@ -103,6 +105,16 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 					ImGui::Checkbox("Lowercase Alphabets (a-z)", &m_lowercase_alphabets); 
 					ImGui::NextColumn();
 					ImGui::Checkbox("Special Characters (+*~.#^)", &m_special_characters);
+					*/
+					ImGui::Combo("Length", &m_selected_length_index, m_lengths.data(), m_lengths.size(), -1);
+					ImGui::NextColumn();
+					ImGui::Checkbox("Numbers", &m_digits);
+					ImGui::NextColumn();
+					ImGui::Checkbox("Uppercase", &m_uppercase_alphabets);
+					ImGui::NextColumn();
+					ImGui::Checkbox("Lowercase", &m_lowercase_alphabets);
+					ImGui::NextColumn();
+					ImGui::Checkbox("Symbols", &m_special_characters); 
 				ImGui::EndColumns();
 			ImGui::PopFont();
 			//

@@ -2,7 +2,8 @@
 #include "ToolsScene.hpp"
 #include <imgui.h>
 
-#include "PasswordGeneratorTool.h"
+#include "PasswordGeneratorTool.hpp"
+#include "HashingTool.hpp"
 
 NS_ENIGMA_BEGIN
 
@@ -18,6 +19,8 @@ void ToolsScene::OnCreate()
 
 	// Add Collapsing header tools
 	m_tools.push_back(std::make_unique<PasswordGeneratorTool>());
+	m_tools.push_back(std::make_unique<HashingTool>());
+	//m_tools.push_back(std::make_unique<XTool>());
 	//m_tools.push_back(std::make_unique<XTool>());
 	//m_tools.push_back(std::make_unique<XTool>());
 
