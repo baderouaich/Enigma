@@ -15,11 +15,4 @@ Config::Config(const String& file_name)
 	}
 }
 
-
-
-Config::~Config() noexcept
-{
-}
-
-
 NS_ENIGMA_END

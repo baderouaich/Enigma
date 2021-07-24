@@ -65,7 +65,7 @@ public: /* Constructors / Destructor */
 	MessageBox(const String& title, const String& message,
 		Icon icon = Icon::Info,
 		Choice choice = Choice::Ok_Cancel);
-	~MessageBox() noexcept;
+	~MessageBox() noexcept = default;
 
 public: /* Accessors */
 	/*

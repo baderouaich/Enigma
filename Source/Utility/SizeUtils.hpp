@@ -9,23 +9,24 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API SizeUtils
+class ENIGMA_API SizeUtils final
 {
+	ENIGMA_STATIC_CLASS(SizeUtils);
 public:
 	/*
 	*	Converts bytes to human friendly readable format, e.g (100 KB, 30 Bytes, 5.23 MB...)
 	*/
 	static String FriendlySize(const size_t bytes) noexcept
 	{
-		constexpr const i32 KB = 1024;
+		constexpr const size_t KB = 1024;
 
 		if (bytes < KB)  
 			return std::to_string(bytes) + " Bytes";
 
-		std::ostringstream oss{};
 		constexpr const char* sizes[]{ "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-		const size_t i = static_cast<size_t>(std::floor(std::log(bytes) / std::log(KB)));
+		const size_t i = static_cast<size_t>(std::floor(static_cast<f64>(std::log(bytes) / std::log(KB))));
 
+		std::ostringstream oss{};
 		oss << std::fixed
 			<< std::setprecision(2)
 			<< static_cast<f32>(bytes / std::pow(KB, i))
@@ -33,23 +34,6 @@ public:
 			<< sizes[i];
 
 		return oss.str();
-
-#if 0
-		if (bytes == 0)  return String("0 Bytes");
-		
-		std::ostringstream oss{};
-		constexpr const i32 KB = 1024;
-		constexpr const char* sizes[]{ "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-		const size_t i = static_cast<size_t>(std::floor(std::log(bytes) / std::log(KB)));
-		
-		oss << std::fixed
-			<< std::setprecision(2)
-			<< static_cast<f32>(bytes / std::pow(KB, i)) 
-			<< ' ' 
-			<< sizes[i];
-
-		return oss.str();
-#endif
 	}
 
 };

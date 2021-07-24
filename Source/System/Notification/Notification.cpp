@@ -21,8 +21,5 @@ void Notification::Show() const
 	);
 }
 
-Notification::~Notification() noexcept
-{
-}
 
 NS_ENIGMA_END

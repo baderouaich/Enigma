@@ -33,7 +33,7 @@ void DecryptFileScene::OnCreate()
 
 }
 
-void DecryptFileScene::OnUpdate(const f32& dt)
+void DecryptFileScene::OnUpdate(const f32&)
 {}
 
 void DecryptFileScene::OnDraw()

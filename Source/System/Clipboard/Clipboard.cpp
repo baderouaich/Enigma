@@ -6,7 +6,7 @@
 
 NS_ENIGMA_BEGIN
 
-const String Clipboard::Get()
+String Clipboard::Get()
 {
 	auto glfw_window = Application::GetInstance()->GetWindow()->GetGLFWwindow();
 	return String(glfwGetClipboardString(glfw_window));

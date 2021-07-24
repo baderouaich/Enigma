@@ -326,7 +326,7 @@ void EncryptTextScene::OnImGuiDraw()
 
 }
 
-void EncryptTextScene::OnEvent(Event& event)
+void EncryptTextScene::OnEvent(Event&)
 {
 	//// Go back to main menu scene
 	//if (Input::IsKeyPressed(Enigma::Key::Escape))

@@ -22,8 +22,5 @@ std::vector<String> OpenFileDialog::Show() const
 		.result();
 }
 
-OpenFileDialog::~OpenFileDialog() noexcept
-{
-}
 NS_ENIGMA_END
 

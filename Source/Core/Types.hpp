@@ -20,6 +20,7 @@ namespace Enigma
 	using ui64	= std::uint64_t;
 	using f32	= float;
 	using f64	= double;
+	using lf64	= long double;
 	using byte	= ui8;
 	using size_t	= std::size_t;
 	using String	= std::string;	// UTF-8 string (std::uint8_t)

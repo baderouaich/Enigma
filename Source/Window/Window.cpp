@@ -196,7 +196,7 @@ bool Window::InitGLFWCallbacks()
 			this_window.m_event_callback(event);
 		});
 
-	//Window Files Drop
+	//Window Files Drop Event
 	glfwSetDropCallback(m_GLFWwindow, [](GLFWwindow* window, int path_count, const char* paths[])
 		{ 
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
@@ -213,7 +213,7 @@ bool Window::InitGLFWCallbacks()
 		});
 
 	//Key
-	glfwSetKeyCallback(m_GLFWwindow, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+	glfwSetKeyCallback(m_GLFWwindow, [](GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 			switch (action)
@@ -252,7 +252,7 @@ bool Window::InitGLFWCallbacks()
 
 
 	//Mouse button 
-	glfwSetMouseButtonCallback(m_GLFWwindow, [](GLFWwindow* window, int button, int action, int mods)
+	glfwSetMouseButtonCallback(m_GLFWwindow, [](GLFWwindow* window, int button, int action, int /*mods*/)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 			switch (action)

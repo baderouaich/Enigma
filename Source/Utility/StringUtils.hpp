@@ -14,8 +14,9 @@ NS_ENIGMA_BEGIN
 /*
 *	UTF-8 & UTF-16 String Utils
 */
-class ENIGMA_API StringUtils
+class ENIGMA_API StringUtils final
 {
+	ENIGMA_STATIC_CLASS(StringUtils);
 public:
     /*
     *   Removes leading and trailing spaces from a string

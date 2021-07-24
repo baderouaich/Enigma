@@ -7,8 +7,9 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API MathUtils
+class ENIGMA_API MathUtils final
 {
+	ENIGMA_STATIC_CLASS(MathUtils);
 public:
 	/*
 	*	Maps value from a range to another
@@ -19,7 +20,7 @@ public:
 	*	@param stop2: upper bound of the value's target range
 	*/
 	template<typename T>
-	[[no_discard]] static constexpr const T Map(const T& value, const T& start1, const T& stop1, const T& start2, const T& stop2) noexcept
+	static constexpr const T Map(const T& value, const T& start1, const T& stop1, const T& start2, const T& stop2) noexcept
 	{
 		return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
 	}

@@ -18,7 +18,7 @@ void ENV::Set(const std::string_view& key, const std::string_view& value)
 #endif
 }
 
-const String ENV::Get(const std::string_view& key)
+String ENV::Get(const std::string_view& key)
 {
 	String value{};
 #if defined(ENIGMA_PLATFORM_WINDOWS)

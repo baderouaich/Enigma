@@ -24,9 +24,5 @@ String SaveFileDialog::Show() const
 		.result();
 }
 
-SaveFileDialog::~SaveFileDialog() noexcept
-{
-}
-
 NS_ENIGMA_END
 

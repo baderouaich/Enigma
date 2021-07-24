@@ -10,8 +10,9 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API Logger
+class ENIGMA_API Logger final
 {
+	ENIGMA_STATIC_CLASS(Logger);
 public:
 	/*
 	*	Initialize Enigma Logger

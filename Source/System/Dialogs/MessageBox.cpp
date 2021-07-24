@@ -40,9 +40,5 @@ MessageBox::Action MessageBox::Show() const
 #endif 
 }
 
-MessageBox::~MessageBox() noexcept
-{
-}
-
 NS_ENIGMA_END
 

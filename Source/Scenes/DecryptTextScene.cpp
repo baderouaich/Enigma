@@ -230,7 +230,7 @@ void DecryptTextScene::OnImGuiDraw()
 
 }
 
-void DecryptTextScene::OnEvent(Event& event)
+void DecryptTextScene::OnEvent(Event&)
 {
 	//if (event.IsInCategory(EventCategory::EC_KEYBOARD))
 	//{

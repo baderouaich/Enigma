@@ -6,8 +6,9 @@
 #include <random>
 
 NS_ENIGMA_BEGIN
-class ENIGMA_API Random
+class ENIGMA_API Random final
 {
+	ENIGMA_STATIC_CLASS(Random);
 public:
 	/*
 	*	@brief Generates a random real between a range
@@ -50,6 +51,8 @@ public:
 		return !!dist(m_engine);
 	}
 
+
+#if 0
 	/*
 	*	@brief Generates a random string with length
 	*	@param length: length of the generated random string
@@ -80,6 +83,7 @@ public:
 		}
 		return str;
 	}
+#endif
 
 private:
 	inline static std::random_device m_seed{};

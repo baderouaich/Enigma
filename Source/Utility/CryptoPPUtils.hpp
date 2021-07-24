@@ -6,8 +6,9 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API CryptoPPUtils
+class ENIGMA_API CryptoPPUtils final
 {
+	ENIGMA_STATIC_CLASS(CryptoPPUtils);
 public:
 	/*
 	*	Converts Crypto++ ErrorType into String

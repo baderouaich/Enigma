@@ -22,7 +22,7 @@ public:
 
 public:
 	Scene() noexcept;
-	virtual ~Scene() noexcept;
+	virtual ~Scene() noexcept = default;
 
 	/* Scene Life Cicle */
 	virtual void OnCreate() = 0;

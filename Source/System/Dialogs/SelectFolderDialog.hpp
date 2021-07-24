@@ -21,7 +21,7 @@ public: /* Constructors / Destructor */
 	explicit SelectFolderDialog(const String& title,
 		const String& initial_path = ".",
 		const bool force_path = true);
-	~SelectFolderDialog() noexcept;
+	~SelectFolderDialog() noexcept = default;
 
 public: /* Accessors */
 	/*

@@ -89,6 +89,8 @@ project "Enigma"
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 	--debugdir ("%{wks.location}/")
 
+	---[[ Enable the toolset's maximum warning level ]]---
+	warnings "Extra"
 
 	--[[ 
 		Command to copy Resources/ folder next to Enigma.exe (targetdir) after each build https://github.com/premake/premake-core/wiki/postbuildcommands 
@@ -106,9 +108,6 @@ project "Enigma"
 
 	---[[ Disable RTTI to optimize if we're not using dynamic_cast or typeid ]]---
 	--rtti "Off"
-
-	---[[ Enable the toolset's maximum warning level ]]---
-	warnings "Extra"
 	
 	---[[ Source files ]]---
 	files

@@ -12,8 +12,9 @@ NS_ENIGMA_BEGIN
 /*
 *	.gz Compressor & Decompressor
 */
-class ENIGMA_API GZip
+class ENIGMA_API GZip final
 {
+	ENIGMA_STATIC_CLASS(GZip);
 public:
 	enum class DeflateLevel
 	{

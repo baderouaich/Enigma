@@ -10,13 +10,14 @@ NS_ENIGMA_BEGIN
 *	The environment variables are set within the context of your program.
 *	When your program exits, you're back in the context from where your program was started.
 */
-class ENIGMA_API ENV
+class ENIGMA_API ENV final
 {
+	ENIGMA_STATIC_CLASS(ENV);
 public:
 	/*
 	*	Get process runtime environment variable value
 	*/
-	static const String Get(const std::string_view& key);
+	static String Get(const std::string_view& key);
 
 	/*
 	*	Set process runtime environment variable
@@ -48,9 +49,6 @@ public:
 	*/
 	static void Delete(const std::string_view& key);
 
-public:
-	ENIGMA_NON_COPYABLE(ENV);
-	ENIGMA_NON_MOVEABLE(ENV);
 };
 
 NS_ENIGMA_END

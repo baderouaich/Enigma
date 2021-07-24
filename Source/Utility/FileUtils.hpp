@@ -15,8 +15,9 @@
 #endif
 
 NS_ENIGMA_BEGIN
-class ENIGMA_API FileUtils
+class ENIGMA_API FileUtils final
 {
+	ENIGMA_STATIC_CLASS(FileUtils);
 public:
 	/*
 	*	Returns path to Enigma.exe file e.g( "C:/Users/user/Enigma/Enigma.exe" )
@@ -83,7 +84,7 @@ public:
 	/*
 	*	Reads a file chunk by chunk
 	*/
-	static void ReadChunks(const String& filename, const std::size_t max_chunk_size, const std::function<void(std::vector<byte>&&)>& callback)
+	static void ReadChunks(const String& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback)
 	{
 		if (std::ifstream ifs{ filename, std::ios::binary }) 
 		{
@@ -97,8 +98,10 @@ public:
 				if (bytes_read < max_chunk_size)
 					chunk.resize(bytes_read);
 
-				// serve chunk
-				callback(std::move(chunk));
+				// serve chunk and see if true was returned from callback to stop reading loop.
+				const bool should_stop = callback(std::move(chunk));
+				if (should_stop)
+					break;
 			}
 			ifs.close();
 		}

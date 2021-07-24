@@ -19,7 +19,9 @@ NS_ENIGMA_BEGIN
 */
 class ENIGMA_API Database final
 {
-public:
+	ENIGMA_STATIC_CLASS(Database);
+
+ public:
 	enum class OrderBy : byte
 	{
 		ID,
@@ -300,11 +302,6 @@ public: // Modifiers
 
 private:
 	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; // Database connection configuered on Initialize()
-
-
-public:
-	ENIGMA_NON_COPYABLE(Database);
-	ENIGMA_NON_MOVEABLE(Database);
 };
 /*
 Notes:

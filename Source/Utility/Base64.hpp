@@ -5,8 +5,9 @@
 #include <Core/Core.hpp>
 
 NS_ENIGMA_BEGIN
-class ENIGMA_API Base64
+class ENIGMA_API Base64 final
 {
+	ENIGMA_STATIC_CLASS(Base64);
 public:
     /*
      *	Encodes string bytes into Base64 string

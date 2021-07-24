@@ -6,15 +6,12 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API Clipboard
+class ENIGMA_API Clipboard final
 {
+	ENIGMA_STATIC_CLASS(Clipboard);
 public:
-	static const String Get();
+	static String Get();
 	static void Set(const String& buffer);
-
-public:
-	ENIGMA_NON_COPYABLE(Clipboard);
-	ENIGMA_NON_MOVEABLE(Clipboard);
 };
 
 NS_ENIGMA_END

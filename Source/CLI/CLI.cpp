@@ -530,10 +530,4 @@ void CLI::OnCheckForUpdates()
 	ENIGMA_LOG(oss.str());
 }
 
-
-CLI::~CLI() noexcept
-{
-	ENIGMA_TRACE_CURRENT_FUNCTION();
-}
-
 NS_ENIGMA_END

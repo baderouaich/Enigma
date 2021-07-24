@@ -12,11 +12,6 @@ Scene::Scene() noexcept
 {
 }
 
-
-Scene::~Scene() noexcept
-{
-}
-
 NS_ENIGMA_END
 
 

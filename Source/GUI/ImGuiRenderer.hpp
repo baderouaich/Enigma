@@ -11,7 +11,7 @@ class ENIGMA_API ImGuiRenderer
 {
 public:
 	ImGuiRenderer();
-	virtual ~ImGuiRenderer();
+	~ImGuiRenderer();
 
 	//Begin imgui rendering
 	void Begin();

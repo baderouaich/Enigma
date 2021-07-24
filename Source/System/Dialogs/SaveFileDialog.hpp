@@ -24,7 +24,7 @@ public: /* Constructors / Destructor */
 		const String& initial_path = ".",
 		const bool force_overwrite = true,
 		const std::vector<String>& filters = { "All Files", "*" });
-	~SaveFileDialog() noexcept;
+	~SaveFileDialog() noexcept = default;
 
 public: /* Accessors */
 	/*

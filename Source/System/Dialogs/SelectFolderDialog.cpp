@@ -21,9 +21,5 @@ String SelectFolderDialog::Show() const
 		.result();
 }
 
-SelectFolderDialog::~SelectFolderDialog() noexcept
-{
-}
-
 NS_ENIGMA_END
 

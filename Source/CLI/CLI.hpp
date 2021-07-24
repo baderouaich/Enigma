@@ -35,7 +35,7 @@ class ENIGMA_API CLI
 {
 public:
 	CLI(const i32& argc, const char* const* argv);
-	~CLI() noexcept;
+	~CLI() noexcept = default;
 
 public:
 	i32 Run();

@@ -17,7 +17,7 @@ public:
 	* @exception std::runtime_error on failure
 	*/
 	explicit Config(const String& file_name);
-	~Config() noexcept;
+	~Config() noexcept = default;
 
 public:
 	// Integers (and make sure its not bool since its also considered integral: https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template)

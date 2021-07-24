@@ -6,8 +6,9 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API OpenGLUtils
+class ENIGMA_API OpenGLUtils final
 {
+	ENIGMA_STATIC_CLASS(OpenGLUtils);
 public:
 	/*
 	*	Convert GL Error Enum macro name to a String, returns "Unknown GLenum" on non detected macros 
@@ -36,7 +37,7 @@ public:
 		do \
 		{ \
 			(call); \
-			GLenum err = glGetError(); \
+			const GLenum err = glGetError(); \
 			if (err != GL_NO_ERROR) \
 			{ \
 				ENIGMA_ASSERT(false, OpenGLUtils::GetGLErrorEnumString(err)); \

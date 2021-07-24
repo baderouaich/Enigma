@@ -102,7 +102,7 @@
 
 
 /// Array Size
-#define ENIGMA_ARRAY_SIZE(arr) ::Enigma::size_t(sizeof(arr) / sizeof((arr)[0]))
+#define ENIGMA_ARRAY_SIZE(arr) static_cast<::Enigma::size_t>(sizeof(arr) / sizeof((arr)[0]))
 ///
 
 /// Check if value is between or equal a range
@@ -143,6 +143,14 @@
     Class& operator=(Class&& obj) = delete;        
 ///
 
+
+/// Makes a class static, which will prevent creating instances from it and only use it as Class::Func()..
+#define ENIGMA_STATIC_CLASS(Class) \
+		ENIGMA_NON_COPYABLE(Class) \
+		ENIGMA_NON_MOVEABLE(Class) \
+		Class() = delete; \
+		~Class() = delete; 
+///
 
 
 

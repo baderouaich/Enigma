@@ -17,24 +17,24 @@
 ///
 
 
-///ENIGMA Headers
+/// ENIGMA Headers
 #include "Enigma.hpp"
 ///
 
-///OpenGL: GLAD
+/// OpenGL: GLAD
 #include <glad/glad.h>
 ///
 
-///Graphic library framwork: GLFW
+/// Graphic library framwork: GLFW
 #include <GLFW/glfw3.h>
 ///
 
-///UI: ImGui
+/// UI: ImGui
 #include <imgui.h>
 ///
 
 
-///Logger: SpdLog
+/// Logger: SpdLog
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/fmt/ostr.h>
@@ -42,12 +42,12 @@
 ///
 
 
-///pfd: portable file dialog
+/// pfd: portable file dialog
 #include <portable-file-dialogs.h>
 ///
 
 
-///the C++ Standard Libraries
+/// the C++ Standard Libraries
 #include <iostream>
 #include <string>
 #include <sstream>

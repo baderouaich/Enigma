@@ -24,7 +24,7 @@ public: /* Constructors / Destructor */
 		const String& initial_path = ".",
 		const bool allow_multiselect = true,
 		const std::vector<String>& filters = { "All Files", "*" });
-	~OpenFileDialog() noexcept;
+	~OpenFileDialog() noexcept = default;
 
 public: /* Accessors */
 	/*

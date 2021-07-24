@@ -12,6 +12,7 @@ NS_ENIGMA_BEGIN
 
 class ENIGMA_API DialogUtils final
 {
+	ENIGMA_STATIC_CLASS(DialogUtils);
 public:
 	static const Enigma::MessageBox::Action Error(const String& title, const String& message, const Enigma::MessageBox::Choice& choice = Enigma::MessageBox::Choice::Ok)
 	{
