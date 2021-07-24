@@ -118,8 +118,9 @@ void Application::InitImGuiFonts()
 	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 45.0f);
 	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 20.0f);
 	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 18.0f);
-	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 12.0f);
 	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 16.0f);
+	m_fonts["Montserrat-Medium-14"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 14.0f);
+	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 12.0f);
 	
 	// Build added fonts atlas --> imgui issue #3643
 	io.Fonts->Build();
@@ -209,9 +210,7 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
-#ifdef ENIGMA_DEBUG
-	ENIGMA_INFO("Closing Window due WindowCloseEvent");
-#endif
+
 
 
 	// check if there is a scene doing some work in progress...
@@ -225,12 +224,15 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 	if (there_is_a_scene_still_doing_some_work)
 	{
 
-		(void)DialogUtils::Warn("Warning!", "There is a scene still doing some work currently! Please wait little more...");
+		(void)DialogUtils::Warn("Warning!", "A Scene is still doing some work, please wait...");
 		m_window->SetShouldClose(false); // force GLFW to keep window open. GLFW will close the window when a close window event received.
 		return true; // handled.
 	}
 	else
 	{
+#ifdef ENIGMA_DEBUG
+	ENIGMA_INFO("Closing Window due WindowCloseEvent");
+#endif
 		this->EndApplication();
 		return true; // the end of the app, all events are handled.
 	}

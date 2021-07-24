@@ -7,7 +7,10 @@
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	#define WIN32_LEAN_AND_MEAN
-	#define _WIN32_WINNT 0x06000100
+	#if defined(_WIN32_WINNT)
+		#undef _WIN32_WINNT
+		#define _WIN32_WINNT 0x06000100
+	#endif
 	#include <SDKDDKVer.h>
 	#include <Windows.h>
 	#include <Winsock2.h>

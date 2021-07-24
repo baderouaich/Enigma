@@ -1,4 +1,6 @@
 ========================= IN PROGRESS =============================
+- Add ToolsScene with tools: Password Generator, 
+
 - Cross platform single instance https://github.com/GekkoFyre/FyreDL/blob/develop/src/singleton_proc.hpp
 
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else

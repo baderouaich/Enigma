@@ -6,6 +6,7 @@
 #include "EncryptTextScene.hpp"
 #include "DecryptTextScene.hpp"
 #include "MyEncryptionsScene.hpp"
+#include "ToolsScene/ToolsScene.hpp"
 
 #include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
@@ -191,7 +192,18 @@ void MainMenuScene::OnImGuiDraw()
 					}
 					ImGui::PopStyleColor(3);
 				}
-
+				spacing(6);
+				{
+					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::TOOLS_BUTTON_COLOR); // buttons color idle
+					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER);  // buttons color hover
+					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE); // buttons color pressed
+					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
+					if (ImGui::Button("Tools", button_size))
+					{
+						this->OnToolsButtonPressed();
+					}
+					ImGui::PopStyleColor(3);
+				}
 				spacing(7);
 
 				{
@@ -273,6 +285,11 @@ void MainMenuScene::OnDecryptTextButtonPressed()
 void MainMenuScene::OnMyEncryptionsButtonPressed()
 {
 	Application::GetInstance()->PushScene(std::make_unique<MyEncryptionsScene>());
+}
+
+void MainMenuScene::OnToolsButtonPressed()
+{
+	Application::GetInstance()->PushScene(std::make_unique<ToolsScene>());
 }
 
 void MainMenuScene::OnReportIssueMenuButtonPressed()

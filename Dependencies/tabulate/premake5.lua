@@ -3,11 +3,11 @@ project "tabulate"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "on"
-	
+		
+	warnings "Off"
+
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
-
-	warnings "Off"
 
 	includedirs 
 	{

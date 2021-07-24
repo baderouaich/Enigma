@@ -24,6 +24,7 @@ private: /* Callbacks */
 	void OnEncryptTextButtonPressed();
 	void OnDecryptTextButtonPressed();
 	void OnMyEncryptionsButtonPressed();
+	void OnToolsButtonPressed();
 	// Menu
 	void OnReportIssueMenuButtonPressed();
 	void OnCheckForUpdatesMenuButtonPressed();
