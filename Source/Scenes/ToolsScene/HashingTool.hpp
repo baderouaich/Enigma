@@ -42,8 +42,8 @@ class HashingTool : public Tool
 #undef CASE_RET
 	}
 public:
-	HashingTool() noexcept = default;
-	~HashingTool() noexcept = default;
+	HashingTool() = default;
+	~HashingTool() = default;
 
 public: /* Tool Life Cycle */
 	void OnCreate() override;

@@ -10,8 +10,8 @@ NS_ENIGMA_BEGIN
 class PasswordGeneratorTool : public Tool
 {
 public:
-	PasswordGeneratorTool() noexcept = default;
-	~PasswordGeneratorTool() noexcept = default;
+	PasswordGeneratorTool() = default;
+	~PasswordGeneratorTool() = default;
 
 public: /* Tool Life Cycle */
 	void OnCreate() override;
