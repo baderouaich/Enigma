@@ -1,3 +1,6 @@
 Source/Application/SingleProcessInstance.hpp:71:3: performance: Variable 'm_socket_fd' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
   m_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
   ^
+Source/Scenes/ToolsScene/SystemAndHardwareInfoTool.hpp:19:4: performance: Variable 'quantities' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+   quantities = iware::cpu::quantities();
+   ^
