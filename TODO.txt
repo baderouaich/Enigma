@@ -1,4 +1,5 @@
 ========================= IN PROGRESS =============================
+- System & Hardware Information Tool, Tree nodes (CPU DONE, RAM, OS, Displays, Kernel, Connected HIDs or Devices, GPU)
 
 - Cross platform single instance https://github.com/GekkoFyre/FyreDL/blob/develop/src/singleton_proc.hpp
 

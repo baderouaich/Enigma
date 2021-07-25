@@ -35,11 +35,11 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 ## Available Tools
 - Password Generator
 - Hashing Algorithms (MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHAKE128, SHAKE256, KECCAK224, KECCAK256, KECCAK384, KECCAK512, TIGER, WHIRLPOOL)
-
+- System & Hardware Information
 
 ## Features
 - :zap: Very fast Encryption & Decryption
-- :hammer_and_wrench: Useful tools like Password Generator and Hashing
+- :hammer_and_wrench: Useful tools like Password Generator, Hashing and System & Hardware Information
 - :computer: User Interface & Command-Line Interface support
 - :shield: Strongest Encryption Algorithms of the Decade
 - :package:	GZip Compression by default to reduce cipher size if sharing or uploading to clouds

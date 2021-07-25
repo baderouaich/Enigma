@@ -27,6 +27,7 @@
 - Now algorithm is auto-detected by default when decrypting, which removes the "detect algorithm used for encryption button"
 - Added Password Generator Tool
 - Added Hashing Tool
+- Added System & Hardware Information Tool
 
 
 # 1.2.1

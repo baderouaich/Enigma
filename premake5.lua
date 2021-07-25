@@ -47,6 +47,7 @@ IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config
 IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
 IncludeDir["sqlitecpp"]		= "%{wks.location}/Dependencies/sqlitecpp/include" -- sqlite3 cpp wrapper
 IncludeDir["tabulate"]		= "%{wks.location}/Dependencies/tabulate/include" -- cmd table maker lib for CLI
+IncludeDir["infoware"]		= "%{wks.location}/Dependencies/infoware/include" -- C++ Library for pulling system and hardware information, without hitting the command line.
 
 IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
 IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking library wrapper around cURL (will include and link to curl)
@@ -69,6 +70,7 @@ group "Dependencies"
 	include "Dependencies/json"
 	include "Dependencies/sqlitecpp"
 	include "Dependencies/tabulate"
+	include "Dependencies/infoware"
 
 	include "Dependencies/curl"
 	include "Dependencies/cpr"
@@ -138,6 +140,7 @@ project "Enigma"
 		"%{IncludeDir.cpr}",
 		--"%{IncludeDir.zlib}",
 		"%{IncludeDir.tabulate}",
+		"%{IncludeDir.infoware}",
 	}
 
 
@@ -159,6 +162,7 @@ project "Enigma"
 		"cpr",
 		--"zlib",
 		"tabulate",
+		"infoware",
 	}
 
 
