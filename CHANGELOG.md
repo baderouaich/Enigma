@@ -25,7 +25,8 @@
 - Changed logging format
 - Now buffer is always compressed by default before encrypting
 - Now algorithm is auto-detected by default when decrypting, which removes the "detect algorithm used for encryption button"
-
+- Added Password Generator Tool
+- Added Hashing Tool
 
 
 # 1.2.1

@@ -32,8 +32,14 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 <!-- - [ ] algo || [x] algo -->
 
 
+## Available Tools
+- Password Generator
+- Hashing Algorithms (MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHAKE128, SHAKE256, KECCAK224, KECCAK256, KECCAK384, KECCAK512, TIGER, WHIRLPOOL)
+
+
 ## Features
 - :zap: Very fast Encryption & Decryption
+- :hammer_and_wrench: Useful tools like Password Generator and Hashing
 - :computer: User Interface & Command-Line Interface support
 - :shield: Strongest Encryption Algorithms of the Decade
 - :package:	GZip Compression by default to reduce cipher size if sharing or uploading to clouds
@@ -94,6 +100,7 @@ output: my important data securly encrypted!
 <image src="Resources/ScreenShots/1.png"/>
 <image src="Resources/ScreenShots/2.png"/>
 <image src="Resources/ScreenShots/3.png"/>
+<image src="Resources/ScreenShots/Tools-Demo.png"/>
 
 <!--
 <image width="300" src="Resources/ScreenShots/UI-MainMenuScene.png"/>  <image width="300" src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>  <image width="300" src="Resources/ScreenShots/UI-DecryptText-Demo.png"/>  <image width="300" src="Resources/ScreenShots/UI-EncryptFile-Demo.png"/>  <image width="300" src="Resources/ScreenShots/UI-DecryptFile-Demo.png"/>

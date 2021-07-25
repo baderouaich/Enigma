@@ -12,6 +12,7 @@ void PasswordGeneratorTool::OnCreate()
 
 	m_digits = m_uppercase_alphabets = m_lowercase_alphabets = m_special_characters = true;
 
+#if 0
 	// Make Available lengths
 	for (i32 i = 2; i <= 4096; i *= 2)
 	{
@@ -19,7 +20,16 @@ void PasswordGeneratorTool::OnCreate()
 		std::sprintf(s, "%d", i); // will add \000 at the end which is required for imgui combo box
 		m_lengths.emplace_back(std::move(s));
 	}
-	m_selected_length_index = 2; // 8
+#endif
+	// Make Available lengths
+	m_lengths.reserve(4096 - 5);
+	for (i32 i = 5; i <= 4096; ++i)
+	{
+		char* s = new char[10];
+		std::sprintf(s, "%d", i); // will add \000 at the end which is required for imgui combo box
+		m_lengths.emplace_back(std::move(s));
+	}
+	m_selected_length_index = 7; // 12
 }
 
 void PasswordGeneratorTool::OnDraw(Scene* parent)
@@ -49,7 +59,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			spacing(3);
 			// Copy button, Output Input Text , Generate Button
 			// Copy Generated password button 10% of width
-			ImGui::PushFont(font_montserrat_medium_20);
+			//ImGui::PushFont(font_montserrat_medium_20);
 			if (ImGuiWidgets::Button("Copy", Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 			{
 				this->OnCopyPasswordButtonPressed();
@@ -58,7 +68,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			ImGui::SameLine();
 
 			// Output password input text 65% of width
-			ImGuiWidgets::InputTextMultiline("##input1", &m_password, Vec2f(win_w * 0.65f, 33.0f));
+			ImGuiWidgets::InputTextMultiline("##input_pw", &m_password, Vec2f(win_w * 0.65f, 33.0f));
 			//
 
 			ImGui::SameLine();
@@ -84,15 +94,15 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 					this->OnCopyRememberPasswordSentenceButtonPressed();
 				}
 				ImGui::SameLine();
-				ImGuiWidgets::InputTextMultiline("##input2", &m_remember_password_sentence, Vec2f(-1.0f, 33.0));
+				ImGuiWidgets::InputTextMultiline("##output_rmb_pw", &m_remember_password_sentence, Vec2f(-1.0f, 33.0f));
 				ImGui::NewLine();
 			}
 			//
-			ImGui::PopFont();
+			//ImGui::PopFont();
 
 			// Password Settings
 			// Wrap password settings in columns to order things up
-			ImGui::PushFont(font_montserrat_medium_14);
+			//ImGui::PushFont(font_montserrat_medium_14);
 				ImGui::BeginColumns("Password Settings", 5,  ImGuiColumnsFlags_NoResize);
 					// Length Combo Box
 					/*
@@ -116,7 +126,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 					ImGui::NextColumn();
 					ImGui::Checkbox("Symbols", &m_special_characters); 
 				ImGui::EndColumns();
-			ImGui::PopFont();
+			//ImGui::PopFont();
 			//
 
 			ImGui::PopFont();
