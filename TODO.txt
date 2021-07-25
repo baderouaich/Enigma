@@ -1,5 +1,4 @@
 ========================= IN PROGRESS =============================
-- Add ToolsScene with tools: Password Generator, 
 
 - Cross platform single instance https://github.com/GekkoFyre/FyreDL/blob/develop/src/singleton_proc.hpp
 
@@ -30,7 +29,7 @@
 - use enum ColumnFlags { ID = 1 << 0, TITLE = 1 << 1,...}; to filter what columns to get from database instead of constexpr booleans for readability
 
 ============================== DONE ===============================
-- DONE Add Search textfield feature in MyEncryptionsScene  with Like %%
+- DONE Add Search textfield feature in MyEncryptionsScene using sql like clause
 - DONE added VACUUM sqlite command to defragment disk
 - DONE (issue was argv[0] returns enigma.exe only) Investigate why ENV doesnt work on CLI (it works when running it from local 
 debugger with ui, but when calling cli, it doesnt seem to be set or get)
@@ -69,6 +68,8 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE Enable file drop in Encrypt & Decrypt Files using glfwSetDropCallback(onFiledropcallback);
 - DONE [USING SOCKETS] Prevent multiple enigma app instances
 - DONE [RESOLVED] CPU Usage is not accurate on windows https://github.com/BaderEddineOuaich/Enigma/issues/2
+- DONE Add Password Generator Tool
+- DONE Add Hashing Tool
 =============================================================================
 
 

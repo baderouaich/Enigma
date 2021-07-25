@@ -32,7 +32,8 @@ void HashingTool::OnDraw(Scene* parent)
 	ImGui::PushFont(font_audiowide_regular_20);
 	{		
 		
-		if (ImGui::CollapsingHeader("Hashing", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen))
+		//if (ImGui::CollapsingHeader("Hashing", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen))
+		if (ImGui::CollapsingHeader("Hashing", nullptr))
 		{
 			ImGui::PushFont(font_montserrat_medium_18);
 			spacing(3);
@@ -61,8 +62,7 @@ void HashingTool::OnDraw(Scene* parent)
 				}
 			}
 
-			ImGui::NewLine();
-			spacing(1);
+			spacing(2);
 
 			// Input text to calculate hash for
 			ImGui::BulletText("Input: ");
@@ -75,6 +75,8 @@ void HashingTool::OnDraw(Scene* parent)
 						this->OnCalculateHashButtonPressed();
 					});
 			}
+
+			spacing(2);
 
 
 			// Output calculated hash
