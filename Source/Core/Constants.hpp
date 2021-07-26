@@ -157,6 +157,11 @@ namespace Enigma
 				return Color4f{ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f };
 			};
 
+			static const Color4f RED(1.0f, 0.0f, 0.0f, 1.0f);
+			static const Color4f GREEN(0.0f, 1.0f, 0.0f, 1.0f);
+			static const Color4f BLUE(0.0f, 0.0f, 1.0f, 1.0f);
+			static const auto ORANGE = COLOR4I_TO_COLOR4F(255, 182, 0, 255);
+
 #if 0
 			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(12, 26, 50, 200);
 

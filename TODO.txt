@@ -1,7 +1,5 @@
 ========================= IN PROGRESS =============================
-- System & Hardware Information Tool, Tree nodes (CPU DONE, RAM, OS, Displays, Kernel, Connected HIDs or Devices, GPU)
-
-- Cross platform single instance https://github.com/GekkoFyre/FyreDL/blob/develop/src/singleton_proc.hpp
+- System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU)
 
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
 
@@ -19,8 +17,6 @@
 
 - maybe go further on new updates available, download update, extract binary to "."
 
-- Add donate github or menu option (very low priority) if user wants to buy me a coffee.
-
 - Maybe uplaod enigma release to stores like windows store and linux in such as https://www.linux-apps.com/ for global usage as a free open source project
 
 - ability to cancel check-for-updates ui
@@ -28,6 +24,8 @@
 - add to search utils myencryptions to search encryptions between two dates (or even direct sql query?)
 
 - use enum ColumnFlags { ID = 1 << 0, TITLE = 1 << 1,...}; to filter what columns to get from database instead of constexpr booleans for readability
+
+- Add donate github or menu option (very low priority) if user wants to buy me a coffee.
 
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene using sql like clause

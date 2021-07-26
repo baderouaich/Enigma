@@ -20,14 +20,15 @@ project "infoware"
     }
     excludes
     {
-    	"src/pci.cpp"
+    	"src/pci.cpp",
+    	"include/infoware/pci.hpp",
     }
 
     -- check https://github.com/ThePhD/infoware/blob/main/CMakeLists.txt for compilation settings
     defines	
     {
     	"INFOWARE_VERSION=\"0.6.0\"",
-   		"INFOWARE_USE_OPENGL=1",
+   		"INFOWARE_USE_OPENGL=1", -- Use OpenGL to extract GPU info (although not implemented yet by infoware)
     }
 
 	--- Platform ---
@@ -35,9 +36,17 @@ project "infoware"
 		systemversion "latest"
 		defines
 		{
+
 		}
 		links
 		{
+			-- for infoware/system
+			"version.lib", 
+			"wbemuuid.lib",
+
+			-- for infoware/gpu (if defined  INFOWARE_USE_D3D, but pci data still required)
+			--"D3D11.lib", 
+			--"DXGI.lib",
 		}
 
 
@@ -63,6 +72,7 @@ project "infoware"
 		runtime "Debug"
 		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
+
 
 	filter "configurations:Release"
 		runtime "Release"
