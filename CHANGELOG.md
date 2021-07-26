@@ -1,9 +1,12 @@
 <!-- In Progress...
-# 1.3.1
+# 1.4.0
 - Updated portable-file-dialogs library after issue https://github.com/samhocevar/portable-file-dialogs/issues/50 Fixed
-- Upgraded imgui library from 1.81 to 1.83 (master branch)
+- Upgraded ImGui library from 1.81 to 1.83 (master branch)
 - Now file paths are runtime detected (which solves the issue of calling CLI from an external folder doesn't work properly)
 - Added ability to drop files in window to Encrypt or Decrypt
+- Added Password Generator Tool
+- Added Hashing Tool
+- Added System & Hardware Information Tool
 -->
 
 
@@ -25,9 +28,7 @@
 - Changed logging format
 - Now buffer is always compressed by default before encrypting
 - Now algorithm is auto-detected by default when decrypting, which removes the "detect algorithm used for encryption button"
-- Added Password Generator Tool
-- Added Hashing Tool
-- Added System & Hardware Information Tool
+
 
 
 # 1.2.1

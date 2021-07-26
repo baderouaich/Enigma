@@ -97,9 +97,9 @@ output: my important data securly encrypted!
 
 
 ## Enigma UI
-<image src="Resources/ScreenShots/1.png"/>
+<image src="Resources/ScreenShots/Main-Menu-Demo.png"/>
 <image src="Resources/ScreenShots/2.png"/>
-<image src="Resources/ScreenShots/3.png"/>
+<image src="Resources/ScreenShots/My-Encryptions-Demo.png"/>
 <image src="Resources/ScreenShots/Tools-Demo.png"/>
 
 <!--
