@@ -23,7 +23,7 @@ public:
 	*	Checks wether an extension available for example: GL_NVX_gpu_memory_info
 	*	returns extension index of glGetStringi() if found, -1 otherwise
 	*/
-	static constexpr const GLint IsExtensionSupported(const char* extension_name) noexcept
+	static const GLint IsExtensionSupported(const char* extension_name) noexcept
 	{	
 		GLint ext_count{};
 		glGetIntegerv(GL_NUM_EXTENSIONS, &ext_count);
