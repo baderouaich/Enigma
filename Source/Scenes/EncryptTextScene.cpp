@@ -57,6 +57,7 @@ void EncryptTextScene::OnImGuiDraw()
 	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
 	static ImFont* const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
 	static ImFont* const& font_montserrat_medium_16 = fonts.at("Montserrat-Medium-16");
+	static ImFont* const& font_montserrat_medium_14 = fonts.at("Montserrat-Medium-14");
 	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
 
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;// | ImGuiWindowFlags_NoBackground;
@@ -224,19 +225,20 @@ void EncryptTextScene::OnImGuiDraw()
 				// Label
 				ImGui::Text("Cipher (in base64):");
 				// Encrypted text
-				static const ImVec2 copy_button_size(45.0f, 25.0f);
-				ImGuiWidgets::InputText("##text4", &m_cipher_base64, win_w - (copy_button_size.x * 2.0f));
-				ImGui::PushFont(font_montserrat_medium_12);
+				ImGuiWidgets::InputText("##text4", &m_cipher_base64, win_w * 0.88f);
+				ImGui::PushFont(font_montserrat_medium_14);
 					ImGui::SameLine();
 					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-					if (ImGui::Button("Copy", copy_button_size))
+					if (ImGui::Button("Copy", ImVec2(win_w * 0.10f, 30.0f)))
 					{
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
 					//ImGui::NewLine();
-					ImGui::Text("%s (Please save cipher base64 text above in a safe place)", SizeUtils::FriendlySize(m_cipher_base64.size()).c_str());
+					ImGui::PushFont(font_montserrat_medium_12);
+						ImGui::Text("%s (Please save cipher base64 text above in a safe place)", SizeUtils::FriendlySize(m_cipher_base64.size()).c_str());
+					ImGui::PopFont();
 					ImGui::PopStyleColor(3);
 				ImGui::PopFont();
 			}

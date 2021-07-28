@@ -17,27 +17,24 @@ IDEA::~IDEA() noexcept
 
 String IDEA::Encrypt(const String& password, const String& buffer)
 {
-	// Make sure encryption mode and the seeder are initialized
+	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
 		ENIGMA_ASSERT_OR_THROW(m_idea_encryptor, "IDEA Encryptor is not initialized properly");
 		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "IDEA Encryptor seeder is not initialized properly");
-	}
-
-	// Validate Arguments
-	{
 		// Password length must be at least 9 for security reasons
 		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "IDEA Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 
-	String iv = this->GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE); // Randomly generated 8 bytes IV
-	String output(sizeof(Algorithm::Type), static_cast<const byte>(this->GetType())); // return value will be (AlgoType + IV + Cipher)
+
+	// Randomly generated IV
+	const String iv = this->GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(CryptoPP::IDEA::MAX_KEYLENGTH + CryptoPP::IDEA::BLOCKSIZE); // Encryption key to be generated from user password + IV
 
 	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
-	CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
+	CryptoPP::HKDF<CryptoPP::SHA256> hkdf{};
 	hkdf.DeriveKey(
 		key, key.size(),
 		reinterpret_cast<const byte*>(password.data()), password.size(),
@@ -50,40 +47,41 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 
 	// Encrypt
 	String cipher{}; // Final encrypted buffer
-	const CryptoPP::StringSource ss(
+	[[maybe_unused]] const auto ss = CryptoPP::StringSource(
 		buffer,
 		true,
 		//new CryptoPP::StreamTransformationFilter(
 		new CryptoPP::AuthenticatedEncryptionFilter(
 			*m_idea_encryptor,
 			new CryptoPP::StringSink(cipher)
-		)
-		);
-	//NOTE: StringSource will auto clean the allocated memory
+		)); //NOTE: StringSource will auto clean the allocated memory
+	
 
-	// Output (AlgoType + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
-	output += iv; // Append IV
-	output += cipher; // Append Cipher
-
-	return output;
+	// Output will be (Algorithm Type + IV + Cipher) since we need IV and Algorithm used for encryption later for decryption
+	std::ostringstream output{};
+	output
+		<< static_cast<char>(this->GetType()) // Append Algorithm Type (enum id)
+		<< iv // Append IV
+		<< cipher; // Append Cipher
+	return output.str();
 }
 
-String IDEA::Decrypt(const String& password, const String& iv_cipher)
+String IDEA::Decrypt(const String& password, const String& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT_OR_THROW(m_idea_decryptor, "IDEA Decryptor is not initialized properly");
 
-	// Split IV and Cipher from buffer (we output encrypted buffers as String(AlgoType + IV + Cipher))
-	const String iv = iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
-	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV from cipher");
-	const String cipher = iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::IDEA::BLOCKSIZE, iv_cipher.size() - 1);
-	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher from cipher");
+	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
+	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
+	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_cipher");
+	const String cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::IDEA::BLOCKSIZE, algotype_iv_cipher.size() - 1);
+	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_cipher");
 
 	// Prepare Key
 	CryptoPP::SecByteBlock key(CryptoPP::IDEA::MAX_KEYLENGTH + CryptoPP::IDEA::BLOCKSIZE);
 
 	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
-	CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
+	CryptoPP::HKDF<CryptoPP::SHA256> hkdf{};
 	hkdf.DeriveKey(
 		key, key.size(),
 		reinterpret_cast<const byte*>(password.data()), password.size(),
@@ -98,15 +96,10 @@ String IDEA::Decrypt(const String& password, const String& iv_cipher)
 	const CryptoPP::StringSource ss(
 		cipher,
 		true,
-		//new CryptoPP::StreamTransformationFilter(
 		new CryptoPP::AuthenticatedDecryptionFilter(
 			*m_idea_decryptor,
 			new CryptoPP::StringSink(decrypted)
-		)
-		);
-
-	//NOTE: StringSource will auto clean the allocated memory
-
+		)); //NOTE: StringSource will auto clean the allocated memory
 
 	return decrypted;
 }

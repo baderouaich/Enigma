@@ -20,6 +20,7 @@ private: /* Overrides */
 private: /* Callbacks */
 	void OnDecryptButtonPressed();
 	void OnBackButtonPressed();
+	void OnCopyDecryptedTextButtonPressed();
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm

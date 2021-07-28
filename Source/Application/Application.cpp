@@ -12,7 +12,6 @@
 
 NS_ENIGMA_BEGIN
 
-
 Application::Application(const WindowSettings& window_settings)
 	:
 	SingleProcessInstance(Constants::ENIGMA_SINGLE_PROCESS_UNIQUE_PORT),

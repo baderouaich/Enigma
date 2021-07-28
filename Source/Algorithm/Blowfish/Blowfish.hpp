@@ -19,7 +19,7 @@ public:
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& iv_cipher) override;
+	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private:
 	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption> m_blowfish_encryptor; // Blowfish-EAX encryptor

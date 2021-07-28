@@ -1,6 +1,7 @@
 #pragma once
 #include <Core/Core.hpp>
 #include <Core/Types.hpp>
+#include <Utility/Random.hpp>
 
 namespace Enigma
 {
@@ -25,7 +26,20 @@ eu malesuada erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Quisque vehicula id enim ut vulputate. Sed vitae nisl ac orci vehicula porttitor
 vitae sit amet nunc.)";
 
-
+	String RandomString(size_t length)
+	{
+		String out(length, '\000');
+		for (char& c : out)
+		{
+			if (int r = Random::Int(0, 2); r == 0)
+				c = char(Random::Int(int('a'), int('z')));
+			else if (r == 1)
+				c = char(Random::Int(int('A'), int('Z')));
+			else if (r == 2)
+				c = char(Random::Int(int('0'), int('9')));
+		}
+		return out;
+	}
 
 #if 0
 #pragma region Populate Database With Random Data For Testing

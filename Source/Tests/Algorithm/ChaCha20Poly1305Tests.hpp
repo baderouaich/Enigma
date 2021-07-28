@@ -1,6 +1,8 @@
 #pragma once
 #include <catch2/catch_all.hpp>
 #include <Algorithm/ChaCha20Poly1305/ChaCha20Poly1305.hpp>
+#include <Tests/TestData.hpp>
+
 using namespace Enigma;
 using namespace Catch::Matchers;
 using namespace std;
@@ -16,10 +18,13 @@ TEST_CASE("ChaCha20 Encryption and Decryption")
 	String buffer, password;
 	String encrypted, decrypted;
 
-	cout << "\nEnter buffer to encrypt: ";
-	getline(cin, buffer);
-	cout << "\nEnter password (encryption key): ";
-	getline(cin, password);
+	buffer = RandomString(4096);
+	password = RandomString(1024);
+
+	//cout << "\nEnter buffer to encrypt: ";
+	//getline(cin, buffer);
+	//cout << "\nEnter password (encryption key): ";
+	//getline(cin, password);
 
 
 	encrypted = chacha_encryptor->Encrypt(password, buffer); // iv + cipher

@@ -56,6 +56,7 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromType(const Type type, const Inte
 
 String Algorithm::GenerateRandomIV(const size_t size)
 {
+	ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Random seeder is not initialized properly");
 	String iv(size, '\000');
 	m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
 	return iv;

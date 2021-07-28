@@ -3,6 +3,7 @@
 #include <Algorithm/AES/AES.hpp>
 #include <Utility/FileUtils.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
+#include <Tests/TestData.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
 using namespace std;
@@ -80,20 +81,26 @@ TEST_CASE("AES File Encryption and Decryption")
 }
 
 #else
+
+
+
 TEST_CASE("AES-GCM Encryption and Decryption")
 {
 	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	std::unique_ptr<Enigma::AES> aes_encryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Encrypt);
-	std::unique_ptr<Enigma::AES> aes_decryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Decrypt);
+	std::unique_ptr<AES> aes_encryptor(new AES(AES::Intent::Encrypt));
+	std::unique_ptr<AES> aes_decryptor(new AES(AES::Intent::Decrypt));
 
 	String buffer, password;
 	String encrypted, decrypted;
 
-	cout << "\nEnter buffer to encrypt: ";
-	getline(cin, buffer);
-	cout << "\nEnter password (encryption key): ";
-	getline(cin, password);
+
+	buffer = RandomString(4096);
+	password = RandomString(1024);
+	//cout << "\nEnter buffer to encrypt: ";
+	//getline(cin, buffer);
+	//cout << "\nEnter password (encryption key): ";
+	//getline(cin, password);
 
 
 	encrypted = aes_encryptor->Encrypt(password, buffer); // iv + cipher

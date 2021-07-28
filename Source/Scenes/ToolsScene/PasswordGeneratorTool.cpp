@@ -104,7 +104,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 					ImGui::NextColumn();
 					ImGui::Checkbox("Special Characters (+*~.#^)", &m_special_characters);
 					*/
-					ImGui::Combo("Length", &m_selected_length_index, m_lengths.data(), m_lengths.size(), -1);
+					ImGui::Combo("Length", &m_selected_length_index, m_lengths.data(), static_cast<i32>(m_lengths.size()), -1);
 					ImGui::NextColumn();
 					ImGui::Checkbox("Numbers", &m_digits);
 					ImGui::NextColumn();

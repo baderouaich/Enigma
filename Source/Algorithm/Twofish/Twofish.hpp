@@ -19,7 +19,7 @@ public:
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& iv_cipher) override;
+	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private:
 	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Encryption> m_twofish_encryptor; // Twofish-GCM encryptor

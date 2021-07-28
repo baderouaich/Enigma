@@ -181,9 +181,14 @@ void DecryptTextScene::OnImGuiDraw()
 				ImGui::Text("Recovered Text:");
 
 				// Input text
-				const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
+				const ImVec2 input_text_size(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f);
 				ImGuiWidgets::InputTextMultiline("##recovered_text", &m_recovered_text, input_text_size);
-
+				ImGui::SameLine();
+				// Copy Button
+				if (ImGuiWidgets::Button("Copy", Vec2f(win_w * 0.10f, 30.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+				{
+					this->OnCopyDecryptedTextButtonPressed();
+				}
 				// Bytes count
 				ImGui::PushFont(font_montserrat_medium_12);
 				//ImGui::Text("%zu bytes", m_recovered_text.size());
@@ -232,6 +237,10 @@ void DecryptTextScene::OnImGuiDraw()
 
 void DecryptTextScene::OnEvent(Event&)
 {
+	/*if (Input::IsKeyPressed(KeyCode::Enter))
+	{
+		this->OnDecryptButtonPressed();
+	}*/
 	//if (event.IsInCategory(EventCategory::EC_KEYBOARD))
 	//{
 	//	if (Input::IsKeyPressed(Enigma::Key::Escape))
@@ -264,6 +273,12 @@ void DecryptTextScene::OnBackButtonPressed()
 	//}
 	//else
 		Scene::EndScene();
+}
+
+void DecryptTextScene::OnCopyDecryptedTextButtonPressed()
+{
+	if (!m_recovered_text.empty())
+		Clipboard::Set(m_recovered_text);
 }
 
 void DecryptTextScene::OnDecryptButtonPressed()

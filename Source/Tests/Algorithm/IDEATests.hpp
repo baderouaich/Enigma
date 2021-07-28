@@ -17,10 +17,13 @@ TEST_CASE("IDEA Encryption and Decryption")
 	String buffer = LOREM_IPSUM * 2, password;
 	String encrypted, decrypted;
 
+	buffer = RandomString(4096);
+	password = RandomString(1024);
+
 	//cout << "\nEnter buffer to encrypt: ";
 	//getline(cin, buffer);
-	cout << "\nEnter password (encryption key): ";
-	getline(cin, password);
+	//cout << "\nEnter password (encryption key): ";
+	//getline(cin, password);
 
 	encrypted = idea_encryptor->Encrypt(password, buffer); // iv + cipher
 	cout << "\nEncrypted: " << encrypted << endl;

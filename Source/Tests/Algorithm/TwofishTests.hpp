@@ -1,6 +1,8 @@
 #pragma once
 #include <catch2/catch_all.hpp>
 #include <Algorithm/Twofish/Twofish.hpp>
+#include <Tests/TestData.hpp>
+
 using namespace Enigma;
 using namespace Catch::Matchers;
 using namespace std;
@@ -16,10 +18,13 @@ TEST_CASE("Twofish Encryption and Decryption")
 	String buffer, password;
 	String encrypted, decrypted;
 
-	cout << "\nEnter buffer to encrypt: ";
-	getline(cin, buffer);
-	cout << "\nEnter password (encryption key): ";
-	getline(cin, password);
+	buffer = RandomString(4096);
+	password = RandomString(1024);
+
+ //cout << "\nEnter buffer to encrypt: ";
+ //getline(cin, buffer);
+ //cout << "\nEnter password (encryption key): ";
+ //getline(cin, password);
 
 
 	encrypted = twofish_encryptor->Encrypt(password, buffer); // iv + cipher

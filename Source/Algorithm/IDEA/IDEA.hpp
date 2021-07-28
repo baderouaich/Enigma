@@ -19,7 +19,7 @@ public:
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& iv_cipher) override;
+	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private:
 	// IDEA is the International Data Encryption Standard by Massey and Lai. The cipher is a 64-bit block cipher which uses 126-bit

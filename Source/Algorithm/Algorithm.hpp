@@ -104,7 +104,7 @@ protected:
 	/*
 	*	Generates random IV with specified length
 	*/
-	String GenerateRandomIV(const size_t size);
+	static String GenerateRandomIV(const size_t size);
 
 public:
 	/*
@@ -140,7 +140,7 @@ public:
 protected:
 	Type m_type; // Algorithm type: AES, ChaCha, TripleDES...
 	Intent m_intent; // Operation, Encrypt or Decrypt
-	std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV
+	inline static std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV on encryption
 
 };
 

@@ -19,7 +19,7 @@ public:
 
 public:
 	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& iv_cipher) override;
+	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private: 
 	// TripleDES, TDEA or 3DES, is multiple applications of the DES algorithm to plain text data to increase the security

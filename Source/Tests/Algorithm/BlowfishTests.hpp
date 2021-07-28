@@ -4,6 +4,8 @@
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <filesystem>
 #include <Utility/FileUtils.hpp>
+#include <Tests/TestData.hpp>
+
 namespace fs = std::filesystem;
 using namespace Enigma;
 using namespace Catch::Matchers;
@@ -92,10 +94,13 @@ TEST_CASE("Blowfish-GCM Encryption and Decryption")
 	String buffer, password;
 	String encrypted, decrypted;
 
-	cout << "\nEnter buffer to encrypt: ";
-	getline(cin, buffer);
-	cout << "\nEnter password (encryption key): ";
-	getline(cin, password);
+	buffer = RandomString(4096);
+	password = RandomString(1024);
+
+	//cout << "\nEnter buffer to encrypt: ";
+	//getline(cin, buffer);
+	//cout << "\nEnter password (encryption key): ";
+	//getline(cin, password);
 
 
 	encrypted = blowfish_encryptor->Encrypt(password, buffer); // iv + cipher

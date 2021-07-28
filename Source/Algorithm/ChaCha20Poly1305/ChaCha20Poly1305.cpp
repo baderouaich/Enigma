@@ -18,26 +18,22 @@ ChaCha20Poly1305::~ChaCha20Poly1305() noexcept
 
 String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 {
-	// Make sure encryption mode and the seeder are initialized
+	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
 		ENIGMA_ASSERT_OR_THROW(m_chacha_encryptor, "ChaCha20Poly1305 Encryptor is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "ChaCha20Poly1305 Encryptor seeder is not initialized properly");
-	}
-	// Validate Arguments
-	{
 		// ChaCha20Poly1305 password length must be at least 9 for security reasons
 		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "ChaCha20Poly1305 Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, this allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
-
+	
 	// Randomly generated iv
-	const String iv = this->GenerateRandomIV(m_chacha_encryptor->MaxIVLength()); 
+	const String iv = Algorithm::GenerateRandomIV(m_chacha_encryptor->MaxIVLength()); 
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(m_chacha_encryptor->MaxKeyLength() + m_chacha_encryptor->MaxIVLength());
 
 	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
-	CryptoPP::HKDF<CryptoPP::SHA256> hkdf;
+	CryptoPP::HKDF<CryptoPP::SHA256> hkdf{};
 	hkdf.DeriveKey(
 		key,
 		key.size(),
@@ -67,10 +63,11 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 
 	// Output will be (Algorithm Type + IV + MAC + Cipher)
 	std::ostringstream output{};
-	output  << static_cast<char>(this->GetType()) // Append Algorithm Type (enum id)
-			<< iv // Append IV
-			<< mac // Append MAC
-			<< cipher; // Append Cipher
+	output 
+		<< static_cast<char>(this->GetType()) // Append Algorithm Type (enum id)
+		<< iv // Append IV
+		<< mac // Append MAC
+		<< cipher; // Append Cipher
 	return output.str();
 }
 
@@ -80,19 +77,14 @@ String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_
 	ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, "ChaCha20Poly1305 Decryptor is not initialized properly");
 
 	// Extract IV, mac and cipher from algotype_iv_mac_cipher (algotype_iv_mac_cipher is the output we got from encryption shipped with IV, MAC, Cipher, Algo type enum id)
-	const auto [iv, mac, cipher] = [this, &algotype_iv_mac_cipher]() -> std::tuple<String, String, String>
-	{
-		String iv = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type), m_chacha_decryptor->MaxIVLength());
-		ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_mac_cipher");
+	const String iv = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type), m_chacha_decryptor->MaxIVLength());
+	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_mac_cipher");
 		
-		String mac = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size(), 16); // mac is 16 bytes
-		ENIGMA_ASSERT_OR_THROW(!mac.empty(), "Failed to extract MAC part from algotype_iv_mac_cipher");
+	const String mac = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size(), 16); // mac is 16 bytes
+	ENIGMA_ASSERT_OR_THROW(!mac.empty(), "Failed to extract MAC part from algotype_iv_mac_cipher");
 
-		String cipher = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size() + 16, algotype_iv_mac_cipher.size() - 1);
-		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_mac_cipher");
-
-		return std::make_tuple(iv, mac, cipher);
-	}();
+	const String cipher = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size() + 16, algotype_iv_mac_cipher.size() - 1);
+	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_mac_cipher");
 
 	// Prepare Key
 	CryptoPP::SecByteBlock key(m_chacha_decryptor->MaxKeyLength() + m_chacha_decryptor->MaxIVLength());
