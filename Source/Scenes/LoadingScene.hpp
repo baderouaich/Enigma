@@ -1,7 +1,5 @@
 #pragma once
 #include "Scene.hpp"
-#include <Algorithm/AES/AES.hpp>
-#include <Algorithm/ChaCha20/ChaCha20.hpp>
 
 NS_ENIGMA_BEGIN
 class LoadingScene : public Enigma::Scene

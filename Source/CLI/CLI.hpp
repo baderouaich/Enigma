@@ -7,7 +7,7 @@
 
 // Algorithms
 #include <Algorithm/AES/AES.hpp>
-#include <Algorithm/ChaCha20/ChaCha20.hpp>
+#include <Algorithm/ChaCha20Poly1305/ChaCha20Poly1305.hpp>
 #include <Algorithm/TripleDES/TripleDES.hpp>
 #include <Algorithm/Twofish/Twofish.hpp>
 #include <Algorithm/IDEA/IDEA.hpp>

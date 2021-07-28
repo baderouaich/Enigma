@@ -5,7 +5,7 @@
 
 #if ENIGMA_TEST
 	//#include <Tests/Algorithm/AESTests.hpp>
-	//#include <Tests/Algorithm/ChaChaTests.hpp>
+	//#include <Tests/Algorithm/ChaCha20Poly1305Tests.hpp>
 	//#include <Tests/Algorithm/TripleDESTests.hpp>
 	//#include <Tests/Algorithm/TwofishTests.hpp>
 	//#include <Tests/Algorithm/IDEATests.hpp>
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 		}
 #else
 		//========= Tests Entry =========//
-		exit_status = Catch::Session().run(argc, argv);
+		exit_code = Catch::Session().run(argc, argv);
 #endif
 	}
 	catch (const std::exception& e)

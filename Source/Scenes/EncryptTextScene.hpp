@@ -1,7 +1,7 @@
 #pragma once
 #include "Scene.hpp"
 #include <Algorithm/AES/AES.hpp>
-#include <Algorithm/ChaCha20/ChaCha20.hpp>
+#include <Algorithm/ChaCha20Poly1305/ChaCha20Poly1305.hpp>
 
 NS_ENIGMA_BEGIN
 class EncryptTextScene : public Enigma::Scene

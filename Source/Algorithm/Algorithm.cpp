@@ -2,7 +2,7 @@
 #include "Algorithm.hpp"
 
 #include "AES/AES.hpp"
-#include "ChaCha20/ChaCha20.hpp"
+#include "ChaCha20Poly1305/ChaCha20Poly1305.hpp"
 #include "TripleDES/TripleDES.hpp"
 #include "Twofish/Twofish.hpp"
 #include "IDEA/IDEA.hpp"
@@ -34,8 +34,8 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& name, const I
 
 	if (ModeIn({ "aes", "aes-gcm", "aes_gcm", "aesgcm" }))
 		return std::make_unique<AES>(intent);
-	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20", "chacha20poly1305", "salsapoly1305", "salsa20poly1305", "poly1305" }))
-		return std::make_unique<ChaCha20>(intent);
+	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20", "chacha20poly1305", "salsapoly1305", "salsa20poly1305" }))
+		return std::make_unique<ChaCha20Poly1305>(intent);
 	else if (ModeIn({ "tripledes", "triple-des", "tripledes-eax", "tripledes_eax", "tripledeseax", "triple" }))
 		return std::make_unique<TripleDES>(intent);
 	else if (ModeIn({ "twofish", "twofish-gcm", "2fish", "twofish_gcm", "twofishgcm" }))
@@ -126,11 +126,11 @@ String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 	switch (e)
 	{
 		CASE_ENUM(AES);
-		CASE_ENUM(ChaCha20);
-		CASE_ENUM(TripleDES);
 		CASE_ENUM(Twofish);
-		CASE_ENUM(IDEA);
+		CASE_ENUM(TripleDES);
 		CASE_ENUM(Blowfish);
+		CASE_ENUM(IDEA);
+		CASE_ENUM(ChaCha20Poly1305);
 		default: return "<unknown algorithm>";
 	}
 #undef CASE_ENUM

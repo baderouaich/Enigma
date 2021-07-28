@@ -71,12 +71,12 @@ public:	/* Accessors */
 	/*
 	*	Returns frame buffer width of this window
 	*/
-	const i32 GetFrameBufferWidth() noexcept;
+	i32 GetFrameBufferWidth() noexcept;
 	
 	/*
 	*	Returns frame buffer height of this window
 	*/
-	const i32 GetFrameBufferHeight() noexcept;
+	i32 GetFrameBufferHeight() noexcept;
 
 	/*
 	*	Returns the aspect ratio ( width / height ) of this window

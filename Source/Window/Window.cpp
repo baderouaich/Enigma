@@ -377,13 +377,13 @@ const std::pair<i32, i32>& Window::GetFrameBufferSize() noexcept
 	return m_frame_buffer_size;
 }
 
-const i32 Window::GetFrameBufferWidth() noexcept
+i32 Window::GetFrameBufferWidth() noexcept
 {
 	const auto& [w, h] = GetFrameBufferSize();
 	return w;
 }
 
-const i32 Window::GetFrameBufferHeight() noexcept
+i32 Window::GetFrameBufferHeight() noexcept
 {
 	const auto& [w, h] = GetFrameBufferSize(); 
 	return h; 

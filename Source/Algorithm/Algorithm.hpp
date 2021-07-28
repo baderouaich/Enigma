@@ -57,15 +57,15 @@ public:
 	*/
 	enum class Type : byte
 	{
-		AES		= 0x01, // AES-GCM
-		Twofish,		// Twofish-GCM
-		TripleDES,		// TripleDES-EAX
-		Blowfish,		// Blowfish-EAX
-		IDEA,			// IDEA-EAX
-		ChaCha20,		// ChaCha20Poly1305
+		AES		= 0x01,			// AES-GCM
+		Twofish,				// Twofish-GCM
+		TripleDES,				// TripleDES-EAX
+		Blowfish,				// Blowfish-EAX
+		IDEA,					// IDEA-EAX
+		ChaCha20Poly1305,		// ChaCha20Poly1305
 
 		BEGIN	= AES,
-		END		= ChaCha20
+		END		= ChaCha20Poly1305
 	};
 
 public:
@@ -85,7 +85,7 @@ public:
 	/*
 	*	Decrypts cipher with password
 	* @param password: Password used to Encyrpt buffer
-	* @param cipher: containts 3 parts, (1- algorithm used in encryption 1byte) + (2- IV Block size bytes) + (3- the actual cipher)
+	* @param cipher: can contain more than cipher part, like IV, algorithm used for encryption, MAC and so on, depending on the algorithm implementation.
 	* @return Recovered Buffer
 	* @exception throws CryptoPP::Exception, std::exception on failure
 	*/
