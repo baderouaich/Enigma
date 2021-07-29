@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	explicit IDEA(Algorithm::Intent intent) noexcept;
+	explicit IDEA(const Algorithm::Intent intent) noexcept;
 	virtual ~IDEA() noexcept;
 
 public:

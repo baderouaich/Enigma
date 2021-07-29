@@ -18,7 +18,7 @@
 #include <gcm.h> // GCM Authentication Mode
 #include <eax.h> // EAX Authentication Mode
 //#include <chacha.h> // ChaCha/Salsa20
-#include <chachapoly.h> // ChaCha/Salsa20 Authenticated
+#include <chachapoly.h> // ChaCha20Poly1305 Authenticated
 #include <des.h> // TripleDES
 #include <twofish.h> // Twofish
 #include <idea.h> // IDEA
@@ -29,12 +29,15 @@ static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size 
 
 NS_ENIGMA_BEGIN
 
+/*
+*	Forward Declarations
+*/
 class AES;
-class ChaCha20;
-class TripleDES;
 class Twofish;
-class IDEA;
+class TripleDES;
 class Blowfish;
+class IDEA;
+class ChaCha20Poly1305;
 
 /*
 *	Algorithm abstract class
@@ -43,15 +46,27 @@ class ENIGMA_API Algorithm
 {
 public:
 	/*
-	*	Intention of creating an instance of Algorithm.
-	*	to not initialize resources not needed for the operation. 
+	*	Intention of creating an instance of an Algorithm.
+	*	to not initialize resources not needed for an operation.
+	*	(like when encrypting, we initialize a random seeder which is not needed
+	*   when decrypting)
 	*/
-	enum class Intent : byte 
+	enum class Intent : byte
 	{
-		Encrypt = 0x1,
-		Decrypt
+		None	= 0 << 0,
+		Encrypt = 1 << 1,
+		Decrypt = 1 << 2
 	};
-
+	// Intent bitwise operators
+	friend inline constexpr Intent operator~ (const Intent i) noexcept { return static_cast<Intent>(~static_cast<const byte>(i)); }
+	friend inline constexpr Intent operator| (const Intent a, const Intent b) noexcept { return static_cast<Intent>(static_cast<const byte>(a) | static_cast<const byte>(b)); }
+	friend inline constexpr bool operator& (const Intent a, const Intent b) noexcept { return static_cast<bool>(static_cast<const byte>(a) & static_cast<const byte>(b)); }
+	friend inline constexpr Intent operator^ (const Intent a, const Intent b) noexcept { return static_cast<Intent>(static_cast<const byte>(a) ^ static_cast<const byte>(b)); }
+	friend inline constexpr Intent operator|= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) |= (const byte)(b)); }
+	friend inline constexpr Intent operator&= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) &= (const byte)(b)); }
+	friend inline constexpr Intent operator^= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) ^= (const byte)(b)); }
+	
+	
 	/*
 	*	Algorithm type, AES, ChaCha...
 	*/
@@ -68,8 +83,9 @@ public:
 		END		= ChaCha20Poly1305
 	};
 
+
 public:
-	explicit Algorithm(Type type, Intent intent) noexcept;
+	explicit Algorithm(const Type type, const Intent intent = Intent::Encrypt | Intent::Decrypt) noexcept;
 	virtual ~Algorithm() noexcept;
 
 public:

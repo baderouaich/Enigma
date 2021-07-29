@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	explicit AES(Algorithm::Intent intent) noexcept;
+	explicit AES(const Algorithm::Intent intent) noexcept;
 	virtual ~AES() noexcept;
 
 public:

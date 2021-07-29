@@ -3,12 +3,26 @@
 
 NS_ENIGMA_BEGIN
 
-Twofish::Twofish(Algorithm::Intent intent) noexcept
+Twofish::Twofish(const Algorithm::Intent intent) noexcept
 	:
-	Algorithm(Algorithm::Type::Twofish, intent),
-	m_twofish_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>() : nullptr),
-	m_twofish_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>() : nullptr)
+	Algorithm(Algorithm::Type::Twofish, intent)
 {
+	// Encrypting & Decrypting
+	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	{
+		m_twofish_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>();
+		m_twofish_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>();
+	}
+	// Encrypting only
+	else if (intent & Intent::Encrypt)
+	{
+		m_twofish_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>();
+	}
+	// Decrypting only
+	else if (intent & Intent::Decrypt)
+	{
+		m_twofish_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>();
+	}
 }
 Twofish::~Twofish() noexcept
 {

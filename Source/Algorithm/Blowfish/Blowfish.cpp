@@ -3,13 +3,26 @@
 
 NS_ENIGMA_BEGIN
 
-Blowfish::Blowfish(Algorithm::Intent intent) noexcept
+Blowfish::Blowfish(const Algorithm::Intent intent) noexcept
 	:
-	Algorithm(Algorithm::Type::Blowfish, intent),
-	m_blowfish_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption>() : nullptr),
-	m_blowfish_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Decryption>() : nullptr)
+	Algorithm(Algorithm::Type::Blowfish, intent)
 {
-
+	// Encrypting & Decrypting
+	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	{
+		m_blowfish_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption>();
+		m_blowfish_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Decryption>();
+	}
+	// Encrypting only
+	else if (intent & Intent::Encrypt)
+	{
+		m_blowfish_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption>();
+	}
+	// Decrypting only
+	else if (intent & Intent::Decrypt)
+	{
+		m_blowfish_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Decryption>();
+	}
 }
 
 Blowfish::~Blowfish() noexcept

@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	explicit TripleDES(Algorithm::Intent intent) noexcept;
+	explicit TripleDES(const Algorithm::Intent intent) noexcept;
 	virtual ~TripleDES() noexcept;
 
 public:

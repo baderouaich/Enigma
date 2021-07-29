@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	explicit Twofish(Algorithm::Intent intent) noexcept;
+	explicit Twofish(const Algorithm::Intent intent) noexcept;
 	virtual ~Twofish() noexcept;
 
 public:

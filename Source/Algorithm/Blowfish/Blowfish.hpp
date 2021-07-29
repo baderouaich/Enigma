@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	explicit Blowfish(Algorithm::Intent intent) noexcept;
+	explicit Blowfish(const Algorithm::Intent intent) noexcept;
 	virtual ~Blowfish() noexcept;
 
 public:

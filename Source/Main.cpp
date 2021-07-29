@@ -3,20 +3,11 @@
 */
 #include <pch.hpp>
 
-#if ENIGMA_TEST
-	//#include <Tests/Algorithm/AESTests.hpp>
-	//#include <Tests/Algorithm/ChaCha20Poly1305Tests.hpp>
-	//#include <Tests/Algorithm/TripleDESTests.hpp>
-	//#include <Tests/Algorithm/TwofishTests.hpp>
-	//#include <Tests/Algorithm/IDEATests.hpp>
-	//#include <Tests/Algorithm/BlowfishTests.hpp>
-	//#include <Tests/Utils/Base64Tests.hpp>
-	//#include <Tests/Utils/GZipTests.hpp>
-	//#include <Tests/Utils/FileUtilsTests.hpp>
-#else
+#if ! ENIGMA_TESTING
 	#include <Enigma.hpp>
+#else	
+	#include <Tests/TestsAll.hpp>
 #endif
-
 
 int main(int argc, char* argv[])
 {
@@ -28,7 +19,7 @@ int main(int argc, char* argv[])
 	Enigma::i32 exit_code = -1;
 	try
 	{
-#if ! ENIGMA_TEST
+#if ! ENIGMA_TESTING
 		//========= CLI Entry =========//
 		if (argc > 1)
 		{
@@ -51,7 +42,8 @@ int main(int argc, char* argv[])
 		}
 #else
 		//========= Tests Entry =========//
-		exit_code = Catch::Session().run(argc, argv);
+		const auto _Tests = std::make_unique<Catch::Session>();
+		exit_code = _Tests->run(argc, argv);
 #endif
 	}
 	catch (const std::exception& e)

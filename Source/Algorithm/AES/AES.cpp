@@ -3,13 +3,26 @@
 
 NS_ENIGMA_BEGIN
 
-AES::AES(Algorithm::Intent intent) noexcept
-	:
-	Algorithm(Algorithm::Type::AES, intent),
-	m_aes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>() : nullptr),
-	m_aes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>() : nullptr)
+AES::AES(const Algorithm::Intent intent) noexcept
+	: 
+	Algorithm(Algorithm::Type::AES, intent)
 {
-	
+	// Encrypting & Decrypting
+	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	{
+		m_aes_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>();
+		m_aes_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>();
+	}
+	// Encrypting only
+	else if (intent & Intent::Encrypt)
+	{
+		m_aes_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>();
+	}
+	// Decrypting only
+	else if (intent & Intent::Decrypt)
+	{
+		m_aes_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>();
+	}
 }
 
 AES::~AES() noexcept

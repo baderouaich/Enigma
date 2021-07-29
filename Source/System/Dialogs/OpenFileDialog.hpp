@@ -28,7 +28,7 @@ public: /* Constructors / Destructor */
 
 public: /* Accessors */
 	/*
-	*	Spawns Open File Dialog and returns selected file(s) path
+	*	Spawns Open File Dialog and returns selected file(s) paths
 	*/
 	std::vector<String> Show() const;
 

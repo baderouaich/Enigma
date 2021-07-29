@@ -3,12 +3,26 @@
 
 NS_ENIGMA_BEGIN
 
-TripleDES::TripleDES(Algorithm::Intent intent) noexcept
+TripleDES::TripleDES(const Algorithm::Intent intent) noexcept
 	:
-	Algorithm(Algorithm::Type::TripleDES, intent),
-	m_tripledes_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Encryption>() : nullptr),
-	m_tripledes_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Decryption>() : nullptr)
+	Algorithm(Algorithm::Type::TripleDES, intent)
 {
+	// Encrypting & Decrypting
+	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	{
+		m_tripledes_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Encryption>();
+		m_tripledes_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Decryption>();
+	}
+	// Encrypting only
+	else if (intent & Intent::Encrypt)
+	{
+		m_tripledes_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Encryption>();
+	}
+	// Decrypting only
+	else if (intent & Intent::Decrypt)
+	{
+		m_tripledes_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Decryption>();
+	}
 }
 TripleDES::~TripleDES() noexcept
 {

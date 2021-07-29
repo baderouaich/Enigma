@@ -2,48 +2,46 @@
 #include <catch2/catch_all.hpp>
 #include <Algorithm/ChaCha20Poly1305/ChaCha20Poly1305.hpp>
 #include <Tests/TestData.hpp>
+#include <Utility/SizeUtils.hpp>
 
 using namespace Enigma;
 using namespace Catch::Matchers;
-using namespace std;
 
 
-TEST_CASE("ChaCha20 Encryption and Decryption")
+TEST_CASE("ChaCha20Poly1305 Encryption and Decryption")
 {
-	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
+	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	std::unique_ptr<Enigma::ChaCha20Poly1305> chacha_encryptor = std::make_unique<Enigma::ChaCha20Poly1305>(Enigma::ChaCha20Poly1305::Intent::Encrypt);
-	std::unique_ptr<Enigma::ChaCha20Poly1305> chacha_decryptor = std::make_unique<Enigma::ChaCha20Poly1305>(Enigma::ChaCha20Poly1305::Intent::Decrypt);
+	// Make ChaCha20Poly1305 algorithm with intention to Encrypt and Decrypt
+	std::unique_ptr<ChaCha20Poly1305> chacha(new ChaCha20Poly1305(ChaCha20Poly1305::Intent::Encrypt | ChaCha20Poly1305::Intent::Decrypt));
 
-	String buffer, password;
-	String encrypted, decrypted;
+	// Buffer to encrypt
+	String buffer = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)));
+	// Encryption password
+	String password = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)));
 
-	buffer = RandomString(4096);
-	password = RandomString(1024);
+	// Encrypted buffer (aka cipher)
+	String encrypted = chacha->Encrypt(password, buffer);
+	// Decrypted cipher (aka recovered)
+	String decrypted = chacha->Decrypt(password, encrypted);
 
-	//cout << "\nEnter buffer to encrypt: ";
-	//getline(cin, buffer);
-	//cout << "\nEnter password (encryption key): ";
-	//getline(cin, password);
-
-
-	encrypted = chacha_encryptor->Encrypt(password, buffer); // iv + cipher
-	cout << "\nEncrypted: " << encrypted << endl;
-
-	decrypted = chacha_decryptor->Decrypt(password, encrypted);
-	cout << "\nDecrypted: " << decrypted << endl;
-
-	REQUIRE_THAT(buffer, !Equals(encrypted));
-	REQUIRE_THAT(buffer, Equals(decrypted));
-
+	SECTION("Comparing buffers")
+	{
+		// Buffer must not match cipher
+		REQUIRE_THAT(buffer, !Equals(encrypted));
+		// Buffer must match decrypted cipher
+		REQUIRE_THAT(buffer, Equals(decrypted));
+	}
 
 	SECTION("Clearing buffers")
 	{
 		buffer.clear();
+		password.clear();
 		encrypted.clear();
 		decrypted.clear();
 
 		REQUIRE(buffer.size() == 0);
+		REQUIRE(password.size() == 0);
 		REQUIRE(encrypted.size() == 0);
 		REQUIRE(decrypted.size() == 0);
 	}

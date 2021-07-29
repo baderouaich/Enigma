@@ -3,12 +3,26 @@
 
 NS_ENIGMA_BEGIN
 
-IDEA::IDEA(Algorithm::Intent intent) noexcept
+IDEA::IDEA(const Algorithm::Intent intent) noexcept
 	:
-	Algorithm(Algorithm::Type::IDEA, intent),
-	m_idea_encryptor(intent == Algorithm::Intent::Encrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>() : nullptr),
-	m_idea_decryptor(intent == Algorithm::Intent::Decrypt ? std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>() : nullptr)
+	Algorithm(Algorithm::Type::IDEA, intent)
 {
+	// Encrypting & Decrypting
+	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	{
+		m_idea_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>();
+		m_idea_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>();
+	}
+	// Encrypting only
+	else if (intent & Intent::Encrypt)
+	{
+		m_idea_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>();
+	}
+	// Decrypting only
+	else if (intent & Intent::Decrypt)
+	{
+		m_idea_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>();
+	}
 }
 
 IDEA::~IDEA() noexcept

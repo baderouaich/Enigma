@@ -44,6 +44,11 @@ public:
 #define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
 #define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
 
+/// Convert mb to bytes, kb, gb, tb
+#define ENIGMA_MB_TO_BYTES(mb) (static_cast<::Enigma::size_t>(mb) * 1024 * 1024)
+#define ENIGMA_MB_TO_KB(mb)    (static_cast<::Enigma::size_t>(mb) * 1024)
+#define ENIGMA_MB_TO_GB(mb)    (static_cast<::Enigma::f32>(mb) / 1024.0f)
+#define ENIGMA_MB_TO_TB(mb)    (static_cast<::Enigma::f32>(mb) / 1024.0f / 1024.0f)
 
 NS_ENIGMA_END
 

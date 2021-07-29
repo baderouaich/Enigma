@@ -9,9 +9,11 @@
 #if defined(__cpp_lib_filesystem)
 	#include <filesystem>
 	namespace fs = std::filesystem;
-#else
+#elif defined(__cpp_lib_experimental_filesystem)
 	#include <experimental/filesystem>
 	namespace fs = std::experimental::filesystem;
+#else
+	#error compiler does not support std::filesystem
 #endif
 
 NS_ENIGMA_BEGIN
@@ -38,7 +40,7 @@ public:
 
 
 	/*
-	*	Returns dir which contains Enigma.exe file e.g( "C:/Users/user/Enigma/" )
+	*	Returns dir which contains Enigma.exe file e.g( "C:/Users/username/Enigma/" )
 	*/
 	static fs::path GetEnigmaExecutableDir()
 	{
@@ -47,7 +49,7 @@ public:
 
 
 public:
-	static bool Read(const String& filename, String& buffer)
+	static bool Read(const fs::path& filename, String& buffer)
 	{
 		if (std::ifstream ifs{ filename, std::ios::binary | std::ios::ate }) // ate: open at the end
 		{
@@ -60,12 +62,12 @@ public:
 		}
 		else
 		{
-			ENIGMA_ERROR("Failed to read file {0}", filename);
+			ENIGMA_ERROR("Failed to read file {0}", filename.string());
 			return false;
 		}
 	}
 
-	static bool Write(const String& filename, const std::string_view& buffer)
+	static bool Write(const fs::path& filename, const std::string_view& buffer)
 	{
 		if (std::ofstream ofs{ filename, std::ios::binary })
 		{
@@ -75,7 +77,7 @@ public:
 		}
 		else
 		{
-			ENIGMA_ERROR("Failed to write file {0}", filename);
+			ENIGMA_ERROR("Failed to write file {0}", filename.string());
 			return false;
 		}
 	}
@@ -84,7 +86,7 @@ public:
 	/*
 	*	Reads a file chunk by chunk
 	*/
-	static void ReadChunks(const String& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback)
+	static void ReadChunks(const fs::path &filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback)
 	{
 		if (std::ifstream ifs{ filename, std::ios::binary }) 
 		{
@@ -107,7 +109,7 @@ public:
 		}
 		else
 		{
-			ENIGMA_ERROR("Failed to read file chunks {0}", filename);
+			ENIGMA_ERROR("Failed to read file chunks {0}", filename.string());
 		}
 	}
 

@@ -14,7 +14,7 @@ public:
 	/*
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
-	explicit ChaCha20Poly1305(Algorithm::Intent intent) noexcept;
+	explicit ChaCha20Poly1305(const Algorithm::Intent intent) noexcept;
 	virtual ~ChaCha20Poly1305() noexcept;
 
 public:

@@ -2,48 +2,46 @@
 #include <catch2/catch_all.hpp>
 #include <Algorithm/Twofish/Twofish.hpp>
 #include <Tests/TestData.hpp>
+#include <Utility/SizeUtils.hpp>
 
 using namespace Enigma;
 using namespace Catch::Matchers;
-using namespace std;
 
 
 TEST_CASE("Twofish Encryption and Decryption")
 {
-	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
+	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	std::unique_ptr<Enigma::Twofish> twofish_encryptor = std::make_unique<Enigma::Twofish>(Enigma::Twofish::Intent::Encrypt);
-	std::unique_ptr<Enigma::Twofish> twofish_decryptor = std::make_unique<Enigma::Twofish>(Enigma::Twofish::Intent::Decrypt);
+	// Make TripleDES algorithm with intention to Encrypt and Decrypt
+	std::unique_ptr<Twofish> twofish(new Twofish(Twofish::Intent::Encrypt | Twofish::Intent::Decrypt));
 
-	String buffer, password;
-	String encrypted, decrypted;
+	// Buffer to encrypt
+	String buffer = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)));
+	// Encryption password
+	String password = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)));
 
-	buffer = RandomString(4096);
-	password = RandomString(1024);
+	// Encrypted buffer (aka cipher)
+	String encrypted = twofish->Encrypt(password, buffer);
+	// Decrypted cipher (aka recovered)
+	String decrypted = twofish->Decrypt(password, encrypted);
 
- //cout << "\nEnter buffer to encrypt: ";
- //getline(cin, buffer);
- //cout << "\nEnter password (encryption key): ";
- //getline(cin, password);
-
-
-	encrypted = twofish_encryptor->Encrypt(password, buffer); // iv + cipher
-	cout << "\nEncrypted: " << encrypted << endl;
-
-	decrypted = twofish_decryptor->Decrypt(password, encrypted);
-	cout << "\nDecrypted: " << decrypted << endl;
-
-	REQUIRE_THAT(buffer, !Equals(encrypted)); // buffer must not equal cipher
-	REQUIRE_THAT(buffer, Equals(decrypted)); // buffer must equal decrypted cipher
-
+	SECTION("Comparing buffers")
+	{
+		// Buffer must not match cipher
+		REQUIRE_THAT(buffer, !Equals(encrypted));
+		// Buffer must match decrypted cipher
+		REQUIRE_THAT(buffer, Equals(decrypted));
+	}
 
 	SECTION("Clearing buffers")
 	{
 		buffer.clear();
+		password.clear();
 		encrypted.clear();
 		decrypted.clear();
 
 		REQUIRE(buffer.size() == 0);
+		REQUIRE(password.size() == 0);
 		REQUIRE(encrypted.size() == 0);
 		REQUIRE(decrypted.size() == 0);
 	}

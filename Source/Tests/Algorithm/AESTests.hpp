@@ -2,79 +2,69 @@
 #include <catch2/catch_all.hpp>
 #include <Algorithm/AES/AES.hpp>
 #include <Utility/FileUtils.hpp>
+#include <Utility/SizeUtils.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <Tests/TestData.hpp>
 using namespace Enigma;
 using namespace Catch::Matchers;
 using namespace std;
 
-#define TEST_FILES false
+#define TESTING_FILES false
 
-#if TEST_FILES
+#if TESTING_FILES
+
 String GetSelectedFilePath()
 {
 	Enigma::OpenFileDialog ofd("Select a file to encrypt", ".", false);
-	return *ofd.Show().begin();
+	if (const auto files = ofd.Show(); !files.empty())
+	{
+		return files[0];
+	}
+	else
+	{
+		std::cout << "No files were selected.\n";
+		return GetSelectedFilePath(); // i'l be damned if i let u go without selecting a file XD (its just testing i mean no harm :v)
+	}
+	
 }
 
 TEST_CASE("AES File Encryption and Decryption")
 {
-	using std::cout, std::cin, std::cerr, std::endl, std::getline;
+	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
-	std::unique_ptr<Enigma::AES> aes_encryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Encrypt);
-	std::unique_ptr<Enigma::AES> aes_decryptor = std::make_unique<Enigma::AES>(Enigma::AES::Intent::Decrypt);
+	// Encryption password
+	String password = GenerateRandomString(4096);
 
-	String buffer, password, filename_to_encrypt;
-	String encrypted, decrypted;
-
-	// Encryption Password
-	{
-		cout << "\nEnter password (encryption key): ";
-		getline(cin, password);
-	}
-	//File to encrypt
-	{
-		cout << "\nSelect a file to encrypt: ";
-		Enigma::OpenFileDialog ofd("Select a file to encrypt", ".", false);
-		const auto selections = ofd.Show();
-		if (selections.empty())
-		{
-			cerr << "No file was selected\n";
-			exit(EXIT_FAILURE);
-		}
-		filename_to_encrypt = selections.back();
-	}
-	if (!fs::exists(filename_to_encrypt)) 
-	{
-		cerr << "File does not exist\n";
-		exit(EXIT_FAILURE);
-	}
+	// File to encrypt
+	String filename_to_encrypt = GetSelectedFilePath();
+	String buffer;
 	if (!FileUtils::Read(filename_to_encrypt, buffer))
 	{
-		cerr << "Failed to read file\n";
-		exit(EXIT_FAILURE);
+		std::cerr << "Failed to read file\n";
+		std::exit(EXIT_FAILURE);
 	}
-	{
-		encrypted = aes_encryptor->Encrypt(password, buffer); // iv + cipher
-		if(FileUtils::Write(filename_to_encrypt + ".encrypted.enigma", encrypted))
-			cout << "\nEncrypted buffer saved to : " << filename_to_encrypt + ".enigma" << endl;
+	
+	// Encrypt file buffer
+	String encrypted = aes->Encrypt(password, buffer);
 
-	}
-	{
-		decrypted = aes_decryptor->Decrypt(password, encrypted);
-		if (FileUtils::Write(filename_to_encrypt + ".decrypted.enigma", decrypted))
-			cout << "\nDecrypted buffer saved to " << filename_to_encrypt + ".decrypted.enigma" << endl;
-	}
-
+	// Decrypt file buffer
+	String decrypted = aes->Decrypt(password, encrypted);
+	
+	// Buffer must not match cipher
 	REQUIRE_THAT(buffer, !Equals(encrypted));
+	// Buffer must match decrypted cipher
 	REQUIRE_THAT(buffer, Equals(decrypted));
+
+
 	SECTION("Clearing buffers")
 	{
 		buffer.clear();
+		password.clear();
 		encrypted.clear();
 		decrypted.clear();
 
 		REQUIRE(buffer.size() == 0);
+		REQUIRE(password.size() == 0);
 		REQUIRE(encrypted.size() == 0);
 		REQUIRE(decrypted.size() == 0);
 	}
@@ -82,44 +72,40 @@ TEST_CASE("AES File Encryption and Decryption")
 
 #else
 
-
-
 TEST_CASE("AES-GCM Encryption and Decryption")
 {
-	cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
+	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	std::unique_ptr<AES> aes_encryptor(new AES(AES::Intent::Encrypt));
-	std::unique_ptr<AES> aes_decryptor(new AES(AES::Intent::Decrypt));
+	// Make AES algorithm with intention to Encrypt and Decrypt
+	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
-	String buffer, password;
-	String encrypted, decrypted;
+	// Buffer to encrypt
+	String buffer = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)));
+	// Encryption password
+	String password = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)));
 
+	// Encrypted buffer (aka cipher)
+	String encrypted = aes->Encrypt(password, buffer);
+	// Decrypted cipher (aka recovered)
+	String decrypted = aes->Decrypt(password, encrypted);
 
-	buffer = RandomString(4096);
-	password = RandomString(1024);
-	//cout << "\nEnter buffer to encrypt: ";
-	//getline(cin, buffer);
-	//cout << "\nEnter password (encryption key): ";
-	//getline(cin, password);
-
-
-	encrypted = aes_encryptor->Encrypt(password, buffer); // iv + cipher
-	cout << "\nEncrypted: " << encrypted << endl;
-
-	decrypted = aes_decryptor->Decrypt(password, encrypted);
-	cout << "\nDecrypted: " << decrypted << endl;
-
-	REQUIRE_THAT(buffer, !Equals(encrypted)); // buffer must not equal cipher
-	REQUIRE_THAT(buffer, Equals(decrypted)); // buffer must equal decrypted cipher
-
+	SECTION("Comparing buffers")
+	{
+		// Buffer must not match cipher
+		REQUIRE_THAT(buffer, !Equals(encrypted));
+		// Buffer must match decrypted cipher
+		REQUIRE_THAT(buffer, Equals(decrypted));
+	}
 
 	SECTION("Clearing buffers")
 	{
 		buffer.clear();
+		password.clear();
 		encrypted.clear();
 		decrypted.clear();
 
 		REQUIRE(buffer.size() == 0);
+		REQUIRE(password.size() == 0);
 		REQUIRE(encrypted.size() == 0);
 		REQUIRE(decrypted.size() == 0);
 	}
