@@ -1,13 +1,9 @@
 ========================= IN PROGRESS =============================
-- Make algorithm intent bitwise based so an encryption can be created for both purposes
-
 - System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU)
 
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
 
 - My Encryptions table, display date as Jun, 01 2021 instead of 06 01 2021 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
-
-- Make Reset button invisible or disabled until query is not empty in ViewEncryptions
 
 - CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
 
@@ -15,17 +11,17 @@
 
 - maybe store file extension in database aswell, can help recover file, pass extension with SaveFileDialog {"."}
 
-- Encrypt & Decrypt Files using Chunks 
+- Encrypt & Decrypt Files using Chunks (what if file is too huge and can be loaded entirely in memory?)
 
 - maybe go further on new updates available, download update, extract binary to "."
-
-- Maybe uplaod enigma release to stores like windows store and linux in such as https://www.linux-apps.com/ for global usage as a free open source project
 
 - ability to cancel check-for-updates ui
 
 - add to search utils myencryptions to search encryptions between two dates (or even direct sql query?)
 
-- use enum ColumnFlags { ID = 1 << 0, TITLE = 1 << 1,...}; to filter what columns to get from database instead of constexpr booleans for readability
+- use enum ColumnFlags { ID = 1 << 0, TITLE = 1 << 1,...}; to filter what columns to get from database instead of compile time constexpr booleans for readability
+
+- Maybe uplaod enigma release to stores like windows store and linux in such as https://www.linux-apps.com/ for global usage as a free open source project
 
 - Add donate github or menu option (very low priority) if user wants to buy me a coffee.
 
@@ -71,6 +67,7 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE [RESOLVED] CPU Usage is not accurate on windows https://github.com/BaderEddineOuaich/Enigma/issues/2
 - DONE Add Password Generator Tool
 - DONE Add Hashing Tool
+- DONE Make algorithm intent bitwise based so an encryption algorithm can be created for both intentions
 =============================================================================
 
 

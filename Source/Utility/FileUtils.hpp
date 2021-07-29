@@ -2,6 +2,7 @@
 #ifndef ENIGMA_FILE_UTILS_H
 #define ENIGMA_FILE_UTILS_H
 
+#include <version>  // __cpp_lib_filesystem & __cpp_lib_experimental_filesystem
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 
