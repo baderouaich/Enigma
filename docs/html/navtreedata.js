@@ -41,11 +41,11 @@ var NAVTREE =
       [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
     ] ],
     [ "1.4.0", "md__c_h_a_n_g_e_l_o_g.html", [
-      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md1", null ],
-      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
-      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
-      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
-      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ]
+      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
+      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
+      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
+      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ],
+      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md6", null ]
     ] ],
     [ "LICENSE", "md__l_i_c_e_n_s_e.html", null ],
     [ "Todo List", "todo.html", null ],
