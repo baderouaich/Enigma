@@ -13,6 +13,9 @@ https://www.doxygen.nl/manual/commands.html
 * @warning
 */
 
+- Check why in docs u cant view file contents for example:  go to https://badereddineouaich.github.io/Enigma/class_check_for_updates.html and click CheckForUpdates.hpp
+- Fix images not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html
+
 - System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU)
 
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
