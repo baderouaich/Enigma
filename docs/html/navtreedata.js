@@ -26,26 +26,26 @@ var NAVTREE =
 [
   [ "Enigma", "index.html", [
     [ "Enigma", "md__r_e_a_d_m_e.html", [
-      [ "Supported Algorithms", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
-      [ "Available Tools", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
-      [ "Features", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
-      [ "NOTES", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-      [ "Enigma CLI", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
-      [ "Enigma UI", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "Compiling", "md__r_e_a_d_m_e.html#autotoc_md7", [
-        [ "Windows", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-        [ "Linux", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-        [ "MacOS TODO (when i figure out a way to test macos on vm)", "md__r_e_a_d_m_e.html#autotoc_md10", null ]
+      [ "Supported Algorithms", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
+      [ "Available Tools", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+      [ "Features", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+      [ "NOTES", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
+      [ "Enigma CLI", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "Enigma UI", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Compiling", "md__r_e_a_d_m_e.html#autotoc_md13", [
+        [ "Windows", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
+        [ "Linux", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+        [ "MacOS TODO (when i figure out a way to test macos on vm)", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
       ] ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md12", null ]
+      [ "License", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
+      [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
     ] ],
     [ "1.4.0", "md__c_h_a_n_g_e_l_o_g.html", [
-      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md14", null ],
-      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md15", null ],
-      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md16", null ],
-      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md17", null ],
-      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md18", null ]
+      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
+      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
+      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
+      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ],
+      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md6", null ]
     ] ],
     [ "LICENSE", "md__l_i_c_e_n_s_e.html", null ],
     [ "Todo List", "todo.html", null ],

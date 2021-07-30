@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Enigma: Source/Algorithm Directory Reference</title>
+<title>Enigma: Source/Algorithm/Algorithm.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,7 +65,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('dir_9e7e62f556bf0c5dbbca41dba23c3b25.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('_algorithm_8hpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -84,39 +84,69 @@ $(document).ready(function(){initNavTree('dir_9e7e62f556bf0c5dbbca41dba23c3b25.h
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">Algorithm Directory Reference</div>  </div>
+<div class="title">Algorithm.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a> class.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;<a class="el" href="_core_8hpp_source.html">Core/Core.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_logger_8hpp_source.html">Logger/Logger.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_crypto_p_p_utils_8hpp_source.html">Utility/CryptoPPUtils.hpp</a>&gt;</code><br />
+<code>#include &lt;cryptlib.h&gt;</code><br />
+<code>#include &lt;filters.h&gt;</code><br />
+<code>#include &lt;osrng.h&gt;</code><br />
+<code>#include &lt;hkdf.h&gt;</code><br />
+<code>#include &lt;sha.h&gt;</code><br />
+<code>#include &lt;aes.h&gt;</code><br />
+<code>#include &lt;gcm.h&gt;</code><br />
+<code>#include &lt;eax.h&gt;</code><br />
+<code>#include &lt;chachapoly.h&gt;</code><br />
+<code>#include &lt;des.h&gt;</code><br />
+<code>#include &lt;twofish.h&gt;</code><br />
+<code>#include &lt;idea.h&gt;</code><br />
+<code>#include &lt;blowfish.h&gt;</code><br />
+</div>
+<p><a href="_algorithm_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="subdirs"></a>
-Directories</h2></td></tr>
-<tr class="memitem:dir_53c37db65346eebf37ae6a517a2eaeec"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_53c37db65346eebf37ae6a517a2eaeec.html">AES</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dir_738c531d32dacfceb4076bea53fd7db0"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_738c531d32dacfceb4076bea53fd7db0.html">Blowfish</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dir_d705af384a4de73359eb70da3f938ee6"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_d705af384a4de73359eb70da3f938ee6.html">ChaCha20Poly1305</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dir_775656572bf92868dc5b71565e8c544d"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_775656572bf92868dc5b71565e8c544d.html">IDEA</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dir_f1455ad3107d7a073b5e027f46c2e4a4"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_f1455ad3107d7a073b5e027f46c2e4a4.html">TripleDES</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:dir_eed7d658790a0adae05656607b02e61f"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_eed7d658790a0adae05656607b02e61f.html">Twofish</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html">Algorithm</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a> abstract class.  <a href="class_algorithm.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:_algorithm_8cpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_algorithm_8cpp.html">Algorithm.cpp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:_algorithm_8hpp"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_algorithm_8hpp.html">Algorithm.hpp</a> <a href="_algorithm_8hpp_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ae4ccb24f8869cb6c6571ee6f593ebabf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_algorithm_8hpp.html#ae4ccb24f8869cb6c6571ee6f593ebabf">ENIGMA_ALGORITHM_H</a></td></tr>
+<tr class="separator:ae4ccb24f8869cb6c6571ee6f593ebabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a> class. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ae4ccb24f8869cb6c6571ee6f593ebabf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ccb24f8869cb6c6571ee6f593ebabf">&#9670;&nbsp;</a></span>ENIGMA_ALGORITHM_H</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENIGMA_ALGORITHM_H</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_9e7e62f556bf0c5dbbca41dba23c3b25.html">Algorithm</a></li>
+    <li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_9e7e62f556bf0c5dbbca41dba23c3b25.html">Algorithm</a></li><li class="navelem"><a class="el" href="_algorithm_8hpp.html">Algorithm.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
