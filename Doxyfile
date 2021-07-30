@@ -404,7 +404,7 @@ DISTRIBUTE_GROUP_DOC   = YES
 # is disabled and one has to add nested compounds explicitly via \ingroup.
 # The default value is: NO.
 
-GROUP_NESTED_COMPOUNDS = NO
+GROUP_NESTED_COMPOUNDS = YES
 
 # Set the SUBGROUPING tag to YES to allow class member groups of the same type
 # (for instance a group of public functions) to be put as a subgroup of that
@@ -864,11 +864,11 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = C:\Users\bader\Desktop\Enigma\Source \
-                         README.md \
+INPUT                  = README.md \
                          CHANGELOG.md \
                          LICENSE.md \
-                         C:\Users\bader\Desktop\Enigma\Resources
+                         Source/ \
+                         Resources/
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1009,7 +1009,23 @@ EXAMPLE_RECURSIVE      = NO
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             =
+IMAGE_PATH             = Resources/Branding/Logo.png \
+                         Resources/Branding/Logo127x142.png \
+                         Resources/Branding/Logo.ico \
+                         Resources/ScreenShots/2.png \
+                         Resources/ScreenShots/2_OLD.png \
+                         Resources/ScreenShots/3.png \
+                         Resources/ScreenShots/3_OLD.png \
+                         Resources/ScreenShots/4.png \
+                         Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png \
+                         Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png \
+                         Resources/ScreenShots/Main-Menu-Demo.png \
+                         Resources/ScreenShots/My-Encryptions-Demo.png \
+                         Resources/ScreenShots/Tools-Demo.png \
+                         Resources/ScreenShots/UI-DecryptFile-Demo.png \
+                         Resources/ScreenShots/UI-DecryptText-Demo.png \
+                         Resources/ScreenShots/UI-EncryptFile-Demo.png \
+                         Resources/ScreenShots/UI-EncryptText-Demo.png
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program

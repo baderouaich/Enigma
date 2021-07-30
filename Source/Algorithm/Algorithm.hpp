@@ -1,7 +1,3 @@
-/**	@file
-*	@brief Algorithm class
-*
-*/
 #pragma once
 #ifndef ENIGMA_ALGORITHM_H
 #define ENIGMA_ALGORITHM_H
