@@ -5,13 +5,15 @@
 #include <Algorithm/Algorithm.hpp>
 
 NS_ENIGMA_BEGIN
-/*
+/**
 *	AES-GCM Algorithm Encryptor/Decryptor
+* 
+*	AES symmetric cipher is recommended to be used with GCM mode
 */
 class AES : public Algorithm
 {
 public:
-	/*
+	/**
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit AES(const Algorithm::Intent intent) noexcept;
@@ -22,9 +24,8 @@ public:
 	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private:
-	// AES symmetric cipher is recommended to be used with GCM mode
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryptor; // AES-GCM encryptor
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryptor; // AES-GCM decryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryptor; /**< AES-GCM encryptor */
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryptor; /**< AES-GCM decryptor */
 };
 
 NS_ENIGMA_END

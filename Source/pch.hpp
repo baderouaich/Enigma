@@ -1,4 +1,6 @@
-/// ENIGMA Precompiled Header ///
+/**
+*	ENIGMA Precompiled Heade
+*/
 #pragma once
 #ifndef ENIGMA_PCH_H
 #define ENIGMA_PCH_H

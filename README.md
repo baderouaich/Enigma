@@ -81,7 +81,7 @@ output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1Srgl
 ./Enigma -d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
 output: my important data securly encrypted!
 ```
-<!--<image src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>-->
+<!--<img src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>-->
 
 - Example encypting a file with AES-GCM:<br>
 ```text
@@ -91,27 +91,27 @@ output: my important data securly encrypted!
 ```text
 ./Enigma -d --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
 ```
-<!-- <image src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
-<image src="Resources/ScreenShots/4.png"/><br>
+<!-- <img src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
+<img src="Resources/ScreenShots/4.png"/><br>
 
 
 
 ## Enigma UI
-<image src="Resources/ScreenShots/Main-Menu-Demo.png"/>
-<image src="Resources/ScreenShots/2.png"/>
-<image src="Resources/ScreenShots/My-Encryptions-Demo.png"/>
-<image src="Resources/ScreenShots/Tools-Demo.png"/>
+<img src="Resources/ScreenShots/Main-Menu-Demo.png"/>
+<img src="Resources/ScreenShots/2.png"/>
+<img src="Resources/ScreenShots/My-Encryptions-Demo.png"/>
+<img src="Resources/ScreenShots/Tools-Demo.png"/>
 
 <!--
-<image width="300" src="Resources/ScreenShots/UI-MainMenuScene.png"/>  <image width="300" src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>  <image width="300" src="Resources/ScreenShots/UI-DecryptText-Demo.png"/>  <image width="300" src="Resources/ScreenShots/UI-EncryptFile-Demo.png"/>  <image width="300" src="Resources/ScreenShots/UI-DecryptFile-Demo.png"/>
+<img width="300" src="Resources/ScreenShots/UI-MainMenuScene.png"/>  <img width="300" src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>  <img width="300" src="Resources/ScreenShots/UI-DecryptText-Demo.png"/>  <img width="300" src="Resources/ScreenShots/UI-EncryptFile-Demo.png"/>  <img width="300" src="Resources/ScreenShots/UI-DecryptFile-Demo.png"/>
 -->
 
 <!--
 Latest Test on `Windows 10 Version 20H2`
-<image src="Resources/Dev Process/Windows-Latest.png"/>
+<img src="Resources/Dev Process/Windows-Latest.png"/>
 <br>
 Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
-<image src="Resources/Dev Process/Linux-Latest.png"/>
+<img src="Resources/Dev Process/Linux-Latest.png"/>
 -->
 
 

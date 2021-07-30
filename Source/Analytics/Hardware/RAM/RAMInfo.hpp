@@ -26,12 +26,12 @@ typedef struct vm_statistics_data_t memory_status_t;
 #endif
 
 NS_ENIGMA_BEGIN
-/*
+/**
 *	RAMInfo class will gather informations about the RAM at runtime
 */
 class ENIGMA_API RAMInfo
 {
-public: /* Constructors / Destructor */
+public:
 	RAMInfo() noexcept;
 	~RAMInfo() noexcept = default;
 
@@ -39,44 +39,44 @@ public: /* Constructors / Destructor */
 	ENIGMA_NON_MOVEABLE(RAMInfo);
 
 public:
-	/*
+	/**
 	*	Updates the RAM status at runtime
 	*/
 	void Update();
 
-	/*
+	/**
 	*	Returns the total physical memory reserved by all processes (in bytes)
 	*/
 	size_t GetUsedRAM() const noexcept;
 
-	/*
+	/**
 	*	Returns the total physical memory used by this process (in bytes)
 	*/
 	size_t GetProcessUsedRAM() const noexcept;
 
-	/*
+	/**
 	*	Returns the total physical memory free (in bytes)
 	*/
 	size_t GetFreeRAM() const noexcept;
 
-	/*
+	/**
 	*	Returns the max available memory on the system (in bytes)
 	*/
 	size_t GetAvailableRAM() const noexcept;
 
-	/*
+	/**
 	*	Returns memory usage by all processes (in percentage [0% -> 100%])
 	*/
 	f32 GetRAMUsage() noexcept;
 
-	/*
+	/**
 	*	Returns memory usage by current process (in percentage [0% -> 100%])
 	*/
 	f32 GetProcessRAMUsage() noexcept;
 
 
 private:
-	 memory_status_t m_memory_status;
+	 memory_status_t m_memory_status; /**< memory_status_t will be MEMORYSTATUSEX in windows, sysinfo in linux, vm_statistics_data_t in macos */
 };
 
 

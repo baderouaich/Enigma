@@ -1,4 +1,4 @@
-/*
+/**
 *	Enigma Entry Point
 */
 #include <pch.hpp>
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
 }
 
 
-/*
+/**
 *	Windows Entry Point (for Release & Distribution)
 *	Note: even when using WinMain, release & dist are built as ConsoleApp so CLI will work properly.
 */

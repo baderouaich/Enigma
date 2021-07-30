@@ -29,7 +29,7 @@ static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size 
 
 NS_ENIGMA_BEGIN
 
-/*
+/**
 *	Forward Declarations
 */
 class AES;
@@ -39,14 +39,17 @@ class Blowfish;
 class IDEA;
 class ChaCha20Poly1305;
 
-/*
-*	Algorithm abstract class
+/**
+*	@brief Algorithm abstract class
+*	@details All encryption algorithms like AES, Twofish.. inherrit from this class
+*	@todo add more encryption algorithms
 */
 class ENIGMA_API Algorithm
 {
 public:
-	/*
+	/**
 	*	Intention of creating an instance of an Algorithm.
+	* 
 	*	to not initialize resources not needed for an operation.
 	*	(like when encrypting, we initialize a random seeder which is not needed
 	*   when decrypting)
@@ -57,7 +60,9 @@ public:
 		Encrypt = 1 << 1,
 		Decrypt = 1 << 2
 	};
-	// Intent bitwise operators
+	/**
+	*	Intent bitwise operators
+	*/
 	friend inline constexpr Intent operator~ (const Intent i) noexcept { return static_cast<Intent>(~static_cast<const byte>(i)); }
 	friend inline constexpr Intent operator| (const Intent a, const Intent b) noexcept { return static_cast<Intent>(static_cast<const byte>(a) | static_cast<const byte>(b)); }
 	friend inline constexpr bool operator& (const Intent a, const Intent b) noexcept { return static_cast<bool>(static_cast<const byte>(a) & static_cast<const byte>(b)); }
@@ -67,7 +72,7 @@ public:
 	friend inline constexpr Intent operator^= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) ^= (const byte)(b)); }
 	
 	
-	/*
+	/**
 	*	Algorithm type, AES, ChaCha...
 	*/
 	enum class Type : byte
@@ -89,26 +94,33 @@ public:
 	virtual ~Algorithm() noexcept;
 
 public:
-	/*
+	/**
 	*	Encrypts buffer with password
-	* @param password: Encryption password
-	* @param buffer: Buffer to encrypt (text, binary...)
-	* @return (Algo type enum id + IV + Cipher)
-	* @exception throws CryptoPP::Exception, std::exception on failure
+	*	@param password: Encryption password
+	*	@param buffer: Buffer to encrypt (text, binary...)
+	*	@return (Algo type enum id + IV + Cipher)
+	*	@exception throws CryptoPP::Exception, std::exception on failure
 	*/
 	virtual String Encrypt(const String& password, const String& buffer) = 0;
 
-	/*
+	/**
 	*	Decrypts cipher with password
-	* @param password: Password used to Encyrpt buffer
-	* @param cipher: can contain more than cipher part, like IV, algorithm used for encryption, MAC and so on, depending on the algorithm implementation.
-	* @return Recovered Buffer
-	* @exception throws CryptoPP::Exception, std::exception on failure
+	*	@param password: Password used to Encyrpt buffer
+	*	@param cipher: can contain more than cipher part, like IV, algorithm used for encryption, MAC and so on, depending on the algorithm implementation.
+	*	@return Recovered Buffer
+	*	@exception throws CryptoPP::Exception, std::exception on failure
 	*/
 	virtual String Decrypt(const String& password, const String& cipher) = 0;
 
 public: /* Create polymorphic algorithm by either mode name or type*/
+	/** 
+	*	Creates polymorphic algorithm from algorithm type name
+	*	@see CreateFromType()
+	*/
 	static std::unique_ptr<Algorithm> CreateFromName(const String& name, const Intent intent);
+	/** 
+	*	Creates polymorphic algorithm from algorithm type
+	*/
 	static std::unique_ptr<Algorithm> CreateFromType(const Type type, const Intent intent);
 
 public:
@@ -117,52 +129,49 @@ public:
 	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
 
 protected:
-	/*
+	/**
 	*	Generates random IV with specified length
 	*/
 	static String GenerateRandomIV(const size_t size);
 
 public:
-	/*
+	/**
 	*	Auto detect algorithm used for encryption from cipher text
 	*/
 	static Type DetectFromCipher(const String& cipher);
 
-	/*
+	/**
 	*	Auto detect algorithm used for encryption from cipher base64 text
 	*/
 	static Type DetectFromCipherBase64(const String& cipher_base64);
 
-	/*
+	/**
 	*	Auto detect algorithm used for encryption from encrypted file
 	*/
 	static Type DetectFromFile(const String& filename);
 
-	/*
+	/**
 	*	Converts Algorithm::Type to String
 	*/
 	static String AlgoTypeEnumToStr(const Algorithm::Type e) noexcept;
 
-	/*
+	/**
 	*	Returns a string of supported algorithms represented as "[Algo1, Algo2, Algo3...]" orderd as enum Type
 	*/
 	static String GetSupportedAlgorithmsStr() noexcept;
 
-	/*
+	/**
 	*	Returns a vector of supported algorithms represented as pair of algo name string, algo type. orderd as enum Type
 	*/
 	static std::vector<std::pair<String, Algorithm::Type>> GetSupportedAlgorithms() noexcept;
 
 protected:
-	Type m_type; // Algorithm type: AES, ChaCha, TripleDES...
-	Intent m_intent; // Operation, Encrypt or Decrypt
-	inline static std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; // To generate random IV on encryption
+	Type m_type; /**< Algorithm type: AES, ChaCha, TripleDES... */
+	Intent m_intent; /**< Operation, Encrypt or Decrypt */
+	inline static std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; /**< To generate random IV on encryption */
 
 };
 
-
 NS_ENIGMA_END
-
-
 
 #endif // !ENIGMA_ALGORITHM_H

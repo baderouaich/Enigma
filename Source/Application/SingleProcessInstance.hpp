@@ -25,9 +25,9 @@
 
 
 NS_ENIGMA_BEGIN
-/*
-*	Single process instance interface
-*	if you inherrit from this class, your application process will have only one instance at a time.
+/**
+*	@brief Single process instance interface
+*	@details if you inherrit from this class, your application process will have only one instance at a time.
 *   Using a socket implementation, this checks to see if the application is already open or not.
 *   You must also choose a port that is unique to the application.
 */
@@ -93,7 +93,7 @@ public:
 
 	}
 
-	/*
+	/**
 	*   Returns true if this is a unique process instance (no other instance process is running)
 	*/
 	constexpr bool IsUnique() const noexcept
@@ -116,9 +116,9 @@ public:
 	}
 
 private:
-	socket_t m_socket_fd{}; // Socket file descriptor
-	ui16 m_port{}; // Application's unique port
-	i32 m_rc{-1}; // Return code of bind socket function 0 means no error, when < 0 is an error
+	socket_t m_socket_fd{}; /**< Socket file descriptor, will be SOCKET in windows, int in linux */
+	ui16 m_port{}; /**< Application's unique port */
+	i32 m_rc{-1}; /**< Return code of bind socket function 0 means no error, when < 0 is an error */
 };
 NS_ENIGMA_END
 

@@ -3,10 +3,10 @@
 #define ENIGMA_VERSION_H
 
 // major, minor, patch string (needed for Enigma.rc)
-#define ENIGMA_VERSION_STR "1.3.0"
+#define ENIGMA_VERSION_STR "1.4.0"
 
 // major, minor, patch divided (needed for Enigma.rc)
-#define ENIGMA_VERSION_DIV 1, 3, 0
+#define ENIGMA_VERSION_DIV 1, 4, 0
 
 #define ENIGMA_VERSION ENIGMA_VERSION_STR
 
@@ -21,7 +21,7 @@
 
 
 /*
-* // Reminder: Enigma.rc will include this file to get versions as they change, no need to modify version in any other place than here.
+* Reminder: Enigma.rc will include this file to get versions as they change, no need to modify version in any other place than here.
 * https://semver.org/
 * # when minor version is incremented, patch must reset to 0
 * # when major version is incremented, minor and patch must reset to 0

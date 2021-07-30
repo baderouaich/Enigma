@@ -39,3 +39,22 @@ the workingsetsize is correct (Shared DLLS don't get loaded into every process s
 - add to Algorithm::CreateFromName
 - add to README.md
 - make tests
+
+
+
+# Doxygen notes
+- to document multiple funcs, vars in same group, Don't forget to set the option "DISTRIBUTE_GROUP_DOC" in the "Expert" -> Project tab. Them all the members of the group will receive the same comment.
+- check out a great doxygen basic tutorial at: https://www.youtube.com/watch?v=TtRn3HsOm1s 
+https://www.doxygen.nl/manual/commands.html
+/**
+* @brief Basic doxygen commands
+* @details a list of basic doxy tags aka commands
+* @param a: 
+* @return 
+* @throws
+* @see Func() or Class::Func()
+* @note
+* @attention
+* @warning
+*/
+

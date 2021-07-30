@@ -24,12 +24,12 @@
 #endif
 
 NS_ENIGMA_BEGIN
-/*
+/**
 *	CPUInfo class will gather informations about the CPU at runtime
 */
 class ENIGMA_API CPUInfo
 {
-public: /* Constructors / Destructor */
+public:
 	CPUInfo() noexcept;
 	~CPUInfo() noexcept = default;
 
@@ -38,19 +38,19 @@ public: /* Constructors / Destructor */
 
 
 public:
-	/*
+	/**
 	*	Returns cpu usage (in percentage [0% -> 100%])
 	*/
 	f32 GetCPUUsage() noexcept;
 
-	/*
+	/**
 	*	Returns cpu usage by current process (in percentage [0% -> 100%])
 	*/
 	f32 GetProcessCPUUsage() noexcept;
 
-private: /* Platform Functions */
+private: /** Platform Functions */
 #if defined(ENIGMA_PLATFORM_WINDOWS) || defined(ENIGMA_PLATFORM_MACOS)
-	/*
+	/**
 	*	Calculates CPU Load percentage by idle and total ticks for (used for Windows & MacOS)
 	*/
 	f32 CalculateCPULoad(const ui64 idle_ticks, const ui64 total_ticks)
@@ -69,7 +69,7 @@ private: /* Platform Functions */
 
 
 
-private: /* Platform Variables */
+private: /** Platform Variables */
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
 	FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};

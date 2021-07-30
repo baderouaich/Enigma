@@ -5,13 +5,13 @@
 #include <Algorithm/Algorithm.hpp>
 
 NS_ENIGMA_BEGIN
-/*
+/**
 *	Blowfish Algorithm Encryptor/Decryptor
 */
 class Blowfish : public Algorithm
 {
 public:
-	/*
+	/**
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit Blowfish(const Algorithm::Intent intent) noexcept;
@@ -22,8 +22,8 @@ public:
 	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private:
-	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption> m_blowfish_encryptor; // Blowfish-EAX encryptor
-	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Decryption> m_blowfish_decryptor; // Blowfish-EAX decryptor
+	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption> m_blowfish_encryptor; /**< Blowfish-EAX encryptor */
+	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Decryption> m_blowfish_decryptor; /**< Blowfish-EAX decryptor */
 };
 
 NS_ENIGMA_END

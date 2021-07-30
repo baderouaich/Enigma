@@ -5,13 +5,13 @@
 #include <Algorithm/Algorithm.hpp>
 
 NS_ENIGMA_BEGIN
-/*
+/**
 *	Twofish-GCM Algorithm Encryptor/Decryptor
 */
 class Twofish : public Algorithm
 {
 public:
-	/*
+	/**
 	*	@param intent: Operation, Encrypt or Decrypt
 	*/
 	explicit Twofish(const Algorithm::Intent intent) noexcept;
@@ -22,8 +22,8 @@ public:
 	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
 
 private:
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Encryption> m_twofish_encryptor; // Twofish-GCM encryptor
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Decryption> m_twofish_decryptor; // Twofish-GCM decryptor
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Encryption> m_twofish_encryptor; /**< Twofish-GCM encryptor */
+	std::unique_ptr<CryptoPP::GCM<CryptoPP::Twofish>::Decryption> m_twofish_decryptor; /**< Twofish-GCM decryptor */
 };
 
 NS_ENIGMA_END

@@ -1,4 +1,3 @@
-<!-- In Progress...
 # 1.4.0
 - Updated portable-file-dialogs library after issue https://github.com/samhocevar/portable-file-dialogs/issues/50 Fixed
 - Upgraded ImGui library from 1.81 to 1.83 (master branch)
@@ -7,8 +6,7 @@
 - Added Password Generator Tool
 - Added Hashing Tool
 - Added System & Hardware Information Tool
--->
-
+- Added Doxygen Documentation
 
 # 1.3.0
 - Fixed Clang compilation issue on Linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)
