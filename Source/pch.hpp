@@ -1,6 +1,8 @@
-/**
-*	ENIGMA Precompiled Heade
+/**	@file
+*	@brief ENIGMA Precompiled Header
+*
 */
+
 #pragma once
 #ifndef ENIGMA_PCH_H
 #define ENIGMA_PCH_H
