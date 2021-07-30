@@ -86,6 +86,7 @@ $(document).ready(function(){initNavTree('class_window_file_drop_event.html','')
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_window_file_drop_event-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -110,17 +111,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a29501a8a58dc227994cf4c4e6f1b2b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0e5527ead33f78ded1aff7ec3d00957"><td class="memItemLeft" align="right" valign="top">constexpr const std::vector&lt; fs::path &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#af0e5527ead33f78ded1aff7ec3d00957">GetFilenames</a> () const noexcept</td></tr>
 <tr class="separator:af0e5527ead33f78ded1aff7ec3d00957"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab72cc801f5d9bffb534f9a4200e6609"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#aab72cc801f5d9bffb534f9a4200e6609">EVENT_CLASS_TYPE</a> (<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a46dff95ba09f778800911805789baa2a">EventType::WINDOW_FILE_DROP</a>)</td></tr>
-<tr class="separator:aab72cc801f5d9bffb534f9a4200e6609"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade3b42a4d33e436d89e88c2b064efd87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#ade3b42a4d33e436d89e88c2b064efd87">EVENT_CLASS_CATEGORY</a> (<a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38a0ec0a3f8aade8993f11fedcbaa0d8db6">EventCategory::APPLICATION</a>)</td></tr>
-<tr class="separator:ade3b42a4d33e436d89e88c2b064efd87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a6c1a2f18f8b7bb4f2d647d672f9fb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#a0a6c1a2f18f8b7bb4f2d647d672f9fb9">GetEventType</a> () const override</td></tr>
+<tr class="separator:a0a6c1a2f18f8b7bb4f2d647d672f9fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae35526c5be4a05f21e058982080aa59f"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#ae35526c5be4a05f21e058982080aa59f">GetName</a> () const override</td></tr>
+<tr class="separator:ae35526c5be4a05f21e058982080aa59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e1775966747faf65ab8bd7ac183bc77"><td class="memItemLeft" align="right" valign="top">virtual i32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#a1e1775966747faf65ab8bd7ac183bc77">GetCategoryFlags</a> () const override</td></tr>
+<tr class="separator:a1e1775966747faf65ab8bd7ac183bc77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_event"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_event')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_event.html">Event</a></td></tr>
-<tr class="memitem:af14bbd8f69c2778def9462375a0e70f2 inherit pub_methods_class_event"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#af14bbd8f69c2778def9462375a0e70f2">GetEventType</a> () const =0</td></tr>
-<tr class="separator:af14bbd8f69c2778def9462375a0e70f2 inherit pub_methods_class_event"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad251ba19770b3e9c9ba20a6558ffe8b1 inherit pub_methods_class_event"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#ad251ba19770b3e9c9ba20a6558ffe8b1">GetName</a> () const =0</td></tr>
-<tr class="separator:ad251ba19770b3e9c9ba20a6558ffe8b1 inherit pub_methods_class_event"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac34bfaa765063ac94b90a879f88bb8cf inherit pub_methods_class_event"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#ac34bfaa765063ac94b90a879f88bb8cf">GetCategoryFlags</a> () const =0</td></tr>
-<tr class="separator:ac34bfaa765063ac94b90a879f88bb8cf inherit pub_methods_class_event"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17303a8089a66eece86b41cdea845f55 inherit pub_methods_class_event"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a17303a8089a66eece86b41cdea845f55">ToString</a> () const</td></tr>
 <tr class="separator:a17303a8089a66eece86b41cdea845f55 inherit pub_methods_class_event"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4780431ffc73f833ff3d71d114d6580 inherit pub_methods_class_event"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#ad4780431ffc73f833ff3d71d114d6580">IsInCategory</a> (<a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> category) const noexcept</td></tr>
@@ -129,6 +126,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a63e77b2db30df182e0f854b528b268e8 inherit pub_methods_class_event"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17a779dcd1008b33f927ef77fa1231d7 inherit pub_methods_class_event"><td class="memItemLeft" align="right" valign="top">const void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a17a779dcd1008b33f927ef77fa1231d7">SetHandled</a> (const bool handled) noexcept</td></tr>
 <tr class="separator:a17a779dcd1008b33f927ef77fa1231d7 inherit pub_methods_class_event"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a2f412d24a847a2ef638b87e3cc03ea77"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_window_file_drop_event.html#a2f412d24a847a2ef638b87e3cc03ea77">GetStaticType</a> ()</td></tr>
+<tr class="separator:a2f412d24a847a2ef638b87e3cc03ea77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -169,39 +171,57 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ade3b42a4d33e436d89e88c2b064efd87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade3b42a4d33e436d89e88c2b064efd87">&#9670;&nbsp;</a></span>EVENT_CLASS_CATEGORY()</h2>
+<a id="a1e1775966747faf65ab8bd7ac183bc77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1775966747faf65ab8bd7ac183bc77">&#9670;&nbsp;</a></span>GetCategoryFlags()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">WindowFileDropEvent::EVENT_CLASS_CATEGORY </td>
+          <td class="memname">virtual i32 WindowFileDropEvent::GetCategoryFlags </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38a0ec0a3f8aade8993f11fedcbaa0d8db6">EventCategory::APPLICATION</a>&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_event.html#ac34bfaa765063ac94b90a879f88bb8cf">Event</a>.</p>
 
 </div>
 </div>
-<a id="aab72cc801f5d9bffb534f9a4200e6609"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab72cc801f5d9bffb534f9a4200e6609">&#9670;&nbsp;</a></span>EVENT_CLASS_TYPE()</h2>
+<a id="a0a6c1a2f18f8b7bb4f2d647d672f9fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a6c1a2f18f8b7bb4f2d647d672f9fb9">&#9670;&nbsp;</a></span>GetEventType()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">WindowFileDropEvent::EVENT_CLASS_TYPE </td>
+          <td class="memname">virtual <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> WindowFileDropEvent::GetEventType </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a46dff95ba09f778800911805789baa2a">EventType::WINDOW_FILE_DROP</a>&#160;</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_event.html#af14bbd8f69c2778def9462375a0e70f2">Event</a>.</p>
 
 </div>
 </div>
@@ -224,6 +244,58 @@ Additional Inherited Members</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae35526c5be4a05f21e058982080aa59f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae35526c5be4a05f21e058982080aa59f">&#9670;&nbsp;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char* WindowFileDropEvent::GetName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_event.html#ad251ba19770b3e9c9ba20a6558ffe8b1">Event</a>.</p>
+
+</div>
+</div>
+<a id="a2f412d24a847a2ef638b87e3cc03ea77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f412d24a847a2ef638b87e3cc03ea77">&#9670;&nbsp;</a></span>GetStaticType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> WindowFileDropEvent::GetStaticType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
