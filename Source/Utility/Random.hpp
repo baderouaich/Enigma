@@ -10,10 +10,10 @@ class ENIGMA_API Random final
 {
 	ENIGMA_STATIC_CLASS(Random);
 public:
-	/*
+	/**
 	*	@brief Generates a random real between a range
-	*	@param min: minimum value of range (included)
-	*	@param max: maximum value of range (included)
+	*	@param min: minimum value of range (included in range)
+	*	@param max: maximum value of range (included in range)
 	*	@return Random real between min and max
 	*/
 	template<typename T>
@@ -25,10 +25,10 @@ public:
 		return dist(m_engine);
 	}
 
-	/*
+	/**
 	*	@brief Generates a random integer between a range
-	*	@param min: minimum value of range (included)
-	*	@param max: maximum value of range (included)
+	*	@param min: minimum value of range (included in range)
+	*	@param max: maximum value of range (included in range)
 	*	@return Random integer between min and max
 	*/
 	template<typename T>
@@ -40,7 +40,7 @@ public:
 		return dist(m_engine);
 	}
 
-	/*
+	/**
 	*	@brief Generates a random boolean value
 	*	@param p: Probability of true (50% by default)
 	*	@return Returns a Random bool value, either 'true' or 'false'
@@ -50,7 +50,14 @@ public:
 		std::bernoulli_distribution dist(p);
 		return !!dist(m_engine);
 	}
-
+	
+	/**
+	*	@brief Reseeds the random engine with a new value 
+	*/
+	static void Reseed() noexcept
+	{
+		m_engine.seed(m_seed());
+	}
 
 #if 0
 	/*

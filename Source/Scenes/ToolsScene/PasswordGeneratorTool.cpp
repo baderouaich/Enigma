@@ -164,7 +164,8 @@ void PasswordGeneratorTool::OnGenerateButtonPressed()
 	// get desired length
 	const size_t length = std::stoull(m_lengths[m_selected_length_index]);
 	const String special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
-	
+
+	Random::Reseed();
 	m_password.clear();
 	while (m_password.size() < length)
 	{
@@ -206,7 +207,7 @@ void PasswordGeneratorTool::OnGenerateButtonPressed()
 	}
 
 
-	// 
+	// Generate helpful sentence to remember password with
 	m_remember_password_sentence.clear();
 	for (const char c : m_password)
 	{
@@ -214,12 +215,12 @@ void PasswordGeneratorTool::OnGenerateButtonPressed()
 		if (m_remember_password_char_words.find(c) == m_remember_password_char_words.end())
 		{
 			m_remember_password_sentence += c;
-			m_remember_password_sentence += ' ';
 		}
 		else
 		{
-			m_remember_password_sentence += m_remember_password_char_words.at(c) + ' ';
+			m_remember_password_sentence += m_remember_password_char_words.at(c);
 		}
+		m_remember_password_sentence += ' ';
 	}
 }
 

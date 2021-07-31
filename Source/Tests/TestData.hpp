@@ -31,6 +31,7 @@ vitae sit amet nunc.)";
 	String GenerateRandomString(const size_t length)
 	{
 		String out(length, '\000');
+		Random::Reseed();
 		std::for_each(std::execution::par, out.begin(), out.end(), [](char& c)
 			{
 				if (int r = Random::Int(0, 2); r == 0)
