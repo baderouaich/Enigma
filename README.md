@@ -121,35 +121,35 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 
 ### Windows
  - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br><br>
-<strong>Method 1: Visual Studio 16 2019</strong>
- - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 Project<br> 
+<strong>Method 1 (Recommended): Visual Studio 16 2019</strong>
+ - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
  - Open Enigma.sln and Change configuration to Release or Dist
- - Build Solution<br>
- - Copy Resources/ folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it<br><br>
+ - Build & Run Solution
+<!-- - Copy Resources/ folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it<br><br>-->
 <strong>Method 2 (Unstable): Makefile (GMake2)</strong>
  - Run `Gen-Windows-Makefile.bat` to generate project Makefiles<br>
- - Run `make config=release CC="path/to/your/c/compiler" CXX="path/to/your/c++/compiler"`<br>
-   example: `make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe  CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 2`<br>
- - Copy `Resources/` folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it
+ - Run `$ make config=release CC="path/to/your/c/compiler/gcc.exe" CXX="path/to/your/c++/compiler/g++.exe"`<br>
+   example: `$ make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 4`<br>
+<!-- - Copy `Resources/` folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it  -->
 
 ### Linux
  - Install Latest gcc or clang Compiler<br>
-  `sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
-	`sudo apt update`<br>
-	gcc `sudo apt install gcc-10 g++-10` or clang `sudo apt install clang-10 clang++-10`<br>
- - Install necessary libs<br>
-  `sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
+  `$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
+	`$ sudo apt update`<br>
+	gcc: `$ sudo apt install gcc-10 g++-10` or clang: `$ sudo apt install clang-10 clang++-10`<br>
+ - Install necessary libs (opengl, x11, ...)<br>
+  `$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
  - Extract premake5 binary <br>
-  `tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/`
- - Run `sudo bash ./Gen-Linux-Makefile.sh` to generate project Makefiles
- - Compile with gcc `make config=release CC=gcc-10 CPP=g++-10 -j X` or clang `make config=release CC=clang-10 CPP=clang++-10 -j X` <br> 
-   replace X with number of threads to use for compilation, the more the faster<br>
-   replace release with dist for full performance
- - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma`
+  `$ tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/`
+ - Run `$ sudo bash ./Gen-Linux-Makefile.sh` to generate project Makefiles
+ - Compile with gcc: `$ make config=release CC=gcc-10 CPP=g++-10 -j 4` or clang: `$ make config=release CC=clang-10 CPP=clang++-10 -j 4` <br> 
+<!--  replace -j X with number of threads to use for compilation, the more the faster<br>
+   replace release with dist for full performance -->
+<!--  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma` --> 
  - Run Enigma Binary `./Bin/Release-linux-x86_64/Enigma/Enigma`
 
 ### MacOS TODO (when i figure out a way to test macos on vm)
-- Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode Project<br>
+- Run `sudo bash ./Gen-MacOS-XCode.sh` to generate XCode project files<br>
 
 
 ## License
