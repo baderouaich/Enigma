@@ -100,12 +100,18 @@ $(document).ready(function(){initNavTree('class_random.html',''); initResizable(
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8cc8d5d3e19d9fe4a15d569518a586e8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a8cc8d5d3e19d9fe4a15d569518a586e8"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if&lt; std::is_floating_point&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_random.html#a8cc8d5d3e19d9fe4a15d569518a586e8">Real</a> (const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> min, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> max) noexcept</td></tr>
+<tr class="memdesc:a8cc8d5d3e19d9fe4a15d569518a586e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random real between a range.  <a href="class_random.html#a8cc8d5d3e19d9fe4a15d569518a586e8">More...</a><br /></td></tr>
 <tr class="separator:a8cc8d5d3e19d9fe4a15d569518a586e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6071329a7398a8dc532debc9ea407a89"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a6071329a7398a8dc532debc9ea407a89"><td class="memTemplItemLeft" align="right" valign="top">static std::enable_if&lt; std::is_integral&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::value &amp;&amp;!std::is_same&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, bool &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Int</a> (const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> min, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> max) noexcept</td></tr>
+<tr class="memdesc:a6071329a7398a8dc532debc9ea407a89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random integer between a range.  <a href="class_random.html#a6071329a7398a8dc532debc9ea407a89">More...</a><br /></td></tr>
 <tr class="separator:a6071329a7398a8dc532debc9ea407a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53ecff0dbd86f01e911f5a1c4e79854b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a53ecff0dbd86f01e911f5a1c4e79854b">Bool</a> (const f64 p=0.5) noexcept</td></tr>
+<tr class="memdesc:a53ecff0dbd86f01e911f5a1c4e79854b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random boolean value.  <a href="class_random.html#a53ecff0dbd86f01e911f5a1c4e79854b">More...</a><br /></td></tr>
 <tr class="separator:a53ecff0dbd86f01e911f5a1c4e79854b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c813acd3008e398b1c01109308b124f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a3c813acd3008e398b1c01109308b124f">Reseed</a> () noexcept</td></tr>
+<tr class="memdesc:a3c813acd3008e398b1c01109308b124f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reseeds the random engine with a new value.  <a href="class_random.html#a3c813acd3008e398b1c01109308b124f">More...</a><br /></td></tr>
+<tr class="separator:a3c813acd3008e398b1c01109308b124f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -119,7 +125,10 @@ Static Private Attributes</h2></td></tr>
 <tr class="memitem:abeace6614a1e702312b319a55077ddd3"><td class="memItemLeft" align="right" valign="top">static std::default_random_engine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#abeace6614a1e702312b319a55077ddd3">m_engine</a> { <a class="el" href="class_random.html#ad5b83f2275d1cb24d34f4f37595d6f8e">m_seed</a>() }</td></tr>
 <tr class="separator:abeace6614a1e702312b319a55077ddd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00009">9</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a53ecff0dbd86f01e911f5a1c4e79854b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53ecff0dbd86f01e911f5a1c4e79854b">&#9670;&nbsp;</a></span>Bool()</h2>
 
@@ -143,6 +152,17 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Generates a random boolean value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Probability of true (50% by default) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a <a class="el" href="class_random.html">Random</a> bool value, either 'true' or 'false' </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00048">48</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>
@@ -208,6 +228,18 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Generates a random integer between a range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>minimum value of range (included in range) </td></tr>
+    <tr><td class="paramname">max</td><td>maximum value of range (included in range) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_random.html">Random</a> integer between min and max </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00036">36</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+
 </div>
 </div>
 <a id="a8cc8d5d3e19d9fe4a15d569518a586e8"></a>
@@ -246,6 +278,47 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Generates a random real between a range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">min</td><td>minimum value of range (included in range) </td></tr>
+    <tr><td class="paramname">max</td><td>maximum value of range (included in range) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_random.html">Random</a> real between min and max </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00021">21</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3c813acd3008e398b1c01109308b124f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c813acd3008e398b1c01109308b124f">&#9670;&nbsp;</a></span>Reseed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Random::Reseed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reseeds the random engine with a new value. </p>
+
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00057">57</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -269,6 +342,8 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00097">97</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+
 </div>
 </div>
 <a id="ad5b83f2275d1cb24d34f4f37595d6f8e"></a>
@@ -290,6 +365,8 @@ template&lt;typename T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00096">96</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>

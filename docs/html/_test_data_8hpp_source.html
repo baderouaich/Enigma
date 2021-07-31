@@ -121,66 +121,68 @@ $(document).ready(function(){initNavTree('_test_data_8hpp_source.html',''); init
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespace_enigma.html#ad8029e155f6eda548f07271c731617b4">   31</a></span>&#160;    <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> <a class="code" href="namespace_enigma.html#ad8029e155f6eda548f07271c731617b4">GenerateRandomString</a>(<span class="keyword">const</span> <span class="keywordtype">size_t</span> length)</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> out(length, <span class="charliteral">&#39;\000&#39;</span>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        std::for_each(std::execution::par, out.begin(), out.end(), [](<span class="keywordtype">char</span>&amp; c)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                if (int r = Random::Int(0, 2); r == 0)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                    c = char(Random::Int(int(<span class="stringliteral">&#39;a&#39;</span>), int(<span class="stringliteral">&#39;z&#39;</span>)));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                else if (r == 1)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    c = char(Random::Int(int(<span class="stringliteral">&#39;A&#39;</span>), int(<span class="stringliteral">&#39;Z&#39;</span>)));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                else if (r == 2)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    c = char(Random::Int(int(<span class="stringliteral">&#39;0&#39;</span>), int(<span class="stringliteral">&#39;9&#39;</span>)));</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            });</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> out;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#pragma region Populate Database With Random Data For Testing</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Initialize Enigma Logger</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    Enigma::Logger::Initialize();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// Initialize SQLite3 Database</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    Enigma::Database::Initialize();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">using namespace </span><a class="code" href="namespace_enigma.html">Enigma</a>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">auto</span> e = std::make_unique&lt;Encryption&gt;();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt;= 1000; i++)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        e-&gt;title = Random::Str(<a class="code" href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Random::Int</a>(3, 255));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        e-&gt;cipher.data = std::move(Random::Str(<a class="code" href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Random::Int</a>(256, 1024 * 10)));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        e-&gt;size = e-&gt;cipher.data.size();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_database.html#aae5e1d55cfbe7d567abee3c0b98eec10">Database::AddEncryption</a>(e);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="comment">//if (Database::AddEncryption(e))</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="comment">//  std::printf(&quot;Added Encryption #%d\n&quot;, i);</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">//else</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">//  std::printf(&quot;Failed to add Encryptionn #%d\n&quot;, i);</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        e-&gt;title.clear();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        e-&gt;date_time.clear();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        e-&gt;cipher.data.clear();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Database total changes since connection: &quot;</span> &lt;&lt; <a class="code" href="class_database.html#af06bd291304b896a45a3bc121720c555">Database::GetInstance</a>()-&gt;getTotalChanges() &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Database headerStr: &quot;</span> &lt;&lt; <a class="code" href="class_database.html#af06bd291304b896a45a3bc121720c555">Database::GetInstance</a>()-&gt;getHeaderInfo().headerStr &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    Enigma::Database::Shutdown();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    Enigma::Logger::Shutdown();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="class_random.html#a3c813acd3008e398b1c01109308b124f">Random::Reseed</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        std::for_each(std::execution::par, out.begin(), out.end(), [](<span class="keywordtype">char</span>&amp; c)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                if (int r = Random::Int(0, 2); r == 0)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                    c = char(Random::Int(int(<span class="stringliteral">&#39;a&#39;</span>), int(<span class="stringliteral">&#39;z&#39;</span>)));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                else if (r == 1)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    c = char(Random::Int(int(<span class="stringliteral">&#39;A&#39;</span>), int(<span class="stringliteral">&#39;Z&#39;</span>)));</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                else if (r == 2)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    c = char(Random::Int(int(<span class="stringliteral">&#39;0&#39;</span>), int(<span class="stringliteral">&#39;9&#39;</span>)));</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            });</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> out;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#pragma region Populate Database With Random Data For Testing</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// Initialize Enigma Logger</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    Enigma::Logger::Initialize();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Initialize SQLite3 Database</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    Enigma::Database::Initialize();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">using namespace </span><a class="code" href="namespace_enigma.html">Enigma</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">auto</span> e = std::make_unique&lt;Encryption&gt;();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt;= 1000; i++)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        e-&gt;title = Random::Str(<a class="code" href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Random::Int</a>(3, 255));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        e-&gt;cipher.data = std::move(Random::Str(<a class="code" href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Random::Int</a>(256, 1024 * 10)));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        e-&gt;size = e-&gt;cipher.data.size();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="class_database.html#aae5e1d55cfbe7d567abee3c0b98eec10">Database::AddEncryption</a>(e);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="comment">//if (Database::AddEncryption(e))</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">//  std::printf(&quot;Added Encryption #%d\n&quot;, i);</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">//else</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="comment">//  std::printf(&quot;Failed to add Encryptionn #%d\n&quot;, i);</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        e-&gt;title.clear();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        e-&gt;date_time.clear();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        e-&gt;cipher.data.clear();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Database total changes since connection: &quot;</span> &lt;&lt; <a class="code" href="class_database.html#af06bd291304b896a45a3bc121720c555">Database::GetInstance</a>()-&gt;getTotalChanges() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Database headerStr: &quot;</span> &lt;&lt; <a class="code" href="class_database.html#af06bd291304b896a45a3bc121720c555">Database::GetInstance</a>()-&gt;getHeaderInfo().headerStr &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    Enigma::Database::Shutdown();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    Enigma::Logger::Shutdown();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#pragma endregion</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_random_8hpp_html"><div class="ttname"><a href="_random_8hpp.html">Random.hpp</a></div></div>
 <div class="ttc" id="a_types_8hpp_html"><div class="ttname"><a href="_types_8hpp.html">Types.hpp</a></div></div>
-<div class="ttc" id="aclass_database_html_aae5e1d55cfbe7d567abee3c0b98eec10"><div class="ttname"><a href="class_database.html#aae5e1d55cfbe7d567abee3c0b98eec10">Database::AddEncryption</a></div><div class="ttdeci">static bool AddEncryption(const std::unique_ptr&lt; Encryption &gt; &amp;e)</div><div class="ttdef"><b>Definition:</b> Database.cpp:86</div></div>
-<div class="ttc" id="aclass_database_html_af06bd291304b896a45a3bc121720c555"><div class="ttname"><a href="class_database.html#af06bd291304b896a45a3bc121720c555">Database::GetInstance</a></div><div class="ttdeci">static const std::unique_ptr&lt; SQLite::Database &gt; &amp; GetInstance() noexcept</div><div class="ttdef"><b>Definition:</b> Database.hpp:273</div></div>
-<div class="ttc" id="aclass_random_html_a6071329a7398a8dc532debc9ea407a89"><div class="ttname"><a href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Random::Int</a></div><div class="ttdeci">static std::enable_if&lt; std::is_integral&lt; T &gt;::value &amp;&amp;!std::is_same&lt; T, bool &gt;::value, T &gt;::type Int(const T min, const T max) noexcept</div><div class="ttdef"><b>Definition:</b> Random.hpp:36</div></div>
-<div class="ttc" id="anamespace_enigma_html"><div class="ttname"><a href="namespace_enigma.html">Enigma</a></div><div class="ttdef"><b>Definition:</b> Constants.hpp:9</div></div>
-<div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> Types.hpp:26</div></div>
-<div class="ttc" id="anamespace_enigma_html_a2ff3904dc743843e6c44edac43e346f3"><div class="ttname"><a href="namespace_enigma.html#a2ff3904dc743843e6c44edac43e346f3">Enigma::LOREM_IPSUM</a></div><div class="ttdeci">static const String LOREM_IPSUM</div><div class="ttdef"><b>Definition:</b> TestData.hpp:20</div></div>
-<div class="ttc" id="anamespace_enigma_html_acad0912a4ab3a1df2d97c28e8cf62ae6"><div class="ttname"><a href="namespace_enigma.html#acad0912a4ab3a1df2d97c28e8cf62ae6">Enigma::operator*</a></div><div class="ttdeci">String operator*(const String &amp;str, const size_t mult)</div><div class="ttdef"><b>Definition:</b> TestData.hpp:10</div></div>
-<div class="ttc" id="anamespace_enigma_html_ad8029e155f6eda548f07271c731617b4"><div class="ttname"><a href="namespace_enigma.html#ad8029e155f6eda548f07271c731617b4">Enigma::GenerateRandomString</a></div><div class="ttdeci">String GenerateRandomString(const size_t length)</div><div class="ttdef"><b>Definition:</b> TestData.hpp:31</div></div>
+<div class="ttc" id="aclass_database_html_aae5e1d55cfbe7d567abee3c0b98eec10"><div class="ttname"><a href="class_database.html#aae5e1d55cfbe7d567abee3c0b98eec10">Database::AddEncryption</a></div><div class="ttdeci">static bool AddEncryption(const std::unique_ptr&lt; Encryption &gt; &amp;e)</div><div class="ttdef"><b>Definition:</b> <a href="_database_8cpp_source.html#l00086">Database.cpp:86</a></div></div>
+<div class="ttc" id="aclass_database_html_af06bd291304b896a45a3bc121720c555"><div class="ttname"><a href="class_database.html#af06bd291304b896a45a3bc121720c555">Database::GetInstance</a></div><div class="ttdeci">static const std::unique_ptr&lt; SQLite::Database &gt; &amp; GetInstance() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_database_8hpp_source.html#l00273">Database.hpp:273</a></div></div>
+<div class="ttc" id="aclass_random_html_a3c813acd3008e398b1c01109308b124f"><div class="ttname"><a href="class_random.html#a3c813acd3008e398b1c01109308b124f">Random::Reseed</a></div><div class="ttdeci">static void Reseed() noexcept</div><div class="ttdoc">Reseeds the random engine with a new value.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00057">Random.hpp:57</a></div></div>
+<div class="ttc" id="aclass_random_html_a6071329a7398a8dc532debc9ea407a89"><div class="ttname"><a href="class_random.html#a6071329a7398a8dc532debc9ea407a89">Random::Int</a></div><div class="ttdeci">static std::enable_if&lt; std::is_integral&lt; T &gt;::value &amp;&amp;!std::is_same&lt; T, bool &gt;::value, T &gt;::type Int(const T min, const T max) noexcept</div><div class="ttdoc">Generates a random integer between a range.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00036">Random.hpp:36</a></div></div>
+<div class="ttc" id="anamespace_enigma_html"><div class="ttname"><a href="namespace_enigma.html">Enigma</a></div><div class="ttdef"><b>Definition:</b> <a href="_constants_8hpp_source.html#l00008">Constants.hpp:9</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00026">Types.hpp:26</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_a2ff3904dc743843e6c44edac43e346f3"><div class="ttname"><a href="namespace_enigma.html#a2ff3904dc743843e6c44edac43e346f3">Enigma::LOREM_IPSUM</a></div><div class="ttdeci">static const String LOREM_IPSUM</div><div class="ttdef"><b>Definition:</b> <a href="_test_data_8hpp_source.html#l00020">TestData.hpp:20</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_acad0912a4ab3a1df2d97c28e8cf62ae6"><div class="ttname"><a href="namespace_enigma.html#acad0912a4ab3a1df2d97c28e8cf62ae6">Enigma::operator*</a></div><div class="ttdeci">String operator*(const String &amp;str, const size_t mult)</div><div class="ttdef"><b>Definition:</b> <a href="_test_data_8hpp_source.html#l00010">TestData.hpp:10</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_ad8029e155f6eda548f07271c731617b4"><div class="ttname"><a href="namespace_enigma.html#ad8029e155f6eda548f07271c731617b4">Enigma::GenerateRandomString</a></div><div class="ttdeci">String GenerateRandomString(const size_t length)</div><div class="ttdef"><b>Definition:</b> <a href="_test_data_8hpp_source.html#l00031">TestData.hpp:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
