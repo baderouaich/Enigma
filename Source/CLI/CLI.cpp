@@ -7,7 +7,7 @@
 NS_ENIGMA_BEGIN
 
 
-CLI::CLI(const i32& argc, const char* const* argv)
+CLI::CLI(const i32 argc, const char* const* argv)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 	try

@@ -74,7 +74,8 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				ImGui::BulletText("Vendor: %s", vendor.c_str());
 				ImGui::BulletText("Vendor ID: %s", vendor_id.c_str());
 
-				spacing(2);
+				
+				//spacing(2);
 
 				// Quantities
 				if (ImGui::TreeNode("Quantities"))
@@ -86,7 +87,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 					ImGui::TreePop();
 				}
 
-				spacing(2);
+				//spacing(2);
 
 				// Caches
 				if (ImGui::TreeNode("Caches"))
@@ -108,7 +109,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				}
 					
 
-				spacing(2);
+				//spacing(2);
 
 				// Supported Instruction Set
 				if (ImGui::TreeNode("Supported Instruction Set"))

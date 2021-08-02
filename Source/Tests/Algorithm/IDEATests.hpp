@@ -1,8 +1,9 @@
 #pragma once
 #include <catch2/catch_all.hpp>
 #include <Algorithm/IDEA/IDEA.hpp>
-#include <Tests/TestData.hpp>
 #include <Utility/SizeUtils.hpp>
+#include <Tests/TestsData.hpp>
+
 using namespace Enigma;
 using namespace Catch::Matchers;
 
@@ -14,9 +15,9 @@ TEST_CASE("IDEA Encryption and Decryption")
 	std::unique_ptr<IDEA> idea(new IDEA(IDEA::Intent::Encrypt | IDEA::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)));
+	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)), true);
 	// Encryption password
-	String password = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)));
+	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)), true);
 
 	// Encrypted buffer (aka cipher)
 	String encrypted = idea->Encrypt(password, buffer);

@@ -5,6 +5,7 @@
 // #include "Platform.hpp" /* Now platform is detected by premake5.lua script while generating project */ 
 #include "Macros.hpp"
 #include "Constants.hpp"
+#include "Concepts.hpp"
 #include "Types.hpp"
 #include "Version.hpp"
 

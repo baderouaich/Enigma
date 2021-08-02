@@ -4,10 +4,10 @@ project "tabulate"
 	cppdialect "C++17"
 	staticruntime "on"
 		
-	warnings "Off"
-
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
+
+	warnings "Off"
 
 	includedirs 
 	{
@@ -57,6 +57,7 @@ project "tabulate"
 		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
+		
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.

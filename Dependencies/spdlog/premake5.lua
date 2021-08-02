@@ -32,10 +32,31 @@ project "spdlog"
 		"include"
 	}
 
-	-- Platform --
-	-- [[ Windows ]] --
+	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"
+		defines
+		{
+		}
+		links
+		{
+		}
+
+	filter "system:linux"
+		links
+		{
+		}
+		defines
+		{
+		}
+
+	filter "system:macosx"
+		defines
+		{
+		}	
+		links
+		{
+		}
 
 
 	--- Configurations ---

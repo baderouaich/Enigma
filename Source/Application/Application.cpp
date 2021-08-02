@@ -209,9 +209,6 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
-
-
-
 	// check if there is a scene doing some work in progress...
 	const bool there_is_a_scene_still_doing_some_work = // long name i know XD  
 		std::any_of(m_scenes.rbegin(), m_scenes.rend(),
@@ -316,7 +313,6 @@ void Application::Run()
 				glAssert( glFlush() );
 			}
 
-		
 			// Swap Buffers
 			m_window->SwapBuffers();
 
@@ -326,7 +322,7 @@ void Application::Run()
 				// Notify user before ending scene
 				m_scenes.back()->OnDestroy();
 				// Destroy Scene
-				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~shared_ptr to cleanup memory)
+				m_scenes.pop_back(); // Remove scene from vector (btw vector will call ~unique_ptr to cleanup memory)
 			}
 
 		}
@@ -339,14 +335,14 @@ void Application::Run()
 }
 
 
-void Application::Exit(const String& message, i32 exit_code) noexcept
+void Application::Exit(const String& message, const i32 exit_code) noexcept
 {
-	const String msg = "Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
+	const String msg = "Enigma Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
 	
 	if (Logger::GetLogger())
 		ENIGMA_CRITICAL(msg);
 	else
-		std::cerr << msg;
+		std::cerr << msg << std::endl;
 
 	std::exit(exit_code);
 }
@@ -437,7 +433,7 @@ Application::~Application()
 	m_loading_scene->OnDestroy(); // Don't forget the loading scene
 
 	m_scenes.clear();
-	m_fonts.clear();
+	m_fonts.clear(); //ImGui::GetIO().Fonts->Clear();
 }
 NS_ENIGMA_END
 

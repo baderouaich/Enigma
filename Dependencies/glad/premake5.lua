@@ -35,7 +35,7 @@ project "glad"
 
 
 	filter "system:linux"
-	    pic "On" -- required fo clang-10
+	    pic "On" -- required for clang-10+
 		defines
 		{
 		}

@@ -23,9 +23,11 @@ public: /* Callbacks */
 	void OnCopyPasswordButtonPressed();
 	void OnCopyRememberPasswordSentenceButtonPressed();
 
+
+	
+
 private: // Password settings
 	bool m_digits, m_uppercase_alphabets, m_lowercase_alphabets, m_special_characters;
-	
 
 	std::vector<const char*> m_lengths{}; // length combo box items (heap allocated elements with new[])
 	i32 m_selected_length_index{0}; // selected length index from combo box

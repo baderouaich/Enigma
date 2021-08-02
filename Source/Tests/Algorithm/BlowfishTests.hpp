@@ -3,8 +3,8 @@
 #include <Algorithm/Blowfish/Blowfish.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <Utility/FileUtils.hpp>
-#include <Tests/TestData.hpp>
 #include <Utility/SizeUtils.hpp>
+#include <Tests/TestsData.hpp>
 #include <iostream>
 
 using namespace Enigma;
@@ -18,9 +18,9 @@ TEST_CASE("Blowfish-GCM Encryption and Decryption")
 	std::unique_ptr<Blowfish> blowfish(new Blowfish(Blowfish::Intent::Encrypt | Blowfish::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)));
+	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)), true);
 	// Encryption password
-	String password = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)));
+	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)), true);
 
 	// Encrypted buffer (aka cipher)
 	String encrypted = blowfish->Encrypt(password, buffer);

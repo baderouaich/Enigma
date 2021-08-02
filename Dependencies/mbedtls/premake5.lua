@@ -22,7 +22,6 @@ project "mbedtls"
 	{
 		 --"MBEDTLS_ZLIB_SUPPORT",
 		 "KRML_VERIFIED_UINT128"
-
 	}
 	
 	
@@ -243,12 +242,12 @@ project "mbedtls"
 		}
 		links
 		{
-			"ws2_32"
+			"ws2_32.lib" -- WinSock
 		}
 
 
 	filter "system:linux"
-	    pic "On" -- required fo clang-10
+	    pic "On" -- required fo clang-10+
 		links
 		{
 		}

@@ -57,6 +57,7 @@ project "json"
 		symbols "Full" --vs17 and newer | symbols "On"
 		optimize "Off" -- No optimization will be performed.
 
+		
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "On" -- Perform a balanced set of optimizations.

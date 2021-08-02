@@ -2,7 +2,7 @@
 #ifndef ENIGMA_FILE_UTILS_H
 #define ENIGMA_FILE_UTILS_H
 
-#include <version>  // __cpp_lib_filesystem & __cpp_lib_experimental_filesystem
+#include <version>  // version include has yvals_core.h include so we can use __cpp_lib_filesystem & __cpp_lib_experimental_filesystem defines
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 

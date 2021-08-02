@@ -31,30 +31,47 @@ $ ./Enigma -d --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data-encryp
 */
 
 NS_ENIGMA_BEGIN
+/** Command Line Interface */
 class ENIGMA_API CLI
 {
 public:
-	CLI(const i32& argc, const char* const* argv);
+	/** CLI Constructor
+	*	Parses arguments in constructor boy
+	*	@param argc: number of arguments from main entry point
+	*	@param argv: arguments list from main entry point
+	*/
+	CLI(const i32 argc, const char* const* argv);
 	~CLI() noexcept = default;
 
 public:
+	/** Processes arguments and invokes scenarios bellow
+	*	@returns exit code
+	*/
 	i32 Run();
 
 private: /* Scenarios (divide and conquer) */
+	/** Scenario when encrypting a text */
 	void OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool save_to_database);
+	/** Scenario when decrypting a text */
 	void OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& cipher_base64);
+	/** Scenario when encrypting a file */
 	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool save_to_database);
+	/** Scenario when decrypting a file */
 	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted);
 
+	/** Scenario when --list arg processed to list saved encryptions from database */
 	void OnListEncryptionRecords();
 
+	/** Scenario when --help arg processed to display help message */
 	void OnHelp();
+	/** Scenario when --version arg processed to display Enigma's current version */
 	void OnVersion();
+	/** Scenario when --check-for-updates arg processed to check for new releases of Enigma */
 	void OnCheckForUpdates();
 
 private:
-	std::unique_ptr<cxxopts::Options> m_options;
-	std::unique_ptr<cxxopts::ParseResult> m_parse_result;
+	std::unique_ptr<cxxopts::Options> m_options; /**< cxxopts command line arguments processor */
+	std::unique_ptr<cxxopts::ParseResult> m_parse_result; /**< cxxopts command line arguments parser */
 };
 NS_ENIGMA_END
 

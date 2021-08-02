@@ -4,7 +4,8 @@
 #include <Utility/Base64.hpp>
 #include <Utility/SizeUtils.hpp>
 #include <Algorithm/AES/AES.hpp>
-#include <Tests/TestData.hpp>
+#include <Tests/TestsData.hpp>
+
 using namespace Enigma;
 using namespace Catch;
 using namespace Catch::Matchers;
@@ -20,9 +21,9 @@ TEST_CASE("Base64 Encode And Decode Cipher With AES", "Base64")
 	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)));
+	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)), true);
 	// Encryption password
-	String password = GenerateRandomString(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)));
+	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)), true);
 	// Encrypted buffer (aka cipher)
 	String encrypted = aes->Encrypt(password, buffer);
 	// Encode cipher to Base64

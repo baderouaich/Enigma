@@ -1,6 +1,5 @@
 ========================= IN PROGRESS =============================
-- Remove spacing between TreeNodes in System & Hardware info tool CPU -> Quantities..
-- Doxygen Documentation (Algorithm DONE, Analytics DONE, Application DONE, CLI, Config, Core, Database, Events, GUI, Input, Logger, Networking, Scenes, System, Tests, Utility, Window) check out a great doxygen basic tutorial at: https://www.youtube.com/watch?v=TtRn3HsOm1s 
+- Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html
 /**
 * @brief Basic doxygen commands
@@ -13,11 +12,27 @@ https://www.doxygen.nl/manual/commands.html
 * @attention
 * @warning
 */
+Algorithm DONE
+Analytics DONE
+Application DONE
+CLI DONE
+Config DONE
+Core
+Database
+Events
+GUI
+Input
+Logger
+Networking
+Scenes
+System
+Tests
+Utility
+Window
 
-- Check why in docs u cant view file contents for example:  go to https://badereddineouaich.github.io/Enigma/class_check_for_updates.html and click CheckForUpdates.hpp
-- Fix images not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html
+- Fix images do not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html
 
-- System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU)
+- System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU Waiting for major OpenGL GPU Info impl)
 
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
 
@@ -86,6 +101,8 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE Add Password Generator Tool
 - DONE Add Hashing Tool
 - DONE Make algorithm intent bitwise based so an encryption algorithm can be created for both intentions
+- DONE Check why in docs u cant view file contents for example:  go to https://badereddineouaich.github.io/Enigma/class_check_for_updates.html and click CheckForUpdates.hpp, fixed by adding .nojekyll file to docs/ . see https://stackoverflow.com/questions/25320356/can-i-have-my-github-pages-index-html-in-a-subfolder-of-the-repository
+- DONE Remove spacing between TreeNodes in System & Hardware info tool CPU -> Quantities..
 =============================================================================
 
 

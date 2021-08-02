@@ -3,6 +3,8 @@
 #include <iostream>
 #include <catch2/catch_all.hpp>
 #include <Utility/FileUtils.hpp>
+#include <Tests/TestsData.hpp>
+
 using namespace Enigma;
 using namespace Catch;
 using namespace Catch::Matchers;

@@ -20,7 +20,7 @@ project "imgui"
 	files
 	{
 		"*.h",
-		"*.cpp", -- Dont include backends/*, use only *.cpp instead of **.cpp (recurse)
+		"*.cpp", -- Dont include backends/*, use only *.cpp instead of **.cpp (** = recursive)
 		--[[
 		"imconfig.h",
 		"imgui.h",

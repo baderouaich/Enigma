@@ -155,7 +155,6 @@ void PasswordGeneratorTool::OnDestroy()
 	m_lengths.clear();
 }
 
-
 void PasswordGeneratorTool::OnGenerateButtonPressed()
 {
 	if (!m_digits && !m_lowercase_alphabets && !m_uppercase_alphabets && !m_special_characters)

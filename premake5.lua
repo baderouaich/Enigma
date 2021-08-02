@@ -2,9 +2,9 @@ require("premake", ">=5.0.0-alpha15") -- allow premake 5.0.0 alpha15 and up only
 
 include "./Premake/premake_customization/solution_items.lua"
 
-workspace "Enigma"  -- Workspace which is the solution in windows, in xcode will be something else
+workspace "Enigma"  -- Workspace which is the solution in windows
 	architecture "x86_64" -- Targeted architecture x64
-	startproject "Enigma" -- Set 'Enigma Application' project as start up project
+	startproject "Enigma" -- Set 'Enigma' project as start up project
 	
 	configurations
 	{
@@ -37,28 +37,28 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["glfw"]			= "%{wks.location}/Dependencies/glfw/include"  -- Graphics Library Framework lib
 IncludeDir["glad"]			= "%{wks.location}/Dependencies/glad/include"-- OpenGL lib
-IncludeDir["imgui"]			= "%{wks.location}/Dependencies/imgui" 	-- UI lib
-IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include" -- logging lib
+IncludeDir["imgui"]			= "%{wks.location}/Dependencies/imgui" 	-- GUI lib
+IncludeDir["spdlog"]		= "%{wks.location}/Dependencies/spdlog/include" -- Logging lib
 IncludeDir["pfd"]			= "%{wks.location}/Dependencies/pfd/include"  -- portable-file-dialog lib
 IncludeDir["stb_image"]		= "%{wks.location}/Dependencies/stb_image/include" -- image loading lib
-IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp"  -- cryptography lib 
-IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- arguments parser lib
+IncludeDir["cryptopp"]		= "%{wks.location}/Dependencies/cryptopp"  -- Cryptography lib 
+IncludeDir["cxxopts"]		= "%{wks.location}/Dependencies/cxxopts/include" -- Arguments parser lib
 IncludeDir["inih"]			= "%{wks.location}/Dependencies/inih/include" -- ini config file loader lib
 IncludeDir["json"]			= "%{wks.location}/Dependencies/json/include" -- nlohmann json lib
-IncludeDir["sqlitecpp"]		= "%{wks.location}/Dependencies/sqlitecpp/include" -- sqlite3 cpp wrapper
-IncludeDir["tabulate"]		= "%{wks.location}/Dependencies/tabulate/include" -- cmd table maker lib for CLI
+IncludeDir["sqlitecpp"]		= "%{wks.location}/Dependencies/sqlitecpp/include" -- SQLite3 cpp wrapper
+IncludeDir["tabulate"]		= "%{wks.location}/Dependencies/tabulate/include" -- Commande line Table maker lib for CLI
 IncludeDir["infoware"]		= "%{wks.location}/Dependencies/infoware/include" -- C++ Library for pulling system and hardware information, without hitting the command line.
 
 IncludeDir["curl"]			= "%{wks.location}/Dependencies/curl/include" -- curl networking lib
-IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- networking library wrapper around cURL (will include and link to curl)
+IncludeDir["cpr"]			= "%{wks.location}/Dependencies/cpr/include" -- Networking library wrapper around cURL (will include and link to curl)
 IncludeDir["mbedtls"]		= "%{wks.location}/Dependencies/mbedtls/include" -- cURL depends on mbedtls lib (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
 IncludeDir["zlib"]			= "%{wks.location}/Dependencies/zlib" -- cURL a depend on it on Linux (will be included and linked in curl project for linux, see Dependencies/curl/premake.lua)
 
-IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- catch2 unit tests
+IncludeDir["catch2"]		= "%{wks.location}/Dependencies/catch2/src"  -- Catch2 unit tests
 
 -- Organize libs solution in a single filtered directory 
 group "Dependencies"
-	include "Dependencies/glfw" --there is a premake5.lua in Dependencies/glfw/ which will be detected and set things up for us
+	include "Dependencies/glfw" -- There is a premake5.lua in Dependencies/glfw/ which will be detected and set things up for us
 	include "Dependencies/glad"
 	include "Dependencies/imgui"
 	include "Dependencies/spdlog"
@@ -83,7 +83,7 @@ group ""
 -- Include Enigma Application project solution
 project "Enigma"
 	language "C++"
-	cppdialect "C++17" --"C++latest" --TODO C++20 
+	cppdialect "C++17" -- TODO C++20 using "C++latest"
 	staticruntime "on"
 
 	---[[ Binary Output dirs ]]---

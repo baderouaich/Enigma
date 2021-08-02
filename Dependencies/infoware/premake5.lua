@@ -25,10 +25,10 @@ project "infoware"
     }
 
     -- check https://github.com/ThePhD/infoware/blob/main/CMakeLists.txt for compilation settings
-    defines	
+    defines
     {
     	"INFOWARE_VERSION=\"0.6.0\"",
-   		"INFOWARE_USE_OPENGL=1", -- Use OpenGL to extract GPU info (although not implemented yet by infoware)
+   		"INFOWARE_USE_OPENGL=1", --TODO: Use OpenGL to extract GPU info (although not implemented yet by infoware, System info tool displays only minimal data for GPU info from opengl, waiting for furter releases)
     }
 
 	--- Platform ---

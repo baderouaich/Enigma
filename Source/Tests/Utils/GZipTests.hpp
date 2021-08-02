@@ -2,7 +2,8 @@
 #include <catch2/catch_all.hpp>
 #include <Utility/GZip.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <Tests/TestData.hpp>
+#include <Tests/TestsData.hpp>
+
 using namespace Enigma;
 using namespace Catch;
 using namespace Catch::Matchers;

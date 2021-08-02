@@ -4,6 +4,8 @@
 
 #include <Core/Core.hpp>
 #include <random>
+#include <algorithm>
+#include <execution> // std::for_each(std::execution::par, ...)
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API Random final
@@ -18,9 +20,9 @@ public:
 	*/
 	template<typename T>
 	static typename std::enable_if<std::is_floating_point<T>::value, T>::type
-	Real(const T min, const T max) noexcept
+	Real(const T min, const T max)
 	{
-		ENIGMA_ASSERT(min < max, "min is >= max");
+		ENIGMA_ASSERT(min < max, "min random value should be less than max value");
 		std::uniform_real_distribution<T> dist(min, max);
 		return dist(m_engine);
 	}
@@ -33,9 +35,9 @@ public:
 	*/
 	template<typename T>
 	static typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value, T>::type
-	Int(const T min, const T max) noexcept
+	Int(const T min, const T max)
 	{
-		ENIGMA_ASSERT(min < max, "min is >= max");
+		ENIGMA_ASSERT(min < max, "min random value should be less than max value");
 		std::uniform_int_distribution<T> dist(min, max);
 		return dist(m_engine);
 	}
@@ -45,52 +47,61 @@ public:
 	*	@param p: Probability of true (50% by default)
 	*	@return Returns a Random bool value, either 'true' or 'false'
 	*/
-	static bool Bool(const f64 p = 0.5) noexcept
+	static bool Bool(const f64 p = 0.5)
 	{
 		std::bernoulli_distribution dist(p);
 		return !!dist(m_engine);
 	}
 	
-	/**
-	*	@brief Reseeds the random engine with a new value 
+
+	/** @brief Generates a random string
+	*	@param length: length of the random string to generate
+	*	@param parallel: if true, a random string will be generated as fast as possible using multiple threads (usefull when string is too large)
+	*	@returns a random String with specified length consists of alphanumeric and special characters
 	*/
-	static void Reseed() noexcept
+	static String Str(const size_t length, const bool parallel = false) noexcept
+	{
+		String out(length, '\000');
+		const std::string_view special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
+		if (parallel)
+		{
+			std::mutex mtx{};
+			std::for_each(std::execution::seq, out.begin(), out.end(), [&special_characters, &mtx](char& c)
+				{
+					std::scoped_lock<std::mutex> guard{ mtx }; // guard scope, note that most of functions bellow us assertions, without guarding can result on bad rare behavior where two threads assert at the same time. its just nasty, use lock guards.
+					if (const ui16 r = Random::Int<ui16>(0, 3); r == 0)
+						c = static_cast<char>(Random::Int(ui16('a'), ui16('z'))); // alpha lower
+					else if (r == 1) // alpha upper
+						c = static_cast<char>(Random::Int(ui16('A'), ui16('Z')));
+					else if (r == 2) // digits
+						c = static_cast<char>(Random::Int(ui16('0'), ui16('9')));
+					else if (r == 3) // special characters
+						c = special_characters[Random::Int<size_t>(0, special_characters.size() - 1)];
+				});
+		}
+		else
+		{
+			for (char& c : out)
+			{
+				if (const ui16 r = Random::Int<ui16>(0, 3); r == 0)
+					c = static_cast<char>(Random::Int(ui16('a'), ui16('z'))); // alpha lower
+				else if (r == 1) // alpha upper
+					c = static_cast<char>(Random::Int(ui16('A'), ui16('Z')));
+				else if (r == 2) // digits
+					c = static_cast<char>(Random::Int(ui16('0'), ui16('9')));
+				else if (r == 3) // special characters
+					c = special_characters[Random::Int<size_t>(0, special_characters.size() - 1)];
+			}
+		}
+		return out;
+}
+
+
+	/** Reseeds the random engine with a new value */
+	static void Reseed()
 	{
 		m_engine.seed(m_seed());
 	}
-
-#if 0
-	/*
-	*	@brief Generates a random string with length
-	*	@param length: length of the generated random string
-	*	@return Returns a Random String with specified length consists of alphanumeric characters and special characters
-	*/
-	static String Str(const size_t length) noexcept
-	{
-		String str(length, '\000');
-		for (char& c : str)
-		{
-			const i32 i = Int(static_cast<i32>(1), static_cast<i32>(4));
-			switch (i)
-			{
-			case 1: // a-z
-				c = Int(static_cast<i32>('a'), static_cast<i32>('z'));
-				break;
-			case 2: // A-Z
-				c = Int(static_cast<i32>('A'), static_cast<i32>('Z'));
-				break;
-			case 3: // 0-9
-				c = Int(static_cast<i32>('0'), static_cast<i32>('9')); // ascii 0 = 48 | 9 = 57
-				break;
-			case 4: // special characters
-				using Constants::Algorithm::SPECIAL_CHARACTERS;
-				c = SPECIAL_CHARACTERS[Int(static_cast<size_t>(0), ENIGMA_ARRAY_SIZE(SPECIAL_CHARACTERS) - 1)];
-				break;
-			}
-		}
-		return str;
-	}
-#endif
 
 private:
 	inline static std::random_device m_seed{};

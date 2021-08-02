@@ -32,7 +32,7 @@ project "inih"
 		}
 
 	filter "system:linux"
-	    pic "On" -- required fo clang-10
+	    pic "On" -- required fo clang-10+
 		links
 		{
 		}

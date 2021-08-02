@@ -25,8 +25,7 @@
 
 
 NS_ENIGMA_BEGIN
-/**
-*	@brief Single process instance interface
+/** @brief Single process instance interface
 *	@details if you inherrit from this class, your application process will have only one instance at a time.
 *   Using a socket implementation, this checks to see if the application is already open or not.
 *   You must also choose a port that is unique to the application.
@@ -34,6 +33,9 @@ NS_ENIGMA_BEGIN
 class SingleProcessInstance
 {
 public:
+	/** Single process instance class constructor
+	*	@param port: Application's unique port
+	*/
 	explicit SingleProcessInstance(const ui16 port) noexcept
 		:
 		m_socket_fd(M_INVALID_SOCKET),
@@ -93,14 +95,15 @@ public:
 
 	}
 
-	/**
-	*   Returns true if this is a unique process instance (no other instance process is running)
-	*/
+	/**  Returns true if this is a unique process instance (no other instance of this process is running) */
 	constexpr bool IsUnique() const noexcept
 	{
 		return (m_socket_fd != M_INVALID_SOCKET) && (m_rc == 0); // valid socket and no binding errors.
 	}
 
+	/** Single process instace destructor
+	*	Closes the socket and shuts down WinSock on windows
+	*/
 	virtual ~SingleProcessInstance() noexcept
 	{
 		if (m_socket_fd != M_INVALID_SOCKET)
