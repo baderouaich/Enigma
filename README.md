@@ -138,7 +138,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 	`$ sudo apt update`<br>
 	gcc: `$ sudo apt install gcc-10 g++-10` or clang: `$ sudo apt install clang-10 clang++-10`<br>
  - Install necessary libs (opengl, x11, ...)<br>
-  `$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev`
+  `$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev`
  - Extract premake5 binary<br>
   `$ tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/`
  - Run `$ sudo bash ./Gen-Linux-Makefile.sh` to generate project Makefiles

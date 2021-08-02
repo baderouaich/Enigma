@@ -215,7 +215,8 @@ project "Enigma"
 			"X11", -- x11 Linux gui libs
 			"dl", -- dynamic loader interface
 			"pthread", -- std::thread
-			"stdc++fs" -- std::filesystem
+			"stdc++fs", -- std::filesystem
+			"tbb" -- std::execution
 		}
 
 	filter "system:macosx"
