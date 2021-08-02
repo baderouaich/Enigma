@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gzip_1280',['GZip',['../class_g_zip.html',1,'']]]
+  ['gzip_1285',['GZip',['../class_g_zip.html',1,'']]]
 ];

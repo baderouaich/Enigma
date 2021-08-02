@@ -140,13 +140,13 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:acad0912a4ab3a1df2d97c28e8cf62ae6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#acad0912a4ab3a1df2d97c28e8cf62ae6">operator*</a> (const <a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> &amp;str, const <a class="el" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">size_t</a> mult)</td></tr>
 <tr class="separator:acad0912a4ab3a1df2d97c28e8cf62ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8029e155f6eda548f07271c731617b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#ad8029e155f6eda548f07271c731617b4">GenerateRandomString</a> (const <a class="el" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">size_t</a> length)</td></tr>
-<tr class="separator:ad8029e155f6eda548f07271c731617b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e8eb0315239f4740b6a1f54ec3b693"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#ab7e8eb0315239f4740b6a1f54ec3b693">operator*</a> (const std::string_view &amp;str, const <a class="el" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">size_t</a> mult)</td></tr>
+<tr class="separator:ab7e8eb0315239f4740b6a1f54ec3b693"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a2ff3904dc743843e6c44edac43e346f3"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#a2ff3904dc743843e6c44edac43e346f3">LOREM_IPSUM</a></td></tr>
-<tr class="separator:a2ff3904dc743843e6c44edac43e346f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48da91fcd68f4726295467e6523bff7e"><td class="memItemLeft" align="right" valign="top">static constexpr const std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#a48da91fcd68f4726295467e6523bff7e">LOREM_IPSUM</a></td></tr>
+<tr class="separator:a48da91fcd68f4726295467e6523bff7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ac9e9f2c7b5f202b0fa0da8cddfd39c8f"></a>
@@ -422,28 +422,38 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad8029e155f6eda548f07271c731617b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8029e155f6eda548f07271c731617b4">&#9670;&nbsp;</a></span>GenerateRandomString()</h2>
+<a id="ab7e8eb0315239f4740b6a1f54ec3b693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e8eb0315239f4740b6a1f54ec3b693">&#9670;&nbsp;</a></span>operator*() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> Enigma::GenerateRandomString </td>
+          <td class="memname"><a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> Enigma::operator* </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">size_t</a>&#160;</td>
-          <td class="paramname"><em>length</em></td><td>)</td>
+          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">size_t</a>&#160;</td>
+          <td class="paramname"><em>mult</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_test_data_8hpp_source.html#l00031">31</a> of file <a class="el" href="_test_data_8hpp_source.html">TestData.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_tests_data_8hpp_source.html#l00018">18</a> of file <a class="el" href="_tests_data_8hpp_source.html">TestsData.hpp</a>.</p>
 
 </div>
 </div>
 <a id="acad0912a4ab3a1df2d97c28e8cf62ae6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acad0912a4ab3a1df2d97c28e8cf62ae6">&#9670;&nbsp;</a></span>operator*()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acad0912a4ab3a1df2d97c28e8cf62ae6">&#9670;&nbsp;</a></span>operator*() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -468,13 +478,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_test_data_8hpp_source.html#l00010">10</a> of file <a class="el" href="_test_data_8hpp_source.html">TestData.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_tests_data_8hpp_source.html#l00009">9</a> of file <a class="el" href="_tests_data_8hpp_source.html">TestsData.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a2ff3904dc743843e6c44edac43e346f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ff3904dc743843e6c44edac43e346f3">&#9670;&nbsp;</a></span>LOREM_IPSUM</h2>
+<a id="a48da91fcd68f4726295467e6523bff7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48da91fcd68f4726295467e6523bff7e">&#9670;&nbsp;</a></span>LOREM_IPSUM</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,12 +493,12 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> Enigma::LOREM_IPSUM</td>
+          <td class="memname">constexpr const std::string_view Enigma::LOREM_IPSUM</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -502,7 +512,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="stringliteral">Quisque vehicula id enim ut vulputate. Sed vitae nisl ac orci vehicula porttitor</span></div>
 <div class="line"><span class="stringliteral">vitae sit amet nunc.)&quot;</span></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_test_data_8hpp_source.html#l00020">20</a> of file <a class="el" href="_test_data_8hpp_source.html">TestData.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_tests_data_8hpp_source.html#l00023">23</a> of file <a class="el" href="_tests_data_8hpp_source.html">TestsData.hpp</a>.</p>
 
 </div>
 </div>

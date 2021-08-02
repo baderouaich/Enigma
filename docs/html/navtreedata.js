@@ -65,7 +65,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Related Functions", "functions_rela.html", null ]
@@ -88,13 +88,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_e_s_8cpp.html",
-"_hashing_tool_8cpp.html#aaf6b64f1f93fd4c066488b666eaf54ee",
-"_key_codes_8hpp.html#acb709e03bbec7e209f4438e0cde34a52",
-"_types_8hpp.html#a19e9ac18a724d47eb32f1adcbca70c70",
-"class_decrypt_file_scene.html#abd1ed9c2dd757f94a68f7f0632af4634",
-"class_main_menu_scene.html",
-"class_tools_scene.html#a2b95023624a11bdd0a531ce0a42773bc",
-"functions_u.html"
+"_g_zip_tests_8hpp.html#ad05ae186dbe60b0dbec48156b6207d62",
+"_key_codes_8hpp.html#ac7d3abb61359a82e1bc6d628fe2d262d",
+"_types_8hpp.html#a13fe618cf25f03e96f3e756752441e2e",
+"class_decrypt_file_scene.html#a9e8f73f99b4e531e25eb41dad6910fb3",
+"class_logger.html#a918e72e940f8cffb370c9966dc3e9af2",
+"class_tools_scene.html",
+"functions_rela.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

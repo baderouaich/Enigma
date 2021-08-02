@@ -3,7 +3,7 @@ var class_application =
     [ "Application", "class_application.html#ae588b7a96a03ed92bea82ea6a49801e1", null ],
     [ "~Application", "class_application.html#a748bca84fefb9c12661cfaa2f623748d", null ],
     [ "EndApplication", "class_application.html#ad88ded7fc048236d848d1a4c3e08af4d", null ],
-    [ "Exit", "class_application.html#adda54754c9326fd9d1c038ede52ea8d1", null ],
+    [ "Exit", "class_application.html#a5a92c2df2ae7e02f468158acbe507342", null ],
     [ "GetCPUInfo", "class_application.html#a9f7e61cc3f73709d358bbfb4460b9cac", null ],
     [ "GetDeltaTime", "class_application.html#aa7d20473b2aa9cd4bbb1821212efb711", null ],
     [ "GetFonts", "class_application.html#a15d4a8d1409f1a226621b72870f4e389", null ],

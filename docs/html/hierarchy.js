@@ -52,6 +52,7 @@ var hierarchy =
     [ "ImGuiRenderer", "class_im_gui_renderer.html", null ],
     [ "ImGuiWidgets", "class_im_gui_widgets.html", null ],
     [ "Input", "class_input.html", null ],
+    [ "ImGuiWidgets::InputTextCallback_UserData", "struct_im_gui_widgets_1_1_input_text_callback___user_data.html", null ],
     [ "CheckForUpdates::LatestReleaseInfo", "struct_check_for_updates_1_1_latest_release_info.html", null ],
     [ "Logger", "class_logger.html", null ],
     [ "MathUtils", "class_math_utils.html", null ],

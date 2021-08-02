@@ -18,7 +18,7 @@ var namespace_enigma =
     [ "ui8", "namespace_enigma.html#a13fe618cf25f03e96f3e756752441e2e", null ],
     [ "Vec2f", "namespace_enigma.html#a822cc33eb45de8cf5590dc3b286b250b", null ],
     [ "WString", "namespace_enigma.html#a2370b684a9fcf187190fe574c0171dba", null ],
-    [ "GenerateRandomString", "namespace_enigma.html#ad8029e155f6eda548f07271c731617b4", null ],
+    [ "operator*", "namespace_enigma.html#ab7e8eb0315239f4740b6a1f54ec3b693", null ],
     [ "operator*", "namespace_enigma.html#acad0912a4ab3a1df2d97c28e8cf62ae6", null ],
-    [ "LOREM_IPSUM", "namespace_enigma.html#a2ff3904dc743843e6c44edac43e346f3", null ]
+    [ "LOREM_IPSUM", "namespace_enigma.html#a48da91fcd68f4726295467e6523bff7e", null ]
 ];

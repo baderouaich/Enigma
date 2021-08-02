@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"class_logger.html#a918e72e940f8cffb370c9966dc3e9af2":[5,0,40,3],
+"class_logger.html#a9873996a4869fca2c80897b7e72eda13":[5,0,40,0],
+"class_logger.html#aefc20924638420a17cab0740421cfe75":[5,0,40,1],
 "class_main_menu_scene.html":[5,0,41],
 "class_main_menu_scene.html#a004e12118640336eaa05bc25d9ce85e8":[5,0,41,1],
 "class_main_menu_scene.html#a084495ad3b13193261fabcfca06e816a":[5,0,41,7],
@@ -163,12 +166,13 @@ var NAVTREEINDEX5 =
 "class_r_a_m_info.html#adf85992d4c0ce56485f09a001e052326":[5,0,54,1],
 "class_r_a_m_info.html#af6a835035d692e0024497acb21f97b58":[5,0,54,0],
 "class_random.html":[5,0,55],
-"class_random.html#a3c813acd3008e398b1c01109308b124f":[5,0,55,4],
-"class_random.html#a53ecff0dbd86f01e911f5a1c4e79854b":[5,0,55,0],
-"class_random.html#a6071329a7398a8dc532debc9ea407a89":[5,0,55,2],
-"class_random.html#a8cc8d5d3e19d9fe4a15d569518a586e8":[5,0,55,3],
-"class_random.html#abeace6614a1e702312b319a55077ddd3":[5,0,55,5],
-"class_random.html#ad5b83f2275d1cb24d34f4f37595d6f8e":[5,0,55,6],
+"class_random.html#a6dd16775002ce89c60bef0749b35ff3b":[5,0,55,2],
+"class_random.html#a9660238603ebeb23aea0bba0483f49fb":[5,0,55,0],
+"class_random.html#a9c8eecba49e71c80dbbc84b093b1b09f":[5,0,55,3],
+"class_random.html#aa7e3710782c57d7f091f4932f339d14c":[5,0,55,5],
+"class_random.html#aa813b66cca7fd2e7416c0a03c2225732":[5,0,55,4],
+"class_random.html#abeace6614a1e702312b319a55077ddd3":[5,0,55,6],
+"class_random.html#ad5b83f2275d1cb24d34f4f37595d6f8e":[5,0,55,7],
 "class_random.html#ada1d5fe8390f741dcb6bd5554067559b":[5,0,55,1],
 "class_save_file_dialog.html":[5,0,56],
 "class_save_file_dialog.html#a0cf168f63e5e91dc5e5a74e875f17a7a":[5,0,56,5],
@@ -245,9 +249,5 @@ var NAVTREEINDEX5 =
 "class_tool.html#a14229b2f565d5ecb3ca12d2cb8df5e23":[5,0,63,4],
 "class_tool.html#a8baf6126c87dda88049a97312881ff94":[5,0,63,0],
 "class_tool.html#ac24d5ba7c4b9a22b6bcb6366b9928989":[5,0,63,2],
-"class_tool.html#adf9c2a14f3edd2ea7494953d3f1fffdc":[5,0,63,1],
-"class_tools_scene.html":[5,0,64],
-"class_tools_scene.html#a17f016c295569a67c7e0dfc546216ea5":[5,0,64,5],
-"class_tools_scene.html#a254fd0d6b3e593e90a44de53e5bac329":[5,0,64,2],
-"class_tools_scene.html#a2adcfae8eb8daa0cf3000ffb679a4fb7":[5,0,64,7]
+"class_tool.html#adf9c2a14f3edd2ea7494953d3f1fffdc":[5,0,63,1]
 };

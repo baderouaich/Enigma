@@ -22,7 +22,7 @@ var searchData=
   ['blowfishtests_2ehpp_49',['BlowfishTests.hpp',['../_blowfish_tests_8hpp.html',1,'']]],
   ['blue_50',['BLUE',['../namespace_enigma_1_1_constants_1_1_colors.html#a493d561cbb61ba4d134cd297d7609195',1,'Enigma::Constants::Colors']]],
   ['body_51',['body',['../struct_check_for_updates_1_1_latest_release_info.html#ad2eb85acc823309e5fadbe4ea8c5e5b4',1,'CheckForUpdates::LatestReleaseInfo']]],
-  ['bool_52',['Bool',['../class_random.html#a53ecff0dbd86f01e911f5a1c4e79854b',1,'Random']]],
+  ['bool_52',['Bool',['../class_random.html#a9660238603ebeb23aea0bba0483f49fb',1,'Random']]],
   ['button_53',['Button',['../class_im_gui_widgets.html#a490925468df4e6ca1c515fba49dd432f',1,'ImGuiWidgets']]],
   ['button0_54',['Button0',['../_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424adf18fdbdb36feb48df7a2b683a732543',1,'MouseCodes.hpp']]],
   ['button1_55',['Button1',['../_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a6475a3746209a62a6ce6289a3741d07e',1,'MouseCodes.hpp']]],

@@ -100,7 +100,7 @@ Inheritance diagram for SystemAndHardwareInfoTool:</div>
  <div class="center">
   <img src="class_system_and_hardware_info_tool.png" usemap="#SystemAndHardwareInfoTool_map" alt=""/>
   <map id="SystemAndHardwareInfoTool_map" name="SystemAndHardwareInfoTool_map">
-<area href="class_tool.html" alt="Tool" shape="rect" coords="0,0,176,24"/>
+<area href="class_tool.html" title="Tool collapsing header view abstract class." alt="Tool" shape="rect" coords="0,0,176,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -111,10 +111,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a02c30b5ba05977423980730b4be73495"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_system_and_hardware_info_tool.html#a02c30b5ba05977423980730b4be73495">~SystemAndHardwareInfoTool</a> ()=default</td></tr>
 <tr class="separator:a02c30b5ba05977423980730b4be73495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1d3f8314361ef04b2bbd32ac030e0bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_system_and_hardware_info_tool.html#ab1d3f8314361ef04b2bbd32ac030e0bc">OnCreate</a> () override</td></tr>
+<tr class="memdesc:ab1d3f8314361ef04b2bbd32ac030e0bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a tool is constructed.  <a href="class_system_and_hardware_info_tool.html#ab1d3f8314361ef04b2bbd32ac030e0bc">More...</a><br /></td></tr>
 <tr class="separator:ab1d3f8314361ef04b2bbd32ac030e0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4eb331ff61155a95f303623dbd8f52c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_system_and_hardware_info_tool.html#ab4eb331ff61155a95f303623dbd8f52c">OnDraw</a> (<a class="el" href="class_scene.html">Scene</a> *parent) override</td></tr>
+<tr class="memdesc:ab4eb331ff61155a95f303623dbd8f52c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called each frame to handle imgui draw.  <a href="class_system_and_hardware_info_tool.html#ab4eb331ff61155a95f303623dbd8f52c">More...</a><br /></td></tr>
 <tr class="separator:ab4eb331ff61155a95f303623dbd8f52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c19e912b995be399a1077d405858daa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_system_and_hardware_info_tool.html#a8c19e912b995be399a1077d405858daa">OnDestroy</a> () override</td></tr>
+<tr class="memdesc:a8c19e912b995be399a1077d405858daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when tool is destroyed.  <a href="class_system_and_hardware_info_tool.html#a8c19e912b995be399a1077d405858daa">More...</a><br /></td></tr>
 <tr class="separator:a8c19e912b995be399a1077d405858daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_tool"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_tool')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_tool.html">Tool</a></td></tr>
 <tr class="memitem:a8baf6126c87dda88049a97312881ff94 inherit pub_methods_class_tool"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tool.html#a8baf6126c87dda88049a97312881ff94">Tool</a> ()=default</td></tr>
@@ -213,6 +216,8 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Called when a tool is constructed. </p>
+
 <p>Implements <a class="el" href="class_tool.html#ac24d5ba7c4b9a22b6bcb6366b9928989">Tool</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_system_and_hardware_info_tool_8cpp_source.html#l00008">8</a> of file <a class="el" href="_system_and_hardware_info_tool_8cpp_source.html">SystemAndHardwareInfoTool.cpp</a>.</p>
@@ -242,9 +247,11 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Called when tool is destroyed. </p>
+
 <p>Implements <a class="el" href="class_tool.html#a0ffc409cca945d240f602ae5217faba4">Tool</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_system_and_hardware_info_tool_8cpp_source.html#l00321">321</a> of file <a class="el" href="_system_and_hardware_info_tool_8cpp_source.html">SystemAndHardwareInfoTool.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_system_and_hardware_info_tool_8cpp_source.html#l00322">322</a> of file <a class="el" href="_system_and_hardware_info_tool_8cpp_source.html">SystemAndHardwareInfoTool.cpp</a>.</p>
 
 </div>
 </div>
@@ -271,6 +278,14 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Called each frame to handle imgui draw. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>pointer to <a class="el" href="class_tools_scene.html">ToolsScene</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 <p>CPU Information BEGIN /// Static</p>
 <p>CPU Information END ///</p>
 <p>RAM Information BEGIN /// Volatile</p>

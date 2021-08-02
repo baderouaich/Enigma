@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wstring_2055',['WString',['../namespace_enigma.html#a2370b684a9fcf187190fe574c0171dba',1,'Enigma']]]
+  ['wstring_2065',['WString',['../namespace_enigma.html#a2370b684a9fcf187190fe574c0171dba',1,'Enigma']]]
 ];

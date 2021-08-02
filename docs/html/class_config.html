@@ -93,35 +93,45 @@ $(document).ready(function(){initNavTree('class_config.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="class_config.html" title="Config file Loader (.ini)">Config</a> file Loader (.ini)  
+ <a href="class_config.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_config_8hpp_source.html">Config.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5b17c7f8ae00fd584bf7c9bcde7996e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_config.html#a5b17c7f8ae00fd584bf7c9bcde7996e3">Config</a> (const String &amp;file_name)</td></tr>
+<tr class="memdesc:a5b17c7f8ae00fd584bf7c9bcde7996e3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_config.html" title="Config file Loader (.ini)">Config</a> Constructor Loads and initializes config file.  <a href="class_config.html#a5b17c7f8ae00fd584bf7c9bcde7996e3">More...</a><br /></td></tr>
 <tr class="separator:a5b17c7f8ae00fd584bf7c9bcde7996e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9ea940f04ce58068fbbcd0b023e364e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_config.html#ad9ea940f04ce58068fbbcd0b023e364e">~Config</a> () noexcept=default</td></tr>
 <tr class="separator:ad9ea940f04ce58068fbbcd0b023e364e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd4db45f20f0c4d20d4de09826421618"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:abd4db45f20f0c4d20d4de09826421618"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_integral&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::value &amp;&amp;!std::is_same&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, bool &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_config.html#abd4db45f20f0c4d20d4de09826421618">Get</a> (const String &amp;section, const String &amp;name, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &amp;default_value) const</td></tr>
+<tr class="memdesc:abd4db45f20f0c4d20d4de09826421618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get integer fields from loaded config file Integers (and make sure its not bool since its also considered integral : <a href="https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template">https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template</a>)  <a href="class_config.html#abd4db45f20f0c4d20d4de09826421618">More...</a><br /></td></tr>
 <tr class="separator:abd4db45f20f0c4d20d4de09826421618"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab469c35dfa292a5f5e05a9413efb7d03"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab469c35dfa292a5f5e05a9413efb7d03"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_floating_point&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_config.html#ab469c35dfa292a5f5e05a9413efb7d03">Get</a> (const String &amp;section, const String &amp;name, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &amp;default_value) const</td></tr>
+<tr class="memdesc:ab469c35dfa292a5f5e05a9413efb7d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Floating point fields from loaded config file.  <a href="class_config.html#ab469c35dfa292a5f5e05a9413efb7d03">More...</a><br /></td></tr>
 <tr class="separator:ab469c35dfa292a5f5e05a9413efb7d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d716f7d66af85553fa23c7f34730fd7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a1d716f7d66af85553fa23c7f34730fd7"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_same&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, bool &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_config.html#a1d716f7d66af85553fa23c7f34730fd7">Get</a> (const String &amp;section, const String &amp;name, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &amp;default_value) const</td></tr>
+<tr class="memdesc:a1d716f7d66af85553fa23c7f34730fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Boolean fields from loaded config file.  <a href="class_config.html#a1d716f7d66af85553fa23c7f34730fd7">More...</a><br /></td></tr>
 <tr class="separator:a1d716f7d66af85553fa23c7f34730fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80e431363b6bf3a583b6bcd22e9d2d4e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a80e431363b6bf3a583b6bcd22e9d2d4e"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_same&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, String &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_config.html#a80e431363b6bf3a583b6bcd22e9d2d4e">Get</a> (const String &amp;section, const String &amp;name, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &amp;default_value) const</td></tr>
+<tr class="memdesc:a80e431363b6bf3a583b6bcd22e9d2d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get String fields from loaded config file.  <a href="class_config.html#a80e431363b6bf3a583b6bcd22e9d2d4e">More...</a><br /></td></tr>
 <tr class="separator:a80e431363b6bf3a583b6bcd22e9d2d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a31f81c2f50434200bc8a5e590b0d7f92"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; INIReader &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_config.html#a31f81c2f50434200bc8a5e590b0d7f92">m_ini_reader</a> {}</td></tr>
+<tr class="memdesc:a31f81c2f50434200bc8a5e590b0d7f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">inih library loader &amp; parser  <a href="class_config.html#a31f81c2f50434200bc8a5e590b0d7f92">More...</a><br /></td></tr>
 <tr class="separator:a31f81c2f50434200bc8a5e590b0d7f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00012">12</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
+<div class="textblock"><p><a class="el" href="class_config.html" title="Config file Loader (.ini)">Config</a> file Loader (.ini) </p>
+
+<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00010">10</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5b17c7f8ae00fd584bf7c9bcde7996e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b17c7f8ae00fd584bf7c9bcde7996e3">&#9670;&nbsp;</a></span>Config()</h2>
@@ -146,6 +156,20 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p><a class="el" href="class_config.html" title="Config file Loader (.ini)">Config</a> Constructor Loads and initializes config file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>ini config file path </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>on failure </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="_config_8cpp_source.html#l00006">6</a> of file <a class="el" href="_config_8cpp_source.html">Config.cpp</a>.</p>
 
@@ -219,7 +243,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00026">26</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
+<p>Get integer fields from loaded config file Integers (and make sure its not bool since its also considered integral : <a href="https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template">https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template</a>) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">section</td><td>section name </td></tr>
+    <tr><td class="paramname">name</td><td>field name </td></tr>
+    <tr><td class="paramname">default_value</td><td>default value to return if field not found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00030">30</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
 
 </div>
 </div>
@@ -265,7 +299,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00034">34</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
+<p>Get Floating point fields from loaded config file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">section</td><td>section name </td></tr>
+    <tr><td class="paramname">name</td><td>field name </td></tr>
+    <tr><td class="paramname">default_value</td><td>default value to return if field not found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00042">42</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +355,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00042">42</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
+<p>Get Boolean fields from loaded config file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">section</td><td>section name </td></tr>
+    <tr><td class="paramname">name</td><td>field name </td></tr>
+    <tr><td class="paramname">default_value</td><td>default value to return if field not found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00054">54</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
 
 </div>
 </div>
@@ -357,7 +411,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00050">50</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
+<p>Get String fields from loaded config file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">section</td><td>section name </td></tr>
+    <tr><td class="paramname">name</td><td>field name </td></tr>
+    <tr><td class="paramname">default_value</td><td>default value to return if field not found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00066">66</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
 
 </div>
 </div>
@@ -382,7 +446,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00056">56</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
+<p>inih library loader &amp; parser </p>
+
+<p class="definition">Definition at line <a class="el" href="_config_8hpp_source.html#l00072">72</a> of file <a class="el" href="_config_8hpp_source.html">Config.hpp</a>.</p>
 
 </div>
 </div>

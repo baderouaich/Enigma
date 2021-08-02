@@ -93,39 +93,42 @@ $(document).ready(function(){initNavTree('_file_utils_tests_8hpp_source.html',''
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;catch2/catch_all.hpp&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_file_utils_8hpp.html">Utility/FileUtils.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespace_enigma.html">Enigma</a>;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span>Catch;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span>Catch::Matchers;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="_file_utils_tests_8hpp.html#a989e8505922ed8bf11502c98e9aa702f">   10</a></span>&#160;<a class="code" href="_file_utils_tests_8hpp.html#a989e8505922ed8bf11502c98e9aa702f">TEST_CASE</a>(<span class="stringliteral">&quot;File Utils Tests&quot;</span>, <span class="stringliteral">&quot;FileUtils&quot;</span>)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;\n======[ &quot;</span> &lt;&lt; Catch::getResultCapture().getCurrentTestName() &lt;&lt; <span class="stringliteral">&quot; ]======\n&quot;</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> filename = <a class="code" href="class_file_utils.html#a0d11a3a817b4e76ad38c5b5d806e7d21">FileUtils::GetEnigmaExecutableDir</a>() / fs::path(<a class="code" href="namespace_enigma_1_1_constants_1_1_config.html#a1414ee93d215a834a043115d2ef5bfc8">Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH</a>);</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_tests_data_8hpp.html">Tests/TestsData.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespace_enigma.html">Enigma</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span>Catch;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span>Catch::Matchers;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="_file_utils_tests_8hpp.html#a989e8505922ed8bf11502c98e9aa702f">   12</a></span>&#160;<a class="code" href="_file_utils_tests_8hpp.html#a989e8505922ed8bf11502c98e9aa702f">TEST_CASE</a>(<span class="stringliteral">&quot;File Utils Tests&quot;</span>, <span class="stringliteral">&quot;FileUtils&quot;</span>)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;\n======[ &quot;</span> &lt;&lt; Catch::getResultCapture().getCurrentTestName() &lt;&lt; <span class="stringliteral">&quot; ]======\n&quot;</span>;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::vector&lt;Enigma::byte&gt; buffer{};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> filename = <a class="code" href="class_file_utils.html#a0d11a3a817b4e76ad38c5b5d806e7d21">FileUtils::GetEnigmaExecutableDir</a>() / fs::path(<a class="code" href="namespace_enigma_1_1_constants_1_1_config.html#a1414ee93d215a834a043115d2ef5bfc8">Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH</a>);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> max_chunk_size = 9; <span class="comment">// 9 bytes per chunk</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    Enigma::FileUtils::ReadChunks(filename, max_chunk_size,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        [&amp;buffer](std::vector&lt;Enigma::byte&gt;&amp;&amp; chunk) -&gt; <span class="keywordtype">bool</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;Read Chunk Size: &quot;</span> &lt;&lt; chunk.size() &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            buffer.insert(buffer.begin(), chunk.begin(), chunk.end());</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// keep reading chunks,, don&#39;t stop</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        });</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// buffer size must match file size</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    REQUIRE(buffer.size() == fs::file_size(filename));</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// buffer must match buffer from file</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> buffer_from_file;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    REQUIRE(<a class="code" href="class_file_utils.html#a475853b95daefe3a38f1e95391e6d80a">FileUtils::Read</a>(filename, buffer_from_file));</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    REQUIRE(buffer.size() == buffer_from_file.size());</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    std::vector&lt;Enigma::byte&gt; buffer{};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> max_chunk_size = 9; <span class="comment">// 9 bytes per chunk</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    Enigma::FileUtils::ReadChunks(filename, max_chunk_size,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        [&amp;buffer](std::vector&lt;Enigma::byte&gt;&amp;&amp; chunk) -&gt; <span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            std::cout &lt;&lt; <span class="stringliteral">&quot;Read Chunk Size: &quot;</span> &lt;&lt; chunk.size() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            buffer.insert(buffer.begin(), chunk.begin(), chunk.end());</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// keep reading chunks,, don&#39;t stop</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        });</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// buffer size must match file size</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    REQUIRE(buffer.size() == fs::file_size(filename));</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// buffer must match buffer from file</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> buffer_from_file;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    REQUIRE(<a class="code" href="class_file_utils.html#a475853b95daefe3a38f1e95391e6d80a">FileUtils::Read</a>(filename, buffer_from_file));</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    REQUIRE(buffer.size() == buffer_from_file.size());</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
 <div class="ttc" id="a_enigma_8hpp_html"><div class="ttname"><a href="_enigma_8hpp.html">Enigma.hpp</a></div></div>
 <div class="ttc" id="a_file_utils_8hpp_html"><div class="ttname"><a href="_file_utils_8hpp.html">FileUtils.hpp</a></div></div>
-<div class="ttc" id="a_file_utils_tests_8hpp_html_a989e8505922ed8bf11502c98e9aa702f"><div class="ttname"><a href="_file_utils_tests_8hpp.html#a989e8505922ed8bf11502c98e9aa702f">TEST_CASE</a></div><div class="ttdeci">TEST_CASE(&quot;File Utils Tests&quot;, &quot;FileUtils&quot;)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_tests_8hpp_source.html#l00010">FileUtilsTests.hpp:10</a></div></div>
+<div class="ttc" id="a_file_utils_tests_8hpp_html_a989e8505922ed8bf11502c98e9aa702f"><div class="ttname"><a href="_file_utils_tests_8hpp.html#a989e8505922ed8bf11502c98e9aa702f">TEST_CASE</a></div><div class="ttdeci">TEST_CASE(&quot;File Utils Tests&quot;, &quot;FileUtils&quot;)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_tests_8hpp_source.html#l00012">FileUtilsTests.hpp:12</a></div></div>
+<div class="ttc" id="a_tests_data_8hpp_html"><div class="ttname"><a href="_tests_data_8hpp.html">TestsData.hpp</a></div></div>
 <div class="ttc" id="aclass_file_utils_html_a0d11a3a817b4e76ad38c5b5d806e7d21"><div class="ttname"><a href="class_file_utils.html#a0d11a3a817b4e76ad38c5b5d806e7d21">FileUtils::GetEnigmaExecutableDir</a></div><div class="ttdeci">static fs::path GetEnigmaExecutableDir()</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00046">FileUtils.hpp:46</a></div></div>
 <div class="ttc" id="aclass_file_utils_html_a475853b95daefe3a38f1e95391e6d80a"><div class="ttname"><a href="class_file_utils.html#a475853b95daefe3a38f1e95391e6d80a">FileUtils::Read</a></div><div class="ttdeci">static bool Read(const fs::path &amp;filename, String &amp;buffer)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00053">FileUtils.hpp:53</a></div></div>
 <div class="ttc" id="anamespace_enigma_1_1_constants_1_1_config_html_a1414ee93d215a834a043115d2ef5bfc8"><div class="ttname"><a href="namespace_enigma_1_1_constants_1_1_config.html#a1414ee93d215a834a043115d2ef5bfc8">Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH</a></div><div class="ttdeci">static constexpr const char * WINDOW_CONFIG_FILE_PATH</div><div class="ttdef"><b>Definition:</b> <a href="_constants_8hpp_source.html#l00055">Constants.hpp:55</a></div></div>
