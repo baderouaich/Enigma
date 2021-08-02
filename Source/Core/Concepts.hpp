@@ -1,7 +1,7 @@
 #pragma once
 #ifndef ENIGMA_CONCEPTS_H
 #define ENIGMA_CONCEPTS_H
-#include <yvals_core.h> // for __cpp_lib_concepts
+#include <version> // for __cpp_lib_concepts
 
 #ifdef __cpp_lib_concepts
 #include <concepts>
