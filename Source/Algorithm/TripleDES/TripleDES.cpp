@@ -40,7 +40,7 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	}
 
 	// Randomly generated IV
-	const String iv = this->GenerateRandomIV(CryptoPP::DES_EDE3::BLOCKSIZE);
+	const String iv = Algorithm::GenerateRandomIV(CryptoPP::DES_EDE3::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(CryptoPP::DES_EDE3::MAX_KEYLENGTH + CryptoPP::DES_EDE3::BLOCKSIZE); // Encryption key to be generated from user password + IV

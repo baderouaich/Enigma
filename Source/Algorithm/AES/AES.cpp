@@ -40,7 +40,7 @@ String AES::Encrypt(const String& password, const String& buffer)
 	}
 
 	// Randomly generated IV
-	const String iv = this->GenerateRandomIV(CryptoPP::AES::BLOCKSIZE);
+	const String iv = Algorithm::GenerateRandomIV(CryptoPP::AES::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH + CryptoPP::AES::BLOCKSIZE); // Encryption key to be generated from user password + IV

@@ -42,7 +42,7 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 
 
 	// Randomly generated IV
-	const String iv = this->GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE);
+	const String iv = Algorithm::GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(CryptoPP::IDEA::MAX_KEYLENGTH + CryptoPP::IDEA::BLOCKSIZE); // Encryption key to be generated from user password + IV

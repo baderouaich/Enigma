@@ -40,7 +40,7 @@ String Twofish::Encrypt(const String& password, const String& buffer)
 	}
 
 	// Randomly generated IV
-	const String iv = this->GenerateRandomIV(CryptoPP::Twofish::BLOCKSIZE); 
+	const String iv = Algorithm::GenerateRandomIV(CryptoPP::Twofish::BLOCKSIZE); 
 	
 	// Prepare key
 	CryptoPP::SecByteBlock key(CryptoPP::Twofish::MAX_KEYLENGTH + CryptoPP::Twofish::BLOCKSIZE); // Encryption key to be generated from user password + IV
