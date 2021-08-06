@@ -13,7 +13,7 @@ NS_ENIGMA_BEGIN
 class KeyEvent : public Event
 {
 public:
-	const KeyCode& GetKeyCode() const noexcept { return m_key_code; }
+	KeyCode GetKeyCode() const noexcept { return m_key_code; }
 
 	EVENT_CLASS_CATEGORY(EventCategory::KEYBOARD | EventCategory::INPUT)
 	
@@ -34,7 +34,7 @@ public:
 		KeyEvent(keycode),
 		m_repeat_count(repeat_count) {}
 
-	const ui16& GetRepeatCount() const noexcept { return m_repeat_count; }
+	ui16 GetRepeatCount() const noexcept { return m_repeat_count; }
 
 	String ToString() const override
 	{

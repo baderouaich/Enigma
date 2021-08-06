@@ -1,7 +1,6 @@
 #include "pch.hpp"
 #include "ChaCha20Poly1305.hpp"
 
-
 NS_ENIGMA_BEGIN
 
 ChaCha20Poly1305::ChaCha20Poly1305(const Algorithm::Intent intent) noexcept
@@ -70,7 +69,7 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 	m_chacha_encryptor->EncryptAndAuthenticate(
 		reinterpret_cast<byte*>(cipher.data()), // output cipher (encrypted buffer)
 		reinterpret_cast<byte*>(mac.data()), mac.size(),  // output calculated MAC
-		reinterpret_cast<const byte*>(iv.data()) , iv.size(), // iv
+		reinterpret_cast<const byte*>(iv.data()), static_cast<i32>(iv.size()), // iv
 		nullptr, 0, // aad buffer (additional authenticated data)
 		reinterpret_cast<const byte*>(buffer.data()), buffer.size() // buffer to encrypt
 	);
@@ -125,7 +124,7 @@ String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_
 	const bool mac_verified = m_chacha_decryptor->DecryptAndVerify(
 		reinterpret_cast<byte*>(decrypted.data()), // output buffer (decrypted cipher)
 		reinterpret_cast<const byte*>(mac.data()), mac.size(), // input MAC (calculated in encryption)
-		reinterpret_cast<const byte*>(iv.data()), iv.size(), // input IV (generated in encryption)
+		reinterpret_cast<const byte*>(iv.data()), static_cast<i32>(iv.size()), // input IV (generated in encryption)
 		nullptr, 0, // aad buffer (additional authenticated data)
 		reinterpret_cast<const byte*>(cipher.data()), cipher.size() // cipher to decrypt
 	);

@@ -42,8 +42,8 @@ enum class EventType : ui32
 	JOYSTICK_CONNECTED,
 	JOYSTICK_DISCONNECTED
 };
-inline ui32 operator |(const EventType& a, EventType b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
-inline ui32 operator &(const EventType& a, EventType b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
+inline ui32 operator |(const EventType a, const EventType b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
+inline ui32 operator &(const EventType a, const EventType b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
 
 enum class EventCategory : ui32
 {
@@ -55,29 +55,29 @@ enum class EventCategory : ui32
 	MOUSE_BUTTON = BIT(4),
 	JOYSTICK = BIT(5)
 };
-inline ui32 operator |(const EventCategory& a, EventCategory b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
-inline ui32 operator &(const EventCategory& a, EventCategory b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
+inline ui32 operator |(const EventCategory a, const EventCategory b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
+inline ui32 operator &(const EventCategory a, const EventCategory b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return type; } \
 								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override { return #type; }
-#define EVENT_CLASS_CATEGORY(category) virtual i32 GetCategoryFlags() const override { return static_cast<i32>(category); }
+#define EVENT_CLASS_CATEGORY(category) virtual ui32 GetCategoryFlags() const override { return static_cast<ui32>(category); }
 
 class ENIGMA_API Event
 {
 public:
 	virtual EventType GetEventType() const = 0;
 	virtual const char* GetName() const = 0;
-	virtual int GetCategoryFlags() const = 0;
-	virtual std::string ToString() const { return GetName(); }
+	virtual ui32 GetCategoryFlags() const = 0;
+	virtual String ToString() const { return GetName(); }
 
-	const bool IsInCategory(EventCategory category) const noexcept
+	bool IsInCategory(EventCategory category) const noexcept
 	{
-		return GetCategoryFlags() & static_cast<i32>(category);
+		return GetCategoryFlags() & static_cast<ui32>(category);
 	}
 
-	const bool IsHandled() const noexcept { return m_isHandled; }
-	const void SetHandled(const bool handled) noexcept { m_isHandled = handled; }
+	bool IsHandled() const noexcept { return m_isHandled; }
+	void SetHandled(const bool handled) noexcept { m_isHandled = handled; }
 
 protected:
 	bool m_isHandled{ false };

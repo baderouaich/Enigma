@@ -4503,7 +4503,7 @@ inline int get_wcswidth(const std::string &string, const std::string &locale,
 }
 #endif
 
-inline size_t get_sequence_length(const std::string &text, const std::string &locale,
+inline size_t get_sequence_length(const std::string &text, [[maybe_unused]] const std::string &locale,
                                   bool is_multi_byte_character_support_enabled) {
   if (!is_multi_byte_character_support_enabled)
     return text.length();

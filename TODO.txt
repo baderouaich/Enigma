@@ -34,7 +34,7 @@ Window
 
 - System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU Waiting for major OpenGL GPU Info impl)
 
-- Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely. TODO: also test on linux to see if it has to do with os renderer or else
+- Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely.
 
 - My Encryptions table, display date as Jun, 01 2021 instead of 06 01 2021 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
 

@@ -21,8 +21,8 @@ public:
 		m_mouseY(y) 
 	{}
 
-	const f32& GetX() const noexcept { return m_mouseX; }
-	const f32& GetY() const noexcept { return m_mouseY; }
+	f32 GetX() const noexcept { return m_mouseX; }
+	f32 GetY() const noexcept { return m_mouseY; }
 
 	String ToString() const override
 	{
@@ -47,13 +47,13 @@ public:
 		m_YOffset(yOffset)
 	{}
 
-	const f32& GetXOffset() const noexcept { return m_XOffset; }
-	const f32& GetYOffset() const noexcept { return m_YOffset; }
+	f32 GetXOffset() const noexcept { return m_XOffset; }
+	f32 GetYOffset() const noexcept { return m_YOffset; }
 
 	String ToString() const override
 	{
 		std::ostringstream ss;
-		ss << "MouseWheelEvent: " << GetXOffset() << ", " << GetYOffset();
+		ss << "MouseWheelEvent: " << m_XOffset << ", " << m_YOffset;
 		return ss.str();
 	}
 
@@ -67,7 +67,7 @@ private:
 class MouseButtonEvent : public Event
 {
 public:
-	const MouseCode& GetMouseButton() const noexcept { return m_button; }
+	MouseCode GetMouseButton() const noexcept { return m_button; }
 
 	virtual String ToString() const override = 0;
 

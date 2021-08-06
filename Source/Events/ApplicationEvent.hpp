@@ -19,8 +19,8 @@ public:
 		m_width(width),
 		m_height(height) {}
 
-	const i32& GetWidth()  const noexcept { return m_width; }
-	const i32& GetHeight() const noexcept { return m_height; }
+	i32 GetWidth()  const noexcept { return m_width; }
+	i32 GetHeight() const noexcept { return m_height; }
 
 	String ToString() const override
 	{
@@ -45,12 +45,12 @@ public:
 		m_width(width),
 		m_height(height) {}
 
-	const i32& GetWidth()  const noexcept { return m_width; }
-	const i32& GetHeight() const noexcept { return m_height; }
+	i32 GetWidth()  const noexcept { return m_width; }
+	i32 GetHeight() const noexcept { return m_height; }
 
 	String ToString() const override
 	{
-		std::stringstream ss;
+		std::ostringstream ss;
 		ss << "FrameBufferResizeEvent: " << m_width << ", " << m_height;
 		return ss.str();
 	}
@@ -71,8 +71,8 @@ public:
 		m_xPos(x),
 		m_yPos(y) {}
 
-	const i32& GetTopLeftX() const noexcept { return m_xPos; }
-	const i32& GetTopLeftY() const noexcept { return m_yPos; }
+	i32 GetTopLeftX() const noexcept { return m_xPos; }
+	i32 GetTopLeftY() const noexcept { return m_yPos; }
 
 	String ToString() const override
 	{
@@ -95,7 +95,7 @@ public:
 		:
 		m_isMaximized(maximized) {}
 
-	const bool& IsMaximized() const noexcept { return m_isMaximized; }
+	bool IsMaximized() const noexcept { return m_isMaximized; }
 
 	String ToString() const override
 	{
