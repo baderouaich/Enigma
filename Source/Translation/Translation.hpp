@@ -6,6 +6,7 @@
 #include <Utility/FileUtils.hpp>
 #include <memory>
 #include <string>
+#include <list>
 #include <spdlog/fmt/fmt.h> // fmt
 #include <spdlog/fmt/bundled/format.h> // fmt::format
 
