@@ -68,7 +68,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				 
 				// Architecture, Frequency, Model name, Vendor Name, Vendor ID
 				ImGui::BulletText("%s: %s", ENIGMA_TRANSLATE_CSTR("Architecture"), architecture.c_str());
-				ImGui::BulletText("%s: %s", ENIGMA_TRANSLATE_CSTR("Frequency"), frequency);
+				ImGui::BulletText("%s: %zu", ENIGMA_TRANSLATE_CSTR("Frequency"), frequency);
 				ImGui::BulletText("%s: %s", ENIGMA_TRANSLATE_CSTR("Endianness"), endianness.c_str());
 				ImGui::BulletText("%s: %s", ENIGMA_TRANSLATE_CSTR("Model name"), model_name.c_str());
 				ImGui::BulletText("%s: %s", ENIGMA_TRANSLATE_CSTR("Vendor"), vendor.c_str());
@@ -295,7 +295,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 								const auto& config = display_configs[j];
 								if (ImGui::TreeNode(std::to_string(j).c_str(), "%ux%u", config.width, config.height)) // Resolution
 								{
-									ImGui::BulletText("%s:", ENIGMA_TRANSLATE_FMT("Refresh rates"));
+									ImGui::BulletText("%s:", ENIGMA_TRANSLATE_CSTR("Refresh rates"));
 									for (const f64& rate : config.refresh_rates)
 									{
 										ImGui::Text("\t\t%.2lfHz", rate);

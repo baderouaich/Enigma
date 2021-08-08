@@ -1,10 +1,7 @@
 ========================= IN PROGRESS =============================
 - Add Translation Language support 
-French: 
-German:
-Portuguesse:
-Spanish:
-Chinese:
+French: Todo CLI, Algorithm exception messages
+
 
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html

@@ -7,6 +7,7 @@
 - Added Hashing Tool
 - Added System & Hardware Information Tool
 - Added Doxygen Documentation
+- Added Language Translation System (experimental)
 
 # 1.3.0
 - Fixed Clang compilation issue on Linux requires pic flag '-fPIC' for libraries (inih, curl, zlib, mbedlts)

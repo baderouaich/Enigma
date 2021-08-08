@@ -129,7 +129,7 @@ String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_
 		reinterpret_cast<const byte*>(cipher.data()), cipher.size() // cipher to decrypt
 	);
 	// Throw an exception if mac was not verified (mac is auto calculated at encryption by encryptor->EncryptAndAuthenticate)
-	ENIGMA_ASSERT_OR_THROW(mac_verified, "Failed to verify MAC");
+	ENIGMA_ASSERT_OR_THROW(mac_verified, ENIGMA_TRANSLATE("Failed to verify MAC"));
 
 	return decrypted;
 }
