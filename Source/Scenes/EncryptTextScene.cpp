@@ -72,7 +72,7 @@ void EncryptTextScene::OnImGuiDraw()
 		// Back button [<] & Title
 		{
 			static const auto& title_font = font_audiowide_regular_30;
-			static constexpr const auto title = "Encrypt Text";
+			const auto title = ENIGMA_TRANSLATE_CSTR("Encrypt Text");
 			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
 			static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -110,7 +110,7 @@ void EncryptTextScene::OnImGuiDraw()
 		{
 			// Label
 			//ImGui::LabelText("##label", "Algorithm:");
-			ImGui::Text("Algorithm:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Algorithm"));
 			ImGui::NewLine();
 
 			// Algo types radio buttons
@@ -143,7 +143,7 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_16);
 		{
 			ImGui::PushFont(font_audiowide_regular_20);
-				ImGui::Text("Save to database:");
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Save to database"));
 			ImGui::PopFont();
 			inline_dummy(6.0f, 0.0f);
 			ImGui::SameLine();
@@ -151,8 +151,8 @@ void EncryptTextScene::OnImGuiDraw()
 
 			if (m_save_to_database)
 			{
-				ImGui::Text("Encryption Title:");
-				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: An important message) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Encryption Title"));
+				ImGuiWidgets::InputTextWithHint("##idb", ENIGMA_TRANSLATE_CSTR("(example > An important message) helps with searching through encryption records in the future"), &m_db_title, win_w / 1.3f);
 			}
 		}
 		ImGui::PopFont();
@@ -166,7 +166,7 @@ void EncryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("Text:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Text"));
 
 			// Input text
 			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 5);
@@ -197,10 +197,10 @@ void EncryptTextScene::OnImGuiDraw()
 				Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
 			); 
 			// Label
-			ImGui::Text("Password:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Password"));
 			// Input text
 			ImGuiWidgets::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
-			ImGui::Text("Confirm Password:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Confirm Password"));
 			ImGuiWidgets::InputText("##text3", &m_confirm_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::PopStyleColor();
 			// Bytes count
@@ -223,7 +223,7 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("Cipher (in base64):");
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Cipher (in base64)"));
 				// Encrypted text
 				ImGuiWidgets::InputText("##text4", &m_cipher_base64, win_w * 0.88f);
 				ImGui::PushFont(font_montserrat_medium_14);
@@ -231,13 +231,13 @@ void EncryptTextScene::OnImGuiDraw()
 					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-					if (ImGui::Button("Copy", ImVec2(win_w * 0.10f, 30.0f)))
+					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Copy"), ImVec2(win_w * 0.10f, 30.0f)))
 					{
 						this->OnCopyEncryptedBase64TextButtonPressed();
 					}
 					//ImGui::NewLine();
 					ImGui::PushFont(font_montserrat_medium_12);
-						ImGui::Text("%s (Please save cipher base64 text above in a safe place)", SizeUtils::FriendlySize(m_cipher_base64.size()).c_str());
+						ImGui::Text("%s", SizeUtils::FriendlySize(m_cipher_base64.size()).c_str());
 					ImGui::PopFont();
 					ImGui::PopStyleColor(3);
 				ImGui::PopFont();
@@ -258,9 +258,9 @@ void EncryptTextScene::OnImGuiDraw()
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
-				if (ImGui::Button("Encrypt", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Encrypt"), button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, "Encrypting text...", [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE_CSTR("Encrypting text..."), [this]() -> void
 						{
 							this->OnEncryptButtonPressed();
 						});
@@ -269,54 +269,7 @@ void EncryptTextScene::OnImGuiDraw()
 			}
 			ImGui::PopStyleColor(3);
 			ImGui::PopFont();
-#if 0
-			ImGui::PushFont(font_audiowide_regular_20); // buttons font
-			ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x * 2) / 2.0f);
-			ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
-			if (ImGuiWidgets::Button("Back", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
-			{
-				this->OnBackButtonPressed();
-			}
-			ImGui::PopFont();
 
-
-			ImGui::PushFont(font_audiowide_regular_20); // buttons font
-			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			{
-				ImGui::SameLine();
-				if (ImGui::Button("Encrypt", button_size))
-				{
-					Application::GetInstance()->LaunchWorkerThread(this, [this]() -> void
-					{
-						this->OnEncryptButtonPressed();
-					});
-
-					/*std::thread working_thread([this]() -> void
-						{
-							std::scoped_lock<std::mutex> guard{ Scene::GetMutex() };
-
-							ENIGMA_LOG("Launching worker thread id #{0}", std::this_thread::get_id());
-
-							Scene::SetLoading(true);
-								this->OnEncryptButtonPressed();
-							Scene::SetLoading(false);
-
-							ENIGMA_LOG("Finished worker thread id #{0}", std::this_thread::get_id());
-						});
-					working_thread.detach();*/
-					/*Application::GetInstance()->LaunchWorkerThread(this,
-					[this]() -> void
-					{
-						this->OnEncryptButtonPressed();
-					});*/
-
-					//this->OnEncryptButtonPressed();
-				}
-			}
-			ImGui::PopStyleColor(3);
-#endif
 		}
 		
 
@@ -357,19 +310,19 @@ void EncryptTextScene::OnEncryptButtonPressed()
 	// Validate fields 
 	if (m_text.empty())
 	{
-		(void)DialogUtils::Warn("Text to encrypt is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Text to encrypt is empty"));
 	}
 	else if (m_password.empty() || m_confirm_password.empty())
 	{
-		(void)DialogUtils::Warn("Encryption Password is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Encryption password is empty"));
 	}
 	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 	{
-		(void)DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD);
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_FMT("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 	}
 	else if (m_password != m_confirm_password)
 	{
-		(void)DialogUtils::Warn("Password doesn't match");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Password doesn't match confirm password"));
 	}
 	else // Alles gut
 	{ 
@@ -377,7 +330,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		{
 			// Create encryptor based on selected algorithm type
 			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
-			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
+			ENIGMA_ASSERT_OR_THROW(algorithm, ENIGMA_TRANSLATE("Failed to create algorithm from type"));
 
 
 			/*
@@ -389,26 +342,26 @@ void EncryptTextScene::OnEncryptButtonPressed()
 
 			// Compress text before encrypting
 			const String compressed_text = GZip::Compress(m_text);
-			ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), "Failed to compress text");
+			ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), ENIGMA_TRANSLATE("Failed to compress text"));
 
 			// Encrypt text
 			m_cipher = algorithm->Encrypt(m_password, compressed_text);
-			ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to encrypt text");
+			ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), ENIGMA_TRANSLATE("Failed to encrypt text"));
 
 			// Encode cipher to Base64
 			m_cipher_base64 = Base64::Encode(m_cipher);
-			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), "Failed to encode cipher text to Base64");
+			ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), ENIGMA_TRANSLATE("Failed to encode cipher text to Base64"));
 
 			// Save to database
 			if (m_save_to_database)
 			{
-				ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), "Encryption title is too long or short, must be between 3 and 255 characters");
+				ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), ENIGMA_TRANSLATE("Encryption title is too long or short, must be between 3 and 255 characters"));
 				auto e = std::make_unique<Encryption>();
 				e->title = m_db_title;
 				e->is_file = false;
 				e->cipher.data = m_cipher;
 				e->size = e->cipher.data.size();
-				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), ENIGMA_TRANSLATE("Failed to save encryption record to database"));
 			}
 
 			// Spawn notification alert if window is not focused
@@ -442,16 +395,16 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 			ENIGMA_ERROR("Encryption Failure: {0}", err_msg);
-			(void)DialogUtils::Error("Encryption Failure", err_msg);
+			(void)DialogUtils::Error(ENIGMA_TRANSLATE("Encryption Failure"), err_msg);
 		}
 		catch (const std::exception& e)
 		{
 			ENIGMA_ERROR("Encryption Failure: {0}", e.what());
-			(void)DialogUtils::Error("Encryption Failure", e.what());
+			(void)DialogUtils::Error(ENIGMA_TRANSLATE("Encryption Failure"), e.what());
 		}
 		catch (...)
 		{
-			const String err_msg = "Encryption Failure: Unknown Error";
+			const String err_msg = ENIGMA_TRANSLATE("Encryption Failure UNKNOWN ERROR");
 			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}

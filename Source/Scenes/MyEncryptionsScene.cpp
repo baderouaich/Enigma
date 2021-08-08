@@ -72,7 +72,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 		// Back button [<] & Title
 		{
 			static const auto& title_font = font_audiowide_regular_30;
-			static constexpr const auto title = "My Encryptions";
+			const auto title = ENIGMA_TRANSLATE_CSTR("My Encryptions");
 			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
 			static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -113,7 +113,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 		ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 		{
 			//ImGui::LabelText("##label", "Search by title...");
-			if (ImGuiWidgets::InputTextWithHint("##inputtext", "Search by title...", &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
+			if (ImGuiWidgets::InputTextWithHint("##inputtext", ENIGMA_TRANSLATE_CSTR("Search by title..."), &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database 
 			{
 				// Enable searching
 				m_isSearching = true;
@@ -132,7 +132,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			if (ImGui::Button("Reset"))
+			if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Reset")))
 			{
 				m_isSearching = false;
 				m_query.clear();
@@ -152,10 +152,10 @@ void MyEncryptionsScene::OnImGuiDraw()
 			{
 				// Order By
 				ImGui::PushFont(font_montserrat_medium_18); // text font
-				ImGui::Text("Order By "); ImGui::SameLine();
+				ImGui::Text(ENIGMA_TRANSLATE_CSTR("Order By")); ImGui::SameLine();
 				for (byte i = static_cast<byte>(Database::OrderBy::BEGIN); i <= static_cast<byte>(Database::OrderBy::END); i++)
 				{
-					if (ImGui::RadioButton(*static_cast<Database::OrderBy>(i), static_cast<byte>(m_order_by) == i))
+					if (ImGui::RadioButton(ENIGMA_TRANSLATE_CSTR(*static_cast<Database::OrderBy>(i)), static_cast<byte>(m_order_by) == i))
 					{
 						if (static_cast<byte>(m_order_by) != i) // avoid exhausting database
 						{
@@ -170,10 +170,10 @@ void MyEncryptionsScene::OnImGuiDraw()
 				ImGui::NewLine();
 
 				// Order ASC DESC
-				ImGui::Text("Order"); ImGui::SameLine();
+				ImGui::Text(ENIGMA_TRANSLATE_CSTR("Order")); ImGui::SameLine();
 				for (byte i = static_cast<byte>(Database::Order::Begin); i <= static_cast<byte>(Database::Order::End); i++)
 				{
-					if (ImGui::RadioButton(*static_cast<Database::Order>(i), static_cast<byte>(m_order) == i))
+					if (ImGui::RadioButton(ENIGMA_TRANSLATE_CSTR(*static_cast<Database::Order>(i)), static_cast<byte>(m_order) == i))
 					{
 						if (static_cast<byte>(m_order) != i) // avoid exhausting database
 						{
@@ -290,12 +290,12 @@ void MyEncryptionsScene::OnImGuiDraw()
 						ImGuiTableColumnFlags_NoResize    // disable column resize
 						;
 
-					ImGui::TableSetupColumn("ID", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
-					ImGui::TableSetupColumn("Title", header_columns_flags | ImGuiTableColumnFlags_WidthStretch); // no need to specify title width fixed size, since table can can scroll x and y
-					ImGui::TableSetupColumn("Date Time", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
-					ImGui::TableSetupColumn("Size", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
-					ImGui::TableSetupColumn("Type", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
-					ImGui::TableSetupColumn("Operation", header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+					ImGui::TableSetupColumn(ENIGMA_TRANSLATE_CSTR("ID"), header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+					ImGui::TableSetupColumn(ENIGMA_TRANSLATE_CSTR("Title"), header_columns_flags | ImGuiTableColumnFlags_WidthStretch); // no need to specify title width fixed size, since table can can scroll x and y
+					ImGui::TableSetupColumn(ENIGMA_TRANSLATE_CSTR("Date Time"), header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+					ImGui::TableSetupColumn(ENIGMA_TRANSLATE_CSTR("Size"), header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+					ImGui::TableSetupColumn(ENIGMA_TRANSLATE_CSTR("Type"), header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
+					ImGui::TableSetupColumn(ENIGMA_TRANSLATE_CSTR("Operation"), header_columns_flags | ImGuiTableColumnFlags_WidthFixed);
 					ImGui::TableHeadersRow(); // show headers
 
 					// Rows
@@ -315,12 +315,12 @@ void MyEncryptionsScene::OnImGuiDraw()
 						ImGui::TableSetColumnIndex(3);
 						ImGui::Text("%s", SizeUtils::FriendlySize(size).c_str());
 						ImGui::TableSetColumnIndex(4);
-						ImGui::Text("%s", is_file ? "File" : "Text");
+						ImGui::Text("%s", is_file ? ENIGMA_TRANSLATE_CSTR("File") : ENIGMA_TRANSLATE_CSTR("Text"));
 						// Operation (View|delete...)
 						ImGui::TableSetColumnIndex(5);
 						{
 							ImGui::PushID(static_cast<i32>(id)); // Special id for button
-							if (ImGuiWidgets::Button("View"))
+							if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("View")))
 							{
 								this->OnViewEncryptionButtonPressed(id);
 							}
@@ -329,7 +329,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 							ImGui::SameLine();
 
 							ImGui::PushID(static_cast<i32>(id)); // Special id for button
-							if (ImGuiWidgets::Button("Delete", ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+							if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Delete"), ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 							{
 								// if item is deleted, vector size is changed so break loop.
 								if (this->OnDeleteEncryptionButtonPressed(id))
@@ -353,7 +353,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_18); // text font
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			{
-				static const auto text = m_isSearching ? "No Encryptions found." : "No Encryptions saved yet.";
+				static const auto text = m_isSearching ? ENIGMA_TRANSLATE_CSTR("No Encryptions found") : ENIGMA_TRANSLATE_CSTR("No Encryptions saved yet");
 				static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
 				ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
 				ImGui::Text(text);
@@ -495,7 +495,7 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 		}
 		else
 		{
-			const String msg = "Couldn't delete encryption record with id " + std::to_string(ide) + " from database";
+			const String msg = ENIGMA_TRANSLATE_FMT("Couldn't delete encryption record with id {} from database", ide);
 			ENIGMA_ERROR(msg);
 			(void)DialogUtils::Error(msg);
 			return false;

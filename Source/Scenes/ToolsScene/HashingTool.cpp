@@ -33,13 +33,13 @@ void HashingTool::OnDraw(Scene* parent)
 	{		
 		
 		//if (ImGui::CollapsingHeader("Hashing", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen))
-		if (ImGui::CollapsingHeader("Hashing", nullptr))
+		if (ImGui::CollapsingHeader(ENIGMA_TRANSLATE_CSTR("Hashing"), nullptr))
 		{
 			ImGui::PushFont(font_montserrat_medium_18);
 			spacing(3);
 
 			// Hashing algorithms
-			ImGui::BulletText("Algorithms: ");
+			ImGui::BulletText("%s:", ENIGMA_TRANSLATE_CSTR("Algorithms"));
 			for (i32 i = static_cast<i32>(HashAlgorithm::BEGIN); i <= static_cast<i32>(HashAlgorithm::END); ++i)
 			{
 				if (ImGui::RadioButton(*static_cast<HashAlgorithm>(i), m_selected_hash == static_cast<HashAlgorithm>(i)))
@@ -65,12 +65,12 @@ void HashingTool::OnDraw(Scene* parent)
 			spacing(2);
 
 			// Input text to calculate hash for
-			ImGui::BulletText("Input: ");
+			ImGui::BulletText("%s:", ENIGMA_TRANSLATE_CSTR("Input"));
 			ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 60.0f));
 			ImGui::SameLine();
-			if (ImGuiWidgets::Button("Calculate", Vec2f(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
+			if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Calculate"), Vec2f(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
 			{
-				Application::GetInstance()->LaunchWorkerThread(parent, "Calculating Hash...", [this]()
+				Application::GetInstance()->LaunchWorkerThread(parent, ENIGMA_TRANSLATE_CSTR("Calculating Hash..."), [this]()
 					{
 						this->OnCalculateHashButtonPressed();
 					});
@@ -82,13 +82,15 @@ void HashingTool::OnDraw(Scene* parent)
 			// Output calculated hash
 			if (!m_output.empty())
 			{
-				ImGui::BulletText("Output (Hex Encoded): ");
+				ImGui::BulletText("%s:", ENIGMA_TRANSLATE_CSTR("Output (Hex Encoded)"));
 				ImGuiWidgets::InputTextMultiline("##output1", &m_output, Vec2f(win_w * 0.85f, 60.0f), ImGuiInputTextFlags_ReadOnly);
 				ImGui::SameLine();
-				if (ImGuiWidgets::Button("Copy", Vec2f(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+				ImGui::PushID("CopyCalculatedHash");
+				if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Copy"), Vec2f(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 				{
 					this->OnCopyHashButtonPressed();
 				}
+				ImGui::PopID();
 			}
 
 
@@ -272,19 +274,19 @@ void HashingTool::OnCalculateHashButtonPressed()
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		const String err_msg = "Hashing Failure: " + CryptoPPUtils::GetFullErrorMessage(e);
+		const String err_msg = ENIGMA_TRANSLATE("Hashing Failure") + ": " + CryptoPPUtils::GetFullErrorMessage(e);
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
 	catch (const std::exception& e)
 	{
-		const String err_msg = "Hashing Failure: " + String(e.what());
+		const String err_msg = ENIGMA_TRANSLATE("Hashing Failure") + ": " + String(e.what());
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
 	catch (...)
 	{
-		const String err_msg = "Hashing Failure: UNKNOWN ERROR";
+		const String err_msg = ENIGMA_TRANSLATE("Hashing Failure UNKNOWN ERROR");
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}

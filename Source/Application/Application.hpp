@@ -46,7 +46,7 @@ public:
 	*	@param scene: pointer to scene which spawns the worker thread
 	*	@param work_func: function has work code to run in parallel
 	*/
-	void LaunchWorkerThread(Scene* scene, const std::string_view& loading_text, const std::function<void()>& work_func);
+	void LaunchWorkerThread(Scene* scene, const String loading_text, const std::function<void()>& work_func);
 
 
 public: //https://www.doxygen.nl/manual/grouping.html#memgroup

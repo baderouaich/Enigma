@@ -27,7 +27,7 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& name, const I
 {
 	const String mode = StringUtils::LowerCopy(name);
 
-	const auto ModeIn = [&mode](const std::vector<std::string_view>& v) -> const bool
+	const auto ModeIn = [&mode](const std::vector<std::string_view>& v) -> bool
 	{
 		return std::find(v.begin(), v.end(), mode) != v.end();
 	};

@@ -74,7 +74,7 @@ void EncryptFileScene::OnImGuiDraw()
 		// Back button [<] & Title
 		{
 			static const auto& title_font = font_audiowide_regular_30;
-			static constexpr const auto title = "Encrypt File";
+			const auto title = ENIGMA_TRANSLATE_CSTR("Encrypt File");
 			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
 			static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -104,15 +104,17 @@ void EncryptFileScene::OnImGuiDraw()
 		}
 
 
+
 		spacing(3);
 		ImGui::Separator();
 		spacing(3);
+
 
 		// Algorithm To encrypt File with
 		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			// Label
-			ImGui::Text("Algorithm:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Algorithm"));
 			ImGui::NewLine();
 
 			// Algo types radio buttons
@@ -151,7 +153,7 @@ void EncryptFileScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_16);
 		{
 			ImGui::PushFont(font_audiowide_regular_20);
-				ImGui::Text("Save to database:");
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Save to database"));
 			ImGui::PopFont();
 			inline_dummy(6.0f, 0.0f);
 			ImGui::SameLine();
@@ -159,8 +161,8 @@ void EncryptFileScene::OnImGuiDraw()
 
 			if (m_save_to_database)
 			{
-				ImGui::Text("Encryption Title:");
-				ImGuiWidgets::InputTextWithHint("##idb", "(e.g: An important video) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Encryption Title"));
+				ImGuiWidgets::InputTextWithHint("##idb", ENIGMA_TRANSLATE_CSTR("(example > An important video) helps with searching through encryption records in the future"), &m_db_title, win_w / 1.3f);
 			}
 		}
 		ImGui::PopFont();
@@ -176,22 +178,24 @@ void EncryptFileScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("File To Encrypt:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("File To Encrypt"));
 			// Encrypted text
-			static const ImVec2 browse_button_size(45.0f, 25.0f);
-			ImGuiWidgets::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
+			static const ImVec2 browse_button_size(win_w * 0.10f, 25.0f);
+			ImGuiWidgets::InputText("##text1", &m_in_filename, win_w  * 0.85f);
 			ImGui::PushFont(font_montserrat_medium_12);
 				ImGui::SameLine();
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-				if (ImGui::Button("Browse", browse_button_size))
+				ImGui::PushID("Browse1");
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Browse"), browse_button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, "Browsing input file...", [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE_CSTR("Browsing input file..."), [this]() -> void
 					{
 						this->OnBrowseInFileButtonPressed();
 					});
 				}
+				ImGui::PopID();
 				ImGui::PopStyleColor(3);
 			ImGui::PopFont();
 	
@@ -206,22 +210,25 @@ void EncryptFileScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("Encrypted File Location:");
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Encrypted File Location"));
+
 				// Encrypted text
-				static const ImVec2 browse_button_size(45.0f, 25.0f);
-				ImGuiWidgets::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
+				static const ImVec2 browse_button_size(win_w * 0.10f, 25.0f);
+				ImGuiWidgets::InputText("##text2", &m_out_filename, win_w * 0.85f);
 				ImGui::PushFont(font_montserrat_medium_12);
 				ImGui::SameLine();
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-				if (ImGui::Button("Browse ", browse_button_size))
+				ImGui::PushID("Browse2");
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Browse"), browse_button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, "Browsing output file location...", [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE_CSTR("Browsing output file location..."), [this]() -> void
 					{
 						this->OnBrowseOutFileLocationButtonPressed();
 					});
 				}
+				ImGui::PopID();
 				ImGui::PopFont();
 				ImGui::PopStyleColor(3);
 			}
@@ -245,10 +252,10 @@ void EncryptFileScene::OnImGuiDraw()
 				Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
 			);
 			// Label
-			ImGui::Text("Password:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Password"));
 			// Input text
 			ImGuiWidgets::InputText("##text3", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
-			ImGui::Text("Confirm Password:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Confirm Password"));
 			ImGuiWidgets::InputText("##text4", &m_confirm_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::PopStyleColor();
 			// Bytes count
@@ -274,9 +281,9 @@ void EncryptFileScene::OnImGuiDraw()
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
-				if (ImGui::Button("Encrypt", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Encrypt"), button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, "Encrypting file...", [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE_CSTR("Encrypting file..."), [this]() -> void
 					{
 						this->OnEncryptButtonPressed();
 					});
@@ -342,7 +349,7 @@ void EncryptFileScene::OnDestroy()
 void EncryptFileScene::OnBrowseInFileButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::OpenFileDialog>(
-		"Select A File To Encrypt",
+		ENIGMA_TRANSLATE("Select A File To Encrypt"),
 		m_in_filename, // initial path
 		false // disable multi-select
 	);
@@ -360,7 +367,7 @@ void EncryptFileScene::OnBrowseInFileButtonPressed()
 void EncryptFileScene::OnBrowseOutFileLocationButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::SelectFolderDialog>(
-		"Select A Location To Save Encrypted File To",
+		ENIGMA_TRANSLATE("Select A Location To Save Encrypted File To"),
 		m_in_filename, // initial path
 		false // disable multi-select
 		);
@@ -382,42 +389,42 @@ void EncryptFileScene::OnEncryptButtonPressed()
 	// Validate fields 
 	if (m_in_filename.empty())
 	{
-		(void)DialogUtils::Warn("In File to encrypt is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Input File to encrypt is empty"));
 	}
 	else if (!fs::exists(m_in_filename))
 	{
-		(void)DialogUtils::Warn(m_in_filename + " does not exist");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_FMT("File {} does not exist", m_in_filename));
 	}
 	else if (!fs::is_regular_file(m_in_filename))
 	{
-		(void)DialogUtils::Warn(m_in_filename + " is not a regular file");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_FMT("File {} is not a regular file", m_in_filename));
 	}
 	else if (fs::is_empty(m_in_filename))
 	{
-		(void)DialogUtils::Warn(m_in_filename + " is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_FMT("File {} is empty", m_in_filename));
 		return;
 	}
 	//outfile checks
 	else if (m_out_filename.empty())
 	{
-		(void)DialogUtils::Warn("Out File location is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Out File location is empty"));
 	}
 	else if (!fs::path(m_out_filename).has_filename() || !fs::path(m_out_filename).has_extension())
 	{
-		(void)DialogUtils::Warn("Please specify a filename and extension to output file");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Please specify a filename and extension to output file"));
 	}
 	//pass checks
 	else if (m_password.empty() || m_confirm_password.empty())
 	{
-		(void)DialogUtils::Warn("Encryption Password is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Encryption password is empty"));
 	}
 	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 	{
-		(void)DialogUtils::Warn(Constants::ErrorMessages::WEAK_PASSWORD);
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_FMT("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 	}
 	else if (m_password != m_confirm_password)
 	{
-		(void)DialogUtils::Warn("Password doesn't match");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Password doesn't match confirm password"));
 	}
 	else // Alles gut
 	{
@@ -425,12 +432,12 @@ void EncryptFileScene::OnEncryptButtonPressed()
 		{
 			// Create encryptor based on selected algorithm type
 			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
-			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
+			ENIGMA_ASSERT_OR_THROW(algorithm, ENIGMA_TRANSLATE("Failed to create algorithm from type"));
 
 			// Read in file buffer
 			String buffer{};
-			ENIGMA_ASSERT_OR_THROW(FileUtils::Read(m_in_filename, buffer), "Failed to read buffer from file " + m_in_filename);
-			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Nothing to encrypt! File " + m_in_filename + " is empty.");
+			ENIGMA_ASSERT_OR_THROW(FileUtils::Read(m_in_filename, buffer), ENIGMA_TRANSLATE_FMT("Failed to read buffer from file {}", m_in_filename));
+			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ENIGMA_TRANSLATE_FMT("Nothing to encrypt! File {} is empty", m_in_filename));
 			
 			/*
 			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
@@ -448,50 +455,46 @@ void EncryptFileScene::OnEncryptButtonPressed()
 
 			// Encrypt file buffer
 			String cipher = algorithm->Encrypt(m_password, compressed_buffer);
-			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file buffer");
+			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ENIGMA_TRANSLATE("Failed to encrypt file buffer"));
 
 			// Write cipher to out file
-			ENIGMA_ASSERT_OR_THROW(FileUtils::Write(m_out_filename, cipher), "Failed to write cipher to file " + m_out_filename);
+			ENIGMA_ASSERT_OR_THROW(FileUtils::Write(m_out_filename, cipher), ENIGMA_TRANSLATE_FMT("Failed to write cipher to file {}", m_out_filename));
 
 			// Save to database (Note: file buffer forced to be compressed above if saving to database)
 			if (m_save_to_database)
 			{
-				ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), "Encryption title is too long or short, must be between 3 and 255 characters");
+				ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), ENIGMA_TRANSLATE("Encryption title is too long or short, must be between 3 and 255 characters"));
 				auto e = std::make_unique<Encryption>();
 				e->title = m_db_title;
 				e->is_file = true;
 				e->cipher.data = cipher; // already compressed above
 				e->size = e->cipher.data.size();
-				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), ENIGMA_TRANSLATE("Failed to save encryption record to database"));
 			}
 
 			// Alert user that encryption was successfull
-			std::ostringstream msg{};
-			{
-				msg << "Encrypted " << fs::path(m_in_filename).filename() << " to "
-					<< fs::path(m_out_filename).filename() << " Successfully!\n";
-				
-				if (decreased_bytes)
-						msg << "Compression Status: File size decreased by " << SizeUtils::FriendlySize(decreased_bytes);
-			}
-			ENIGMA_INFO(msg.str());
-			(void)DialogUtils::Info(msg.str());
+			const String msg = ENIGMA_TRANSLATE_FMT("Encrypted {} to {} Successfully\nCompression Status: File size decreased by {}",
+				fs::path(m_in_filename).filename(),
+				fs::path(m_out_filename).filename(),
+				SizeUtils::FriendlySize(decreased_bytes));
+			ENIGMA_INFO(msg);
+			(void)DialogUtils::Info(msg);
 
 		}
 		catch (const CryptoPP::Exception& e)
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 			ENIGMA_ERROR("Encryption Failure: {0}", err_msg);
-			(void)DialogUtils::Error("Encryption Failure", err_msg);
+			(void)DialogUtils::Error(ENIGMA_TRANSLATE("Encryption Failure"), err_msg);
 		}
 		catch (const std::exception& e)
 		{
 			ENIGMA_ERROR("Encryption Failure: {0}", e.what());
-			(void)DialogUtils::Error("Encryption Failure", e.what());
+			(void)DialogUtils::Error(ENIGMA_TRANSLATE("Encryption Failure"), e.what());
 		}
 		catch (...)
 		{
-			const String err_msg = "Encryption Failure: UNKNOWN ERROR";
+			const String err_msg = ENIGMA_TRANSLATE("Encryption Failure: UNKNOWN ERROR");
 			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}

@@ -1,4 +1,11 @@
 ========================= IN PROGRESS =============================
+- Add Translation Language support 
+French: 
+German:
+Portuguesse:
+Spanish:
+Chinese:
+
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html
 /**

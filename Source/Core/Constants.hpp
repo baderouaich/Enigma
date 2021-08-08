@@ -116,14 +116,16 @@ namespace Enigma
 			*/
 	}
 
+		namespace Translation
+		{
+			static constexpr const char* TRANSLATION_DIR = "Translation";
+			static constexpr const char* TRANSLATION_CURRENT_FILE_PATH = "Resources/Translation/.current";  // application selected language to remember
+			static constexpr const char* TRANSLATION_ENGLISH_PATH = "Resources/Translation/English.ini"; 
+		}
+
 		namespace CLI
 		{
 			static constexpr const char* CLI_HELP_MESSAGE = "Say -h or --help to display available options";
-		}
-
-		namespace ErrorMessages
-		{
-			static const auto WEAK_PASSWORD = "Password is too weak! consider using "s + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) + " characters or more including special characters like: "s + Constants::Algorithm::SPECIAL_CHARACTERS;
 		}
 
 		namespace Links

@@ -1,6 +1,5 @@
 #include <pch.hpp>
 #include "MainMenuScene.hpp"
-
 #include "EncryptFileScene.hpp"
 #include "DecryptFileScene.hpp"
 #include "EncryptTextScene.hpp"
@@ -11,6 +10,8 @@
 #include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Networking/CheckForUpdates.hpp>
+
+#include <Translation/Translation.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -80,30 +81,45 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PushFont(font_audiowide_regular_20);
 			if (ImGui::BeginMenuBar())
 			{
-				if (ImGui::BeginMenu("Menu"))
+				if (ImGui::BeginMenu(ENIGMA_TRANSLATE_CSTR("Menu")))
 				{
-					if (ImGui::MenuItem("Exit")) { Scene::EndScene(); }
+					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("Exit"))) { Scene::EndScene(); }
 					ImGui::EndMenu();
 				}
-				if (ImGui::BeginMenu("Help"))
+				
+				if (ImGui::BeginMenu(ENIGMA_TRANSLATE_CSTR("Language")))
 				{
-					if (ImGui::MenuItem("Report issue")) 
+					for (ui16 i = static_cast<ui16>(Translation::Language::BEGIN); i <= static_cast<ui16>(Translation::Language::END); ++i)
 					{
-						Application::GetInstance()->LaunchWorkerThread(this, "Reporting issue...", [this]() -> void
+						bool selected = Translation::GetLanguage() == static_cast<Translation::Language>(i);
+						if (ImGui::MenuItem(Translation::StringifyLanguageEnum(static_cast<Translation::Language>(i)).c_str(), nullptr, &selected))
+						{
+							Translation::SetLanguage(static_cast<Translation::Language>(i));
+						}
+					}
+					ImGui::EndMenu();
+				}
+
+				if (ImGui::BeginMenu(ENIGMA_TRANSLATE_CSTR("Help")))
+				{
+					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("Report an issue")))
+					{
+						Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE("Reporting issue..."), [this]() -> void
 						{
 							this->OnReportIssueMenuButtonPressed(); 
 						});
 					}
-					if (ImGui::MenuItem("Check for updates")) 
+					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("Check for updates")))
 					{
-						Application::GetInstance()->LaunchWorkerThread(this, "Checking for updates...", [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE("Checking for updates..."), [this]() -> void
 						{
 							this->OnCheckForUpdatesMenuButtonPressed();
 						});
 					}
-					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
+					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("About"))) { this->OnAboutMenuButtonPressed(); }
 					ImGui::EndMenu();
 				}
+				
 				/*if (ImGui::BeginMenu("Examples"))
 				{
 					ImGui::MenuItem("Example 1");
@@ -160,23 +176,23 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button("Encrypt File", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Encrypt File"), button_size))
 				{
 					this->OnEncryptFileButtonPressed();
 				}
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button("Decrypt File", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Decrypt File"), button_size))
 				{
 					this->OnDecryptFileButtonPressed();
 				}
 				spacing(6);
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button("Encrypt Text", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Encrypt Text"), button_size))
 				{
 					this->OnEncryptTextButtonPressed();
 				}
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button("Decrypt Text", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Decrypt Text"), button_size))
 				{
 					this->OnDecryptTextButtonPressed();
 				}
@@ -186,7 +202,7 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-					if (ImGui::Button("My Encryptions", button_size))
+					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("My Encryptions"), button_size))
 					{
 						this->OnMyEncryptionsButtonPressed();
 					}
@@ -198,7 +214,7 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE); // buttons color pressed
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-					if (ImGui::Button("Tools", button_size))
+					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Tools"), button_size))
 					{
 						this->OnToolsButtonPressed();
 					}
@@ -209,7 +225,7 @@ void MainMenuScene::OnImGuiDraw()
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 					//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
-					if (ImGuiWidgets::Button("Exit", button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+					if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Exit"), button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 					{
 						Scene::EndScene();
 					}
@@ -300,7 +316,7 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	
-	(void)ShellExecuteA(nullptr, "open", url.c_str() , nullptr, nullptr, SW_SHOWNORMAL);
+	[[maybe_unused]] auto _ = ShellExecuteA(nullptr, "open", url.c_str() , nullptr, nullptr, SW_SHOWNORMAL);
 	
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
@@ -309,7 +325,7 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 
 #else
 
-	(void)DialogUtils::Info("If you face any problems feel free to open an issue at " + url);
+	[[maybe_unused]] auto _ = DialogUtils::Info(ENIGMA_TRANSLATE_FMT("If you face any problems feel free to open an issue at {}", url));
 
 #endif
 }

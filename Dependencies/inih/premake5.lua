@@ -20,7 +20,10 @@ project "inih"
     	"src/ini.c"
     }
 
-    
+    defines
+	{
+		"INI_MAX_LINE=4096", -- 4096bytes max line chars https://github.com/benhoyt/inih#parsing-options
+	}
 	--- Platform ---
 	filter "system:windows"
 		systemversion "latest"

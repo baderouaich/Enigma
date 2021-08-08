@@ -74,7 +74,7 @@ void DecryptFileScene::OnImGuiDraw()
 		// Back button [<] & Title
 		{
 			static const auto& title_font = font_audiowide_regular_30;
-			static constexpr const auto title = "Decrypt File";
+			const auto title = ENIGMA_TRANSLATE_CSTR("Decrypt File");
 			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
 			static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -111,7 +111,7 @@ void DecryptFileScene::OnImGuiDraw()
 		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			// Label
-			ImGui::Text("Algorithm:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Algorithm"));
 			ImGui::NewLine();
 
 			// Algo types radio buttons
@@ -154,7 +154,7 @@ void DecryptFileScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("File To Decrypt:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("File To Decrypt"));
 			// Encrypted text
 			static const ImVec2 browse_button_size(45.0f, 25.0f);
 			ImGuiWidgets::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
@@ -163,7 +163,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			ImGui::PushID(1);
+			ImGui::PushID("Browse1");
 				if (ImGui::Button("Browse", browse_button_size))
 				{
 					Application::GetInstance()->LaunchWorkerThread(this, "Browsing input file...", [this]() -> void
@@ -185,7 +185,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("Decrypted File Location:");
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Decrypted File Location"));
 				// Encrypted text
 				static const ImVec2 browse_button_size(45.0f, 25.0f);
 				ImGuiWidgets::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
@@ -194,7 +194,7 @@ void DecryptFileScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-				ImGui::PushID(2);
+				ImGui::PushID("Browse2");
 					if (ImGui::Button("Browse", browse_button_size))
 					{
 						Application::GetInstance()->LaunchWorkerThread(this, "Browsing output file location...", [this]() -> void
@@ -218,7 +218,7 @@ void DecryptFileScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("Password:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Password"));
 
 			// Input text
 			ImGuiWidgets::InputText("##text3", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
@@ -244,9 +244,9 @@ void DecryptFileScene::OnImGuiDraw()
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
-				if (ImGui::Button("Decrypt", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Decrypt"), button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, "Decrypting File...", [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE_CSTR("Decrypting file..."), [this]() -> void
 					{
 						this->OnDecryptButtonPressed();
 					});
@@ -294,7 +294,7 @@ void DecryptFileScene::OnDestroy()
 void DecryptFileScene::OnBrowseInFileButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::OpenFileDialog>(
-		"Select A File To Decrypt",
+		ENIGMA_TRANSLATE_CSTR("Select A File To Decrypt"),
 		m_in_filename, // initial path
 		false // disable multi-select
 		);
@@ -313,7 +313,7 @@ void DecryptFileScene::OnBrowseInFileButtonPressed()
 void DecryptFileScene::OnBrowseOutFileLocationButtonPressed()
 {
 	const auto ofd = std::make_unique<Enigma::SelectFolderDialog>(
-		"Select A Location To Save Decrypted File To",
+		ENIGMA_TRANSLATE_CSTR("Select A Location To Save Decrypted File To"),
 		fs::path(m_in_filename).has_parent_path() ? fs::path(m_in_filename).parent_path().string() : m_in_filename, // in file location as an initial path
 		false // disable multi-select
 		);
@@ -353,19 +353,19 @@ void DecryptFileScene::OnDecryptButtonPressed()
 	// Validate fields 
 	if (m_in_filename.empty())
 	{
-		(void)DialogUtils::Warn("In File to decrypt is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_CSTR("Input File to decrypt is empty"));
 	}
 	else if (m_out_filename.empty())
 	{
-		(void)DialogUtils::Warn("Out File location is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_CSTR("Out File location is empty"));
 	}
 	else if (!fs::exists(m_in_filename) || !fs::is_regular_file(m_in_filename))
 	{
-		(void)DialogUtils::Warn("In File does not exist");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_CSTR("Input File does not exist"));
 	}
 	else if (m_password.empty())
 	{
-		(void)DialogUtils::Warn("Encryption Password is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE_CSTR("Encryption password is empty"));
 	}
 	else // Alles gut
 	{
@@ -377,17 +377,17 @@ void DecryptFileScene::OnDecryptButtonPressed()
 
 			// Create decryptor based on selected algorithm type
 			const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
-			ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
+			ENIGMA_ASSERT_OR_THROW(algorithm, ENIGMA_TRANSLATE("Failed to create algorithm from type"));
 
 			// Read in file cipher
 			String cipher{};
 			const bool file_read_success = FileUtils::Read(m_in_filename, cipher);
-			ENIGMA_ASSERT_OR_THROW(file_read_success, "Failed to read cipher from file " + m_in_filename);
-			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "File " + m_in_filename + " is empty");
+			ENIGMA_ASSERT_OR_THROW(file_read_success, ENIGMA_TRANSLATE_FMT("Failed to read cipher from file {}", m_in_filename));
+			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ENIGMA_TRANSLATE_FMT("File {} is empty", m_in_filename));
 
 			// Decrypt file cipher
 			String buffer = algorithm->Decrypt(m_password, cipher);
-			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file cipher");
+			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ENIGMA_TRANSLATE("Failed to decrypt file cipher"));
 
 			/*
 			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
@@ -421,40 +421,33 @@ void DecryptFileScene::OnDecryptButtonPressed()
 #endif
 
 			// Save buffer to out file decrypted
-			ENIGMA_ASSERT_OR_THROW(!m_out_filename.empty(), "Invalid output file name");
+			ENIGMA_ASSERT_OR_THROW(!m_out_filename.empty(), ENIGMA_TRANSLATE("Invalid output file name"));
 			// Write buffer to out file
 			const bool file_written_success = FileUtils::Write(m_out_filename, buffer);
-			ENIGMA_ASSERT_OR_THROW(file_written_success, "Failed to write buffer to file " + m_out_filename);
+			ENIGMA_ASSERT_OR_THROW(file_written_success, ENIGMA_TRANSLATE_FMT("Failed to write buffer to file {}", m_out_filename));
 
 			// Alert user that decryption was successfull
-			std::ostringstream msg{};
-			{
-				msg << "Decrypted " << fs::path(m_in_filename).filename() << " to "
-					<< fs::path(m_out_filename).filename() << " Successfully!\n";
-					
-				if (increased_bytes)
-						msg << "Decompression Status: File size increased by " << SizeUtils::FriendlySize(increased_bytes);
-				
-
-			}
-			ENIGMA_INFO(msg.str());
-			(void)DialogUtils::Info(msg.str());
-
+			const String msg = ENIGMA_TRANSLATE_FMT("Decrypted {} to {} successfully, decompression increased file size by {}",
+				fs::path(m_in_filename).filename(),
+				fs::path(m_out_filename).filename(),
+				SizeUtils::FriendlySize(increased_bytes));
+			ENIGMA_INFO(msg);
+			(void)DialogUtils::Info(msg);
 		}
 		catch (const CryptoPP::Exception& e)
 		{
 			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 			ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
-			(void)DialogUtils::Error("Decryption Failure", err_msg);
+			(void)DialogUtils::Error(ENIGMA_TRANSLATE("Decryption Failure"), err_msg);
 		}
 		catch (const std::exception& e)
 		{
 			ENIGMA_ERROR("Decryption Failure: {0}", e.what());
-			(void)DialogUtils::Error("Decryption Failure", e.what());
+			(void)DialogUtils::Error(ENIGMA_TRANSLATE("Decryption Failure"), e.what());
 		}
 		catch (...)
 		{
-			const String err_msg = "Decryption Failure: UNKNOWN ERROR";
+			const String err_msg = ENIGMA_TRANSLATE("Decryption Failure UNKNOWN ERROR");
 			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}

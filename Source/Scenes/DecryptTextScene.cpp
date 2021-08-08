@@ -69,7 +69,7 @@ void DecryptTextScene::OnImGuiDraw()
 		// Back button [<] & Title
 		{
 			static const auto& title_font = font_audiowide_regular_30;
-			static constexpr const auto title = "Decrypt Text";
+			const auto title = ENIGMA_TRANSLATE_CSTR("Decrypt Text");
 			static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
 			static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -107,7 +107,7 @@ void DecryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_audiowide_regular_20);
 		{
 			// Label
-			ImGui::Text("Algorithm:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Algorithm"));
 			ImGui::NewLine();
 
 			// Algo types radio buttons
@@ -132,7 +132,7 @@ void DecryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("Cipher (in base64):");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Cipher (in base64)"));
 
 			// Input text
 			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 2.5f);
@@ -154,7 +154,7 @@ void DecryptTextScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("Password:");
+			ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Password"));
 
 			// Input text
 			ImGuiWidgets::InputText("##password", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
@@ -178,14 +178,14 @@ void DecryptTextScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("Recovered Text:");
+				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Recovered Text"));
 
 				// Input text
 				const ImVec2 input_text_size(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f);
 				ImGuiWidgets::InputTextMultiline("##recovered_text", &m_recovered_text, input_text_size);
 				ImGui::SameLine();
 				// Copy Button
-				if (ImGuiWidgets::Button("Copy", Vec2f(win_w * 0.10f, 30.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+				if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Copy"), Vec2f(win_w * 0.10f, 30.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 				{
 					this->OnCopyDecryptedTextButtonPressed();
 				}
@@ -213,9 +213,9 @@ void DecryptTextScene::OnImGuiDraw()
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
-				if (ImGui::Button("Decrypt", button_size))
+				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Decrypt"), button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, "Decrypting text...", [this]() -> void
+					Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE_CSTR("Decrypting text..."), [this]() -> void
 					{
 						this->OnDecryptButtonPressed();
 					});
@@ -285,12 +285,12 @@ void DecryptTextScene::OnDecryptButtonPressed()
 {
 	if (m_cipher_base64.empty())
 	{
-		(void)DialogUtils::Warn("Cipher Base64 is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Cipher Base64 is empty"));
 		return;
 	}
 	if (m_password.empty())
 	{
-		(void)DialogUtils::Warn("Password is empty");
+		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Encryption password is empty"));
 		return;
 	}
 
@@ -302,15 +302,15 @@ void DecryptTextScene::OnDecryptButtonPressed()
 		
 		// Decode base64 to cipher
 		m_cipher = Base64::Decode(m_cipher_base64);
-		ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption");
+		ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), ENIGMA_TRANSLATE("Failed to decode cipher base64! please make sure you have the exact cipher text you received on encryption"));
 	
 		// Create encryptor based on selected algorithm type
 		const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
-		ENIGMA_ASSERT_OR_THROW(algorithm, "Failed to create algorithm from type");
+		ENIGMA_ASSERT_OR_THROW(algorithm, ENIGMA_TRANSLATE("Failed to create algorithm from type"));
 		
 		// Decrypt text
 		m_recovered_text = algorithm->Decrypt(m_password, m_cipher);
-		ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), "Failed to recover encrypted text");
+		ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), ENIGMA_TRANSLATE("Failed to recover encrypted text"));
 
 		// Decompress text
 		m_recovered_text = GZip::Decompress(m_recovered_text);
@@ -325,17 +325,17 @@ void DecryptTextScene::OnDecryptButtonPressed()
 	{
 		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 		ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
-		(void)DialogUtils::Error("Decryption Failure", err_msg);
+		(void)DialogUtils::Error(ENIGMA_TRANSLATE("Decryption Failure"), err_msg);
 	}
 	catch (const std::exception& e)
 	{
 		ENIGMA_ERROR("Decryption Failure: {0}", e.what());
-		(void)DialogUtils::Error("Decryption Failure", e.what());
+		(void)DialogUtils::Error(ENIGMA_TRANSLATE("Decryption Failure"), e.what());
 	}
 	catch (...)
 	{
-		const String err_msg = "Decryption Failure: Unknown Error";
-		ENIGMA_ERROR("Decryption Failure: Unknown Error");
+		const String err_msg = ENIGMA_TRANSLATE("Decryption Failure UNKNOWN ERRORr");
+		ENIGMA_ERROR("Decryption Failure UNKNOWN ERROR");
 		(void)DialogUtils::Error(err_msg);
 	}
 	}

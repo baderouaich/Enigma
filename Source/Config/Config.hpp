@@ -15,8 +15,8 @@ public:
 	*	@param file_name: ini config file path
 	*	@throws std::runtime_error on failure
 	*/
-	explicit Config(const String& file_name);
-	~Config() noexcept = default;
+	Config(const String& file_name);
+	~Config() = default;
 
 public:
 	/** Get integer fields from loaded config file
