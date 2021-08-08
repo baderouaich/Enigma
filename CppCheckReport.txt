@@ -1,3 +1,6 @@
 Source/Application/SingleProcessInstance.hpp:73:3: performance: Variable 'm_socket_fd' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
   m_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
   ^
+Source/Application/Application.hpp:49:53: performance: Function parameter 'loading_text' should be passed by const reference. [passedByValue]
+ void LaunchWorkerThread(Scene* scene, const String loading_text, const std::function<void()>& work_func);
+                                                    ^
