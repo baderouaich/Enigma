@@ -51,10 +51,19 @@ public:
 		/*   
 		https://stackoverflow.com/questions/25070949/cryptopp-plaintext-fixed-length-limit
 		https://ietf.org/rfc/rfc2437.txt => Section 7.1.1
-		M message to be encrypted, an octet string of length at
-		most k - 2 - 2 * hLen, where k is the length in bytes of the
-		key size / 8, and hLen is the length in bytes of the hash
-		function output for EME - OAEP
+		7.1.1 Encryption operation
+
+		   RSAES-OAEP-ENCRYPT ((n, e), M, P)
+
+		   Input:
+		   (n, e)    recipient's RSA public key
+
+		   M         message to be encrypted, an octet string of length at
+		             most k-2-2hLen, where k is the length in octets of the
+		             modulus n and hLen is the length in octets of the hash
+		             function output for EME-OAEP
+
+		   P         encoding parameters, an octet string that may be empty
 		*/
 		
 		// k - 2 - 2 * hLen
