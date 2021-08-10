@@ -3,7 +3,7 @@
 #define ENIGMA_RSA_H
 
 #include <Algorithm/Algorithm.hpp>
-
+#include <Utility/Base64.hpp>
 
 NS_ENIGMA_BEGIN
 /**
@@ -19,7 +19,7 @@ class RSA : public Algorithm
 
 	/*
 	https://www.javamex.com/tutorials/cryptography/rsa_key_length.shtml
-	//https://stackoverflow.com/questions/39068473/what-is-the-maximum-length-of-private-and-public-rsa-keys
+	https://stackoverflow.com/questions/39068473/what-is-the-maximum-length-of-private-and-public-rsa-keys
 	Other authors have been more conservative. Ferguson & Schneier (2003) in 
 	Practical Cryptography implied that 2048 bits would only be sufficient to
 	keep data confidential for around 20 years,
@@ -27,14 +27,16 @@ class RSA : public Algorithm
 	"The absolute minimum size for n is 2048 bits or so if you want to protect your data for 20 years.
 	[...] If you can afford it in your application, let n be 4096 bits long, or as close to this size as you can get it." (p. 233)
 	*/
+
+	// Supported RSA Key Sizes
 	inline static constexpr std::array<ui32, 6> RSA_KEY_SIZES =
 	{
-		512,  // Generates in about 0.00s (Intel i7-4770K 4 Physical CPUs 8 Logical CPUs) 3.40GHz
-		1024, // Generates in about 0.01s  
-		2048, // Generates in about 0.09s | Lifetime of data : Up to 2030
-		3072, // Generates in about 0.25s | Lifetime of data : Up to 2031 onwards
-		4096, // Generates in about 0.40s
-		8192  // Generates in about 15.0s
+		512,  // Weak and fast, Generates in about 0.00s (Intel i7-4770K 4 Physical CPUs 8 Logical CPUs) 3.40GHz
+		1024, // Medium and fast, Generates in about 0.01s  
+		2048, // Strong and fast, Generates in about 0.09s | Lifetime of data : Up to 2030
+		3072, // Very Strong and fast, Generates in about 0.25s | Lifetime of data : Up to 2031 onwards
+		4096, // Ultimate but slow, Generates in about 0.40s
+		8192  // Insane but slow, Generates in about 15.0s
 	};
 
 	inline static const String RSA_PRIVATE_KEY_HEADING  = "-----BEGIN RSA PRIVATE KEY-----\n";
@@ -42,12 +44,7 @@ class RSA : public Algorithm
 	inline static const String RSA_PUBLIC_KEY_HEADING   = "-----BEGIN RSA PUBLIC KEY-----\n";
 	inline static const String RSA_PUBLIC_KEY_TRAILING  = "-----END RSA PUBLIC KEY-----";
 
-	/*
-		https://stackoverflow.com/questions/11822607/what-is-the-rsa-max-block-size-to-encode#:~:text=If%20you%20use%20RSA%20OAEP%20%28and%20you%20should%29%2C,2%20-%202%2Ahash%20size%2C%20which%20is%20446%20bytes.
-		If you use RSA OAEP(and you should), the amount of data you can encrypt at most is therefore modulus size - 2 - 2 * hash size, which is 446 bytes.
-	*/
 public:
-
 	/** Returns length of maximum buffer RSA can encrypt with the selected key size */
 	constexpr size_t GetMaximumBufferSize() const noexcept
 	{
@@ -61,9 +58,9 @@ public:
 		*/
 		
 		// k - 2 - 2 * hLen
-		constexpr const size_t k = 4096 / 8;
+		const size_t k = static_cast<size_t>(m_key_size) / 8;
 		constexpr const size_t hLen = RSA_Hash::DIGESTSIZE;
-		return (k - 2 - 2 * hLen);
+		return static_cast<size_t>(k - 2 - 2 * hLen);
 	}
 
 public:
@@ -82,7 +79,7 @@ public:
 	{
 		// Generate random rsa key
 		m_params.reset(new CryptoPP::InvertibleRSAFunction());
-		m_params->GenerateRandomWithKeySize(*m_auto_seeded_random_pool, static_cast<ui32>(m_key_size));
+		m_params->GenerateRandomWithKeySize(*m_auto_seeded_random_pool, m_key_size);
 		
 		// Make private key with the generated random key
 		m_private_key.reset(new CryptoPP::RSA::PrivateKey(*m_params));
@@ -131,7 +128,7 @@ public:
 	}
 
 public:
-	void SetKeySize(const size_t key_size) noexcept { m_key_size = key_size; }
+	void SetKeySize(const ui32 key_size) noexcept { m_key_size = key_size; }
 	size_t GetKeySize() const noexcept { return m_key_size; }
 
 public:
@@ -194,13 +191,12 @@ public:
 
 
 private:
-		
 	std::unique_ptr<RSA_Encryptor> m_rsa_encryptor;// Encryption Scheme(OAEP using hash RSA_Hash)
 	std::unique_ptr<RSA_Decryptor> m_rsa_decryptor;
 	std::unique_ptr<CryptoPP::InvertibleRSAFunction> m_params;
 	std::unique_ptr<CryptoPP::RSA::PrivateKey> m_private_key;
 	std::unique_ptr<CryptoPP::RSA::PublicKey> m_public_key;
-	std::size_t m_key_size;
+	ui32 m_key_size;
 	
 };
 

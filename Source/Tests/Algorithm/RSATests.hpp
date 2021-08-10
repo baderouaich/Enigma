@@ -9,54 +9,71 @@ using namespace Catch::Matchers;
 
 TEST_CASE("RSA Encryption and Decryption")
 {
+#if 0
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
-
-	// Make IDEA algorithm with intention to Encrypt and Decrypt
-	std::unique_ptr<RSA> rsa(new RSA(RSA::Intent::Encrypt | RSA::Intent::Decrypt));
-	rsa->SetKeySize(30720);
-	// Buffer to encrypt
-	String buffer = "Hello World";
+	std::unique_ptr<RSA> rsa_encryptor(new RSA(RSA::Intent::Encrypt));
+	std::unique_ptr<RSA> rsa_decryptor(new RSA(RSA::Intent::Decrypt));
+	rsa_encryptor->SetKeySize(4096);
+	auto max_buffer_length = rsa_encryptor->GetMaximumBufferSize();
+	std::cout << "maximum buffer length u can encrypt with keysize " << rsa_encryptor->GetKeySize() << " is " << max_buffer_length << std::endl;
+	String buffer = Random::Str(max_buffer_length);
 
 	std::cout << "Encrypting... " << std::endl << std::endl;
-	String cipher = rsa->Encrypt("", buffer);
+	String cipher = rsa_encryptor->Encrypt("", buffer);
 
-	String private_key = rsa->GetPrivateKey();
-	String public_key = rsa->GetPublicKey();
-
-
+	String private_key = rsa_encryptor->GetPrivateKey();
+	String public_key = rsa_encryptor->GetPublicKey();
 	std::cout << "buffer: " << buffer << std::endl << std::endl;
 	std::cout << "cipher: " << cipher << std::endl << std::endl;
-	std::cout << "private_key: " << private_key << std::endl << std::endl;
-	std::cout << "public_key: " << public_key << std::endl << std::endl;
-	/*
-	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)), true);
-	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)), true);
+	std::cout << "private_key: \n" << private_key << std::endl << std::endl;
+	std::cout << "public_key: \n" << public_key << std::endl << std::endl;
+	
+	std::cout << "\nDecrypting... " << std::endl << std::endl;
+	rsa_decryptor->SetPrivateKey(private_key);
+	String recovered = rsa_decryptor->Decrypt("", cipher);
+	std::cout << "recovered: " << recovered << std::endl << std::endl;
 
-	// Encrypted buffer (aka cipher)
-	String encrypted = idea->Encrypt(password, buffer);
-	// Decrypted cipher (aka recovered)
-	String decrypted = idea->Decrypt(password, encrypted);
-
-	SECTION("Comparing buffers")
+	REQUIRE(buffer != cipher);
+	REQUIRE(buffer == recovered);
+#else
+	try
 	{
-		// Buffer must not match cipher
-		REQUIRE_THAT(buffer, !Equals(encrypted));
-		// Buffer must match decrypted cipher
-		REQUIRE_THAT(buffer, Equals(decrypted));
+		ENIGMA_BEGIN_TIMER(t1);
+		// Make IDEA algorithm with intention to Encrypt and Decrypt
+		std::unique_ptr<RSA> rsa(new RSA(RSA::Intent::Encrypt | RSA::Intent::Decrypt));
+		rsa->SetKeySize(8192);
+		// Buffer to encrypt
+		auto max_buffer_length = rsa->GetMaximumBufferSize();
+		std::cout << "maximum buffer length u can encrypt with keysize " << rsa->GetKeySize() << " is " << max_buffer_length << std::endl;
+		String buffer = Random::Str(max_buffer_length);
+
+		std::cout << "Encrypting... " << std::endl << std::endl;
+		String cipher = rsa->Encrypt("", buffer);
+		auto s = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+
+		String private_key = rsa->GetPrivateKey();
+		String public_key = rsa->GetPublicKey();
+		std::cout << "took: " << s << "s to generate " << rsa->GetKeySize() << std::endl << std::endl;
+		std::cout << "buffer: " << buffer << std::endl << std::endl;
+		std::cout << "cipher: " << cipher << std::endl << std::endl;
+		std::cout << "private_key: \n" << private_key << std::endl << std::endl;
+		std::cout << "public_key: \n" << public_key << std::endl << std::endl;
+
+
+		std::cout << "\nDecrypting... " << std::endl << std::endl;
+		rsa->SetPrivateKey(private_key);
+		rsa->SetPublicKey(public_key);
+		String recovered = rsa->Decrypt("", cipher);
+		std::cout << "recovered: " << recovered << std::endl << std::endl;
+
+		REQUIRE(buffer != cipher);
+		REQUIRE(buffer == recovered);
+
 	}
-
-	SECTION("Clearing buffers")
+	catch (const CryptoPP::Exception& e)
 	{
-		buffer.clear();
-		password.clear();
-		encrypted.clear();
-		decrypted.clear();
-
-		REQUIRE(buffer.size() == 0);
-		REQUIRE(password.size() == 0);
-		REQUIRE(encrypted.size() == 0);
-		REQUIRE(decrypted.size() == 0);
-	}*/
+		std::cerr << Enigma::CryptoPPUtils::GetFullErrorMessage(e) << '\n';
+		REQUIRE(false);
+	}
+#endif
 }

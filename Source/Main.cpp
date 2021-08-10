@@ -8,47 +8,9 @@
 #else	
 	#include <Tests/TestsAll.hpp>
 #endif
-#include <Algorithm/RSA/RSA.hpp>
 
 int main(int argc, char* argv[])
 {
-
-	//try{
-		using namespace Enigma;
-		ENIGMA_BEGIN_TIMER(t1);
-		// Make IDEA algorithm with intention to Encrypt and Decrypt
-		std::unique_ptr<RSA> rsa(new RSA(RSA::Intent::Encrypt | RSA::Intent::Decrypt));
-		rsa->SetKeySize(512);
-		// Buffer to encrypt
-		String buffer = Random::Str(rsa->GetMaximumBufferSize()); 
-
-		std::cout << "Encrypting... " << std::endl << std::endl;
-		String cipher = rsa->Encrypt("", buffer);
-		auto s = ENIGMA_END_TIMER(t1, f64, std::milli)/1000.0;
-
-		String private_key = rsa->GetPrivateKey();
-		String public_key = rsa->GetPublicKey();
-		std::cout << "took: " << s << "s to generate " << rsa->GetKeySize() << std::endl << std::endl;
-		std::cout << "buffer: " << buffer << std::endl << std::endl;
-		std::cout << "cipher: " << cipher << std::endl << std::endl;
-		std::cout << "private_key: \n" << private_key << std::endl << std::endl;
-		std::cout << "public_key: \n" << public_key << std::endl << std::endl;
-
-
-		std::cout << "\nDecrypting... " << std::endl << std::endl;
-		rsa->SetPrivateKey(private_key);
-		rsa->SetPublicKey(public_key);
-		String recovered = rsa->Decrypt("", cipher);
-		std::cout << "recovered: " << recovered << std::endl << std::endl;
-		ENIGMA_ASSERT(buffer == recovered);
-
-		return 0;
-//}
-//catch (const CryptoPP::Exception& e)
-//{
-//	std::cerr << Enigma::CryptoPPUtils::GetFullErrorMessage(e) << '\n';
-//	return 1;
-//}
 	// Initialize Logger
 	Enigma::Logger::Initialize();
 	// Initialize Languages Translation
