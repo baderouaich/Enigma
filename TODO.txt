@@ -2,6 +2,7 @@
 - Add Translation Language support 
 French: Todo CLI, Algorithm exception messages
 
+- Add RSA Algorithm
 
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html

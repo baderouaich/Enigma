@@ -8,7 +8,8 @@
 // Crypto++
 #pragma warning(push, 0) // This ignores all warnings raised inside External headers
 #include <Utility/CryptoPPUtils.hpp>
-#include <cryptlib.h> // HexEncoder, HexDecoder
+#include <cryptlib.h> // CryptoPP
+#include <hex.h> // HexEncoder, HexDecoder
 #include <filters.h> // StringSink, StringSource, StreamTransformationFilter
 #include <osrng.h> // AutoSeededRandomPool
 #include <hkdf.h> // HKDF
@@ -23,6 +24,7 @@
 #include <twofish.h> // Twofish
 #include <idea.h> // IDEA
 #include <blowfish.h> // Blowfish
+#include <rsa.h> // RSA
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
@@ -38,6 +40,7 @@ class TripleDES;
 class Blowfish;
 class IDEA;
 class ChaCha20Poly1305;
+class RSA;
 
 /**
 *	@brief Algorithm abstract class
@@ -83,9 +86,10 @@ public:
 		Blowfish,				// Blowfish-EAX
 		IDEA,					// IDEA-EAX
 		ChaCha20Poly1305,		// ChaCha20Poly1305
+		RSA,					// RSA
 
 		BEGIN	= AES,
-		END		= ChaCha20Poly1305
+		END		= RSA
 	};
 
 

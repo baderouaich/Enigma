@@ -37,11 +37,11 @@ public:
 #undef CASE_RETURN
 	}
 
-	static const String GetErrorReason(const enum CryptoPP::Exception::ErrorType& _enum)
+	static const String GetErrorReason(const enum CryptoPP::Exception::ErrorType error_type)
 	{
 		using ErrorType = CryptoPP::Exception::ErrorType;
 #define CASE_RETURN(c, ret) case c: return ret
-		switch (_enum)
+		switch (error_type)
 		{
 			CASE_RETURN(ErrorType::INVALID_ARGUMENT, "An invalid argument was detected");
 			CASE_RETURN(ErrorType::CANNOT_FLUSH, "BufferedTransformation received a Flush(true) signal but can't flush buffers");
