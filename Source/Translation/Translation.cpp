@@ -78,7 +78,9 @@ void Translation::Shutdown()
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	const fs::path current_translation_file = FileUtils::GetEnigmaExecutableDir() / Constants::Translation::TRANSLATION_CURRENT_FILE_PATH;
+#if defined(ENIGMA_DEBUG)
 	ENIGMA_INFO("Saving current translation language enum id to {}...", current_translation_file.string());
+#endif
 	FileUtils::Write(current_translation_file, std::to_string(static_cast<ui16>(m_language)));
 
 	m_translation.clear();

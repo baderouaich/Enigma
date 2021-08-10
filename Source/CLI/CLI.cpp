@@ -106,12 +106,12 @@ i32 CLI::Run()
 		if (r.count("e") || r.count("encrypt")) // -e or --encrypt
 		{
 			//LOG("Encrypting ");
-			intent = Algorithm::Intent::Encrypt;
+			intent |= Algorithm::Intent::Encrypt;
 		}
 		else if (r.count("d") || r.count("decrypt")) // -d or --decrypt
 		{
 			//LOG("Decrypting ");
-			intent = Algorithm::Intent::Decrypt;
+			intent |= Algorithm::Intent::Decrypt;
 		}
 		else
 			throw std::runtime_error("You should specify whether you want to encrypt -e or decrypt -d");
@@ -129,7 +129,7 @@ i32 CLI::Run()
 
 			//LOG("Mode: {0}", m);
 		}
-		else if(intent == Algorithm::Intent::Encrypt) // If intent is encrypting, mode is required, otherwise we can detect which mode used for encryption.
+		else if(intent & Algorithm::Intent::Encrypt) // If intent is encrypting, mode is required, otherwise we can detect which mode used for encryption.
 			throw std::runtime_error("You should specify an encryption mode like: --mode=aes or -m aes, unless you are decrypting, then we can auto-detect the mode used for encryption.");
 
 		// What is the encryption/decryption password?
@@ -197,6 +197,15 @@ i32 CLI::Run()
 		if (!text.empty())
 		{
 			// Check intention
+			if(intent & Algorithm::Intent::Encrypt)
+				this->OnEncryptText(algorithm, password, text, save_to_database);
+			else 
+				this->OnDecryptText(algorithm, password, text);
+
+
+			/*
+			that was before Intent enum was bitshifts based
+			// Check intention
 			switch (intent)
 			{
 			case Algorithm::Intent::Encrypt:
@@ -205,12 +214,19 @@ i32 CLI::Run()
 			case Algorithm::Intent::Decrypt:
 				this->OnDecryptText(algorithm, password, text);
 				break;
-			}
+			}*/
 		}
 		else if (!infilename.empty() && !outfilename.empty())
 		{
 
 			// Check intention
+			if(intent & Algorithm::Intent::Encrypt)
+				this->OnEncryptFile(algorithm, password, infilename, outfilename, save_to_database);
+			else 
+				this->OnDecryptFile(algorithm, password, infilename, outfilename);
+
+			/*
+			that was before Intent enum was bitshifts based
 			switch (intent)
 			{
 			case Algorithm::Intent::Encrypt:
@@ -219,7 +235,7 @@ i32 CLI::Run()
 			case Algorithm::Intent::Decrypt:
 				this->OnDecryptFile(algorithm, password, infilename, outfilename);
 				break;
-			}
+			}*/
 		}
 		else
 			throw std::runtime_error("Please specify what to encrypt, either text using --text or a file using --infile & --outfile");

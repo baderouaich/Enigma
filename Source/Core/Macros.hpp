@@ -149,7 +149,8 @@ do { \
 		ENIGMA_NON_COPYABLE(Class) \
 		ENIGMA_NON_MOVEABLE(Class) \
 		Class() = delete; \
-		~Class() = delete; 
+		~Class() = delete; \
+		private:
 ///
 
 

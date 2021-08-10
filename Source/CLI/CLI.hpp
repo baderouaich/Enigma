@@ -36,9 +36,9 @@ class ENIGMA_API CLI
 {
 public:
 	/** CLI Constructor
-	*	Parses arguments in constructor boy
+	*	Parses arguments in constructor's body
 	*	@param argc: number of arguments from main entry point
-	*	@param argv: arguments list from main entry point
+	*	@param argv: arguments values array from main entry point
 	*/
 	CLI(const i32 argc, const char* const* argv);
 	~CLI() noexcept = default;

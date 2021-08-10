@@ -94,7 +94,9 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		// Insert encryption
 		{
 			constexpr const char* sql = "INSERT INTO Encryption(title, date_time, size, is_file) VALUES(?, DATETIME(), ?, ?)";
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql);
+#endif
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->title);
 			query->bind(2, e->size);
@@ -109,7 +111,9 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		// Insert cipher
 		{
 			constexpr const char* sql = "INSERT INTO Cipher(data, ide) VALUES(?, ?)";
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql);
+#endif
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->cipher.data.data(), static_cast<i32>(e->cipher.data.size())); // bind blob
 			//query->bindNoCopy(1, e->cipher.data); // bind blob (same as bindText..)
@@ -118,7 +122,7 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert cipher record");
 		}
 		
-		// OK (transaction will rollback when it goes out of scope)
+		// OK (if transaction was not commited, it will rollback when it goes out of scope in ~Transaction)
 		transaction->commit();
 
 		return true;
@@ -141,7 +145,9 @@ std::unique_ptr<Cipher> Database::GetCipherByEncryptionID(const i64 ide)
 		// Make sql
 		std::ostringstream sql{};
 		sql << "SELECT * FROM Cipher WHERE ide = " << ide;
-		ENIGMA_LOG("SQL: {0}", sql.str());
+#if defined(ENIGMA_DEBUG)
+			ENIGMA_LOG("SQL: {0}", sql.str());
+#endif
 
 		// Execute sql
 		const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
@@ -175,7 +181,9 @@ bool Database::DeleteEncryption(const i64 ide)
 		// Delete cipher (Optional, since ON DELETE CASCADE is enabled in Cipher.ide, cipher record will be deleted automatically)
 		{
 			constexpr const char* sql = "DELETE FROM Cipher WHERE ide = ?";
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql);
+#endif
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bind(1, ide);
 			i32 r = query->exec(); // returns # of rows effected
@@ -185,7 +193,9 @@ bool Database::DeleteEncryption(const i64 ide)
 		// Delete encryption
 		{
 			constexpr const char* sql = "DELETE FROM Encryption WHERE ide = ?";
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql);
+#endif
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bind(1, ide);
 			i32 r = query->exec(); // returns # of rows effected

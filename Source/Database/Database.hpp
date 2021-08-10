@@ -118,7 +118,9 @@ public:
 				sql << " FROM Encryption e";
 				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.ide";
 				sql << " WHERE e.ide = " << ide;
+#if defined(ENIGMA_DEBUG)
 				ENIGMA_LOG("SQL: {0}", sql.str());
+#endif
 			}
 
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
@@ -175,7 +177,9 @@ public:
 				sql << " ORDER BY" << order_by << order;
 			}
 			
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql.str());
+#endif
 
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
 
@@ -235,8 +239,9 @@ public:
 				sql << " ORDER BY" << order_by << order;
 			}
 
+#if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql.str());
-
+#endif
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
 
 			// Loop to execute the query step by step, to get rows of result
