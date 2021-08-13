@@ -1,5 +1,4 @@
 #include "pch.hpp"
-#include "RSA.h"
 #include "RSA.hpp"
 
 NS_ENIGMA_BEGIN
