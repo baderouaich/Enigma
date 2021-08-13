@@ -3,7 +3,7 @@ project "curl"
 	kind "StaticLib"
     language "C"
     --cdialect "C11" [C11 result in error: lib/hostip.h:205:8: error: unknown type name ‘sigjmp_buf’  205 | extern sigjmp_buf curl_jmpenv; | see https://github.com/BaderEddineOuaich/Enigma/runs/2035170343]
-	staticruntime "on"
+	staticruntime "On"
 
 	targetdir ("Bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("Bin-Intermediate/" .. outputdir .. "/%{prj.name}")

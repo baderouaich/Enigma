@@ -17,7 +17,7 @@ Algorithm::Algorithm(Type type, Intent intent) noexcept
 	m_intent(intent)
 {
 	// we only need random seeder to generate random iv when encrypting
-	if (intent & Intent::Encrypt)
+	if (intent & Intent::Encrypt && !m_auto_seeded_random_pool)
 		m_auto_seeded_random_pool = std::make_unique<CryptoPP::AutoSeededRandomPool>();
 }
 
@@ -45,7 +45,7 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& name, const I
 		return std::make_unique<IDEA>(intent);
 	else if (ModeIn({ "blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax" }))
 		return std::make_unique<Blowfish>(intent);
-	else if (ModeIn({ "rsa" }))
+	else if (ModeIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
 		return std::make_unique<RSA>(intent);
 	else
 		throw std::runtime_error("Unsupported algorithm mode: " + mode);
@@ -135,6 +135,7 @@ String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 		CASE_ENUM(Blowfish);
 		CASE_ENUM(IDEA);
 		CASE_ENUM(ChaCha20Poly1305);
+		CASE_ENUM(RSA);
 		default: return "<unknown algorithm>";
 	}
 #undef CASE_ENUM

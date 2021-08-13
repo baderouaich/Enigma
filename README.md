@@ -30,12 +30,14 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :white_check_mark: <strong>Blowfish-EAX</strong>
 - :white_check_mark: <strong>IDEA-EAX</strong>
 - :white_check_mark: <strong>ChaCha20Poly1305</strong>
+- :white_check_mark: <strong>RSA-OAEP-SHA256</strong>
 <!-- - [ ] algo || [x] algo -->
 
 
 ## Available Tools
 - Password Generator
 - Hashing Algorithms (MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHAKE128, SHAKE256, KECCAK224, KECCAK256, KECCAK384, KECCAK512, TIGER, WHIRLPOOL)
+- XOR Encryption
 - System & Hardware Information
 
 ## Features

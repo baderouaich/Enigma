@@ -4,6 +4,7 @@
 
 #include "PasswordGeneratorTool.hpp"
 #include "HashingTool.hpp"
+#include "XOREncryptionTool.hpp"
 #include "SystemAndHardwareInfoTool.hpp"
 
 NS_ENIGMA_BEGIN
@@ -21,6 +22,7 @@ void ToolsScene::OnCreate()
 	// Add Collapsing header tools
 	m_tools.push_back(std::make_unique<PasswordGeneratorTool>());
 	m_tools.push_back(std::make_unique<HashingTool>());
+	m_tools.push_back(std::make_unique<XOREncryptionTool>());
 	m_tools.push_back(std::make_unique<SystemAndHardwareInfoTool>());
 	//m_tools.push_back(std::make_unique<XTool>());
 	//m_tools.push_back(std::make_unique<XTool>());

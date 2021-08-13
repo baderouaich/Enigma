@@ -2,8 +2,22 @@
 
 ================ WRAP UP VERSION 1.4.0 ================
 - Add Translation Language support 
-French: Todo CLI, Algorithm exception messages
-- Add RSA Algorithm
+French: Todo CLI, Algorithm exception messages, XOREncryptionTool
+- Add RSA Algorithm, sign and verify in encrypt or decrypt
+// Generate or Load keys
+RSA::PrivateKey privateKey;
+RSA::PublicKey publicKey;
+...
+
+RSASS<PSSR, SHA1>::Signer signer(privateKey);
+// Create signature
+...
+
+RSASS<PSSR, SHA1>::Verifier verifier(publicKey);
+// Verify signature on message
+...
+
+
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html
 /**

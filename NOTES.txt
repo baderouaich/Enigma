@@ -58,3 +58,34 @@ https://www.doxygen.nl/manual/commands.html
 * @warning
 */
 - Deploy docs to github pages: https://goseeky.wordpress.com/2017/07/22/documentation-101-doxygen-with-github-pages/
+
+
+
+
+# RSA: What is the modulus of the RSA key?
+The integer number n is called "modulus" and it defines the RSA key length. It is typically very large prime number (e.g. 2048 bits). The pair {n, e} is the public key. It is designed to be shared with everyone.
+	https://www.javamex.com/tutorials/cryptography/rsa_key_length.shtml
+	https://stackoverflow.com/questions/39068473/what-is-the-maximum-length-of-private-and-public-rsa-keys
+	Other authors have been more conservative. Ferguson & Schneier (2003) in 
+	Practical Cryptography implied that 2048 bits would only be sufficient to
+	keep data confidential for around 20 years,
+	and were already recommending 4096 bit keys:
+	"The absolute minimum size for n is 2048 bits or so if you want to protect your data for 20 years.
+	[...] If you can afford it in your application, let n be 4096 bits long, or as close to this size as you can get it." (p. 233)
+
+	https://stackoverflow.com/questions/25070949/cryptopp-plaintext-fixed-length-limit
+	https://ietf.org/rfc/rfc2437.txt => Section 7.1.1
+	7.1.1 Encryption operation
+
+	   RSAES-OAEP-ENCRYPT ((n, e), M, P)
+
+	   Input:
+	   (n, e)    recipient's RSA public key
+
+	   M         message to be encrypted, an octet string of length at
+				 most k-2-2hLen, where k is the length in octets of the
+				 modulus n and hLen is the length in octets of the hash
+				 function output for EME-OAEP
+
+	   P         encoding parameters, an octet string that may be empty
+	

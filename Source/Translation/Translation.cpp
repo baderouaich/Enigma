@@ -44,13 +44,12 @@ void Translation::Initialize(Language language)
 	{
 		if (std::ifstream ifs{ default_translation_file })
 		{
-
 			while (!ifs.eof())
 			{
 				String line{};
 				if (std::getline(ifs, line); !line.empty())
 				{
-					if (line[0] == ';') // comment
+					if (line[0] == ';') // skip comments & empty lines
 					{
 						continue;
 					}

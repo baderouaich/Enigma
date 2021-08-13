@@ -53,7 +53,7 @@ TEST_CASE("RSA Encryption and Decryption")
 
 		String private_key = rsa->GetPrivateKey();
 		String public_key = rsa->GetPublicKey();
-		std::cout << "took: " << s << "s to generate " << rsa->GetKeySize() << std::endl << std::endl;
+		std::cout << "took: " << s << "s to encrypt with rsa key size " << rsa->GetKeySize() << std::endl << std::endl;
 		std::cout << "buffer: " << buffer << std::endl << std::endl;
 		std::cout << "cipher: " << cipher << std::endl << std::endl;
 		std::cout << "private_key: \n" << private_key << std::endl << std::endl;
