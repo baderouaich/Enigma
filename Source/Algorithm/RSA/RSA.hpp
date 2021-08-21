@@ -13,9 +13,11 @@ class RSA : public Algorithm
 {
 	using RSA_Hash = CryptoPP::SHA256;
 	template <typename Hash> 
-	using RSA_Padding = CryptoPP::OAEP<Hash>;
+	using RSA_Padding   = CryptoPP::OAEP<Hash>;
 	using RSA_Encryptor = CryptoPP::RSAES<RSA_Padding<RSA_Hash>>::Encryptor;
 	using RSA_Decryptor = CryptoPP::RSAES<RSA_Padding<RSA_Hash>>::Decryptor;
+	using RSA_Signer    = CryptoPP::RSASS<CryptoPP::PSSR, RSA_Hash>::Signer;
+	using RSA_Verifier  = CryptoPP::RSASS<CryptoPP::PSSR, RSA_Hash>::Verifier;
 
 	/*
 	https://www.javamex.com/tutorials/cryptography/rsa_key_length.shtml
@@ -105,6 +107,10 @@ private:
 	std::unique_ptr<CryptoPP::RSA::PrivateKey> m_private_key;
 	std::unique_ptr<CryptoPP::RSA::PublicKey> m_public_key;
 	ui32 m_key_size;
+
+	//std::unique_ptr<RSA_Signer> m_signer;
+	//std::unique_ptr<RSA_Verifier> m_verifier;
+
 	
 };
 

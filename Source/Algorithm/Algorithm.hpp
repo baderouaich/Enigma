@@ -25,6 +25,7 @@
 #include <idea.h> // IDEA
 #include <blowfish.h> // Blowfish
 #include <rsa.h> // RSA
+#include <pssr.h> // RSA Signer & Verifier
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 

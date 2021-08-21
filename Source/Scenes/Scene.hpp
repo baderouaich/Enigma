@@ -24,7 +24,7 @@ public:
 	Scene() noexcept;
 	virtual ~Scene() noexcept = default;
 
-	/* Scene Life Cicle */
+	/* Scene Life Cycle */
 	virtual void OnCreate() = 0;
 	virtual void OnEvent(Event& event) = 0;
 	virtual void OnUpdate(const f32& dt) = 0;

@@ -1,8 +1,6 @@
 ========================= IN PROGRESS =============================
 
 ================ WRAP UP VERSION 1.4.0 ================
-- Add Translation Language support 
-French: Todo CLI, Algorithm exception messages, XOREncryptionTool
 - Add RSA Algorithm, sign and verify in encrypt or decrypt
 // Generate or Load keys
 RSA::PrivateKey privateKey;
@@ -47,6 +45,9 @@ Scenes
 System
 Tests
 Utility
+
+- Add Translation Language support 
+French: Todo CLI, Algorithm exception messages, XOREncryptionTool
 ================ WRAP UP VERSION 1.4.0 ================
 
 
