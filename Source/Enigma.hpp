@@ -16,7 +16,7 @@
 //
 
 // Enigma Language Translator
-#include <Translation/Translation.hpp>
+//#include <Translation/Translation.hpp>
 //
 
 // System Dialogs, Notification, Clipboard, Environment Variable

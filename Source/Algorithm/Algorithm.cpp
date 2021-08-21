@@ -7,7 +7,7 @@
 #include "Twofish/Twofish.hpp"
 #include "IDEA/IDEA.hpp"
 #include "Blowfish/Blowfish.hpp"
-#include "RSA/RSA.hpp"
+//#include "RSA/RSA.hpp"
 
 NS_ENIGMA_BEGIN
 
@@ -45,8 +45,8 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& name, const I
 		return std::make_unique<IDEA>(intent);
 	else if (ModeIn({ "blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax" }))
 		return std::make_unique<Blowfish>(intent);
-	else if (ModeIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
-		return std::make_unique<RSA>(intent);
+	//else if (ModeIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
+	//	return std::make_unique<RSA>(intent);
 	else
 		throw std::runtime_error("Unsupported algorithm mode: " + mode);
 }
@@ -135,7 +135,7 @@ String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 		CASE_ENUM(Blowfish);
 		CASE_ENUM(IDEA);
 		CASE_ENUM(ChaCha20Poly1305);
-		CASE_ENUM(RSA);
+	//	CASE_ENUM(RSA);
 		default: return "<unknown algorithm>";
 	}
 #undef CASE_ENUM

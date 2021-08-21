@@ -1,21 +1,5 @@
 ========================= IN PROGRESS =============================
-
-================ WRAP UP VERSION 1.4.0 ================
-- Add RSA Algorithm, sign and verify in encrypt or decrypt
-// Generate or Load keys
-RSA::PrivateKey privateKey;
-RSA::PublicKey publicKey;
-...
-
-RSASS<PSSR, SHA1>::Signer signer(privateKey);
-// Create signature
-...
-
-RSASS<PSSR, SHA1>::Verifier verifier(publicKey);
-// Verify signature on message
-...
-
-
+- On checking for new version, check major and minor if greater than current to inform user if he has an old version
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html
 /**
@@ -46,11 +30,7 @@ System
 Tests
 Utility
 
-- Add Translation Language support 
-French: Todo CLI, Algorithm exception messages, XOREncryptionTool
-================ WRAP UP VERSION 1.4.0 ================
-
-
+- Add [delete all button] and [export as json], [import as json] in MyEncryptionsScene
 
 - Fix images do not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html
 
@@ -80,6 +60,22 @@ French: Todo CLI, Algorithm exception messages, XOREncryptionTool
 
 - Add donate github or menu option (very low priority) if user wants to buy me a coffee.
 
+- Add RSA Algorithm, sign and verify in encrypt or decrypt
+// Generate or Load keys
+RSA::PrivateKey privateKey;
+RSA::PublicKey publicKey;
+...
+
+RSASS<PSSR, SHA1>::Signer signer(privateKey);
+// Create signature
+...
+
+RSASS<PSSR, SHA1>::Verifier verifier(publicKey);
+// Verify signature on message
+...
+
+
+- Add Translation system 
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene using sql like clause
 - DONE added VACUUM sqlite command to defragment disk

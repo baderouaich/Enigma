@@ -29,8 +29,7 @@ class ENIGMA_API Database final
 		DateTime,
 		Size,
 
-		BEGIN	= ID,
-		END		= Size
+		ENIGMA_ENUM_DECLARE_BEGIN_END(ID)
 	};
 	friend const char* operator *(OrderBy order_by) // operator* to stringify enum OrderBy
 	{
@@ -61,8 +60,7 @@ class ENIGMA_API Database final
 		Ascending,
 		Descending,
 
-		Begin	= Ascending,
-		End		= Descending
+		ENIGMA_ENUM_DECLARE_BEGIN_END(Ascending)
 	};
 	friend const char* operator *(Order order) // operator* to stringify enum Order
 	{

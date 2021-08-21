@@ -28,7 +28,7 @@ CLI::CLI(const i32 argc, const char* const* argv)
 			("p,password", "Encryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
 			("t,text", "Text to Encrypt/Decrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
 			("i,infile", "Input File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
-			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"
+			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"			
 			("s,save", "Save encryption record to database")  // save to database
 			("l,list", "List saved encryption records from database")  // show saved encryption records
 			("h,help", "Displays help message")  // HELP
@@ -43,19 +43,19 @@ CLI::CLI(const i32 argc, const char* const* argv)
 		if (!unmatched_args.empty())
 		{
 			for (const auto& uarg : unmatched_args)
-				ENIGMA_WARN("Unknown argument {0}", uarg);
+				ENIGMA_WARN("Unknown argument {}", uarg);
 			throw std::runtime_error("Received unknown arguments");
 		}
 
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: {0} | {1}", e.what(), Constants::CLI::CLI_HELP_MESSAGE);
+		ENIGMA_ERROR("Failed to parse arguments {} | {}", e.what(), Constants::CLI::CLI_HELP_MESSAGE);
 		std::exit(EXIT_FAILURE);
 	}
 	catch (...)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: UNKNOWN ERROR");
+		ENIGMA_ERROR("Failed to parse arguments UNKNOWN ERROR");
 		std::exit(EXIT_FAILURE);
 	}
 }
@@ -90,7 +90,7 @@ i32 CLI::Run()
 		return EXIT_SUCCESS;
 	}
 
-	ENIGMA_LOG("Processing arguments...");
+	ENIGMA_LOG(("Processing arguments..."));
 
 	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
 	Algorithm::Intent intent{}; // Encrypt or Decrypt? to save memory resources not needed in a specific operation
@@ -130,8 +130,7 @@ i32 CLI::Run()
 			//LOG("Mode: {0}", m);
 		}
 		else if(intent & Algorithm::Intent::Encrypt) // If intent is encrypting, mode is required, otherwise we can detect which mode used for encryption.
-			throw std::runtime_error("You should specify an encryption mode like: --mode=aes or -m aes, unless you are decrypting, then we can auto-detect the mode used for encryption.");
-
+			throw std::runtime_error("You should specify an encryption mode example -m aes, unless you are decrypting, then we can auto-detect the mode used for encryption.");
 		// What is the encryption/decryption password?
 		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
 		{
@@ -140,7 +139,7 @@ i32 CLI::Run()
 			//LOG("Password: {0}", password);
 		}
 		else
-			throw std::runtime_error("You should specify an encryption/decryption password like: --password=mypass or -p mypass");
+			throw std::runtime_error("You should specify an encryption/decryption password example -p mypass");
 
 
 		// Is there a text to encrypt/decrypt?
@@ -185,7 +184,7 @@ i32 CLI::Run()
 			algorithm = Algorithm::CreateFromType(type, intent);
 
 			// little happy msg for user
-			ENIGMA_INFO("Successfully auto-detected algorithm used for encryption which is: {0}",  Algorithm::AlgoTypeEnumToStr(type));
+			ENIGMA_INFO("Successfully auto-detected algorithm used for encryption which is {}",  Algorithm::AlgoTypeEnumToStr(type));
 		}
 		else
 		{
@@ -243,12 +242,12 @@ i32 CLI::Run()
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: {0}", CryptoPPUtils::GetFullErrorMessage(e));
+		ENIGMA_ERROR("Failed to parse arguments {}", CryptoPPUtils::GetFullErrorMessage(e));
 		return EXIT_FAILURE;
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments: {0}", e.what());
+		ENIGMA_ERROR("Failed to parse arguments {}", e.what());
 		return EXIT_FAILURE;
 	}
 	catch (...)
@@ -263,20 +262,20 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH,
-		ENIGMA_TRANSLATE_FMT("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 
 	String cipher{}, cipher_base64{};
 	f64 elapsed_seconds{ 0.0 };
 
 	// Compression
 	const String compressed_text = GZip::Compress(text);
-	ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), "Failed to compress text");
+	ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), ("Failed to compress text"));
 
 	ENIGMA_BEGIN_TIMER(t1);
 	{
-		ENIGMA_TRACE("Encrypting Text with " + algorithm->GetTypeString() + " Algorithm ...");
+		ENIGMA_TRACE("Encrypting Text with {} Algorithm...", algorithm->GetTypeString());
 		cipher = algorithm->Encrypt(password, compressed_text);
-		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt text");
+		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ("Failed to encrypt text"));
 
 		ENIGMA_TRACE("Encoding Cipher to Base64...");
 		cipher_base64 = Base64::Encode(cipher);
@@ -286,14 +285,14 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	}
 
 	ENIGMA_INFO(cipher_base64);
-	ENIGMA_LOG("Encrypted {0} in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
-		 SizeUtils::FriendlySize(text.size()), elapsed_seconds);
+	ENIGMA_LOG(fmt::format("Encrypted {0} in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
+		 SizeUtils::FriendlySize(text.size()), elapsed_seconds));
 
 	// Save encryption record to database on option -s | --save 
 	if(save_to_database)
 	{
 		String title{};
-		ENIGMA_LOG("Save encryption to database, please enter encryption title (e.g: My Github Password). it helps with searching through encryptions from the database in the future: ");
+		ENIGMA_LOG("Save encryption to database, please enter encryption title (example My Github Password). it helps with searching through encryptions from the database in the future: ");
 		std::cout << "> ";
 		std::getline(std::cin, title);
 
@@ -316,7 +315,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
-		ENIGMA_TRANSLATE_FMT("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 
 	String cipher{}, decrypted_text{};
 	f64 elapsed_seconds{ 0.0 };
@@ -329,16 +328,16 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 		ENIGMA_TRACE("Decrypting Cipher...");
 		decrypted_text = algorithm->Decrypt(password, cipher);
-		ENIGMA_ASSERT_OR_THROW(!decrypted_text.empty(), "Failed to decrypt text");
+		ENIGMA_ASSERT_OR_THROW(!decrypted_text.empty(), "Failed to decrypt cipher");
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}
 	// Decompress 
 	const String recovered_text = GZip::Decompress(decrypted_text);
-	ENIGMA_ASSERT_OR_THROW(!recovered_text.empty(), "Failed to decompress recovered text");
+	ENIGMA_ASSERT_OR_THROW(!recovered_text.empty(), ("Failed to decompress recovered text"));
 
 	ENIGMA_INFO(recovered_text);
-	ENIGMA_LOG("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds);
+	ENIGMA_LOG(("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds));
 
 	cipher.clear();
 	decrypted_text.clear();
@@ -348,7 +347,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
-		ENIGMA_TRANSLATE_FMT("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 	// assert input file is valid
 	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename), "Input file " + in_filename + " does not exist");
 	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(in_filename), "Input file " + in_filename + " is not a regular file");
@@ -417,7 +416,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
-		ENIGMA_TRANSLATE_FMT("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 	// assert input file is valid
 	ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename_encrypted), "Input file " + in_filename_encrypted + " does not exist");
 	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(in_filename_encrypted), "Input file " + in_filename_encrypted + " is not a regular file");

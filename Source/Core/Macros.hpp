@@ -173,7 +173,12 @@ do { \
 #endif
 ///
 
-
+/// Allows looping over an enum by providing a BEGIN and END enum values NOTE: should be placed at the end of the enum, providing the first element of the enum
+#define ENIGMA_ENUM_DECLARE_BEGIN_END(begin) \
+	__HALT__, \
+	BEGIN = begin, \
+	END = __HALT__ - 1
+///
 
 
 //void TimedFunction(

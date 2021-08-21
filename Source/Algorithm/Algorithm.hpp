@@ -75,7 +75,6 @@ public:
 	friend inline constexpr Intent operator&= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) &= (const byte)(b)); }
 	friend inline constexpr Intent operator^= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) ^= (const byte)(b)); }
 	
-	
 	/**
 	*	Algorithm type, AES, ChaCha...
 	*/
@@ -87,10 +86,9 @@ public:
 		Blowfish,				// Blowfish-EAX
 		IDEA,					// IDEA-EAX
 		ChaCha20Poly1305,		// ChaCha20Poly1305
-		RSA,					// RSA
+		//RSA,					// RSA N/A yet
 
-		BEGIN	= AES,
-		END		= RSA
+		ENIGMA_ENUM_DECLARE_BEGIN_END(AES)
 	};
 
 

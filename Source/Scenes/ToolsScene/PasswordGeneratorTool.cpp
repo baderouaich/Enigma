@@ -52,7 +52,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 
 	ImGui::PushFont(font_audiowide_regular_20);
 	{
-		if (ImGui::CollapsingHeader(ENIGMA_TRANSLATE_CSTR("Password Generator"), nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) 
+		if (ImGui::CollapsingHeader(("Password Generator"), nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen)) 
 		//if (ImGui::CollapsingHeader("Password Generator", nullptr)) 
 		{
 			ImGui::PushFont(font_montserrat_medium_18);
@@ -61,7 +61,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			// Copy Generated password button 10% of width
 			//ImGui::PushFont(font_montserrat_medium_20);
 			ImGui::PushID("CopyGeneratedPw");
-			if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Copy"), Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+			if (ImGuiWidgets::Button(("Copy"), Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 			{
 				this->OnCopyPasswordButtonPressed();
 			}
@@ -76,9 +76,9 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			ImGui::SameLine();
 
 			// Generate button 25% of width
-			if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Generate"), Vec2f(win_w * 0.20f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
+			if (ImGuiWidgets::Button(("Generate"), Vec2f(win_w * 0.20f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
 			{
-				Application::GetInstance()->LaunchWorkerThread(parent, ENIGMA_TRANSLATE("Generating Password..."), [this]()
+				Application::GetInstance()->LaunchWorkerThread(parent, ("Generating Password..."), [this]()
 				{
 					this->OnGenerateButtonPressed();
 				});
@@ -106,15 +106,15 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 					ImGui::NextColumn();
 					ImGui::Checkbox("Special Characters (+*~.#^)", &m_special_characters);
 					*/
-					ImGui::Combo(ENIGMA_TRANSLATE_CSTR("Length"), &m_selected_length_index, m_lengths.data(), static_cast<i32>(m_lengths.size()), -1);
+					ImGui::Combo(("Length"), &m_selected_length_index, m_lengths.data(), static_cast<i32>(m_lengths.size()), -1);
 					ImGui::NextColumn();
-					ImGui::Checkbox(ENIGMA_TRANSLATE_CSTR("Numbers"), &m_digits);
+					ImGui::Checkbox(("Numbers"), &m_digits);
 					ImGui::NextColumn();
-					ImGui::Checkbox(ENIGMA_TRANSLATE_CSTR("Uppercase"), &m_uppercase_alphabets);
+					ImGui::Checkbox(("Uppercase"), &m_uppercase_alphabets);
 					ImGui::NextColumn();
-					ImGui::Checkbox(ENIGMA_TRANSLATE_CSTR("Lowercase"), &m_lowercase_alphabets);
+					ImGui::Checkbox(("Lowercase"), &m_lowercase_alphabets);
 					ImGui::NextColumn();
-					ImGui::Checkbox(ENIGMA_TRANSLATE_CSTR("Symbols"), &m_special_characters);
+					ImGui::Checkbox(("Symbols"), &m_special_characters);
 				ImGui::EndColumns();
 			//ImGui::PopFont();
 			//
@@ -124,9 +124,9 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			// Remember your password sentence (only when available)
 			if (!m_remember_password_sentence.empty())
 			{
-				ImGui::BulletText("%s:", ENIGMA_TRANSLATE_CSTR("Remember Your Password"));
+				ImGui::BulletText("%s:", ("Remember Your Password"));
 				ImGui::PushID("CopyRememberPw");
-				if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Copy"), Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+				if (ImGuiWidgets::Button(("Copy"), Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 				{
 					this->OnCopyRememberPasswordSentenceButtonPressed();
 				}

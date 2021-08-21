@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	// Initialize Logger
 	Enigma::Logger::Initialize();
 	// Initialize Languages Translation
-	Enigma::Translation::Initialize();
+	//Enigma::Translation::Initialize();
 	// Initialize SQLite3 Database
 	Enigma::Database::Initialize();
 
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 	// Shutdown SQLite3 Database
 	Enigma::Database::Shutdown();
 	// Shutdown Languages Translation
-	Enigma::Translation::Shutdown();
+	//Enigma::Translation::Shutdown();
 	// Shutdown Logger
 	Enigma::Logger::Shutdown();
 

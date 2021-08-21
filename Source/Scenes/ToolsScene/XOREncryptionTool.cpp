@@ -29,20 +29,20 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 
 	ImGui::PushFont(font_audiowide_regular_20);
 	{
-		if (ImGui::CollapsingHeader(ENIGMA_TRANSLATE_CSTR("XOR Encrypt/Decrypt")))
+		if (ImGui::CollapsingHeader(("XOR Encrypt/Decrypt")))
 		{
 			ImGui::PushFont(font_montserrat_medium_18);
 			spacing(3);
 
 
 			// Opearation Radio buttons
-			ImGui::Text("%s:", "Operation");
-			if (ImGui::RadioButton("Encrypt", m_intent == Algorithm::Intent::Encrypt))
+			ImGui::Text("%s:", ("Operation"));
+			if (ImGui::RadioButton(("Encrypt"), m_intent == Algorithm::Intent::Encrypt))
 			{
 				m_intent = Algorithm::Intent::Encrypt;
 			}
 			ImGui::SameLine();
-			if (ImGui::RadioButton("Decrypt", m_intent == Algorithm::Intent::Decrypt))
+			if (ImGui::RadioButton(("Decrypt"), m_intent == Algorithm::Intent::Decrypt))
 			{
 				m_intent = Algorithm::Intent::Decrypt;
 			}
@@ -53,7 +53,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("%s:", "Input");
+				ImGui::Text("%s:", ("Input"));
 
 				// Input text/cipher
 				const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
@@ -72,7 +72,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 			ImGui::PushFont(font_montserrat_medium_20);
 			{			
 				// Label
-				ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Password"));
+				ImGui::Text("%s:", ("Password"));
 				// Input text
 				ImGuiWidgets::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			}
@@ -86,7 +86,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 				ImGui::PushFont(font_montserrat_medium_20);
 				{
 					// Label
-					ImGui::Text("%s:", ENIGMA_TRANSLATE_CSTR("Output (in base64)"));
+					ImGui::Text("%s:", ("Output (in base64)"));
 					// Encrypted/Decrypted text
 					ImGuiWidgets::InputTextMultiline("##text4", &m_output, ImVec2(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f));
 					ImGui::PushFont(font_montserrat_medium_14);
@@ -94,7 +94,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 					ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Copy"), ImVec2(win_w * 0.10f, 30.0f)))
+					if (ImGui::Button(("Copy"), ImVec2(win_w * 0.10f, 30.0f)))
 					{
 						Clipboard::Set(m_output);
 					}
@@ -122,10 +122,10 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 					//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 					const auto btn_txt = m_intent == Algorithm::Intent::Encrypt ? "Encrypt" : "Decrypt";
 					ImGui::PushID(m_intent == Algorithm::Intent::Encrypt ? 33 : 66);
-					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR(btn_txt), button_size))
+					if (ImGui::Button((btn_txt), button_size))
 					{
 						const auto loading_txt = m_intent == Algorithm::Intent::Encrypt ? "Encrypting text..." : "Decrypting text...";
-						Application::GetInstance()->LaunchWorkerThread(parent, ENIGMA_TRANSLATE_CSTR(loading_txt), [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(parent, (loading_txt), [this]() -> void
 							{
 								if(m_intent == Algorithm::Intent::Encrypt)
 									this->OnEncryptButtonPressed();
@@ -161,12 +161,12 @@ void XOREncryptionTool::OnEncryptButtonPressed()
 	// validate fields
 	if (m_password.empty())
 	{
-		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Encryption password is empty"));
+		(void)DialogUtils::Warn(("Encryption password is empty"));
 		return;
 	}
 	if (m_input.empty())
 	{
-		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Input is empty"));
+		(void)DialogUtils::Warn(("Input is empty"));
 		return;
 	}
 
@@ -178,11 +178,11 @@ void XOREncryptionTool::OnEncryptButtonPressed()
 	catch (const std::exception& e)
 	{
 		ENIGMA_ERROR("Encryption Failure: {0}", e.what());
-		(void)DialogUtils::Error(ENIGMA_TRANSLATE("Encryption Failure"), e.what());
+		(void)DialogUtils::Error(("Encryption Failure"), e.what());
 	}
 	catch (...)
 	{
-		const String err_msg = ENIGMA_TRANSLATE("Encryption Failure: UNKNOWN ERROR");
+		const String err_msg = ("Encryption Failure: UNKNOWN ERROR");
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
@@ -195,12 +195,12 @@ void XOREncryptionTool::OnDecryptButtonPressed()
 	// validate fields
 	if (m_password.empty())
 	{
-		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Encryption password is empty"));
+		(void)DialogUtils::Warn(("Encryption password is empty"));
 		return;
 	}
 	if (m_input.empty())
 	{
-		(void)DialogUtils::Warn(ENIGMA_TRANSLATE("Input is empty"));
+		(void)DialogUtils::Warn(("Input is empty"));
 		return;
 	}
 
@@ -211,11 +211,11 @@ void XOREncryptionTool::OnDecryptButtonPressed()
 	catch (const std::exception& e)
 	{
 		ENIGMA_ERROR("Decryption Failure: {0}", e.what());
-		(void)DialogUtils::Error(ENIGMA_TRANSLATE("Encryption Failure"), e.what());
+		(void)DialogUtils::Error(("Encryption Failure"), e.what());
 	}
 	catch (...)
 	{
-		const String err_msg = ENIGMA_TRANSLATE("Decryption Failure: UNKNOWN ERROR");
+		const String err_msg = ("Decryption Failure: UNKNOWN ERROR");
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}

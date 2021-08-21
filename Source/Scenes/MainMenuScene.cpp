@@ -11,7 +11,7 @@
 #include <Utility/DialogUtils.hpp>
 #include <Networking/CheckForUpdates.hpp>
 
-#include <Translation/Translation.hpp>
+//#include <Translation/Translation.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -81,13 +81,14 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PushFont(font_audiowide_regular_20);
 			if (ImGui::BeginMenuBar())
 			{
-				if (ImGui::BeginMenu(ENIGMA_TRANSLATE_CSTR("Menu")))
+				if (ImGui::BeginMenu(("Menu")))
 				{
-					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("Exit"))) { Scene::EndScene(); }
+					if (ImGui::MenuItem(("Exit"))) { Scene::EndScene(); }
 					ImGui::EndMenu();
 				}
 				
-				if (ImGui::BeginMenu(ENIGMA_TRANSLATE_CSTR("Language")))
+				/*
+				if (ImGui::BeginMenu(("Language")))
 				{
 					for (ui16 i = static_cast<ui16>(Translation::Language::BEGIN); i <= static_cast<ui16>(Translation::Language::END); ++i)
 					{
@@ -99,24 +100,24 @@ void MainMenuScene::OnImGuiDraw()
 					}
 					ImGui::EndMenu();
 				}
-
-				if (ImGui::BeginMenu(ENIGMA_TRANSLATE_CSTR("Help")))
+				*/
+				if (ImGui::BeginMenu(("Help")))
 				{
-					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("Report an issue")))
+					if (ImGui::MenuItem(("Report an issue")))
 					{
-						Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE("Reporting issue..."), [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(this, ("Reporting issue..."), [this]() -> void
 						{
 							this->OnReportIssueMenuButtonPressed(); 
 						});
 					}
-					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("Check for updates")))
+					if (ImGui::MenuItem(("Check for updates")))
 					{
-						Application::GetInstance()->LaunchWorkerThread(this, ENIGMA_TRANSLATE("Checking for updates..."), [this]() -> void
+						Application::GetInstance()->LaunchWorkerThread(this, ("Checking for updates..."), [this]() -> void
 						{
 							this->OnCheckForUpdatesMenuButtonPressed();
 						});
 					}
-					if (ImGui::MenuItem(ENIGMA_TRANSLATE_CSTR("About"))) { this->OnAboutMenuButtonPressed(); }
+					if (ImGui::MenuItem(("About"))) { this->OnAboutMenuButtonPressed(); }
 					ImGui::EndMenu();
 				}
 				
@@ -176,23 +177,23 @@ void MainMenuScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Encrypt File"), button_size))
+				if (ImGui::Button(("Encrypt File"), button_size))
 				{
 					this->OnEncryptFileButtonPressed();
 				}
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Decrypt File"), button_size))
+				if (ImGui::Button(("Decrypt File"), button_size))
 				{
 					this->OnDecryptFileButtonPressed();
 				}
 				spacing(6);
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Encrypt Text"), button_size))
+				if (ImGui::Button(("Encrypt Text"), button_size))
 				{
 					this->OnEncryptTextButtonPressed();
 				}
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-				if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Decrypt Text"), button_size))
+				if (ImGui::Button(("Decrypt Text"), button_size))
 				{
 					this->OnDecryptTextButtonPressed();
 				}
@@ -202,7 +203,7 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("My Encryptions"), button_size))
+					if (ImGui::Button(("My Encryptions"), button_size))
 					{
 						this->OnMyEncryptionsButtonPressed();
 					}
@@ -214,7 +215,7 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER);  // buttons color hover
 					ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE); // buttons color pressed
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-					if (ImGui::Button(ENIGMA_TRANSLATE_CSTR("Tools"), button_size))
+					if (ImGui::Button(("Tools"), button_size))
 					{
 						this->OnToolsButtonPressed();
 					}
@@ -225,7 +226,7 @@ void MainMenuScene::OnImGuiDraw()
 				{
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 					//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
-					if (ImGuiWidgets::Button(ENIGMA_TRANSLATE_CSTR("Exit"), button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+					if (ImGuiWidgets::Button(("Exit"), button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 					{
 						Scene::EndScene();
 					}
@@ -325,7 +326,7 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 
 #else
 
-	[[maybe_unused]] auto _ = DialogUtils::Info(ENIGMA_TRANSLATE_FMT("If you face any problems feel free to open an issue at {}", url));
+	[[maybe_unused]] auto _ = DialogUtils::Info(("If you face any problems feel free to open an issue at {}", url));
 
 #endif
 }
