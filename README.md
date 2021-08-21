@@ -40,6 +40,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - XOR Encryption
 - System & Hardware Information
 
+<!--
 ## Features
 - :zap: Very fast Encryption & Decryption
 - :hammer_and_wrench: Useful tools like Password Generator, Hashing and System & Hardware Information
@@ -48,13 +49,15 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :package:	GZip Compression by default to reduce cipher size if sharing or uploading to clouds
 - :briefcase: SQLite3 Database system to save, import and export encryption records
 - :octocat: Open Source of course!
+-->
+
 <!--- :detective: Auto-detect algorithm used for encryption (no need to keep remembering which algorithm you used, just remember your password, and store cipher base64-text or encrypted file somewhere preferably clouds)-->
 
-
+<!--
 ## NOTES
 - Encryption passwords are NOT saved into the database.
 - Import/Export your database by copying or replacing database file `Enigma.db` located in `./Resources/Database/`
-
+-->
 
 ## Enigma CLI
 ```text
