@@ -11,7 +11,7 @@ on:
 # platform tasks
 jobs:
 
-  ### WINDOWS ###
+  ###=== WINDOWS ===###
   Windows:
     runs-on: windows-latest
     strategy:
@@ -37,7 +37,7 @@ jobs:
     - name: Build Solution
       run: msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo 
 
-  ### LINUX ###
+  ##=== LINUX ===###
   Linux:
     runs-on: ubuntu-latest
     strategy:
@@ -68,31 +68,3 @@ jobs:
     
     - name: Run Enigma
       run: ./Bin/Release-linux-x86_64/Enigma/Enigma --version
-
-
-#    - name: Generate Project Make Files
-#      run: |
-#        sudo apt-get update
-#        sudo ./Gen-Linux-Makefile.sh
-#
-#    - name: Make Project
-#      run: |
-#        make
-#
-#
-#    # update os and install Premake5
-#    # https://zoomadmin.com/HowToInstall/UbuntuPackage/premake
-#    - name: Install Dependencies
-#      run: |
-#        sudo apt-get update -y
-#        sudo apt-get install -y premake
-#
-#    # generate project Makefiles and make executable
-#    - name: Build Enigma g++ 64-bit
-#      run: |
-#        g++ --version
-#        premake5 gmake2
-#        make
-# TODO
-#  MacOSX:
-#    runs-on:

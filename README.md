@@ -125,20 +125,27 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git`<br>
 
-### Windows
+### Windows Visual Studio 16 2019 
+> Bellow steps are equivelent to running script `./Windows-Build-Release.bat`
+ - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br>
+ - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
+ - Open Enigma.sln and Change configuration to Release or Dist
+ - Build & Run Solution
+
+<!--
+### Windows (equivelent to running `./Windows-Build-Release.bat`)
  - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br><br>
 <strong>Method 1 (Recommended): Visual Studio 16 2019</strong>
  - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
  - Open Enigma.sln and Change configuration to Release or Dist
  - Build & Run Solution
-<!-- - Copy Resources/ folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it<br><br>-->
 <strong>Method 2 (Unstable): Makefile (GMake2)</strong>
  - Run `Gen-Windows-Makefile.bat` to generate project Makefiles<br>
  - Run `$ make config=release CC="path/to/your/c/compiler/gcc.exe" CXX="path/to/your/c++/compiler/g++.exe"`<br>
    example: `$ make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 4`<br>
-<!-- - Copy `Resources/` folder next to the executable at `.\Bin\Release-windows-x86_64\Enigma\Enigma.exe` and Run it  -->
-
-### Linux
+-->
+### Linux GNU Makefile 
+> Bellow steps are equivelent to running script `sudo bash ./Linux-Build-Release.sh`
  - Install latest c++ compiler (gcc or clang)<br>
   `$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
   `$ sudo apt update`<br>
