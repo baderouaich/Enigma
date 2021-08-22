@@ -16,15 +16,62 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API CheckForUpdates final
 {
 public:
+	struct Version
+	{
+		ui16 major;
+		ui16 minor;
+		ui16 patch;
+
+		Version() : major(0), minor(0), patch(0) {}
+		Version(const String& tag_name)
+		{
+			const std::vector<String> parts = StringUtils::Split(tag_name, '.');
+			ENIGMA_ASSERT_OR_THROW(parts.size() == 3, fmt::format("Version tag_name is malformed, expected major.minor.patch (%d.%d.%d) but received {}", tag_name));
+			
+			// Convert string parts to ui16 major minor patch
+			const auto stoui16 = [](const String& str) -> ui16
+			{
+				ui16 i{};
+				std::stringstream oss(str);
+				oss >> i;
+				return i;
+			};
+
+			major = stoui16(parts[0]);
+			minor = stoui16(parts[1]);
+			patch = stoui16(parts[2]);
+		}
+
+		constexpr bool operator > (const Version& other) const noexcept
+		{
+			if (major > other.major) return true;
+			if (minor > other.minor) return true;
+			if (patch > other.patch) return true;
+			return false;
+		}
+		constexpr bool operator < (const Version& other) const noexcept
+		{
+			if (major < other.major) return true;
+			if (minor < other.minor) return true;
+			if (patch < other.patch) return true;
+			return false;
+		}
+		constexpr bool operator == (const Version& other) const noexcept
+		{
+			return major == other.major && minor == other.minor && patch == other.patch;
+		}
+	};
+
 	struct LatestReleaseInfo
 	{
 		String name;   // "name": "Enigma Release (Windows x64, Linux x64)",
-		String tag_name; // version e.g v1.0.0
+		String tag_name; // version e.g 1.0.0
 		String created_at;//"created_at": "2021-02-06T11:41:26Z",
 		String published_at;	//"published_at" : "2021-02-06T12:16:37Z",
 		String body;	//  "body": "Enigma first stable release for Windows x64 and Linux x64 using:\r\n- Crypto++ v8.4.0\r\n- GLFW v3.3.2\r\n- ImGui v1.79\r\n- spdlog v1.8.0\r\n- and other libraries"
 		String tarball_url; // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
 		String zipball_url;	// "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
+		Version version; // parsed version to compare
 
 		LatestReleaseInfo() noexcept
 			:
@@ -34,7 +81,8 @@ public:
 			published_at("<unknown>"),
 			body("<unknown>"),
 			tarball_url("<unknown>"),
-			zipball_url("<unknown>")
+			zipball_url("<unknown>"),
+			version()
 		{}
 		
 		~LatestReleaseInfo() noexcept = default;
@@ -55,6 +103,8 @@ public:
 			ASSIGN_IF(info->body, "body", string);
 			ASSIGN_IF(info->tarball_url, "tarball_url", string);
 			ASSIGN_IF(info->zipball_url, "zipball_url", string);
+
+			info->version = Version(info->tag_name); // parse version
 			return info;
 
 #undef ASSIGN_IF

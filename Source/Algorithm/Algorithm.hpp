@@ -76,7 +76,7 @@ public:
 	friend inline constexpr Intent operator^= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) ^= (const byte)(b)); }
 	
 	/**
-	*	Algorithm type, AES, ChaCha...
+	*	Algorithm type: AES, ChaCha...
 	*/
 	enum class Type : byte
 	{

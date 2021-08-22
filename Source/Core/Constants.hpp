@@ -130,9 +130,11 @@ namespace Enigma
 
 		namespace Links
 		{
+			static const auto ENIGMA_GITHUB_REPOSITORY = "https://github.com/BaderEddineOuaich/Enigma"s;
+			static const auto ENIGMA_GITHUB_REPOSITORY_ISSUES = ENIGMA_GITHUB_REPOSITORY + "/issues"s;
+			static const auto ENIGMA_GITHUB_REPOSITORY_PULL_REQUESTS = ENIGMA_GITHUB_REPOSITORY + "/pulls"s;
 			static const auto ENIGMA_GITHUB_API = "https://api.github.com/repos/BaderEddineOuaich/Enigma"s;
 			static const auto ENIGMA_GITHUB_API_LATEST_RELEASE = ENIGMA_GITHUB_API + "/releases/latest"s;
-			static const auto ENIGMA_GITHUB_REPOSITORY = "https://github.com/BaderEddineOuaich/Enigma"s;
 		}
 
 		namespace Resources

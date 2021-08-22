@@ -335,6 +335,39 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
+	// Check for enigma updates from github api --check-for-updates
+	ENIGMA_TRACE("Retrieving Enigma's latest release info from {}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
+	const auto info = CheckForUpdates::GetLatestReleaseInfo();
+	if (!info) return;
+
+	const CheckForUpdates::Version current_version(ENIGMA_VERSION);
+	const CheckForUpdates::Version& latest_version = info->version;
+
+	std::ostringstream oss{};
+	if (current_version == latest_version)
+	{
+		oss << "You are using the latest Enigma version " << info->tag_name;
+	}
+	else if (latest_version > current_version)
+	{
+		oss << "New version is available!\n"
+			<< "# Name: " << info->name << '\n'
+			<< "# Version: " << info->tag_name << '\n'
+			<< "# Created At: " << info->created_at << '\n'
+			<< "# Published At: " << info->published_at << '\n'
+			<< "# What's new ?: " << info->body << '\n'
+			<< "# .tar release download url: " << info->tarball_url << '\n'
+			<< "# .zip release download url: " << info->zipball_url << '\n';
+	}
+	else if (latest_version < current_version) [[unlikely]] // please don't happen!
+	{
+		oss << "This version of Enigma is newer than the latest version available! there must have been some bug, or you have compiled Enigma with a higher version than it currently is, please report this issue to " << Constants::Links::ENIGMA_GITHUB_REPOSITORY_ISSUES;
+	}
+
+	(void)DialogUtils::Info(oss.str());
+	ENIGMA_LOG(oss.str());
+
+#if 0
 	ENIGMA_TRACE("Retrieving Enigma's latest release info from {0}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
 	const auto info = CheckForUpdates::GetLatestReleaseInfo();
 	if (!info) 
@@ -359,6 +392,7 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 	}
 	(void)DialogUtils::Info(oss.str());
 	ENIGMA_LOG(oss.str());
+#endif
 }
 
 void MainMenuScene::OnAboutMenuButtonPressed()

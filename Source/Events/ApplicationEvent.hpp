@@ -144,13 +144,13 @@ public:
 		m_filenames(filenames)
 	{}
 
-	constexpr const std::vector<fs::path>& GetFilenames() const noexcept { return m_filenames; }
+	const std::vector<fs::path>& GetFilenames() const noexcept { return m_filenames; }
 
 	EVENT_CLASS_TYPE(EventType::WINDOW_FILE_DROP);
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 
 private:
-	const std::vector<fs::path>& m_filenames;
+	std::vector<fs::path> m_filenames;
 };
 
 class AppUpdateEvent : public Event

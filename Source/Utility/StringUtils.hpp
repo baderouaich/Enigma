@@ -9,6 +9,7 @@
 #include <utility>		// std::transform
 #include <codecvt>		// helps converting between UTF-X strings
 #include <locale>		// required for linux & darwin causes error: ‘wstring_convert’ is not a member of ‘std’
+#include <vector>
 
 NS_ENIGMA_BEGIN
 /*
@@ -130,6 +131,21 @@ public:
 		return str.size() >= suffix.size() && str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 	}
 	
+	/*
+	*	Splits string at a delimiter into parts 
+	*/
+	template<typename StringType>
+	static std::vector<StringType> Split(const StringType& str, const typename String::value_type delimiter)
+	{
+		std::vector<StringType> parts{};
+		std::stringstream ss(str);
+		String line{};
+		while (std::getline(ss, line, delimiter)) 
+		{
+			parts.push_back(line);
+		}
+		return parts;
+	}
 
 	/*
 	*   Check if a string contains another

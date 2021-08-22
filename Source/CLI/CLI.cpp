@@ -24,9 +24,9 @@ CLI::CLI(const i32 argc, const char* const* argv)
 			//option, description, value, arg_help message
 			("e,encrypt", "Encrypt operation") // -e | --encrypt
 			("d,decrypt", "Decrypt operation") // -d | --decrypt
-			("m,mode", "Encryption/Decryption mode", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithmsStr()) // -m aes | --mode=aes
+			("a,algorithm", "Encryption/Decryption algorithm", cxxopts::value<std::string>()->default_value("AES"), Algorithm::GetSupportedAlgorithmsStr()) // -a aes | --algorithm=aes
 			("p,password", "Encryption password", cxxopts::value<std::string>()) // -p "mypass" | --password="mypass"
-			("t,text", "Text to Encrypt/Decrypt", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
+			("t,text", "Text to Encrypt or Decrypt (base64)", cxxopts::value<std::string>()) // -t "lorem" | --text="lorem"
 			("i,infile", "Input File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -i "C:/file" | --infile="C:/file"
 			("o,outfile", "Output File to Encrypt/Decrypt", cxxopts::value<std::string>()) // -o "C:/file" | --outfile="C:/file"			
 			("s,save", "Save encryption record to database")  // save to database
@@ -50,12 +50,12 @@ CLI::CLI(const i32 argc, const char* const* argv)
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments {} | {}", e.what(), Constants::CLI::CLI_HELP_MESSAGE);
+		ENIGMA_ERROR("Failed to parse arguments: {} | {}", e.what(), Constants::CLI::CLI_HELP_MESSAGE);
 		std::exit(EXIT_FAILURE);
 	}
 	catch (...)
 	{
-		ENIGMA_ERROR("Failed to parse arguments UNKNOWN ERROR");
+		ENIGMA_ERROR("Failed to parse arguments: UNKNOWN ERROR");
 		std::exit(EXIT_FAILURE);
 	}
 }
@@ -90,11 +90,11 @@ i32 CLI::Run()
 		return EXIT_SUCCESS;
 	}
 
-	ENIGMA_LOG(("Processing arguments..."));
+	ENIGMA_LOG("Processing arguments...");
 
 	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
 	Algorithm::Intent intent{}; // Encrypt or Decrypt? to save memory resources not needed in a specific operation
-	String mode{}; // "aes", "tripledes"..
+	String algo{}; // "aes", "tripledes"..
 	String password{}; // Encryption password 
 	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
 	String infilename{}; // In file to encrypt if mode is --encrypt, otherwise file to be decrypted
@@ -116,21 +116,14 @@ i32 CLI::Run()
 		else
 			throw std::runtime_error("You should specify whether you want to encrypt -e or decrypt -d");
 
-		// White algorithm mode are we using ?
-		if (r.count("m") || r.count("mode")) // --m=aes or --mode=aes or chacha..
+		// White algorithm are we using ?
+		if (r.count("a") || r.count("algorithm")) // --a=aes or --algorithm=aes or chacha..
 		{
-			mode = r["m"].as<String>();
-
-			// Hardcoded argh!! >_<
-			//if (m == "aes") mode = Algorithm::Type::AES;
-			//else if (m == "chacha") mode = Algorithm::Type::ChaCha20;
-			//else if (m == "tripledes") mode = Algorithm::Type::TripleDES;
-			//else throw std::runtime_error("Unsupported algorithm mode: " + m);
-
-			//LOG("Mode: {0}", m);
+			algo = r["a"].as<String>();
+			//LOG("Algorithm: {0}", m);
 		}
-		else if(intent & Algorithm::Intent::Encrypt) // If intent is encrypting, mode is required, otherwise we can detect which mode used for encryption.
-			throw std::runtime_error("You should specify an encryption mode example -m aes, unless you are decrypting, then we can auto-detect the mode used for encryption.");
+		else if(intent & Algorithm::Intent::Encrypt) // If intent is encrypting, algorithm is required, otherwise we can detect which mode used for encryption.
+			throw std::runtime_error("You should specify an encryption algorithm example -a aes, unless you are decrypting, then we can auto-detect the algorithm used for encryption.");
 		// What is the encryption/decryption password?
 		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
 		{
@@ -169,8 +162,8 @@ i32 CLI::Run()
 		///============ Call Scenarios ============///
 
 		// Create polymorphic Algorithm type
-		// if mode is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
-		if (mode.empty())
+		// if algorithm is not set, probably user forgot which algorithm used in encryption? auto-detect it then...since first character of cipher is Algorithm::Type enum id
+		if (algo.empty())
 		{
 			Algorithm::Type type{};
 			if (!text.empty()) // Cipher Base64 Text
@@ -188,7 +181,7 @@ i32 CLI::Run()
 		}
 		else
 		{
-			algorithm = Algorithm::CreateFromName(mode, intent);
+			algorithm = Algorithm::CreateFromName(algo, intent);
 		}
 
 
@@ -242,12 +235,12 @@ i32 CLI::Run()
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments {}", CryptoPPUtils::GetFullErrorMessage(e));
+		ENIGMA_ERROR("Failed to parse arguments: {}", CryptoPPUtils::GetFullErrorMessage(e));
 		return EXIT_FAILURE;
 	}
 	catch (const std::exception& e)
 	{
-		ENIGMA_ERROR("Failed to parse arguments {}", e.what());
+		ENIGMA_ERROR("Failed to parse arguments: {}", e.what());
 		return EXIT_FAILURE;
 	}
 	catch (...)
@@ -260,7 +253,7 @@ i32 CLI::Run()
 
 void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool save_to_database)
 {
-	// assert the pw size is 9 or more
+	// assert the pw size is 6 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH,
 		fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 
@@ -313,9 +306,9 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 
 void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& cipher_base64)
 {
-	// assert the pw size is 9 or more
+	// assert the pw size is 6 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
-		fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		fmt::format("Password is too weak! encryption passwords are mimimum {} characters", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 
 	String cipher{}, decrypted_text{};
 	f64 elapsed_seconds{ 0.0 };
@@ -337,7 +330,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(!recovered_text.empty(), ("Failed to decompress recovered text"));
 
 	ENIGMA_INFO(recovered_text);
-	ENIGMA_LOG(("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds));
+	ENIGMA_LOG("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds);
 
 	cipher.clear();
 	decrypted_text.clear();
@@ -523,6 +516,37 @@ void CLI::OnVersion()
 
 void CLI::OnCheckForUpdates()
 {
+	// Check for enigma updates from github api --check-for-updates
+	ENIGMA_TRACE("Retrieving Enigma's latest release info from {}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
+	const auto info = CheckForUpdates::GetLatestReleaseInfo();
+	if (!info) return;
+
+	const CheckForUpdates::Version current_version(ENIGMA_VERSION);
+	const CheckForUpdates::Version& latest_version = info->version;
+
+	std::ostringstream oss{};
+	if (current_version == latest_version)
+	{ 
+		oss << "You are using the latest Enigma version " << info->tag_name;
+	}
+	else if (latest_version > current_version)
+	{
+		oss << "New version is available!\n"
+			<< "# Name: " << info->name << '\n'
+			<< "# Version: " << info->tag_name << '\n'
+			<< "# Created At: " << info->created_at << '\n'
+			<< "# Published At: " << info->published_at << '\n'
+			<< "# What's new ?: " << info->body << '\n'
+			<< "# .tar release download url: " << info->tarball_url << '\n'
+			<< "# .zip release download url: " << info->zipball_url << '\n';
+	}
+	else if (latest_version < current_version) [[unlikely]] // please don't happen!
+	{
+		oss << "This version of Enigma is newer than the latest version available! there must have been some bug, or you have compiled Enigma with a higher version than it currently is, please report this issue to " << Constants::Links::ENIGMA_GITHUB_REPOSITORY_ISSUES;
+	}
+	ENIGMA_LOG(oss.str());
+
+#if 0
 	// Check for enigma updates from github api --updates | -n 
 	ENIGMA_TRACE("Retrieving Enigma's latest release info from {0}...", Enigma::Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE);
 	const auto info = CheckForUpdates::GetLatestReleaseInfo();
@@ -547,6 +571,7 @@ void CLI::OnCheckForUpdates()
 			<< "# .zip release download url: " << info->zipball_url << '\n';
 	}
 	ENIGMA_LOG(oss.str());
+#endif
 }
 
 NS_ENIGMA_END

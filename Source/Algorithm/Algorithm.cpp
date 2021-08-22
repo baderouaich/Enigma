@@ -24,31 +24,31 @@ Algorithm::Algorithm(Type type, Intent intent) noexcept
 Algorithm::~Algorithm() noexcept {}
 
 
-std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& name, const Intent intent)
+std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& algorithm_name, const Intent intent)
 {
-	const String mode = StringUtils::LowerCopy(name);
+	const String algo = StringUtils::LowerCopy(algorithm_name);
 
-	const auto ModeIn = [&mode](const std::vector<std::string_view>& v) -> bool
+	const auto AlgoIn = [&algo](const std::vector<std::string_view>& v) noexcept -> bool
 	{
-		return std::find(v.begin(), v.end(), mode) != v.end();
+		return std::find(v.begin(), v.end(), algo) != v.end();
 	};
 
-	if (ModeIn({ "aes", "aes-gcm", "aes_gcm", "aesgcm" }))
+	if (AlgoIn({ "aes", "aes-gcm", "aes_gcm", "aesgcm" }))
 		return std::make_unique<AES>(intent);
-	else if (ModeIn({ "chacha", "chacha20", "salsa", "salsa20", "chacha20poly1305", "salsapoly1305", "salsa20poly1305" }))
+	else if (AlgoIn({ "chacha", "chacha20", "salsa", "salsa20", "chacha20poly1305", "salsapoly1305", "salsa20poly1305" }))
 		return std::make_unique<ChaCha20Poly1305>(intent);
-	else if (ModeIn({ "tripledes", "triple-des", "tripledes-eax", "tripledes_eax", "tripledeseax", "triple" }))
+	else if (AlgoIn({ "tripledes", "triple-des", "tripledes-eax", "tripledes_eax", "tripledeseax", "triple" }))
 		return std::make_unique<TripleDES>(intent);
-	else if (ModeIn({ "twofish", "twofish-gcm", "2fish", "twofish_gcm", "twofishgcm" }))
+	else if (AlgoIn({ "twofish", "twofish-gcm", "2fish", "twofish_gcm", "twofishgcm" }))
 		return std::make_unique<Twofish>(intent);
-	else if (ModeIn({ "idea", "idea-eax", "idea_eax", "ideaeax" }))
+	else if (AlgoIn({ "idea", "idea-eax", "idea_eax", "ideaeax" }))
 		return std::make_unique<IDEA>(intent);
-	else if (ModeIn({ "blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax" }))
+	else if (AlgoIn({ "blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax" }))
 		return std::make_unique<Blowfish>(intent);
-	//else if (ModeIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
+	//else if (AlgoIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
 	//	return std::make_unique<RSA>(intent);
 	else
-		throw std::runtime_error("Unsupported algorithm mode: " + mode);
+		throw std::runtime_error("Unsupported algorithm: " + algorithm_name);
 }
 
 std::unique_ptr<Algorithm> Algorithm::CreateFromType(const Type type, const Intent intent)
@@ -74,7 +74,7 @@ Algorithm::Type Algorithm::DetectFromCipher(const String& cipher)
 
 	// Check if we detected a valid encryption algorithm mode
 	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::BEGIN), static_cast<byte>(Algorithm::Type::END)),
-		"Could not auto-detect algorithm mode used for encryption");
+		"Could not auto-detect algorithm used for encryption");
 
 	// if alles gut, return type
 	return static_cast<Algorithm::Type>(cipher_first_byte);
@@ -108,7 +108,7 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 	//ENIGMA_ASSERT_OR_THROW(FileUtils::Read(filename, cipher), "Failed to read file " + filename);
 	////NOTE: no need to decompress, since files and text are encrypted after compressed.
 
-	// extract first byte from infile cipher which must be the mode type used in encryption
+	// extract first byte from infile cipher which must be the algorithm type used in encryption
 	byte cipher_first_byte = static_cast<byte>(Algorithm::Type::END) + 1;
 	if (std::ifstream ifs{ filename, std::ios::binary | std::ios::in })
 	{
@@ -116,9 +116,9 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 		ifs.close();
 	}
 
-	// Check if we detected a valid encryption algorithm mode
+	// Check if we detected a valid encryption algorithm
 	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::BEGIN), static_cast<byte>(Algorithm::Type::END)),
-		"Could not auto-detect algorithm mode used for encryption");
+		"Could not auto-detect algorithm used for encryption");
 
 	return static_cast<Algorithm::Type>(cipher_first_byte);
 }
@@ -126,19 +126,19 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 
 String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 {
-#define CASE_ENUM(e) case Algorithm::Type::e: return String(#e)
+#define CASE_RET(e) case Algorithm::Type::e: return String(#e)
 	switch (e)
 	{
-		CASE_ENUM(AES);
-		CASE_ENUM(Twofish);
-		CASE_ENUM(TripleDES);
-		CASE_ENUM(Blowfish);
-		CASE_ENUM(IDEA);
-		CASE_ENUM(ChaCha20Poly1305);
-	//	CASE_ENUM(RSA);
+		CASE_RET(AES);
+		CASE_RET(Twofish);
+		CASE_RET(TripleDES);
+		CASE_RET(Blowfish);
+		CASE_RET(IDEA);
+		CASE_RET(ChaCha20Poly1305);
+	//	CASE_RET(RSA);
 		default: return "<unknown algorithm>";
 	}
-#undef CASE_ENUM
+#undef CASE_RET
 }
 
 

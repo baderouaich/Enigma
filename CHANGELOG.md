@@ -1,3 +1,7 @@
+# 2.0.0
+- Changed CLI option --mode,-m to --algorithm,-a
+
+
 # 1.4.0
 - Upgraded portable-file-dialogs library after issue https://github.com/samhocevar/portable-file-dialogs/issues/50 Fixed
 - Upgraded ImGui library from 1.81 to 1.83 (master branch)

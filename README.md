@@ -66,9 +66,9 @@ Usage:
 
   -e, --encrypt                 Encrypt operation
   -d, --decrypt                 Decrypt operation
-  -m, --mode [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption mode (default: AES)
+  -a, --algorithm [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption algorithm (default: AES)
   -p, --password arg            Encryption password
-  -t, --text arg                Text to Encrypt/Decrypt
+  -t, --text arg                Text to Encrypt or Decrypt (base64)
   -i, --infile arg              Input File to Encrypt/Decrypt
   -o, --outfile arg             Output File to Encrypt/Decrypt
   -s, --save                    Save encryption record to database
@@ -77,9 +77,10 @@ Usage:
   -v, --version                 Displays Enigma's version
       --check-for-updates       Check for new version releases
 ```
+
 - Example encypting a text with AES-GCM:<br>
 ```batch
-./Enigma -e --mode=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
+./Enigma -e --algorithm=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
 output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT
 ```
 - Example decrypting a text with AES-GCM:<br>
@@ -91,7 +92,7 @@ output: my important data securly encrypted!
 
 - Example encypting a file with AES-GCM:<br>
 ```batch
-./Enigma -e --mode=aes --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data.txt" --outfile="/home/user/Desktop/Data_encrypted.txt.enigma"
+./Enigma -e --algorithm=aes --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data.txt" --outfile="/home/user/Desktop/Data_encrypted.txt.enigma"
 ```
 - Example decypting a file with AES-GCM:<br>
 ```batch

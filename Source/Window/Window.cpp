@@ -202,10 +202,10 @@ bool Window::InitGLFWCallbacks()
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 
 			std::vector<fs::path> filenames{};
-			filenames.reserve(path_count);
+			filenames.reserve(static_cast<size_t>(path_count));
 			for (int i = 0; i < path_count; i++)
 			{
-				filenames.emplace_back(fs::path(paths[i]));
+				filenames.emplace_back(paths[i]);
 			}
 
 			WindowFileDropEvent event(filenames);
