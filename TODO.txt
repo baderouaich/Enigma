@@ -1,4 +1,7 @@
 ========================= IN PROGRESS =============================
+- in version 2.0.0, change cli --mode to --algorithm,-a
+- Filesystem manager to get paths to files, Filesystem::GetEnigmaExePath(), Filesystem::Get(ResoucesEnum::FontsEnum::Font1)  (ResoucesEnum::ImagesEnum::Icon)
+- Make hashing algorithms in a combo box instead of radio buttons
 - On checking for new version, check major and minor if greater than current to inform user if he has an old version
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html

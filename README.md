@@ -46,7 +46,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :hammer_and_wrench: Useful tools like Password Generator, Hashing and System & Hardware Information
 - :computer: User Interface & Command-Line Interface support
 - :shield: Strongest Encryption Algorithms of the Decade
-- :package:	GZip Compression by default to reduce cipher size if sharing or uploading to clouds
+- :package: GZip Compression by default to reduce cipher size if sharing or uploading to clouds
 - :briefcase: SQLite3 Database system to save, import and export encryption records
 - :octocat: Open Source of course!
 -->
@@ -78,23 +78,23 @@ Usage:
       --check-for-updates       Check for new version releases
 ```
 - Example encypting a text with AES-GCM:<br>
-```text
+```batch
 ./Enigma -e --mode=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
 output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT
 ```
 - Example decrypting a text with AES-GCM:<br>
-```text
+```batch
 ./Enigma -d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
 output: my important data securly encrypted!
 ```
 <!--<img src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>-->
 
 - Example encypting a file with AES-GCM:<br>
-```text
+```batch
 ./Enigma -e --mode=aes --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data.txt" --outfile="/home/user/Desktop/Data_encrypted.txt.enigma"
 ```
 - Example decypting a file with AES-GCM:<br>
-```text
+```batch
 ./Enigma -d --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
 ```
 <!-- <img src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
@@ -140,8 +140,8 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 ### Linux
  - Install latest c++ compiler (gcc or clang)<br>
   `$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
-	`$ sudo apt update`<br>
-	gcc: `$ sudo apt install gcc-10 g++-10` or clang: `$ sudo apt install clang-10 clang++-10`<br>
+  `$ sudo apt update`<br>
+  gcc: `$ sudo apt install gcc-10 g++-10` or clang: `$ sudo apt install clang-10 clang++-10`<br>
  - Install necessary libs (opengl, x11, ...)<br>
   `$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev`
  - Extract premake5 binary<br>
