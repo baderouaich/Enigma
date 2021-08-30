@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.hpp"
-using namespace Enigma;
+#include <Algorithm/Algorithm.hpp>
 
 NS_ENIGMA_BEGIN
 class DecryptTextScene : public Enigma::Scene

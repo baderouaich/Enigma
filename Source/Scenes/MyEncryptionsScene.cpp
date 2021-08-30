@@ -4,6 +4,8 @@
 #include <Utility/DialogUtils.hpp>
 
 #include <imgui.h>
+#include <Application/Application.hpp>
+#include <GUI/ImGuiWidgets.hpp>
 
 
 NS_ENIGMA_BEGIN
@@ -71,7 +73,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 	{
 #pragma region Back button [<] & Scene Title
 		static const auto& title_font = font_audiowide_regular_30;
-		static const String title = ("My Encryptions");
+		static const String title = "My Encryptions";
 		static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
 		static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -301,14 +303,14 @@ void MyEncryptionsScene::OnImGuiDraw()
 					//for (const auto& enc_ptr : m_isSearching ? m_search_encryptions : m_encryptions)
 					for (const auto& enc_ptr : m_encryptions)
 					{
-						const auto& [id, title, _, date_time, size, is_file] = *enc_ptr;
+						const auto& [id, _title, _, date_time, size, is_file] = *enc_ptr;
 
-						// id, title, date_time, size, is_file
+						// id, _title, date_time, size, is_file
 						ImGui::TableNextRow();
 						ImGui::TableSetColumnIndex(0);
 						ImGui::Text("%zd", id);
 						ImGui::TableSetColumnIndex(1);
-						ImGui::TextWrapped("%s", title.c_str());
+						ImGui::TextWrapped("%s", _title.c_str());
 						ImGui::TableSetColumnIndex(2);
 						ImGui::Text("%s", date_time.c_str());
 						ImGui::TableSetColumnIndex(3);
@@ -353,10 +355,10 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			{
 
-				static const String text = m_isSearching ? ("No Encryptions found") : ("No Encryptions saved yet");
-				static const ImVec2 text_size(ImGui::CalcTextSize(text.c_str()).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text.c_str()).y * font_montserrat_medium_18->Scale);
+				const char* text = m_isSearching ? ("No Encryptions found") : ("No Encryptions saved yet");
+				static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
 				ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
-				ImGui::Text(text.c_str());
+				ImGui::Text(text);
 			}
 			ImGui::PopStyleColor(1);
 			ImGui::PopFont();

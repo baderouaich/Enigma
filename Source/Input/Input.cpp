@@ -2,6 +2,7 @@
 #include "Input.hpp"
 
 #include <GLFW/glfw3.h>
+#include <Application/Application.hpp>
 
 NS_ENIGMA_BEGIN
 

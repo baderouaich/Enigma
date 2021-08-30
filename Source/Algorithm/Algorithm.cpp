@@ -8,6 +8,9 @@
 #include "IDEA/IDEA.hpp"
 #include "Blowfish/Blowfish.hpp"
 //#include "RSA/RSA.hpp"
+#include <Utility/StringUtils.hpp>
+#include <Utility/Base64.hpp>
+#include <Utility/FileUtils.hpp>
 
 NS_ENIGMA_BEGIN
 

@@ -1,5 +1,6 @@
 #include <pch.hpp>
 #include "RAMInfo.hpp"
+#include <Utility/MathUtils.hpp>
 
 NS_ENIGMA_BEGIN
 

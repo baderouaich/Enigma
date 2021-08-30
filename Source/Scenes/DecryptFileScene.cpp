@@ -6,6 +6,9 @@
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <System/Dialogs/SaveFileDialog.hpp>
 #include <System/Dialogs/SelectFolderDialog.hpp>
+#include <Events/EventDispatcher.hpp>
+#include <Utility/StringUtils.hpp>
+#include <Utility/GZip.hpp>
 //#include <Scenes/RSAScene.hpp>
 
 NS_ENIGMA_BEGIN
@@ -427,7 +430,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(file_written_success, ("Failed to write buffer to file {}", m_out_filename));
 
 			// Alert user that decryption was successfull
-			const String msg = ("Decrypted {} to {} successfully, decompression increased file size by {}",
+			const String msg = fmt::format("Decrypted {} to {} successfully, decompression increased file size by {}",
 				fs::path(m_in_filename).filename(),
 				fs::path(m_out_filename).filename(),
 				SizeUtils::FriendlySize(increased_bytes));

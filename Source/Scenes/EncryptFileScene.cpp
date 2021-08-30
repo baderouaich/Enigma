@@ -1,11 +1,15 @@
 #include "pch.hpp"
 #include "EncryptFileScene.hpp"
 #include <GUI/ImGuiWidgets.hpp>
+#include <Database/Database.hpp>
+#include <Events/EventDispatcher.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <System/Dialogs/MessageBox.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
 #include <System/Dialogs/SaveFileDialog.hpp>
 #include <System/Dialogs/SelectFolderDialog.hpp>
+#include <Utility/GZip.hpp>
+#include <Database/Models/Encryption.hpp>
 //#include <Scenes/RSAScene.hpp>
 
 NS_ENIGMA_BEGIN
@@ -392,15 +396,15 @@ void EncryptFileScene::OnEncryptButtonPressed()
 	}
 	else if (!fs::exists(m_in_filename))
 	{
-		(void)DialogUtils::Warn(("File {} does not exist", m_in_filename));
+		(void)DialogUtils::Warn(fmt::format("File {} does not exist", m_in_filename));
 	}
 	else if (!fs::is_regular_file(m_in_filename))
 	{
-		(void)DialogUtils::Warn(("File {} is not a regular file", m_in_filename));
+		(void)DialogUtils::Warn(fmt::format("File {} is not a regular file", m_in_filename));
 	}
 	else if (fs::is_empty(m_in_filename))
 	{
-		(void)DialogUtils::Warn(("File {} is empty", m_in_filename));
+		(void)DialogUtils::Warn(fmt::format("File {} is empty", m_in_filename));
 		return;
 	}
 	//outfile checks
@@ -419,7 +423,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 	}
 	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 	{
-		(void)DialogUtils::Warn(("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		(void)DialogUtils::Warn(fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 	}
 	else if (m_password != m_confirm_password)
 	{
@@ -435,8 +439,8 @@ void EncryptFileScene::OnEncryptButtonPressed()
 
 			// Read in file buffer
 			String buffer{};
-			ENIGMA_ASSERT_OR_THROW(FileUtils::Read(m_in_filename, buffer), ("Failed to read buffer from file {}", m_in_filename));
-			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ("Nothing to encrypt! File {} is empty", m_in_filename));
+			ENIGMA_ASSERT_OR_THROW(FileUtils::Read(m_in_filename, buffer), fmt::format("Failed to read buffer from file {}", m_in_filename));
+			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), fmt::format("Nothing to encrypt! File {} is empty", m_in_filename));
 			
 			/*
 			Note: You should compress before encrypting. Encryption turns your data into high-entropy data,
@@ -472,7 +476,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			}
 
 			// Alert user that encryption was successfull
-			const String msg = ("Encrypted {} to {} Successfully\nCompression Status: File size decreased by {}",
+			const String msg = fmt::format("Encrypted {} to {} Successfully\nCompression Status: File size decreased by {}",
 				fs::path(m_in_filename).filename(),
 				fs::path(m_out_filename).filename(),
 				SizeUtils::FriendlySize(decreased_bytes));

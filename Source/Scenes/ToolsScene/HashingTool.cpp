@@ -3,6 +3,8 @@
 #include <System/Clipboard/Clipboard.hpp>
 #include <Utility/CryptoPPUtils.hpp> 
 #include <Utility/DialogUtils.hpp> 
+#include <Application/Application.hpp> 
+#include <GUI/ImGuiWidgets.hpp>
 
 NS_ENIGMA_BEGIN
 void HashingTool::OnCreate()

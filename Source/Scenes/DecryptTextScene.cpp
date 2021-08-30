@@ -3,6 +3,8 @@
 #include <GUI/ImGuiWidgets.hpp>
 #include <Utility/DialogUtils.hpp>
 #include <Utility/Base64.hpp>
+#include <System/Clipboard/Clipboard.hpp>
+#include <Utility/GZip.hpp>
 //#include <Scenes/RSAScene.hpp>
 
 NS_ENIGMA_BEGIN

@@ -1,11 +1,13 @@
 #include <pch.hpp>
 #include "ToolsScene.hpp"
 #include <imgui.h>
+#include <Application/Application.hpp>
 
 #include "PasswordGeneratorTool.hpp"
 #include "HashingTool.hpp"
 #include "XOREncryptionTool.hpp"
 #include "SystemAndHardwareInfoTool.hpp"
+#include <GUI/ImGuiWidgets.hpp>
 
 NS_ENIGMA_BEGIN
 

@@ -47,7 +47,6 @@
 #include <Logger/Logger.hpp>
 //
 
-
 // GUI 
 #include <GUI/ImGuiRenderer.hpp>
 #include <GUI/ImGuiWidgets.hpp>

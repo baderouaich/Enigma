@@ -1,8 +1,14 @@
 #include <pch.hpp>
 #include "CLI.hpp"
+#include <Database/Models/Encryption.hpp>
+#include <Database/Database.hpp>
 #include <Utility/DialogUtils.hpp>
-
-#include <tabulate.hpp> // Table Maker for Modern C++ library
+#include <Utility/Base64.hpp>
+#include <Utility/GZip.hpp>
+#include <Utility/SizeUtils.hpp>
+#include <Utility/StringUtils.hpp>
+#include <Utility/FileUtils.hpp>
+#include <Networking/CheckForUpdates.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -540,7 +546,7 @@ void CLI::OnCheckForUpdates()
 			<< "# .tar release download url: " << info->tarball_url << '\n'
 			<< "# .zip release download url: " << info->zipball_url << '\n';
 	}
-	else if (latest_version < current_version) [[unlikely]] // please don't happen!
+	else if (latest_version < current_version) // [[unlikely]] // please don't happen!
 	{
 		oss << "This version of Enigma is newer than the latest version available! there must have been some bug, or you have compiled Enigma with a higher version than it currently is, please report this issue to " << Constants::Links::ENIGMA_GITHUB_REPOSITORY_ISSUES;
 	}

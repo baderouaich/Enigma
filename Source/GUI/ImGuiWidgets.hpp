@@ -7,6 +7,7 @@
 #include <Utility/SizeUtils.hpp>
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <Application/Application.hpp>
 
 NS_ENIGMA_BEGIN
 

@@ -18,35 +18,68 @@
 #endif
 ///
 
+///// ENIGMA Headers
+//#include "Enigma.hpp"
+/////
 
-/// ENIGMA Headers
-#include "Enigma.hpp"
-///
 
 /// OpenGL: GLAD
+#pragma warning(push, 0)
 #include <glad/glad.h>
+#pragma warning(pop)
 ///
 
 /// Graphic library framwork: GLFW
+#pragma warning(push, 0)
 #include <GLFW/glfw3.h>
+#pragma warning(pop)
 ///
 
 /// UI: ImGui
+#pragma warning(push, 0)
 #include <imgui.h>
+#pragma warning(pop)
 ///
 
-
 /// Logger: SpdLog
+#pragma warning(push, 0)
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
-/// FMT: already included in SpdLog
-#include <spdlog/fmt/fmt.h>
+#include <spdlog/fmt/fmt.h> /// FMT: already embedded in SpdLog
+#pragma warning(pop)
 ///
 
 
 /// pfd: portable file dialog
+#pragma warning(push, 0)
 #include <portable-file-dialogs.h>
+#pragma warning(pop)
+///
+
+/// tablulate: cli table maker
+#pragma warning(push, 0)
+#include <tabulate.hpp>
+#pragma warning(pop)
+///
+
+
+/// cxxopts: CMD parser library
+#pragma warning(push, 0)
+#include <cxxopts.hpp>
+#pragma warning(pop)
+///
+
+/// cpr: cURL c++ wrapper
+#pragma warning(push, 0)
+#include <cpr/cpr.h>
+#pragma warning(pop)
+///
+
+/// nlohmann-json: json parser library
+#pragma warning(push, 0)
+#include <json.hpp> // nlohmann-json
+#pragma warning(pop)
 ///
 
 

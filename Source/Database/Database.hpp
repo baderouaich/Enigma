@@ -5,11 +5,14 @@
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include "Models/Encryption.hpp"
+#include <Utility/SizeUtils.hpp>
+#include <Utility/StringUtils.hpp>
 
 #include <SQLiteCpp/SQLiteCpp.h>
 
 #include <memory>
 #include <vector>
+
 
 NS_ENIGMA_BEGIN
 /*

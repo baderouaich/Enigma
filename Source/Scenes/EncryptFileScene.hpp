@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.hpp"
+#include <Algorithm/Algorithm.hpp>
 
 NS_ENIGMA_BEGIN
 class EncryptFileScene : public Scene

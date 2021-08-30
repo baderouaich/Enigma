@@ -8,9 +8,18 @@
 
 #include <memory>
 
-#include <cpr/cpr.h> // cpr (cURL c++ wrapper)
+/// cpr: cURL c++ wrapper
+#pragma warning(push, 0)
+#include <cpr/cpr.h>
+#pragma warning(pop)
+///
+
+/// nlohmann-json: json parser library
+#pragma warning(push, 0)
 #include <json.hpp> // nlohmann-json
-using namespace nlohmann;
+#pragma warning(pop)
+///
+
 
 NS_ENIGMA_BEGIN
 class ENIGMA_API CheckForUpdates final
@@ -87,7 +96,7 @@ public:
 		
 		~LatestReleaseInfo() noexcept = default;
 
-		static std::unique_ptr<LatestReleaseInfo> FromJson(const json& obj)
+		static std::unique_ptr<LatestReleaseInfo> FromJson(const nlohmann::json& obj)
 		{
 #define CC1(a, b) a##b
 #define CC(a, b) CC1(a, b)
@@ -144,7 +153,7 @@ public:
 			cpr::Response response = cpr::Get(url);
 			if (response.status_code == cpr::status::HTTP_OK)
 			{
-				json data = json::parse(response.text);
+				nlohmann::json data = nlohmann::json::parse(response.text);
 				return LatestReleaseInfo::FromJson(data);
 			}
 			else

@@ -13,7 +13,12 @@
 #include <Algorithm/IDEA/IDEA.hpp>
 //#include <Algorithm/RSA/RSA.hpp>
 
-#include <cxxopts.hpp> // CMD parser library
+/// cxxopts: CMD parser library
+#pragma warning(push, 0)
+#include <cxxopts.hpp>
+#pragma warning(pop)
+///
+
 
 /*
 Example encypting a text with AES-GCM:

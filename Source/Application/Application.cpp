@@ -9,6 +9,8 @@
 
 #include <Scenes/MainMenuScene.hpp>
 #include <Scenes/LoadingScene.hpp>
+#include <Events/EventDispatcher.hpp>
+#include <Utility/OpenGLUtils.hpp>
 
 NS_ENIGMA_BEGIN
 

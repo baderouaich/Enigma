@@ -3,6 +3,10 @@
 
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
+#include <Events/ApplicationEvent.hpp>
+#include <Events/KeyEvent.hpp>
+#include <Events/MouseEvent.hpp>
+#include <Utility/SizeUtils.hpp>
 
 NS_ENIGMA_BEGIN
 

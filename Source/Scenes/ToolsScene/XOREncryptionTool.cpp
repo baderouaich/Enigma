@@ -1,5 +1,10 @@
 #include "pch.hpp"
 #include "XOREncryptionTool.hpp"
+#include <Application/Application.hpp>
+#include <GUI/ImGuiWidgets.hpp>
+#include <Utility/DialogUtils.hpp>
+#include <System/Clipboard/Clipboard.hpp>
+#include <Utility/Base64.hpp>
 
 NS_ENIGMA_BEGIN
 void XOREncryptionTool::OnCreate()

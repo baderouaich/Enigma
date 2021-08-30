@@ -1,7 +1,13 @@
 #include <pch.hpp>
 #include "ViewEncryptionScene.hpp"
+#include <Utility/DialogUtils.hpp>
+#include <Application/Application.hpp>
 
 #include <imgui.h>
+#include <GUI/ImGuiWidgets.hpp>
+#include <Algorithm/Algorithm.hpp>
+#include <Utility/GZip.hpp>
+#include <System/Clipboard/Clipboard.hpp>
 
 NS_ENIGMA_BEGIN
 

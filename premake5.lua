@@ -27,6 +27,7 @@ workspace "Enigma"  -- Workspace which is the solution in windows
 	flags
 	{
 		"MultiProcessorCompile", -- Speed up compile time, Enable Visual Studio to use multiple compiler processes when building.
+		"FatalWarnings" -- Treat all warnings as errors; equivalent to FatalCompileWarnings, FatalLinkWarnings	
 	}
 
 
@@ -91,7 +92,7 @@ project "Enigma"
 	objdir ("%{wks.location}/Bin-Intermediate/" .. outputdir .. "/%{prj.name}")
 	--debugdir ("%{wks.location}/")
 
-	---[[ Enable the toolset's maximum warning level ]]---
+	---[[ Enable the toolset's maximum warning level (also using fatal warnings flags or -Werror)]]---
 	warnings "Extra"
 
 	--[[ 
@@ -110,7 +111,8 @@ project "Enigma"
 
 	---[[ Disable RTTI to optimize if we're not using dynamic_cast or typeid ]]---
 	--rtti "Off"
-	
+	--exceptionhandling "Off"
+
 	---[[ Source files ]]---
 	files
 	{

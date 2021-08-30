@@ -4,7 +4,12 @@
 
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
+
 #include <Events/Event.hpp>
+#include <Events/EventDispatcher.hpp>
+#include <Events/ApplicationEvent.hpp>
+#include <Events/KeyEvent.hpp>
+#include <Events/MouseEvent.hpp>
 
 #include <mutex>
 

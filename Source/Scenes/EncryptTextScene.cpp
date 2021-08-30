@@ -4,6 +4,9 @@
 #include <GUI/ImGuiWidgets.hpp>
 #include <Utility/GZip.hpp>
 #include <System/Clipboard/Clipboard.hpp>
+#include <Utility/Base64.hpp>
+#include <Database/Database.hpp>
+#include <Database/Models/Encryption.hpp>
 //#include <Scenes/RSAScene.hpp>
 
 NS_ENIGMA_BEGIN
@@ -152,7 +155,7 @@ void EncryptTextScene::OnImGuiDraw()
 			if (m_save_to_database)
 			{
 				ImGui::Text("%s:", ("Encryption Title"));
-				ImGuiWidgets::InputTextWithHint("##idb", ("(example > An important message) helps with searching through encryption records in the future"), &m_db_title, win_w / 1.3f);
+				ImGuiWidgets::InputTextWithHint("##idb", "(example: An important message) helps with searching through encryption records in the future", &m_db_title, win_w / 1.3f);
 			}
 		}
 		ImGui::PopFont();
@@ -319,7 +322,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 	}
 	else if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH)
 	{
-		(void)DialogUtils::Warn(("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+		(void)DialogUtils::Warn(fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 	}
 	else if (m_password != m_confirm_password)
 	{

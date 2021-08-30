@@ -359,7 +359,7 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 			<< "# .tar release download url: " << info->tarball_url << '\n'
 			<< "# .zip release download url: " << info->zipball_url << '\n';
 	}
-	else if (latest_version < current_version) [[unlikely]] // please don't happen!
+	else if (latest_version < current_version) // [[unlikely]] // please don't happen!
 	{
 		oss << "This version of Enigma is newer than the latest version available! there must have been some bug, or you have compiled Enigma with a higher version than it currently is, please report this issue to " << Constants::Links::ENIGMA_GITHUB_REPOSITORY_ISSUES;
 	}

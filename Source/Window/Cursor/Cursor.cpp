@@ -1,5 +1,6 @@
 #include <pch.hpp>
 #include "Cursor.hpp"
+#include <Logger/Logger.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
