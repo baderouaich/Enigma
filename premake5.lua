@@ -27,7 +27,6 @@ workspace "Enigma"  -- Workspace which is the solution in windows
 	flags
 	{
 		"MultiProcessorCompile", -- Speed up compile time, Enable Visual Studio to use multiple compiler processes when building.
-		"FatalWarnings" -- Treat all warnings as errors; equivalent to FatalCompileWarnings, FatalLinkWarnings	
 	}
 
 
@@ -200,6 +199,10 @@ project "Enigma"
 		links
 		{
 			"opengl32" -- Loads windows opengl32 kernel .lib
+		}
+		flags
+		{
+			"FatalWarnings" -- Treat all warnings as errors; equivalent to FatalCompileWarnings, FatalLinkWarnings	
 		}
 
 	filter "system:linux"
