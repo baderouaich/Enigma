@@ -215,6 +215,73 @@ bool Database::DeleteEncryption(const i64 ide)
 	}
 }
 
+bool Database::DeleteAllEncryptions()
+{
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
+	try
+	{
+		auto transaction = std::make_unique<SQLite::Transaction>(*m_database);
+
+		// Delete everything from Cipher
+		{
+			constexpr const char* sql = "DELETE FROM Cipher";
+#if defined(ENIGMA_DEBUG)
+			ENIGMA_LOG("SQL: {0}", sql);
+#endif
+			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
+			[[maybe_unused]] auto _ = query->exec();
+		}
+
+		// Delete everything from Encryption
+		{
+			constexpr const char* sql = "DELETE FROM Encryption";
+#if defined(ENIGMA_DEBUG)
+			ENIGMA_LOG("SQL: {0}", sql);
+#endif
+			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
+			[[maybe_unused]] auto _ = query->exec();
+		}
+
+		// OK
+		transaction->commit();
+
+		return true;
+	}
+	catch (const SQLite::Exception& e)
+	{
+		ENIGMA_ERROR(e.what());
+		return false;
+	}
+}
+
+i64 Database::GetEncryptionsCount()
+{
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
+
+	try
+	{
+		// Make sql
+		constexpr const char* sql = "SELECT COUNT(*) FROM Encryption";
+#if defined(ENIGMA_DEBUG)
+		ENIGMA_LOG("SQL: {0}", sql);
+#endif
+		// Execute sql
+		const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
+		ENIGMA_ASSERT_OR_THROW(query->executeStep(), "Failed to execute step");
+
+		// get and return count
+		return query->getColumn(0).getInt64();
+	}
+	catch (const SQLite::Exception& e)
+	{
+		ENIGMA_ERROR("{0}", e.what());
+		return 0;
+	}
+}
+
+
 
 
 NS_ENIGMA_END

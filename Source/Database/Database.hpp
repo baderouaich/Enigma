@@ -7,8 +7,10 @@
 #include "Models/Encryption.hpp"
 #include <Utility/SizeUtils.hpp>
 #include <Utility/StringUtils.hpp>
+#include <Utility/FileUtils.hpp>
 
 #include <SQLiteCpp/SQLiteCpp.h>
+#include <Utility/GZip.hpp>
 
 #include <memory>
 #include <vector>
@@ -95,7 +97,66 @@ public: // Encryption Operations
 	// Delete Encryption record by id, returns true if successfully deleted
 	static bool DeleteEncryption(const i64 ide);
 
-public:
+	// Delete all saved encryptions from the database (with their cipher)
+	static bool DeleteAllEncryptions();
+
+	// Returns how many encryption records are saved
+	static i64 GetEncryptionsCount();
+
+#if 0
+	// TODO
+	// Export all encryptions data to a json file
+	static bool ExportAllEncryptionsJSON(const fs::path& filename)
+	{
+		ENIGMA_TRACE_CURRENT_FUNCTION();
+		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
+		try
+		{
+			ENIGMA_INFO("Getting all encryptions from database to export to json file {}...", filename.string());
+			std::vector<std::unique_ptr<Encryption>> encryptions = Database::GetAllEncryptions<true, true, true, true, true>();
+			ENIGMA_INFO("Got {0} Encryption records.", encryptions.size());
+
+			// Make json 
+			using namespace nlohmann;
+			json json_encryptions = json::array();
+			for (const auto& encryption_ptr : encryptions)
+			{
+				// expand Encryption 
+				const auto& [ide, title, cipher, date_time, size, is_file] = *encryption_ptr;
+				
+				// make encryption object
+				json enc_obj{};
+				enc_obj["ide"] = ide;
+				enc_obj["title"] = title;
+				
+				json cipher_obj{};
+					cipher_obj["idc"] = cipher.idc;
+					cipher_obj["ide"] = cipher.ide;
+					cipher_obj["data"] = cipher.data;
+				enc_obj["cipher"] = cipher_obj;
+
+				enc_obj["date_time"] = date_time;
+				enc_obj["size"] = size;
+				enc_obj["is_file"] = is_file;
+
+				// add obj to array
+				json_encryptions.push_back(std::move(enc_obj));
+			}
+
+			// we can freeup the memory now.
+			encryptions.clear(); 
+
+			// save made json array to file
+			return FileUtils::Write(filename, json_encryptions.dump(-1, 32, false, json::error_handler_t::replace));
+		}
+		catch (const SQLite::Exception& e)
+		{
+			ENIGMA_ERROR(e.what());
+			return false;
+		}
+	}
+#endif
+
 	// Get an Encyrption by id with desired columns for optimization
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)

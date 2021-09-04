@@ -16,7 +16,7 @@
 
 /// nlohmann-json: json parser library
 #pragma warning(push, 0)
-#include <json.hpp> // nlohmann-json
+#include <json.hpp>
 #pragma warning(pop)
 ///
 

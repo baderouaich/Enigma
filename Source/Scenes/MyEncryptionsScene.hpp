@@ -25,6 +25,8 @@ private: /* Callbacks */
 	// returns true if item deleted successfully to notify draw loop that vector range changed
 	bool OnDeleteEncryptionButtonPressed(const i64 ide);
 	void OnSearchEncryptionsByTitle();
+	void OnDeleteAllEncryptions();
+	//void OnExportAllEncryptionsJSON();
 
 private: /* Initializers */
 	// Get all Encryptions from database

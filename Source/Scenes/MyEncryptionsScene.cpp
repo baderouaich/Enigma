@@ -53,6 +53,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 
 	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
 	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine(); }};
 
 	static auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -130,21 +131,36 @@ void MyEncryptionsScene::OnImGuiDraw()
 			}
 			ImGui::SameLine();
 
-			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
-			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
-			ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-			if (ImGui::Button(("Reset")))
+			if (ImGuiWidgets::Button("Reset", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 			{
 				m_isSearching = false;
 				m_query.clear();
 				this->GetAllEncryptions();
 			}
-			ImGui::PopStyleColor(3);
+
+#if 0
+			// TODO
+			inline_spacing(4);
+			if (ImGuiWidgets::Button("Export JSON", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+			{
+				this->OnExportAllEncryptionsJSON();
+			}
+#endif 
+			inline_spacing(4);
+
+			if (ImGuiWidgets::Button("Delete All", ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+			{
+				this->OnDeleteAllEncryptions();
+			}
+
+
 		}
 		ImGui::PopStyleColor(3);
 		ImGui::PopFont();
 
-		spacing(2);
+		
+		spacing(2);	
+
 
 
 		if (!m_encryptions.empty())
@@ -472,18 +488,18 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
-	ENIGMA_TRACE("Delete {0}", ide);
-	ENIGMA_TRACE("Confirming deletion of encryption with id {0}", ide);
+	//ENIGMA_TRACE("Delete {0}", ide);
+	//ENIGMA_TRACE("Confirming deletion of encryption with id {0}", ide);
 
 	const auto action = DialogUtils::Warn("Are you sure you want to delete encryption?", MessageBox::Choice::Yes_No_Cancel);
 	if (action == MessageBox::Action::Yes)
 	{
-		ENIGMA_TRACE("Deleting encryption with id {0} from database", ide);
+		ENIGMA_TRACE("Deleting encryption with id {0} from database...", ide);
 		// Remove from database
 		const bool deleted = Database::DeleteEncryption(ide);
 		if (deleted)
 		{
-			ENIGMA_TRACE("Deleting encryption with id {0} from vector", ide);
+			ENIGMA_TRACE("Deleting encryption with id {0} from vector...", ide);
 			// Remove from m_encryptions vector
 			for (auto it = m_encryptions.begin(); it != m_encryptions.end(); ++it)
 			{
@@ -514,6 +530,61 @@ void MyEncryptionsScene::OnSearchEncryptionsByTitle()
 	m_encryptions = Database::SearchEncryptionsByTitle<true, false, true, true, true>(m_query);
 
 }
+
+void MyEncryptionsScene::OnDeleteAllEncryptions()
+{
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
+	if (m_encryptions.empty())
+		return;
+
+	ENIGMA_TRACE("Confirming deletion of all encryption records");
+
+	// Make sure user is certain to delete all encryption records
+	const auto answer = DialogUtils::Question("Are you sure you want to delete all encryption records?", MessageBox::Choice::Yes_No_Cancel);
+	if (answer == MessageBox::Action::Yes)
+	{
+		ENIGMA_TRACE("Deleting all encryption records from database...");
+		// Delete everything
+		const bool deleted = Database::DeleteAllEncryptions();
+		if (deleted)
+		{
+			ENIGMA_TRACE("Deleting all encryption records from vector...");
+			m_encryptions.clear(); // clear vector data
+		}
+	}
+}
+
+#if 0
+// TODO
+void MyEncryptionsScene::OnExportAllEncryptionsJSON()
+{
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+
+	if (m_encryptions.empty())
+	{
+		DialogUtils::Info("No encryptions to export");
+		return;
+	}
+
+	SaveFileDialog sfd("Save exported json file as ...", ".", true, { "All Files", "*" });
+	fs::path filename(sfd.Show());
+
+	// user canceled
+	if (filename.empty()) 
+		return;
+
+	// json only
+	if (filename.extension().string() != ".json")
+		return;
+
+	const bool exported = Database::ExportAllEncryptionsJSON(filename);
+	if (!exported)
+	{
+		DialogUtils::Error("Failed to export encryptions records, check console for more details.");
+	}
+}
+#endif
 
 
 NS_ENIGMA_END

@@ -10,4 +10,4 @@ del /s /q /f *.sln
 del /s /q /f *.vcxproj.*
 
 echo Done.
-PAUSE
+#PAUSE
