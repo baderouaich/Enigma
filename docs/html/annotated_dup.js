@@ -56,6 +56,8 @@ var annotated_dup =
     [ "PasswordGeneratorTool", "class_password_generator_tool.html", "class_password_generator_tool" ],
     [ "RAMInfo", "class_r_a_m_info.html", "class_r_a_m_info" ],
     [ "Random", "class_random.html", "class_random" ],
+    [ "RSA", "class_r_s_a.html", "class_r_s_a" ],
+    [ "RSAScene", "class_r_s_a_scene.html", "class_r_s_a_scene" ],
     [ "SaveFileDialog", "class_save_file_dialog.html", "class_save_file_dialog" ],
     [ "Scene", "class_scene.html", "class_scene" ],
     [ "SelectFolderDialog", "class_select_folder_dialog.html", "class_select_folder_dialog" ],
@@ -65,6 +67,7 @@ var annotated_dup =
     [ "SystemAndHardwareInfoTool", "class_system_and_hardware_info_tool.html", "class_system_and_hardware_info_tool" ],
     [ "Tool", "class_tool.html", "class_tool" ],
     [ "ToolsScene", "class_tools_scene.html", "class_tools_scene" ],
+    [ "Translation", "class_translation.html", "class_translation" ],
     [ "TripleDES", "class_triple_d_e_s.html", "class_triple_d_e_s" ],
     [ "Twofish", "class_twofish.html", "class_twofish" ],
     [ "ViewEncryptionScene", "class_view_encryption_scene.html", "class_view_encryption_scene" ],
@@ -76,5 +79,6 @@ var annotated_dup =
     [ "WindowMaximizedEvent", "class_window_maximized_event.html", "class_window_maximized_event" ],
     [ "WindowMoveEvent", "class_window_move_event.html", "class_window_move_event" ],
     [ "WindowResizeEvent", "class_window_resize_event.html", "class_window_resize_event" ],
-    [ "WindowSettings", "struct_window_settings.html", "struct_window_settings" ]
+    [ "WindowSettings", "struct_window_settings.html", "struct_window_settings" ],
+    [ "XOREncryptionTool", "class_x_o_r_encryption_tool.html", "class_x_o_r_encryption_tool" ]
 ];

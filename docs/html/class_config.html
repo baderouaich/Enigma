@@ -103,8 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5b17c7f8ae00fd584bf7c9bcde7996e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_config.html#a5b17c7f8ae00fd584bf7c9bcde7996e3">Config</a> (const String &amp;file_name)</td></tr>
 <tr class="memdesc:a5b17c7f8ae00fd584bf7c9bcde7996e3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_config.html" title="Config file Loader (.ini)">Config</a> Constructor Loads and initializes config file.  <a href="class_config.html#a5b17c7f8ae00fd584bf7c9bcde7996e3">More...</a><br /></td></tr>
 <tr class="separator:a5b17c7f8ae00fd584bf7c9bcde7996e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9ea940f04ce58068fbbcd0b023e364e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_config.html#ad9ea940f04ce58068fbbcd0b023e364e">~Config</a> () noexcept=default</td></tr>
-<tr class="separator:ad9ea940f04ce58068fbbcd0b023e364e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd1b8e9a2f731db838bb5856670e314c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_config.html#afd1b8e9a2f731db838bb5856670e314c">~Config</a> ()=default</td></tr>
+<tr class="separator:afd1b8e9a2f731db838bb5856670e314c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd4db45f20f0c4d20d4de09826421618"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:abd4db45f20f0c4d20d4de09826421618"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_integral&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::value &amp;&amp;!std::is_same&lt; <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a>, bool &gt;::value, <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_config.html#abd4db45f20f0c4d20d4de09826421618">Get</a> (const String &amp;section, const String &amp;name, const <a class="el" href="_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07ab9ece18c950afbfa6b0fdbfa4ff731d3">T</a> &amp;default_value) const</td></tr>
 <tr class="memdesc:abd4db45f20f0c4d20d4de09826421618"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get integer fields from loaded config file Integers (and make sure its not bool since its also considered integral : <a href="https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template">https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template</a>)  <a href="class_config.html#abd4db45f20f0c4d20d4de09826421618">More...</a><br /></td></tr>
@@ -138,9 +138,6 @@ Private Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a> Config::Config </td>
@@ -150,11 +147,6 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p><a class="el" href="class_config.html" title="Config file Loader (.ini)">Config</a> Constructor Loads and initializes config file. </p>
@@ -171,12 +163,12 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_config_8cpp_source.html#l00006">6</a> of file <a class="el" href="_config_8cpp_source.html">Config.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_config_8cpp_source.html#l00007">7</a> of file <a class="el" href="_config_8cpp_source.html">Config.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ad9ea940f04ce58068fbbcd0b023e364e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9ea940f04ce58068fbbcd0b023e364e">&#9670;&nbsp;</a></span>~Config()</h2>
+<a id="afd1b8e9a2f731db838bb5856670e314c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd1b8e9a2f731db838bb5856670e314c">&#9670;&nbsp;</a></span>~Config()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +185,7 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

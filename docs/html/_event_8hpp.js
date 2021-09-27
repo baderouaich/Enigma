@@ -36,9 +36,9 @@ var _event_8hpp =
       [ "JOYSTICK_CONNECTED", "_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a0b115a29d2b806bb44a3309fe3fbb9ef", null ],
       [ "JOYSTICK_DISCONNECTED", "_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a4148fe8bcbd01a4e88ab324decc3efa4", null ]
     ] ],
-    [ "operator&", "_event_8hpp.html#a69a302884824bfc63d3cc8e6be095284", null ],
-    [ "operator&", "_event_8hpp.html#a28987a1907e71258b49cdfbeace83998", null ],
+    [ "operator&", "_event_8hpp.html#a8ca9aceb3c8cec5a50c4c91bc293e2f7", null ],
+    [ "operator&", "_event_8hpp.html#a95a5c338f1fc89fc185b533cd392fd0e", null ],
     [ "operator<<", "_event_8hpp.html#addb3e61d738e970953b85a370441a626", null ],
-    [ "operator|", "_event_8hpp.html#adc376353ab9939576250668a0bd16322", null ],
-    [ "operator|", "_event_8hpp.html#ae467a184a94cdd58efdfc456a344a559", null ]
+    [ "operator|", "_event_8hpp.html#ace3a7ea33f98fb800c8cb13b7845bd77", null ],
+    [ "operator|", "_event_8hpp.html#a99e66e5e5709006e4088f2deec8a6c88", null ]
 ];

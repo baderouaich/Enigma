@@ -42,17 +42,21 @@ var namespace_enigma_1_1_constants =
     [ "ENV", "namespace_enigma_1_1_constants_1_1_e_n_v.html", [
       [ "ENIGMA_DIR_ENV_KEY", "namespace_enigma_1_1_constants_1_1_e_n_v.html#a788653de631e4e6697bbef8126f25c16", null ]
     ] ],
-    [ "ErrorMessages", "namespace_enigma_1_1_constants_1_1_error_messages.html", [
-      [ "WEAK_PASSWORD", "namespace_enigma_1_1_constants_1_1_error_messages.html#ad71e99ab396320f93d56cd601bbffe20", null ]
-    ] ],
     [ "Links", "namespace_enigma_1_1_constants_1_1_links.html", [
       [ "ENIGMA_GITHUB_API", "namespace_enigma_1_1_constants_1_1_links.html#afe5bea5e31a435af7aac1294b31c1a3d", null ],
       [ "ENIGMA_GITHUB_API_LATEST_RELEASE", "namespace_enigma_1_1_constants_1_1_links.html#a95410e6d862e6091cbeafc679b9622b3", null ],
-      [ "ENIGMA_GITHUB_REPOSITORY", "namespace_enigma_1_1_constants_1_1_links.html#a6d08e07eebd7ac80854412315108ed02", null ]
+      [ "ENIGMA_GITHUB_REPOSITORY", "namespace_enigma_1_1_constants_1_1_links.html#a6d08e07eebd7ac80854412315108ed02", null ],
+      [ "ENIGMA_GITHUB_REPOSITORY_ISSUES", "namespace_enigma_1_1_constants_1_1_links.html#a4e9328c5b2e722781c1667e740c17187", null ],
+      [ "ENIGMA_GITHUB_REPOSITORY_PULL_REQUESTS", "namespace_enigma_1_1_constants_1_1_links.html#ab0188b8b512753590b9952513bc2336d", null ]
     ] ],
     [ "Logger", "namespace_enigma_1_1_constants_1_1_logger.html", [
       [ "LOG_FILE_PATH", "namespace_enigma_1_1_constants_1_1_logger.html#a12290a2721e75a521cda03a6f70f57a4", null ]
     ] ],
     [ "Resources", "namespace_enigma_1_1_constants_1_1_resources.html", "namespace_enigma_1_1_constants_1_1_resources" ],
+    [ "Translation", "namespace_enigma_1_1_constants_1_1_translation.html", [
+      [ "TRANSLATION_CURRENT_FILE_PATH", "namespace_enigma_1_1_constants_1_1_translation.html#abe8689f06dc6f62c7a8f703c14703ab6", null ],
+      [ "TRANSLATION_DIR", "namespace_enigma_1_1_constants_1_1_translation.html#a99d375bd9251fae165f75fb0f479bd15", null ],
+      [ "TRANSLATION_ENGLISH_PATH", "namespace_enigma_1_1_constants_1_1_translation.html#aa090ccf225763d688ee337a5454e953e", null ]
+    ] ],
     [ "ENIGMA_SINGLE_PROCESS_UNIQUE_PORT", "namespace_enigma_1_1_constants.html#a37226bce4dc4835ac7c68f3c0cda80b9", null ]
 ];

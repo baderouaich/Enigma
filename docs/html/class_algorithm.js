@@ -11,9 +11,7 @@ var class_algorithm =
       [ "TripleDES", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41bafd7ed19772feb9e1c97efa84dd795d67", null ],
       [ "Blowfish", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41badf30d7ec6c752a5a639efc845e26a93a", null ],
       [ "IDEA", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6", null ],
-      [ "ChaCha20Poly1305", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d", null ],
-      [ "BEGIN", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba19aad9f2fe3ce0023298ab83f7e75775", null ],
-      [ "END", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41bab1a326c06d88bf042f73d70f50197905", null ]
+      [ "ChaCha20Poly1305", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d", null ]
     ] ],
     [ "Algorithm", "class_algorithm.html#a065131116da634148173f5eee58440a3", null ],
     [ "~Algorithm", "class_algorithm.html#a4b7e83f78897d3a348289bcb6a356dcb", null ],

@@ -11,6 +11,7 @@ var _macros_8hpp =
     [ "ENIGMA_BIND_FUN", "_macros_8hpp.html#a7cff31b1ac87b18a07ab2e570eeee589", null ],
     [ "ENIGMA_CURRENT_FUNCTION", "_macros_8hpp.html#afacbad14c9d6c70a7b46ffe1f572b5b0", null ],
     [ "ENIGMA_END_TIMER", "_macros_8hpp.html#a03b87860fb5c74cc165dbfaa2e46b7be", null ],
+    [ "ENIGMA_ENUM_DECLARE_BEGIN_END", "_macros_8hpp.html#a80f3da42320e764590e315ec103d117d", null ],
     [ "ENIGMA_IS_BETWEEN", "_macros_8hpp.html#aa00ecb7cd175181c5254be40771a854f", null ],
     [ "ENIGMA_MACROS_H", "_macros_8hpp.html#a53bfa630c43724e694564bb0be315297", null ],
     [ "ENIGMA_NON_COPYABLE", "_macros_8hpp.html#ab4c4e2285229c6645de4aec58a0b2af9", null ],

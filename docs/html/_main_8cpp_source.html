@@ -98,8 +98,8 @@ $(document).ready(function(){initNavTree('_main_8cpp_source.html',''); initResiz
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">   12</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// Initialize Enigma Logger</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{   </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// Initialize Logger</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Enigma::Logger::Initialize();</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// Initialize SQLite3 Database</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    Enigma::Database::Initialize();</div>
@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('_main_8cpp_source.html',''); initResiz
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// Shutdown SQLite3 Database</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    Enigma::Database::Shutdown();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// Shutdown Enigma Logger</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// Shutdown Logger</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    Enigma::Logger::Shutdown();</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> exit_code;</div>
@@ -154,10 +154,10 @@ $(document).ready(function(){initNavTree('_main_8cpp_source.html',''); initResiz
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS) &amp;&amp; (defined(ENIGMA_RELEASE) || defined(ENIGMA_DIST))</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">int</span> WINAPI WinMain(</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    _In_ HINSTANCE instance,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    _In_opt_ HINSTANCE prev_instance,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    _In_ LPSTR cmd_line,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    _In_ <span class="keywordtype">int</span> cmd_show)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    [[maybe_unused]] _In_ HINSTANCE instance,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    [[maybe_unused]] _In_opt_ HINSTANCE prev_instance,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    [[maybe_unused]] _In_ LPSTR cmd_line,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    [[maybe_unused]] _In_ <span class="keywordtype">int</span> cmd_show)</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="_main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">return ::main</a>(__argc, __argv);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>

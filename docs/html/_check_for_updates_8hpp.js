@@ -1,6 +1,7 @@
 var _check_for_updates_8hpp =
 [
     [ "CheckForUpdates", "class_check_for_updates.html", "class_check_for_updates" ],
+    [ "Version", "struct_check_for_updates_1_1_version.html", "struct_check_for_updates_1_1_version" ],
     [ "LatestReleaseInfo", "struct_check_for_updates_1_1_latest_release_info.html", "struct_check_for_updates_1_1_latest_release_info" ],
     [ "ASSIGN_IF", "_check_for_updates_8hpp.html#a42d3a544df252137ea9b2d3e639174bf", null ],
     [ "CC", "_check_for_updates_8hpp.html#ab8cb6605644cdba6ddc7334644d0d136", null ],

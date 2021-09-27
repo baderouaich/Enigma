@@ -92,11 +92,9 @@ $(document).ready(function(){initNavTree('_version_8hpp_source.html',''); initRe
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef ENIGMA_VERSION_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="_version_8hpp.html#a2670f980ee2c18a3cb8cb288989f7ab9">    3</a></span>&#160;<span class="preprocessor">#define ENIGMA_VERSION_H</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// major, minor, patch string (needed for Enigma.rc)</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="_version_8hpp.html#aba0ee133605283fb5b9f2deef58559f4">    6</a></span>&#160;<span class="preprocessor">#define ENIGMA_VERSION_STR &quot;1.4.0&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="_version_8hpp.html#aba0ee133605283fb5b9f2deef58559f4">    6</a></span>&#160;<span class="preprocessor">#define ENIGMA_VERSION_STR &quot;2.0.0&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// major, minor, patch divided (needed for Enigma.rc)</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="_version_8hpp.html#a902b1fa665e172190d69ee4b81e43da4">    9</a></span>&#160;<span class="preprocessor">#define ENIGMA_VERSION_DIV 1, 4, 0</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="_version_8hpp.html#a902b1fa665e172190d69ee4b81e43da4">    9</a></span>&#160;<span class="preprocessor">#define ENIGMA_VERSION_DIV 2, 0, 0</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="_version_8hpp.html#ae8d1ce982f3e9c82e1a9cffb0651eccc">   11</a></span>&#160;<span class="preprocessor">#define ENIGMA_VERSION ENIGMA_VERSION_STR</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
@@ -108,23 +106,21 @@ $(document).ready(function(){initNavTree('_version_8hpp_source.html',''); initRe
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;&quot;THE SOFTWARE IS PROVIDED &#39;AS IS&#39;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.&quot;;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">* Reminder: Enigma.rc will include this file to get versions as they change, no need to modify version in any other place than here.</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">* https://semver.org/</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">* # when minor version is incremented, patch must reset to 0</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">* # when major version is incremented, minor and patch must reset to 0</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">*</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">* Given a version number MAJOR.MINOR.PATCH, increment the:</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">* - 1. MAJOR version when you make incompatible API changes (e.g. installer-users have to modify their infrastructure (phone/tablet/PC/web-server/firewall config/etc) in some way), when its incremented, minor and patch are back to 0.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">* - 2. MINOR version when you add functionality in a backwards compatible manner (e.g. passing additional data to an already-provisioned API or adding any end-user functionality that does not affect the installation-requirements)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">* - 3. PATCH version when you make backwards compatible bug fixes (e.g. fixing any end-user bug that does not affect the installation requirements)</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">* Additional labels for pre-release and build metadata are available</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">* as extensions to the MAJOR.MINOR.PATCH format.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_VERSION_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">* Reminder: Enigma.rc will include this file to get versions as they change, no need to modify version in any other place than here.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">* https://semver.org/</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">* # when minor version is incremented, patch must reset to 0</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">* # when major version is incremented, minor and patch must reset to 0</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">*</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">* Given a version number MAJOR.MINOR.PATCH, increment the:</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">* - 1. MAJOR version when you make incompatible API changes (e.g. installer-users have to modify their infrastructure (phone/tablet/PC/web-server/firewall config/etc) in some way), when its incremented, minor and patch are back to 0.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">* - 2. MINOR version when you add functionality in a backwards compatible manner (e.g. passing additional data to an already-provisioned API or adding any end-user functionality that does not affect the installation-requirements)</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">* - 3. PATCH version when you make backwards compatible bug fixes (e.g. fixing any end-user bug that does not affect the installation requirements)</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">* Additional labels for pre-release and build metadata are available</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">* as extensions to the MAJOR.MINOR.PATCH format.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_VERSION_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

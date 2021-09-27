@@ -90,9 +90,9 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
 <div class="contents">
 <div class="textblock"><p><a href="https://github.com/BaderEddineOuaich/Enigma/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-yellow" alt="MIT License" class="inline"/></a> <a href="https://github.com/BaderEddineOuaich/Enigma/actions?workflow=build"><img src="https://github.com/BaderEddineOuaich/Enigma/workflows/build/badge.svg" alt="Build Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/BaderEddineOuaich/Enigma/actions?workflow=static-analysis"><img src="https://github.com/BaderEddineOuaich/Enigma/workflows/static-analysis/badge.svg" alt="Static Analysis Status" style="pointer-events: none;" class="inline"/></a> <a href="https://badereddineouaich.github.io/Enigma"><img src="https://codedocs.xyz/doxygen/doxygen.svg" alt="Docs" style="pointer-events: none;" class="inline"/></a></p>
 <p><img src="Resources/Branding/Logo.png" alt="" width="333" class="inline"/></p>
-<p>A Simple, Reliable and Efficient UI + <a class="el" href="class_c_l_i.html" title="Command Line Interface.">CLI</a> <a class="el" href="struct_encryption.html">Encryption</a> <a class="el" href="class_tool.html" title="Tool collapsing header view abstract class.">Tool</a><br  />
+<p>A Simple, Reliable and Efficient UI + <a class="el" href="class_c_l_i.html" title="cxxopts: CMD parser library">CLI</a> <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> <a class="el" href="class_tool.html" title="Tool collapsing header view abstract class.">Tool</a><br  />
 </p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Supported Algorithms</h1>
 <p>All <a href="https://www.cryptopp.com/wiki/Authenticated_Encryption">Authenticated Encryption</a></p><ul>
 <li>:white_check_mark: <b>AES-GCM</b> (Recommended)</li>
@@ -102,40 +102,24 @@ Supported Algorithms</h1>
 <li>:white_check_mark: <b>IDEA-EAX</b></li>
 <li>:white_check_mark: <b><a class="el" href="class_cha_cha20_poly1305.html" title="ChaCha20Poly1305 Algorithm Encryptor/Decryptor.">ChaCha20Poly1305</a></b></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Available Tools</h1>
 <ul>
 <li>Password Generator</li>
 <li>Hashing Algorithms (MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHAKE128, SHAKE256, KECCAK224, KECCAK256, KECCAK384, KECCAK512, TIGER, WHIRLPOOL)</li>
+<li>XOR <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a></li>
 <li>System &amp; Hardware Information</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md9"></a>
-Features</h1>
-<ul>
-<li>:zap: Very fast <a class="el" href="struct_encryption.html">Encryption</a> &amp; Decryption</li>
-<li>:hammer_and_wrench: Useful tools like Password Generator, Hashing and System &amp; Hardware Information</li>
-<li>:computer: User Interface &amp; Command-Line Interface support</li>
-<li>:shield: Strongest <a class="el" href="struct_encryption.html">Encryption</a> Algorithms of the Decade</li>
-<li>:package: <a class="el" href="class_g_zip.html">GZip</a> Compression by default to reduce cipher size if sharing or uploading to clouds</li>
-<li>:briefcase: SQLite3 <a class="el" href="class_database.html">Database</a> system to save, import and export encryption records</li>
-<li>:octocat: Open Source of course!</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md10"></a>
-NOTES</h1>
-<ul>
-<li><a class="el" href="struct_encryption.html">Encryption</a> passwords are NOT saved into the database.</li>
-<li>Import/Export your database by copying or replacing database file <code>Enigma.db</code> located in <code>./Resources/Database/</code></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Enigma CLI</h1>
 <div class="fragment"><div class="line">Usage:</div>
 <div class="line">  Enigma [OPTION...]</div>
 <div class="line"> </div>
 <div class="line">  -e, --encrypt                 Encrypt operation</div>
 <div class="line">  -d, --decrypt                 Decrypt operation</div>
-<div class="line">  -m, --mode [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption mode (default: AES)</div>
+<div class="line">  -a, --algorithm [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption algorithm (default: AES)</div>
 <div class="line">  -p, --password arg            Encryption password</div>
-<div class="line">  -t, --text arg                Text to Encrypt/Decrypt</div>
+<div class="line">  -t, --text arg                Text to Encrypt or Decrypt (base64)</div>
 <div class="line">  -i, --infile arg              Input File to Encrypt/Decrypt</div>
 <div class="line">  -o, --outfile arg             Output File to Encrypt/Decrypt</div>
 <div class="line">  -s, --save                    Save encryption record to database</div>
@@ -145,7 +129,7 @@ Enigma CLI</h1>
 <div class="line">      --check-for-updates       Check for new version releases</div>
 </div><!-- fragment --><ul>
 <li>Example encypting a text with AES-GCM:<br  />
- <div class="fragment"><div class="line">./Enigma -e --mode=aes --password=&quot;My@pa$$W0rd&quot; --text=&quot;my important data securly encrypted!&quot;</div>
+ <div class="fragment"><div class="line">./Enigma -e --algorithm=aes --password=&quot;My@pa$$W0rd&quot; --text=&quot;my important data securly encrypted!&quot;</div>
 <div class="line">output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT</div>
 </div><!-- fragment --></li>
 <li>Example decrypting a text with AES-GCM:<br  />
@@ -153,7 +137,7 @@ Enigma CLI</h1>
 <div class="line">output: my important data securly encrypted!</div>
 </div><!-- fragment --></li>
 <li>Example encypting a file with AES-GCM:<br  />
- <div class="fragment"><div class="line">./Enigma -e --mode=aes --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data.txt&quot; --outfile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot;</div>
+ <div class="fragment"><div class="line">./Enigma -e --algorithm=aes --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data.txt&quot; --outfile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot;</div>
 </div><!-- fragment --></li>
 <li>Example decypting a file with AES-GCM:<br  />
  <div class="fragment"><div class="line">./Enigma -d --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot; --outfile=&quot;/home/user/Desktop/Data_decrypted.txt&quot;</div>
@@ -161,40 +145,36 @@ Enigma CLI</h1>
 </ul>
 <p><img src="Resources/ScreenShots/4.png" alt="" class="inline"/><br  />
 </p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Enigma UI</h1>
 <p><img src="Resources/ScreenShots/Main-Menu-Demo.png" alt="" class="inline"/> <img src="Resources/ScreenShots/2.png" alt="" class="inline"/> <img src="Resources/ScreenShots/My-Encryptions-Demo.png" alt="" class="inline"/> <img src="Resources/ScreenShots/Tools-Demo.png" alt="" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md14"></a>
 Compiling</h1>
 <ul>
 <li><em>Clone Repository</em> : <code>$ git clone <a href="https://github.com/BaderEddineOuaich/Enigma.git">https://github.com/BaderEddineOuaich/Enigma.git</a></code><br  />
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
-Windows</h2>
-<ul>
-<li>Extract premake5 binary in <code>./Premake/Windows/premake-5.0.0-alpha16-windows.zip</code><br  />
-<br  />
- <b>Method 1 (Recommended): Visual Studio 16 2019</b></li>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Windows Visual Studio 16 2019</h2>
+<blockquote class="doxtable">
+<p>Bellow steps are equivelent to running script <code>./Windows-Build-Release.bat</code> </p>
+</blockquote>
+<p>- Extract premake5 binary in <code>./Premake/Windows/premake-5.0.0-alpha16-windows.zip</code><br  />
+</p><ul>
 <li>Run <code>Gen-Windows-vs2019.bat</code> to generate Visual Studio 16 2019 project solution files</li>
 <li>Open Enigma.sln and Change configuration to Release or Dist</li>
 <li>Build &amp; Run Solution</li>
 </ul>
-<p><b>Method 2 (Unstable): Makefile (GMake2)</b></p><ul>
-<li>Run <code>Gen-Windows-Makefile.bat</code> to generate project Makefiles<br  />
-</li>
-<li>Run <code>$ make config=release CC="path/to/your/c/compiler/gcc.exe" CXX="path/to/your/c++/compiler/g++.exe"</code><br  />
- example: <code>$ make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 4</code><br  />
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md15"></a>
-Linux</h2>
-<ul>
-<li>Install latest c++ compiler (gcc or clang)<br  />
+<h2><a class="anchor" id="autotoc_md17"></a>
+Linux GNU Makefile</h2>
+<blockquote class="doxtable">
+<p>Bellow steps are equivelent to running script <code>sudo bash ./Linux-Build-Release.sh</code> </p>
+</blockquote>
+<p>- Install latest c++ compiler (gcc or clang)<br  />
  <code>$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa</code><br  />
  <code>$ sudo apt update</code><br  />
  gcc: <code>$ sudo apt install gcc-10 g++-10</code> or clang: <code>$ sudo apt install clang-10 clang++-10</code><br  />
-</li>
+</p><ul>
 <li>Install necessary libs (opengl, x11, ...)<br  />
  <code>$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev</code></li>
 <li>Extract premake5 binary<br  />
@@ -204,16 +184,16 @@ Linux</h2>
 </li>
 <li>Run <a class="el" href="namespace_enigma.html">Enigma</a> Binary <code>$ ./Bin/Release-linux-x86_64/Enigma/Enigma</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 MacOS TODO (when i figure out a way to test macos on vm)</h2>
 <ul>
 <li>Run <code>$ sudo bash ./Gen-MacOS-XCode.sh</code> to generate XCode project files<br  />
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 License</h1>
 <p><a class="el" href="md__l_i_c_e_n_s_e.html">MIT License</a></p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Features and bugs</h1>
 <p>If you face any problems feel free to open an issue at the <a href="https://github.com/BaderEddineOuaich/Enigma/issues">issue tracker</a>. If you feel the program is missing a feature, please raise a ticket on Github. Pull requests are also welcome. </p>
 </div></div><!-- contents -->

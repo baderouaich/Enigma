@@ -25,28 +25,27 @@
 var NAVTREE =
 [
   [ "Enigma", "index.html", [
-    [ "1.4.0", "md__c_h_a_n_g_e_l_o_g.html", [
-      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md1", null ],
-      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
-      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
-      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
-      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ]
+    [ "2.0.0", "md__c_h_a_n_g_e_l_o_g.html", [
+      [ "1.4.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md1", null ],
+      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
+      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
+      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
+      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ],
+      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md6", null ]
     ] ],
     [ "LICENSE", "md__l_i_c_e_n_s_e.html", null ],
     [ "Enigma", "md__r_e_a_d_m_e.html", [
-      [ "Supported Algorithms", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
-      [ "Available Tools", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Features", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "NOTES", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "Enigma CLI", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
-      [ "Enigma UI", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
-      [ "Compiling", "md__r_e_a_d_m_e.html#autotoc_md13", [
-        [ "Windows", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-        [ "Linux", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
-        [ "MacOS TODO (when i figure out a way to test macos on vm)", "md__r_e_a_d_m_e.html#autotoc_md16", null ]
+      [ "Supported Algorithms", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+      [ "Available Tools", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+      [ "Enigma CLI", "md__r_e_a_d_m_e.html#autotoc_md12", null ],
+      [ "Enigma UI", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
+      [ "Compiling", "md__r_e_a_d_m_e.html#autotoc_md14", [
+        [ "Windows Visual Studio 16 2019", "md__r_e_a_d_m_e.html#autotoc_md15", null ],
+        [ "Linux GNU Makefile", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
+        [ "MacOS TODO (when i figure out a way to test macos on vm)", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
       ] ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
-      [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
+      [ "License", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
+      [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -88,13 +87,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_e_s_8cpp.html",
-"_g_zip_tests_8hpp.html#ad05ae186dbe60b0dbec48156b6207d62",
-"_key_codes_8hpp.html#ac7d3abb61359a82e1bc6d628fe2d262d",
-"_types_8hpp.html#a13fe618cf25f03e96f3e756752441e2e",
-"class_decrypt_file_scene.html#a9e8f73f99b4e531e25eb41dad6910fb3",
-"class_logger.html#a918e72e940f8cffb370c9966dc3e9af2",
-"class_tools_scene.html",
-"functions_rela.html"
+"_g_zip_8hpp.html",
+"_key_codes_8hpp.html#ab15156628fc8413c37870b9247976800",
+"_translation_8cpp.html#af8e35959ccaee099114423327b92a0e6",
+"class_database.html#a3566b08f31c08183f3e6860b541c506a",
+"class_key_released_event.html#a045c6c9b7974c31d1a236c26877e24c2",
+"class_scene.html#a08178340f931c23f882b97ba8af58fac",
+"class_window_resize_event.html#ae031b750ccf2a1b9e61ba6d2123c44a6",
+"namespace_enigma_1_1_constants_1_1_links.html#a95410e6d862e6091cbeafc679b9622b3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

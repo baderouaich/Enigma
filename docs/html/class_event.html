@@ -100,21 +100,21 @@ Inheritance diagram for Event:</div>
  <div class="center">
   <img src="class_event.png" usemap="#Event_map" alt=""/>
   <map id="Event_map" name="Event_map">
-<area href="class_app_render_event.html" alt="AppRenderEvent" shape="rect" coords="162,56,314,80"/>
-<area href="class_app_tick_event.html" alt="AppTickEvent" shape="rect" coords="162,112,314,136"/>
-<area href="class_app_update_event.html" alt="AppUpdateEvent" shape="rect" coords="162,168,314,192"/>
-<area href="class_frame_buffer_resize_event.html" alt="FrameBufferResizeEvent" shape="rect" coords="162,224,314,248"/>
-<area href="class_key_event.html" alt="KeyEvent" shape="rect" coords="162,280,314,304"/>
-<area href="class_mouse_button_event.html" alt="MouseButtonEvent" shape="rect" coords="162,336,314,360"/>
-<area href="class_mouse_motion_event.html" alt="MouseMotionEvent" shape="rect" coords="162,392,314,416"/>
-<area href="class_mouse_wheel_event.html" alt="MouseWheelEvent" shape="rect" coords="162,448,314,472"/>
-<area href="class_window_close_event.html" alt="WindowCloseEvent" shape="rect" coords="162,504,314,528"/>
-<area href="class_window_file_drop_event.html" alt="WindowFileDropEvent" shape="rect" coords="162,560,314,584"/>
-<area href="class_window_focus_event.html" alt="WindowFocusEvent" shape="rect" coords="162,616,314,640"/>
-<area href="class_window_focus_lost_event.html" alt="WindowFocusLostEvent" shape="rect" coords="162,672,314,696"/>
-<area href="class_window_maximized_event.html" alt="WindowMaximizedEvent" shape="rect" coords="162,728,314,752"/>
-<area href="class_window_move_event.html" alt="WindowMoveEvent" shape="rect" coords="162,784,314,808"/>
-<area href="class_window_resize_event.html" alt="WindowResizeEvent" shape="rect" coords="162,840,314,864"/>
+<area href="class_app_render_event.html" title="Application main loop tick Draw Event." alt="AppRenderEvent" shape="rect" coords="162,56,314,80"/>
+<area href="class_app_tick_event.html" title="Application main loop tick Event." alt="AppTickEvent" shape="rect" coords="162,112,314,136"/>
+<area href="class_app_update_event.html" title="Application main loop tick Update Event." alt="AppUpdateEvent" shape="rect" coords="162,168,314,192"/>
+<area href="class_frame_buffer_resize_event.html" title="Frame buffer size changed Event." alt="FrameBufferResizeEvent" shape="rect" coords="162,224,314,248"/>
+<area href="class_key_event.html" title="Keyboard buttons Event." alt="KeyEvent" shape="rect" coords="162,280,314,304"/>
+<area href="class_mouse_button_event.html" title="Mouse Button Click, Hold Event." alt="MouseButtonEvent" shape="rect" coords="162,336,314,360"/>
+<area href="class_mouse_motion_event.html" title="Mouse Movement Event." alt="MouseMotionEvent" shape="rect" coords="162,392,314,416"/>
+<area href="class_mouse_wheel_event.html" title="Mouse Wheel Scroll Event." alt="MouseWheelEvent" shape="rect" coords="162,448,314,472"/>
+<area href="class_window_close_event.html" title="Window close button pressed Event." alt="WindowCloseEvent" shape="rect" coords="162,504,314,528"/>
+<area href="class_window_file_drop_event.html" title="Files dropped over window Event." alt="WindowFileDropEvent" shape="rect" coords="162,560,314,584"/>
+<area href="class_window_focus_event.html" title="Window gain focus Event." alt="WindowFocusEvent" shape="rect" coords="162,616,314,640"/>
+<area href="class_window_focus_lost_event.html" title="Window lost focus Event." alt="WindowFocusLostEvent" shape="rect" coords="162,672,314,696"/>
+<area href="class_window_maximized_event.html" title="Window maximized Event." alt="WindowMaximizedEvent" shape="rect" coords="162,728,314,752"/>
+<area href="class_window_move_event.html" title="Window position changed Event." alt="WindowMoveEvent" shape="rect" coords="162,784,314,808"/>
+<area href="class_window_resize_event.html" title="Window size changed Event." alt="WindowResizeEvent" shape="rect" coords="162,840,314,864"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -124,16 +124,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af14bbd8f69c2778def9462375a0e70f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad251ba19770b3e9c9ba20a6558ffe8b1"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#ad251ba19770b3e9c9ba20a6558ffe8b1">GetName</a> () const =0</td></tr>
 <tr class="separator:ad251ba19770b3e9c9ba20a6558ffe8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac34bfaa765063ac94b90a879f88bb8cf"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#ac34bfaa765063ac94b90a879f88bb8cf">GetCategoryFlags</a> () const =0</td></tr>
-<tr class="separator:ac34bfaa765063ac94b90a879f88bb8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17303a8089a66eece86b41cdea845f55"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a17303a8089a66eece86b41cdea845f55">ToString</a> () const</td></tr>
-<tr class="separator:a17303a8089a66eece86b41cdea845f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4780431ffc73f833ff3d71d114d6580"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#ad4780431ffc73f833ff3d71d114d6580">IsInCategory</a> (<a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> category) const noexcept</td></tr>
-<tr class="separator:ad4780431ffc73f833ff3d71d114d6580"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63e77b2db30df182e0f854b528b268e8"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a63e77b2db30df182e0f854b528b268e8">IsHandled</a> () const noexcept</td></tr>
-<tr class="separator:a63e77b2db30df182e0f854b528b268e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17a779dcd1008b33f927ef77fa1231d7"><td class="memItemLeft" align="right" valign="top">const void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a17a779dcd1008b33f927ef77fa1231d7">SetHandled</a> (const bool handled) noexcept</td></tr>
-<tr class="separator:a17a779dcd1008b33f927ef77fa1231d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbbb958eecc2d755a85a04539b98d7c2"><td class="memItemLeft" align="right" valign="top">virtual ui32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#afbbb958eecc2d755a85a04539b98d7c2">GetCategoryFlags</a> () const =0</td></tr>
+<tr class="separator:afbbb958eecc2d755a85a04539b98d7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af675341ab9774421bcf8740674aba0b3"><td class="memItemLeft" align="right" valign="top">virtual String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#af675341ab9774421bcf8740674aba0b3">ToString</a> () const</td></tr>
+<tr class="separator:af675341ab9774421bcf8740674aba0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a61f2ab92853e14aa5d84f222cf3658"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a9a61f2ab92853e14aa5d84f222cf3658">IsInCategory</a> (<a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> category) const noexcept</td></tr>
+<tr class="separator:a9a61f2ab92853e14aa5d84f222cf3658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a899e117fd598bddfdddb9ea571ede653"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a899e117fd598bddfdddb9ea571ede653">IsHandled</a> () const noexcept</td></tr>
+<tr class="separator:a899e117fd598bddfdddb9ea571ede653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6daafe93a3b5f53bfa1c90dbda255d80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_event.html#a6daafe93a3b5f53bfa1c90dbda255d80">SetHandled</a> (const bool handled) noexcept</td></tr>
+<tr class="separator:a6daafe93a3b5f53bfa1c90dbda255d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -144,8 +144,8 @@ Protected Attributes</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00066">66</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac34bfaa765063ac94b90a879f88bb8cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac34bfaa765063ac94b90a879f88bb8cf">&#9670;&nbsp;</a></span>GetCategoryFlags()</h2>
+<a id="afbbb958eecc2d755a85a04539b98d7c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbbb958eecc2d755a85a04539b98d7c2">&#9670;&nbsp;</a></span>GetCategoryFlags()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +154,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int Event::GetCategoryFlags </td>
+          <td class="memname">virtual ui32 Event::GetCategoryFlags </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -167,7 +167,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_mouse_button_event.html#a387e9177c778a66130c299443ea51fac">MouseButtonEvent</a>, <a class="el" href="class_mouse_wheel_event.html#ad9edde06a61f3a9859a3bb8a553f0898">MouseWheelEvent</a>, <a class="el" href="class_mouse_motion_event.html#a28b5ee7cc5a2da2a30377c7a1f86dca0">MouseMotionEvent</a>, <a class="el" href="class_key_event.html#ad55440503be881ddd6f660b3b9b3d81c">KeyEvent</a>, <a class="el" href="class_app_tick_event.html#aa06b0d01004f042a1a2f60efe0740879">AppTickEvent</a>, <a class="el" href="class_app_render_event.html#a5405ab2136b9b6622c6933fb55238619">AppRenderEvent</a>, <a class="el" href="class_app_update_event.html#ac9c0894ebfb8bd67a3e66926fbbcb864">AppUpdateEvent</a>, <a class="el" href="class_window_file_drop_event.html#a1e1775966747faf65ab8bd7ac183bc77">WindowFileDropEvent</a>, <a class="el" href="class_window_close_event.html#a46c8741242a441db44a0d6a6519631d7">WindowCloseEvent</a>, <a class="el" href="class_window_focus_event.html#a166462c5663681f6578944e64eb98135">WindowFocusEvent</a>, <a class="el" href="class_window_focus_lost_event.html#ab5e5fe497561e387e3f7f039e4f1753c">WindowFocusLostEvent</a>, <a class="el" href="class_window_maximized_event.html#a9ba9295d7b058777442e7506df1f8a8f">WindowMaximizedEvent</a>, <a class="el" href="class_window_move_event.html#a46c8eb2c9c372fa0b4f9a7a340cb0ab1">WindowMoveEvent</a>, <a class="el" href="class_frame_buffer_resize_event.html#adc03e127d0109c7f0ca05f45a5026ec8">FrameBufferResizeEvent</a>, and <a class="el" href="class_window_resize_event.html#ac370f5367fe4ec4a7ebc6f0aaf4ef350">WindowResizeEvent</a>.</p>
+<p>Implemented in <a class="el" href="class_mouse_button_event.html#af3b2b9faa025e3ca90d4a1d36c9e6b2f">MouseButtonEvent</a>, <a class="el" href="class_mouse_wheel_event.html#a831aeac3c2fc7102042d9421705a2a5b">MouseWheelEvent</a>, <a class="el" href="class_mouse_motion_event.html#a96bdbbd23f5e2dbd4b8a34767bfbe89b">MouseMotionEvent</a>, <a class="el" href="class_key_event.html#af5ce2f52790e4b634fb790e3e37a260e">KeyEvent</a>, <a class="el" href="class_app_tick_event.html#aa8c6269441710cf899ea1fee4f9daeb2">AppTickEvent</a>, <a class="el" href="class_app_render_event.html#a20e8091a41421b9359e3026171207594">AppRenderEvent</a>, <a class="el" href="class_app_update_event.html#ac2425117bd31f5389bb8fa8b4a8f9845">AppUpdateEvent</a>, <a class="el" href="class_window_file_drop_event.html#a18c5dd8f336209dece64b1b443d49f64">WindowFileDropEvent</a>, <a class="el" href="class_window_close_event.html#ab6e1190917835ac7e7d1fe99f6438ea1">WindowCloseEvent</a>, <a class="el" href="class_window_focus_event.html#a49d2a28370a7eb2e98823c84b07785e4">WindowFocusEvent</a>, <a class="el" href="class_window_focus_lost_event.html#afec2e50d93fce3fa7c30afcf491ec161">WindowFocusLostEvent</a>, <a class="el" href="class_window_maximized_event.html#a95fcd758be79e4a1f48eef4a914d903f">WindowMaximizedEvent</a>, <a class="el" href="class_window_move_event.html#a3e6c7a1a188b5e764e7a906a2ff6644b">WindowMoveEvent</a>, <a class="el" href="class_frame_buffer_resize_event.html#aa5f808270de6e736e8a68fc9d92de4ee">FrameBufferResizeEvent</a>, and <a class="el" href="class_window_resize_event.html#ae3546e670ebaf3c8ac873171d42f78e3">WindowResizeEvent</a>.</p>
 
 </div>
 </div>
@@ -225,8 +225,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a63e77b2db30df182e0f854b528b268e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63e77b2db30df182e0f854b528b268e8">&#9670;&nbsp;</a></span>IsHandled()</h2>
+<a id="a899e117fd598bddfdddb9ea571ede653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a899e117fd598bddfdddb9ea571ede653">&#9670;&nbsp;</a></span>IsHandled()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +235,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool Event::IsHandled </td>
+          <td class="memname">bool Event::IsHandled </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -252,8 +252,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad4780431ffc73f833ff3d71d114d6580"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4780431ffc73f833ff3d71d114d6580">&#9670;&nbsp;</a></span>IsInCategory()</h2>
+<a id="a9a61f2ab92853e14aa5d84f222cf3658"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a61f2ab92853e14aa5d84f222cf3658">&#9670;&nbsp;</a></span>IsInCategory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +262,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool Event::IsInCategory </td>
+          <td class="memname">bool Event::IsInCategory </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a>&#160;</td>
           <td class="paramname"><em>category</em></td><td>)</td>
@@ -280,8 +280,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a17a779dcd1008b33f927ef77fa1231d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17a779dcd1008b33f927ef77fa1231d7">&#9670;&nbsp;</a></span>SetHandled()</h2>
+<a id="a6daafe93a3b5f53bfa1c90dbda255d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6daafe93a3b5f53bfa1c90dbda255d80">&#9670;&nbsp;</a></span>SetHandled()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +290,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const void Event::SetHandled </td>
+          <td class="memname">void Event::SetHandled </td>
           <td>(</td>
           <td class="paramtype">const bool&#160;</td>
           <td class="paramname"><em>handled</em></td><td>)</td>
@@ -308,8 +308,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a17303a8089a66eece86b41cdea845f55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17303a8089a66eece86b41cdea845f55">&#9670;&nbsp;</a></span>ToString()</h2>
+<a id="af675341ab9774421bcf8740674aba0b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af675341ab9774421bcf8740674aba0b3">&#9670;&nbsp;</a></span>ToString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -318,7 +318,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::string Event::ToString </td>
+          <td class="memname">virtual String Event::ToString </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

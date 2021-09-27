@@ -93,40 +93,43 @@ $(document).ready(function(){initNavTree('class_open_file_dialog.html',''); init
 </div><!--header-->
 <div class="contents">
 
+<p>System Dialog to ask the user to select a file from disk.  
+ <a href="class_open_file_dialog.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_open_file_dialog_8hpp_source.html">OpenFileDialog.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aff5161de1850286eebf43c6c2bc4d633"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#aff5161de1850286eebf43c6c2bc4d633">OpenFileDialog</a> (const String &amp;title, const String &amp;initial_path=&quot;.&quot;, const bool allow_multiselect=true, const std::vector&lt; String &gt; &amp;filters={ &quot;All Files&quot;, &quot;*&quot; })</td></tr>
-<tr class="separator:aff5161de1850286eebf43c6c2bc4d633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b60425c4c9f45f7b3c5c6e2cea2d248"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a4b60425c4c9f45f7b3c5c6e2cea2d248">OpenFileDialog</a> (const String &amp;title, const String &amp;initial_path=&quot;.&quot;, const bool allow_multiselect=true, const std::initializer_list&lt; String &gt; &amp;filters={ &quot;All Files&quot;, &quot;*&quot; })</td></tr>
+<tr class="memdesc:a4b60425c4c9f45f7b3c5c6e2cea2d248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_open_file_dialog.html#a4b60425c4c9f45f7b3c5c6e2cea2d248">More...</a><br /></td></tr>
+<tr class="separator:a4b60425c4c9f45f7b3c5c6e2cea2d248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefe3bbf12e0ef2c0375f3a0617474728"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#aefe3bbf12e0ef2c0375f3a0617474728">~OpenFileDialog</a> () noexcept=default</td></tr>
 <tr class="separator:aefe3bbf12e0ef2c0375f3a0617474728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8726428d7ac7a2e3c289247077debe0a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a8726428d7ac7a2e3c289247077debe0a">Show</a> () const</td></tr>
+<tr class="memdesc:a8726428d7ac7a2e3c289247077debe0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns Open File Dialog and returns selected file(s) paths.  <a href="class_open_file_dialog.html#a8726428d7ac7a2e3c289247077debe0a">More...</a><br /></td></tr>
 <tr class="separator:a8726428d7ac7a2e3c289247077debe0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:acb2ad19d7d37f7db25540764b8c6bf87"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#acb2ad19d7d37f7db25540764b8c6bf87">m_title</a></td></tr>
-<tr class="separator:acb2ad19d7d37f7db25540764b8c6bf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e9d854b195de7219129cee3dd18a03b"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a3e9d854b195de7219129cee3dd18a03b">m_initial_path</a></td></tr>
-<tr class="separator:a3e9d854b195de7219129cee3dd18a03b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa03230cdc501089deb8cd2d81d94c23e"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#aa03230cdc501089deb8cd2d81d94c23e">m_allow_multiselect</a></td></tr>
-<tr class="separator:aa03230cdc501089deb8cd2d81d94c23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4891a50df0b911cc9a5054359be442a4"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a4891a50df0b911cc9a5054359be442a4">m_filters</a></td></tr>
-<tr class="separator:a4891a50df0b911cc9a5054359be442a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f9f61eebefc03179162ad14aa6dd5a"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#ae6f9f61eebefc03179162ad14aa6dd5a">m_title</a></td></tr>
+<tr class="separator:ae6f9f61eebefc03179162ad14aa6dd5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e25d085169a8aae2c0fef756b9b46ae"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a8e25d085169a8aae2c0fef756b9b46ae">m_initial_path</a></td></tr>
+<tr class="separator:a8e25d085169a8aae2c0fef756b9b46ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46cfbf56f1130d4b3ac96bb5e3079e31"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a46cfbf56f1130d4b3ac96bb5e3079e31">m_allow_multiselect</a></td></tr>
+<tr class="separator:a46cfbf56f1130d4b3ac96bb5e3079e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dd757bb0c82d03069ec95cff31beaa4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_open_file_dialog.html#a2dd757bb0c82d03069ec95cff31beaa4">m_filters</a></td></tr>
+<tr class="separator:a2dd757bb0c82d03069ec95cff31beaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
+<div class="textblock"><p>System Dialog to ask the user to select a file from disk. </p>
+
 <p class="definition">Definition at line <a class="el" href="_open_file_dialog_8hpp_source.html#l00013">13</a> of file <a class="el" href="_open_file_dialog_8hpp_source.html">OpenFileDialog.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aff5161de1850286eebf43c6c2bc4d633"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff5161de1850286eebf43c6c2bc4d633">&#9670;&nbsp;</a></span>OpenFileDialog()</h2>
+<a id="a4b60425c4c9f45f7b3c5c6e2cea2d248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b60425c4c9f45f7b3c5c6e2cea2d248">&#9670;&nbsp;</a></span>OpenFileDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a> OpenFileDialog::OpenFileDialog </td>
@@ -149,7 +152,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; String &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::initializer_list&lt; String &gt; &amp;&#160;</td>
           <td class="paramname"><em>filters</em> = <code>{&#160;&quot;All&#160;Files&quot;,&#160;&quot;*&quot;&#160;}</code>&#160;</td>
         </tr>
         <tr>
@@ -158,12 +161,18 @@ Private Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>title of the dialog </td></tr>
+    <tr><td class="paramname">initial_path</td><td>the default path of the dialog. </td></tr>
+    <tr><td class="paramname">allow_multiselect</td><td>to allow selecting multiple files </td></tr>
+    <tr><td class="paramname">filters</td><td>The filter list enumerates filter names and corresponded space-separated wildcard lists. It defaults to { "All Files", "*" } </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="_open_file_dialog_8cpp_source.html#l00006">6</a> of file <a class="el" href="_open_file_dialog_8cpp_source.html">OpenFileDialog.cpp</a>.</p>
 
@@ -210,13 +219,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Spawns Open File Dialog and returns selected file(s) paths. </p>
+
 <p class="definition">Definition at line <a class="el" href="_open_file_dialog_8cpp_source.html#l00015">15</a> of file <a class="el" href="_open_file_dialog_8cpp_source.html">OpenFileDialog.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa03230cdc501089deb8cd2d81d94c23e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa03230cdc501089deb8cd2d81d94c23e">&#9670;&nbsp;</a></span>m_allow_multiselect</h2>
+<a id="a46cfbf56f1130d4b3ac96bb5e3079e31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46cfbf56f1130d4b3ac96bb5e3079e31">&#9670;&nbsp;</a></span>m_allow_multiselect</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +236,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool OpenFileDialog::m_allow_multiselect</td>
+          <td class="memname">bool OpenFileDialog::m_allow_multiselect</td>
         </tr>
       </table>
   </td>
@@ -239,8 +250,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4891a50df0b911cc9a5054359be442a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4891a50df0b911cc9a5054359be442a4">&#9670;&nbsp;</a></span>m_filters</h2>
+<a id="a2dd757bb0c82d03069ec95cff31beaa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dd757bb0c82d03069ec95cff31beaa4">&#9670;&nbsp;</a></span>m_filters</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +260,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::vector&lt;String&gt; OpenFileDialog::m_filters</td>
+          <td class="memname">std::vector&lt;String&gt; OpenFileDialog::m_filters</td>
         </tr>
       </table>
   </td>
@@ -263,8 +274,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3e9d854b195de7219129cee3dd18a03b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e9d854b195de7219129cee3dd18a03b">&#9670;&nbsp;</a></span>m_initial_path</h2>
+<a id="a8e25d085169a8aae2c0fef756b9b46ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e25d085169a8aae2c0fef756b9b46ae">&#9670;&nbsp;</a></span>m_initial_path</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -273,7 +284,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const String OpenFileDialog::m_initial_path</td>
+          <td class="memname">String OpenFileDialog::m_initial_path</td>
         </tr>
       </table>
   </td>
@@ -287,8 +298,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="acb2ad19d7d37f7db25540764b8c6bf87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb2ad19d7d37f7db25540764b8c6bf87">&#9670;&nbsp;</a></span>m_title</h2>
+<a id="ae6f9f61eebefc03179162ad14aa6dd5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f9f61eebefc03179162ad14aa6dd5a">&#9670;&nbsp;</a></span>m_title</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -297,7 +308,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const String OpenFileDialog::m_title</td>
+          <td class="memname">String OpenFileDialog::m_title</td>
         </tr>
       </table>
   </td>

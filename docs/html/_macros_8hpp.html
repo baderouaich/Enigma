@@ -155,6 +155,9 @@ Macros</h2></td></tr>
 <tr class="memitem:ad952be9546d5a30a7cd4806a936900dc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#ad952be9546d5a30a7cd4806a936900dc">ENIGMA_TRACE_CURRENT_FUNCTION</a>()</td></tr>
 <tr class="memdesc:ad952be9546d5a30a7cd4806a936900dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs current function for debugging.  <a href="_macros_8hpp.html#ad952be9546d5a30a7cd4806a936900dc">More...</a><br /></td></tr>
 <tr class="separator:ad952be9546d5a30a7cd4806a936900dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80f3da42320e764590e315ec103d117d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a80f3da42320e764590e315ec103d117d">ENIGMA_ENUM_DECLARE_BEGIN_END</a>(begin)</td></tr>
+<tr class="memdesc:a80f3da42320e764590e315ec103d117d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows looping over an enum by providing a BEGIN and END enum values NOTE: should be placed at the end of the enum, providing the first element of the enum.  <a href="_macros_8hpp.html#a80f3da42320e764590e315ec103d117d">More...</a><br /></td></tr>
+<tr class="separator:a80f3da42320e764590e315ec103d117d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad27cc17b25bb93134368d5eb21126eae"></a>
@@ -381,7 +384,7 @@ Macros</h2></td></tr>
 
 <p>Begin and end timer with a unit. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00158">158</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00160">160</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +461,32 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00159">159</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00161">161</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a80f3da42320e764590e315ec103d117d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f3da42320e764590e315ec103d117d">&#9670;&nbsp;</a></span>ENIGMA_ENUM_DECLARE_BEGIN_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENIGMA_ENUM_DECLARE_BEGIN_END</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">begin</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    __HALT__, \</div>
+<div class="line">    BEGIN = begin, \</div>
+<div class="line">    END = __HALT__ - 1</div>
+</div><!-- fragment -->
+<p>Allows looping over an enum by providing a BEGIN and END enum values NOTE: should be placed at the end of the enum, providing the first element of the enum. </p>
+
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00178">178</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -655,11 +683,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <a class="code" href="_macros_8hpp.html#ab4c4e2285229c6645de4aec58a0b2af9">ENIGMA_NON_COPYABLE</a>(Class) \</div>
-<div class="line">        ENIGMA_NON_MOVEABLE(Class) \</div>
-<div class="line">        Class() = <span class="keyword">delete</span>; \</div>
-<div class="line">        ~Class() = <span class="keyword">delete</span>;</div>
-<div class="ttc" id="a_macros_8hpp_html_ab4c4e2285229c6645de4aec58a0b2af9"><div class="ttname"><a href="_macros_8hpp.html#ab4c4e2285229c6645de4aec58a0b2af9">ENIGMA_NON_COPYABLE</a></div><div class="ttdeci">#define ENIGMA_NON_COPYABLE(Class)</div><div class="ttdoc">Prevent class copying or moving.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00139">Macros.hpp:139</a></div></div>
+<b>Value:</b><div class="fragment"><div class="line">        <span class="keyword">public</span>: \</div>
+<div class="line">            ENIGMA_NON_COPYABLE(Class) \</div>
+<div class="line">            ENIGMA_NON_MOVEABLE(Class) \</div>
+<div class="line">            Class() = <span class="keyword">delete</span>; \</div>
+<div class="line">            ~Class() = <span class="keyword">delete</span>; \</div>
+<div class="line">        private:</div>
 </div><!-- fragment -->
 <p>Makes a class static, which will prevent creating instances from it and only use it as Class::Func().. </p>
 
@@ -684,7 +713,7 @@ Macros</h2></td></tr>
 
 <p>Logs current function for debugging. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00171">171</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00173">173</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>

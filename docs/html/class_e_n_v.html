@@ -93,15 +93,21 @@ $(document).ready(function(){initNavTree('class_e_n_v.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
+<p>System's Environment Variable Manager The environment variables are set within the context of your program.  
+ <a href="class_e_n_v.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_e_n_v_8hpp_source.html">ENV.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a26a4d62384be9953c77f384452a5578c"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#a26a4d62384be9953c77f384452a5578c">Get</a> (const std::string_view &amp;key)</td></tr>
+<tr class="memdesc:a26a4d62384be9953c77f384452a5578c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get process runtime environment variable value.  <a href="class_e_n_v.html#a26a4d62384be9953c77f384452a5578c">More...</a><br /></td></tr>
 <tr class="separator:a26a4d62384be9953c77f384452a5578c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af95394b2702e0cc8fa696ac8936e7da4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#af95394b2702e0cc8fa696ac8936e7da4">Set</a> (const std::string_view &amp;key, const std::string_view &amp;value)</td></tr>
+<tr class="memdesc:af95394b2702e0cc8fa696ac8936e7da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set process runtime environment variable.  <a href="class_e_n_v.html#af95394b2702e0cc8fa696ac8936e7da4">More...</a><br /></td></tr>
 <tr class="separator:af95394b2702e0cc8fa696ac8936e7da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e22a9b5c94d328aa78326320ec9e51a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#a3e22a9b5c94d328aa78326320ec9e51a">Delete</a> (const std::string_view &amp;key)</td></tr>
+<tr class="memdesc:a3e22a9b5c94d328aa78326320ec9e51a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unset process runtime environment variable.  <a href="class_e_n_v.html#a3e22a9b5c94d328aa78326320ec9e51a">More...</a><br /></td></tr>
 <tr class="separator:a3e22a9b5c94d328aa78326320ec9e51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
@@ -110,7 +116,9 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a97dd97bc6e86d5e8efafea33d8ab0dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
+<div class="textblock"><p>System's Environment Variable Manager The environment variables are set within the context of your program. </p>
+<p>When your program exits, you're back in the context from where your program was started. </p>
+
 <p class="definition">Definition at line <a class="el" href="_e_n_v_8hpp_source.html#l00013">13</a> of file <a class="el" href="_e_n_v_8hpp_source.html">ENV.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3e22a9b5c94d328aa78326320ec9e51a"></a>
@@ -136,6 +144,8 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Unset process runtime environment variable. </p>
 
 <p class="definition">Definition at line <a class="el" href="_e_n_v_8cpp_source.html#l00044">44</a> of file <a class="el" href="_e_n_v_8cpp_source.html">ENV.cpp</a>.</p>
 
@@ -191,6 +201,8 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get process runtime environment variable value. </p>
+
 <p class="definition">Definition at line <a class="el" href="_e_n_v_8cpp_source.html#l00021">21</a> of file <a class="el" href="_e_n_v_8cpp_source.html">ENV.cpp</a>.</p>
 
 </div>
@@ -228,6 +240,8 @@ Private Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set process runtime environment variable. </p>
 
 <p class="definition">Definition at line <a class="el" href="_e_n_v_8cpp_source.html#l00006">6</a> of file <a class="el" href="_e_n_v_8cpp_source.html">ENV.cpp</a>.</p>
 

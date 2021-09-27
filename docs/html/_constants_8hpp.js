@@ -21,6 +21,8 @@ var _constants_8hpp =
     [ "ENIGMA_GITHUB_API", "_constants_8hpp.html#afe5bea5e31a435af7aac1294b31c1a3d", null ],
     [ "ENIGMA_GITHUB_API_LATEST_RELEASE", "_constants_8hpp.html#a95410e6d862e6091cbeafc679b9622b3", null ],
     [ "ENIGMA_GITHUB_REPOSITORY", "_constants_8hpp.html#a6d08e07eebd7ac80854412315108ed02", null ],
+    [ "ENIGMA_GITHUB_REPOSITORY_ISSUES", "_constants_8hpp.html#a4e9328c5b2e722781c1667e740c17187", null ],
+    [ "ENIGMA_GITHUB_REPOSITORY_PULL_REQUESTS", "_constants_8hpp.html#ab0188b8b512753590b9952513bc2336d", null ],
     [ "ENIGMA_LOGO_PNG_PATH", "_constants_8hpp.html#a0895e340cad91703539181ad97dbf319", null ],
     [ "ENIGMA_SINGLE_PROCESS_UNIQUE_PORT", "_constants_8hpp.html#a37226bce4dc4835ac7c68f3c0cda80b9", null ],
     [ "ERROR_TEXT_COLOR", "_constants_8hpp.html#ad6c5f93b3a4d2a34b43c1dab0fac3236", null ],
@@ -42,6 +44,8 @@ var _constants_8hpp =
     [ "TOOLS_BUTTON_COLOR", "_constants_8hpp.html#a94b2766c8e7070f3c809b8719a4c512d", null ],
     [ "TOOLS_BUTTON_COLOR_ACTIVE", "_constants_8hpp.html#a9b7b848deb5bd48f48139ffc235cecec", null ],
     [ "TOOLS_BUTTON_COLOR_HOVER", "_constants_8hpp.html#aa335df1b829abcb4477f9cb20ff8302b", null ],
-    [ "WEAK_PASSWORD", "_constants_8hpp.html#ad71e99ab396320f93d56cd601bbffe20", null ],
+    [ "TRANSLATION_CURRENT_FILE_PATH", "_constants_8hpp.html#abe8689f06dc6f62c7a8f703c14703ab6", null ],
+    [ "TRANSLATION_DIR", "_constants_8hpp.html#a99d375bd9251fae165f75fb0f479bd15", null ],
+    [ "TRANSLATION_ENGLISH_PATH", "_constants_8hpp.html#aa090ccf225763d688ee337a5454e953e", null ],
     [ "WINDOW_CONFIG_FILE_PATH", "_constants_8hpp.html#a1414ee93d215a834a043115d2ef5bfc8", null ]
 ];

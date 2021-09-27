@@ -5,6 +5,7 @@ var hierarchy =
       [ "Blowfish", "class_blowfish.html", null ],
       [ "ChaCha20Poly1305", "class_cha_cha20_poly1305.html", null ],
       [ "IDEA", "class_i_d_e_a.html", null ],
+      [ "RSA", "class_r_s_a.html", null ],
       [ "TripleDES", "class_triple_d_e_s.html", null ],
       [ "Twofish", "class_twofish.html", null ]
     ] ],
@@ -69,6 +70,7 @@ var hierarchy =
       [ "LoadingScene", "class_loading_scene.html", null ],
       [ "MainMenuScene", "class_main_menu_scene.html", null ],
       [ "MyEncryptionsScene", "class_my_encryptions_scene.html", null ],
+      [ "RSAScene", "class_r_s_a_scene.html", null ],
       [ "ToolsScene", "class_tools_scene.html", null ],
       [ "ViewEncryptionScene", "class_view_encryption_scene.html", null ]
     ] ],
@@ -85,8 +87,11 @@ var hierarchy =
     [ "Tool", "class_tool.html", [
       [ "HashingTool", "class_hashing_tool.html", null ],
       [ "PasswordGeneratorTool", "class_password_generator_tool.html", null ],
-      [ "SystemAndHardwareInfoTool", "class_system_and_hardware_info_tool.html", null ]
+      [ "SystemAndHardwareInfoTool", "class_system_and_hardware_info_tool.html", null ],
+      [ "XOREncryptionTool", "class_x_o_r_encryption_tool.html", null ]
     ] ],
+    [ "Translation", "class_translation.html", null ],
+    [ "CheckForUpdates::Version", "struct_check_for_updates_1_1_version.html", null ],
     [ "Window", "class_window.html", null ],
     [ "WindowSettings", "struct_window_settings.html", null ]
 ];

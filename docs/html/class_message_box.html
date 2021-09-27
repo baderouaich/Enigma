@@ -94,6 +94,9 @@ $(document).ready(function(){initNavTree('class_message_box.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>Avoid mismatch with windows's <a class="el" href="class_message_box.html" title="Avoid mismatch with windows&#39;s MessageBox macro.">MessageBox</a> macro.  
+ <a href="class_message_box.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -103,6 +106,7 @@ Public Types</h2></td></tr>
 , <a class="el" href="class_message_box.html#af303a736f07ca8e0aea3d4388f1b472aa902b0d55fddef6f8d651fe1035b7d4bd">Error</a> = static_cast&lt;ui8&gt;(pfd::icon::error)
 , <a class="el" href="class_message_box.html#af303a736f07ca8e0aea3d4388f1b472aaa97ea56b0e00b2379736ae60869ff66a">Question</a> = static_cast&lt;ui8&gt;(pfd::icon::question)
  }</td></tr>
+<tr class="memdesc:af303a736f07ca8e0aea3d4388f1b472a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message box Icon type.  <a href="class_message_box.html#af303a736f07ca8e0aea3d4388f1b472a">More...</a><br /></td></tr>
 <tr class="separator:af303a736f07ca8e0aea3d4388f1b472a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d0a93e769b403e48aa5105c29ef2ff3"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a5d0a93e769b403e48aa5105c29ef2ff3">Choice</a> : ui8 { <br />
 &#160;&#160;<a class="el" href="class_message_box.html#a5d0a93e769b403e48aa5105c29ef2ff3aa60852f204ed8028c1c58808b746d115">Ok</a> = static_cast&lt;ui8&gt;(pfd::choice::ok)
@@ -114,6 +118,7 @@ Public Types</h2></td></tr>
 , <a class="el" href="class_message_box.html#a5d0a93e769b403e48aa5105c29ef2ff3a0581d04dc1aa46c4928d3169d774b51f">Abort_Retry_Ignore</a> = static_cast&lt;ui8&gt;(pfd::choice::abort_retry_ignore)
 <br />
  }</td></tr>
+<tr class="memdesc:a5d0a93e769b403e48aa5105c29ef2ff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message box button layout choices.  <a href="class_message_box.html#a5d0a93e769b403e48aa5105c29ef2ff3">More...</a><br /></td></tr>
 <tr class="separator:a5d0a93e769b403e48aa5105c29ef2ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa11ce61cf2d3d88a3d67309f0620aeac"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#aa11ce61cf2d3d88a3d67309f0620aeac">Action</a> : i8 { <br />
 &#160;&#160;<a class="el" href="class_message_box.html#aa11ce61cf2d3d88a3d67309f0620aeacaea4788705e6873b424c65e91c2846b19">Cancel</a> = static_cast&lt;i8&gt;(pfd::button::cancel)
@@ -126,15 +131,18 @@ Public Types</h2></td></tr>
 , <a class="el" href="class_message_box.html#aa11ce61cf2d3d88a3d67309f0620aeacafd038fc7f319e48f3115d92bf5bdbef9">Ignore</a> = static_cast&lt;i8&gt;(pfd::button::ignore)
 <br />
  }</td></tr>
+<tr class="memdesc:aa11ce61cf2d3d88a3d67309f0620aeac"><td class="mdescLeft">&#160;</td><td class="mdescRight">User Performed Action Result.  <a href="class_message_box.html#aa11ce61cf2d3d88a3d67309f0620aeac">More...</a><br /></td></tr>
 <tr class="separator:aa11ce61cf2d3d88a3d67309f0620aeac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a464e6bfb16b8b14a764a3c9389a60554"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a464e6bfb16b8b14a764a3c9389a60554">MessageBox</a> (const String &amp;title, const String &amp;message, <a class="el" href="class_message_box.html#af303a736f07ca8e0aea3d4388f1b472a">Icon</a> icon=<a class="el" href="class_message_box.html#af303a736f07ca8e0aea3d4388f1b472aa4059b0251f66a18cb56f544728796875">Icon::Info</a>, <a class="el" href="class_message_box.html#a5d0a93e769b403e48aa5105c29ef2ff3">Choice</a> choice=<a class="el" href="class_message_box.html#a5d0a93e769b403e48aa5105c29ef2ff3a5ab4f2eaf629c7b8092163e59acee45e">Choice::Ok_Cancel</a>)</td></tr>
+<tr class="memdesc:a464e6bfb16b8b14a764a3c9389a60554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_message_box.html#a464e6bfb16b8b14a764a3c9389a60554">More...</a><br /></td></tr>
 <tr class="separator:a464e6bfb16b8b14a764a3c9389a60554"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d78c6b8b256101f87ed57a9d26e909"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#ab4d78c6b8b256101f87ed57a9d26e909">~MessageBox</a> () noexcept=default</td></tr>
 <tr class="separator:ab4d78c6b8b256101f87ed57a9d26e909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b72a7b877a624f90d052dca71a98d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_message_box.html#aa11ce61cf2d3d88a3d67309f0620aeac">MessageBox::Action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#ab7b72a7b877a624f90d052dca71a98d4">Show</a> () const</td></tr>
+<tr class="memdesc:ab7b72a7b877a624f90d052dca71a98d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns <a class="el" href="class_message_box.html" title="Avoid mismatch with windows&#39;s MessageBox macro.">MessageBox</a> and returns user Action.  <a href="class_message_box.html#ab7b72a7b877a624f90d052dca71a98d4">More...</a><br /></td></tr>
 <tr class="separator:ab7b72a7b877a624f90d052dca71a98d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -149,7 +157,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a99800467c8c74b5b3cbdc78accbc336b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
+<div class="textblock"><p>Avoid mismatch with windows's <a class="el" href="class_message_box.html" title="Avoid mismatch with windows&#39;s MessageBox macro.">MessageBox</a> macro. </p>
+
 <p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00017">17</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="aa11ce61cf2d3d88a3d67309f0620aeac"></a>
@@ -171,6 +180,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>User Performed Action Result. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa11ce61cf2d3d88a3d67309f0620aeacaea4788705e6873b424c65e91c2846b19"></a>Cancel&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa11ce61cf2d3d88a3d67309f0620aeacaa60852f204ed8028c1c58808b746d115"></a>Ok&#160;</td><td class="fielddoc"></td></tr>
@@ -204,6 +215,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Message box button layout choices. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5d0a93e769b403e48aa5105c29ef2ff3aa60852f204ed8028c1c58808b746d115"></a>Ok&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5d0a93e769b403e48aa5105c29ef2ff3a5ab4f2eaf629c7b8092163e59acee45e"></a>Ok_Cancel&#160;</td><td class="fielddoc"></td></tr>
@@ -236,6 +249,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Message box Icon type. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af303a736f07ca8e0aea3d4388f1b472aa4059b0251f66a18cb56f544728796875"></a>Info&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="af303a736f07ca8e0aea3d4388f1b472aa0eaadb4fcb48a0a0ed7bc9868be9fbaa"></a>Warning&#160;</td><td class="fielddoc"></td></tr>
@@ -286,6 +301,17 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>title of the message box </td></tr>
+    <tr><td class="paramname">message</td><td>description of the message box </td></tr>
+    <tr><td class="paramname">icon</td><td>Icon type of the message box Info, Warning, Error or Question </td></tr>
+    <tr><td class="paramname">choice</td><td>buttons layout of the message box </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="_message_box_8cpp_source.html#l00006">6</a> of file <a class="el" href="_message_box_8cpp_source.html">MessageBox.cpp</a>.</p>
 
 </div>
@@ -331,6 +357,8 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Spawns <a class="el" href="class_message_box.html" title="Avoid mismatch with windows&#39;s MessageBox macro.">MessageBox</a> and returns user Action. </p>
+
 <p class="definition">Definition at line <a class="el" href="_message_box_8cpp_source.html#l00015">15</a> of file <a class="el" href="_message_box_8cpp_source.html">MessageBox.cpp</a>.</p>
 
 </div>
@@ -356,7 +384,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00080">80</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00081">81</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>
@@ -380,7 +408,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00079">79</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00080">80</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>
@@ -404,7 +432,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00078">78</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00079">79</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>
@@ -428,7 +456,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00077">77</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00078">78</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>

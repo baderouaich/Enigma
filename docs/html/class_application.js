@@ -15,7 +15,7 @@ var class_application =
     [ "InitImGuiFonts", "class_application.html#a98b5f0decee7b93387ea67fd6da90d47", null ],
     [ "InitImGuiRenderer", "class_application.html#adb664e9cf20471295b3cf6a22dfb3846", null ],
     [ "InitWindow", "class_application.html#a019c2bfa3bbab290a388db8a6fbc2cec", null ],
-    [ "LaunchWorkerThread", "class_application.html#a1b2dee4ddd9fba672bbbfa3c0196b6c2", null ],
+    [ "LaunchWorkerThread", "class_application.html#a256aa8ce3ea1dfc83edf2a0b0826a87f", null ],
     [ "OnEvent", "class_application.html#a0bbe535a299fa5e1cd10599e5d43b0d4", null ],
     [ "OnFrameBufferResize", "class_application.html#af8d8827ea04a741b69ecde6a7140fa26", null ],
     [ "OnWindowClose", "class_application.html#ab412a2dbd02aee378c68a810bfef9c8e", null ],

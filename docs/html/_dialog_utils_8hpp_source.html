@@ -97,37 +97,37 @@ $(document).ready(function(){initNavTree('_dialog_utils_8hpp_source.html',''); i
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_open_file_dialog_8hpp.html">System/Dialogs/OpenFileDialog.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_save_file_dialog_8hpp.html">System/Dialogs/SaveFileDialog.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_select_folder_dialog_8hpp.html">System/Dialogs/SelectFolderDialog.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_dialog_utils.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a> <a class="code" href="class_dialog_utils.html">DialogUtils</a> final</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#ab68767d3835d21bac5e35395f3f90b3a">   15</a></span>&#160;    <a class="code" href="class_dialog_utils.html#ab68767d3835d21bac5e35395f3f90b3a">ENIGMA_STATIC_CLASS</a>(<a class="code" href="class_dialog_utils.html">DialogUtils</a>);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#abad7a442922363d1582e2ff49333c51f">   17</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#abad7a442922363d1582e2ff49333c51f">Error</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Ok)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            title,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            message,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            Enigma::MessageBox::Icon::Error,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            choice</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            );</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">return</span> action;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_file_utils_8hpp.html">Utility/FileUtils.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_dialog_utils.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a> <a class="code" href="class_dialog_utils.html">DialogUtils</a> final</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#ab68767d3835d21bac5e35395f3f90b3a">   16</a></span>&#160;    <a class="code" href="class_dialog_utils.html#ab68767d3835d21bac5e35395f3f90b3a">ENIGMA_STATIC_CLASS</a>(<a class="code" href="class_dialog_utils.html">DialogUtils</a>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a98485ddb246261226a058c1c12b7d2e5">   18</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a98485ddb246261226a058c1c12b7d2e5">Error</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            title,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            message,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            Enigma::MessageBox::Icon::Error,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            choice</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            );</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a6050a539ae55449c50fc11c89695001f">   28</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a6050a539ae55449c50fc11c89695001f">Error</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Ok)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            message,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            Enigma::MessageBox::Icon::Error,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            choice</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            );</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> action;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a5c6693d1c70422f11c127555548a5050">   29</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a5c6693d1c70422f11c127555548a5050">Error</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            message,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            Enigma::MessageBox::Icon::Error,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            choice</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            );</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;   </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a42d3953ffe5426f36d45ad4a58ddabbb">   40</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a42d3953ffe5426f36d45ad4a58ddabbb">Warn</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Ok)</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#ab32c80ead6fb1e58fed71f4696215208">   40</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#ab32c80ead6fb1e58fed71f4696215208">Warn</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            title,</div>
@@ -135,10 +135,10 @@ $(document).ready(function(){initNavTree('_dialog_utils_8hpp_source.html',''); i
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            Enigma::MessageBox::Icon::Warning,</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            choice</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            );</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">return</span> action;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a99bd23c7e59aa0065a3f0e41ed6bfcff">   51</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a99bd23c7e59aa0065a3f0e41ed6bfcff">Warn</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Ok)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#aa25a55ad2edef2e018a4dc60921c5886">   51</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#aa25a55ad2edef2e018a4dc60921c5886">Warn</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
@@ -146,80 +146,99 @@ $(document).ready(function(){initNavTree('_dialog_utils_8hpp_source.html',''); i
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            Enigma::MessageBox::Icon::Warning,</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            choice</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            );</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">return</span> action;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#ad09491cedceb20c5c4517743429ca797">   63</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#ad09491cedceb20c5c4517743429ca797">Question</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Yes_No)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            title,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            message,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            Enigma::MessageBox::Icon::Question,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            choice</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            );</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">return</span> action;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a7f9686e93e5658950a31dbfe7d3957cb">   74</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a7f9686e93e5658950a31dbfe7d3957cb">Question</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Yes_No)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            message,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            Enigma::MessageBox::Icon::Question,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            choice</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            );</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> action;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a80a783aaf44b901c0b50725b977e7ff8">   86</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a80a783aaf44b901c0b50725b977e7ff8">Info</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Ok)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            title,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            message,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            Enigma::MessageBox::Icon::Info,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            choice</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            );</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">return</span> action;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a256360879a4d4eaaa79ef3a87570b829">   97</a></span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a256360879a4d4eaaa79ef3a87570b829">Info</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice&amp; choice = Enigma::MessageBox::Choice::Ok)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            message,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            Enigma::MessageBox::Icon::Info,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            choice</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            );</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> action = msgbox-&gt;Show();</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">return</span> action;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// !ENIGMA_DIALOG_UTILS_H</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#ab865d71b5ce65f5f1f561ac996e79486">   62</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#ab865d71b5ce65f5f1f561ac996e79486">Question</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Yes_No)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            title,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            message,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            Enigma::MessageBox::Icon::Question,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            choice</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            );</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a1f2b9ac268016815614ea2ac0904119b">   73</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a1f2b9ac268016815614ea2ac0904119b">Question</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Yes_No)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            message,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            Enigma::MessageBox::Icon::Question,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            choice</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            );</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a032f41c571428e4066e849845338b230">   84</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a032f41c571428e4066e849845338b230">Info</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; title, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            title,</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            message,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            Enigma::MessageBox::Icon::Info,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            choice</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            );</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="class_dialog_utils.html#a22fcd2cb51f526ac9ac5e184bb9a0cb3">   95</a></span>&#160;    <span class="keyword">static</span> Enigma::MessageBox::Action <a class="code" href="class_dialog_utils.html#a22fcd2cb51f526ac9ac5e184bb9a0cb3">Info</a>(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a>&amp; message, <span class="keyword">const</span> Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> msgbox = std::make_unique&lt;Enigma::MessageBox&gt;(</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="stringliteral">&quot;Enigma&quot;</span>,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            message,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            Enigma::MessageBox::Icon::Info,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            choice</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            );</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> msgbox-&gt;Show();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    static fs::path SelectFolder(const String&amp; title, const String&amp; initial_path = FileUtils::GetEnigmaExecutableDir().string(), const bool force_path = true)</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">        const auto sfd = std::make_unique&lt;Enigma::SelectFolderDialog&gt;(</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">            title,</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">            initial_path,</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">            force_path</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">            );</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">        return fs::path(sfd-&gt;Show());</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">    static fs::path SelectFile(const String&amp; title, const String&amp; initial_path = FileUtils::GetEnigmaExecutableDir().string(), const bool allow_multiselect = true)</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">    {</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">        std::initializer_list&lt;String&gt; filters{};</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">        const auto sfd = std::make_unique&lt;Enigma::OpenFileDialog&gt;(</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">            title,</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">            initial_path,</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">            false,</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">            filters</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">            );</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">        return fs::path(sfd-&gt;Show()[0]);</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">    }*/</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;};</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// !ENIGMA_DIALOG_UTILS_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_core_8hpp_html_abd951424e242d065209e958e30b73aed"><div class="ttname"><a href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a></div><div class="ttdeci">#define ENIGMA_API</div><div class="ttdoc">API import &amp; export macros.</div><div class="ttdef"><b>Definition:</b> <a href="_core_8hpp_source.html#l00035">Core.hpp:35</a></div></div>
+<div class="ttc" id="a_file_utils_8hpp_html"><div class="ttname"><a href="_file_utils_8hpp.html">FileUtils.hpp</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
 <div class="ttc" id="a_message_box_8hpp_html"><div class="ttname"><a href="_message_box_8hpp.html">MessageBox.hpp</a></div></div>
 <div class="ttc" id="a_open_file_dialog_8hpp_html"><div class="ttname"><a href="_open_file_dialog_8hpp.html">OpenFileDialog.hpp</a></div></div>
 <div class="ttc" id="a_save_file_dialog_8hpp_html"><div class="ttname"><a href="_save_file_dialog_8hpp.html">SaveFileDialog.hpp</a></div></div>
 <div class="ttc" id="a_select_folder_dialog_8hpp_html"><div class="ttname"><a href="_select_folder_dialog_8hpp.html">SelectFolderDialog.hpp</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html"><div class="ttname"><a href="class_dialog_utils.html">DialogUtils</a></div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00013">DialogUtils.hpp:14</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_a256360879a4d4eaaa79ef3a87570b829"><div class="ttname"><a href="class_dialog_utils.html#a256360879a4d4eaaa79ef3a87570b829">DialogUtils::Info</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Info(const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00097">DialogUtils.hpp:97</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_a42d3953ffe5426f36d45ad4a58ddabbb"><div class="ttname"><a href="class_dialog_utils.html#a42d3953ffe5426f36d45ad4a58ddabbb">DialogUtils::Warn</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Warn(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00040">DialogUtils.hpp:40</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_a6050a539ae55449c50fc11c89695001f"><div class="ttname"><a href="class_dialog_utils.html#a6050a539ae55449c50fc11c89695001f">DialogUtils::Error</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Error(const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00028">DialogUtils.hpp:28</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_a7f9686e93e5658950a31dbfe7d3957cb"><div class="ttname"><a href="class_dialog_utils.html#a7f9686e93e5658950a31dbfe7d3957cb">DialogUtils::Question</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Question(const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Yes_No)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00074">DialogUtils.hpp:74</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_a80a783aaf44b901c0b50725b977e7ff8"><div class="ttname"><a href="class_dialog_utils.html#a80a783aaf44b901c0b50725b977e7ff8">DialogUtils::Info</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Info(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00086">DialogUtils.hpp:86</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_a99bd23c7e59aa0065a3f0e41ed6bfcff"><div class="ttname"><a href="class_dialog_utils.html#a99bd23c7e59aa0065a3f0e41ed6bfcff">DialogUtils::Warn</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Warn(const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00051">DialogUtils.hpp:51</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html"><div class="ttname"><a href="class_dialog_utils.html">DialogUtils</a></div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00014">DialogUtils.hpp:15</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_a032f41c571428e4066e849845338b230"><div class="ttname"><a href="class_dialog_utils.html#a032f41c571428e4066e849845338b230">DialogUtils::Info</a></div><div class="ttdeci">static Enigma::MessageBox::Action Info(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00084">DialogUtils.hpp:84</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_a1f2b9ac268016815614ea2ac0904119b"><div class="ttname"><a href="class_dialog_utils.html#a1f2b9ac268016815614ea2ac0904119b">DialogUtils::Question</a></div><div class="ttdeci">static Enigma::MessageBox::Action Question(const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Yes_No)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00073">DialogUtils.hpp:73</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_a22fcd2cb51f526ac9ac5e184bb9a0cb3"><div class="ttname"><a href="class_dialog_utils.html#a22fcd2cb51f526ac9ac5e184bb9a0cb3">DialogUtils::Info</a></div><div class="ttdeci">static Enigma::MessageBox::Action Info(const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00095">DialogUtils.hpp:95</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_a5c6693d1c70422f11c127555548a5050"><div class="ttname"><a href="class_dialog_utils.html#a5c6693d1c70422f11c127555548a5050">DialogUtils::Error</a></div><div class="ttdeci">static Enigma::MessageBox::Action Error(const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00029">DialogUtils.hpp:29</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_a98485ddb246261226a058c1c12b7d2e5"><div class="ttname"><a href="class_dialog_utils.html#a98485ddb246261226a058c1c12b7d2e5">DialogUtils::Error</a></div><div class="ttdeci">static Enigma::MessageBox::Action Error(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00018">DialogUtils.hpp:18</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_aa25a55ad2edef2e018a4dc60921c5886"><div class="ttname"><a href="class_dialog_utils.html#aa25a55ad2edef2e018a4dc60921c5886">DialogUtils::Warn</a></div><div class="ttdeci">static Enigma::MessageBox::Action Warn(const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00051">DialogUtils.hpp:51</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_ab32c80ead6fb1e58fed71f4696215208"><div class="ttname"><a href="class_dialog_utils.html#ab32c80ead6fb1e58fed71f4696215208">DialogUtils::Warn</a></div><div class="ttdeci">static Enigma::MessageBox::Action Warn(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00040">DialogUtils.hpp:40</a></div></div>
 <div class="ttc" id="aclass_dialog_utils_html_ab68767d3835d21bac5e35395f3f90b3a"><div class="ttname"><a href="class_dialog_utils.html#ab68767d3835d21bac5e35395f3f90b3a">DialogUtils::ENIGMA_STATIC_CLASS</a></div><div class="ttdeci">ENIGMA_STATIC_CLASS(DialogUtils)</div></div>
-<div class="ttc" id="aclass_dialog_utils_html_abad7a442922363d1582e2ff49333c51f"><div class="ttname"><a href="class_dialog_utils.html#abad7a442922363d1582e2ff49333c51f">DialogUtils::Error</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Error(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Ok)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00017">DialogUtils.hpp:17</a></div></div>
-<div class="ttc" id="aclass_dialog_utils_html_ad09491cedceb20c5c4517743429ca797"><div class="ttname"><a href="class_dialog_utils.html#ad09491cedceb20c5c4517743429ca797">DialogUtils::Question</a></div><div class="ttdeci">static const Enigma::MessageBox::Action Question(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice &amp;choice=Enigma::MessageBox::Choice::Yes_No)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00063">DialogUtils.hpp:63</a></div></div>
+<div class="ttc" id="aclass_dialog_utils_html_ab865d71b5ce65f5f1f561ac996e79486"><div class="ttname"><a href="class_dialog_utils.html#ab865d71b5ce65f5f1f561ac996e79486">DialogUtils::Question</a></div><div class="ttdeci">static Enigma::MessageBox::Action Question(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Yes_No)</div><div class="ttdef"><b>Definition:</b> <a href="_dialog_utils_8hpp_source.html#l00062">DialogUtils.hpp:62</a></div></div>
 <div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00026">Types.hpp:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

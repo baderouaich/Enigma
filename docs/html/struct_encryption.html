@@ -94,6 +94,9 @@ $(document).ready(function(){initNavTree('struct_encryption.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> Model | Table: <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a>.  
+ <a href="struct_encryption.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -106,16 +109,22 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a0addb6474f3904a09ade0b83357f353e"><td class="memItemLeft" align="right" valign="top">i64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_encryption.html#a0addb6474f3904a09ade0b83357f353e">ide</a> {}</td></tr>
+<tr class="memdesc:a0addb6474f3904a09ade0b83357f353e"><td class="mdescLeft">&#160;</td><td class="mdescRight">auto incremental id in range [0, SIZE_MAX]  <a href="struct_encryption.html#a0addb6474f3904a09ade0b83357f353e">More...</a><br /></td></tr>
 <tr class="separator:a0addb6474f3904a09ade0b83357f353e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a758d93ae1c14931b6a42303e9b553161"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_encryption.html#a758d93ae1c14931b6a42303e9b553161">title</a> {}</td></tr>
+<tr class="memdesc:a758d93ae1c14931b6a42303e9b553161"><td class="mdescLeft">&#160;</td><td class="mdescRight">encryption title, e.g: "this is my gmail password"  <a href="struct_encryption.html#a758d93ae1c14931b6a42303e9b553161">More...</a><br /></td></tr>
 <tr class="separator:a758d93ae1c14931b6a42303e9b553161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d248076acf27142827886f914d9e993"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_cipher.html">Cipher</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_encryption.html#a4d248076acf27142827886f914d9e993">cipher</a> {}</td></tr>
+<tr class="memdesc:a4d248076acf27142827886f914d9e993"><td class="mdescLeft">&#160;</td><td class="mdescRight">encryption encrypted data, aka cipher.  <a href="struct_encryption.html#a4d248076acf27142827886f914d9e993">More...</a><br /></td></tr>
 <tr class="separator:a4d248076acf27142827886f914d9e993"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7243092877eb625e11848487ff01b260"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_encryption.html#a7243092877eb625e11848487ff01b260">date_time</a> {}</td></tr>
+<tr class="memdesc:a7243092877eb625e11848487ff01b260"><td class="mdescLeft">&#160;</td><td class="mdescRight">date &amp; time saved by sqlite3  <a href="struct_encryption.html#a7243092877eb625e11848487ff01b260">More...</a><br /></td></tr>
 <tr class="separator:a7243092877eb625e11848487ff01b260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0df0ce3ef18682208d1df08d4d7e6799"><td class="memItemLeft" align="right" valign="top">i64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_encryption.html#a0df0ce3ef18682208d1df08d4d7e6799">size</a> {}</td></tr>
+<tr class="memdesc:a0df0ce3ef18682208d1df08d4d7e6799"><td class="mdescLeft">&#160;</td><td class="mdescRight">size of compressed cipher in bytes  <a href="struct_encryption.html#a0df0ce3ef18682208d1df08d4d7e6799">More...</a><br /></td></tr>
 <tr class="separator:a0df0ce3ef18682208d1df08d4d7e6799"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15a8e196a10819a633e95c19f996867d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_encryption.html#a15a8e196a10819a633e95c19f996867d">is_file</a> {}</td></tr>
+<tr class="memdesc:a15a8e196a10819a633e95c19f996867d"><td class="mdescLeft">&#160;</td><td class="mdescRight">whether its a text or file encryption  <a href="struct_encryption.html#a15a8e196a10819a633e95c19f996867d">More...</a><br /></td></tr>
 <tr class="separator:a15a8e196a10819a633e95c19f996867d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -124,8 +133,9 @@ Friends</h2></td></tr>
 <tr class="separator:a76da759df4141077eddc3734ac4f0759"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00013">13</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<div class="textblock"><p><a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> Model | Table: <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00015">15</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa73b1c5af73496d8884844f5d1ada83e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa73b1c5af73496d8884844f5d1ada83e">&#9670;&nbsp;</a></span>~Encryption()</h2>
@@ -150,7 +160,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00022">22</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00024">24</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -178,7 +188,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00039">39</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00041">41</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -217,7 +227,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00029">29</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00031">31</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -234,7 +244,10 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00017">17</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p>encryption encrypted data, aka cipher. </p>
+<p>from another table for perfermance reasons </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00019">19</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +263,9 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00018">18</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p>date &amp; time saved by sqlite3 </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00020">20</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -266,7 +281,9 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00015">15</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p>auto incremental id in range [0, SIZE_MAX] </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00017">17</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -282,7 +299,9 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00020">20</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p>whether its a text or file encryption </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00022">22</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -298,7 +317,9 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00019">19</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p>size of compressed cipher in bytes </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00021">21</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +335,9 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00016">16</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
+<p>encryption title, e.g: "this is my gmail password" </p>
+
+<p class="definition">Definition at line <a class="el" href="_encryption_8hpp_source.html#l00018">18</a> of file <a class="el" href="_encryption_8hpp_source.html">Encryption.hpp</a>.</p>
 
 </div>
 </div>

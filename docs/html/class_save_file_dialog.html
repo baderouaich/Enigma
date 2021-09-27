@@ -93,40 +93,43 @@ $(document).ready(function(){initNavTree('class_save_file_dialog.html',''); init
 </div><!--header-->
 <div class="contents">
 
+<p>System Dialog to ask the user to select a path to save a file to.  
+ <a href="class_save_file_dialog.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae0a170de69af10cec72d62b844bf56c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#ae0a170de69af10cec72d62b844bf56c0">SaveFileDialog</a> (const String &amp;title, const String &amp;initial_path=&quot;.&quot;, const bool force_overwrite=true, const std::vector&lt; String &gt; &amp;filters={ &quot;All Files&quot;, &quot;*&quot; })</td></tr>
-<tr class="separator:ae0a170de69af10cec72d62b844bf56c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40678277732bb9db6e47488bb37340d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a40678277732bb9db6e47488bb37340d3">SaveFileDialog</a> (const String &amp;title, const String &amp;initial_path=&quot;.&quot;, const bool force_overwrite=true, const std::initializer_list&lt; String &gt; &amp;filters={ &quot;All Files&quot;, &quot;*&quot; })</td></tr>
+<tr class="memdesc:a40678277732bb9db6e47488bb37340d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="class_save_file_dialog.html#a40678277732bb9db6e47488bb37340d3">More...</a><br /></td></tr>
+<tr class="separator:a40678277732bb9db6e47488bb37340d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f310f6537eb6a020ebaab834eaac2a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a9f310f6537eb6a020ebaab834eaac2a1">~SaveFileDialog</a> () noexcept=default</td></tr>
 <tr class="separator:a9f310f6537eb6a020ebaab834eaac2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3250f962239d7c1a4447a4978388400"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#ad3250f962239d7c1a4447a4978388400">Show</a> () const</td></tr>
+<tr class="memdesc:ad3250f962239d7c1a4447a4978388400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn Save file dialog and get selected path.  <a href="class_save_file_dialog.html#ad3250f962239d7c1a4447a4978388400">More...</a><br /></td></tr>
 <tr class="separator:ad3250f962239d7c1a4447a4978388400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a1dd3ab8e0d71da43d7828f1f124c3bbf"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a1dd3ab8e0d71da43d7828f1f124c3bbf">m_title</a></td></tr>
-<tr class="separator:a1dd3ab8e0d71da43d7828f1f124c3bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cf168f63e5e91dc5e5a74e875f17a7a"><td class="memItemLeft" align="right" valign="top">const String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a0cf168f63e5e91dc5e5a74e875f17a7a">m_initial_path</a></td></tr>
-<tr class="separator:a0cf168f63e5e91dc5e5a74e875f17a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad62070b0b13091b102c51283b96e845"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#aad62070b0b13091b102c51283b96e845">m_force_overwrite</a></td></tr>
-<tr class="separator:aad62070b0b13091b102c51283b96e845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba5fb4b5139f3691a41a1c40eb482927"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#aba5fb4b5139f3691a41a1c40eb482927">m_filters</a></td></tr>
-<tr class="separator:aba5fb4b5139f3691a41a1c40eb482927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fac3b719b065b7e86b6d7c821f43c70"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a4fac3b719b065b7e86b6d7c821f43c70">m_title</a></td></tr>
+<tr class="separator:a4fac3b719b065b7e86b6d7c821f43c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9f55c5f1cf9ceaf50a73e532ffbec0"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#afb9f55c5f1cf9ceaf50a73e532ffbec0">m_initial_path</a></td></tr>
+<tr class="separator:afb9f55c5f1cf9ceaf50a73e532ffbec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a125023476ebb1f5fc931869f1daee0d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a125023476ebb1f5fc931869f1daee0d1">m_force_overwrite</a></td></tr>
+<tr class="separator:a125023476ebb1f5fc931869f1daee0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d9e48473000b44b5fc6768a0e0a7bfb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a1d9e48473000b44b5fc6768a0e0a7bfb">m_filters</a></td></tr>
+<tr class="separator:a1d9e48473000b44b5fc6768a0e0a7bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
+<div class="textblock"><p>System Dialog to ask the user to select a path to save a file to. </p>
+
 <p class="definition">Definition at line <a class="el" href="_save_file_dialog_8hpp_source.html#l00013">13</a> of file <a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae0a170de69af10cec72d62b844bf56c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0a170de69af10cec72d62b844bf56c0">&#9670;&nbsp;</a></span>SaveFileDialog()</h2>
+<a id="a40678277732bb9db6e47488bb37340d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40678277732bb9db6e47488bb37340d3">&#9670;&nbsp;</a></span>SaveFileDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a> SaveFileDialog::SaveFileDialog </td>
@@ -149,7 +152,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; String &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::initializer_list&lt; String &gt; &amp;&#160;</td>
           <td class="paramname"><em>filters</em> = <code>{&#160;&quot;All&#160;Files&quot;,&#160;&quot;*&quot;&#160;}</code>&#160;</td>
         </tr>
         <tr>
@@ -158,12 +161,18 @@ Private Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">title</td><td>title of the dialog </td></tr>
+    <tr><td class="paramname">initial_path</td><td>the default path of the dialog. </td></tr>
+    <tr><td class="paramname">force_overwrite</td><td>force overwrite and disable the confirmation dialog </td></tr>
+    <tr><td class="paramname">filters</td><td>The filter list enumerates filter names and corresponded space-separated wildcard lists. It defaults to { "All Files", "*" } </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="_save_file_dialog_8cpp_source.html#l00007">7</a> of file <a class="el" href="_save_file_dialog_8cpp_source.html">SaveFileDialog.cpp</a>.</p>
 
@@ -210,13 +219,15 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_save_file_dialog_8cpp_source.html#l00017">17</a> of file <a class="el" href="_save_file_dialog_8cpp_source.html">SaveFileDialog.cpp</a>.</p>
+<p>Spawn Save file dialog and get selected path. </p>
+
+<p class="definition">Definition at line <a class="el" href="_save_file_dialog_8cpp_source.html#l00016">16</a> of file <a class="el" href="_save_file_dialog_8cpp_source.html">SaveFileDialog.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aba5fb4b5139f3691a41a1c40eb482927"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba5fb4b5139f3691a41a1c40eb482927">&#9670;&nbsp;</a></span>m_filters</h2>
+<a id="a1d9e48473000b44b5fc6768a0e0a7bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d9e48473000b44b5fc6768a0e0a7bfb">&#9670;&nbsp;</a></span>m_filters</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +236,31 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::vector&lt;String&gt; SaveFileDialog::m_filters</td>
+          <td class="memname">std::vector&lt;String&gt; SaveFileDialog::m_filters</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_save_file_dialog_8hpp_source.html#l00040">40</a> of file <a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a125023476ebb1f5fc931869f1daee0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a125023476ebb1f5fc931869f1daee0d1">&#9670;&nbsp;</a></span>m_force_overwrite</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SaveFileDialog::m_force_overwrite</td>
         </tr>
       </table>
   </td>
@@ -239,8 +274,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aad62070b0b13091b102c51283b96e845"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad62070b0b13091b102c51283b96e845">&#9670;&nbsp;</a></span>m_force_overwrite</h2>
+<a id="afb9f55c5f1cf9ceaf50a73e532ffbec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb9f55c5f1cf9ceaf50a73e532ffbec0">&#9670;&nbsp;</a></span>m_initial_path</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +284,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool SaveFileDialog::m_force_overwrite</td>
+          <td class="memname">String SaveFileDialog::m_initial_path</td>
         </tr>
       </table>
   </td>
@@ -263,8 +298,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0cf168f63e5e91dc5e5a74e875f17a7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cf168f63e5e91dc5e5a74e875f17a7a">&#9670;&nbsp;</a></span>m_initial_path</h2>
+<a id="a4fac3b719b065b7e86b6d7c821f43c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fac3b719b065b7e86b6d7c821f43c70">&#9670;&nbsp;</a></span>m_title</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -273,7 +308,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const String SaveFileDialog::m_initial_path</td>
+          <td class="memname">String SaveFileDialog::m_title</td>
         </tr>
       </table>
   </td>
@@ -284,30 +319,6 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_save_file_dialog_8hpp_source.html#l00037">37</a> of file <a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1dd3ab8e0d71da43d7828f1f124c3bbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dd3ab8e0d71da43d7828f1f124c3bbf">&#9670;&nbsp;</a></span>m_title</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const String SaveFileDialog::m_title</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_save_file_dialog_8hpp_source.html#l00036">36</a> of file <a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>.</p>
 
 </div>
 </div>

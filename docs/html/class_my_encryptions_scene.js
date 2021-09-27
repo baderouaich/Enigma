@@ -5,6 +5,7 @@ var class_my_encryptions_scene =
     [ "GetAllEncryptions", "class_my_encryptions_scene.html#a13ce1f64edd0d3f65fd3eb5ba9ca114f", null ],
     [ "OnBackButtonPressed", "class_my_encryptions_scene.html#ab4de6b30364496789ad2c8a419d4e0e0", null ],
     [ "OnCreate", "class_my_encryptions_scene.html#ab2ca2243499a8c318cd92ba1a8a1d8b0", null ],
+    [ "OnDeleteAllEncryptions", "class_my_encryptions_scene.html#ae292f4f5e153b6e11c6d118908578f85", null ],
     [ "OnDeleteEncryptionButtonPressed", "class_my_encryptions_scene.html#acc2af3bb35d3131deeb258e9e547bf56", null ],
     [ "OnDestroy", "class_my_encryptions_scene.html#af19c6c37472d97046dd69c76d689c712", null ],
     [ "OnDraw", "class_my_encryptions_scene.html#a7a3994b116f6220d4baf36c3a16f1ef8", null ],
