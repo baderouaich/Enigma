@@ -20,8 +20,7 @@ MessageBox::Action MessageBox::Show() const
 		m_message,
 		static_cast<pfd::choice>(m_choice),
 		static_cast<pfd::icon>(m_icon))
-		.result();
-	
+		.result();	
 	return static_cast<MessageBox::Action>(result);
 
 #if 0 

@@ -146,10 +146,11 @@ do { \
 
 /// Makes a class static, which will prevent creating instances from it and only use it as Class::Func()..
 #define ENIGMA_STATIC_CLASS(Class) \
-		ENIGMA_NON_COPYABLE(Class) \
-		ENIGMA_NON_MOVEABLE(Class) \
-		Class() = delete; \
-		~Class() = delete; \
+		public: \
+			ENIGMA_NON_COPYABLE(Class) \
+			ENIGMA_NON_MOVEABLE(Class) \
+			Class() = delete; \
+			~Class() = delete; \
 		private:
 ///
 

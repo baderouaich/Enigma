@@ -4,7 +4,7 @@
 
 NS_ENIGMA_BEGIN
 
-SaveFileDialog::SaveFileDialog(const String& title, const String& initial_path, const bool force_overwrite, const std::vector<String>& filters)
+SaveFileDialog::SaveFileDialog(const String& title, const String& initial_path, const bool force_overwrite, const std::initializer_list<String>& filters)
 	:
 	m_title(title),
 	m_initial_path(initial_path),
@@ -12,7 +12,6 @@ SaveFileDialog::SaveFileDialog(const String& title, const String& initial_path, 
 	m_filters(filters)
 {
 }
-
 
 String SaveFileDialog::Show() const
 {

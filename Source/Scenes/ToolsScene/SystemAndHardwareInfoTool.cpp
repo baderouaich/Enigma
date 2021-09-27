@@ -50,7 +50,25 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				static const String vendor_id = iware::cpu::vendor_id();
 				static std::vector<String> supported_instructions_set{}; // SSE, SSE2, AVX...
 				static std::array<iware::cpu::cache_t, 3> caches{};
+				
+				// Get Instructions Set And Caches 
 				// Will execute just once
+				static std::once_flag once_flag{};
+				std::call_once(once_flag, [this] 
+				{
+						// Instructions set
+						for (const auto is : iware::cpu::supported_instruction_sets())
+						{
+							supported_instructions_set.push_back(this->StringifyInstructionSetEnum(is));
+						}
+						// Caches
+						for (i32 i = 0; i < caches.size(); ++i)
+						{
+							caches[i] = iware::cpu::cache(i + 1);
+						}
+				});
+				/*
+				* method 2 of execute once
 				[[maybe_unused]] static const auto GetInstructionsSetAndCachesOnce = [this]() -> bool
 				{
 					// Instructions set
@@ -65,7 +83,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 					}
 
 					return true;
-				}();
+				}();*/
 				 
 				// Architecture, Frequency, Model name, Vendor Name, Vendor ID
 				ImGui::BulletText("%s: %s", ("Architecture"), architecture.c_str());

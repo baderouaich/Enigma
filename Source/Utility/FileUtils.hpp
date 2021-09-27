@@ -48,6 +48,39 @@ public:
 		return GetEnigmaExecutableFilePath().parent_path();
 	}
 
+	
+#if 0
+	enum class ResourcePath : ui16
+	{
+		EXECUTABLE_DIR = 0x00,
+		FONTS_DIR,
+		BRANDING_DIR,
+		CONFIG_DIR,
+		DATABASE_DIR,
+
+		EXECUTABLE_FILE,
+		FONT_AUDIOWIDE_REGULAR_FILE,
+		...
+	};
+	static fs::path GetResourcePath(const ResourcePath res_path)
+	{
+		switch (res_path)
+		{
+		case ResourcePath::EXECUTABLE_DIR:
+			return GetEnigmaExecutableDir();
+		case ResourcePath::FONTS_DIR:
+			return GetEnigmaExecutableDir() / "Fonts";
+		case ResourcePath::BRANDING_DIR:
+			return GetEnigmaExecutableDir() / "Branding";
+		case ResourcePath::CONFIG_DIR:
+			return GetEnigmaExecutableDir() / "Config";
+		case ResourcePath::DATABASE_DIR:
+			return GetEnigmaExecutableDir() / "Database";
+		}
+		ENIGMA_ASSERT(false, "<unknown resource path>");
+	}
+#endif
+
 
 public:
 	static bool Read(const fs::path& filename, String& buffer)

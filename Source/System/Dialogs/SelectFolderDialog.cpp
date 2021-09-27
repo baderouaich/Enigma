@@ -11,7 +11,6 @@ SelectFolderDialog::SelectFolderDialog(const String& title, const String& initia
 {
 }
 
-
 String SelectFolderDialog::Show() const
 {
 	return pfd::select_folder(

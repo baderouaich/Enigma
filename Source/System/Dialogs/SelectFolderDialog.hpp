@@ -18,7 +18,7 @@ public: /* Constructors / Destructor */
 	*	@param initial_path: the default path of the dialog.
 	*	@param force_path: to force the operating system to use the provided path. Some systems default to the most recently used path, if applicable.
 	*/
-	explicit SelectFolderDialog(const String& title,
+	SelectFolderDialog(const String& title,
 		const String& initial_path = ".",
 		const bool force_path = true);
 	~SelectFolderDialog() noexcept = default;
@@ -30,9 +30,9 @@ public: /* Accessors */
 	String Show() const;
 
 private:
-	const String m_title;
-	const String m_initial_path;
-	const bool m_force_path;
+	String m_title;
+	String m_initial_path;
+	bool m_force_path;
 };
 
 NS_ENIGMA_END

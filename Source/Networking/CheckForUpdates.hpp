@@ -24,6 +24,7 @@
 NS_ENIGMA_BEGIN
 class ENIGMA_API CheckForUpdates final
 {
+	ENIGMA_STATIC_CLASS(CheckForUpdates);
 public:
 	struct Version
 	{
@@ -34,9 +35,14 @@ public:
 		Version() : major(0), minor(0), patch(0) {}
 		Version(const String& tag_name)
 		{
+			Parse(tag_name);
+		}
+
+		void Parse(const String& tag_name)
+		{
 			const std::vector<String> parts = StringUtils::Split(tag_name, '.');
 			ENIGMA_ASSERT_OR_THROW(parts.size() == 3, fmt::format("Version tag_name is malformed, expected major.minor.patch (%d.%d.%d) but received {}", tag_name));
-			
+
 			// Convert string parts to ui16 major minor patch
 			const auto stoui16 = [](const String& str) -> ui16
 			{
@@ -50,6 +56,7 @@ public:
 			minor = stoui16(parts[1]);
 			patch = stoui16(parts[2]);
 		}
+
 
 		constexpr bool operator > (const Version& other) const noexcept
 		{
@@ -80,7 +87,7 @@ public:
 		String body;	//  "body": "Enigma first stable release for Windows x64 and Linux x64 using:\r\n- Crypto++ v8.4.0\r\n- GLFW v3.3.2\r\n- ImGui v1.79\r\n- spdlog v1.8.0\r\n- and other libraries"
 		String tarball_url; // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
 		String zipball_url;	// "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
-		Version version; // parsed version to compare
+		Version version; // parsed comparable version
 
 		LatestReleaseInfo() noexcept
 			:
@@ -113,7 +120,7 @@ public:
 			ASSIGN_IF(info->tarball_url, "tarball_url", string);
 			ASSIGN_IF(info->zipball_url, "zipball_url", string);
 
-			info->version = Version(info->tag_name); // parse version
+			info->version.Parse(info->tag_name); // parse version by tagname
 			return info;
 
 #undef ASSIGN_IF

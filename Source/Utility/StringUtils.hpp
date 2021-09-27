@@ -5,6 +5,7 @@
 #include <Core/Types.hpp>	// Enigma Types
 
 #include <string>		// std::string, std::string_view
+#include <sstream>		// std::stringstream
 #include <algorithm>	// std::all_of
 #include <utility>		// std::transform
 #include <codecvt>		// helps converting between UTF-X strings
@@ -178,6 +179,18 @@ public:
 		return converter.to_bytes(wstr);
 	}
 
+
+	/*
+	*	Convert string to any other simple type
+	*/
+	template <typename T, typename StringType>
+	static T To(const StringType& str)
+	{
+		T t{};
+		std::basic_stringstream<typename StringType::value_type> ss(str);
+		ss >> t;
+		return t;
+	}
 
 #if 0
 

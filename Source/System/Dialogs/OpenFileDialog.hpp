@@ -20,10 +20,10 @@ public: /* Constructors / Destructor */
 	*	@param filters: The filter list enumerates filter names and corresponded space-separated wildcard lists. 
 						It defaults to { "All Files", "*" }
 	*/
-	explicit OpenFileDialog(const String& title,
+	OpenFileDialog(const String& title,
 		const String& initial_path = ".",
 		const bool allow_multiselect = true,
-		const std::vector<String>& filters = { "All Files", "*" });
+		const std::initializer_list<String>& filters = { "All Files", "*" });
 	~OpenFileDialog() noexcept = default;
 
 public: /* Accessors */
@@ -33,10 +33,10 @@ public: /* Accessors */
 	std::vector<String> Show() const;
 
 private:
-	const String m_title;
-	const String m_initial_path;
-	const bool m_allow_multiselect;
-	const std::vector<String> m_filters;
+	String m_title;
+	String m_initial_path;
+	bool m_allow_multiselect;
+	std::vector<String> m_filters;
 };
 
 NS_ENIGMA_END

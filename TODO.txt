@@ -33,6 +33,8 @@ System
 Tests
 Utility
 
+- Fix typos & grammar (after documenting)
+
 - Add [delete all button] and [export as json], [import as json] in MyEncryptionsScene
 
 - Fix images do not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html
