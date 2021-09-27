@@ -10,6 +10,8 @@
 #include "Event.hpp"
 
 NS_ENIGMA_BEGIN
+
+/** Event dispatcher to dispatch specific desired events */
 class ENIGMA_API EventDispatcher
 {
 	template<typename T>

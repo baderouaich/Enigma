@@ -17,7 +17,8 @@
 
 
 NS_ENIGMA_BEGIN
-/*
+
+/**
 * Enigma SQLite database to store and retrieve encryption records
 * User can export and import Database file to clouds or drives
 * Database file will store Encrypted Text and Encrypted Files ciphers and other info
@@ -27,6 +28,7 @@ class ENIGMA_API Database final
 	ENIGMA_STATIC_CLASS(Database);
 
  public:
+	/** Encryption Table order by column */
 	enum class OrderBy : byte
 	{
 		ID,
@@ -36,7 +38,8 @@ class ENIGMA_API Database final
 
 		ENIGMA_ENUM_DECLARE_BEGIN_END(ID)
 	};
-	friend const char* operator *(OrderBy order_by) // operator* to stringify enum OrderBy
+	/** To help stringify enum OrderBy */
+	friend const char* operator *(OrderBy order_by) 
 	{
 #define CASE_STR(e) case OrderBy::e: return #e
 		switch (order_by)
@@ -60,6 +63,7 @@ class ENIGMA_API Database final
 		}
 		return os;
 	}
+	/** Encryption Table order column */
 	enum class Order : byte
 	{
 		Ascending,
@@ -67,7 +71,8 @@ class ENIGMA_API Database final
 
 		ENIGMA_ENUM_DECLARE_BEGIN_END(Ascending)
 	};
-	friend const char* operator *(Order order) // operator* to stringify enum Order
+	/** To help stringify enum Order */
+	friend const char* operator *(Order order)
 	{
 #define CASE_STR(e) case Order::e: return #e
 		switch (order)
@@ -84,23 +89,25 @@ class ENIGMA_API Database final
 	}
 
 public:
+	/** Initializes SQLite database connection */
 	static void Initialize();
+	/** Shuts down SQLite connection */
 	static void Shutdown();
 
 public: // Encryption Operations
-	// Add Encryption to Encryptions table, returns true on success
+	/** Add Encryption to Encryptions table, returns true on success */
 	static bool AddEncryption(const std::unique_ptr<Encryption>& e);
 
-	// Returns cipher from database by encryption id
+	/** Returns cipher from database by encryption id */
 	static std::unique_ptr<Cipher> GetCipherByEncryptionID(const i64 ide);
 
-	// Delete Encryption record by id, returns true if successfully deleted
+	/** Delete Encryption record by id, returns true if successfully deleted */
 	static bool DeleteEncryption(const i64 ide);
 
-	// Delete all saved encryptions from the database (with their cipher)
+	/** Delete all saved encryptions from the database (with their cipher) */
 	static bool DeleteAllEncryptions();
 
-	// Returns how many encryption records are saved
+	/** Returns how many encryption records are saved */
 	static i64 GetEncryptionsCount();
 
 #if 0
@@ -157,7 +164,7 @@ public: // Encryption Operations
 	}
 #endif
 
-	// Get an Encyrption by id with desired columns for optimization
+	/** Get an Encyrption by id with desired columns for optimization */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
 	{
@@ -214,7 +221,7 @@ public: // Encryption Operations
 		}
 	}
 
-	// Get all Encryptions with desired columns for optimization
+	/** Get all Encryptions with desired columns for optimization */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
 	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{			
@@ -275,7 +282,7 @@ public: // Encryption Operations
 	}
 
 
-	// Search Encryptions by title using keyword LIKE %QUERY%
+	/** Search Encryptions by title using keyword LIKE %QUERY% */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file> // select which columns to return (for optimization)
 	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
@@ -337,15 +344,17 @@ public: // Encryption Operations
 
 
 public: // Accessors
+	/** Returns SQLite database connection instance */
 	static const std::unique_ptr<SQLite::Database>& GetInstance() noexcept { return m_database; }
 
 
 public: // Modifiers
-	/*
-	*	https://www.sqlitetutorial.net/sqlite-vacuum/
+	/**	
 	*	Cleans up allocated disk space for deleted data, blob...
+	*
 	*	When you insert or delete data from the tables, the indexes and tables become fragmented, 
 	*	especially for the database that has a high number of inserts, updates, and deletes.
+	*	@note https://www.sqlitetutorial.net/sqlite-vacuum/
 	*/
 	static void Vacuum() noexcept 
 	{
@@ -361,20 +370,20 @@ public: // Modifiers
 		}
 		//else
 		//	ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");
-
-
 	}
 
 	
 
 private:
-	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; // Database connection configuered on Initialize()
+	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; /**< Database connection configuered on Initialize() */
 };
+
 /*
 Notes:
 for bind, use index starts by 1
 for getColumn, use index starts by 0
 */
+
 NS_ENIGMA_END
 #endif // !ENIGMA_DATABASE_H
 

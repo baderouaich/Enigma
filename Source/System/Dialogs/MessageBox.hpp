@@ -5,7 +5,7 @@
 #include <Core/Core.hpp>
 #include <portable-file-dialogs.h>
 
-// Avoid mismatch with windows's MessageBox macro
+/** Avoid mismatch with windows's MessageBox macro */
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	#undef MessageBox
 	#undef ERROR
@@ -17,7 +17,7 @@ NS_ENIGMA_BEGIN
 class ENIGMA_API MessageBox
 {
 public: /* Enums */
-	/*
+	/**
 	* Message box Icon type
 	*/
 	enum class Icon : ui8
@@ -28,7 +28,7 @@ public: /* Enums */
 		Question	= static_cast<ui8>(pfd::icon::question)
 	};
 
-	/*
+	/**
 	*	Message box button layout choices
 	*/
 	enum class Choice : ui8
@@ -41,7 +41,7 @@ public: /* Enums */
 		Abort_Retry_Ignore	= static_cast<ui8>(pfd::choice::abort_retry_ignore)
 	};
 
-	/*
+	/**
 	*	User Performed Action Result
 	*/
 	enum class Action : i8
@@ -56,7 +56,8 @@ public: /* Enums */
 	};
 
 public: /* Constructors / Destructor */
-	/*
+	/**
+	*	Constructor
 	*	@param title: title of the message box
 	*	@param message: description of the message box
 	*	@param icon: Icon type of the message box Info, Warning, Error or Question
@@ -68,16 +69,17 @@ public: /* Constructors / Destructor */
 	~MessageBox() noexcept = default;
 
 public: /* Accessors */
-	/*
+	/**
 	*	Spawns MessageBox and returns user Action
 	*/
 	MessageBox::Action Show() const;
 	
 private:
-	String m_title;
-	String m_message;
-	Icon m_icon;
-	Choice m_choice;
+	String m_title;	  /*< MessageBox title */
+	String m_message; /*< MessageBox message */
+	Icon m_icon;	  /*< MessageBox icon */
+	Choice m_choice;  /*< MessageBox choice/button template */
+					  
 };
 
 NS_ENIGMA_END

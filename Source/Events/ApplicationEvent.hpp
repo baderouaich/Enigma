@@ -11,6 +11,7 @@
 
 NS_ENIGMA_BEGIN
 
+/** Window size changed Event */
 class WindowResizeEvent : public Event
 {
 public:
@@ -37,6 +38,7 @@ private:
 	i32 m_width, m_height;
 };
 
+/** Frame buffer size changed Event */
 class FrameBufferResizeEvent : public Event
 {
 public:
@@ -63,6 +65,7 @@ private:
 	i32 m_width, m_height;
 };
 
+/** Window position changed Event */
 class WindowMoveEvent : public Event
 {
 public:
@@ -88,6 +91,7 @@ private:
 	i32 m_xPos, m_yPos;
 };
 
+/** Window maximized Event */
 class WindowMaximizedEvent : public Event
 {
 public:
@@ -111,6 +115,7 @@ private:
 	bool m_isMaximized;
 };
 
+/** Window lost focus Event */
 class WindowFocusLostEvent : public Event
 {
 public:
@@ -119,6 +124,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
+/** Window gain focus Event */
 class WindowFocusEvent : public Event
 {
 public:
@@ -127,6 +133,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
+/** Window close button pressed Event */
 class WindowCloseEvent : public Event
 {
 public:
@@ -136,6 +143,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
+/** Files dropped over window Event */
 class WindowFileDropEvent : public Event
 {
 public:
@@ -153,6 +161,7 @@ private:
 	std::vector<fs::path> m_filenames;
 };
 
+/** Application main loop tick Update Event */
 class AppUpdateEvent : public Event
 {
 public:
@@ -162,6 +171,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
+/** Application main loop tick Draw Event */
 class AppRenderEvent : public Event
 {
 public:
@@ -171,6 +181,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 };
 
+/** Application main loop tick Event */
 class AppTickEvent : public Event
 {
 public:

@@ -6,13 +6,13 @@
 #include <portable-file-dialogs.h>
 
 NS_ENIGMA_BEGIN
-/*
+/**
 *	System Notification
 */
 class ENIGMA_API Notification
 {
 public: /* Enums */
-	/*
+	/**
 	* Notification Icon type
 	*/
 	enum class Icon : ui8
@@ -23,7 +23,7 @@ public: /* Enums */
 	};
 
 public: /* Constructors / Destructor */
-	/*
+	/** Constructor
 	*	@param title: title of the notification
 	*	@param message: description of the notification
 	*	@param icon: Icon type of the notification
@@ -32,15 +32,15 @@ public: /* Constructors / Destructor */
 	~Notification() noexcept = default;
 
 public: /* Accessors */
-	/*
+	/**
 	*	Spawns System Notification
 	*/
 	void Show() const;
 
 private:
-	const String m_title;
-	const String m_message;
-	const Icon m_icon;
+	const String m_title;	/*< Notification title */
+	const String m_message; /*< Notification message */
+	const Icon m_icon;		/*< Notification icon (Info, Error or Warning) */
 };
 
 NS_ENIGMA_END

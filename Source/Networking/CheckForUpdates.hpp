@@ -26,6 +26,7 @@ class ENIGMA_API CheckForUpdates final
 {
 	ENIGMA_STATIC_CLASS(CheckForUpdates);
 public:
+	/** Comparable Version struct, an instance can be made from a version string e.g "1.0.0" */
 	struct Version
 	{
 		ui16 major;
@@ -78,6 +79,7 @@ public:
 		}
 	};
 
+	/** Latest Enigma release information data struct */
 	struct LatestReleaseInfo
 	{
 		String name;   // "name": "Enigma Release (Windows x64, Linux x64)",
@@ -152,6 +154,7 @@ public:
 	};
 
 public:
+	/** Returns the Latest Enigma release information using Github API */
 	static std::unique_ptr<LatestReleaseInfo> GetLatestReleaseInfo()
 	{
 		try

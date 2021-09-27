@@ -10,6 +10,7 @@
 
 NS_ENIGMA_BEGIN
 
+/** Keyboard buttons Event */
 class KeyEvent : public Event
 {
 public:
@@ -26,6 +27,7 @@ protected:
 	KeyCode m_key_code;
 };
 
+/** Keyboard button press Event */
 class KeyPressedEvent : public KeyEvent
 {
 public:
@@ -49,6 +51,7 @@ private:
 	ui16 m_repeat_count;
 };
 
+/** Keyboard button release Event */
 class KeyReleasedEvent : public KeyEvent
 {
 public:
@@ -67,6 +70,7 @@ public:
 	EVENT_CLASS_TYPE(EventType::KEY_RELEASED)
 };
 
+/** Keyboard button type Event */
 class KeyTypedEvent : public KeyEvent
 {
 public:

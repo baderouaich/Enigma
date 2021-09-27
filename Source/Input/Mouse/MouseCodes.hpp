@@ -7,7 +7,7 @@
 
 NS_ENIGMA_BEGIN
 
-// Mouse codes From glfw3.h
+/** Mouse codes From glfw3.h */
 typedef enum class MouseCode : ui16
 {
 	Button0 = GLFW_MOUSE_BUTTON_1,

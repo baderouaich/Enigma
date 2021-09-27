@@ -11,7 +11,7 @@
 
 NS_ENIGMA_BEGIN
 
-
+/** Mouse Movement Event */
 class MouseMotionEvent : public Event
 {
 public:
@@ -38,6 +38,7 @@ private:
 	f32 m_mouseX, m_mouseY;
 };
 
+/** Mouse Wheel Scroll Event */
 class MouseWheelEvent : public Event
 {
 public:
@@ -64,6 +65,7 @@ private:
 	f32 m_XOffset, m_YOffset;
 };
 
+/** Mouse Button Click, Hold Event */
 class MouseButtonEvent : public Event
 {
 public:
@@ -81,6 +83,7 @@ protected:
 	MouseCode m_button;
 };
 
+/** Mouse Button Press Event */
 class MouseButtonPressedEvent : public MouseButtonEvent
 {
 public:
@@ -99,6 +102,7 @@ public:
 	EVENT_CLASS_TYPE(EventType::MOUSE_BUTTON_PRESSED)
 };
 
+/** Mouse Button Release Event */
 class MouseButtonReleasedEvent : public MouseButtonEvent
 {
 public:

@@ -2,7 +2,7 @@
 #ifndef ENIGMA_PLATFORM_H
 #define ENIGMA_PLATFORM_H
 
-/*
+/**
 *	Detects current platform
 */
 

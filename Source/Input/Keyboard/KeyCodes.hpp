@@ -7,7 +7,7 @@
 
 NS_ENIGMA_BEGIN
 
-//Keycodes From glfw3.h
+/** Keyboard codes From glfw3.h */
 typedef enum class KeyCode : ui16
 {
 	Space = GLFW_KEY_SPACE,

@@ -1,7 +1,5 @@
 ========================= IN PROGRESS =============================
-- in version 2.0.0, change cli --mode to --algorithm,-a
-- Filesystem manager to get paths to files, Filesystem::GetEnigmaExePath(), Filesystem::Get(ResoucesEnum::FontsEnum::Font1)  (ResoucesEnum::ImagesEnum::Icon)
-- Make hashing algorithms in a combo box instead of radio buttons
+- Make hashing algorithms in a combo box instead of radio buttons in HashingTool Scene
 - On checking for new version, check major and minor if greater than current to inform user if he has an old version
 - Doxygen Documentation 
 https://www.doxygen.nl/manual/commands.html
@@ -21,17 +19,18 @@ Analytics DONE
 Application DONE
 CLI DONE
 Config DONE
-Core
-Database
-Events
-GUI
-Input
-Logger
-Networking
-Scenes
-System
+Core DONE
+Database DONE
+Events DONE
+GUI DONE
+Input DONE
+Logger DONE
+Networking DONE
+System Done
 Tests
 Utility
+Window
+Scenes
 
 - Fix typos & grammar (after documenting)
 
@@ -81,6 +80,8 @@ RSASS<PSSR, SHA1>::Verifier verifier(publicKey);
 
 
 - Add Translation system 
+
+- Filesystem manager to get paths to files, Filesystem::GetEnigmaExePath(), Filesystem::Get(ResoucesEnum::FontsEnum::Font1)  (ResoucesEnum::ImagesEnum::Icon)
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene using sql like clause
 - DONE added VACUUM sqlite command to defragment disk
@@ -126,6 +127,7 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE Make algorithm intent bitwise based so an encryption algorithm can be created for both intentions
 - DONE Check why in docs u cant view file contents for example:  go to https://badereddineouaich.github.io/Enigma/class_check_for_updates.html and click CheckForUpdates.hpp, fixed by adding .nojekyll file to docs/ . see https://stackoverflow.com/questions/25320356/can-i-have-my-github-pages-index-html-in-a-subfolder-of-the-repository
 - DONE Remove spacing between TreeNodes in System & Hardware info tool CPU -> Quantities..
+- DONE Change cli --mode to --algorithm,-a
 =============================================================================
 
 

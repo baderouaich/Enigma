@@ -6,11 +6,15 @@
 
 NS_ENIGMA_BEGIN
 
+/** Clipboard Manager static class */
 class ENIGMA_API Clipboard final
 {
 	ENIGMA_STATIC_CLASS(Clipboard);
 public:
+	/** Get Clipboard text */
 	static String Get();
+
+	/** Set Clipboard text */
 	static void Set(const String& buffer);
 };
 

@@ -1,5 +1,7 @@
 # 2.0.0
 - Changed CLI option --mode,-m to --algorithm,-a
+- Fix check for updates bug
+- Proceeded Doxygen Documentation (~0.60% Documented)
 
 
 # 1.4.0

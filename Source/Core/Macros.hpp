@@ -182,19 +182,19 @@ do { \
 ///
 
 
-//void TimedFunction(
+//static void TimedFunction(
 //	const std::function<void()>& onStart,
 //	const std::function<void()>& func,
-//	const std::function<void(double)>& onFinish)
+//	const std::function<void(::Enigma::f64)>& onFinish)
 //{
 //	onStart();
 //	ENIGMA_BEGIN_TIMER(t1);
 //		func();
-//	auto elapsed = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
+//	::Enigma::f64 elapsed = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 //	onFinish(elapsed);
 //}
-//
-//
+
+
 
 
 #endif // !ENIGMA_MACROS_H

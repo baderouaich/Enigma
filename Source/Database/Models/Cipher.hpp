@@ -6,12 +6,14 @@
 
 NS_ENIGMA_BEGIN
 
-// Cipher Model | table: Cipher
+/**
+*	Cipher Model | table: Cipher
+*/
 struct Cipher
 {
-	i64 idc{}; // auto incremental id
-	String data{}; // BLOB compressed text or file binary cipher
-	i64 ide{}; // foreign key references Encryption(id)
+	i64 idc{}; /**< auto incremental id */
+	String data{}; /**< BLOB compressed text or file binary cipher */
+	i64 ide{}; /**< foreign key references Encryption(id) */
 
 	~Cipher() noexcept
 	{

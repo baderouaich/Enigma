@@ -5,18 +5,28 @@
 #include <Core/Core.hpp>
 
 NS_ENIGMA_BEGIN
-/*Refs: examples/example_glfw_opengl3/main.cpp*/
+/** 
+*	ImGui Renderer
+* 
+*	@note: see examples/example_glfw_opengl3/main.cpp/
+*/
 class ENIGMA_API ImGuiRenderer
-
 {
 public:
+	/** Constructor
+	*	Initializes ImGui context
+	*/
 	ImGuiRenderer();
+
+	/** Destructor
+	*	Shuts down ImGui context
+	*/
 	~ImGuiRenderer();
 
-	//Begin imgui rendering
+	/** Begin imgui rendering */
 	void Begin();
 
-	//End imgui rendering
+	/** End imgui rendering */
 	void End();
 };
 

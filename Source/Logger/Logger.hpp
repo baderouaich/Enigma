@@ -14,12 +14,12 @@ class ENIGMA_API Logger final
 {
 	ENIGMA_STATIC_CLASS(Logger);
 public:
-	/*
+	/**
 	*	Initialize Enigma Logger
 	*/
 	static void Initialize();
 
-	/*
+	/**
 	*	Shutdown Enigma Logger (cleans up spdlog stuff, remains optional to call at the exit of the app)
 	*/
 	static void Shutdown();

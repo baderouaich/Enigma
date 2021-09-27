@@ -15,11 +15,10 @@ class ENIGMA_API ImGuiWidgets final
 {
 	ENIGMA_STATIC_CLASS(ImGuiWidgets);
 public:
-	/*
+	/**
 	*	InputTextMultiline with stl container std::string instread of char* static size
-	*	Refs:
-	*		https://github.com/ocornut/imgui/issues/2035
-	*		https://github.com/ocornut/imgui/blob/master/misc/cpp/imgui_stdlib.cpp
+	*	
+	*	@note: https://github.com/ocornut/imgui/issues/2035, https://github.com/ocornut/imgui/blob/master/misc/cpp/imgui_stdlib.cpp
 	*/
 	struct InputTextCallback_UserData
 	{
@@ -48,6 +47,7 @@ public:
 		return 0;
 	}
 
+	/** ImGui InputText with dynamic std::string */
 	static bool InputText(const char* label, std::string* str, const float width, ImGuiInputTextFlags flags = 0, ImGuiInputTextCallback callback = nullptr, void* user_data = nullptr)
 	{
 		IM_ASSERT((flags & ImGuiInputTextFlags_CallbackResize) == 0);
@@ -60,7 +60,8 @@ public:
 		ImGui::PushItemWidth(width);
 		return ImGui::InputText(label, (char*)str->c_str(), str->capacity() + 1, flags, InputTextCallback, &cb_user_data);
 	}
-	 
+
+	/** ImGui InputTextMultiline with dynamic std::string */	 
 	static bool InputTextMultiline(const char* label, std::string* str, const ImVec2& size, ImGuiInputTextFlags flags = 0, ImGuiInputTextCallback callback = nullptr, void* user_data = nullptr)
 	{
 		IM_ASSERT((flags & ImGuiInputTextFlags_CallbackResize) == 0);
@@ -71,8 +72,9 @@ public:
 		cb_user_data.ChainCallback = callback;
 		cb_user_data.ChainCallbackUserData = user_data;
 		return ImGui::InputTextMultiline(label, (char*)str->c_str(), str->capacity() + 1, size, flags, InputTextCallback, &cb_user_data);
-}
+	}
 	 
+	/** ImGui InputTextWithHint with dynamic std::string */
 	static bool InputTextWithHint(const char* label, const char* hint, std::string* str, const float width, ImGuiInputTextFlags flags = 0, ImGuiInputTextCallback callback = nullptr, void* user_data = nullptr)
 	{
 		IM_ASSERT((flags & ImGuiInputTextFlags_CallbackResize) == 0);
@@ -126,6 +128,7 @@ public:
 	
 
 
+	/** ImGui Button with default color, hover color, active color */
 	static bool Button(const char* text,
 		const ImVec2& size = ImVec2(0.0f, 0.0f),
 		const ImVec4& color = Constants::Colors::BUTTON_COLOR,
@@ -141,6 +144,7 @@ public:
 		return pressed_or_selected;
 	}
 
+	/** ImGui BackButton with default color, hover color, active color */
 	static bool BackButton(const char* str_id,
 		const ImVec2& size = ImVec2(0.0f, 0.0f),
 		const ImVec4& color = Constants::Colors::BACK_BUTTON_COLOR,
@@ -158,7 +162,11 @@ public:
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// Loading spinner https://github.com/ocornut/imgui/issues/1901
+	/** 
+	*	ImGui Loading spinner 
+	* 
+	*	@note: https://github.com/ocornut/imgui/issues/1901
+	*/
 	static bool LoadingSpinner(const char* label, float radius, float thickness, const ImU32 color) {
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
@@ -199,7 +207,11 @@ public:
 
 	}
 
-	// Loading bar https://github.com/ocornut/imgui/issues/1901
+	/**
+	*	ImGui Loading bar 
+	*
+	*	@note: https://github.com/ocornut/imgui/issues/1901
+	*/ 
 	static bool LoadingBar(const char* label, float value, const ImVec2& size_arg, const ImU32 bg_col, const ImU32 fg_col) {
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 		if (window->SkipItems)
@@ -247,8 +259,12 @@ public:
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	//https://github.com/ocornut/imgui/issues/249
-	// Popup dialog has spinner loading inside it
+	/**
+	*	Popup dialog has spinner loading inside it, displayed when a worker thread is launched
+	*	to prevent interactions with the scene widgets until the thread is finished.
+	* 
+	*	@note: https://github.com/ocornut/imgui/issues/249
+	*/
 	static void LoadingDialog(const char* text, const ImVec2& spinner_position, const float spinner_radius, const float spinner_thickness, const ImVec4& spinner_color, 
 		const float container_width = (float)Application::GetInstance()->GetWindow()->GetSize().first,
 		const float container_height = (float)Application::GetInstance()->GetWindow()->GetSize().second)
@@ -281,7 +297,11 @@ public:
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// https://github.com/ocornut/imgui/wiki/Image-Loading-and-Displaying-Examples#Example-for-OpenGL-users
+	/**
+	*	ImGui GPU Based Image
+	* 
+	*	@note: https://github.com/ocornut/imgui/wiki/Image-Loading-and-Displaying-Examples#Example-for-OpenGL-users
+	*/
 	class Image
 	{
 	public:

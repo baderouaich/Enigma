@@ -54,8 +54,8 @@ public:
 	/**
 	*	Intention of creating an instance of an Algorithm.
 	* 
-	*	to not initialize resources not needed for an operation.
-	*	(like when encrypting, we initialize a random seeder which is not needed
+	*	helps to avoid initializing resources not needed for an specific operation.
+	*	(for example when encrypting, we initialize a random seeder which is not needed
 	*   when decrypting)
 	*/
 	enum class Intent : byte

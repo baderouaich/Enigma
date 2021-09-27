@@ -9,15 +9,17 @@
 
 NS_ENIGMA_BEGIN
 
-// Encryption Model | table: Encryption
+/**
+*	Encryption Model | Table: Encryption
+*/
 struct Encryption
 {
-	i64 ide{}; // auto incremental id 0 -> SIZE_MAX
-	String title{}; // E.G: "this is my gmail password"
-	Cipher cipher{}; 
-	String date_time{}; // date & time saved by sqlite3
-	i64 size{}; // size of compressed cipher in bytes
-	bool is_file{}; // whether its a text or file encryption
+	i64 ide{};  /**< auto incremental id in range [0, SIZE_MAX] */
+	String title{}; /**< encryption title, e.g: "this is my gmail password" */
+	Cipher cipher{}; /**< encryption encrypted data, aka cipher. from another table for perfermance reasons */
+	String date_time{}; /**< date & time saved by sqlite3 */
+	i64 size{}; /**< size of compressed cipher in bytes */
+	bool is_file{}; /**< whether its a text or file encryption */
 
 	~Encryption() noexcept
 	{
