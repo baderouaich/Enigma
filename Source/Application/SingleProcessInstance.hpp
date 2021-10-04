@@ -25,8 +25,8 @@
 
 
 NS_ENIGMA_BEGIN
-/** @brief Single process instance interface
-*	@details if you inherrit from this class, your application process will have only one instance at a time.
+/** @brief Single process instance class
+*	@details if your application inherrits from this class, it will have only one instance at a time.
 *   Using a socket implementation, this checks to see if the application is already open or not.
 *   You must also choose a port that is unique to the application.
 */

@@ -66,7 +66,7 @@ public:
 		if (parallel)
 		{
 			std::mutex mtx{};
-			std::for_each(std::execution::seq, out.begin(), out.end(), [&special_characters, &mtx](char& c)
+			std::for_each(std::execution::par, out.begin(), out.end(), [&special_characters, &mtx](char& c)
 				{
 					std::scoped_lock<std::mutex> guard{ mtx }; // guard scope, note that most of functions bellow us assertions, without guarding can result on bad rare behavior where two threads assert at the same time. its just nasty, use lock guards.
 					if (const ui16 r = Random::Int<ui16>(0, 3); r == 0)

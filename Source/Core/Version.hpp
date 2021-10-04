@@ -19,7 +19,10 @@
 
 
 /*
-* Reminder: Enigma.rc will include this file to get versions as they change, no need to modify version in any other place than here.
+* Reminder: 
+>> Enigma.rc will include this file to get versions as they change, no need to modify version in any other place than here.
+>>> Also make sure you update version in doxyfile using doxywizard
+
 * https://semver.org/
 * # when minor version is incremented, patch must reset to 0
 * # when major version is incremented, minor and patch must reset to 0
