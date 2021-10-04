@@ -122,7 +122,7 @@ i32 CLI::Run()
 		else
 			throw std::runtime_error("You should specify whether you want to encrypt -e or decrypt -d");
 
-		// White algorithm are we using ?
+		// Which algorithm are we using ?
 		if (r.count("a") || r.count("algorithm")) // --a=aes or --algorithm=aes or chacha..
 		{
 			algo = r["a"].as<String>();
@@ -191,7 +191,7 @@ i32 CLI::Run()
 		}
 
 
-		// Check wether its a text or file encryption/decryption
+		// Check whether its a text or file encryption/decryption
 		if (!text.empty())
 		{
 			// Check intention
