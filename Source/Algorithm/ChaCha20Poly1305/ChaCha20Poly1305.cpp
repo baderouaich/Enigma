@@ -29,13 +29,13 @@ ChaCha20Poly1305::~ChaCha20Poly1305() noexcept
 {
 }
 
-String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
+String ChaCha20Poly1305::EncryptText(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
-		ENIGMA_ASSERT_OR_THROW(m_chacha_encryptor, "ChaCha20Poly1305 Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_chacha_encryptor, GetTypeString() + " Encryptor is not initialized properly");
 		// ChaCha20Poly1305 password length must be at least 9 for security reasons
-		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "ChaCha20Poly1305 Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
+		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, GetTypeString() + " Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, this allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 	
@@ -84,10 +84,10 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_iv_mac_cipher)
+String ChaCha20Poly1305::DecryptText(const String& password, const String& algotype_iv_mac_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, "ChaCha20Poly1305 Decryptor is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, GetTypeString() + " Decryptor is not initialized properly");
 
 	// Extract IV, mac and cipher from algotype_iv_mac_cipher (algotype_iv_mac_cipher is the output we got from encryption shipped with IV, MAC, Cipher, Algo type enum id)
 	const String iv = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type), m_chacha_decryptor->MaxIVLength());
@@ -132,6 +132,14 @@ String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_
 	ENIGMA_ASSERT_OR_THROW(mac_verified, ("Failed to verify MAC"));
 
 	return decrypted;
+}
+
+void ChaCha20Poly1305::EncryptFile(const String& password, const fs::path& filename)
+{
+}
+
+void ChaCha20Poly1305::DecryptFile(const String& password, const fs::path& filename)
+{
 }
 
 NS_ENIGMA_END

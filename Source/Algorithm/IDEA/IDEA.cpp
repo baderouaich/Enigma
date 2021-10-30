@@ -29,12 +29,12 @@ IDEA::~IDEA() noexcept
 {
 }
 
-String IDEA::Encrypt(const String& password, const String& buffer)
+String IDEA::EncryptText(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
-		ENIGMA_ASSERT_OR_THROW(m_idea_encryptor, "IDEA Encryptor is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "IDEA Encryptor seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_idea_encryptor, GetTypeString() + " Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, GetTypeString() + " Encryptor seeder is not initialized properly");
 		// Password length must be at least 9 for security reasons
 		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "IDEA Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
@@ -80,10 +80,10 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String IDEA::Decrypt(const String& password, const String& algotype_iv_cipher)
+String IDEA::DecryptText(const String& password, const String& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_idea_decryptor, "IDEA Decryptor is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_idea_decryptor, GetTypeString() + " Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
 	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
@@ -116,6 +116,14 @@ String IDEA::Decrypt(const String& password, const String& algotype_iv_cipher)
 		)); //NOTE: StringSource will auto clean the allocated memory
 
 	return decrypted;
+}
+
+void IDEA::EncryptFile(const String& password, const fs::path& filename)
+{
+}
+
+void IDEA::DecryptFile(const String& password, const fs::path& filename)
+{
 }
 
 NS_ENIGMA_END

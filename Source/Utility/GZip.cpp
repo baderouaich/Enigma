@@ -56,5 +56,23 @@ String GZip::Decompress(const String& buffer)
 #endif
 }
 
+std::vector<byte> GZip::Compress(const std::vector<byte>& buffer, const DeflateLevel level)
+{
+	std::vector<byte> compressed{};
+	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::VectorSink(compressed), static_cast<ui32>(level)));
+	m_zipper->Put(buffer.data(), buffer.size());
+	m_zipper->MessageEnd();
+	return compressed;
+}
+
+std::vector<byte> GZip::Decompress(const std::vector<byte>& buffer)
+{
+	std::vector<byte> decompressed{};
+	m_unzipper.reset(new CryptoPP::Gunzip(new CryptoPP::VectorSink(decompressed)));
+	m_unzipper->Put(buffer.data(), buffer.size());
+	m_unzipper->MessageEnd();
+	return decompressed;
+}
+
 NS_ENIGMA_END
 

@@ -34,10 +34,17 @@ public: /* Accessors */
 	String Show() const;
 
 private:
+<<<<<<< Updated upstream
 	String m_title; /*< Dialog title */
 	String m_initial_path; /*< Dialog initial path */
 	bool m_force_overwrite; /*< Shall force file overwriting? */
 	std::vector<String> m_filters; /*< Which files to allow to save e.g .txt, .jpg... */
+=======
+	String m_title;
+	String m_initial_path;
+	bool m_force_overwrite;
+	std::vector<String> m_filters;
+>>>>>>> Stashed changes
 };
 
 NS_ENIGMA_END

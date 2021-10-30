@@ -30,12 +30,12 @@ Blowfish::~Blowfish() noexcept
 }
 
 
-String Blowfish::Encrypt(const String& password, const String& buffer)
+String Blowfish::EncryptText(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
-		ENIGMA_ASSERT_OR_THROW(m_blowfish_encryptor, "Blowfish Encryptor is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Blowfish Encryptor seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_blowfish_encryptor, GetTypeString() + " Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, GetTypeString() + " Encryptor seeder is not initialized properly");
 		// Blowfish password length must be at least 6 for security reasons
 		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "Blowfish Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, this allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
@@ -79,10 +79,10 @@ String Blowfish::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String Blowfish::Decrypt(const String& password, const String& algotype_iv_cipher)
+String Blowfish::DecryptText(const String& password, const String& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT(m_blowfish_decryptor, "Blowfish Decryptor is not initialized properly");
+	ENIGMA_ASSERT(m_blowfish_decryptor, GetTypeString() + " Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
 	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::Blowfish::BLOCKSIZE);
@@ -116,6 +116,14 @@ String Blowfish::Decrypt(const String& password, const String& algotype_iv_ciphe
 	); //NOTE: StringSource will auto clean the allocated memory
 
 	return decrypted;
+}
+
+void Blowfish::EncryptFile(const String& password, const fs::path& filename)
+{
+}
+
+void Blowfish::DecryptFile(const String& password, const fs::path& filename)
+{
 }
 
 

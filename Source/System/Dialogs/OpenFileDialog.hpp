@@ -32,11 +32,19 @@ public: /* Accessors */
 	*/
 	std::vector<String> Show() const;
 
+<<<<<<< Updated upstream
 private: 
 	String m_title; /*< Dialog title */
 	String m_initial_path; /*< Dialog initial path */
 	bool m_allow_multiselect; /*< Shall allow multi file selection ? */
 	std::vector<String> m_filters; /*< Which files to allow e.g .txt, .jpg... */
+=======
+private:
+	String m_title;
+	String m_initial_path;
+	bool m_allow_multiselect;
+	std::vector<String> m_filters;
+>>>>>>> Stashed changes
 };
 
 NS_ENIGMA_END

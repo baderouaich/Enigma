@@ -5,7 +5,11 @@
 #include <Core/Core.hpp>
 #include <portable-file-dialogs.h>
 
+<<<<<<< Updated upstream
 /** Avoid mismatch with windows's MessageBox macro */
+=======
+// Avoid mismatch with windows's MessageBox macro
+>>>>>>> Stashed changes
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	#undef MessageBox
 	#undef ERROR

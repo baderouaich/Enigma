@@ -4,6 +4,8 @@
 
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
+#include <Utility/FileUtils.hpp>
+#include <Utility/SizeUtils.hpp>
 
 // Crypto++
 #pragma warning(push, 0) // This ignores all warnings raised inside External headers
@@ -29,6 +31,11 @@
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
+// Avoid mismatch of EncryptFile & DecryptFile macros with this class's functions in windows
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+	#undef DecryptFile
+	#undef EncryptFile
+#endif
 
 NS_ENIGMA_BEGIN
 
@@ -99,21 +106,42 @@ public:
 public:
 	/**
 	*	Encrypts buffer with password
+	*	Compresses buffer before encrypting
 	*	@param password: Encryption password
 	*	@param buffer: Buffer to encrypt (text, binary...)
 	*	@return (Algo type enum id + IV + Cipher)
 	*	@exception throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Encrypt(const String& password, const String& buffer) = 0;
+	virtual String EncryptText(const String& password, const String& text) = 0;
+	/**
+	*	Encrypts file with password (chunk by chunk to handle very large files)
+	*	Compresses chunk before encrypting
+	*	@param password: Encryption password
+	*	@param in_filename: Path of file to encrypt
+	*	@param out_filename: Path of output encrypted file to save
+	*	@exception throws CryptoPP::Exception, std::exception on failure
+	*/
+	virtual void EncryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename) = 0;
 
 	/**
 	*	Decrypts cipher with password
+	*	Decompresses cipher after decrypting
 	*	@param password: Password used to Encyrpt buffer
 	*	@param cipher: can contain more than cipher part, like IV, algorithm used for encryption, MAC and so on, depending on the algorithm implementation.
 	*	@return Recovered Buffer
 	*	@exception throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Decrypt(const String& password, const String& cipher) = 0;
+	virtual String DecryptText(const String& password, const String& cipher_text) = 0;
+	/**
+	*	Decrypts file with password (chunk by chunk to handle very large files)
+	*	Decompresses cipher chunk after decrypting
+	*	@param password: Password used to Encyrpt buffer
+	*	@param in_filename: Path of file to decrypt
+	*	@param out_filename: Path of output decrypted file to save
+	*	@exception throws CryptoPP::Exception, std::exception on failure
+	*/
+	virtual void DecryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename) = 0;
+
 
 public: /* Create polymorphic algorithm by either mode name or type*/
 	/** 
@@ -172,7 +200,7 @@ protected:
 	Type m_type; /**< Algorithm type: AES, ChaCha, TripleDES... */
 	Intent m_intent; /**< Operation, Encrypt or Decrypt */
 	inline static std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; /**< To generate random IV on encryption */
-
+	inline static constexpr const std::size_t FILE_IO_MAX_CHUNK_SIZE = ENIGMA_MB_TO_BYTES(1); /**< 1MB chunk size when treating files */
 };
 
 NS_ENIGMA_END

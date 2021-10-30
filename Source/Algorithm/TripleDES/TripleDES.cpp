@@ -28,14 +28,14 @@ TripleDES::~TripleDES() noexcept
 {
 }
 
-String TripleDES::Encrypt(const String& password, const String& buffer)
+String TripleDES::EncryptText(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
-		ENIGMA_ASSERT_OR_THROW(m_tripledes_encryptor, "TripleDES Encryptor is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "TripleDES Encryptor seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_tripledes_encryptor, GetTypeString() + " Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, GetTypeString() + " Encryptor seeder is not initialized properly");
 		// Password length must be at least 9 for security reasons
-		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "TripleDES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
+		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, GetTypeString() + " Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, this allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 
@@ -77,10 +77,10 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String TripleDES::Decrypt(const String& password, const String& algotype_iv_cipher)
+String TripleDES::DecryptText(const String& password, const String& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_tripledes_decryptor, "TripleDES Decryptor is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_tripledes_decryptor, GetTypeString() + " Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
 	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::DES_EDE3::BLOCKSIZE);
@@ -112,6 +112,14 @@ String TripleDES::Decrypt(const String& password, const String& algotype_iv_ciph
 			new CryptoPP::StringSink(decrypted)
 		)); //NOTE: StringSource will auto clean the allocated memory
 	return decrypted;
+}
+
+void TripleDES::EncryptFile(const String& password, const fs::path& filename)
+{
+}
+
+void TripleDES::DecryptFile(const String& password, const fs::path& filename)
+{
 }
 
 NS_ENIGMA_END

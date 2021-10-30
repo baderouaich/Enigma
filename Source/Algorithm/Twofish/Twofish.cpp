@@ -28,14 +28,14 @@ Twofish::~Twofish() noexcept
 {
 }
 
-String Twofish::Encrypt(const String& password, const String& buffer)
+String Twofish::EncryptText(const String& password, const String& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized &  Validate Arguments
 	{
-		ENIGMA_ASSERT_OR_THROW(m_twofish_encryptor, "Twofish Encryptor is not initialized properly");
-		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Twofish Encryptor seeder is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_twofish_encryptor, GetTypeString() + " Encryptor is not initialized properly");
+		ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, GetTypeString() + " Encryptor seeder is not initialized properly");
 		// Twofish password length must be at least 9 for security reasons
-		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "Twofish Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
+		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, GetTypeString() + " Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		//No max password check since we using KDF SHA-256, this allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
 	}
 
@@ -76,10 +76,10 @@ String Twofish::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String Twofish::Decrypt(const String& password, const String& algotype_iv_cipher)
+String Twofish::DecryptText(const String& password, const String& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
-	ENIGMA_ASSERT_OR_THROW(m_twofish_decryptor, "Twofish Decryptor is not initialized properly");
+	ENIGMA_ASSERT_OR_THROW(m_twofish_decryptor, GetTypeString() + " Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
 	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::Twofish::BLOCKSIZE);
@@ -112,6 +112,14 @@ String Twofish::Decrypt(const String& password, const String& algotype_iv_cipher
 		)); //NOTE: StringSource will auto clean the allocated memory
 
 	return decrypted;
+}
+
+void Twofish::EncryptFile(const String& password, const fs::path& filename)
+{
+}
+
+void Twofish::DecryptFile(const String& password, const fs::path& filename)
+{
 }
 
 NS_ENIGMA_END

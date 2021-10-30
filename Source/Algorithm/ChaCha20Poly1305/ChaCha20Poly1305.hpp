@@ -22,8 +22,11 @@ public:
 	virtual ~ChaCha20Poly1305() noexcept;
 
 public:
-	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& algotype_iv_mac_cipher) override;
+	String EncryptText(const String& password, const String& buffer) override;
+	String DecryptText(const String& password, const String& algotype_iv_mac_cipher) override;
+	void EncryptFile(const String& password, const fs::path& filename) override;
+	void DecryptFile(const String& password, const fs::path& filename) override;
+
 private:
 	std::unique_ptr<CryptoPP::ChaCha20Poly1305::Encryption> m_chacha_encryptor; /**< ChaCha20Poly1305 encryptor */
 	std::unique_ptr<CryptoPP::ChaCha20Poly1305::Decryption> m_chacha_decryptor; /**< ChaCha20Poly1305 decryptor */
