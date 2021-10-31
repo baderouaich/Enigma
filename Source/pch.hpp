@@ -7,7 +7,8 @@
 
 
 /// ENIGMA Core (Must be before platform includes to detect current platform)
-#include <Core/Core.hpp>
+//#include <Core/Core.hpp>
+#include <Enigma.hpp>
 ///
 
 
