@@ -273,7 +273,7 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Encrypting Text with {} Algorithm...", algorithm->GetTypeString());
-		cipher = algorithm->Encrypt(password, compressed_text);
+		cipher = algorithm->EncryptText(password, compressed_text);
 		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ("Failed to encrypt text"));
 
 		ENIGMA_TRACE("Encoding Cipher to Base64...");
@@ -326,7 +326,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to decode encrypted text from base64 to cipher");
 
 		ENIGMA_TRACE("Decrypting Cipher...");
-		decrypted_text = algorithm->Decrypt(password, cipher);
+		decrypted_text = algorithm->DecryptText(password, cipher);
 		ENIGMA_ASSERT_OR_THROW(!decrypted_text.empty(), "Failed to decrypt cipher");
 
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
@@ -374,7 +374,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Encrypting buffer with " + algorithm->GetTypeString() + " Algorithm ...");
-		cipher = algorithm->Encrypt(password, buffer);
+		cipher = algorithm->EncryptText(password, buffer);
 		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file content");
 		
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
@@ -434,7 +434,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_BEGIN_TIMER(t1);
 	{
 		ENIGMA_TRACE("Decrypting Cipher with " + algorithm->GetTypeString() + " Algorithm ...");
-		buffer = algorithm->Decrypt(password, cipher);
+		buffer = algorithm->DecryptText(password, cipher);
 		ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file content");
 		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
 	}

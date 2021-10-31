@@ -457,7 +457,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			ENIGMA_TRACE("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
 
 			// Encrypt file buffer
-			String cipher = algorithm->Encrypt(m_password, compressed_buffer);
+			String cipher = algorithm->EncryptText(m_password, compressed_buffer);
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ("Failed to encrypt file buffer"));
 
 			// Write cipher to out file

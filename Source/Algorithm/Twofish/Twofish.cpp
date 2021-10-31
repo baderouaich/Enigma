@@ -114,11 +114,11 @@ String Twofish::DecryptText(const String& password, const String& algotype_iv_ci
 	return decrypted;
 }
 
-void Twofish::EncryptFile(const String& password, const fs::path& filename)
+void Twofish::EncryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 
-void Twofish::DecryptFile(const String& password, const fs::path& filename)
+void Twofish::DecryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 

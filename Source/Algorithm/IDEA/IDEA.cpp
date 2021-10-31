@@ -118,11 +118,11 @@ String IDEA::DecryptText(const String& password, const String& algotype_iv_ciphe
 	return decrypted;
 }
 
-void IDEA::EncryptFile(const String& password, const fs::path& filename)
+void IDEA::EncryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 
-void IDEA::DecryptFile(const String& password, const fs::path& filename)
+void IDEA::DecryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 

@@ -311,7 +311,7 @@ void DecryptTextScene::OnDecryptButtonPressed()
 		ENIGMA_ASSERT_OR_THROW(algorithm, ("Failed to create algorithm from type"));
 		
 		// Decrypt text
-		m_recovered_text = algorithm->Decrypt(m_password, m_cipher);
+		m_recovered_text = algorithm->DecryptText(m_password, m_cipher);
 		ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), ("Failed to recover encrypted text"));
 
 		// Decompress text

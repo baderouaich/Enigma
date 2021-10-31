@@ -272,7 +272,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 		if (m_encryption->is_file) 
 		{
 			// Decrypt cipher
-			String buffer = algorithm->Decrypt(m_password, cipher->data);
+			String buffer = algorithm->DecryptText(m_password, cipher->data);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ("Failed to decrypt file cipher"));
 
 			// Decompress buffer
@@ -302,7 +302,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 		else
 		{
 			// Decrypt cipher text
-			m_recovered_text = algorithm->Decrypt(m_password, cipher->data);
+			m_recovered_text = algorithm->DecryptText(m_password, cipher->data);
 			ENIGMA_ASSERT_OR_THROW(!m_recovered_text.empty(), ("Failed to decrypt text"));
 
 			// Decompress recovered text

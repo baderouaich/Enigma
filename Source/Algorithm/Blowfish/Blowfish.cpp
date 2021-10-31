@@ -118,11 +118,11 @@ String Blowfish::DecryptText(const String& password, const String& algotype_iv_c
 	return decrypted;
 }
 
-void Blowfish::EncryptFile(const String& password, const fs::path& filename)
+void Blowfish::EncryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 
-void Blowfish::DecryptFile(const String& password, const fs::path& filename)
+void Blowfish::DecryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 

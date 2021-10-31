@@ -114,11 +114,11 @@ String TripleDES::DecryptText(const String& password, const String& algotype_iv_
 	return decrypted;
 }
 
-void TripleDES::EncryptFile(const String& password, const fs::path& filename)
+void TripleDES::EncryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 
-void TripleDES::DecryptFile(const String& password, const fs::path& filename)
+void TripleDES::DecryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename)
 {
 }
 

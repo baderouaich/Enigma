@@ -31,15 +31,9 @@ public: /* Accessors */
 	String Show() const;
 
 private:
-<<<<<<< Updated upstream
 	String m_title; /*< Dialog title */
 	String m_initial_path;  /*< Dialog initial path */
 	bool m_force_path;  /*< Shall force the operating system to use the provided path? Some systems default to the most recently used path, if applicable. */
-=======
-	String m_title;
-	String m_initial_path;
-	bool m_force_path;
->>>>>>> Stashed changes
 };
 
 NS_ENIGMA_END

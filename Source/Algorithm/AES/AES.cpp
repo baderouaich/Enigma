@@ -91,7 +91,7 @@ String AES::DecryptText(const String& password, const String& algotype_iv_cipher
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
 	const String iv = algotype_iv_cipher_text.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_cipher");
-	const String cipher = algotype_iv_cipher_text.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, algotype_iv_cipher.size() - 1);
+	const String cipher = algotype_iv_cipher_text.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, algotype_iv_cipher_text.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_cipher");
 
 	// Prepare Key
@@ -133,7 +133,7 @@ void AES::EncryptFile(const String& password, const fs::path& in_filename, const
 		// Make sure encryption mode and the seeder are initialized & Validate Arguments
 		ENIGMA_ASSERT_OR_THROW(m_aes_encryptor, GetTypeString() + " Encryptor is not initialized properly");
 		// AES password length must be at least 6 for security reasons
-		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
+		ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, GetTypeString() + " Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 		// Check file existence
 		ENIGMA_ASSERT_OR_THROW(fs::exists(in_filename), fmt::format("File {} doesn't exist", in_filename.string()));
 		// Check file regularity

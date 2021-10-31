@@ -349,7 +349,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), ("Failed to compress text"));
 
 			// Encrypt text
-			m_cipher = algorithm->Encrypt(m_password, compressed_text);
+			m_cipher = algorithm->EncryptText(m_password, compressed_text);
 			ENIGMA_ASSERT_OR_THROW(!m_cipher.empty(), ("Failed to encrypt text"));
 
 			// Encode cipher to Base64

@@ -20,8 +20,8 @@ public:
 public:
 	String EncryptText(const String& password, const String& buffer) override;
 	String DecryptText(const String& password, const String& algotype_iv_cipher) override;
-	void EncryptFile(const String& password, const fs::path& filename) override;
-	void DecryptFile(const String& password, const fs::path& filename) override;
+	void EncryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename) override;
+	void DecryptFile(const String& password, const fs::path& in_filename, const fs::path& out_filename) override;
 
 private:
 	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption> m_blowfish_encryptor; /**< Blowfish-EAX encryptor */

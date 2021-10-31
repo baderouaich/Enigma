@@ -389,7 +389,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ("File {} is empty", m_in_filename));
 
 			// Decrypt file cipher
-			String buffer = algorithm->Decrypt(m_password, cipher);
+			String buffer = algorithm->DecryptText(m_password, cipher);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ("Failed to decrypt file cipher"));
 
 			/*
