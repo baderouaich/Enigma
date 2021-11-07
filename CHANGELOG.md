@@ -1,3 +1,7 @@
+# 2.1.0
+- Reduced program CPU usage by adding `GLFW 3+ glfwWaitEvents()` in the main loop to wait for events. 
+
+
 # 2.0.0
 - Changed CLI option --mode,-m to --algorithm,-a
 - Fix check for updates bug
