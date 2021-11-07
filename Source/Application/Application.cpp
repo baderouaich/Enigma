@@ -273,8 +273,11 @@ void Application::Run()
 {
 	while (! m_window->ShouldClose())
 	{
-		// Poll Events
-		m_window->PollEvents();
+		// Waits until events are queued and then processes them (Polls events). (Reduces CPU usage)
+		glfwWaitEvents();
+
+		// Poll Events (no need to poll events, since glfwWaitEvents() above will do this for us)
+		//m_window->PollEvents();
 
 		// Update & Draw (only if there are scenes, otherwise end app).
 		if (! m_scenes.empty())
