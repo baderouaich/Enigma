@@ -10,7 +10,6 @@
 #include <System/Dialogs/SelectFolderDialog.hpp>
 #include <Utility/GZip.hpp>
 #include <Database/Models/Encryption.hpp>
-//#include <Scenes/RSAScene.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -450,10 +449,10 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			*/
 			// Compression
 			ENIGMA_TRACE("Compressing file buffer {0} ...", m_in_filename);
-			auto old_buffer_size = buffer.size();
 			String compressed_buffer = GZip::Compress(buffer);
-			auto new_buffer_size = buffer.size();
-			auto decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
+			const auto old_buffer_size = buffer.size();
+			const auto new_buffer_size = compressed_buffer.size();
+			const auto decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
 			ENIGMA_TRACE("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
 
 			// Encrypt file buffer
@@ -470,12 +469,13 @@ void EncryptFileScene::OnEncryptButtonPressed()
 				auto e = std::make_unique<Encryption>();
 				e->title = m_db_title;
 				e->is_file = true;
+				e->file_ext = fs::path(m_in_filename).extension().string();
 				e->cipher.data = cipher; // already compressed above
 				e->size = e->cipher.data.size();
-				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), ("Failed to save encryption record to database"));
+				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e) >= 0, ("Failed to save encryption record to database"));
 			}
 
-			// Alert user that encryption was successfull
+			// Alert user that encryption was successful
 			const String msg = fmt::format("Encrypted {} to {} Successfully\nCompression Status: File size decreased by {}",
 				fs::path(m_in_filename).filename(),
 				fs::path(m_out_filename).filename(),

@@ -117,6 +117,7 @@
 #include <cassert>
 #include <cstdint>
 #include <cstring>
+#include <csignal>
 ///
 
 

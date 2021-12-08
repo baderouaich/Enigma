@@ -20,7 +20,8 @@ struct Cipher
 		data.clear();
 	}
 
-public:
+public:	
+	constexpr bool operator==(const Cipher& c) const noexcept { return idc == c.idc; }
 	friend std::ostream& operator<<(std::ostream& os, const Cipher& c) noexcept
 	{
 		return os

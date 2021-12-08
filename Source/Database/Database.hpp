@@ -95,8 +95,10 @@ public:
 	static void Shutdown();
 
 public: // Encryption Operations
-	/** Add Encryption to Encryptions table, returns true on success */
-	static bool AddEncryption(const std::unique_ptr<Encryption>& e);
+	/** Add Encryption record to database table
+		@return inserted encryption id i64>=0 on success, -1 on failure
+	*/
+	static i64 AddEncryption(const std::unique_ptr<Encryption>& e);
 
 	/** Returns cipher from database by encryption id */
 	static std::unique_ptr<Cipher> GetCipherByEncryptionID(const i64 ide);
@@ -165,7 +167,7 @@ public: // Encryption Operations
 #endif
 
 	/** Get an Encyrption by id with desired columns for optimization */
-	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
+	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
 	{
 		ENIGMA_TRACE_CURRENT_FUNCTION();
@@ -173,7 +175,7 @@ public: // Encryption Operations
 		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", nullptr);
 		try
 		{
-			// Select e.id, e.title, c.data, e.date_time, e.is_file from Encryptions e JOIN Ciphers c ON e.id = c.id_enc
+			// Select e.id, e.title, c.data, e.date_time, e.is_file, e.file_ext from Encryptions e JOIN Ciphers c ON e.id = c.id_enc
 			
 			// Construct SQL
 			std::ostringstream sql{};
@@ -184,6 +186,7 @@ public: // Encryption Operations
 				if constexpr (date_time) sql << ", e.date_time";
 				if constexpr (size) sql << ", e.size";
 				if constexpr (is_file) sql << ", e.is_file";
+				if constexpr (file_ext) sql << ", e.file_ext";
 				sql << " FROM Encryption e";
 				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.ide";
 				sql << " WHERE e.ide = " << ide;
@@ -210,6 +213,7 @@ public: // Encryption Operations
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
 				if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
 				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
+				if constexpr (file_ext) e->file_ext = query->getColumn(i++).getString();
 			}
 
 			return e;
@@ -222,7 +226,7 @@ public: // Encryption Operations
 	}
 
 	/** Get all Encryptions with desired columns for optimization */
-	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file>
+	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext>
 	inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{			
 		ENIGMA_TRACE_CURRENT_FUNCTION();
@@ -241,6 +245,7 @@ public: // Encryption Operations
 				if constexpr (date_time) sql << ", e.date_time";
 				if constexpr (size) sql << ", e.size";
 				if constexpr (is_file) sql << ", e.is_file";
+				if constexpr (file_ext) sql << ", e.file_ext";
 				sql << " FROM Encryption e";
 				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
 				sql << " ORDER BY" << order_by << order;
@@ -270,6 +275,7 @@ public: // Encryption Operations
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
 				if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
 				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
+				if constexpr (file_ext) e->file_ext = query->getColumn(i++).getString();
 
 				encryptions.emplace_back(std::move(e));
 			}
@@ -283,7 +289,7 @@ public: // Encryption Operations
 
 
 	/** Search Encryptions by title using keyword LIKE %QUERY% */
-	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file> // select which columns to return (for optimization)
+	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext> // select which columns to return (for optimization)
 	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
 		ENIGMA_TRACE_CURRENT_FUNCTION();
@@ -302,6 +308,7 @@ public: // Encryption Operations
 				if constexpr (date_time) sql << ", e.date_time";
 				if constexpr (size) sql << ", e.size";
 				if constexpr (is_file) sql << ", e.is_file";
+				if constexpr (file_ext) sql << ", e.file_ext";
 				sql << " FROM Encryption e";
 				if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
 				sql << " WHERE LOWER(e.title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%'";
@@ -331,6 +338,7 @@ public: // Encryption Operations
 				if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
 				if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
 				if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
+				if constexpr (file_ext) e->file_ext = query->getColumn(i++).getString();
 
 				encryptions.emplace_back(std::move(e));
 			}

@@ -1,5 +1,8 @@
 # 2.1.0
 - Reduced program CPU usage by adding `GLFW 3+ glfwWaitEvents()` in the main loop to wait for events. 
+- Remembering encrypted file extension for decryption.
+- Fixed some typos in logs and message boxes.
+- Handle abnormal exists to normally end program and release resources gracefully.
 
 
 # 2.0.0

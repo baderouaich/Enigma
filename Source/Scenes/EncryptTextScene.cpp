@@ -365,7 +365,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 				e->is_file = false;
 				e->cipher.data = m_cipher;
 				e->size = e->cipher.data.size();
-				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), ("Failed to save encryption record to database"));
+				ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e) >= 0, ("Failed to save encryption record to database"));
 			}
 
 			// Spawn notification alert if window is not focused

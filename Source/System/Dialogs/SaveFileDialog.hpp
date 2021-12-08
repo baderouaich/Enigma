@@ -37,7 +37,7 @@ private:
 	String m_title; /*< Dialog title */
 	String m_initial_path; /*< Dialog initial path */
 	bool m_force_overwrite; /*< Shall force file overwriting? */
-	std::vector<String> m_filters; /*< Which files to allow to save e.g .txt, .jpg... */
+	std::vector<String> m_filters; /*< Which files to allow to save e.g .txt, .jpg... { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }, */
 };
 
 NS_ENIGMA_END

@@ -2,6 +2,7 @@
 #ifndef ENIGMA_TESTS_ALL
 #define ENIGMA_TESTS_ALL
 
+#if 0
 // Encryption Algorithms Tests
 #include <Tests/Algorithm/AESTests.hpp>
 #include <Tests/Algorithm/ChaCha20Poly1305Tests.hpp>
@@ -15,5 +16,10 @@
 #include <Tests/Utils/Base64Tests.hpp>
 #include <Tests/Utils/GZipTests.hpp>
 #include <Tests/Utils/FileUtilsTests.hpp>
+#endif
+
+// Database Tests
+#include <Tests/Database/CRUD.hpp>
+
 
 #endif // !ENIGMA_TESTS_ALL

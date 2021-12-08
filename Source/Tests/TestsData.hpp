@@ -41,7 +41,7 @@ vitae sit amet nunc.)";
 		e->size = e->cipher.data.size();
 
 		Database::AddEncryption(e);
-		//if (Database::AddEncryption(e))
+		//if (Database::AddEncryption(e) >= 0)
 		//	std::printf("Added Encryption #%d\n", i);
 		//else
 		//	std::printf("Failed to add Encryptionn #%d\n", i);

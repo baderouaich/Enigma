@@ -79,11 +79,12 @@ namespace Enigma
 					(
 						ide				INTEGER PRIMARY KEY AUTOINCREMENT,
 						title			VARCHAR(255) NOT NULL,
-						date_time		DATETIME NOT NULL,
-						size			INTEGER NOT NULL,   -- size of compressed cipher in bytes
-						is_file			BOOLEAN NOT NULL,
+						date_time	DATETIME NOT NULL,
+						size			INTEGER NOT NULL,			-- size of compressed cipher in bytes
+						is_file		BOOLEAN NOT NULL,
+						file_ext	VARCHAR(9),						-- file extension to remember file type on decryption
 
-						CHECK(LENGTH(title) <= 255) -- check title length <= 255
+						CHECK(LENGTH(title) <= 255)			-- check title length <= 255
 					);
 				)",
 
@@ -91,9 +92,9 @@ namespace Enigma
 				R"(
 					CREATE TABLE IF NOT EXISTS Cipher
 					(
-						idc				INTEGER PRIMARY KEY AUTOINCREMENT,
-						data			BLOB NOT NULL, -- cipher text or file binary cipher compressed             
-						ide				INTEGER,
+						idc			INTEGER PRIMARY KEY AUTOINCREMENT,
+						data		BLOB NOT NULL, -- cipher text or file binary cipher compressed             
+						ide			INTEGER,
 
 						FOREIGN KEY(ide) REFERENCES Encryption(ide) ON DELETE CASCADE --  when an Encryption record is deleted, all associated Cipher records will also be auto deleted.
 					);

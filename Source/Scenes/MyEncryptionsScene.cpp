@@ -319,7 +319,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 					//for (const auto& enc_ptr : m_isSearching ? m_search_encryptions : m_encryptions)
 					for (const auto& enc_ptr : m_encryptions)
 					{
-						const auto& [id, _title, _, date_time, size, is_file] = *enc_ptr;
+						const auto& [id, _title, _, date_time, size, is_file, file_ext] = *enc_ptr;
 
 						// id, _title, date_time, size, is_file
 						ImGui::TableNextRow();
@@ -332,7 +332,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 						ImGui::TableSetColumnIndex(3);
 						ImGui::Text("%s", SizeUtils::FriendlySize(size).c_str());
 						ImGui::TableSetColumnIndex(4);
-						ImGui::Text("%s", is_file ? ("File") : ("Text"));
+						ImGui::Text("%s", is_file ? ("File ("+ file_ext + ')').c_str() : ("Text"));
 						// Operation (View|delete...)
 						ImGui::TableSetColumnIndex(5);
 						{
@@ -463,7 +463,7 @@ void MyEncryptionsScene::GetAllEncryptions()
 	m_encryptions.clear();
 
 	ENIGMA_INFO("Getting all encryptions from database...");
-	m_encryptions = Database::GetAllEncryptions<true, false, true, true, true>(m_order_by, m_order);
+	m_encryptions = Database::GetAllEncryptions<true, false, true, true, true, true>(m_order_by, m_order);
 	ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
 
 }
@@ -527,7 +527,7 @@ void MyEncryptionsScene::OnSearchEncryptionsByTitle()
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	m_encryptions.clear();
-	m_encryptions = Database::SearchEncryptionsByTitle<true, false, true, true, true>(m_query);
+	m_encryptions = Database::SearchEncryptionsByTitle<true, false, true, true, true, true>(m_query);
 
 }
 

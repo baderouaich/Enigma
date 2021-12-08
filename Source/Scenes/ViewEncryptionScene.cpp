@@ -15,10 +15,10 @@ ViewEncryptionScene::ViewEncryptionScene(const i64 encryption_id)
 	:
 	Enigma::Scene()
 {
-	ENIGMA_TRACE("Gettings encryption#{0}'s data from database...", encryption_id);
+	ENIGMA_TRACE("Retrieving encryption#{0}'s data from database...", encryption_id);
 	
 	// Get Encryption record from database (minus cipher to save up memory)
-	m_encryption = Database::GetEncryptionByID<true, false, true, true, true>(encryption_id);
+	m_encryption = Database::GetEncryptionByID<true, false, true, true, true, true>(encryption_id);
 	if (!m_encryption)
 	{
 		(void)DialogUtils::Error("Couldn't get encryption record from database");
@@ -145,7 +145,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 		ImGui::PushFont(font_montserrat_medium_20);
 		{
 			// Label
-			ImGui::Text("%s:", ("Password"));
+			ImGui::Text("%s:", "Password");
 
 			// Input text
 			ImGuiWidgets::InputText("##password", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
@@ -170,7 +170,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_20);
 			{
 				// Label
-				ImGui::Text("%s:", ("Recovered Text"));
+				ImGui::Text("%s:", "Recovered Text");
 
 				// Encrypted text
 				static const ImVec2 copy_button_size(45.0f, 25.0f);
@@ -180,7 +180,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR); // buttons color idle
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-				if (ImGui::Button(("Copy"), copy_button_size))
+				if (ImGui::Button("Copy", copy_button_size))
 				{
 					this->OnCopyRecoveredTextButtonPressed();
 				}
@@ -204,9 +204,9 @@ void ViewEncryptionScene::OnImGuiDraw()
 			{
 				ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 				//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
-				if (ImGui::Button(("Decrypt"), button_size))
+				if (ImGui::Button("Decrypt", button_size))
 				{
-					Application::GetInstance()->LaunchWorkerThread(this, m_encryption->is_file ? ( "Decrypting file...") : ("Decrypting text...") ,
+					Application::GetInstance()->LaunchWorkerThread(this, m_encryption->is_file ? ("Decrypting file...") : ("Decrypting text...") ,
 						[this]() -> void
 						{
 							this->OnDecryptButtonPressed();
@@ -246,7 +246,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 {
 	if (m_password.empty())
 	{
-		(void)DialogUtils::Warn(("Password is empty"));
+		(void)DialogUtils::Warn("Password is empty");
 		return;
 	}
 
@@ -287,14 +287,15 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 
 			// Ask where to save decrypted file ?
 			// Get path to where decrypted file should be saved
-			if (const String output_filename = SaveFileDialog{ ("Select A Location To Save Decrypted File To")}.Show(); !output_filename.empty())
+			const std::initializer_list<String> filters = { (m_encryption->file_ext.empty() ? String() : String('*' + m_encryption->file_ext)), "All Files", "*" }; // { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }
+			if (const String output_filename = SaveFileDialog("Select A Location To Save Decrypted File To", ".", true, filters).Show(); !output_filename.empty())
 			{
 				// Write file recovered content to output file
 				const bool saved = FileUtils::Write(output_filename, buffer);
 				ENIGMA_ASSERT_OR_THROW(saved, ("Failed to save decrypted file"));
 
 				// little happy msg
-				DialogUtils::Info(("Successfully decrypted file to {}", output_filename));
+				DialogUtils::Info("Successfully decrypted file to {}", output_filename);
 			}
 
 		}

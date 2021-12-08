@@ -421,12 +421,7 @@ void Application::EndApplication() noexcept
 
 Application::~Application()
 {
-	/*for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
-	{
-		// Notify scenes OnDestroy before closing application
-		const std::shared_ptr<Scene>& scene = *it;
-		scene->OnDestroy();
-	}*/
+	EndApplication(); // to be sure
 
 	// Alert scenes OnDestroy()
 	std::for_each(m_scenes.rbegin(), m_scenes.rend(), [](const std::unique_ptr<Scene>& scene)
@@ -438,7 +433,16 @@ Application::~Application()
 	m_loading_scene->OnDestroy(); // Don't forget the loading scene
 
 	m_scenes.clear();
-	m_fonts.clear(); //ImGui::GetIO().Fonts->Clear();
+	m_fonts.clear(); 
+
+	//ImGui::GetIO().Fonts->Clear();
+	/*for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
+	{
+		// Notify scenes OnDestroy before closing application
+		const std::shared_ptr<Scene>& scene = *it;
+		scene->OnDestroy();
+	}*/
+
 }
 NS_ENIGMA_END
 

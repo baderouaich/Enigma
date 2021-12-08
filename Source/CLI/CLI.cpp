@@ -301,7 +301,7 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		e->is_file = false;
 		e->cipher.data = cipher; // already compressed above
 		e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
-		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e) >= 0, "Failed to save encryption record to database");
 
 		ENIGMA_INFO("Encryption saved successfully.");
 	}
@@ -401,7 +401,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		e->is_file = true;
 		e->cipher.data = cipher; // already compressed above
 		e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
-		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e), "Failed to save encryption record to database");
+		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e) >= 0, "Failed to save encryption record to database");
 
 		ENIGMA_INFO("Encryption saved successfully.");
 	}
@@ -462,7 +462,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 void CLI::OnListEncryptionRecords()
 {
 	const std::vector<std::unique_ptr<Encryption>> encryptions =
-		Database::GetAllEncryptions<true, false, true, true, true>(
+		Database::GetAllEncryptions<true, false, true, true, true, true>(
 			Database::OrderBy::DateTime,
 			Database::Order::Ascending);
 
@@ -490,14 +490,14 @@ void CLI::OnListEncryptionRecords()
 	// Make table body
 	std::for_each(encryptions.begin(), encryptions.end(), [&table](const std::unique_ptr<Encryption>& e)
 	{
-		const auto& [ide, title, cipher, date_time, size, is_file] = *e;
-
+		const auto& [ide, title, cipher, date_time, size, is_file, file_ext] = *e;
+		
 		//substr title to 50 chars only
 		String sub_title = title;
 		if (sub_title.size() > 50)
 			sub_title = sub_title.substr(0, 50) + "...";
 
-		table.add_row({ std::to_string(ide), sub_title, date_time, SizeUtils::FriendlySize(size), (is_file ? "File" : "Text") })
+		table.add_row({ std::to_string(ide), sub_title, date_time, SizeUtils::FriendlySize(size), (is_file ? "File ("+ file_ext + ')' : "Text") })
 			.format()
 			.font_align(FontAlign::left);
 	});	 

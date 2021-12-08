@@ -84,7 +84,7 @@ void Database::Shutdown()
 }
 
 // Add Encryption to Encryptions table, returns true on success
-bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
+i64 Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -94,7 +94,7 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 		auto transaction = std::make_unique<SQLite::Transaction>(*m_database);
 		// Insert encryption
 		{
-			constexpr const char* sql = "INSERT INTO Encryption(title, date_time, size, is_file) VALUES(?, DATETIME(), ?, ?)";
+			constexpr const char* sql = "INSERT INTO Encryption(title, date_time, size, is_file, file_ext) VALUES(?, DATETIME(), ?, ?, ?)";
 #if defined(ENIGMA_DEBUG)
 			ENIGMA_LOG("SQL: {0}", sql);
 #endif
@@ -102,8 +102,10 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			query->bindNoCopy(1, e->title);
 			query->bind(2, e->size);
 			query->bind(3, static_cast<i32>(e->is_file));
+			if (e->is_file)
+				query->bind(4, e->file_ext);
 			const i32 r = query->exec(); // returns num rows effected
-			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert encyption record");
+			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert encryption record");
 		}
 		
 		// Get inserted encryption id
@@ -123,15 +125,15 @@ bool Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert cipher record");
 		}
 		
-		// OK (if transaction was not commited, it will rollback when it goes out of scope in ~Transaction)
+		// OK (if transaction was not committed, it will rollback when it goes out of scope in ~Transaction)
 		transaction->commit();
 
-		return true;
+		return last_inserted_encryption_id;
 	}
 	catch (const SQLite::Exception& e)
 	{
 		ENIGMA_ERROR(e.what());
-		return false;
+		return i64(-1);
 	}
 
 }
