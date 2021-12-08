@@ -82,9 +82,10 @@ static void SignalHandler(int sig)
 {
 	const auto stringify_signal = [sig]() noexcept -> const char*
 	{
-#define RET_STR(s, desc) case s: return #s ## ": " ## desc
-		switch (sig) {
-		default: return "<unknown signal>";
+#define RET_STR(s, desc) case s: return #s ": " desc
+		switch (sig) 
+		{
+			default: return "<unknown signal>";
 			RET_STR(SIGABRT, "Abnormal termination triggered by abort call");
 			RET_STR(SIGFPE, "Floating point exception");
 			RET_STR(SIGILL, "Illegal instruction - invalid function image");

@@ -1,6 +1,0 @@
-Source/Application/SingleProcessInstance.hpp:73:3: performance: Variable 'm_socket_fd' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
-  m_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
-  ^
-Source/Main.cpp:85:0: error: failed to expand 'RET_STR', Invalid ## usage when expanding 'RET_STR'. [preprocessorErrorDirective]
-#define RET_STR(s, desc) case s: return #s ## ": " ## desc
-^

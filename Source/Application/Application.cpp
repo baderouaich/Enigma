@@ -157,7 +157,7 @@ void Application::PushScene(std::unique_ptr<Scene> scene)
 }
 
 
-void Application::LaunchWorkerThread(Scene* scene, const String loading_text, const std::function<void()>& work_func)
+void Application::LaunchWorkerThread(Scene* scene, const String& loading_text, const std::function<void()>& work_func)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr!");
 	ENIGMA_ASSERT(work_func, "Work function is empty!");
@@ -273,11 +273,15 @@ void Application::Run()
 {
 	while (! m_window->ShouldClose())
 	{
-		// Waits until events are queued and then processes them (Polls events). (Reduces CPU usage)
-		glfwWaitEvents();
-
 		// Poll Events (no need to poll events, since glfwWaitEvents() above will do this for us)
 		//m_window->PollEvents();
+
+		// Poll Events
+		if (std::any_of(m_scenes.rbegin(), m_scenes.rend(), [](const auto& scene) noexcept { return scene->IsLoading(); })) // if there is a scene still doing some work (loading..)
+			m_window->PollEvents(); // Don't wait for input events so loading animation will keep updating
+		else
+			glfwWaitEvents(); // Waits until events are queued and then processes them (Polls events). (Reduces CPU usage)
+
 
 		// Update & Draw (only if there are scenes, otherwise end app).
 		if (! m_scenes.empty())
