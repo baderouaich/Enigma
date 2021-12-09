@@ -1,5 +1,0 @@
-# codeql config file
-name: "CodeQL config"
-paths-ignore: # DO NOT ANALYZE THESE FOLDERS
-  - Dependencies
-  - Resources
