@@ -27,7 +27,6 @@ void LoadingScene::OnImGuiDraw()
 	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
 	static const auto& io = ImGui::GetIO();
 
-
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;
 	
 	// Push window's background color
@@ -39,23 +38,24 @@ void LoadingScene::OnImGuiDraw()
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{		
 		/*
-		static constexpr const auto loading_txt = "Loading...";
-		static const ImVec2 title_size(ImGui::CalcTextSize(loading_txt).x * font_audiowide_regular_45->Scale, ImGui::CalcTextSize(loading_txt).y * font_audiowide_regular_45->Scale);
-		ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x) / 2.0f);
-		ImGui::SetCursorPosY((io.DisplaySize.y - title_size.y) / 2.0f);
-		ImGui::Text(loading_txt);
+		*	static constexpr const auto loading_txt = "Loading...";
+		*	static const ImVec2 title_size(ImGui::CalcTextSize(loading_txt).x * font_audiowide_regular_45->Scale, ImGui::CalcTextSize(loading_txt).y * font_audiowide_regular_45->Scale);
+		*	ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x) / 2.0f);
+		*	ImGui::SetCursorPosY((io.DisplaySize.y - title_size.y) / 2.0f);
+		*	ImGui::Text(loading_txt);
 		*/
 		
 		const ImVec2 spinner_position = { (io.DisplaySize.x - ((SPINNER_RADIUS * SPINNER_THICKNESS) / 2.0f)) / 2.0f,  (io.DisplaySize.y - ((SPINNER_RADIUS * SPINNER_THICKNESS) / 2.0f)) / 2.0f };
 		ImGuiWidgets::LoadingDialog(
 			m_loading_text.empty() ? "Loading..." : m_loading_text.data(),
 			spinner_position, 
-			SPINNER_RADIUS, 
+			SPINNER_RADIUS,
 			SPINNER_THICKNESS,
 			Constants::Colors::LOADING_SPINNER_COLOR,
 			static_cast<f32>(win_w), 
 			static_cast<f32>(win_h)
 		);
+
 		
 		/*
 		static constexpr const float RADIUS = 45;

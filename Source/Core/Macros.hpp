@@ -95,11 +95,9 @@ do { \
 } while (false);
 ///
 
-
 /// Bit Shift
 #define BIT(x) (1 << x)
 ///
-
 
 /// Array Size
 #define ENIGMA_ARRAY_SIZE(arr) static_cast<::Enigma::size_t>(sizeof(arr) / sizeof((arr)[0]))
@@ -179,6 +177,17 @@ do { \
 	__HALT__, \
 	BEGIN = begin, \
 	END = __HALT__ - 1
+///
+
+/// Implements bitwise operators for enum classes
+#define ENIGMA_ENUM_CLASS_BITWISE_OPERATORS(_enum, _type) \
+	friend inline constexpr _enum operator~ (const _enum i) noexcept { return static_cast<_enum>(~static_cast<const _type>(i)); }  \
+	friend inline constexpr _enum operator| (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) | static_cast<const _type>(b)); } \
+	friend inline constexpr  bool operator& (const _enum a, const _enum b) noexcept { return static_cast<bool>(static_cast<const _type>(a) & static_cast<const _type>(b)); } \
+	friend inline constexpr _enum operator^ (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) ^ static_cast<const _type>(b)); } \
+	friend inline constexpr _enum operator|= (_enum & a, const _enum b) noexcept { return (_enum&)((_type&)(a) |= (const _type)(b)); } \
+	friend inline constexpr _enum operator&= (_enum & a, const _enum b) noexcept { return (_enum&)((_type&)(a) &= (const _type)(b)); } \
+	friend inline constexpr _enum operator^= (_enum & a, const _enum b) noexcept { return (_enum&)((_type&)(a) ^= (const _type)(b)); }
 ///
 
 

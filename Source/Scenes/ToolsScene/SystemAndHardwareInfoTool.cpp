@@ -32,13 +32,13 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 	ImGui::PushFont(font_audiowide_regular_20);
 	{
-		if (ImGui::CollapsingHeader(("System and Hardware Information"), nullptr))
+		if (ImGui::CollapsingHeader("System and Hardware Information", nullptr))
 		{
 			ImGui::PushFont(font_montserrat_medium_18);
 			spacing(3);
 
 			/// CPU Information BEGIN /// Static
-			if (ImGui::TreeNode(("CPU")))
+			if (ImGui::TreeNode("CPU"))
 			{
 				// Static cpu info, unlike ram, needs to be initialized once.
 				static const iware::cpu::quantities_t quantities = iware::cpu::quantities();
@@ -69,35 +69,35 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				});
 				/*
 				* method 2 of execute once
-				[[maybe_unused]] static const auto GetInstructionsSetAndCachesOnce = [this]() -> bool
-				{
-					// Instructions set
-					for (const auto is : iware::cpu::supported_instruction_sets())
-					{
-						supported_instructions_set.push_back(this->StringifyInstructionSetEnum(is));
-					}
-					// Caches
-					for (i32 i = 0; i < caches.size(); ++i)
-					{
-						caches[i] = iware::cpu::cache(i + 1);
-					}
-
-					return true;
-				}();*/
+				* [[maybe_unused]] static const auto GetInstructionsSetAndCachesOnce = [this]() -> bool
+				* {
+				* 	// Instructions set
+				* 	for (const auto is : iware::cpu::supported_instruction_sets())
+				* 	{
+				* 		supported_instructions_set.push_back(this->StringifyInstructionSetEnum(is));
+				* 	}
+				* 	// Caches
+				* 	for (i32 i = 0; i < caches.size(); ++i)
+				* 	{
+				* 		caches[i] = iware::cpu::cache(i + 1);
+				* 	}
+				* 
+				* 	return true;
+				* }();
+				*/
 				 
 				// Architecture, Frequency, Model name, Vendor Name, Vendor ID
-				ImGui::BulletText("%s: %s", ("Architecture"), architecture.c_str());
+				ImGui::BulletText("%s: %s",  ("Architecture"), architecture.c_str());
 				ImGui::BulletText("%s: %zu", ("Frequency"), frequency);
-				ImGui::BulletText("%s: %s", ("Endianness"), endianness.c_str());
-				ImGui::BulletText("%s: %s", ("Model name"), model_name.c_str());
-				ImGui::BulletText("%s: %s", ("Vendor"), vendor.c_str());
-				ImGui::BulletText("%s: %s", ("Vendor ID"), vendor_id.c_str());
+				ImGui::BulletText("%s: %s",  ("Endianness"), endianness.c_str());
+				ImGui::BulletText("%s: %s",  ("Model name"), model_name.c_str());
+				ImGui::BulletText("%s: %s",  ("Vendor"), vendor.c_str());
+				ImGui::BulletText("%s: %s",  ("Vendor ID"), vendor_id.c_str());
 
-				
 				//spacing(2);
 
 				// Quantities
-				if (ImGui::TreeNode(("Quantities")))
+				if (ImGui::TreeNode("Quantities"))
 				{
 					ImGui::BulletText("%s: %u", ("Logical CPUs"), quantities.logical);
 					ImGui::BulletText("%s: %u", ("Physical CPUs"), quantities.physical);
@@ -109,7 +109,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				//spacing(2);
 
 				// Caches
-				if (ImGui::TreeNode(("Caches")))
+				if (ImGui::TreeNode("Caches"))
 				{
 					for (size_t i = 0; i < caches.size(); ++i)
 					{
@@ -131,7 +131,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				//spacing(2);
 
 				// Supported Instruction Set
-				if (ImGui::TreeNode(("Supported Instruction Set")))
+				if (ImGui::TreeNode("Supported Instruction Set"))
 				{
 					for (const auto& is : supported_instructions_set)
 					{
@@ -147,13 +147,13 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 
 			/// RAM Information BEGIN /// Volatile
-			if (ImGui::TreeNode(("RAM")))
+			if (ImGui::TreeNode("RAM"))
 			{
 				// Volatile ram info (will only execute if TreeNode is open, unlike cpu info which are static and preferrably initialized at first)
 				const auto ram_info = iware::system::memory();
 				
 				// Physical
-				if (ImGui::TreeNode(("Physical")))
+				if (ImGui::TreeNode("Physical"))
 				{
 					ImGui::BulletText("%s: %s", ("Available"), SizeUtils::FriendlySize(ram_info.physical_available).c_str());
 					ImGui::BulletText("%s: %s", ("Total"), SizeUtils::FriendlySize(ram_info.physical_total).c_str());
@@ -162,7 +162,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 				}
 
 				// Virtual
-				if (ImGui::TreeNode(("Virtual")))
+				if (ImGui::TreeNode("Virtual"))
 				{
 					ImGui::BulletText("%s: %s", ("Available"), SizeUtils::FriendlySize(ram_info.virtual_available).c_str());
 					ImGui::BulletText("%s: %s", ("Total"), SizeUtils::FriendlySize(ram_info.virtual_total).c_str());
@@ -186,11 +186,11 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 					ImGui::TextColored(Constants::Colors::ERROR_TEXT_COLOR, ("Could not detect GPUs information"));
 #define GPU_INFO_MINIMAL 1
 #if GPU_INFO_MINIMAL 
-				    // if infoware doesnt provide OpenGL implementation yet, make a minimal approach until then.
-					ImGui::TextColored(Constants::Colors::ORANGE, ("GPUs Information not yet available, here are some minimal info about your gpu until this feature is fully implemented"));
-					static const GLubyte* vendor = glGetString(GL_VENDOR);
+				    // if infoware doesn't provide OpenGL implementation yet, make a minimal approach until then.
+					ImGui::TextColored(Constants::Colors::ORANGE, ("GPUs Information not yet available, here are some minimal info about your GPU until this feature is fully implemented"));
+					static const GLubyte* vendor   = glGetString(GL_VENDOR);
 					static const GLubyte* renderer = glGetString(GL_RENDERER);
-					static const GLubyte* version = glGetString(GL_VERSION);
+					static const GLubyte* version  = glGetString(GL_VERSION);
 					ImGui::BulletText("%s: % s", ("Vendor"), vendor);
 					ImGui::BulletText("%s: %s", ("Renderer"), renderer);
 					ImGui::BulletText("%s: %s", ("Version"), version);
@@ -202,7 +202,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 					{
 						const auto& gpu_device = gpu_devices_info[i];
 
-						if (ImGui::TreeNode(fmt::format("Device #{}", i + 1).c_str()))  //("Device #" + std::to_string(i + 1)).c_str()))
+						if (ImGui::TreeNode(fmt::format("Device #{}", i + 1).c_str()))  // ("Device #" + std::to_string(i + 1)).c_str()))
 						{
 							// Vendor, Name, RAM Size, Cache Size, Max Frequency
 							ImGui::BulletText("%s: %s", ("Vendor"), this->StringifyGPUVendorEnum(gpu_device.vendor));
@@ -222,9 +222,9 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 
 			/// OS Information BEGIN /// Static
-			if (ImGui::TreeNode(("Operating System")))
+			if (ImGui::TreeNode("Operating System"))
 			{
-				// Static os info, unlike ram, needs to be initialized once.
+				// Static OS info, unlike ram, needs to be initialized once.
 				static const auto os_info = iware::system::OS_info();
 
 				// Name, Full Name, Version
@@ -239,7 +239,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 
 			/// Kernel Information BEGIN /// Static
-			if (ImGui::TreeNode(("Kernel")))
+			if (ImGui::TreeNode("Kernel"))
 			{
 				// Static kernel info, unlike ram, needs to be initialized once.
 				static const auto kernel_info = iware::system::kernel_info();
@@ -254,7 +254,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 
 			/// Connected HIDs Information BEGIN /// Volatile
-			if (ImGui::TreeNode(("Connected HIDs")))
+			if (ImGui::TreeNode("Connected HIDs"))
 			{
 				// Mice, Keyboards, Other
 				ImGui::BulletText("%s: %zu", ("Mice"), iware::system::mouse_amount());
@@ -267,7 +267,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 
 			/// Displays Information BEGIN /// Volatile
-			if (ImGui::TreeNode(("Displays")))
+			if (ImGui::TreeNode("Displays"))
 			{
 				const auto displays = iware::system::displays();
 				if (displays.empty())
@@ -281,7 +281,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 						// Resolution, DPI, Colour depth, Refresh rate
 						ImGui::BulletText("%s: %ux%u", ("Resolution"), display.width, display.height);
 						ImGui::BulletText("%s: %u", ("DPI"), display.dpi);
-						ImGui::BulletText("%s: %u BPP (bits per pixel)", ("Colour depth"), display.bpp);
+						ImGui::BulletText("%s: %u BPP (bits per pixel)", ("Color depth"), display.bpp);
 						ImGui::BulletText("%s: %.2lfHz", ("Refresh rate"), display.refresh_rate);
 					}
 				}
@@ -292,7 +292,7 @@ void SystemAndHardwareInfoTool::OnDraw(Scene*)
 
 
 			/// Display Configurations BEGIN /// Volatile
-			if (ImGui::TreeNode(("Display Configurations")))
+			if (ImGui::TreeNode("Display Configurations"))
 			{
 				const auto configurations = iware::system::available_display_configurations();
 				if (configurations.empty())

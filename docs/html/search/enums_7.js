@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['language_2228',['Language',['../class_translation.html#a1f6a6a6e3c733bffc2896576da29f4c5',1,'Translation']]]
+  ['mousecode_2134',['MouseCode',['../_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424',1,'MouseCodes.hpp']]]
 ];

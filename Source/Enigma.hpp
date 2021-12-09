@@ -66,7 +66,6 @@
 #include <Utility/MathUtils.hpp>
 //
 
-
 // Analytics: Hardware info RAM, CPU
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>

@@ -135,48 +135,49 @@ struct ENIGMA_API WindowSettings
 	bool is_show_cpu_usage = false;
 
 
-public:
-	static WindowSettings FromConfig(const Config& config)
+	/** Default construct WindowSettings with default values */
+	WindowSettings() = default;
+
+	/** Construct WindowSettings from a Config file (.ini) */
+	WindowSettings(const Config& config)
 	{
-		WindowSettings window_settings{};
-		window_settings.title = config.Get<decltype(WindowSettings::title)>("window", "title", "Enigma");
-		window_settings.width = config.Get<decltype(WindowSettings::width)>("window", "width", 800);
-		window_settings.height = config.Get<decltype(WindowSettings::height)>("window", "height", 600);
-		window_settings.minimum_width = config.Get<decltype(WindowSettings::minimum_width)>("window", "minimum_width", -1);
-		window_settings.minimum_height = config.Get<decltype(WindowSettings::minimum_height)>("window", "minimum_height", -1);
-		window_settings.maximum_width = config.Get<decltype(WindowSettings::maximum_width)>("window", "maximum_width", -1);
-		window_settings.maximum_height = config.Get<decltype(WindowSettings::maximum_height)>("window", "maximum_height", -1);
-		window_settings.refresh_rate = config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1);
-		window_settings.samples = config.Get<decltype(WindowSettings::samples)>("window", "samples", 4);
-		window_settings.swap_interval = config.Get<decltype(WindowSettings::swap_interval)>("window", "swap_interval", 2);
-		window_settings.is_resizable = config.Get<decltype(WindowSettings::is_resizable)>("window", "resizable", true);
-		window_settings.is_fullscreen = config.Get<decltype(WindowSettings::is_fullscreen)>("window", "fullscreen", false);
-		window_settings.is_decorated = config.Get<decltype(WindowSettings::is_decorated)>("window", "decorated", true);
-		window_settings.is_focused = config.Get<decltype(WindowSettings::is_focused)>("window", "focused", true);
-		window_settings.is_maximized = config.Get<decltype(WindowSettings::is_maximized)>("window", "maximized", false);
-		window_settings.is_floating = config.Get<decltype(WindowSettings::is_floating)>("window", "floating", false);
-		window_settings.is_visible = config.Get<decltype(WindowSettings::is_visible)>("window", "visible", true);
-		window_settings.is_auto_iconify = config.Get<decltype(WindowSettings::is_auto_iconify)>("window", "auto_iconify", true);
-		window_settings.is_show_fps = config.Get<decltype(WindowSettings::is_show_fps)>("window", "show_fps", true);
-		window_settings.is_show_ram_usage = config.Get<decltype(WindowSettings::is_show_ram_usage)>("window", "show_ram_usage", true);
-		window_settings.is_show_cpu_usage = config.Get<decltype(WindowSettings::is_show_cpu_usage)>("window", "show_cpu_usage", true);
-		return window_settings;
+		title = config.Get<decltype(WindowSettings::title)>("window", "title", "Enigma");
+		width = config.Get<decltype(WindowSettings::width)>("window", "width", 800);
+		height = config.Get<decltype(WindowSettings::height)>("window", "height", 600);
+		minimum_width = config.Get<decltype(WindowSettings::minimum_width)>("window", "minimum_width", -1);
+		minimum_height = config.Get<decltype(WindowSettings::minimum_height)>("window", "minimum_height", -1);
+		maximum_width = config.Get<decltype(WindowSettings::maximum_width)>("window", "maximum_width", -1);
+		maximum_height = config.Get<decltype(WindowSettings::maximum_height)>("window", "maximum_height", -1);
+		refresh_rate = config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1);
+		samples = config.Get<decltype(WindowSettings::samples)>("window", "samples", 4);
+		swap_interval = config.Get<decltype(WindowSettings::swap_interval)>("window", "swap_interval", 2);
+		is_resizable = config.Get<decltype(WindowSettings::is_resizable)>("window", "resizable", true);
+		is_fullscreen = config.Get<decltype(WindowSettings::is_fullscreen)>("window", "fullscreen", false);
+		is_decorated = config.Get<decltype(WindowSettings::is_decorated)>("window", "decorated", true);
+		is_focused = config.Get<decltype(WindowSettings::is_focused)>("window", "focused", true);
+		is_maximized = config.Get<decltype(WindowSettings::is_maximized)>("window", "maximized", false);
+		is_floating = config.Get<decltype(WindowSettings::is_floating)>("window", "floating", false);
+		is_visible = config.Get<decltype(WindowSettings::is_visible)>("window", "visible", true);
+		is_auto_iconify = config.Get<decltype(WindowSettings::is_auto_iconify)>("window", "auto_iconify", true);
+		is_show_fps = config.Get<decltype(WindowSettings::is_show_fps)>("window", "show_fps", true);
+		is_show_ram_usage = config.Get<decltype(WindowSettings::is_show_ram_usage)>("window", "show_ram_usage", true);
+		is_show_cpu_usage = config.Get<decltype(WindowSettings::is_show_cpu_usage)>("window", "show_cpu_usage", true);
 	}
 
-
-	String toString() noexcept
+public:
+	String toString() noexcept 
 	{
 		std::ostringstream oss{};
 		oss << "[ title:" << title << ", width:" << width << ", height:" << height
-			<< ", minimum_width:" << minimum_width << ", minimum_height:" << minimum_height
-			<< ", maximum_width:" << maximum_width << ", maximum_height:" << maximum_height
-			<< ", refresh_rate:" << refresh_rate << ", swap_interval:" << swap_interval
-			<< ", is_resizable:" << is_resizable << ", is_decorated:" << is_decorated
-			<< ", is_fullscreen:" << is_fullscreen << ", samples:" << samples
-			<< ", is_focused:" << is_focused << ", is_maximized:" << is_maximized
-			<< ", is_floating:" << is_floating << ", is_visible:" << is_visible
-			<< ", is_auto_iconify:" << is_auto_iconify << ", is_show_fps:" << is_show_fps
-			<< " ]";
+			  << ", minimum_width:" << minimum_width << ", minimum_height:" << minimum_height
+			  << ", maximum_width:" << maximum_width << ", maximum_height:" << maximum_height
+			  << ", refresh_rate:" << refresh_rate << ", swap_interval:" << swap_interval
+			  << ", is_resizable:" << is_resizable << ", is_decorated:" << is_decorated
+			  << ", is_fullscreen:" << is_fullscreen << ", samples:" << samples
+			  << ", is_focused:" << is_focused << ", is_maximized:" << is_maximized
+			  << ", is_floating:" << is_floating << ", is_visible:" << is_visible
+			  << ", is_auto_iconify:" << is_auto_iconify << ", is_show_fps:" << is_show_fps
+			  << " ]";
 		return oss.str();
 	}
 };

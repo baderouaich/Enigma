@@ -45,7 +45,7 @@ class RSA;
 
 /**
 *	@brief Algorithm abstract class
-*	@details All encryption algorithms like AES, Twofish.. inherrit from this class
+*	@details All encryption algorithms like AES, Twofish.. inherit from this class
 *	@todo add more encryption algorithms
 */
 class ENIGMA_API Algorithm
@@ -60,21 +60,12 @@ public:
 	*/
 	enum class Intent : byte
 	{
-		None	= 0 << 0,
+		None	  = 0 << 0,
 		Encrypt = 1 << 1,
 		Decrypt = 1 << 2
 	};
-	/**
-	*	Intent bitwise operators
-	*/
-	friend inline constexpr Intent operator~ (const Intent i) noexcept { return static_cast<Intent>(~static_cast<const byte>(i)); }
-	friend inline constexpr Intent operator| (const Intent a, const Intent b) noexcept { return static_cast<Intent>(static_cast<const byte>(a) | static_cast<const byte>(b)); }
-	friend inline constexpr bool operator& (const Intent a, const Intent b) noexcept { return static_cast<bool>(static_cast<const byte>(a) & static_cast<const byte>(b)); }
-	friend inline constexpr Intent operator^ (const Intent a, const Intent b) noexcept { return static_cast<Intent>(static_cast<const byte>(a) ^ static_cast<const byte>(b)); }
-	friend inline constexpr Intent operator|= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) |= (const byte)(b)); }
-	friend inline constexpr Intent operator&= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) &= (const byte)(b)); }
-	friend inline constexpr Intent operator^= (Intent& a, const Intent b) noexcept { return (Intent&)((byte&)(a) ^= (const byte)(b)); }
-	
+	ENIGMA_ENUM_CLASS_BITWISE_OPERATORS(Intent, byte);
+
 	/**
 	*	Algorithm type: AES, ChaCha...
 	*/

@@ -3,6 +3,7 @@
 #define ENIGMA_CONFIG_H
 
 #include <Core/Core.hpp>
+#include <Utility/FileUtils.hpp>
 #include <INIReader.h>
 
 /** Config file Loader (.ini) */
@@ -15,7 +16,7 @@ public:
 	*	@param file_name: ini config file path
 	*	@throws std::runtime_error on failure
 	*/
-	Config(const String& file_name);
+	Config(const fs::path& file_name);
 	~Config() = default;
 
 public:

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['harware_5finfo_5fupdate_5ftime_1986',['HARWARE_INFO_UPDATE_TIME',['../class_application.html#a1ce5e86aa6155177031006cdf25cf2f8',1,'Application']]],
-  ['height_1987',['height',['../struct_window_settings.html#a032fd38826aed1b211c4a9ec5f565583',1,'WindowSettings']]]
+  ['file_5fext_1912',['file_ext',['../struct_encryption.html#a2fdeb2b5096812f173a9a68c4a8168ba',1,'Encryption']]]
 ];

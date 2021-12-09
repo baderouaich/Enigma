@@ -154,7 +154,7 @@ public:
 	};
 
 public:
-	/** Returns the Latest Enigma release information using Github API */
+	/** Returns the Latest Enigma release information using GitHub API */
 	static std::unique_ptr<LatestReleaseInfo> GetLatestReleaseInfo()
 	{
 		try

@@ -143,7 +143,6 @@ void HashingTool::OnCalculateHashButtonPressed()
 			CASE_PERFORM_HASH(m_tiger, TIGER, Tiger);
 			CASE_PERFORM_HASH(m_whirlpool, WHIRLPOOL, Whirlpool);
 
-
 #undef CASE_PERFORM_HASH
 
 #if 0
@@ -274,7 +273,7 @@ void HashingTool::OnCalculateHashButtonPressed()
 			return;
 		}
 	}
-	catch (const CryptoPP::Exception& e)
+	catch (const CryptoPP::Exception& e) 
 	{
 		const String err_msg = ("Hashing Failure: ") + CryptoPPUtils::GetFullErrorMessage(e);
 		ENIGMA_ERROR(err_msg);

@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">if</span> (parallel)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            std::mutex mtx{};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            std::for_each(std::execution::seq, out.begin(), out.end(), [&amp;special_characters, &amp;mtx](<span class="keywordtype">char</span>&amp; c)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            std::for_each(std::execution::par, out.begin(), out.end(), [&amp;special_characters, &amp;mtx](<span class="keywordtype">char</span>&amp; c)</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                {</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    std::scoped_lock&lt;std::mutex&gt; guard{ mtx }; <span class="comment">// guard scope, note that most of functions bellow us assertions, without guarding can result on bad rare behavior where two threads assert at the same time. its just nasty, use lock guards.</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    if (<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a152b6c8137231778a89b47ef90a5b33b">ui16</a> r = Random::Int&lt;ui16&gt;(0, 3); r == 0)</div>

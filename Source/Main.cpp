@@ -11,7 +11,7 @@
 
 static void SignalHandler(int sig);
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) 
 {	
 	// Handle abnormal exists to normally end program and release resources gracefully
 	std::signal(SIGABRT, SignalHandler); // Abnormal termination triggered by abort call
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 	std::signal(SIGSEGV, SignalHandler); // Segment violation
 	std::signal(SIGTERM, SignalHandler); // Software termination signal from kill
 #if defined(ENIGMA_PLATFORM_WINDOWS)
-	std::signal(SIGBREAK, SignalHandler); //  On Windows, a click on console window close button will raise SIGBREAK
+	std::signal(SIGBREAK, SignalHandler); // On Windows, a click on console window close button will raise SIGBREAK
 #endif
 
 	// Initialize Logger
@@ -36,18 +36,18 @@ int main(int argc, char* argv[])
 		//========= CLI Entry =========//
 		if (argc > 1)
 		{
-			const auto _Cli = std::make_unique<Enigma::CLI>(argc, argv);
+			const std::unique_ptr<Enigma::CLI> _Cli(new Enigma::CLI(argc, argv));
 			exit_code = _Cli->Run();
 		}
 		//========= UI Entry =========//
 		else
 		{
 			// Load Window Configuration (title, width, height...)
-			const Enigma::Config window_config((Enigma::FileUtils::GetEnigmaExecutableDir() / fs::path(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH)).string());
+			const std::unique_ptr<Enigma::Config> window_config(new Enigma::Config(Enigma::FileUtils::GetEnigmaExecutableDir() / Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH));
 			// Construct WindowSettings from loaded Config
-			const Enigma::WindowSettings window_settings = Enigma::WindowSettings::FromConfig(window_config);
+			const std::unique_ptr<Enigma::WindowSettings> window_settings(new Enigma::WindowSettings(*window_config));
 			// Create Enigma UI Application
-			const auto _App = std::make_unique<Enigma::Application>(window_settings);
+			const std::unique_ptr<Enigma::Application> _App(new Enigma::Application(*window_settings));
 			// Run Application
 			_App->Run();
 			// Exit Gracefully
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 		}
 #else
 		//========= Tests Entry =========//
-		const auto _Tests = std::make_unique<Catch::Session>();
+		const std::unique_ptr<Catch::Session> _Tests(new Catch::Session());
 		exit_code = _Tests->run(argc, argv);
 #endif
 	}
@@ -65,7 +65,6 @@ int main(int argc, char* argv[])
 		ENIGMA_CRITICAL(e.what());
 		exit_code = EXIT_FAILURE;
 	}
-
 
 	// Shutdown SQLite3 Database
 	Enigma::Database::Shutdown();
@@ -80,7 +79,7 @@ int main(int argc, char* argv[])
 */
 static void SignalHandler(int sig)
 {
-	const auto stringify_signal = [sig]() noexcept -> const char*
+	const auto stringify_signal = [sig]() noexcept -> const char* 
 	{
 #define RET_STR(s, desc) case s: return #s ": " desc
 		switch (sig) 

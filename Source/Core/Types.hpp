@@ -26,7 +26,6 @@ namespace Enigma
 	using String	= std::string;	// UTF-8 string (std::uint8_t)
 	using WString	= std::wstring;	// UTF-16 string (std::uint16_t)
 
-
 	using Color4f	= ImVec4;
 	using Vec2f		= ImVec2;
 }

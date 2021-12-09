@@ -16,7 +16,7 @@ var searchData=
   ['begin_43',['Begin',['../class_im_gui_renderer.html#a00492bbd761707111c90d533571e6540',1,'ImGuiRenderer']]],
   ['begin_5ftimer_44',['BEGIN_TIMER',['../_base64_tests_8hpp.html#a8985a3d796183065d4ea18b2a93b22c6',1,'Base64Tests.hpp']]],
   ['bit_45',['BIT',['../_macros_8hpp.html#ad27cc17b25bb93134368d5eb21126eae',1,'Macros.hpp']]],
-  ['blowfish_46',['Blowfish',['../class_blowfish.html',1,'Blowfish'],['../class_blowfish.html#aba950122296260fd821976cbb51f7ea7',1,'Blowfish::Blowfish()'],['../class_algorithm.html#abfa56bd0469d341e959bb510f4fac41badf30d7ec6c752a5a639efc845e26a93a',1,'Algorithm::Blowfish()']]],
+  ['blowfish_46',['Blowfish',['../class_blowfish.html',1,'Blowfish'],['../class_algorithm.html#abfa56bd0469d341e959bb510f4fac41badf30d7ec6c752a5a639efc845e26a93a',1,'Algorithm::Blowfish()'],['../class_blowfish.html#aba950122296260fd821976cbb51f7ea7',1,'Blowfish::Blowfish()']]],
   ['blowfish_2ecpp_47',['Blowfish.cpp',['../_blowfish_8cpp.html',1,'']]],
   ['blowfish_2ehpp_48',['Blowfish.hpp',['../_blowfish_8hpp.html',1,'']]],
   ['blowfishtests_2ehpp_49',['BlowfishTests.hpp',['../_blowfish_tests_8hpp.html',1,'']]],

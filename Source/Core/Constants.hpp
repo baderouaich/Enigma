@@ -195,8 +195,6 @@ namespace Enigma
 
 			static const Color4f MENUBAR_BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(91, 103, 234, 200); // WHITE TRANSPARENT
 #endif
-
-
 #if  0
 			//static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(36, 54, 54, 255);
 			static const Color4f BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(30, 37, 43, 255);
@@ -246,7 +244,7 @@ namespace Enigma
 
 			static const Color4f LOADING_SPINNER_COLOR = BACK_BUTTON_COLOR;
 			//static const Color4f LOADING_BACKGROUND_COLOR = { BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 0.6f };
-			static const Color4f LOADING_BACKGROUND_COLOR = {0.0f, 0.0f, 0.0f, 0.8f };
+			static const Color4f LOADING_BACKGROUND_COLOR = { 0.0f, 0.0f, 0.0f, 0.8f };
 
 
 			static const Color4f& SCENE_TITLE_BACKGROUND_COLOR = MENUBAR_BACKGROUND_COLOR;

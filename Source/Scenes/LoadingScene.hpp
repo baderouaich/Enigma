@@ -22,7 +22,6 @@ public:
 
 private:
 	String m_loading_text; // loading text from a scene to appear bellow loading spinner to inform user of whats happening
-
 	inline static constexpr const f32 SPINNER_RADIUS = 66.66f;
 	inline static constexpr const f32 SPINNER_THICKNESS = 4.0f;
 };

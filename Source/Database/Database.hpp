@@ -27,7 +27,7 @@ class ENIGMA_API Database final
 {
 	ENIGMA_STATIC_CLASS(Database);
 
- public:
+public:
 	/** Encryption Table order by column */
 	enum class OrderBy : byte
 	{
@@ -83,6 +83,7 @@ class ENIGMA_API Database final
 		}
 #undef CASE_STR
 	}
+
 	friend std::ostream& operator<<(std::ostream& os, const Order order) noexcept // for constructing sql
 	{
 		return os << (order == Order::Ascending ? " ASC" : " DESC");
@@ -112,61 +113,7 @@ public: // Encryption Operations
 	/** Returns how many encryption records are saved */
 	static i64 GetEncryptionsCount();
 
-#if 0
-	// TODO
-	// Export all encryptions data to a json file
-	static bool ExportAllEncryptionsJSON(const fs::path& filename)
-	{
-		ENIGMA_TRACE_CURRENT_FUNCTION();
-		ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
-		try
-		{
-			ENIGMA_INFO("Getting all encryptions from database to export to json file {}...", filename.string());
-			std::vector<std::unique_ptr<Encryption>> encryptions = Database::GetAllEncryptions<true, true, true, true, true>();
-			ENIGMA_INFO("Got {0} Encryption records.", encryptions.size());
-
-			// Make json 
-			using namespace nlohmann;
-			json json_encryptions = json::array();
-			for (const auto& encryption_ptr : encryptions)
-			{
-				// expand Encryption 
-				const auto& [ide, title, cipher, date_time, size, is_file] = *encryption_ptr;
-				
-				// make encryption object
-				json enc_obj{};
-				enc_obj["ide"] = ide;
-				enc_obj["title"] = title;
-				
-				json cipher_obj{};
-					cipher_obj["idc"] = cipher.idc;
-					cipher_obj["ide"] = cipher.ide;
-					cipher_obj["data"] = cipher.data;
-				enc_obj["cipher"] = cipher_obj;
-
-				enc_obj["date_time"] = date_time;
-				enc_obj["size"] = size;
-				enc_obj["is_file"] = is_file;
-
-				// add obj to array
-				json_encryptions.push_back(std::move(enc_obj));
-			}
-
-			// we can freeup the memory now.
-			encryptions.clear(); 
-
-			// save made json array to file
-			return FileUtils::Write(filename, json_encryptions.dump(-1, 32, false, json::error_handler_t::replace));
-		}
-		catch (const SQLite::Exception& e)
-		{
-			ENIGMA_ERROR(e.what());
-			return false;
-		}
-	}
-#endif
-
-	/** Get an Encyrption by id with desired columns for optimization */
+	/** Get an Encryption by id with desired columns for optimization */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext>
 	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
 	{
@@ -287,7 +234,6 @@ public: // Encryption Operations
 		return encryptions;
 	}
 
-
 	/** Search Encryptions by title using keyword LIKE %QUERY% */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext> // select which columns to return (for optimization)
 	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
@@ -350,11 +296,9 @@ public: // Encryption Operations
 		return encryptions;
 	}
 
-
 public: // Accessors
 	/** Returns SQLite database connection instance */
 	static const std::unique_ptr<SQLite::Database>& GetInstance() noexcept { return m_database; }
-
 
 public: // Modifiers
 	/**	
@@ -364,34 +308,72 @@ public: // Modifiers
 	*	especially for the database that has a high number of inserts, updates, and deletes.
 	*	@note https://www.sqlitetutorial.net/sqlite-vacuum/
 	*/
-	static void Vacuum() noexcept 
-	{
-		/*ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
-		(void)m_database->exec("VACUUM");*/
-
-		// Only vacuum if changes to the database were made.
-		const i32 total_changes = m_database->getTotalChanges();
-		if (total_changes > 0)
-		{
-			ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);
-			(void)m_database->exec("VACUUM");
-		}
-		//else
-		//	ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");
-	}
-
-	
+	static void Vacuum() noexcept;
 
 private:
-	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; /**< Database connection configuered on Initialize() */
+	inline static std::unique_ptr<SQLite::Database> m_database{ nullptr }; /**< Database connection configured on Initialize() */
 };
 
-/*
-Notes:
-for bind, use index starts by 1
-for getColumn, use index starts by 0
+/**
+*	Notes:
+*	for bind, use index starts by 1
+*	for getColumn, use index starts by 0
 */
 
 NS_ENIGMA_END
 #endif // !ENIGMA_DATABASE_H
 
+
+#if 0
+// TODO
+// Export all encryptions data to a json file
+static bool ExportAllEncryptionsJSON(const fs::path& filename)
+{
+	ENIGMA_TRACE_CURRENT_FUNCTION();
+	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
+	try
+	{
+		ENIGMA_INFO("Getting all encryptions from database to export to json file {}...", filename.string());
+		std::vector<std::unique_ptr<Encryption>> encryptions = Database::GetAllEncryptions<true, true, true, true, true>();
+		ENIGMA_INFO("Got {0} Encryption records.", encryptions.size());
+
+		// Make json 
+		using namespace nlohmann;
+		json json_encryptions = json::array();
+		for (const auto& encryption_ptr : encryptions)
+		{
+			// expand Encryption 
+			const auto& [ide, title, cipher, date_time, size, is_file] = *encryption_ptr;
+
+			// make encryption object
+			json enc_obj{};
+			enc_obj["ide"] = ide;
+			enc_obj["title"] = title;
+
+			json cipher_obj{};
+			cipher_obj["idc"] = cipher.idc;
+			cipher_obj["ide"] = cipher.ide;
+			cipher_obj["data"] = cipher.data;
+			enc_obj["cipher"] = cipher_obj;
+
+			enc_obj["date_time"] = date_time;
+			enc_obj["size"] = size;
+			enc_obj["is_file"] = is_file;
+
+			// add obj to array
+			json_encryptions.push_back(std::move(enc_obj));
+		}
+
+		// we can freeup the memory now.
+		encryptions.clear();
+
+		// save made json array to file
+		return FileUtils::Write(filename, json_encryptions.dump(-1, 32, false, json::error_handler_t::replace));
+	}
+	catch (const SQLite::Exception& e)
+	{
+		ENIGMA_ERROR(e.what());
+		return false;
+	}
+}
+#endif

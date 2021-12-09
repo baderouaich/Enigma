@@ -39,14 +39,14 @@ public:
 	/*
 	*	Creates Image Based Cursor 
 	*/
-	explicit Cursor(const String& image_path, const i32& xhot = 0, const i32& yhot = 0);
+	explicit Cursor(const String& image_path, const i32 xhot = 0, const i32 yhot = 0);
 
 	~Cursor();
 
 	void Destroy();
 
 public:
-	const CursorMode& GetMode() const noexcept { return m_mode; }
+	CursorMode GetMode() const noexcept { return m_mode; }
 	const GLFWcursor* GetGLFWCursor() const noexcept { return m_GLFWcursor; }
 	GLFWcursor* GetGLFWCursor() noexcept { return m_GLFWcursor; }
 

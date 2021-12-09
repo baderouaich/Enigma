@@ -54,7 +54,7 @@ Cursor::Cursor(CursorMode mode)
 	ENIGMA_ASSERT(m_GLFWcursor, "Could not Create Standard Cursor");
 }
 
-Cursor::Cursor(const String& image_path, const i32& xhot, const i32& yhot)
+Cursor::Cursor(const String& image_path, const i32 xhot, const i32 yhot)
 	:
 	m_mode(CursorMode::NONE)
 {
@@ -79,7 +79,7 @@ Cursor::Cursor(const String& image_path, const i32& xhot, const i32& yhot)
 
 void Cursor::Destroy()
 {
-	if (m_GLFWcursor)
+	if (m_GLFWcursor) 
 	{
 		glfwDestroyCursor(m_GLFWcursor);
 		m_GLFWcursor = nullptr;

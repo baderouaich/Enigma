@@ -1,6 +1,7 @@
 var struct_window_settings =
 [
-    [ "FromConfig", "struct_window_settings.html#a889919797443a4e7a86bcdb0bacaf465", null ],
+    [ "WindowSettings", "struct_window_settings.html#ad35a936d4923cb03273e7af39addc811", null ],
+    [ "WindowSettings", "struct_window_settings.html#a237991469a70521082982dbe74e194cf", null ],
     [ "toString", "struct_window_settings.html#a86cdb5f5adb870375e36e1c17115ee6f", null ],
     [ "height", "struct_window_settings.html#a032fd38826aed1b211c4a9ec5f565583", null ],
     [ "is_auto_iconify", "struct_window_settings.html#ae9c3fb70a187e45e39dbf71337c81e95", null ],

@@ -22,7 +22,7 @@ struct Encryption
 	bool is_file{}; /**< whether its a text or file encryption */
 	String file_ext{}; /**< file extension to remember file type on decryption */
 
-	~Encryption() noexcept
+	~Encryption() noexcept 
 	{
 		title.clear();
 		date_time.clear();

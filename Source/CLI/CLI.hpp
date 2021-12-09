@@ -65,6 +65,25 @@ private: /* Scenarios (divide and conquer) */
 	/** Scenario when decrypting a file */
 	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted);
 
+	/** Scenario when --list arg processed to list saved encryptions from database */
+	void OnListEncryptionRecords();
+
+	/** Scenario when --help arg processed to display help message */
+	void OnHelp();
+	/** Scenario when --version arg processed to display Enigma's current version */
+	void OnVersion();
+	/** Scenario when --check-for-updates arg processed to check for new releases of Enigma */
+	void OnCheckForUpdates();
+
+private:
+	std::unique_ptr<cxxopts::Options> m_options; /**< cxxopts command line arguments processor */
+	std::unique_ptr<cxxopts::ParseResult> m_parse_result; /**< cxxopts command line arguments parser */
+};
+NS_ENIGMA_END
+
+#endif // !ENIGMA_CLI_H
+
+
 #pragma region todo 
 #if 0
 	/** Scenario when encrypting a text with RSA (the only algorithm that should be handled differently)*/
@@ -127,21 +146,3 @@ private: /* Scenarios (divide and conquer) */
 	}
 #endif
 #pragma endregion
-
-	/** Scenario when --list arg processed to list saved encryptions from database */
-	void OnListEncryptionRecords();
-
-	/** Scenario when --help arg processed to display help message */
-	void OnHelp();
-	/** Scenario when --version arg processed to display Enigma's current version */
-	void OnVersion();
-	/** Scenario when --check-for-updates arg processed to check for new releases of Enigma */
-	void OnCheckForUpdates();
-
-private:
-	std::unique_ptr<cxxopts::Options> m_options; /**< cxxopts command line arguments processor */
-	std::unique_ptr<cxxopts::ParseResult> m_parse_result; /**< cxxopts command line arguments parser */
-};
-NS_ENIGMA_END
-
-#endif // !ENIGMA_CLI_H

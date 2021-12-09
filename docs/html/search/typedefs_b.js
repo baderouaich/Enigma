@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vec2f_2216',['Vec2f',['../namespace_enigma.html#a822cc33eb45de8cf5590dc3b286b250b',1,'Enigma']]]
+  ['wstring_2123',['WString',['../namespace_enigma.html#a2370b684a9fcf187190fe574c0171dba',1,'Enigma']]]
 ];

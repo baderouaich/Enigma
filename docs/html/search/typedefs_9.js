@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['size_5ft_2209',['size_t',['../namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f',1,'Enigma']]],
-  ['socket_5ft_2210',['socket_t',['../_single_process_instance_8hpp.html#a445d9aa380009ba3ab6eaf44d84ccc42',1,'SingleProcessInstance.hpp']]],
-  ['string_2211',['String',['../namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70',1,'Enigma']]]
+  ['ui16_2118',['ui16',['../namespace_enigma.html#a152b6c8137231778a89b47ef90a5b33b',1,'Enigma']]],
+  ['ui32_2119',['ui32',['../namespace_enigma.html#a7c24cdbe73c47d54e943bc25fcd1b135',1,'Enigma']]],
+  ['ui64_2120',['ui64',['../namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65',1,'Enigma']]],
+  ['ui8_2121',['ui8',['../namespace_enigma.html#a13fe618cf25f03e96f3e756752441e2e',1,'Enigma']]]
 ];

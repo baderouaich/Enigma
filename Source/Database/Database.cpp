@@ -171,6 +171,7 @@ std::unique_ptr<Cipher> Database::GetCipherByEncryptionID(const i64 ide)
 	}
 
 }
+
 // Delete Encryption record by id, returns true if successfully deleted
 bool Database::DeleteEncryption(const i64 ide)
 {
@@ -283,7 +284,20 @@ i64 Database::GetEncryptionsCount()
 	}
 }
 
+void Database::Vacuum() noexcept
+{
+	/*ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
+	(void)m_database->exec("VACUUM");*/
 
-
+	// Only vacuum if changes to the database were made.
+	const i32 total_changes = m_database->getTotalChanges();
+	if (total_changes > 0)
+	{
+		ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);
+		(void)m_database->exec("VACUUM");
+	}
+	//else
+	//	ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");
+}
 
 NS_ENIGMA_END

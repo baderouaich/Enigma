@@ -124,9 +124,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3fc2b1e8a5399764aa1f1ae6052e276e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#a3fc2b1e8a5399764aa1f1ae6052e276e">Shutdown</a> ()</td></tr>
 <tr class="memdesc:a3fc2b1e8a5399764aa1f1ae6052e276e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down SQLite connection.  <a href="class_database.html#a3fc2b1e8a5399764aa1f1ae6052e276e">More...</a><br /></td></tr>
 <tr class="separator:a3fc2b1e8a5399764aa1f1ae6052e276e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae5e1d55cfbe7d567abee3c0b98eec10"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#aae5e1d55cfbe7d567abee3c0b98eec10">AddEncryption</a> (const std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &amp;e)</td></tr>
-<tr class="memdesc:aae5e1d55cfbe7d567abee3c0b98eec10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> to Encryptions table, returns true on success.  <a href="class_database.html#aae5e1d55cfbe7d567abee3c0b98eec10">More...</a><br /></td></tr>
-<tr class="separator:aae5e1d55cfbe7d567abee3c0b98eec10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf2d0fc6907ee04af4abf4e4105ca6c"><td class="memItemLeft" align="right" valign="top">static i64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#a2cf2d0fc6907ee04af4abf4e4105ca6c">AddEncryption</a> (const std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &amp;e)</td></tr>
+<tr class="memdesc:a2cf2d0fc6907ee04af4abf4e4105ca6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> record to database table.  <a href="class_database.html#a2cf2d0fc6907ee04af4abf4e4105ca6c">More...</a><br /></td></tr>
+<tr class="separator:a2cf2d0fc6907ee04af4abf4e4105ca6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a600be6ffc3184dfd2023f5bf5cb0c9f5"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="struct_cipher.html">Cipher</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#a600be6ffc3184dfd2023f5bf5cb0c9f5">GetCipherByEncryptionID</a> (const i64 ide)</td></tr>
 <tr class="memdesc:a600be6ffc3184dfd2023f5bf5cb0c9f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns cipher from database by encryption id.  <a href="class_database.html#a600be6ffc3184dfd2023f5bf5cb0c9f5">More...</a><br /></td></tr>
 <tr class="separator:a600be6ffc3184dfd2023f5bf5cb0c9f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,24 +139,24 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a7185a2a952f15960fadb2e4ec4147bc8"><td class="memItemLeft" align="right" valign="top">static i64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#a7185a2a952f15960fadb2e4ec4147bc8">GetEncryptionsCount</a> ()</td></tr>
 <tr class="memdesc:a7185a2a952f15960fadb2e4ec4147bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns how many encryption records are saved.  <a href="class_database.html#a7185a2a952f15960fadb2e4ec4147bc8">More...</a><br /></td></tr>
 <tr class="separator:a7185a2a952f15960fadb2e4ec4147bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a3e85c3385a7f9cb626bc14e6f97dd"><td class="memTemplParams" colspan="2">template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file&gt; </td></tr>
-<tr class="memitem:af7a3e85c3385a7f9cb626bc14e6f97dd"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_database.html#af7a3e85c3385a7f9cb626bc14e6f97dd">GetEncryptionByID</a> (const i64 ide)</td></tr>
-<tr class="memdesc:af7a3e85c3385a7f9cb626bc14e6f97dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an Encyrption by id with desired columns for optimization.  <a href="class_database.html#af7a3e85c3385a7f9cb626bc14e6f97dd">More...</a><br /></td></tr>
-<tr class="separator:af7a3e85c3385a7f9cb626bc14e6f97dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d820cd578ab1756b0511f9ac0d608dd"><td class="memTemplParams" colspan="2">template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file&gt; </td></tr>
-<tr class="memitem:a0d820cd578ab1756b0511f9ac0d608dd"><td class="memTemplItemLeft" align="right" valign="top">static std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_database.html#a0d820cd578ab1756b0511f9ac0d608dd">GetAllEncryptions</a> (<a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7">OrderBy</a> order_by=<a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7ab718adec73e04ce3ec720dd11a06a308">OrderBy::ID</a>, <a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5b">Order</a> order=<a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b">Order::Descending</a>)</td></tr>
-<tr class="memdesc:a0d820cd578ab1756b0511f9ac0d608dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all Encryptions with desired columns for optimization.  <a href="class_database.html#a0d820cd578ab1756b0511f9ac0d608dd">More...</a><br /></td></tr>
-<tr class="separator:a0d820cd578ab1756b0511f9ac0d608dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecfc055022adcecc7a70d2367765be8d"><td class="memTemplParams" colspan="2">template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file&gt; </td></tr>
-<tr class="memitem:aecfc055022adcecc7a70d2367765be8d"><td class="memTemplItemLeft" align="right" valign="top">static std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_database.html#aecfc055022adcecc7a70d2367765be8d">SearchEncryptionsByTitle</a> (const String &amp;qtitle, <a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7">OrderBy</a> order_by=<a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7ab718adec73e04ce3ec720dd11a06a308">OrderBy::ID</a>, <a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5b">Order</a> order=<a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b">Order::Descending</a>)</td></tr>
-<tr class="memdesc:aecfc055022adcecc7a70d2367765be8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search Encryptions by title using keyword LIKE QUERY%.  <a href="class_database.html#aecfc055022adcecc7a70d2367765be8d">More...</a><br /></td></tr>
-<tr class="separator:aecfc055022adcecc7a70d2367765be8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13c0e620cc218105e239bca187aead8"><td class="memTemplParams" colspan="2">template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext&gt; </td></tr>
+<tr class="memitem:ab13c0e620cc218105e239bca187aead8"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_database.html#ab13c0e620cc218105e239bca187aead8">GetEncryptionByID</a> (const i64 ide)</td></tr>
+<tr class="memdesc:ab13c0e620cc218105e239bca187aead8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> by id with desired columns for optimization.  <a href="class_database.html#ab13c0e620cc218105e239bca187aead8">More...</a><br /></td></tr>
+<tr class="separator:ab13c0e620cc218105e239bca187aead8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c42e2e9026d3cf88b9138fe37597552"><td class="memTemplParams" colspan="2">template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext&gt; </td></tr>
+<tr class="memitem:a8c42e2e9026d3cf88b9138fe37597552"><td class="memTemplItemLeft" align="right" valign="top">static std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_database.html#a8c42e2e9026d3cf88b9138fe37597552">GetAllEncryptions</a> (<a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7">OrderBy</a> order_by=<a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7ab718adec73e04ce3ec720dd11a06a308">OrderBy::ID</a>, <a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5b">Order</a> order=<a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b">Order::Descending</a>)</td></tr>
+<tr class="memdesc:a8c42e2e9026d3cf88b9138fe37597552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all Encryptions with desired columns for optimization.  <a href="class_database.html#a8c42e2e9026d3cf88b9138fe37597552">More...</a><br /></td></tr>
+<tr class="separator:a8c42e2e9026d3cf88b9138fe37597552"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5b816695f7c81eea7b7f824abce3595"><td class="memTemplParams" colspan="2">template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext&gt; </td></tr>
+<tr class="memitem:af5b816695f7c81eea7b7f824abce3595"><td class="memTemplItemLeft" align="right" valign="top">static std::vector&lt; std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_database.html#af5b816695f7c81eea7b7f824abce3595">SearchEncryptionsByTitle</a> (const String &amp;qtitle, <a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7">OrderBy</a> order_by=<a class="el" href="class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7ab718adec73e04ce3ec720dd11a06a308">OrderBy::ID</a>, <a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5b">Order</a> order=<a class="el" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b">Order::Descending</a>)</td></tr>
+<tr class="memdesc:af5b816695f7c81eea7b7f824abce3595"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search Encryptions by title using keyword LIKE QUERY%.  <a href="class_database.html#af5b816695f7c81eea7b7f824abce3595">More...</a><br /></td></tr>
+<tr class="separator:af5b816695f7c81eea7b7f824abce3595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af06bd291304b896a45a3bc121720c555"><td class="memItemLeft" align="right" valign="top">static const std::unique_ptr&lt; SQLite::Database &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#af06bd291304b896a45a3bc121720c555">GetInstance</a> () noexcept</td></tr>
 <tr class="memdesc:af06bd291304b896a45a3bc121720c555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns SQLite database connection instance.  <a href="class_database.html#af06bd291304b896a45a3bc121720c555">More...</a><br /></td></tr>
 <tr class="separator:af06bd291304b896a45a3bc121720c555"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4daead17615fc64497e2f1212b121bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#af4daead17615fc64497e2f1212b121bf">Vacuum</a> () noexcept</td></tr>
-<tr class="memdesc:af4daead17615fc64497e2f1212b121bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up allocated disk space for deleted data, blob...  <a href="class_database.html#af4daead17615fc64497e2f1212b121bf">More...</a><br /></td></tr>
-<tr class="separator:af4daead17615fc64497e2f1212b121bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f65a969b68a69cdddfd67031e54300"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#ae9f65a969b68a69cdddfd67031e54300">Vacuum</a> () noexcept</td></tr>
+<tr class="memdesc:ae9f65a969b68a69cdddfd67031e54300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up allocated disk space for deleted data, blob...  <a href="class_database.html#ae9f65a969b68a69cdddfd67031e54300">More...</a><br /></td></tr>
+<tr class="separator:ae9f65a969b68a69cdddfd67031e54300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -166,7 +166,7 @@ Private Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
 <tr class="memitem:a3566b08f31c08183f3e6860b541c506a"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; SQLite::Database &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#a3566b08f31c08183f3e6860b541c506a">m_database</a> { nullptr }</td></tr>
-<tr class="memdesc:a3566b08f31c08183f3e6860b541c506a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_database.html" title="Enigma SQLite database to store and retrieve encryption records User can export and import Database f...">Database</a> connection configuered on <a class="el" href="class_database.html#a5d2c010759554e854b6f216a0d238369" title="Initializes SQLite database connection.">Initialize()</a>  <a href="class_database.html#a3566b08f31c08183f3e6860b541c506a">More...</a><br /></td></tr>
+<tr class="memdesc:a3566b08f31c08183f3e6860b541c506a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_database.html" title="Enigma SQLite database to store and retrieve encryption records User can export and import Database f...">Database</a> connection configured on <a class="el" href="class_database.html#a5d2c010759554e854b6f216a0d238369" title="Initializes SQLite database connection.">Initialize()</a>  <a href="class_database.html#a3566b08f31c08183f3e6860b541c506a">More...</a><br /></td></tr>
 <tr class="separator:a3566b08f31c08183f3e6860b541c506a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -250,8 +250,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aae5e1d55cfbe7d567abee3c0b98eec10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae5e1d55cfbe7d567abee3c0b98eec10">&#9670;&nbsp;</a></span>AddEncryption()</h2>
+<a id="a2cf2d0fc6907ee04af4abf4e4105ca6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf2d0fc6907ee04af4abf4e4105ca6c">&#9670;&nbsp;</a></span>AddEncryption()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -260,7 +260,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Database::AddEncryption </td>
+          <td class="memname">i64 Database::AddEncryption </td>
           <td>(</td>
           <td class="paramtype">const std::unique_ptr&lt; <a class="el" href="struct_encryption.html">Encryption</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>e</em></td><td>)</td>
@@ -274,7 +274,8 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Add <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> to Encryptions table, returns true on success. </p>
+<p>Add <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> record to database table. </p>
+<dl class="section return"><dt>Returns</dt><dd>inserted encryption id i64&gt;=0 on success, -1 on failure </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00087">87</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
 
@@ -305,7 +306,7 @@ Friends</h2></td></tr>
 
 <p>Delete all saved encryptions from the database (with their cipher) </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00218">218</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00221">221</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
 
 </div>
 </div>
@@ -335,7 +336,7 @@ Friends</h2></td></tr>
 
 <p>Delete <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> record by id, returns true if successfully deleted. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00173">173</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00176">176</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
 
 </div>
 </div>
@@ -365,13 +366,13 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a0d820cd578ab1756b0511f9ac0d608dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d820cd578ab1756b0511f9ac0d608dd">&#9670;&nbsp;</a></span>GetAllEncryptions()</h2>
+<a id="a8c42e2e9026d3cf88b9138fe37597552"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c42e2e9026d3cf88b9138fe37597552">&#9670;&nbsp;</a></span>GetAllEncryptions()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file&gt; </div>
+template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -403,7 +404,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 <p>Get all Encryptions with desired columns for optimization. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00226">226</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00177">177</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
 
 </div>
 </div>
@@ -433,17 +434,17 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 <p>Returns cipher from database by encryption id. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00139">139</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00141">141</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
 
 </div>
 </div>
-<a id="af7a3e85c3385a7f9cb626bc14e6f97dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7a3e85c3385a7f9cb626bc14e6f97dd">&#9670;&nbsp;</a></span>GetEncryptionByID()</h2>
+<a id="ab13c0e620cc218105e239bca187aead8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab13c0e620cc218105e239bca187aead8">&#9670;&nbsp;</a></span>GetEncryptionByID()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file&gt; </div>
+template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -463,9 +464,9 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 </table>
 </div><div class="memdoc">
 
-<p>Get an Encyrption by id with desired columns for optimization. </p>
+<p>Get an <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> by id with desired columns for optimization. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00169">169</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00118">118</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
 
 </div>
 </div>
@@ -494,7 +495,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 <p>Returns how many encryption records are saved. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00258">258</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00261">261</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
 
 </div>
 </div>
@@ -523,7 +524,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 <p>Returns SQLite database connection instance. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00348">348</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00301">301</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
 
 </div>
 </div>
@@ -556,13 +557,13 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 </div>
 </div>
-<a id="aecfc055022adcecc7a70d2367765be8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecfc055022adcecc7a70d2367765be8d">&#9670;&nbsp;</a></span>SearchEncryptionsByTitle()</h2>
+<a id="af5b816695f7c81eea7b7f824abce3595"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5b816695f7c81eea7b7f824abce3595">&#9670;&nbsp;</a></span>SearchEncryptionsByTitle()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file&gt; </div>
+template&lt;const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -600,7 +601,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 <p>Search Encryptions by title using keyword LIKE QUERY%. </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00287">287</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00239">239</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
 
 </div>
 </div>
@@ -633,8 +634,8 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 
 </div>
 </div>
-<a id="af4daead17615fc64497e2f1212b121bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4daead17615fc64497e2f1212b121bf">&#9670;&nbsp;</a></span>Vacuum()</h2>
+<a id="ae9f65a969b68a69cdddfd67031e54300"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f65a969b68a69cdddfd67031e54300">&#9670;&nbsp;</a></span>Vacuum()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -643,7 +644,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void Database::Vacuum </td>
+          <td class="memname">void Database::Vacuum </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -651,7 +652,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -659,7 +660,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 <p>Cleans up allocated disk space for deleted data, blob... </p>
 <p>When you insert or delete data from the tables, the indexes and tables become fragmented, especially for the database that has a high number of inserts, updates, and deletes. </p><dl class="section note"><dt>Note</dt><dd><a href="https://www.sqlitetutorial.net/sqlite-vacuum/">https://www.sqlitetutorial.net/sqlite-vacuum/</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00359">359</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8cpp_source.html#l00287">287</a> of file <a class="el" href="_database_8cpp_source.html">Database.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +759,7 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00086">86</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00087">87</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
 
 </div>
 </div>
@@ -821,9 +822,9 @@ template&lt;const bool title, const bool cipher, const bool date_time, const boo
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_database.html" title="Enigma SQLite database to store and retrieve encryption records User can export and import Database f...">Database</a> connection configuered on <a class="el" href="class_database.html#a5d2c010759554e854b6f216a0d238369" title="Initializes SQLite database connection.">Initialize()</a> </p>
+<p><a class="el" href="class_database.html" title="Enigma SQLite database to store and retrieve encryption records User can export and import Database f...">Database</a> connection configured on <a class="el" href="class_database.html#a5d2c010759554e854b6f216a0d238369" title="Initializes SQLite database connection.">Initialize()</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00378">378</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_database_8hpp_source.html#l00314">314</a> of file <a class="el" href="_database_8hpp_source.html">Database.hpp</a>.</p>
 
 </div>
 </div>
