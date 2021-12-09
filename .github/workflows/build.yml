@@ -32,7 +32,7 @@ jobs:
         vs-version: '16.8' #using vs 16.8.3 in my local machine Help -> About Microsoft Visual Studio
 
     - name: Generate Project Files
-      run: ./Scripts/Gen-Windows-vs2019.bat
+      run: .\Premake\Windows\premake5.exe vs2019 --file=premake5.lua
 
     - name: Build Solution
       run: msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo 
@@ -61,7 +61,7 @@ jobs:
       run: tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/
 
     - name: Generating Makefiles
-      run: sudo bash ./Scripts/Gen-Linux-Makefile.sh
+      run: ./Premake/Linux/premake5 gmake2 --file=premake5.lua
 
     - name: Make Enigma
       run: make config=release CC=gcc-10 CPP=g++-10 -j$(nproc) #$(nproc) will return the number of cores on the machine
