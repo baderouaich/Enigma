@@ -126,26 +126,15 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 - <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git`<br>
 
 ### Windows Visual Studio 16 2019 
-> Bellow steps are equivelent to running script `./Windows-Build-Release.bat`
+> Bellow steps are equivelent to running script `./Scripts/Windows-Build-Release.bat`
  - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br>
- - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
+ - Run `./Scripts/Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
  - Open Enigma.sln and Change configuration to Release or Dist
  - Build & Run Solution
 
-<!--
-### Windows (equivelent to running `./Windows-Build-Release.bat`)
- - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br><br>
-<strong>Method 1 (Recommended): Visual Studio 16 2019</strong>
- - Run `Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
- - Open Enigma.sln and Change configuration to Release or Dist
- - Build & Run Solution
-<strong>Method 2 (Unstable): Makefile (GMake2)</strong>
- - Run `Gen-Windows-Makefile.bat` to generate project Makefiles<br>
- - Run `$ make config=release CC="path/to/your/c/compiler/gcc.exe" CXX="path/to/your/c++/compiler/g++.exe"`<br>
-   example: `$ make config=release CC=D:/MinGW/10.1.0/mingw64/bin/gcc.exe CXX=D:/MinGW/10.1.0/mingw64/bin/g++.exe -j 4`<br>
--->
+
 ### Linux GNU Makefile 
-> Bellow steps are equivelent to running script `sudo bash ./Linux-Build-Release.sh`
+> Bellow steps are equivelent to running script `sudo bash ./Scripts/Linux-Build-Release.sh`
  - Install latest c++ compiler (gcc or clang)<br>
   `$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
   `$ sudo apt update`<br>
@@ -154,7 +143,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
   `$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev`
  - Extract premake5 binary<br>
   `$ tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/`
- - Run `$ sudo bash ./Gen-Linux-Makefile.sh` to generate project Makefiles
+ - Run `$ sudo bash ./Scripts/Gen-Linux-Makefile.sh` to generate project Makefiles
  - Compile with gcc: `$ make config=release CC=gcc-10 CPP=g++-10 -j 4` or clang: `$ make config=release CC=clang-10 CPP=clang++-10 -j 4` <br> 
 <!--  replace -j X with number of threads to use for compilation, the more the faster<br>
    replace release with dist for full performance -->
@@ -162,7 +151,7 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Run Enigma Binary `$ ./Bin/Release-linux-x86_64/Enigma/Enigma`
 
 ### MacOS TODO (when i figure out a way to test macos on vm)
-- Run `$ sudo bash ./Gen-MacOS-XCode.sh` to generate XCode project files<br>
+- Run `$ sudo bash ./Scripts/Gen-MacOS-XCode.sh` to generate XCode project files<br>
 
 
 ## License
