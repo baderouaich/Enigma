@@ -4,7 +4,10 @@
 - Fixed some typos in logs and message boxes.
 - Handle abnormal exists to normally end program and release resources gracefully.
 - Added keyboard shortcuts to main menu scene.
-
+- Fixed ChaCha20Poly1305 bug 
+- Upgraded ImGui from v1.83 to v1.85
+- Upgraded GLFW from v3.3.0 to v3.3.6
+- Upgraded Crypto++ from v8.4 to v8.6
 
 # 2.0.0
 - Changed CLI option --mode,-m to --algorithm,-a

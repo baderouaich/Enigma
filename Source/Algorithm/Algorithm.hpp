@@ -125,7 +125,7 @@ public:
 
 protected:
 	/**
-	*	Generates random IV with specified length
+	*	Generates random IV (aka Salt) with a desired length
 	*/
 	static String GenerateRandomIV(const size_t size);
 

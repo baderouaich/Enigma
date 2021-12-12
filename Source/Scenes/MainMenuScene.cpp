@@ -166,7 +166,9 @@ void MainMenuScene::OnImGuiDraw()
 					{
 						if (Input::AreKeysPressed({ keys.first, keys.second }))
 						{
-							ENIGMA_INFO("Menu item shortcut pressed {}+{}", keys.first, keys.second);
+#ifdef ENIGMA_DEBUG
+							ENIGMA_LOG("Menu item shortcut pressed {}+{}", keys.first, keys.second);
+#endif
 							(*this.*method_ptr)();
 						}
 					}

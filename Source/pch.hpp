@@ -18,7 +18,7 @@
 ///
 
 ///// ENIGMA Headers
-#include "Enigma.hpp"
+#include <Enigma.hpp>
 /////
 
 /// OpenGL: GLAD

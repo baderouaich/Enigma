@@ -93,7 +93,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 			{
-				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiButtonFlags_Disabled);
+				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 			}
 			ImGui::PopStyleColor(2);
 			ImGui::PopFont();
@@ -118,15 +118,15 @@ void ViewEncryptionScene::OnImGuiDraw()
 			ImGui::PushFont(font_montserrat_medium_18);
 			{
 				static const String format = String("Format: ") +  (m_encryption->is_file ? ("File") : ("Text"));
-				ImGui::ButtonEx(format.c_str(), { 0.0f, 0.0f }, ImGuiButtonFlags_Disabled);
+				ImGui::ButtonEx(format.c_str(), { 0.0f, 0.0f }, ImGuiItemFlags_Disabled);
 				inline_dummy(6.0f, 0.0f);
 
 				static const String date_time = String("Date Time: ") +  m_encryption->date_time;
-				ImGui::ButtonEx(date_time.c_str(), { 0.0f, 0.0f }, ImGuiButtonFlags_Disabled);
+				ImGui::ButtonEx(date_time.c_str(), { 0.0f, 0.0f }, ImGuiItemFlags_Disabled);
 				inline_dummy(6.0f, 0.0f);
 
 				static const String size = SizeUtils::FriendlySize(m_encryption->size);
-				ImGui::ButtonEx(size.c_str(), { 0.0f, 0.0f }, ImGuiButtonFlags_Disabled);
+				ImGui::ButtonEx(size.c_str(), { 0.0f, 0.0f }, ImGuiItemFlags_Disabled);
 
 			}
 			//const auto text_size = ImGui::CalcTextSize(text.c_str());
@@ -290,12 +290,19 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 			const std::initializer_list<String> filters = { (m_encryption->file_ext.empty() ? String() : String('*' + m_encryption->file_ext)), "All Files", "*" }; // { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }
 			if (const String output_filename = SaveFileDialog("Select A Location To Save Decrypted File To", ".", true, filters).Show(); !output_filename.empty())
 			{
+				// Ensure selected output filename has an extension and it is the same one used in encryption
+				if (!m_encryption->file_ext.empty() && fs::path(output_filename).extension() != m_encryption->file_ext)
+				{
+					DialogUtils::Error("Output file extension should be (" + m_encryption->file_ext + ") to recover file.");
+					return;
+				}
+
 				// Write file recovered content to output file
 				const bool saved = FileUtils::Write(output_filename, buffer);
 				ENIGMA_ASSERT_OR_THROW(saved, ("Failed to save decrypted file"));
 
 				// little happy msg
-				DialogUtils::Info("Successfully decrypted file to {}", output_filename);
+				DialogUtils::Info("Successfully decrypted file to " + output_filename);
 			}
 
 		}

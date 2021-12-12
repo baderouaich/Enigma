@@ -140,7 +140,7 @@ protected:
 
 /// OS_GenerateRandomBlock
 /// \brief Generate random array of bytes
-/// \param blocking specifies whther a bobcking or non-blocking generator should be used
+/// \param blocking specifies whether a blocking or non-blocking generator should be used
 /// \param output the byte buffer
 /// \param size the length of the buffer, in bytes
 /// \details OS_GenerateRandomBlock() uses the underlying operating system's
@@ -245,7 +245,7 @@ void AutoSeededX917RNG<BLOCK_CIPHER>::Reseed(bool blocking, const byte *input, s
 {
 	enum {BlockSize=BLOCK_CIPHER::BLOCKSIZE};
 	enum {KeyLength=BLOCK_CIPHER::DEFAULT_KEYLENGTH};
-	enum {SeedSize=BlockSize + KeyLength};
+	enum {SeedSize=EnumToInt(BlockSize)+EnumToInt(KeyLength)};
 
 	SecByteBlock seed(SeedSize), temp(SeedSize);
 	const byte label[] = "X9.17 key generation";
