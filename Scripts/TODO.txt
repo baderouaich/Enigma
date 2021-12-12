@@ -35,8 +35,6 @@ Scenes
 
 - Fix typos & grammar (after documenting)
 
-- Add [delete all button] and [export as json], [import as json] in MyEncryptionsScene
-
 - Fix images do not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html
 
 - System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU Waiting for major OpenGL GPU Info impl)
@@ -45,17 +43,13 @@ Scenes
 
 - My Encryptions table, display date as Jun, 01 2021 instead of 06 01 2021 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
 
-- CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
-
 - Use magic number static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA" at the start of each enigma cipher to detect validity before performing any operation.
-
-- maybe store file extension in database aswell, can help recover file, pass extension with SaveFileDialog {"."}
 
 - Encrypt & Decrypt Files using Chunks (what if file is too huge and can be loaded entirely in memory?)
 
 - maybe go further on new updates available, download update, extract binary to "."
 
-- ability to cancel check-for-updates ui
+- ability to cancel check-for-updates ui or set timeout ?
 
 - add to search utils myencryptions to search encryptions between two dates (or even direct sql query?)
 
@@ -79,10 +73,12 @@ RSASS<PSSR, SHA1>::Verifier verifier(publicKey);
 // Verify signature on message
 ...
 
-
 - Add Translation system 
 
 - Filesystem manager to get paths to files, Filesystem::GetEnigmaExePath(), Filesystem::Get(ResoucesEnum::FontsEnum::Font1)  (ResoucesEnum::ImagesEnum::Icon)
+
+- CodeQL still doesnt ignore Dependencies, since paths-ignore codeql only supports python & js, remove it with .github/codeql/codeql-config (i might keep it if by chance they added support to c/c++ in the future, who knows?)
+
 ============================== DONE ===============================
 - DONE Add Search textfield feature in MyEncryptionsScene using sql like clause
 - DONE added VACUUM sqlite command to defragment disk
@@ -129,6 +125,8 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE Check why in docs u cant view file contents for example:  go to https://badereddineouaich.github.io/Enigma/class_check_for_updates.html and click CheckForUpdates.hpp, fixed by adding .nojekyll file to docs/ . see https://stackoverflow.com/questions/25320356/can-i-have-my-github-pages-index-html-in-a-subfolder-of-the-repository
 - DONE Remove spacing between TreeNodes in System & Hardware info tool CPU -> Quantities..
 - DONE Change cli --mode to --algorithm,-a
+- DONE Add [delete all button] in MyEncryptionsScene
+- [DONE] Store file extension in database as well to help recover file type, and also pass extension with SaveFileDialog filters when decrypting
 =============================================================================
 
 

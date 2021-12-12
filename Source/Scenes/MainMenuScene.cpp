@@ -98,6 +98,49 @@ void MainMenuScene::OnImGuiDraw()
 					ImGui::EndMenu();
 				}
 
+				/*
+				if (ImGui::BeginMenu(("Language")))
+				{
+					for (ui16 i = static_cast<ui16>(Translation::Language::BEGIN); i <= static_cast<ui16>(Translation::Language::END); ++i)
+					{
+						bool selected = Translation::GetLanguage() == static_cast<Translation::Language>(i);
+						if (ImGui::MenuItem(Translation::StringifyLanguageEnum(static_cast<Translation::Language>(i)).c_str(), nullptr, &selected))
+						{
+							Translation::SetLanguage(static_cast<Translation::Language>(i));
+						}
+					}
+					ImGui::EndMenu();
+				}
+				*/
+				if (ImGui::BeginMenu("Help"))
+				{
+					if (ImGui::MenuItem("Report an issue"))
+					{
+						Application::GetInstance()->LaunchWorkerThread(this, ("Reporting issue..."), [this]() -> void
+						{
+							this->OnReportIssueMenuButtonPressed(); 
+						});
+					}
+					if (ImGui::MenuItem("Check for updates"))
+					{
+						Application::GetInstance()->LaunchWorkerThread(this, ("Checking for updates..."), [this]() -> void
+						{
+							this->OnCheckForUpdatesMenuButtonPressed();
+						});
+					}
+					if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
+					ImGui::EndMenu();
+				}
+				
+				/*if (ImGui::BeginMenu("Examples"))
+				{
+					ImGui::MenuItem("Example 1");
+					ImGui::MenuItem("Example 2");
+					ImGui::MenuItem("Example 3");
+					ImGui::MenuItem("Example 4");
+					ImGui::EndMenu();
+				}*/
+
 				// Process Menu items shortcuts
 				{
 					const static std::map<std::pair<KeyCode, KeyCode>, void(MainMenuScene::*)()> shortcuts =
@@ -114,7 +157,11 @@ void MainMenuScene::OnImGuiDraw()
 						{ {KeyCode::LeftControl, KeyCode::T}, &MainMenuScene::OnToolsButtonPressed },
 						// Exit CTRL+E
 						{ {KeyCode::LeftControl, KeyCode::E}, &MainMenuScene::EndScene },
+
+						// About CTRL+A
+						{ {KeyCode::LeftControl, KeyCode::A}, &MainMenuScene::OnAboutMenuButtonPressed },
 					};
+
 					for (const auto& [keys, method_ptr] : shortcuts)
 					{
 						if (Input::AreKeysPressed({ keys.first, keys.second }))
@@ -126,49 +173,6 @@ void MainMenuScene::OnImGuiDraw()
 				}
 
 
-			
-				/*
-				if (ImGui::BeginMenu(("Language")))
-				{
-					for (ui16 i = static_cast<ui16>(Translation::Language::BEGIN); i <= static_cast<ui16>(Translation::Language::END); ++i)
-					{
-						bool selected = Translation::GetLanguage() == static_cast<Translation::Language>(i);
-						if (ImGui::MenuItem(Translation::StringifyLanguageEnum(static_cast<Translation::Language>(i)).c_str(), nullptr, &selected))
-						{
-							Translation::SetLanguage(static_cast<Translation::Language>(i));
-						}
-					}
-					ImGui::EndMenu();
-				}
-				*/
-				if (ImGui::BeginMenu(("Help")))
-				{
-					if (ImGui::MenuItem(("Report an issue")))
-					{
-						Application::GetInstance()->LaunchWorkerThread(this, ("Reporting issue..."), [this]() -> void
-						{
-							this->OnReportIssueMenuButtonPressed(); 
-						});
-					}
-					if (ImGui::MenuItem(("Check for updates")))
-					{
-						Application::GetInstance()->LaunchWorkerThread(this, ("Checking for updates..."), [this]() -> void
-						{
-							this->OnCheckForUpdatesMenuButtonPressed();
-						});
-					}
-					if (ImGui::MenuItem(("About"))) { this->OnAboutMenuButtonPressed(); }
-					ImGui::EndMenu();
-				}
-				
-				/*if (ImGui::BeginMenu("Examples"))
-				{
-					ImGui::MenuItem("Example 1");
-					ImGui::MenuItem("Example 2");
-					ImGui::MenuItem("Example 3");
-					ImGui::MenuItem("Example 4");
-					ImGui::EndMenu();
-				}*/
 				ImGui::EndMenuBar();
 			}
 			ImGui::PopFont();
