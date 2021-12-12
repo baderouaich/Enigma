@@ -4,12 +4,11 @@
 #pragma once
 #ifndef ENIGMA_PCH_H
 #define ENIGMA_PCH_H
-
+#pragma warning(push, 0)
 
 /// ENIGMA Core (Must be before platform includes to detect current platform)
 #include <Core/Core.hpp>
 ///
-
 
 /// Platform specific includes ///
 /// Platform Windows include
@@ -19,69 +18,47 @@
 ///
 
 ///// ENIGMA Headers
-//#include "Enigma.hpp"
+#include "Enigma.hpp"
 /////
 
-
 /// OpenGL: GLAD
-#pragma warning(push, 0)
 #include <glad/glad.h>
-#pragma warning(pop)
 ///
 
-/// Graphic library framwork: GLFW
-#pragma warning(push, 0)
+/// Graphic library framework: GLFW
 #include <GLFW/glfw3.h>
-#pragma warning(pop)
 ///
 
 /// UI: ImGui
-#pragma warning(push, 0)
 #include <imgui.h>
-#pragma warning(pop)
 ///
 
 /// Logger: SpdLog
-#pragma warning(push, 0)
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/fmt/fmt.h> /// FMT: already embedded in SpdLog
-#pragma warning(pop)
 ///
 
-
 /// pfd: portable file dialog
-#pragma warning(push, 0)
 #include <portable-file-dialogs.h>
-#pragma warning(pop)
 ///
 
 /// tablulate: cli table maker
-#pragma warning(push, 0)
 #include <tabulate.hpp>
-#pragma warning(pop)
 ///
 
-
 /// cxxopts: CMD parser library
-#pragma warning(push, 0)
 #include <cxxopts.hpp>
-#pragma warning(pop)
 ///
 
 /// cpr: cURL c++ wrapper
-#pragma warning(push, 0)
 #include <cpr/cpr.h>
-#pragma warning(pop)
 ///
 
 /// nlohmann-json: json parser library
-#pragma warning(push, 0)
 #include <json.hpp> // nlohmann-json
-#pragma warning(pop)
 ///
-
 
 /// the C++ Standard Libraries
 #include <iostream>
@@ -120,7 +97,6 @@
 #include <csignal>
 ///
 
-
-
+#pragma warning(pop)
 #endif // !ENIGMA_PCH_H
 

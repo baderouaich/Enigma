@@ -97,7 +97,7 @@ public:
 
 public: // Encryption Operations
 	/** Add Encryption record to database table
-		@return inserted encryption id i64>=0 on success, -1 on failure
+	*	@return inserted encryption id i64>=0 on success, -1 on failure
 	*/
 	static i64 AddEncryption(const std::unique_ptr<Encryption>& e);
 

@@ -4,57 +4,57 @@
 
 #include <Core/Types.hpp>	// Enigma Types
 
-#include <string>		// std::string, std::string_view
+#include <string>			// std::string, std::string_view
 #include <sstream>		// std::stringstream
 #include <algorithm>	// std::all_of
 #include <utility>		// std::transform
 #include <codecvt>		// helps converting between UTF-X strings
-#include <locale>		// required for linux & darwin causes error: ‘wstring_convert’ is not a member of ‘std’
+#include <locale>			// required for Linux & Darwin causes error: ‘wstring_convert’ is not a member of ‘std’
 #include <vector>
 
 NS_ENIGMA_BEGIN
 /*
-*	UTF-8 & UTF-16 String Utils
+*	UTF-8 & UTF-16 String Utility
 */
 class ENIGMA_API StringUtils final
 {
 	ENIGMA_STATIC_CLASS(StringUtils);
 public:
-    /*
-    *   Removes leading and trailing spaces from a string
-    */
+	/*
+	*		Removes leading and trailing spaces from a string
+	*/
 	template<typename StringType>
-    static void Trim(StringType& str)
-    {
-        TrimLeft(str);
+	static void Trim(StringType& str)
+	{
+		TrimLeft(str);
 		TrimRight(str);
-    }
-	
-
-    /*
-    *   Trim string from left
-    */
-	template<typename StringType>
-    static void TrimLeft(StringType& str)
-    {
-		str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](const auto& c)
-		{
-			return !std::isspace(c);
-		}));
 	}
-	
 
-    /*
-    *   Trim string from right
-    */
+
+	/*
+	*   Trim string from left
+	*/
 	template<typename StringType>
-    static void TrimRight(StringType& str)
-    {
+	static void TrimLeft(StringType& str)
+	{
+		str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](const auto& c)
+			{
+				return !std::isspace(c);
+			}));
+	}
+
+
+	/*
+	*   Trim string from right
+	*/
+	template<typename StringType>
+	static void TrimRight(StringType& str)
+	{
 		str.erase(std::find_if(str.rbegin(), str.rend(), [](const auto& c)
-		{
-			return !std::isspace(c);
-		}).base(), str.end());
-    }
+			{
+				return !std::isspace(c);
+			}).base(), str.end());
+	}
 
 
 	/*
@@ -83,7 +83,7 @@ public:
 			});
 		return cstr;
 	}
-	
+
 
 	/*
 	*   Uppercase a string
@@ -96,7 +96,7 @@ public:
 				return static_cast<typename StringType::value_type>(std::toupper(c));
 			});
 	}
-	
+
 
 	/*
 	*   Uppercase a string and return a copy of it
@@ -121,7 +121,7 @@ public:
 	{
 		return str.size() >= prefix.size() && str.compare(0, prefix.size(), prefix) == 0;
 	}
-	
+
 
 	/*
 	*   Check if a string ends with a suffix
@@ -131,9 +131,9 @@ public:
 	{
 		return str.size() >= suffix.size() && str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 	}
-	
+
 	/*
-	*	Splits string at a delimiter into parts 
+	*	Splits string at a delimiter into parts
 	*/
 	template<typename StringType>
 	static std::vector<StringType> Split(const StringType& str, const typename String::value_type delimiter)
@@ -141,7 +141,7 @@ public:
 		std::vector<StringType> parts{};
 		std::stringstream ss(str);
 		String line{};
-		while (std::getline(ss, line, delimiter)) 
+		while (std::getline(ss, line, delimiter))
 		{
 			parts.push_back(line);
 		}
@@ -156,7 +156,7 @@ public:
 	{
 		return str.find(other) != StringType::npos;
 	}
-	
+
 
 	/*
 	*	Converts UTF-8 std::string to UTF-16 std::wstring

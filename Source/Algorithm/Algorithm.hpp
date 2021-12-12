@@ -41,7 +41,7 @@ class TripleDES;
 class Blowfish;
 class IDEA;
 class ChaCha20Poly1305;
-class RSA;
+//class RSA;
 
 /**
 *	@brief Algorithm abstract class
@@ -62,7 +62,8 @@ public:
 	{
 		None	  = 0 << 0,
 		Encrypt = 1 << 1,
-		Decrypt = 1 << 2
+		Decrypt = 1 << 2,
+		All			= Encrypt | Decrypt
 	};
 	ENIGMA_ENUM_CLASS_BITWISE_OPERATORS(Intent, byte);
 
@@ -71,13 +72,13 @@ public:
 	*/
 	enum class Type : byte
 	{
-		AES		= 0x01,			// AES-GCM
-		Twofish,				// Twofish-GCM
-		TripleDES,				// TripleDES-EAX
-		Blowfish,				// Blowfish-EAX
-		IDEA,					// IDEA-EAX
+		AES		= 0x01,				// AES-GCM
+		Twofish,						// Twofish-GCM
+		TripleDES,					// TripleDES-EAX
+		Blowfish,						// Blowfish-EAX
+		IDEA,								// IDEA-EAX
 		ChaCha20Poly1305,		// ChaCha20Poly1305
-		//RSA,					// RSA N/A yet
+		//RSA,							// RSA N/A yet
 
 		ENIGMA_ENUM_DECLARE_BEGIN_END(AES)
 	};
@@ -163,7 +164,6 @@ protected:
 	Type m_type; /**< Algorithm type: AES, ChaCha, TripleDES... */
 	Intent m_intent; /**< Operation, Encrypt or Decrypt */
 	inline static std::unique_ptr<CryptoPP::AutoSeededRandomPool> m_auto_seeded_random_pool; /**< To generate random IV on encryption */
-
 };
 
 NS_ENIGMA_END

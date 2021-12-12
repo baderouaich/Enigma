@@ -12,7 +12,6 @@
 
 NS_ENIGMA_BEGIN
 
-
 CLI::CLI(const i32 argc, const char* const* argv)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
@@ -22,7 +21,6 @@ CLI::CLI(const i32 argc, const char* const* argv)
 		//m_options
 		//	->positional_help("positional_help")
 		//	.show_positional_help();
-
 
 		m_options
 			->allow_unrecognised_options() // allow unknown options, will be ignored and can be retrieved with unmatched()
@@ -39,7 +37,7 @@ CLI::CLI(const i32 argc, const char* const* argv)
 			("l,list", "List saved encryption records from database")  // show saved encryption records
 			("h,help", "Displays help message")  // HELP
 			("v,version", "Displays Enigma's version")  // VERSION
-			("check-for-updates", "Check for new version releases")  // Check for enigma updates from github api
+			("check-for-updates", "Check for new version releases")  // Check for enigma updates from GitHub Api
 			;
 
 		m_parse_result = std::make_unique<cxxopts::ParseResult>(std::move(m_options->parse(argc, argv)));
@@ -65,7 +63,6 @@ CLI::CLI(const i32 argc, const char* const* argv)
 		std::exit(EXIT_FAILURE);
 	}
 }
-
 
 i32 CLI::Run()
 {
@@ -508,7 +505,6 @@ void CLI::OnListEncryptionRecords()
 	else
 		std::printf("%s\n", table.str().c_str());
 }
-
 
 void CLI::OnHelp()
 {

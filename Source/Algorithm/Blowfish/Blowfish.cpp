@@ -8,7 +8,7 @@ Blowfish::Blowfish(const Algorithm::Intent intent) noexcept
 	Algorithm(Algorithm::Type::Blowfish, intent)
 {
 	// Encrypting & Decrypting
-	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	if (intent & Intent::All)
 	{
 		m_blowfish_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption>();
 		m_blowfish_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::Blowfish>::Decryption>();

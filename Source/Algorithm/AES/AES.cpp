@@ -8,7 +8,7 @@ AES::AES(const Algorithm::Intent intent) noexcept
 	Algorithm(Algorithm::Type::AES, intent)
 {
 	// Encrypting & Decrypting
-	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	if (intent & Intent::All)
 	{
 		m_aes_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Encryption>();
 		m_aes_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::AES>::Decryption>();

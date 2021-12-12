@@ -77,16 +77,56 @@ void MainMenuScene::OnImGuiDraw()
 	{
 		// Menu bar
 		{
-			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 22.0f)); // 16.0f Menu bar padding
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 22.0f)); // 22.0f Menu bar padding
 			ImGui::PushFont(font_audiowide_regular_20);
 			if (ImGui::BeginMenuBar())
 			{
-				if (ImGui::BeginMenu(("Menu")))
+				if (ImGui::BeginMenu("Menu"))
 				{
-					if (ImGui::MenuItem(("Exit"))) { Scene::EndScene(); }
+					if (ImGui::MenuItem("Encrypt File", "E+F")) { this->OnEncryptFileButtonPressed(); }
+
+					if (ImGui::MenuItem("Decrypt File", "D+F")) { this->OnDecryptFileButtonPressed(); }
+
+					if (ImGui::MenuItem("Encrypt Text", "E+T")) { this->OnEncryptTextButtonPressed(); }
+
+					if (ImGui::MenuItem("Decrypt Text", "D+T")) { this->OnDecryptTextButtonPressed(); }
+
+					if (ImGui::MenuItem("Tools", "CTRL+T")) { this->OnToolsButtonPressed(); }
+					
+					if (ImGui::MenuItem("Exit", "CTRL+E")) { Scene::EndScene(); }
+
 					ImGui::EndMenu();
 				}
-				
+
+				// Process Menu items shortcuts
+				{
+					const static std::map<std::pair<KeyCode, KeyCode>, void(MainMenuScene::*)()> shortcuts =
+					{
+						// Encrypt File E+F
+						{ {KeyCode::E, KeyCode::F}, &MainMenuScene::OnEncryptFileButtonPressed },
+						// Decrypt File D+F
+						{ {KeyCode::D, KeyCode::F}, &MainMenuScene::OnDecryptFileButtonPressed },
+						// Encrypt Text E+T
+						{ {KeyCode::E, KeyCode::T}, &MainMenuScene::OnEncryptTextButtonPressed },
+						// Decrypt Text D+T
+						{ {KeyCode::D, KeyCode::T}, &MainMenuScene::OnDecryptTextButtonPressed },
+						// Tools CTRL+T
+						{ {KeyCode::LeftControl, KeyCode::T}, &MainMenuScene::OnToolsButtonPressed },
+						// Exit CTRL+E
+						{ {KeyCode::LeftControl, KeyCode::E}, &MainMenuScene::EndScene },
+					};
+					for (const auto& [keys, method_ptr] : shortcuts)
+					{
+						if (Input::AreKeysPressed({ keys.first, keys.second }))
+						{
+							ENIGMA_INFO("Menu item shortcut pressed {}+{}", keys.first, keys.second);
+							(*this.*method_ptr)();
+						}
+					}
+				}
+
+
+			
 				/*
 				if (ImGui::BeginMenu(("Language")))
 				{

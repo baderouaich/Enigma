@@ -6,14 +6,22 @@
 
 NS_ENIGMA_BEGIN
 
-bool Input::IsKeyPressed(KeyCode keycode) noexcept
+bool Input::IsKeyPressed(const KeyCode keycode) noexcept
 {
 	GLFWwindow* window = Application::GetInstance()->GetWindow()->GetGLFWwindow();
 	i32 state = glfwGetKey(window, static_cast<i32>(keycode));
 	return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-bool Input::IsMouseButtonPressed(MouseCode button) noexcept
+bool Input::AreKeysPressed(const std::initializer_list<KeyCode>& keycodes) noexcept
+{
+	for (const KeyCode k : keycodes)
+		if (!IsKeyPressed(k))
+			return false;
+	return true;
+}
+
+bool Input::IsMouseButtonPressed(const MouseCode button) noexcept
 {
 
 	GLFWwindow* window = Application::GetInstance()->GetWindow()->GetGLFWwindow();

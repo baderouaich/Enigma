@@ -148,9 +148,13 @@ void MyEncryptionsScene::OnImGuiDraw()
 #endif 
 			inline_spacing(4);
 
-			if (ImGuiWidgets::Button("Delete All", ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+			if(!m_encryptions.empty())
 			{
-				this->OnDeleteAllEncryptions();
+				ImGui::SetCursorPosX(win_w - 85.0f);
+				if (ImGuiWidgets::Button("Delete All", ImVec2(80.0f, 30.0f), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
+				{
+					this->OnDeleteAllEncryptions();
+				}
 			}
 
 

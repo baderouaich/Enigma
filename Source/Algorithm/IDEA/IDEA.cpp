@@ -8,7 +8,7 @@ IDEA::IDEA(const Algorithm::Intent intent) noexcept
 	Algorithm(Algorithm::Type::IDEA, intent)
 {
 	// Encrypting & Decrypting
-	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	if (intent & Intent::All)
 	{
 		m_idea_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>();
 		m_idea_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>();

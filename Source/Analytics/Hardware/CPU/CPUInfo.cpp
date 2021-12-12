@@ -80,16 +80,16 @@ f32 CPUInfo::GetProcessCPUUsage() noexcept
 	static ::SYSTEM_INFO sys_info{};
 	::GetSystemInfo(&sys_info);
 	static i32 num_processors = sys_info.dwNumberOfProcessors;
-	static ULARGE_INTEGER last_sys_cpu{}, last_cpu{}, last_user_cpu{};
+	static ::ULARGE_INTEGER last_sys_cpu{}, last_cpu{}, last_user_cpu{};
 
-	ULARGE_INTEGER now{}, sys{}, user{};
+	::ULARGE_INTEGER now{}, sys{}, user{};
 
 	::GetSystemTimeAsFileTime(&m_idle_time);
-	std::memcpy(&now, &m_idle_time, sizeof(FILETIME));
+	std::memcpy(&now, &m_idle_time, sizeof(::FILETIME));
 
 	::GetProcessTimes(::GetCurrentProcess(), &m_idle_time, &m_idle_time, &m_kernel_time, &m_user_time);
-	std::memcpy(&sys, &m_kernel_time, sizeof(FILETIME));
-	std::memcpy(&user, &m_user_time, sizeof(FILETIME));
+	std::memcpy(&sys, &m_kernel_time, sizeof(::FILETIME));
+	std::memcpy(&user, &m_user_time, sizeof(::FILETIME));
 
 	percentage = static_cast<f32>(sys.QuadPart - last_sys_cpu.QuadPart) + static_cast<f32>(user.QuadPart - last_user_cpu.QuadPart);
 	percentage /= static_cast<f32>(now.QuadPart - last_cpu.QuadPart);
@@ -155,4 +155,5 @@ f32 CPUInfo::GetProcessCPUUsage() noexcept
 
 	return percentage;
 }
+
 NS_ENIGMA_END

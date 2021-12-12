@@ -8,7 +8,7 @@ TripleDES::TripleDES(const Algorithm::Intent intent) noexcept
 	Algorithm(Algorithm::Type::TripleDES, intent)
 {
 	// Encrypting & Decrypting
-	if (intent & Intent::Encrypt && intent & Intent::Decrypt)
+	if (intent & Intent::All)
 	{
 		m_tripledes_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Encryption>();
 		m_tripledes_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::DES_EDE3>::Decryption>();

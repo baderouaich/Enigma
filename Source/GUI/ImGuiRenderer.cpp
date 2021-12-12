@@ -21,13 +21,13 @@ ImGuiRenderer::ImGuiRenderer()
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;     //Prevent ImGui from changing cursor for GLFW	
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
-	io.IniFilename = nullptr; //Disable .ini file
+		io.IniFilename = nullptr; //Disable .ini file
 
     // for docking branch
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
     //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
-	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
     //io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
    
 
@@ -37,20 +37,20 @@ ImGuiRenderer::ImGuiRenderer()
     //ImGui::StyleColorsClassic();
 
 
-	// for docking branch
-   //// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-   //ImGuiStyle& style = ImGui::GetStyle();
-   //if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-   //{
-   //    style.WindowRounding = 0.0f;
-   //    style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-   //}
+		// for docking branch
+		//// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+		//ImGuiStyle& style = ImGui::GetStyle();
+		//if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		//{
+		//    style.WindowRounding = 0.0f;
+		//    style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		//}
 
 
     // Set imgui gl context version (to the same one used by window)
     const auto& app = *Application::GetInstance();
     GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow()->GetGLFWwindow());
-	std::ostringstream version{};
+		std::ostringstream version{};
     version << "#version " << ENIGMA_GL_VERSION_MAJOR << ENIGMA_GL_VERSION_MINOR << '0';
     if (!ImGui_ImplGlfw_InitForOpenGL(window, true))
     {
@@ -89,14 +89,14 @@ void ImGuiRenderer::End()
 
 
 
- // for docking branch
- //if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
- //{
- //    GLFWwindow* backup_current_context = glfwGetCurrentContext();
- //    ImGui::UpdatePlatformWindows();
- //    ImGui::RenderPlatformWindowsDefault();
- //    glfwMakeContextCurrent(backup_current_context);
- //}
+	// for docking branch
+	//if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	//{
+	//    GLFWwindow* backup_current_context = glfwGetCurrentContext();
+	//    ImGui::UpdatePlatformWindows();
+	//    ImGui::RenderPlatformWindowsDefault();
+	//    glfwMakeContextCurrent(backup_current_context);
+	//}
 }
 
 

@@ -3,6 +3,7 @@
 - Remembering encrypted file extension for decryption.
 - Fixed some typos in logs and message boxes.
 - Handle abnormal exists to normally end program and release resources gracefully.
+- Added keyboard shortcuts to main menu scene.
 
 
 # 2.0.0

@@ -16,7 +16,7 @@ public:
 	*	@param file_name: ini config file path
 	*	@throws std::runtime_error on failure
 	*/
-	Config(const fs::path& file_name);
+	explicit Config(const fs::path& file_name);
 	~Config() = default;
 
 public:
