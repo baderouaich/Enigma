@@ -7,7 +7,7 @@ var searchData=
   ['case_5fperform_5fhash_76',['CASE_PERFORM_HASH',['../_hashing_tool_8cpp.html#aaf6b64f1f93fd4c066488b666eaf54ee',1,'HashingTool.cpp']]],
   ['case_5fret_77',['CASE_RET',['../_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1',1,'CASE_RET():&#160;HashingTool.hpp'],['../_algorithm_8cpp.html#a847c88668e6c9b0ee372d86a53c43040',1,'CASE_RET():&#160;Algorithm.cpp']]],
   ['case_5fret_5fstr_78',['CASE_RET_STR',['../_system_and_hardware_info_tool_8hpp.html#af8e35959ccaee099114423327b92a0e6',1,'CASE_RET_STR():&#160;SystemAndHardwareInfoTool.hpp'],['../_system_and_hardware_info_tool_8hpp.html#af8e35959ccaee099114423327b92a0e6',1,'CASE_RET_STR():&#160;SystemAndHardwareInfoTool.hpp'],['../_system_and_hardware_info_tool_8hpp.html#af8e35959ccaee099114423327b92a0e6',1,'CASE_RET_STR():&#160;SystemAndHardwareInfoTool.hpp']]],
-  ['case_5freturn_79',['CASE_RETURN',['../_crypto_p_p_utils_8hpp.html#aead94cbe39d1170a00680caed9a74396',1,'CASE_RETURN():&#160;CryptoPPUtils.hpp'],['../_crypto_p_p_utils_8hpp.html#a560c3ffc4bcdd5a6df5e99dfbb721a4f',1,'CASE_RETURN():&#160;CryptoPPUtils.hpp']]],
+  ['case_5freturn_79',['CASE_RETURN',['../_crypto_p_p_utils_8hpp.html#a560c3ffc4bcdd5a6df5e99dfbb721a4f',1,'CASE_RETURN():&#160;CryptoPPUtils.hpp'],['../_crypto_p_p_utils_8hpp.html#aead94cbe39d1170a00680caed9a74396',1,'CASE_RETURN():&#160;CryptoPPUtils.hpp']]],
   ['case_5fstr_80',['CASE_STR',['../_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010',1,'CASE_STR():&#160;Database.hpp'],['../_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010',1,'CASE_STR():&#160;Database.hpp']]],
   ['cc_81',['CC',['../_check_for_updates_8hpp.html#ab8cb6605644cdba6ddc7334644d0d136',1,'CheckForUpdates.hpp']]],
   ['cc1_82',['CC1',['../_check_for_updates_8hpp.html#a5212e1e303f305c46cf0a992d66d0fa6',1,'CheckForUpdates.hpp']]],
@@ -53,7 +53,7 @@ var searchData=
   ['crud_2ehpp_122',['CRUD.hpp',['../_c_r_u_d_8hpp.html',1,'']]],
   ['cryptopputils_123',['CryptoPPUtils',['../class_crypto_p_p_utils.html',1,'']]],
   ['cryptopputils_2ehpp_124',['CryptoPPUtils.hpp',['../_crypto_p_p_utils_8hpp.html',1,'']]],
-  ['cursor_125',['Cursor',['../class_cursor.html',1,'Cursor'],['../class_cursor.html#a851374ee7f54310e3c76e5e7f4075bb6',1,'Cursor::Cursor(const String &amp;image_path, const i32 xhot=0, const i32 yhot=0)'],['../class_cursor.html#ac94bc3e470e11cb14db663a7505ef6b5',1,'Cursor::Cursor(CursorMode mode)'],['../class_cursor.html#ab4b693e8e2e503acbf51ef4c7c9872dc',1,'Cursor::Cursor() noexcept']]],
+  ['cursor_125',['Cursor',['../class_cursor.html#a851374ee7f54310e3c76e5e7f4075bb6',1,'Cursor::Cursor()'],['../class_cursor.html',1,'Cursor'],['../class_cursor.html#ab4b693e8e2e503acbf51ef4c7c9872dc',1,'Cursor::Cursor() noexcept'],['../class_cursor.html#ac94bc3e470e11cb14db663a7505ef6b5',1,'Cursor::Cursor(CursorMode mode)']]],
   ['cursor_2ecpp_126',['Cursor.cpp',['../_cursor_8cpp.html',1,'']]],
   ['cursor_2ehpp_127',['Cursor.hpp',['../_cursor_8hpp.html',1,'']]],
   ['cursormode_128',['CursorMode',['../_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e',1,'Cursor.hpp']]]
