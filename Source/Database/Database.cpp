@@ -88,7 +88,7 @@ i64 Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
-	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
+	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", -1);
 	try
 	{
 		auto transaction = std::make_unique<SQLite::Transaction>(*m_database);
@@ -261,7 +261,7 @@ bool Database::DeleteAllEncryptions()
 i64 Database::GetEncryptionsCount()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
-	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
+	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", 0);
 
 	try
 	{

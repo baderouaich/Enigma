@@ -22,9 +22,9 @@ public: /* Enums */
 	*/
 	enum class Icon : ui8
 	{
-		Info		= static_cast<ui8>(pfd::icon::info),
+		Info			= static_cast<ui8>(pfd::icon::info),
 		Warning		= static_cast<ui8>(pfd::icon::warning),
-		Error		= static_cast<ui8>(pfd::icon::error),
+		Error			= static_cast<ui8>(pfd::icon::error),
 		Question	= static_cast<ui8>(pfd::icon::question)
 	};
 
@@ -33,11 +33,11 @@ public: /* Enums */
 	*/
 	enum class Choice : ui8
 	{
-		Ok					= static_cast<ui8>(pfd::choice::ok),
-		Ok_Cancel			= static_cast<ui8>(pfd::choice::ok_cancel),
-		Yes_No				= static_cast<ui8>(pfd::choice::yes_no),
-		Yes_No_Cancel		= static_cast<ui8>(pfd::choice::yes_no_cancel),
-		Retry_Cancel		= static_cast<ui8>(pfd::choice::retry_cancel),
+		Ok									= static_cast<ui8>(pfd::choice::ok),
+		Ok_Cancel						= static_cast<ui8>(pfd::choice::ok_cancel),
+		Yes_No							= static_cast<ui8>(pfd::choice::yes_no),
+		Yes_No_Cancel				= static_cast<ui8>(pfd::choice::yes_no_cancel),
+		Retry_Cancel				= static_cast<ui8>(pfd::choice::retry_cancel),
 		Abort_Retry_Ignore	= static_cast<ui8>(pfd::choice::abort_retry_ignore)
 	};
 
@@ -47,11 +47,11 @@ public: /* Enums */
 	enum class Action : i8
 	{
 		Cancel	= static_cast<i8>(pfd::button::cancel),
-		Ok		= static_cast<i8>(pfd::button::ok),
-		Yes		= static_cast<i8>(pfd::button::yes),
-		No		= static_cast<i8>(pfd::button::no),
-		Abort	= static_cast<i8>(pfd::button::abort),
-		Retry	= static_cast<i8>(pfd::button::retry),
+		Ok		  = static_cast<i8>(pfd::button::ok),
+		Yes		  = static_cast<i8>(pfd::button::yes),
+		No		  = static_cast<i8>(pfd::button::no),
+		Abort	  = static_cast<i8>(pfd::button::abort),
+		Retry	  = static_cast<i8>(pfd::button::retry),
 		Ignore	= static_cast<i8>(pfd::button::ignore)
 	};
 
