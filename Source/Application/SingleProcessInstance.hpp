@@ -40,7 +40,7 @@ public:
 		:
 		m_socket_fd(M_INVALID_SOCKET),
 		m_port(port),
-		m_rc(1)
+		m_rc(-1)
 	{
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 		// Windows Initialize WinSock
@@ -121,7 +121,7 @@ public:
 private:
 	socket_t m_socket_fd{}; /**< Socket file descriptor, will be SOCKET in windows, int in linux */
 	ui16 m_port{}; /**< Application's unique port */
-	i32 m_rc{-1}; /**< Return code of bind socket function 0 means no error, when < 0 is an error */
+	i32 m_rc{}; /**< Return code of bind socket function 0 means no error, when < 0 is an error */
 };
 NS_ENIGMA_END
 

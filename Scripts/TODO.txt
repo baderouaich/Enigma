@@ -33,6 +33,10 @@ Utility
 Window
 Scenes
 
+- Fix MyEncryptionsScene when searching for an encryption by title, status text is "No encryption is saved yet" instead of "No encryption found"
+
+- Create Enigma shortcut in Desktop at first run?
+
 - Fix typos & grammar (after documenting)
 
 - Fix images do not appear in docs readme page https://badereddineouaich.github.io/Enigma/md__r_e_a_d_m_e.html

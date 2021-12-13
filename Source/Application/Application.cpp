@@ -31,7 +31,6 @@ Application::Application(const WindowSettings& window_settings)
 	if (!SingleProcessInstance::IsUnique())
 	{
 		DialogUtils::Warn("Another instance of Enigma is already running!");
-		this->EndApplication(); 
 		return;
 	}
 	
@@ -110,26 +109,46 @@ void Application::InitImGuiFonts()
 
 	const auto& io = ImGui::GetIO();
 
-	const auto current_dir = FileUtils::GetEnigmaExecutableDir();
-	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 60.0f);
-	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 45.0f);
-	m_fonts["Audiowide-Regular-30"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 30.0f);
-	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH).string().c_str(), 20.0f);
-																   
-	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 45.0f);
-	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 20.0f);
-	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 18.0f);
-	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 16.0f);
-	m_fonts["Montserrat-Medium-14"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 14.0f);
-	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF((current_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH).string().c_str(), 12.0f);
+	const fs::path enigma_dir = FileUtils::GetEnigmaExecutableDir();
+	const fs::path font_audiowide_path = enigma_dir / Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH;
+	const fs::path font_montserrat_path = enigma_dir / Constants::Resources::Fonts::MONTSERRAT_FONT_PATH;
+	ENIGMA_ASSERT_OR_THROW(fs::exists(font_audiowide_path), "Font " + font_audiowide_path.string() + " not found");
+	ENIGMA_ASSERT_OR_THROW(fs::exists(font_montserrat_path), "Font " + font_montserrat_path.string() + " not found");
+
+#ifdef ENIGMA_DEBUG
+	ENIGMA_LOG("Font Audiowide-Regular path: {}", font_audiowide_path.string());
+	ENIGMA_LOG("Font Montserrat-Medium path: {}", font_montserrat_path.string());
+#endif
+
+	//using namespace std::string_literals;
+	//for(auto font_audiowide_size : std::initializer_list<short>{ 20, 30, 45, 60 })
+	//	m_fonts["Audiowide-Regular-"sv + std::to_string(font_audiowide_size)] =  io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), static_cast<float>(font_audiowide_size));
+	//for (auto font_montserrat_size : std::initializer_list<short>{ 12, 14, 16, 18, 20, 45 })
+	//	m_fonts["Montserrat-Medium-"sv + std::to_string(font_montserrat_size)] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), static_cast<float>(font_montserrat_size));
 	
+	m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 60.0f);
+	m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 45.0f);
+	m_fonts["Audiowide-Regular-30"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 30.0f);
+	m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 20.0f);
+															   
+	m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 45.0f);
+	m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 20.0f);
+	m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 18.0f);
+	m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 16.0f);
+	m_fonts["Montserrat-Medium-14"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 14.0f);
+	m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 12.0f);
+
 	// Build added fonts atlas --> imgui issue #3643
 	io.Fonts->Build();
 
 	// Check if fonts are loaded
 	for (const auto& [font_name, font] : m_fonts)
 	{
-		if (!font->IsLoaded())
+		if (font->IsLoaded())
+		{
+			ENIGMA_TRACE("Font {} Loaded", font->ConfigData->Name); 
+		}
+		else
 		{
 			const String err_msg = "Failed to load font " + String(font_name);
 			// console alert
@@ -140,8 +159,6 @@ void Application::InitImGuiFonts()
 			this->EndApplication();
 			break;
 		}
-		else
-			ENIGMA_TRACE("Loaded {0}", font->ConfigData->Name);
 	}
 }
 
@@ -157,16 +174,16 @@ void Application::PushScene(std::unique_ptr<Scene> scene)
 }
 
 
-void Application::LaunchWorkerThread(Scene* scene, const String& loading_text, const std::function<void()>& work_func, const bool cancelable)
+void Application::LaunchWorkerThread(Scene* scene, const String& loading_text, const std::function<void()>& work_func)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr!");
 	ENIGMA_ASSERT(work_func, "Work function is empty!");
 
-	std::thread worker_thread([this, scene, loading_text, work_func, cancelable]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
+	std::thread worker_thread([this, scene, loading_text, work_func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
 		{
 			std::scoped_lock<std::mutex> guard{ scene->GetMutex() };
 
-			ENIGMA_LOG("Launching Worker Thread ID #{0} To Do Work: {1}", std::this_thread::get_id(), loading_text);
+			ENIGMA_LOG("Launching Worker Thread ID #{} To Do Work: {}", std::this_thread::get_id(), loading_text);
 			
 			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(loading_text); // set loading status description text will appear bellow loading spinner
 			scene->SetLoading(true);
@@ -174,8 +191,7 @@ void Application::LaunchWorkerThread(Scene* scene, const String& loading_text, c
 			scene->SetLoading(false);
 			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(""); // reset loading text
 
-
-			ENIGMA_LOG("Finished Worker Thread ID #{0}", std::this_thread::get_id());
+			ENIGMA_LOG("Finished Worker Thread ID #{}", std::this_thread::get_id());
 		});
 	worker_thread.detach();
 }
@@ -213,7 +229,7 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	// check if there is a scene doing some work in progress...
-	const bool there_is_a_scene_still_doing_some_work = // long name i know XD  
+	const bool there_is_a_scene_still_doing_some_work = // long name.. i know :'D
 		std::any_of(m_scenes.rbegin(), m_scenes.rend(),
 			[](const auto& scene) 
 			{
@@ -222,7 +238,6 @@ bool Application::OnWindowClose(WindowCloseEvent& /*event*/)
 	
 	if (there_is_a_scene_still_doing_some_work)
 	{
-
 		(void)DialogUtils::Warn("Warning!", "A Scene is still doing some work, please wait...");
 		m_window->SetShouldClose(false); // force GLFW to keep window open. GLFW will close the window when a close window event received.
 		return true; // handled.
@@ -272,7 +287,8 @@ bool Application::OnFrameBufferResize(FrameBufferResizeEvent& event)
 
 void Application::Run()
 {
-	while (! m_window->ShouldClose())
+	if (!m_window) return;
+	while (!m_window->ShouldClose())
 	{
 		// Poll Events (no need to poll events, since glfwWaitEvents() above will do this for us)
 		//m_window->PollEvents();
@@ -420,7 +436,8 @@ void Application::UpdateHardwareInfo() noexcept
 
 void Application::EndApplication() noexcept
 {
-	m_window->SetShouldClose(true);
+	if(m_window)
+		 m_window->SetShouldClose(true);
 }
 
 
@@ -435,12 +452,14 @@ Application::~Application()
 		scene->OnDestroy();
 	});
 	
-	m_loading_scene->OnDestroy(); // Don't forget the loading scene
+	if(m_loading_scene)
+		 m_loading_scene->OnDestroy(); // Don't forget the loading scene
 
 	m_scenes.clear();
 	m_fonts.clear(); 
 
-	//ImGui::GetIO().Fonts->Clear();
+	ImGui::GetIO().Fonts->Clear();
+
 	/*for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
 	{
 		// Notify scenes OnDestroy before closing application

@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	std::signal(SIGFPE,  SignalHandler); // Floating point exception
 	std::signal(SIGILL,  SignalHandler); // Illegal instruction - invalid function image
 	std::signal(SIGINT,  SignalHandler); // Interrupt e.g console CTRL+C
-	std::signal(SIGSEGV, SignalHandler); // Segment violation
+	std::signal(SIGSEGV, SignalHandler); // Segment violation (nullptr read access violation exception...)
 	std::signal(SIGTERM, SignalHandler); // Software termination signal from kill
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 	std::signal(SIGBREAK, SignalHandler); // On Windows, a click on console window close button will raise SIGBREAK
