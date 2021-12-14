@@ -31,6 +31,8 @@ void MyEncryptionsScene::OnCreate()
 	// Get all Encryptions from database
 	this->GetAllEncryptions();
 
+	// Reformat sqlite3 date format from "2021-12-14 20:40:24" to "Dec 14 2021 20:40:24 PM"
+	this->ReformatEncryptionsDateTime();
 }
 
 void MyEncryptionsScene::OnUpdate(const f32&)
@@ -466,6 +468,34 @@ void MyEncryptionsScene::GetAllEncryptions()
 	m_encryptions = Database::GetAllEncryptions<true, false, true, true, true, true>(m_order_by, m_order);
 	ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
 
+}
+
+void MyEncryptionsScene::ReformatEncryptionsDateTime()
+{
+	for (const auto& enc_ptr : m_encryptions)
+	{
+		try {
+			static const std::map<ui16, char*> months = { {1, "Jan"}, {2, "Feb"}, {3, "Mar"}, {4, "Apr"}, {5, "May"}, {6, "Jun"}, {7, "Jul"}, {8, "Aug"}, {9, "Sep"}, {10, "Oct"}, {11, "Nov"}, {12, "Dec"} };
+			// default sqlite3 date format "2021-12-14 20:40:24"
+			//													   year:1		 month:2			day:3			hour:4	  minute:5   second:6	
+			static const std::regex rgx("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})");
+			std::smatch matches{};
+			if (std::regex_match(enc_ptr->date_time, matches, rgx) && matches.size() == 6 + 1) // +1 extra match for the entire text
+			{
+				const String year = matches[1].str();
+				const String month = months.at(StringUtils::To<ui16>(matches[2].str()));
+				const String day = matches[3].str();
+				const String hour = matches[4].str();
+				const String minute = matches[5].str();
+				const String second = matches[6].str();
+				enc_ptr->date_time = month + ' ' + day + ' ' + year + ' ' + hour + ':' + minute + ':' + second + ' ' + (StringUtils::To<ui16>(hour) >= 12 ? "PM" : "AM");
+			}
+		}
+		catch (const std::exception& e) { // On any failure, just keep the default sqlite3 date_time format.
+			ENIGMA_ERROR("Failed to reformat sqlite3 date_time: {}", e.what());
+			break; // i mean if something went wrong, better just stop lol, im good with the default sqlite3 date_time format than a bunch of log errors :p.
+		}  
+	}
 }
 
 

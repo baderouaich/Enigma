@@ -31,6 +31,8 @@ private: /* Callbacks */
 private: /* Initializers */
 	// Get all Encryptions from database
 	void GetAllEncryptions();
+	/** Reformats sqlite3 date format from "2021-12-14 20:40:24" to "Dec 14 2021 20:40:24 PM" */
+	void ReformatEncryptionsDateTime();
 
 private:
 	std::vector<std::unique_ptr<Encryption>> m_encryptions{}; // encryption records from database

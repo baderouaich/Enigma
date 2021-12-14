@@ -33,8 +33,6 @@ Utility
 Window
 Scenes
 
-- Fix MyEncryptionsScene when searching for an encryption by title, status text is "No encryption is saved yet" instead of "No encryption found"
-
 - Create Enigma shortcut in Desktop at first run?
 
 - Fix typos & grammar (after documenting)
@@ -44,8 +42,6 @@ Scenes
 - System & Hardware Information Tool, Tree nodes (CPU DONE, RAM DONE, OS DONE, Displays DONE, Kernel DONE, Connected HIDs DONE, GPU Waiting for major OpenGL GPU Info impl)
 
 - Fix memory leak caused by ImGui::InputText & ImGui::InputTextMultiline Clipboard past large buffer doesnt get freed entirely.
-
-- My Encryptions table, display date as Jun, 01 2021 instead of 06 01 2021 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
 
 - Use magic number static constexpr const auto ENIGMA_MAGIC_NUMBER = 0x454e49474d41; // "ENIGMA" at the start of each enigma cipher to detect validity before performing any operation.
 
@@ -131,6 +127,9 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - DONE Change cli --mode to --algorithm,-a
 - DONE Add [delete all button] in MyEncryptionsScene
 - [DONE] Store file extension in database as well to help recover file type, and also pass extension with SaveFileDialog filters when decrypting
+- DONE Fix MyEncryptionsScene when searching for an encryption by title, status text is "No encryption is saved yet" instead of "No encryption found"
+- DONE Display date as Jun 01 2021 20:40:24 AM/PM instead of 2021-12-14 20:40:24 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
+
 =============================================================================
 
 
