@@ -125,10 +125,6 @@ void MyEncryptionsScene::OnImGuiDraw()
 					this->OnSearchEncryptionsByTitle();
 				}
 			}
-			else // InputText is not being edited now
-			{
-				m_isSearching = false;
-			}
 			ImGui::SameLine();
 
 			if (ImGuiWidgets::Button("Reset", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))

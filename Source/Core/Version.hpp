@@ -3,10 +3,10 @@
 #define ENIGMA_VERSION_H
 
 /** major, minor, patch string(needed for Enigma.rc) */
-#define ENIGMA_VERSION_STR "2.1.0"
+#define ENIGMA_VERSION_STR "2.2.0"
 
 /**  major, minor, patch divided (needed for Enigma.rc) */
-#define ENIGMA_VERSION_DIV 2, 1, 0
+#define ENIGMA_VERSION_DIV 2, 2, 0
 
 #define ENIGMA_VERSION ENIGMA_VERSION_STR
 

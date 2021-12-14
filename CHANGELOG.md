@@ -1,3 +1,8 @@
+# 2.2.0
+- Fixed wrong text displayed in 'My Encryptions Scene' when searching for unexistent encryption, it displays "No encryption saved yet" instead of "No encryption found".
+- 
+
+
 # 2.1.0
 - Reduced program CPU usage by adding `GLFW 3+ glfwWaitEvents()` in the main loop to wait for events. 
 - Remembering encrypted file extension for decryption.
