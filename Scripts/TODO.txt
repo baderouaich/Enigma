@@ -33,6 +33,9 @@ Utility
 Window
 Scenes
 
+
+- add sudo make install at the end of release build script do equiv in windows
+
 - Create Enigma shortcut in Desktop at first run?
 
 - Fix typos & grammar (after documenting)
