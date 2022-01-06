@@ -43,7 +43,7 @@ public:
 
 	/** XOR Decrypts cipher string
 	*	@param password: Encryption key
-	*	@param cipher: Encyrpted buffer (aka cipher)
+	*	@param cipher: Encrypted buffer (aka cipher)
 	*	@returns recovered buffer
 	*/
 	String XORDecrypt(const String& password, const String& cipher)
