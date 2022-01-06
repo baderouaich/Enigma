@@ -396,9 +396,10 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		auto e = std::make_unique<Encryption>();
 		e->title = title;
 		e->is_file = true;
+		e->file_ext = fs::path(in_filename).extension().string();
 		e->cipher.data = cipher; // already compressed above
-		e->size = static_cast<decltype(Encryption::size)>(e->cipher.data.size());
-		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e) >= 0, "Failed to save encryption record to database");
+		e->size = e->cipher.data.size();
+		ENIGMA_ASSERT_OR_THROW(Database::AddEncryption(e) >= 0, ("Failed to save encryption record to database"));
 
 		ENIGMA_INFO("Encryption saved successfully.");
 	}

@@ -132,7 +132,7 @@ DONE - Complete ViewEncryptionScene (decrypt text works, decrypt file doesnt yet
 - [DONE] Store file extension in database as well to help recover file type, and also pass extension with SaveFileDialog filters when decrypting
 - DONE Fix MyEncryptionsScene when searching for an encryption by title, status text is "No encryption is saved yet" instead of "No encryption found"
 - DONE Display date as Jun 01 2021 20:40:24 AM/PM instead of 2021-12-14 20:40:24 SQLite does not support month names, sadly. You will have to convert it to a month name either using a lookup table, a case statement, or a switch on the presentation layer.
-
+- DONE Fix encrypted file extension is not saved when encrypting a file with CLI
 =============================================================================
 
 
