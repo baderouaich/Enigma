@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 	// Initialize SQLite3 Database
 	Enigma::Database::Initialize();
 
+	// To be returned
 	Enigma::i32 exit_code = -1;
 	try
 	{

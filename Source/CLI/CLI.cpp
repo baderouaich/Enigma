@@ -281,14 +281,14 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	}
 
 	ENIGMA_INFO(cipher_base64);
-	ENIGMA_LOG(fmt::format("Encrypted {0} in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
+	ENIGMA_INFO(fmt::format("Encrypted {0} in {1:0.3f} seconds. (Please save cipher base64 text above in a safe place)",
 		 SizeUtils::FriendlySize(text.size()), elapsed_seconds));
 
 	// Save encryption record to database on option -s | --save 
 	if(save_to_database)
 	{
 		String title{};
-		ENIGMA_LOG("Save encryption to database, please enter encryption title (example My Github Password). it helps with searching through encryptions from the database in the future: ");
+		ENIGMA_INFO("Save encryption to database, please enter encryption title (example My Github Password). it helps with searching through encryptions from the database in the future: ");
 		std::cout << "> ";
 		std::getline(std::cin, title);
 
@@ -333,7 +333,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(!recovered_text.empty(), ("Failed to decompress recovered text"));
 
 	ENIGMA_INFO(recovered_text);
-	ENIGMA_LOG("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds);
+	ENIGMA_INFO("Decrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(decrypted_text.size()), elapsed_seconds);
 
 	cipher.clear();
 	decrypted_text.clear();
@@ -364,7 +364,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	buffer = GZip::Compress(buffer); ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to compress file content");
 	auto new_buffer_size = buffer.size();
 	auto decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
-	ENIGMA_LOG("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
+	ENIGMA_INFO("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
 	
 
 	// Encrypt
@@ -382,13 +382,13 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	const bool successfully_written_file = FileUtils::Write(out_filename_encypted, cipher);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save cipher to file " + out_filename_encypted);
 
-	ENIGMA_LOG("Encrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(buffer.size()), elapsed_seconds);
+	ENIGMA_INFO("Encrypted {0} in {1:0.3f} seconds.", SizeUtils::FriendlySize(buffer.size()), elapsed_seconds);
 
 	// Save encryption record to database on option -s | --save (Note: file buffer forced to be compressed above if saving to database)
 	if (save_to_database)
 	{
 		String title{};
-		ENIGMA_LOG("Save encryption to database, please enter encryption title (e.g: My Image): ");
+		ENIGMA_INFO("Save encryption to database, please enter encryption title (e.g: My Image): ");
 		std::cout << "> ";
 		std::getline(std::cin, title);
 		
@@ -443,7 +443,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	buffer = GZip::Decompress(buffer); ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decompress recovered file content");
 	auto new_buffer_size = buffer.size();
 	auto increased_bytes = old_buffer_size < new_buffer_size ? (new_buffer_size - old_buffer_size) : 0;
-	ENIGMA_LOG("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
+	ENIGMA_INFO("File size increased by {0}", SizeUtils::FriendlySize(increased_bytes));
 
 
 	// Write recovered buffer to file
@@ -451,7 +451,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	const bool successfully_written_file = FileUtils::Write(out_filename_decrypted, buffer);
 	ENIGMA_ASSERT_OR_THROW(successfully_written_file, "Failed to save decrypted cipher to file " + out_filename_decrypted);
 
-	ENIGMA_LOG("Decrypted in {1:0.3f} seconds.", SizeUtils::FriendlySize(buffer.size()), elapsed_seconds);
+	ENIGMA_INFO("Decrypted in {1:0.3f} seconds.", SizeUtils::FriendlySize(buffer.size()), elapsed_seconds);
 
 	cipher.clear();
 	buffer.clear();

@@ -8,17 +8,12 @@
 
 #include <memory>
 
+#pragma warning(push, 0)
 /// cpr: cURL c++ wrapper
-#pragma warning(push, 0)
 #include <cpr/cpr.h>
-#pragma warning(pop)
-///
-
 /// nlohmann-json: json parser library
-#pragma warning(push, 0)
 #include <json.hpp>
 #pragma warning(pop)
-///
 
 
 NS_ENIGMA_BEGIN

@@ -22,7 +22,7 @@
 
 /*
 Example encypting a text with AES-GCM:
-$ ./Enigma -e --mode=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
+$ ./Enigma -e --algorithm=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
 output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT
 
 Example decrypting a text with AES-GCM:
@@ -30,10 +30,10 @@ $ ./Enigma -d --password="My@pa$$W0rd" --text="AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+
 output: my important data securly encrypted!
 
 Example encypting a file with AES-GCM:
-$ ./Enigma -e --mode=aes --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data" --outfile="/home/bader/Desktop/Data-encrypted.enigma" --compress
+$ ./Enigma -e --algorithm=aes --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data.txt" --outfile="/home/user/Desktop/Data_encrypted.txt.enigma"
 
 Example decypting a file with AES-GCM:
-$ ./Enigma -d --password="My@pa$$W0rd" --infile="/home/bader/Desktop/Data-encrypted.enigma" --outfile="/home/bader/Desktop/Data-decrypted" --decompress
+$ ./Enigma -d --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
 */
 
 NS_ENIGMA_BEGIN
