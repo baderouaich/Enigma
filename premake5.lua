@@ -159,8 +159,8 @@ project "Enigma"
 		"inih", 
 		"json",
 		"sqlitecpp",
-		"curl", -- Order matter, Link curl before zlib
 		"cpr",
+		"curl", -- Order matter, Link curl before zlib
 		--"zlib",
 		"tabulate",
 		"infoware",

@@ -9,11 +9,14 @@ Resources/Database/*.db
 # name.ignore.extension files
 *.ignore.*
 
-#Ignore Binary & object build files
+# Ignore Binary & object build files
 [Bb]in/
 [Bb]in-[Ii]ntermediate/
 #*.log
 ####
+
+# Ignore Makefiles
+Makefile
 
 ###################################################################################################
 

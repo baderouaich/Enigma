@@ -27,7 +27,7 @@ project "cpr"
 
     links
     {
-    	--"curl" -- link curl .lib
+    	"curl" -- link to libcurl.so
     }
 
 	--- Platform ---

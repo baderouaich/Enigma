@@ -80,7 +80,7 @@ project "curl"
 
 	    
 	filter "system:linux or bsd or solaris"
-	    pic "On" -- required fo clang-10
+	    pic "On" -- required for clang-10
 		defines 
 		{ 
 			"CURL_HIDDEN_SYMBOLS",
