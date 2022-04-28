@@ -218,6 +218,7 @@ project "Enigma"
 
 			"GL", -- link opengl lib
 			"X11", -- x11 Linux gui libs
+			"Xrandr",
 			"dl", -- dynamic loader interface
 			"pthread", -- std::thread
 			"stdc++fs", -- std::filesystem

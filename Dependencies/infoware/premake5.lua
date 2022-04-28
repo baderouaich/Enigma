@@ -53,9 +53,12 @@ project "infoware"
 	filter "system:linux"
 		defines
 		{
+			"INFOWARE_USE_X11" -- in Linux, use x11 to get display info
 		}
 		links
 		{
+			"X11", 
+			"Xrandr"
 		}
 
 	filter "system:macosx"
