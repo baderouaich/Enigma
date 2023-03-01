@@ -83,7 +83,7 @@ group ""
 -- Include Enigma Application project solution
 project "Enigma"
 	language "C++"
-	cppdialect "C++17" -- TODO C++20 using "C++latest"
+	cppdialect "C++20"
 	staticruntime "on"
 
 	---[[ Binary Output dirs ]]---
@@ -173,17 +173,17 @@ project "Enigma"
 		--entrypoint "WinMainCRTStartup" -- use WinMain as entry point
 
 		-- .exe icon
-	    files 
-	    {
+		files 
+		{
 			'Enigma.rc', '**.ico' 
-	 	}
-	    vpaths 
-	    {
-	    	--[[
-				uncomment if files{ "Resources/**.*" } is deleted above
-	    	--]]
-	  	 	--['Resources/*'] = { '*.rc', '**.ico' } 
-	    }
+		}
+		vpaths 
+		{
+			--[[
+			uncomment if files{ "Resources/**.*" } is deleted above
+			--]]
+			--['Resources/*'] = { '*.rc', '**.ico' } 
+		}
 		--
 
 		defines
