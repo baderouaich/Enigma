@@ -39,7 +39,7 @@ TARGETDIR = Bin/Debug-linux-x86_64/catch2
 TARGET = $(TARGETDIR)/libcatch2.a
 OBJDIR = Bin-Intermediate/Debug-linux-x86_64/catch2
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -w
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -w -std=c++17
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -w -std=c++20
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release)
@@ -47,7 +47,7 @@ TARGETDIR = Bin/Release-linux-x86_64/catch2
 TARGET = $(TARGETDIR)/libcatch2.a
 OBJDIR = Bin-Intermediate/Release-linux-x86_64/catch2
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -w
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -w -std=c++17
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -w -std=c++20
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 else ifeq ($(config),dist)
@@ -55,7 +55,7 @@ TARGETDIR = Bin/Dist-linux-x86_64/catch2
 TARGET = $(TARGETDIR)/libcatch2.a
 OBJDIR = Bin-Intermediate/Dist-linux-x86_64/catch2
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -w
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -w -std=c++17
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -w -std=c++20
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 endif

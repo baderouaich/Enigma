@@ -37,7 +37,7 @@ TARGETDIR = Bin/Debug-linux-x86_64/cpr
 TARGET = $(TARGETDIR)/libcpr.a
 OBJDIR = Bin-Intermediate/Debug-linux-x86_64/cpr
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -w
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -w -std=c++17
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -g -w -std=c++20
 LIBS += ../curl/Bin/Debug-linux-x86_64/curl/libcurl.a
 LDDEPS += ../curl/Bin/Debug-linux-x86_64/curl/libcurl.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
@@ -47,7 +47,7 @@ TARGETDIR = Bin/Release-linux-x86_64/cpr
 TARGET = $(TARGETDIR)/libcpr.a
 OBJDIR = Bin-Intermediate/Release-linux-x86_64/cpr
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -w
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -w -std=c++17
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -w -std=c++20
 LIBS += ../curl/Bin/Release-linux-x86_64/curl/libcurl.a
 LDDEPS += ../curl/Bin/Release-linux-x86_64/curl/libcurl.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
@@ -57,7 +57,7 @@ TARGETDIR = Bin/Dist-linux-x86_64/cpr
 TARGET = $(TARGETDIR)/libcpr.a
 OBJDIR = Bin-Intermediate/Dist-linux-x86_64/cpr
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -w
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -w -std=c++17
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O3 -w -std=c++20
 LIBS += ../curl/Bin/Dist-linux-x86_64/curl/libcurl.a
 LDDEPS += ../curl/Bin/Dist-linux-x86_64/curl/libcurl.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
