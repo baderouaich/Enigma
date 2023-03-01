@@ -28,7 +28,7 @@ f32 CPUInfo::GetCPUUsage() noexcept
 	ui64 total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};
 
 	std::FILE* file = std::fopen("/proc/stat", "r");
-	std::fscanf(file, "cpu %llu %llu %llu %llu",
+	std::fscanf(file, "cpu %zu %zu %zu %zu",
 		&total_user, &total_user_low,
 		&total_sys, &total_idle);
 	std::fclose(file);
