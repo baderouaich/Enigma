@@ -14,6 +14,7 @@ var class_my_encryptions_scene =
     [ "OnSearchEncryptionsByTitle", "class_my_encryptions_scene.html#a4db07f547b43d3fc1a296ed760af85f5", null ],
     [ "OnUpdate", "class_my_encryptions_scene.html#a2b536bc37c3f6983ea7fc1c63c2b4213", null ],
     [ "OnViewEncryptionButtonPressed", "class_my_encryptions_scene.html#a17b2370811f99e3ba1fd00953036cdc1", null ],
+    [ "ReformatEncryptionsDateTime", "class_my_encryptions_scene.html#ad33588494a95951c076538466f50f0b9", null ],
     [ "m_encryptions", "class_my_encryptions_scene.html#a22861bfce74225db61366a533cc9885a", null ],
     [ "m_isSearching", "class_my_encryptions_scene.html#a771e4bb8f24a39fceff1cf72f8fcf4d0", null ],
     [ "m_order", "class_my_encryptions_scene.html#aa34cd3939b488b4fc1eb7819d626f106", null ],

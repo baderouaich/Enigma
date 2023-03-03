@@ -88,28 +88,23 @@ $(document).ready(function(){initNavTree('_scene_8cpp_source.html',''); initResi
 <div class="title">Scene.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_scene_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pch_8hpp.html">pch.hpp</a>&gt;</span></div>
+<a href="_scene_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;pch.hpp&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_scene_8hpp.html">Scene.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_scene.html#a81ff82f6bc21b68167af599eb9c56a94">    7</a></span>&#160;<a class="code" href="class_scene.html#a81ff82f6bc21b68167af599eb9c56a94">Scene::Scene</a>() noexcept</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    :</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    m_quit(false),</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    m_isLoading(false),</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    m_mutex()</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_scene.html#a81ff82f6bc21b68167af599eb9c56a94">    6</a></span>&#160;<a class="code" href="class_scene.html#a81ff82f6bc21b68167af599eb9c56a94">Scene::Scene</a>() noexcept</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        : m_mutex{},</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;            m_quit{<span class="keyword">false</span>},</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            m_isLoading{<span class="keyword">false</span>}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
 <div class="ttc" id="a_scene_8hpp_html"><div class="ttname"><a href="_scene_8hpp.html">Scene.hpp</a></div></div>
-<div class="ttc" id="aclass_scene_html_a81ff82f6bc21b68167af599eb9c56a94"><div class="ttname"><a href="class_scene.html#a81ff82f6bc21b68167af599eb9c56a94">Scene::Scene</a></div><div class="ttdeci">Scene() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_scene_8cpp_source.html#l00007">Scene.cpp:7</a></div></div>
-<div class="ttc" id="apch_8hpp_html"><div class="ttname"><a href="pch_8hpp.html">pch.hpp</a></div></div>
+<div class="ttc" id="aclass_scene_html_a81ff82f6bc21b68167af599eb9c56a94"><div class="ttname"><a href="class_scene.html#a81ff82f6bc21b68167af599eb9c56a94">Scene::Scene</a></div><div class="ttdeci">Scene() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_scene_8cpp_source.html#l00006">Scene.cpp:6</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

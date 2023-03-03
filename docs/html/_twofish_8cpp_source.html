@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('_twofish_8cpp_source.html',''); initRe
 <div class="title">Twofish.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_twofish_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pch_8hpp.html">pch.hpp</a>&quot;</span></div>
+<a href="_twofish_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;pch.hpp&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_twofish_8hpp.html">Twofish.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('_twofish_8cpp_source.html',''); initRe
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> iv = <a class="code" href="class_algorithm.html#a370959bf4668796dbb67a3a688f139bd">Algorithm::GenerateRandomIV</a>(CryptoPP::Twofish::BLOCKSIZE); </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Prepare key</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    CryptoPP::SecByteBlock key(CryptoPP::Twofish::MAX_KEYLENGTH + CryptoPP::Twofish::BLOCKSIZE); <span class="comment">// Encryption key to be generated from user password + IV</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    CryptoPP::SecByteBlock key(<span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">std::size_t</a><span class="keyword">&gt;</span>(CryptoPP::Twofish::MAX_KEYLENGTH) + <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">std::size_t</a><span class="keyword">&gt;</span>(CryptoPP::Twofish::BLOCKSIZE)); <span class="comment">// Encryption key to be generated from user password + IV</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher&#39;s key size</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    CryptoPP::HKDF&lt;CryptoPP::SHA256&gt; hkdf{};</div>
@@ -224,7 +224,7 @@ $(document).ready(function(){initNavTree('_twofish_8cpp_source.html',''); initRe
 <div class="ttc" id="aclass_twofish_html_aedfbe04067a69d68ad5f0d6ec0821e1e"><div class="ttname"><a href="class_twofish.html#aedfbe04067a69d68ad5f0d6ec0821e1e">Twofish::Decrypt</a></div><div class="ttdeci">String Decrypt(const String &amp;password, const String &amp;algotype_iv_cipher) override</div><div class="ttdoc">Decrypts cipher with password.</div><div class="ttdef"><b>Definition:</b> <a href="_twofish_8cpp_source.html#l00079">Twofish.cpp:79</a></div></div>
 <div class="ttc" id="anamespace_enigma_1_1_constants_1_1_algorithm_html_ae256fc18c1e2e2ab8fe3ec8925f69978"><div class="ttname"><a href="namespace_enigma_1_1_constants_1_1_algorithm.html#ae256fc18c1e2e2ab8fe3ec8925f69978">Enigma::Constants::Algorithm::MINIMUM_PASSWORD_LENGTH</a></div><div class="ttdeci">static constexpr const size_t MINIMUM_PASSWORD_LENGTH</div><div class="ttdef"><b>Definition:</b> <a href="_constants_8hpp_source.html#l00026">Constants.hpp:26</a></div></div>
 <div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00026">Types.hpp:26</a></div></div>
-<div class="ttc" id="apch_8hpp_html"><div class="ttname"><a href="pch_8hpp.html">pch.hpp</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_a5f45d8a2af72744f7e86b3d24700a50f"><div class="ttname"><a href="namespace_enigma.html#a5f45d8a2af72744f7e86b3d24700a50f">Enigma::size_t</a></div><div class="ttdeci">std::size_t size_t</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00025">Types.hpp:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

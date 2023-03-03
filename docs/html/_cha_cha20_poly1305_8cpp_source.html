@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('_cha_cha20_poly1305_8cpp_source.html',
 <div class="title">ChaCha20Poly1305.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="_cha_cha20_poly1305_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="pch_8hpp.html">pch.hpp</a>&quot;</span></div>
+<a href="_cha_cha20_poly1305_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;pch.hpp&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_cha_cha20_poly1305_8hpp.html">ChaCha20Poly1305.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
@@ -155,7 +155,7 @@ $(document).ready(function(){initNavTree('_cha_cha20_poly1305_8cpp_source.html',
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">// Output calculated MAC</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> mac(16, <span class="charliteral">&#39;\000&#39;</span>);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// Encrypt &amp; Authenticate (Thanks to @mcoret who mentioned this in https://github.com/BaderEddineOuaich/Enigma/issues/4)</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// Encrypt &amp; Authenticate (Thanks to @mcoret who mentioned this in https://github.com/baderouaich/Enigma/issues/4)</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="class_cha_cha20_poly1305.html#aad3865470356b11c9ee129c39e490afc">m_chacha_encryptor</a>-&gt;EncryptAndAuthenticate(</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">byte</span>*<span class="keyword">&gt;</span>(cipher.data()), <span class="comment">// output cipher (encrypted buffer)</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">byte</span>*<span class="keyword">&gt;</span>(mac.data()), mac.size(),  <span class="comment">// output calculated MAC</span></div>
@@ -245,7 +245,6 @@ $(document).ready(function(){initNavTree('_cha_cha20_poly1305_8cpp_source.html',
 <div class="ttc" id="anamespace_enigma_1_1_constants_1_1_algorithm_html_ae256fc18c1e2e2ab8fe3ec8925f69978"><div class="ttname"><a href="namespace_enigma_1_1_constants_1_1_algorithm.html#ae256fc18c1e2e2ab8fe3ec8925f69978">Enigma::Constants::Algorithm::MINIMUM_PASSWORD_LENGTH</a></div><div class="ttdeci">static constexpr const size_t MINIMUM_PASSWORD_LENGTH</div><div class="ttdef"><b>Definition:</b> <a href="_constants_8hpp_source.html#l00026">Constants.hpp:26</a></div></div>
 <div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00026">Types.hpp:26</a></div></div>
 <div class="ttc" id="anamespace_enigma_html_aadb754fee2ef15f3b524b37315d41f48"><div class="ttname"><a href="namespace_enigma.html#aadb754fee2ef15f3b524b37315d41f48">Enigma::i32</a></div><div class="ttdeci">std::int32_t i32</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00015">Types.hpp:15</a></div></div>
-<div class="ttc" id="apch_8hpp_html"><div class="ttname"><a href="pch_8hpp.html">pch.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

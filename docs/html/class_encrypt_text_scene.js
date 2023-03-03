@@ -11,6 +11,7 @@ var class_encrypt_text_scene =
     [ "OnEvent", "class_encrypt_text_scene.html#a36657298387b670cb209d14317b68bcc", null ],
     [ "OnImGuiDraw", "class_encrypt_text_scene.html#adf7ea030afcfcd78d48f1cf0de67e403", null ],
     [ "OnUpdate", "class_encrypt_text_scene.html#a2f4e144fa0592882ecf3efdd0b4a9f3e", null ],
+    [ "ValidateFields", "class_encrypt_text_scene.html#a6f2a7162c7db8c25444470fea462b78b", null ],
     [ "m_cipher", "class_encrypt_text_scene.html#a0c3519f1c68402234dd45bb1f854d1a8", null ],
     [ "m_cipher_base64", "class_encrypt_text_scene.html#af03f04aaa6765c76ae37a7d4f53a0535", null ],
     [ "m_confirm_password", "class_encrypt_text_scene.html#a2dc663a7a8089313000a4a69c54178e1", null ],

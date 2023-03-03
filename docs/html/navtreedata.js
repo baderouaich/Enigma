@@ -25,28 +25,29 @@
 var NAVTREE =
 [
   [ "Enigma", "index.html", [
-    [ "2.1.0", "md__c_h_a_n_g_e_l_o_g.html", [
-      [ "2.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md2", null ],
-      [ "1.4.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md3", null ],
-      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md4", null ],
-      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md5", null ],
-      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md6", null ],
-      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md7", null ],
-      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md8", null ]
+    [ "2.2.0", "md__c_h_a_n_g_e_l_o_g.html", [
+      [ "2.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md14", null ],
+      [ "2.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md15", null ],
+      [ "1.4.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md16", null ],
+      [ "1.3.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md17", null ],
+      [ "1.2.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md18", null ],
+      [ "1.1.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md19", null ],
+      [ "1.0.1", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md20", null ],
+      [ "1.0.0", "md__c_h_a_n_g_e_l_o_g.html#autotoc_md21", null ]
     ] ],
     [ "LICENSE", "md__l_i_c_e_n_s_e.html", null ],
     [ "Enigma", "md__r_e_a_d_m_e.html", [
-      [ "Supported Algorithms", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "Available Tools", "md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "Enigma CLI", "md__r_e_a_d_m_e.html#autotoc_md13", null ],
-      [ "Enigma UI", "md__r_e_a_d_m_e.html#autotoc_md14", null ],
-      [ "Compiling", "md__r_e_a_d_m_e.html#autotoc_md15", [
-        [ "Windows Visual Studio 16 2019", "md__r_e_a_d_m_e.html#autotoc_md16", null ],
-        [ "Linux GNU Makefile", "md__r_e_a_d_m_e.html#autotoc_md17", null ],
-        [ "MacOS TODO (when i figure out a way to test macos on vm)", "md__r_e_a_d_m_e.html#autotoc_md18", null ]
+      [ "Supported Algorithms", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
+      [ "Available Tools", "md__r_e_a_d_m_e.html#autotoc_md2", null ],
+      [ "Enigma CLI", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
+      [ "Enigma UI", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
+      [ "Compiling", "md__r_e_a_d_m_e.html#autotoc_md7", [
+        [ "Windows Visual Studio 19 2022", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+        [ "Linux GNU Makefile", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+        [ "MacOS TODO (when i figure out a way to test macos on vm)", "md__r_e_a_d_m_e.html#autotoc_md10", null ]
       ] ],
-      [ "License", "md__r_e_a_d_m_e.html#autotoc_md19", null ],
-      [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md20", null ]
+      [ "License", "md__r_e_a_d_m_e.html#autotoc_md11", null ],
+      [ "Features and bugs", "md__r_e_a_d_m_e.html#autotoc_md12", null ]
     ] ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -88,14 +89,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_e_s_8cpp.html",
-"_g_zip_8cpp.html",
-"_key_codes_8hpp.html#aa67808d34f3ae2bbae44fa067aa8900b",
-"_tests_data_8hpp.html#acad0912a4ab3a1df2d97c28e8cf62ae6",
-"class_database.html#a7185a2a952f15960fadb2e4ec4147bc8",
-"class_key_typed_event.html",
-"class_string_utils.html#a75849d25ed1a3cb99321351a6d489d45",
-"functions_b.html",
-"struct_cipher.html#a937608b737fd252e5071f939f218f5a6"
+"_event_8hpp.html#a99e66e5e5709006e4088f2deec8a6c88",
+"_key_codes_8hpp.html#a552cc4204fe35cede0553356c094c65c",
+"_password_generator_tool_8d.html",
+"class_application.html#ad55ac15350dcd478edb7098e9ad8332c",
+"class_hashing_tool.html#a586421850c139d654cd19ebe24e874cfa19aad9f2fe3ce0023298ab83f7e75775",
+"class_open_g_l_utils.html#ab18ec262ee70cdeeea135d529e0ae0d7",
+"class_window_focus_lost_event.html#a10fe01a0d925466621dca84a57498cd3",
+"namespace_enigma_1_1_constants_1_1_algorithm_1_1_twofish.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -88,11 +88,11 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
 <div class="title"><a class="el" href="namespace_enigma.html">Enigma</a> </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://github.com/BaderEddineOuaich/Enigma/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-yellow" alt="MIT License" class="inline"/></a> <a href="https://github.com/BaderEddineOuaich/Enigma/actions?workflow=build"><img src="https://github.com/BaderEddineOuaich/Enigma/workflows/build/badge.svg" alt="Build Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/BaderEddineOuaich/Enigma/actions?workflow=static-analysis"><img src="https://github.com/BaderEddineOuaich/Enigma/workflows/static-analysis/badge.svg" alt="Static Analysis Status" style="pointer-events: none;" class="inline"/></a> <a href="https://badereddineouaich.github.io/Enigma"><img src="https://codedocs.xyz/doxygen/doxygen.svg" alt="Docs" style="pointer-events: none;" class="inline"/></a></p>
+<div class="textblock"><p><a href="https://github.com/baderouaich/Enigma/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-yellow" alt="MIT License" class="inline"/></a> <a href="https://github.com/baderouaich/Enigma/actions?workflow=build"><img src="https://github.com/baderouaich/Enigma/workflows/build/badge.svg" alt="Build Status" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/baderouaich/Enigma/actions?workflow=static-analysis"><img src="https://github.com/baderouaich/Enigma/workflows/static-analysis/badge.svg" alt="Static Analysis Status" style="pointer-events: none;" class="inline"/></a> <a href="https://badereddineouaich.github.io/Enigma"><img src="https://codedocs.xyz/doxygen/doxygen.svg" alt="Docs" style="pointer-events: none;" class="inline"/></a></p>
 <p><img src="Resources/Branding/Logo.png" alt="" width="333" class="inline"/></p>
 <p>A Simple, Reliable and Efficient UI + <a class="el" href="class_c_l_i.html" title="cxxopts: CMD parser library">CLI</a> <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a> <a class="el" href="class_tool.html" title="Tool collapsing header view abstract class.">Tool</a><br  />
 </p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md1"></a>
 Supported Algorithms</h1>
 <p>All <a href="https://www.cryptopp.com/wiki/Authenticated_Encryption">Authenticated Encryption</a></p><ul>
 <li>:white_check_mark: <b>AES-GCM</b> (Recommended)</li>
@@ -102,7 +102,7 @@ Supported Algorithms</h1>
 <li>:white_check_mark: <b>IDEA-EAX</b></li>
 <li>:white_check_mark: <b><a class="el" href="class_cha_cha20_poly1305.html" title="ChaCha20Poly1305 Algorithm Encryptor/Decryptor.">ChaCha20Poly1305</a></b></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Available Tools</h1>
 <ul>
 <li>Password Generator</li>
@@ -110,7 +110,7 @@ Available Tools</h1>
 <li>XOR <a class="el" href="struct_encryption.html" title="Encryption Model | Table: Encryption.">Encryption</a></li>
 <li>System &amp; Hardware Information</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Enigma CLI</h1>
 <div class="fragment"><div class="line">Usage:</div>
 <div class="line">  Enigma [OPTION...]</div>
@@ -129,43 +129,43 @@ Enigma CLI</h1>
 <div class="line">      --check-for-updates       Check for new version releases</div>
 </div><!-- fragment --><ul>
 <li>Example encypting a text with AES-GCM:<br  />
- <div class="fragment"><div class="line">./Enigma -e --algorithm=aes --password=&quot;My@pa$$W0rd&quot; --text=&quot;my important data securly encrypted!&quot;</div>
+ <div class="fragment"><div class="line">$ ./Enigma --encrypt --algorithm=aes --password=&quot;My@pa$$W0rd&quot; --text=&quot;my important data securly encrypted!&quot;</div>
 <div class="line">output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT</div>
 </div><!-- fragment --></li>
 <li>Example decrypting a text with AES-GCM:<br  />
- <div class="fragment"><div class="line">./Enigma -d --password=&quot;My@pa$$W0rd&quot; --text=&quot;AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT&quot;</div>
+ <div class="fragment"><div class="line">$ ./Enigma -d -p &quot;My@pa$$W0rd&quot; -t &quot;AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT&quot;</div>
 <div class="line">output: my important data securly encrypted!</div>
 </div><!-- fragment --></li>
 <li>Example encypting a file with AES-GCM:<br  />
- <div class="fragment"><div class="line">./Enigma -e --algorithm=aes --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data.txt&quot; --outfile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot;</div>
+ <div class="fragment"><div class="line">$ ./Enigma -e -a AES --password &quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data.txt&quot; --outfile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot;</div>
 </div><!-- fragment --></li>
 <li>Example decypting a file with AES-GCM:<br  />
- <div class="fragment"><div class="line">./Enigma -d --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot; --outfile=&quot;/home/user/Desktop/Data_decrypted.txt&quot;</div>
+ <div class="fragment"><div class="line">$ ./Enigma --decrypt --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot; --outfile=&quot;/home/user/Desktop/Data_decrypted.txt&quot;</div>
 </div><!-- fragment --></li>
 </ul>
 <p><img src="Resources/ScreenShots/4.png" alt="" class="inline"/><br  />
 </p>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Enigma UI</h1>
 <p><img src="Resources/ScreenShots/Main-Menu-Demo.png" alt="" class="inline"/> <img src="Resources/ScreenShots/2.png" alt="" class="inline"/> <img src="Resources/ScreenShots/My-Encryptions-Demo.png" alt="" class="inline"/> <img src="Resources/ScreenShots/Tools-Demo.png" alt="" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Compiling</h1>
 <ul>
-<li><em>Clone Repository</em> : <code>$ git clone <a href="https://github.com/BaderEddineOuaich/Enigma.git">https://github.com/BaderEddineOuaich/Enigma.git</a></code><br  />
+<li><em>Clone Repository</em> : <code>$ git clone <a href="https://github.com/baderouaich/Enigma.git">https://github.com/baderouaich/Enigma.git</a></code><br  />
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md16"></a>
-Windows Visual Studio 16 2019</h2>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Windows Visual Studio 19 2022</h2>
 <blockquote class="doxtable">
 <p>Bellow steps are equivelent to running script <code>./Scripts/Windows-Build-Release.bat</code> </p>
 </blockquote>
-<p>- Extract premake5 binary in <code>./Premake/Windows/premake-5.0.0-alpha16-windows.zip</code><br  />
+<p>- Extract premake5 binary in <code>./Premake/Windows/premake-5.0.0-beta1-windows.zip</code><br  />
 </p><ul>
 <li>Run <code>./Scripts/Gen-Windows-vs2019.bat</code> to generate Visual Studio 16 2019 project solution files</li>
 <li>Open Enigma.sln and Change configuration to Release or Dist</li>
 <li>Build &amp; Run Solution</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Linux GNU Makefile</h2>
 <blockquote class="doxtable">
 <p>Bellow steps are equivelent to running script <code>sudo bash ./Scripts/Linux-Build-Release.sh</code> </p>
@@ -173,29 +173,29 @@ Linux GNU Makefile</h2>
 <p>- Install latest c++ compiler (gcc or clang)<br  />
  <code>$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa</code><br  />
  <code>$ sudo apt update</code><br  />
- gcc: <code>$ sudo apt install gcc-10 g++-10</code> or clang: <code>$ sudo apt install clang-10 clang++-10</code><br  />
+ gcc: <code>$ sudo apt install gcc-12 g++-12</code> or clang: <code>$ sudo apt install clang-14 clang++-14</code><br  />
 </p><ul>
 <li>Install necessary libs (opengl, x11, ...)<br  />
  <code>$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev</code></li>
 <li>Extract premake5 binary<br  />
- <code>$ tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/</code></li>
+ <code>$ tar xvzf ./Premake/Linux/premake-5.0.0-beta1-linux.tar.gz -C ./Premake/Linux/</code></li>
 <li>Run <code>$ sudo bash ./Scripts/Gen-Linux-Makefile.sh</code> to generate project Makefiles</li>
-<li>Compile with gcc: <code>$ make config=release CC=gcc-10 CPP=g++-10 -j 4</code> or clang: <code>$ make config=release CC=clang-10 CPP=clang++-10 -j 4</code> <br  />
+<li>Compile with gcc: <code>$ make config=release CC=gcc-12 CPP=g++-12 -j</code> or clang: <code>$ make config=release CC=clang-14 CPP=clang++-14 -j</code> <br  />
 </li>
 <li>Run <a class="el" href="namespace_enigma.html">Enigma</a> Binary <code>$ ./Bin/Release-linux-x86_64/Enigma/Enigma</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 MacOS TODO (when i figure out a way to test macos on vm)</h2>
 <ul>
 <li>Run <code>$ sudo bash ./Scripts/Gen-MacOS-XCode.sh</code> to generate XCode project files<br  />
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 License</h1>
 <p><a class="el" href="md__l_i_c_e_n_s_e.html">MIT License</a></p>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Features and bugs</h1>
-<p>If you face any problems feel free to open an issue at the <a href="https://github.com/BaderEddineOuaich/Enigma/issues">issue tracker</a>. If you feel the program is missing a feature, please raise a ticket on Github. Pull requests are also welcome. </p>
+<p>If you face any problems feel free to open an issue at the <a href="https://github.com/baderouaich/Enigma/issues">issue tracker</a>. If you feel the program is missing a feature, please raise a ticket on Github. Pull requests are also welcome. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -120,9 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5a92c2df2ae7e02f468158acbe507342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a5a92c2df2ae7e02f468158acbe507342">Exit</a> (const String &amp;message, const i32 exit_code) noexcept</td></tr>
 <tr class="memdesc:a5a92c2df2ae7e02f468158acbe507342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Immediate exit from application without waiting for GL flushes or scenes to be destroyed.  <a href="class_application.html#a5a92c2df2ae7e02f468158acbe507342">More...</a><br /></td></tr>
 <tr class="separator:a5a92c2df2ae7e02f468158acbe507342"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b0c16f7090188281683f29c8ac08cb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a9b0c16f7090188281683f29c8ac08cb4">LaunchWorkerThread</a> (<a class="el" href="class_scene.html">Scene</a> *scene, const String &amp;loading_text, const std::function&lt; void()&gt; &amp;work_func, const bool cancelable=false)</td></tr>
-<tr class="memdesc:a9b0c16f7090188281683f29c8ac08cb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launches detached thread seperated from main UI thread.  <a href="class_application.html#a9b0c16f7090188281683f29c8ac08cb4">More...</a><br /></td></tr>
-<tr class="separator:a9b0c16f7090188281683f29c8ac08cb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac54cf61096533ff3534f7f014e111b84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ac54cf61096533ff3534f7f014e111b84">LaunchWorkerThread</a> (<a class="el" href="class_scene.html">Scene</a> *scene, const String &amp;loading_text, const std::function&lt; void()&gt; &amp;work_func)</td></tr>
+<tr class="memdesc:ac54cf61096533ff3534f7f014e111b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launches detached thread seperated from main UI thread.  <a href="class_application.html#ac54cf61096533ff3534f7f014e111b84">More...</a><br /></td></tr>
+<tr class="separator:ac54cf61096533ff3534f7f014e111b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e4f4db86437b9b8aecc9594c9c8dccc"><td class="memItemLeft" align="right" valign="top">const std::unique_ptr&lt; <a class="el" href="class_window.html">Window</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a1e4f4db86437b9b8aecc9594c9c8dccc">GetWindow</a> () const noexcept</td></tr>
 <tr class="memdesc:a1e4f4db86437b9b8aecc9594c9c8dccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_window.html">Window</a> of this <a class="el" href="class_application.html">Application</a>.  <a href="class_application.html#a1e4f4db86437b9b8aecc9594c9c8dccc">More...</a><br /></td></tr>
 <tr class="separator:a1e4f4db86437b9b8aecc9594c9c8dccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -301,7 +301,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00427">427</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00444">444</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +331,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Ends <a class="el" href="class_application.html">Application</a> by exiting the main loop by setting window should close to true. </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00421">421</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00437">437</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -378,7 +378,7 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00348">348</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00364">364</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -611,7 +611,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Initialize Hardware Info (if enabled in WindowSettings.ini) </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00094">94</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00093">93</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -640,7 +640,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Load Fonts. </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00105">105</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00104">104</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -669,7 +669,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Initialize ImGui. </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00089">89</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00088">88</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -699,12 +699,12 @@ Static Private Attributes</h2></td></tr>
 
 <p>Initialize <a class="el" href="class_window.html">Window</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00056">56</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00055">55</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a9b0c16f7090188281683f29c8ac08cb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b0c16f7090188281683f29c8ac08cb4">&#9670;&nbsp;</a></span>LaunchWorkerThread()</h2>
+<a id="ac54cf61096533ff3534f7f014e111b84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac54cf61096533ff3534f7f014e111b84">&#9670;&nbsp;</a></span>LaunchWorkerThread()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -725,13 +725,7 @@ Static Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::function&lt; void()&gt; &amp;&#160;</td>
-          <td class="paramname"><em>work_func</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>cancelable</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>work_func</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -751,7 +745,7 @@ Static Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00160">160</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00177">177</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -781,7 +775,7 @@ Static Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if event is handled, false to pass it to other scenes </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_event_8hpp.html">Event.hpp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00185">185</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00201">201</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -811,7 +805,7 @@ Static Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if event is handled, false to pass it to other scenes </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_event_8hpp.html">Event.hpp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00257">257</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00272">272</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -841,7 +835,7 @@ Static Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if event is handled, false to pass it to other scenes </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_event_8hpp.html">Event.hpp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00211">211</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00227">227</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -871,7 +865,7 @@ Static Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if event is handled, false to pass it to other scenes </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="_event_8hpp.html">Event.hpp</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00241">241</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00256">256</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -893,7 +887,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Pushes new <a class="el" href="class_scene.html">Scene</a> to the stack Calls scene life cycle OnCreate() </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00148">148</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00165">165</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -914,7 +908,7 @@ Static Private Attributes</h2></td></tr>
 
 <p><a class="el" href="class_application.html">Application</a> Main Loop Runner. </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00273">273</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00288">288</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -943,7 +937,7 @@ Static Private Attributes</h2></td></tr>
 
 <p>Updates delta time. </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00361">361</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00377">377</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
@@ -973,7 +967,7 @@ Static Private Attributes</h2></td></tr>
 <p>Updates hardware info (CPU, RAM, FPS... </p>
 <p>if enabled in WindowSettings.ini) </p>
 
-<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00369">369</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_application_8cpp_source.html#l00385">385</a> of file <a class="el" href="_application_8cpp_source.html">Application.cpp</a>.</p>
 
 </div>
 </div>
