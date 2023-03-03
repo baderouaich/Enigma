@@ -1,8 +1,8 @@
 # Enigma
 <!--WORKFLOW-->
-[![MIT License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/BaderEddineOuaich/Enigma/blob/master/LICENSE.md)
-[![Build Status](https://github.com/BaderEddineOuaich/Enigma/workflows/build/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=build) 
-[![Static Analysis Status](https://github.com/BaderEddineOuaich/Enigma/workflows/static-analysis/badge.svg)](https://github.com/BaderEddineOuaich/Enigma/actions?workflow=static-analysis)
+[![MIT License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/baderouaich/Enigma/blob/master/LICENSE.md)
+[![Build Status](https://github.com/baderouaich/Enigma/workflows/build/badge.svg)](https://github.com/baderouaich/Enigma/actions?workflow=build) 
+[![Static Analysis Status](https://github.com/baderouaich/Enigma/workflows/static-analysis/badge.svg)](https://github.com/baderouaich/Enigma/actions?workflow=static-analysis)
 [![Docs](https://codedocs.xyz/doxygen/doxygen.svg)](https://badereddineouaich.github.io/Enigma)
 
 
@@ -123,11 +123,11 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 
 
 ## Compiling
-- <i>Clone Repository</i> : `$ git clone https://github.com/BaderEddineOuaich/Enigma.git`<br>
+- <i>Clone Repository</i> : `$ git clone https://github.com/baderouaich/Enigma.git`<br>
 
-### Windows Visual Studio 16 2019 
+### Windows Visual Studio 19 2022
 > Bellow steps are equivelent to running script `./Scripts/Windows-Build-Release.bat`
- - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-alpha16-windows.zip`<br>
+ - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-beta1-windows.zip`<br>
  - Run `./Scripts/Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
  - Open Enigma.sln and Change configuration to Release or Dist
  - Build & Run Solution
@@ -138,13 +138,13 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
  - Install latest c++ compiler (gcc or clang)<br>
   `$ sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa`<br>
   `$ sudo apt update`<br>
-  gcc: `$ sudo apt install gcc-10 g++-10` or clang: `$ sudo apt install clang-10 clang++-10`<br>
+  gcc: `$ sudo apt install gcc-12 g++-12` or clang: `$ sudo apt install clang-14 clang++-14`<br>
  - Install necessary libs (opengl, x11, ...)<br>
   `$ sudo apt install libgl1-mesa-dev libxi-dev libx11-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev`
  - Extract premake5 binary<br>
-  `$ tar xvzf ./Premake/Linux/premake-5.0.0-alpha16-linux.tar.gz -C ./Premake/Linux/`
+  `$ tar xvzf ./Premake/Linux/premake-5.0.0-beta1-linux.tar.gz -C ./Premake/Linux/`
  - Run `$ sudo bash ./Scripts/Gen-Linux-Makefile.sh` to generate project Makefiles
- - Compile with gcc: `$ make config=release CC=gcc-10 CPP=g++-10 -j 4` or clang: `$ make config=release CC=clang-10 CPP=clang++-10 -j 4` <br> 
+ - Compile with gcc: `$ make config=release CC=gcc-12 CPP=g++-12 -j$(nproc)` or clang: `$ make config=release CC=clang-14 CPP=clang++-14 -j$(nproc)` <br> 
 <!--  replace -j X with number of threads to use for compilation, the more the faster<br>
    replace release with dist for full performance -->
 <!--  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma` --> 
@@ -162,4 +162,4 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 
 If you face any problems feel free to open an issue at the [issue tracker][tracker]. If you feel the program is missing a feature, please raise a ticket on Github. Pull requests are also welcome.
 
-[tracker]: https://github.com/BaderEddineOuaich/Enigma/issues
+[tracker]: https://github.com/baderouaich/Enigma/issues

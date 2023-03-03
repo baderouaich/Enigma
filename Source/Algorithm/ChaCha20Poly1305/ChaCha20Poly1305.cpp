@@ -65,7 +65,7 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 	// Output calculated MAC
 	String mac(16, '\000');
 
-	// Encrypt & Authenticate (Thanks to @mcoret who mentioned this in https://github.com/BaderEddineOuaich/Enigma/issues/4)
+	// Encrypt & Authenticate (Thanks to @mcoret who mentioned this in https://github.com/baderouaich/Enigma/issues/4)
 	m_chacha_encryptor->EncryptAndAuthenticate(
 		reinterpret_cast<byte*>(cipher.data()), // output cipher (encrypted buffer)
 		reinterpret_cast<byte*>(mac.data()), mac.size(),  // output calculated MAC
