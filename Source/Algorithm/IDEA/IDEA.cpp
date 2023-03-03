@@ -45,7 +45,7 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	const String iv = Algorithm::GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE);
 
 	// Prepare key
-	CryptoPP::SecByteBlock key(CryptoPP::IDEA::MAX_KEYLENGTH + CryptoPP::IDEA::BLOCKSIZE); // Encryption key to be generated from user password + IV
+	CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::IDEA::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::IDEA::BLOCKSIZE)); // Encryption key to be generated from user password + IV
 
 	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
 	CryptoPP::HKDF<CryptoPP::SHA256> hkdf{};

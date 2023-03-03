@@ -43,7 +43,7 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	const String iv = Algorithm::GenerateRandomIV(CryptoPP::DES_EDE3::BLOCKSIZE);
 
 	// Prepare key
-	CryptoPP::SecByteBlock key(CryptoPP::DES_EDE3::MAX_KEYLENGTH + CryptoPP::DES_EDE3::BLOCKSIZE); // Encryption key to be generated from user password + IV
+	CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::DES_EDE3::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::DES_EDE3::BLOCKSIZE)); // Encryption key to be generated from user password + IV
 
 	// Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
 	CryptoPP::HKDF<CryptoPP::SHA256> hkdf{};
