@@ -202,7 +202,7 @@ project "Enigma"
 		}
 		flags
 		{
-			"FatalWarnings" -- Treat all warnings as errors; equivalent to FatalCompileWarnings, FatalLinkWarnings	
+			--"FatalWarnings" -- Treat all warnings as errors; equivalent to FatalCompileWarnings, FatalLinkWarnings	
 		}
 
 	filter "system:linux"

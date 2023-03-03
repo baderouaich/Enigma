@@ -475,7 +475,7 @@ void MyEncryptionsScene::ReformatEncryptionsDateTime()
 	for (const auto& enc_ptr : m_encryptions)
 	{
 		try {
-			static const std::map<ui16, char*> months = { {1, "Jan"}, {2, "Feb"}, {3, "Mar"}, {4, "Apr"}, {5, "May"}, {6, "Jun"}, {7, "Jul"}, {8, "Aug"}, {9, "Sep"}, {10, "Oct"}, {11, "Nov"}, {12, "Dec"} };
+			static const std::map<ui16, String> months = { {1, "Jan"}, {2, "Feb"}, {3, "Mar"}, {4, "Apr"}, {5, "May"}, {6, "Jun"}, {7, "Jul"}, {8, "Aug"}, {9, "Sep"}, {10, "Oct"}, {11, "Nov"}, {12, "Dec"} };
 			// default sqlite3 date format "2021-12-14 20:40:24"
 			//													   year:1		 month:2			day:3			hour:4	  minute:5   second:6	
 			static const std::regex rgx("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})");
