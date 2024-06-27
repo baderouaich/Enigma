@@ -35,9 +35,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # NOTE you must enable Read+write permissions in repository Settings -> Actions -> Workflow permissions -> toggle on Read and write permissions
           publish_branch: gh-pages
-          publish_dir: . # from
+          publish_dir: ./docs/html # from
           destination_dir: . # deploy to a subdirectory: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-subdirectory-destination_dir
           commit_message: docs - ${{ github.event.head_commit.message }}
-          # For newbies of GitHub Actions: Note that the GITHUB_TOKEN is NOT a personal access token.
-          # A GitHub Actions runner automatically creates a GITHUB_TOKEN secret to authenticate in your workflow.
-          # So, you can start to deploy immediately without any configuration.
