@@ -5,9 +5,9 @@ name: static-analysis
 # analyse on pushs and pull requests on master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
