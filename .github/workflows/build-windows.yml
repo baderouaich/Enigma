@@ -27,12 +27,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v2
         with:
           vs-version: '16.8' #using vs 16.8.3 in my local machine Help -> About Microsoft Visual Studio
 
       - name: Generate Project Files
-        run: .\Premake\Windows\premake5.exe vs2019 --file=premake5.lua
+        run: mkdir build && cd build && cmake .. -G"Visual Studio 16" -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc)
 
       - name: Build Solution
-        run: msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+        run: cd build && msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo

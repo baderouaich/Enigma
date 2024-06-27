@@ -26,7 +26,7 @@ jobs:
           sudo apt install gcc-12 g++-12
 
       - name: Installing necessary system libraries
-        run: sudo apt install cmake libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
+        run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating CMake Project & Build project
         run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc) -DCMAKE_CXX_COMPILER=g++-12 -DCMAKE_C_COMPILER=gcc-12
