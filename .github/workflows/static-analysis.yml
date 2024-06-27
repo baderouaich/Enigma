@@ -36,7 +36,7 @@ jobs:
           
       # Report generating task
       - name: publish report    
-        uses: mikeal/publish-to-github-action@master
+        uses: mikeal/publish-to-github-action@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: 'static-analysis-reports' # your branch name goes here

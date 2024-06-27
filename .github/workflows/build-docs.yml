@@ -35,7 +35,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # NOTE you must enable Read+write permissions in repository Settings -> Actions -> Workflow permissions -> toggle on Read and write permissions
           publish_branch: gh-pages
-          publish_dir: ./docs/html # from
+          publish_dir: . # from
           destination_dir: . # deploy to a subdirectory: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-subdirectory-destination_dir
           commit_message: docs - ${{ github.event.head_commit.message }}
           # For newbies of GitHub Actions: Note that the GITHUB_TOKEN is NOT a personal access token.
