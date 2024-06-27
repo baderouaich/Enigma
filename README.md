@@ -6,6 +6,7 @@
 [![Docs](https://codedocs.xyz/doxygen/doxygen.svg)](https://badereddineouaich.github.io/Enigma)
 
 
+
 <!--LOGO-->
 <!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
 <!-- <img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
@@ -20,7 +21,12 @@ Built to solve 3 problems i had:
 - just can't trust other programs to do the above two for me plus Enigma is a cool name to waste (in memory of Alan Turing)
 -->
 
+### CI Status
 
+| Operating system | Build status                                                                                                                                                                                    |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ubuntu (x64)     | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-ubuntu.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-ubuntu.yml)    |
+| Windows (x64)    | [![Windows](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-windows.yml) |
 
 ## Supported Algorithms
 All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)
