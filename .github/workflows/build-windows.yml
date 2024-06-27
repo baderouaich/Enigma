@@ -1,5 +1,5 @@
 # Enigma Build workflow task for linux & windows
-name: build
+name: build-windows
 
 # build on pushs and pull requests on master branch
 on:
@@ -8,11 +8,8 @@ on:
   pull_request:
     branches: [ main ]
 
-# platform tasks
 jobs:
-
-  ###=== WINDOWS ===###
-  Windows:
+  build:
     runs-on: windows-latest
     strategy:
       matrix:
@@ -22,18 +19,21 @@ jobs:
     defaults:
       run:
         shell: cmd
-
+     
     steps:
-      - uses: actions/checkout@v2
+    # https://github.com/actions/checkout
+    - uses: actions/checkout@v4
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-        with:
-          vs-version: '16.8' #using vs 16.8.3 in my local machine Help -> About Microsoft Visual Studio
-          msbuild-architecture: x64
+    - name: Ensure deps are installed
+      run: |
+        cmake --version
+        make --version
 
-      - name: Generate Project Files
-        run: mkdir build && cd build && cmake .. -G"Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release
+    - name: Generate Project Makefiles
+      run: |
+        md build && cd build
+        cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 
-      - name: Build Solution
-        run: cd build && msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+    - name: Build Enigma
+      run: cd build && make -j%NUMBER_OF_PROCESSORS%
+# todo    make test if -DENIGMA_ENABLE_TESTS=ON
