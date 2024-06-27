@@ -6,6 +6,24 @@ option(ENIGMA_ENABLE_TESTS "Enable/Disable building of tests" OFF)
 option(ENIGMA_BUILD_DOCS "Build doxygen API documentation" OFF)
 #####################################################
 
+###### Doxygen Documentation ######
+if (ENIGMA_BUILD_DOCS)
+  message(STATUS "Building Doxygen docs is enabled")
+  find_package(Doxygen REQUIRED)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
+  add_custom_target(enigma_build_docs ALL
+    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating Doxygen API documentation..."
+    VERBATIM
+  )
+  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs/html/ TYPE DOC)
+  # No need to go further as we're only building docs.
+  return()
+endif ()
+###################################
+
+
 ################## Libraries ##########################
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps.cmake")
 #######################################################
@@ -46,22 +64,6 @@ else()
   message(FATAL_ERROR "Unsupported platform")
 endif()
 ########################################
-
-
-###### Doxygen Documentation ######
-if (ENIGMA_BUILD_DOCS)
-  message(STATUS "Building Doxygen docs is enabled")
-  find_package(Doxygen REQUIRED)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
-  add_custom_target(enigma_build_docs ALL
-    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Generating Doxygen API documentation..."
-    VERBATIM
-  )
-  install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs/html/ TYPE DOC)
-endif ()
-###################################
 
 
 ###### Tests ######
