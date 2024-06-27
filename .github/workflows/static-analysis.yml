@@ -45,4 +45,5 @@ jobs:
           publish_dir: ./output # from
           destination_dir: . # to - deploy to a subdirectory: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-subdirectory-destination_dir
           commit_message: cppcheck report - ${{ github.event.head_commit.message }}
+          enable_jekyll: false
 
