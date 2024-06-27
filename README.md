@@ -9,15 +9,15 @@
 <!--LOGO-->
 <!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
 <!-- <img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
-<img src="Resources/Branding/Logo.png" width="333" />
+<img src="res/branding/Logo.png" width="250" />
 
 <!--DESCRIOTION-->
 A Simple, Reliable and Efficient UI + CLI Encryption Tool<br>
 <!--
 Built to solve 3 problems i had:
-- huge personal files take too much space in storage clouds <strong>(Solved by Compression)</strong>
+- huge personnel files take too much space in storage clouds <strong>(Solved by Compression)</strong>
 - if someone accessed my storage's account, you know. <strong>(Solved by Encryption)</strong>
-- just can't trust other programs to do the above two for me plus Enigma and is a cool name to waste (in memory of Alan Turing)
+- just can't trust other programs to do the above two for me plus Enigma is a cool name to waste (in memory of Alan Turing)
 -->
 
 
