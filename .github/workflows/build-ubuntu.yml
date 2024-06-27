@@ -30,8 +30,11 @@ jobs:
       - name: Installing necessary system libraries
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
-      - name: Generating CMake Project & Build project
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc)
+      - name: Generating Ninja build fi$les
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release
 
-      - name: Run Enigma
+      - name: Building Enigma
+        run: cd build && ninja -j$(nproc)
+
+      - name: Running Enigma
         run: ./build/Enigma --version
