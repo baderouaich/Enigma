@@ -1,5 +1,7 @@
 # Enigma.db & Databases
-Resources/Database/*.db
+res/Database/*.db
+
+cmake-build-*
 
 # Ignore visual studio .sln .vcxproj...
 *.sln
