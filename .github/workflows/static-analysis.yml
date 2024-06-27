@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Make report output dir
+        run: mkdir ./output
+
       # CppCheck analysis task
       - name: cppcheck
         uses: deep5050/cppcheck-action@main
@@ -32,14 +35,14 @@ jobs:
           max_ctu_depth: 12
           #platform: 
           std: c++20
-          output_file: ./CppCheckReport.txt
+          output_file: ./output/CppCheckReport.txt
 
       - name: Publish cppcheck report
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # NOTE you must enable Read+write permissions in repository Settings -> Actions -> Workflow permissions -> toggle on Read and write permissions
           publish_branch: static-analysis-reports
-          publish_dir: ./CppCheckReport.txt # from
+          publish_dir: ./output # from
           destination_dir: . # to - deploy to a subdirectory: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-subdirectory-destination_dir
           commit_message: cppcheck report - ${{ github.event.head_commit.message }}
 
