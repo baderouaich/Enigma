@@ -1,0 +1,6 @@
+src/Application/SingleProcessInstance.hpp:73:3: performance: Variable 'm_socket_fd' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+  m_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
+  ^
+src/Window/WindowSettings.hpp:144:3: performance: Variable 'title' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+  title = config.Get<decltype(WindowSettings::title)>("window", "title", "Enigma");
+  ^
