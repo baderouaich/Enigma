@@ -8,8 +8,8 @@
 
 
 <!--LOGO-->
-<!-- ![Enigma](Resources/Branding/EnigmaLogoWolf_860x869.png) -->
-<!-- <img src="Resources/Branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
+<!-- ![Enigma](res/branding/EnigmaLogoWolf_860x869.png) -->
+<!-- <img src="res/branding/EnigmaLogoWolf_860x869.png" width="330"/> -->
 <img src="res/branding/Logo.png" width="250" />
 
 <!--DESCRIOTION-->
@@ -62,7 +62,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 <!--
 ## NOTES
 - Encryption passwords are NOT saved into the database.
-- Import/Export your database by copying or replacing database file `Enigma.db` located in `./Resources/Database/`
+- Import/Export your database by copying or replacing database file `Enigma.db` located in `./res/database/`
 -->
 
 ## Enigma CLI
@@ -94,7 +94,7 @@ output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1Srgl
 $ ./Enigma -d -p "My@pa$$W0rd" -t "AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
 output: my important data securly encrypted!
 ```
-<!--<img src="Resources/ScreenShots/CLI-EncryptDecryptText-Demo.png"/><br>-->
+<!--<img src="res/screenshots/CLI-EncryptDecryptText-Demo.png"/><br>-->
 
 - Example encypting a file with AES-GCM:<br>
 ```batch
@@ -104,39 +104,39 @@ $ ./Enigma -e -a AES --password "My@pa$$W0rd" --infile="/home/user/Desktop/Data.
 ```batch
 $ ./Enigma --decrypt --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
 ```
-<!-- <img src="Resources/ScreenShots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
-<img src="Resources/ScreenShots/4.png"/><br>
+<!-- <img src="res/screenshots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
+<img src="res/screenshots/4.png"/><br>
 
 
 
 ## Enigma UI
-<img src="Resources/ScreenShots/Main-Menu-Demo.png"/>
-<img src="Resources/ScreenShots/2.png"/>
-<img src="Resources/ScreenShots/My-Encryptions-Demo.png"/>
-<img src="Resources/ScreenShots/Tools-Demo.png"/>
+<img src="res/screenshots/Main-Menu-Demo.png"/>
+<img src="res/screenshots/2.png"/>
+<img src="res/screenshots/My-Encryptions-Demo.png"/>
+<img src="res/screenshots/Tools-Demo.png"/>
 
 <!--
-<img width="300" src="Resources/ScreenShots/UI-MainMenuScene.png"/>  <img width="300" src="Resources/ScreenShots/UI-EncryptText-Demo.png"/>  <img width="300" src="Resources/ScreenShots/UI-DecryptText-Demo.png"/>  <img width="300" src="Resources/ScreenShots/UI-EncryptFile-Demo.png"/>  <img width="300" src="Resources/ScreenShots/UI-DecryptFile-Demo.png"/>
+<img width="300" src="res/screenshots/UI-MainMenuScene.png"/>  <img width="300" src="res/screenshots/UI-EncryptText-Demo.png"/>  <img width="300" src="res/screenshots/UI-DecryptText-Demo.png"/>  <img width="300" src="res/screenshots/UI-EncryptFile-Demo.png"/>  <img width="300" src="res/screenshots/UI-DecryptFile-Demo.png"/>
 -->
 
 <!--
 Latest Test on `Windows 10 Version 20H2`
-<img src="Resources/Dev Process/Windows-Latest.png"/>
+<img src="res/Dev Process/Windows-Latest.png"/>
 <br>
 Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
-<img src="Resources/Dev Process/Linux-Latest.png"/>
+<img src="res/Dev Process/Linux-Latest.png"/>
 -->
 
+<!-- 
 
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/baderouaich/Enigma.git`<br>
 
 ### Windows Visual Studio 19 2022
-> Bellow steps are equivelent to running script `./Scripts/Windows-Build-Release.bat`
- - Extract premake5 binary in `./Premake/Windows/premake-5.0.0-beta1-windows.zip`<br>
- - Run `./Scripts/Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
- - Open Enigma.sln and Change configuration to Release or Dist
- - Build & Run Solution
+- Extract premake5 binary in `./Premake/Windows/premake-5.0.0-beta1-windows.zip`<br>
+- Run `./Scripts/Gen-Windows-vs2019.bat` to generate Visual Studio 16 2019 project solution files
+- Open Enigma.sln and Change configuration to Release or Dist
+- Build & Run Solution
 
 
 ### Linux GNU Makefile 
@@ -151,14 +151,13 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
   `$ tar xvzf ./Premake/Linux/premake-5.0.0-beta1-linux.tar.gz -C ./Premake/Linux/`
  - Run `$ sudo bash ./Scripts/Gen-Linux-Makefile.sh` to generate project Makefiles
  - Compile with gcc: `$ make config=release CC=gcc-12 CPP=g++-12 -j$(nproc)` or clang: `$ make config=release CC=clang-14 CPP=clang++-14 -j$(nproc)` <br> 
-<!--  replace -j X with number of threads to use for compilation, the more the faster<br>
-   replace release with dist for full performance -->
-<!--  - Copy `Resources/` folder next to the executable at `./Bin/Release-linux-x86_64/Enigma/Enigma` --> 
  - Run Enigma Binary `$ ./Bin/Release-linux-x86_64/Enigma/Enigma`
 
 ### MacOS TODO (when i figure out a way to test macos on vm)
-- Run `$ sudo bash ./Scripts/Gen-MacOS-XCode.sh` to generate XCode project files<br>
+- Run `$ sudo bash ./Scripts/Gen-MacOS-XCode.sh` to generate XCode project files<br> 
 
+
+ -->
 
 ## License
 [MIT License](LICENSE.md)
