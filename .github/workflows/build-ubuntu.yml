@@ -29,7 +29,7 @@ jobs:
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating CMake Project & Build project
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc) -DCMAKE_CXX_COMPILER=g++-12 -DCMAKE_C_COMPILER=gcc-12
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc) -DCMAKE_CXX_COMPILER:FILEPATH=$(which g++-12) -DCMAKE_C_COMPILER:FILEPATH=$(which gcc-12)
 
       - name: Run Enigma
         run: ./build/Enigma --version
