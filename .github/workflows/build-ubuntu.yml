@@ -24,12 +24,14 @@ jobs:
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt update
           sudo apt install gcc-12 g++-12
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
 
       - name: Installing necessary system libraries
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating CMake Project & Build project
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc) -DCMAKE_CXX_COMPILER:FILEPATH=$(which g++-12) -DCMAKE_C_COMPILER:FILEPATH=$(which gcc-12)
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release && ninja -j$(nproc)
 
       - name: Run Enigma
         run: ./build/Enigma --version

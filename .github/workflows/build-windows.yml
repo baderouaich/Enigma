@@ -30,9 +30,10 @@ jobs:
         uses: microsoft/setup-msbuild@v2
         with:
           vs-version: '16.8' #using vs 16.8.3 in my local machine Help -> About Microsoft Visual Studio
+          msbuild-architecture: x64
 
       - name: Generate Project Files
-        run: mkdir build && cd build && cmake .. -G"Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=Release
+        run: mkdir build && cd build && cmake .. -G"Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release
 
       - name: Build Solution
         run: cd build && msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
