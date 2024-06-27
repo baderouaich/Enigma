@@ -1,0 +1,43 @@
+# https://github.com/peaceiris/actions-gh-pages
+
+name: build-docs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Update apt repositories
+        run: sudo apt update
+
+      - name: Install Doxygen & CMake & ninja
+        run: |
+          sudo apt install doxygen cmake ninja-build
+          doxygen --version
+          cmake --version
+          ninja --version
+
+      - name: Build CMake build_docs target
+        run: | # this will generate a docs/html/** folder (configured in the Doxyfile)
+          mkdir build && cd build
+          cmake .. -GNinja -DENIGMA_BUILD_DOCS=ON
+          ninja enigma_build_docs
+
+      - name: Deploy generated documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # NOTE you must enable Read+write permissions in repository Settings -> Actions -> Workflow permissions -> toggle on Read and write permissions
+          publish_branch: gh-pages
+          publish_dir: ./docs/html # from
+          destination_dir: . # deploy to a subdirectory: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-subdirectory-destination_dir
+          commit_message: docs - ${{ github.event.head_commit.message }}
+          # For newbies of GitHub Actions: Note that the GITHUB_TOKEN is NOT a personal access token.
+          # A GitHub Actions runner automatically creates a GITHUB_TOKEN secret to authenticate in your workflow.
+          # So, you can start to deploy immediately without any configuration.
