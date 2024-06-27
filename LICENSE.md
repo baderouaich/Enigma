@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) Bader-Eddine Ouaich and other contributors
+Copyright (c) Bader-Eddine Ouaich and other [contributors](https://github.com/baderouaich/Enigma/graphs/contributors)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
