@@ -47,7 +47,7 @@ Version=${PROJECT_VERSION}
 Comment=${PROJECT_DESCRIPTION}
 Exec=${INSTALL_BASE_DIR}/Enigma
 Icon=${INSTALL_BASE_DIR}/res/branding/Logo.png
-Categories=Utility
+Categories=Utility;Security
 Terminal=false"
   )
   # Put the Enigma.desktop to /home/$(whoami)/.local/share/applications (not the usr/local/share/applications so only this user will have access to the app)

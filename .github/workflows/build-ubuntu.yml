@@ -36,5 +36,8 @@ jobs:
       - name: Building Enigma
         run: cd build && ninja -j$(nproc)
 
+      - name: Installing Enigma
+        run: cd build && ninja install
+
       - name: Running Enigma
         run: ./build/Enigma --version

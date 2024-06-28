@@ -139,8 +139,8 @@ mkdir build && cd build
 cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows
 ```
-- All Enigma files will be installed in `/home/$(whoami)/Enigma/` (Linux) |  `C:\Program Files\Enigma\` (Windows)
-- To uninstall simply remove the installation Enigma folder
+- All Enigma files will be installed to `/home/$(whoami)/Enigma/` (**Linux**) |  `C:\Program Files\Enigma\` (**Windows**)
+- To uninstall simply remove the installed `Enigma/` directory
 
 <!--
 ## Compiling

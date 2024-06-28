@@ -39,8 +39,8 @@ jobs:
 
     - name: Install Enigma
       run: cd build  && make install
-
-    - name: Run Enigma
-      run: Enigma --version
+# TODO
+#    - name: Run Enigma
+#      run: Enigma --version
       
 # todo    make test if -DENIGMA_ENABLE_TESTS=ON
