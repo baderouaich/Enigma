@@ -27,7 +27,7 @@ Built to solve 3 problems i had:
 | Ubuntu (x64)     | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-ubuntu.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-ubuntu.yml)    |
 | Windows (x64)    | [![Windows](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-windows.yml) |
 
-## Supported Algorithms
+## Supported Encryption Algorithms
 All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)
 - :white_check_mark: <strong>AES-GCM</strong> (Recommended)
 - :white_check_mark: <strong>Twofish-GCM</strong>
@@ -39,7 +39,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 <!-- - [ ] algo || [x] algo -->
 
 
-## Available Tools
+## Extra Tools
 - Password Generator
 - Hashing Algorithms (MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHAKE128, SHAKE256, KECCAK224, KECCAK256, KECCAK384, KECCAK512, TIGER, WHIRLPOOL)
 - XOR Encryption
@@ -51,7 +51,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :hammer_and_wrench: Useful tools like Password Generator, Hashing and System & Hardware Information
 - :computer: User Interface & Command-Line Interface support
 - :shield: Strongest Encryption Algorithms of the Decade
-- :package: GZip Compression by default to reduce cipher size if sharing or uploading to clouds
+- :package: GZip Compression by default to reduce cipher size if sharing or uploading files to clouds
 - :briefcase: SQLite3 Database system to save, import and export encryption records
 - :octocat: Open Source of course!
 -->
@@ -126,8 +126,19 @@ Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
 <img src="res/Dev Process/Linux-Latest.png"/>
 -->
 
-<!-- 
 
+### Compiling & Installing
+```shell
+git clone https://github.com/baderouaich/Enigma
+cd Enigma
+mkdir build && cd build
+cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows
+```
+- All Enigma files will be installed in `/home/$(whoami)/Enigma/` (Linux) |  `C:\Program Files\Enigma\` (Windows)
+- To uninstall simply remove the installation Enigma folder
+
+<!--
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/baderouaich/Enigma.git`<br>
 

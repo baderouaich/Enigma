@@ -42,12 +42,12 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 target_compile_definitions(${PROJECT_NAME} PRIVATE
   ENIGMA_VERSION="${PROJECT_VERSION}"
   ENIGMA_DESCRIPTION="${PROJECT_DESCRIPTION}"
-  RES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res"
-  CONFIG_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/config"
-  FONTS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/fonts"
-  BRANDING_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/branding"
-  DATABASE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/database"
-  LOGS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/logs"
+  LOCAL_RES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res"
+#  CONFIG_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/config"
+#  FONTS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/fonts"
+#  BRANDING_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/branding"
+#  DATABASE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/database"
+#  LOGS_DIR="${CMAKE_CURRENT_SOURCE_DIR}/res/logs"
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE
   ${ENIGMA_DEPENDENCIES}
@@ -91,3 +91,7 @@ if (ENIGMA_ENABLE_TESTS)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif ()
 ####################
+
+
+#### Install scripts ######
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/install.cmake")
