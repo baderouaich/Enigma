@@ -1,10 +1,12 @@
 #include <pch.hpp>
 #include <Enigma.hpp>
 
-static void SignalHandler(int sig);
+static void SignalHandler(const int sig);
 
 int main(int argc, char* argv[]) 
-{	
+{
+  using namespace Enigma;
+
 	// Handle abnormal exists to normally end program and release resources gracefully
 	std::signal(SIGABRT, SignalHandler); // Abnormal termination triggered by abort call
 	std::signal(SIGFPE,  SignalHandler); // Floating point exception
@@ -16,47 +18,36 @@ int main(int argc, char* argv[])
 	std::signal(SIGBREAK, SignalHandler); // On Windows, a click on console window close button will raise SIGBREAK
 #endif
 
-	// Initialize Logger
-	Enigma::Logger::Initialize();
-	// Initialize SQLite3 Database
-	Enigma::Database::Initialize();
+	Logger::Initialize();
+	Database::Initialize();
 
-	// To be returned
-	Enigma::i32 exit_code = -1;
+	i32 exit_code = -1;
 	try
 	{
 		//========= CLI Entry =========//
 		if (argc > 1)
 		{
-			const std::unique_ptr<Enigma::CLI> _Cli(new Enigma::CLI(argc, argv));
+			const std::unique_ptr<CLI> _Cli(new CLI(argc, argv));
 			exit_code = _Cli->Run();
 		}
 		//========= UI Entry =========//
 		else
 		{
-			// Load Window Configuration (title, width, height...)
-			const std::unique_ptr<Enigma::Config> window_config(new Enigma::Config(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH));
-			// Construct WindowSettings from loaded Config
-			const std::unique_ptr<Enigma::WindowSettings> window_settings(new Enigma::WindowSettings(*window_config));
-			// Create Enigma UI Application
-			const std::unique_ptr<Enigma::Application> _App(new Enigma::Application(*window_settings));
-			// Run Application
-			_App->Run();
-			// Exit Gracefully
+			const auto windowConfig = std::make_unique<Config>(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
+			const auto windowSettings = std::make_unique<WindowSettings>(*windowConfig);
+      const auto app = std::make_unique<Application>(*windowSettings);
+			app->Run();
 			exit_code = EXIT_SUCCESS;
 		}
 	}
 	catch (const std::exception& e)
 	{
-		// Exit Abnormally
 		ENIGMA_CRITICAL(e.what());
 		exit_code = EXIT_FAILURE;
 	}
 
-	// Shutdown SQLite3 Database
-	Enigma::Database::Shutdown();
-	// Shutdown Logger
-	Enigma::Logger::Shutdown();
+	Database::Shutdown();
+	Logger::Shutdown();
 
 	return exit_code;
 }
@@ -64,7 +55,7 @@ int main(int argc, char* argv[])
 /**
 *	Handles exit signals to release program resources gracefully
 */
-static void SignalHandler(int sig)
+static void SignalHandler(const int sig)
 {
 	const auto stringify_signal = [sig]() noexcept -> const char* 
 	{
@@ -90,21 +81,18 @@ static void SignalHandler(int sig)
 	   ENIGMA_INFO("Exiting gracefully...");
 	}
 
-	// Shutdown Application
 	if (Enigma::Application::GetInstance()) Enigma::Application::GetInstance()->~Application();
-	// Shutdown SQLite3 Database
 	if (Enigma::Database::GetInstance()) Enigma::Database::Shutdown();
-	// Shutdown Logger
 	if (Enigma::Logger::GetLogger()) Enigma::Logger::Shutdown();
 
 	std::exit(EXIT_SUCCESS);
 }
 
 /**
-*	Windows Entry Point (for Release & Distribution)
+*	Windows Entry Point (for Release mode)
 *	Note: even when using WinMain, release & dist are built as ConsoleApp so CLI will work properly.
 */
-#if defined(ENIGMA_PLATFORM_WINDOWS) && (defined(ENIGMA_RELEASE) || defined(ENIGMA_DIST))
+#if defined(ENIGMA_PLATFORM_WINDOWS) && defined(ENIGMA_RELEASE)
 
 int WINAPI WinMain(
 	[[maybe_unused]] _In_ HINSTANCE instance,

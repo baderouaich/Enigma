@@ -56,13 +56,21 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 
 ############ Platform macros ############
-#if(WIN32)
-#  target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_WINDOWS)
-#elseif (UNIX AND NOT APPLE)
-#  target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_LINUX)
-#else()
-#  message(FATAL_ERROR "Unsupported platform")
-#endif()
+if(WIN32)
+  # No need, will be defined by Core/Platform.hpp
+  # target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_WINDOWS)
+  # Common MSVC warnings defines
+  target_compile_definitions(${PROJECT_NAME} PRIVATE
+    _CRT_SECURE_NO_DEPRECATE
+    _CRT_SECURE_NO_WARNINGS
+    _CRT_NONSTDC_NO_WARNINGS
+  )
+elseif (UNIX AND NOT APPLE)
+  # No need, will be defined by Core/Platform.hpp
+  # target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_LINUX)
+else()
+  message(FATAL_ERROR "Unsupported platform")
+endif()
 ########################################
 
 

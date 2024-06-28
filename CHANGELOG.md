@@ -1,3 +1,6 @@
+# 3.0.0
+- Complete build system migration from Premake to CMake
+
 # 2.2.0
 - Fixed wrong text displayed in 'My Encryptions Scene' when searching for unexistent encryption, it displays "No encryption saved yet" instead of "No encryption found".
 
@@ -70,7 +73,7 @@
 - Added hardware analytics next to window if enabled in window settings (FPS, RAM & CPU Usage)
 - Enabled swap interval to keep FPS 30 by default
 - glfwSwapInterval has no effect on Linux https://www.glfw.org/faq.html#33---why-doesnt-glfwswapinterval-work
-"Modern graphics drivers have settings that allow users to override an application’s request for (among other things) swap interval. 
+"Modern graphics drivers have settings that allow users to override an applicationï¿½s request for (among other things) swap interval. 
 If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.
 
 

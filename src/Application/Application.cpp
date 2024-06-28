@@ -490,14 +490,6 @@ Application::~Application()
 	m_fonts.clear(); 
 
 	ImGui::GetIO().Fonts->Clear();
-
-	/*for (auto it = m_scenes.rbegin(); it != m_scenes.rend(); ++it)
-	{
-		// Notify scenes OnDestroy before closing application
-		const std::shared_ptr<Scene>& scene = *it;
-		scene->OnDestroy();
-	}*/
-
 }
 NS_ENIGMA_END
 
