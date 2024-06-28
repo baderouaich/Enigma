@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "Enigma", "index.html", [
-    [ "2.2.0", "md__c_h_a_n_g_e_l_o_g.html", null ],
+    [ "3.0.0", "md__c_h_a_n_g_e_l_o_g.html", null ],
     [ "LICENSE", "md__l_i_c_e_n_s_e.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
