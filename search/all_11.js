@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['q_817',['Q',['../_key_codes_8hpp.html#a154dedd6c3727bf89b0cb4fc8dbe8d07af09564c9ca56850d4cd6b3319e541aee',1,'KeyCodes.hpp']]],
-  ['question_818',['Question',['../class_dialog_utils.html#ab865d71b5ce65f5f1f561ac996e79486',1,'DialogUtils::Question(const String &amp;title, const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Yes_No)'],['../class_dialog_utils.html#a1f2b9ac268016815614ea2ac0904119b',1,'DialogUtils::Question(const String &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Yes_No)'],['../class_message_box.html#af303a736f07ca8e0aea3d4388f1b472aaa97ea56b0e00b2379736ae60869ff66a',1,'MessageBox::Question()']]]
+  ['q_803',['Q',['../_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5af09564c9ca56850d4cd6b3319e541aee',1,'KeyCodes.hpp']]],
+  ['question_804',['Question',['../class_dialog_utils.html#a5cc8e20df4fad7e92ce9713dc1a9a8f4',1,'DialogUtils::Question(const std::string &amp;title, const std::string &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Yes_No)'],['../class_dialog_utils.html#a8a634bc8e595053faa53876160e497e5',1,'DialogUtils::Question(const std::string &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Yes_No)'],['../class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a',1,'MessageBox::Question()']]]
 ];

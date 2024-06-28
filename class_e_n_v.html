@@ -96,20 +96,20 @@ $(document).ready(function(){initNavTree('class_e_n_v.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab2c17c9e7b966912d1d0ffa81f6d66f9"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#ab2c17c9e7b966912d1d0ffa81f6d66f9">Get</a> (const std::string_view &amp;key)</td></tr>
-<tr class="separator:ab2c17c9e7b966912d1d0ffa81f6d66f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44615373abd18136e7d7fd324ace33d0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#a44615373abd18136e7d7fd324ace33d0">Set</a> (const std::string_view &amp;key, const std::string_view &amp;value)</td></tr>
-<tr class="separator:a44615373abd18136e7d7fd324ace33d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56b4600633184c02fe46842dba277f27"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#a56b4600633184c02fe46842dba277f27">Delete</a> (const std::string_view &amp;key)</td></tr>
-<tr class="separator:a56b4600633184c02fe46842dba277f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c923374e78c83b8b240acfbf4a81c5"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#a97c923374e78c83b8b240acfbf4a81c5">Get</a> (const std::string &amp;key)</td></tr>
+<tr class="separator:a97c923374e78c83b8b240acfbf4a81c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac852c59f10bf4e65d5ea591bb37889a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#ac852c59f10bf4e65d5ea591bb37889a9">Set</a> (const std::string &amp;key, const std::string &amp;value)</td></tr>
+<tr class="separator:ac852c59f10bf4e65d5ea591bb37889a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac107689c19ba4ff9275f60758fa57f9b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_n_v.html#ac107689c19ba4ff9275f60758fa57f9b">Delete</a> (const std::string &amp;key)</td></tr>
+<tr class="separator:ac107689c19ba4ff9275f60758fa57f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>System's Environment Variable Manager The environment variables are set within the context of your program. When your program exits, you're back in the context from where your program was started. </p>
 
 <p class="definition">Definition at line <a class="el" href="_e_n_v_8hpp_source.html#l00013">13</a> of file <a class="el" href="_e_n_v_8hpp_source.html">ENV.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a56b4600633184c02fe46842dba277f27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56b4600633184c02fe46842dba277f27">&#9670;&nbsp;</a></span>Delete()</h2>
+<a id="ac107689c19ba4ff9275f60758fa57f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac107689c19ba4ff9275f60758fa57f9b">&#9670;&nbsp;</a></span>Delete()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,7 +120,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static void ENV::Delete </td>
           <td>(</td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>key</em></td><td>)</td>
           <td></td>
         </tr>
@@ -135,8 +135,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab2c17c9e7b966912d1d0ffa81f6d66f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2c17c9e7b966912d1d0ffa81f6d66f9">&#9670;&nbsp;</a></span>Get()</h2>
+<a id="a97c923374e78c83b8b240acfbf4a81c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c923374e78c83b8b240acfbf4a81c5">&#9670;&nbsp;</a></span>Get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,9 +145,9 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static String ENV::Get </td>
+          <td class="memname">static std::string ENV::Get </td>
           <td>(</td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>key</em></td><td>)</td>
           <td></td>
         </tr>
@@ -162,8 +162,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a44615373abd18136e7d7fd324ace33d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44615373abd18136e7d7fd324ace33d0">&#9670;&nbsp;</a></span>Set()</h2>
+<a id="ac852c59f10bf4e65d5ea591bb37889a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac852c59f10bf4e65d5ea591bb37889a9">&#9670;&nbsp;</a></span>Set()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,13 +174,13 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static void ENV::Set </td>
           <td>(</td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
@@ -208,7 +208,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_e_n_v.html">ENV</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

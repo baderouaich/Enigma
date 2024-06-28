@@ -103,13 +103,13 @@ $(document).ready(function(){initNavTree('_base64_8hpp_source.html',''); initRes
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">    *   Encodes string bytes into Base64 string</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    * https://www.cryptopp.com/wiki/Base64Encoder</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_base64.html#adf1a88a584fedba6deecd22621da7ebd">   16</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> <a class="code" href="class_base64.html#adf1a88a584fedba6deecd22621da7ebd">Encode</a>(<span class="keyword">const</span> std::string_view&amp; buffer);</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_base64.html#a1012d79465d56feadb5f4872b2e4481f">   16</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_base64.html#a1012d79465d56feadb5f4872b2e4481f">Encode</a>(<span class="keyword">const</span> std::string_view&amp; buffer);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">/*</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">    * Decodes a Base64 string</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    * https://www.cryptopp.com/wiki/Base64Decoder</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_base64.html#aa492c95418a01aaf46ed52340251e33a">   22</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> <a class="code" href="class_base64.html#aa492c95418a01aaf46ed52340251e33a">Decode</a>(<span class="keyword">const</span> std::string_view&amp; encoded_buffer);</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_base64.html#a3cf76c0fd22fde40e1deaae7af7fb8fc">   22</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_base64.html#a3cf76c0fd22fde40e1deaae7af7fb8fc">Decode</a>(<span class="keyword">const</span> std::string_view&amp; encoded_buffer);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
@@ -120,16 +120,15 @@ $(document).ready(function(){initNavTree('_base64_8hpp_source.html',''); initRes
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a1ded40091ba715d9798dc6d607fc34e8"><div class="ttname"><a href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">ENIGMA_STATIC_CLASS</a></div><div class="ttdeci">#define ENIGMA_STATIC_CLASS(Class)</div><div class="ttdoc">Makes a class static, which will prevent creating instances from it and only use it as Class::Func()....</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00146">Macros.hpp:146</a></div></div>
 <div class="ttc" id="aclass_base64_html"><div class="ttname"><a href="class_base64.html">Base64</a></div><div class="ttdef"><b>Definition:</b> <a href="_base64_8hpp_source.html#l00008">Base64.hpp:9</a></div></div>
-<div class="ttc" id="aclass_base64_html_aa492c95418a01aaf46ed52340251e33a"><div class="ttname"><a href="class_base64.html#aa492c95418a01aaf46ed52340251e33a">Base64::Decode</a></div><div class="ttdeci">static String Decode(const std::string_view &amp;encoded_buffer)</div></div>
-<div class="ttc" id="aclass_base64_html_adf1a88a584fedba6deecd22621da7ebd"><div class="ttname"><a href="class_base64.html#adf1a88a584fedba6deecd22621da7ebd">Base64::Encode</a></div><div class="ttdeci">static String Encode(const std::string_view &amp;buffer)</div></div>
-<div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00025">Types.hpp:25</a></div></div>
+<div class="ttc" id="aclass_base64_html_a1012d79465d56feadb5f4872b2e4481f"><div class="ttname"><a href="class_base64.html#a1012d79465d56feadb5f4872b2e4481f">Base64::Encode</a></div><div class="ttdeci">static std::string Encode(const std::string_view &amp;buffer)</div></div>
+<div class="ttc" id="aclass_base64_html_a3cf76c0fd22fde40e1deaae7af7fb8fc"><div class="ttname"><a href="class_base64.html#a3cf76c0fd22fde40e1deaae7af7fb8fc">Base64::Decode</a></div><div class="ttdeci">static std::string Decode(const std::string_view &amp;encoded_buffer)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_base64_8hpp.html">Base64.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

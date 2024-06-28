@@ -1,11 +1,11 @@
 var class_dialog_utils =
 [
-    [ "Error", "class_dialog_utils.html#a5c6693d1c70422f11c127555548a5050", null ],
-    [ "Error", "class_dialog_utils.html#a98485ddb246261226a058c1c12b7d2e5", null ],
-    [ "Info", "class_dialog_utils.html#a22fcd2cb51f526ac9ac5e184bb9a0cb3", null ],
-    [ "Info", "class_dialog_utils.html#a032f41c571428e4066e849845338b230", null ],
-    [ "Question", "class_dialog_utils.html#a1f2b9ac268016815614ea2ac0904119b", null ],
-    [ "Question", "class_dialog_utils.html#ab865d71b5ce65f5f1f561ac996e79486", null ],
-    [ "Warn", "class_dialog_utils.html#aa25a55ad2edef2e018a4dc60921c5886", null ],
-    [ "Warn", "class_dialog_utils.html#ab32c80ead6fb1e58fed71f4696215208", null ]
+    [ "Error", "class_dialog_utils.html#ade6320b66bdc3f9a4cff64715297a224", null ],
+    [ "Error", "class_dialog_utils.html#a695ad27f8921469a80e507db61fac42d", null ],
+    [ "Info", "class_dialog_utils.html#a2520ede139ddbbc3917a6fa5e2d12a24", null ],
+    [ "Info", "class_dialog_utils.html#a1c022bc651104b1b39d53dd0b13cb5b7", null ],
+    [ "Question", "class_dialog_utils.html#a8a634bc8e595053faa53876160e497e5", null ],
+    [ "Question", "class_dialog_utils.html#a5cc8e20df4fad7e92ce9713dc1a9a8f4", null ],
+    [ "Warn", "class_dialog_utils.html#a32da05fa579bbfff431872958c705aef", null ],
+    [ "Warn", "class_dialog_utils.html#aabed26ec201c9db5434c14e7acb95359", null ]
 ];

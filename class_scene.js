@@ -12,7 +12,7 @@ var class_scene =
     [ "OnDraw", "class_scene.html#a10a7cd2fba919181433bbf3b310e754b", null ],
     [ "OnEvent", "class_scene.html#a1b79bbfddac0175fc7f31e3d812f1e6d", null ],
     [ "OnImGuiDraw", "class_scene.html#a8fdfa6d1be63c6b9f5dae7c91fc9fc06", null ],
-    [ "OnUpdate", "class_scene.html#a944dd1dadf8cdcde9d52a70211ca8518", null ],
+    [ "OnUpdate", "class_scene.html#a1486c850038fdd297d4ab9065dea9e5b", null ],
     [ "SetLoading", "class_scene.html#a30083964badb79e4606f7c40cafec2c9", null ],
     [ "WantsToQuit", "class_scene.html#afd2a392a2f92cebc5a58b31a9e250e3d", null ],
     [ "Application", "class_scene.html#a23f25bcc02a0e94c2f5a4188496b04d0", null ],

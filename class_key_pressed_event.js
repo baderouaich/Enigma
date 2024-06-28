@@ -1,6 +1,6 @@
 var class_key_pressed_event =
 [
-    [ "KeyPressedEvent", "class_key_pressed_event.html#af5f7d6dc02c45fb9448af1f079b0e90d", null ],
-    [ "GetRepeatCount", "class_key_pressed_event.html#a9f3df16c445c61eaa4fcf2576a5e87f0", null ],
-    [ "ToString", "class_key_pressed_event.html#a81ce4d000cbd636e392381251e317b82", null ]
+    [ "KeyPressedEvent", "class_key_pressed_event.html#a65ed95ee05c6c081ef4d0ee727f7ac46", null ],
+    [ "GetRepeatCount", "class_key_pressed_event.html#a065c2308bb6586f358a01b247cd262f5", null ],
+    [ "ToString", "class_key_pressed_event.html#a8c567ae5b3c15df083f051a1a37c33e2", null ]
 ];

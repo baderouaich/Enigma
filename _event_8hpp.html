@@ -108,64 +108,64 @@ Macros</h2></td></tr>
 <tr class="separator:a4cbcd4f1bcca2031802f9dfc462bc5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80d534fc4d69a68eefd1573fd0ac2f44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a80d534fc4d69a68eefd1573fd0ac2f44">EVENT_CLASS_TYPE</a>(type)</td></tr>
 <tr class="separator:a80d534fc4d69a68eefd1573fd0ac2f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd52deea587a36ef619e596a0c691839"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#abd52deea587a36ef619e596a0c691839">EVENT_CLASS_CATEGORY</a>(category)&#160;&#160;&#160;virtual ui32 GetCategoryFlags() const override { return static_cast&lt;ui32&gt;(category); }</td></tr>
+<tr class="memitem:abd52deea587a36ef619e596a0c691839"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#abd52deea587a36ef619e596a0c691839">EVENT_CLASS_CATEGORY</a>(category)&#160;&#160;&#160;virtual std::uint32_t GetCategoryFlags() const override { return static_cast&lt;std::uint32_t&gt;(category); }</td></tr>
 <tr class="separator:abd52deea587a36ef619e596a0c691839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ae56cfea8652691cc923685b812df29c6"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> : ui32 { <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6ab50339a10e1de285ac99d4c3990b8693">NONE</a> = 0
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6ab505fed6e98dcb74312ab9c3d93673d6">WINDOW_CLOSE</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a999715500a423f0bd9169c6a8af370cc">WINDOW_RESIZE</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a793b7b04a58100cc784a9517b6c26bc9">WINDOW_FOCUS</a>
+<tr class="memitem:af047f6eec65afba68db2bb5ded11908d"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> : std::uint32_t { <br />
+&#160;&#160;<a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dab50339a10e1de285ac99d4c3990b8693">NONE</a> = 0
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dab505fed6e98dcb74312ab9c3d93673d6">WINDOW_CLOSE</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da999715500a423f0bd9169c6a8af370cc">WINDOW_RESIZE</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da793b7b04a58100cc784a9517b6c26bc9">WINDOW_FOCUS</a>
 , <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a06f06a4cd84a256cff42dd3efcfc48cb">WINDOW_LOST_FOCUS</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a5f5cc21339f2cc71ebc68bb822637c81">WINDOW_MOVED</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6abd32d53c78346f06f176de017d99acce">WINDOW_MAXIMIZED</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a46dff95ba09f778800911805789baa2a">WINDOW_FILE_DROP</a>
+&#160;&#160;<a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da06f06a4cd84a256cff42dd3efcfc48cb">WINDOW_LOST_FOCUS</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da5f5cc21339f2cc71ebc68bb822637c81">WINDOW_MOVED</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dabd32d53c78346f06f176de017d99acce">WINDOW_MAXIMIZED</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da46dff95ba09f778800911805789baa2a">WINDOW_FILE_DROP</a>
 , <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a1c6be22cfc7bfd2ac02f047b56e3214e">FRAME_BUFFER_RESIZE</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6ac25b63b4c37bb00665f35f8653d5354f">APP_TICK</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6aa3fda2e9b17ce1bf34dbf857f7c51f9a">APP_UPDATE</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a6df280a4113e0684be9474db5cebec3e">APP_RENDER</a>
+&#160;&#160;<a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da1c6be22cfc7bfd2ac02f047b56e3214e">FRAME_BUFFER_RESIZE</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dac25b63b4c37bb00665f35f8653d5354f">APP_TICK</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908daa3fda2e9b17ce1bf34dbf857f7c51f9a">APP_UPDATE</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da6df280a4113e0684be9474db5cebec3e">APP_RENDER</a>
 , <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a7ef8949a37c02f94d7975401b455b7f0">KEY_PRESSED</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a7a3d6a7a7b70e89ce7bc767aed974062">KEY_RELEASED</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a184b612c76ac912c7a7f2e5c2c201cce">KEY_TYPED</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a5c58478534ac36238f73c77d512498de">MOUSE_BUTTON_PRESSED</a>
+&#160;&#160;<a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da7ef8949a37c02f94d7975401b455b7f0">KEY_PRESSED</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da7a3d6a7a7b70e89ce7bc767aed974062">KEY_RELEASED</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da184b612c76ac912c7a7f2e5c2c201cce">KEY_TYPED</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da5c58478534ac36238f73c77d512498de">MOUSE_BUTTON_PRESSED</a>
 , <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a8f1d36cda7a33ad13a86cc22f54836cc">MOUSE_BUTTON_RELEASED</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a6a52684199a74ef0bd3415fe6a76da4f">MOUSE_MOTION</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a5f7856b6bcb3430acde17c87c700a4bc">MOUSE_WHEEL</a>
-, <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a0b115a29d2b806bb44a3309fe3fbb9ef">JOYSTICK_CONNECTED</a>
+&#160;&#160;<a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da8f1d36cda7a33ad13a86cc22f54836cc">MOUSE_BUTTON_RELEASED</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da6a52684199a74ef0bd3415fe6a76da4f">MOUSE_MOTION</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da5f7856b6bcb3430acde17c87c700a4bc">MOUSE_WHEEL</a>
+, <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da0b115a29d2b806bb44a3309fe3fbb9ef">JOYSTICK_CONNECTED</a>
 , <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6a4148fe8bcbd01a4e88ab324decc3efa4">JOYSTICK_DISCONNECTED</a>
+&#160;&#160;<a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908da4148fe8bcbd01a4e88ab324decc3efa4">JOYSTICK_DISCONNECTED</a>
 <br />
  }</td></tr>
-<tr class="separator:ae56cfea8652691cc923685b812df29c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a741318963518f8797aa62779bc2eea38"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> : ui32 { <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38ab50339a10e1de285ac99d4c3990b8693">NONE</a> = 0
-, <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38a0ec0a3f8aade8993f11fedcbaa0d8db6">APPLICATION</a> = BIT(0)
-, <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38aa84cc046d48610b05c21fd3670d0c829">INPUT</a> = BIT(1)
-, <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38aedda266cdb6345b9f6914cc2e7577475">KEYBOARD</a> = BIT(2)
+<tr class="separator:af047f6eec65afba68db2bb5ded11908d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1c281ec2a8aa38bfc59ae098f6e4c3"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a> : std::uint32_t { <br />
+&#160;&#160;<a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3ab50339a10e1de285ac99d4c3990b8693">NONE</a> = 0
+, <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3a0ec0a3f8aade8993f11fedcbaa0d8db6">APPLICATION</a> = BIT(0)
+, <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3aa84cc046d48610b05c21fd3670d0c829">INPUT</a> = BIT(1)
+, <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3aedda266cdb6345b9f6914cc2e7577475">KEYBOARD</a> = BIT(2)
 , <br />
-&#160;&#160;<a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38a2ec2be318cc86a1224c0e9dcc71321e4">MOUSE</a> = BIT(3)
-, <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38a3421ce503e9731d435babad896b7aef8">MOUSE_BUTTON</a> = BIT(4)
-, <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38ab1863bd2f1f87295e69e4b2a7b4b5bfd">JOYSTICK</a> = BIT(5)
+&#160;&#160;<a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3a2ec2be318cc86a1224c0e9dcc71321e4">MOUSE</a> = BIT(3)
+, <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3a3421ce503e9731d435babad896b7aef8">MOUSE_BUTTON</a> = BIT(4)
+, <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3ab1863bd2f1f87295e69e4b2a7b4b5bfd">JOYSTICK</a> = BIT(5)
 <br />
  }</td></tr>
-<tr class="separator:a741318963518f8797aa62779bc2eea38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aaa1c281ec2a8aa38bfc59ae098f6e4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a99e66e5e5709006e4088f2deec8a6c88"><td class="memItemLeft" align="right" valign="top">ui32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a99e66e5e5709006e4088f2deec8a6c88">operator|</a> (const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> a, const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> b)</td></tr>
-<tr class="separator:a99e66e5e5709006e4088f2deec8a6c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95a5c338f1fc89fc185b533cd392fd0e"><td class="memItemLeft" align="right" valign="top">ui32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a95a5c338f1fc89fc185b533cd392fd0e">operator&amp;</a> (const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> a, const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> b)</td></tr>
-<tr class="separator:a95a5c338f1fc89fc185b533cd392fd0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace3a7ea33f98fb800c8cb13b7845bd77"><td class="memItemLeft" align="right" valign="top">ui32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#ace3a7ea33f98fb800c8cb13b7845bd77">operator|</a> (const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> a, const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> b)</td></tr>
-<tr class="separator:ace3a7ea33f98fb800c8cb13b7845bd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ca9aceb3c8cec5a50c4c91bc293e2f7"><td class="memItemLeft" align="right" valign="top">ui32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a8ca9aceb3c8cec5a50c4c91bc293e2f7">operator&amp;</a> (const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> a, const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> b)</td></tr>
-<tr class="separator:a8ca9aceb3c8cec5a50c4c91bc293e2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2527663e464fde5b7f19672e8c31f104"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a2527663e464fde5b7f19672e8c31f104">operator|</a> (const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> a, const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> b)</td></tr>
+<tr class="separator:a2527663e464fde5b7f19672e8c31f104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a919f067e6d4cee719d0276f30dbbc4fa"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a919f067e6d4cee719d0276f30dbbc4fa">operator&amp;</a> (const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> a, const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> b)</td></tr>
+<tr class="separator:a919f067e6d4cee719d0276f30dbbc4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0455f7a7cb0080585833daca03fea5c9"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#a0455f7a7cb0080585833daca03fea5c9">operator|</a> (const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a> a, const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a> b)</td></tr>
+<tr class="separator:a0455f7a7cb0080585833daca03fea5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7dffad25272532f031ec016bb20a8af"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#aa7dffad25272532f031ec016bb20a8af">operator&amp;</a> (const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a> a, const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a> b)</td></tr>
+<tr class="separator:aa7dffad25272532f031ec016bb20a8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addb3e61d738e970953b85a370441a626"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_event_8hpp.html#addb3e61d738e970953b85a370441a626">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="class_event.html">Event</a> &amp;e)</td></tr>
 <tr class="separator:addb3e61d738e970953b85a370441a626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -197,7 +197,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">category</td><td>)</td>
-          <td>&#160;&#160;&#160;virtual ui32 GetCategoryFlags() const override { return static_cast&lt;ui32&gt;(category); }</td>
+          <td>&#160;&#160;&#160;virtual std::uint32_t GetCategoryFlags() const override { return static_cast&lt;std::uint32_t&gt;(category); }</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -221,18 +221,18 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">                                <span class="keyword">static</span> <a class="code" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> GetStaticType() { <span class="keywordflow">return</span> type; } \</div>
-<div class="line">                                virtual <a class="code" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> GetEventType()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> GetStaticType(); } \</div>
+<b>Value:</b><div class="fragment"><div class="line">                                <span class="keyword">static</span> <a class="code" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> GetStaticType() { <span class="keywordflow">return</span> type; } \</div>
+<div class="line">                                virtual <a class="code" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> GetEventType()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> GetStaticType(); } \</div>
 <div class="line">                                virtual <span class="keyword">const</span> <span class="keywordtype">char</span>* GetName()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> #type; }</div>
-<div class="ttc" id="a_event_8hpp_html_ae56cfea8652691cc923685b812df29c6"><div class="ttname"><a href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a></div><div class="ttdeci">EventType</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00009">Event.hpp:10</a></div></div>
+<div class="ttc" id="a_event_8hpp_html_af047f6eec65afba68db2bb5ded11908d"><div class="ttname"><a href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a></div><div class="ttdeci">EventType</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00009">Event.hpp:10</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00061">61</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a741318963518f8797aa62779bc2eea38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a741318963518f8797aa62779bc2eea38">&#9670;&nbsp;</a></span>EventCategory</h2>
+<a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1c281ec2a8aa38bfc59ae098f6e4c3">&#9670;&nbsp;</a></span>EventCategory</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +241,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a> : ui32</td>
+          <td class="memname">enum <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a> : std::uint32_t</td>
         </tr>
       </table>
   </td>
@@ -251,21 +251,21 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38ab50339a10e1de285ac99d4c3990b8693"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38a0ec0a3f8aade8993f11fedcbaa0d8db6"></a>APPLICATION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38aa84cc046d48610b05c21fd3670d0c829"></a>INPUT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38aedda266cdb6345b9f6914cc2e7577475"></a>KEYBOARD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38a2ec2be318cc86a1224c0e9dcc71321e4"></a>MOUSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38a3421ce503e9731d435babad896b7aef8"></a>MOUSE_BUTTON&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a741318963518f8797aa62779bc2eea38ab1863bd2f1f87295e69e4b2a7b4b5bfd"></a>JOYSTICK&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3ab50339a10e1de285ac99d4c3990b8693"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3a0ec0a3f8aade8993f11fedcbaa0d8db6"></a>APPLICATION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3aa84cc046d48610b05c21fd3670d0c829"></a>INPUT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3aedda266cdb6345b9f6914cc2e7577475"></a>KEYBOARD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3a2ec2be318cc86a1224c0e9dcc71321e4"></a>MOUSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3a3421ce503e9731d435babad896b7aef8"></a>MOUSE_BUTTON&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa1c281ec2a8aa38bfc59ae098f6e4c3ab1863bd2f1f87295e69e4b2a7b4b5bfd"></a>JOYSTICK&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00048">48</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae56cfea8652691cc923685b812df29c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae56cfea8652691cc923685b812df29c6">&#9670;&nbsp;</a></span>EventType</h2>
+<a id="af047f6eec65afba68db2bb5ded11908d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af047f6eec65afba68db2bb5ded11908d">&#9670;&nbsp;</a></span>EventType</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +274,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a> : ui32</td>
+          <td class="memname">enum <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a> : std::uint32_t</td>
         </tr>
       </table>
   </td>
@@ -284,27 +284,27 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6ab50339a10e1de285ac99d4c3990b8693"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6ab505fed6e98dcb74312ab9c3d93673d6"></a>WINDOW_CLOSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a999715500a423f0bd9169c6a8af370cc"></a>WINDOW_RESIZE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a793b7b04a58100cc784a9517b6c26bc9"></a>WINDOW_FOCUS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a06f06a4cd84a256cff42dd3efcfc48cb"></a>WINDOW_LOST_FOCUS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a5f5cc21339f2cc71ebc68bb822637c81"></a>WINDOW_MOVED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6abd32d53c78346f06f176de017d99acce"></a>WINDOW_MAXIMIZED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a46dff95ba09f778800911805789baa2a"></a>WINDOW_FILE_DROP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a1c6be22cfc7bfd2ac02f047b56e3214e"></a>FRAME_BUFFER_RESIZE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6ac25b63b4c37bb00665f35f8653d5354f"></a>APP_TICK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6aa3fda2e9b17ce1bf34dbf857f7c51f9a"></a>APP_UPDATE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a6df280a4113e0684be9474db5cebec3e"></a>APP_RENDER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a7ef8949a37c02f94d7975401b455b7f0"></a>KEY_PRESSED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a7a3d6a7a7b70e89ce7bc767aed974062"></a>KEY_RELEASED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a184b612c76ac912c7a7f2e5c2c201cce"></a>KEY_TYPED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a5c58478534ac36238f73c77d512498de"></a>MOUSE_BUTTON_PRESSED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a8f1d36cda7a33ad13a86cc22f54836cc"></a>MOUSE_BUTTON_RELEASED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a6a52684199a74ef0bd3415fe6a76da4f"></a>MOUSE_MOTION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a5f7856b6bcb3430acde17c87c700a4bc"></a>MOUSE_WHEEL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a0b115a29d2b806bb44a3309fe3fbb9ef"></a>JOYSTICK_CONNECTED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ae56cfea8652691cc923685b812df29c6a4148fe8bcbd01a4e88ab324decc3efa4"></a>JOYSTICK_DISCONNECTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908dab50339a10e1de285ac99d4c3990b8693"></a>NONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908dab505fed6e98dcb74312ab9c3d93673d6"></a>WINDOW_CLOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da999715500a423f0bd9169c6a8af370cc"></a>WINDOW_RESIZE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da793b7b04a58100cc784a9517b6c26bc9"></a>WINDOW_FOCUS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da06f06a4cd84a256cff42dd3efcfc48cb"></a>WINDOW_LOST_FOCUS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da5f5cc21339f2cc71ebc68bb822637c81"></a>WINDOW_MOVED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908dabd32d53c78346f06f176de017d99acce"></a>WINDOW_MAXIMIZED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da46dff95ba09f778800911805789baa2a"></a>WINDOW_FILE_DROP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da1c6be22cfc7bfd2ac02f047b56e3214e"></a>FRAME_BUFFER_RESIZE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908dac25b63b4c37bb00665f35f8653d5354f"></a>APP_TICK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908daa3fda2e9b17ce1bf34dbf857f7c51f9a"></a>APP_UPDATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da6df280a4113e0684be9474db5cebec3e"></a>APP_RENDER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da7ef8949a37c02f94d7975401b455b7f0"></a>KEY_PRESSED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da7a3d6a7a7b70e89ce7bc767aed974062"></a>KEY_RELEASED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da184b612c76ac912c7a7f2e5c2c201cce"></a>KEY_TYPED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da5c58478534ac36238f73c77d512498de"></a>MOUSE_BUTTON_PRESSED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da8f1d36cda7a33ad13a86cc22f54836cc"></a>MOUSE_BUTTON_RELEASED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da6a52684199a74ef0bd3415fe6a76da4f"></a>MOUSE_MOTION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da5f7856b6bcb3430acde17c87c700a4bc"></a>MOUSE_WHEEL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da0b115a29d2b806bb44a3309fe3fbb9ef"></a>JOYSTICK_CONNECTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af047f6eec65afba68db2bb5ded11908da4148fe8bcbd01a4e88ab324decc3efa4"></a>JOYSTICK_DISCONNECTED&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="_event_8hpp_source.html#l00009">9</a> of file <a class="el" href="_event_8hpp_source.html">Event.hpp</a>.</p>
@@ -312,8 +312,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8ca9aceb3c8cec5a50c4c91bc293e2f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ca9aceb3c8cec5a50c4c91bc293e2f7">&#9670;&nbsp;</a></span>operator&amp;() <span class="overload">[1/2]</span></h2>
+<a id="aa7dffad25272532f031ec016bb20a8af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7dffad25272532f031ec016bb20a8af">&#9670;&nbsp;</a></span>operator&amp;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,15 +322,15 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ui32 operator&amp; </td>
+          <td class="memname">std::uint32_t operator&amp; </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a>&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -350,8 +350,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a95a5c338f1fc89fc185b533cd392fd0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95a5c338f1fc89fc185b533cd392fd0e">&#9670;&nbsp;</a></span>operator&amp;() <span class="overload">[2/2]</span></h2>
+<a id="a919f067e6d4cee719d0276f30dbbc4fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a919f067e6d4cee719d0276f30dbbc4fa">&#9670;&nbsp;</a></span>operator&amp;() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,15 +360,15 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ui32 operator&amp; </td>
+          <td class="memname">std::uint32_t operator&amp; </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a>&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -426,8 +426,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ace3a7ea33f98fb800c8cb13b7845bd77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace3a7ea33f98fb800c8cb13b7845bd77">&#9670;&nbsp;</a></span>operator|() <span class="overload">[1/2]</span></h2>
+<a id="a0455f7a7cb0080585833daca03fea5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0455f7a7cb0080585833daca03fea5c9">&#9670;&nbsp;</a></span>operator|() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -436,15 +436,15 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ui32 operator| </td>
+          <td class="memname">std::uint32_t operator| </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a>&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#a741318963518f8797aa62779bc2eea38">EventCategory</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3">EventCategory</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -464,8 +464,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a99e66e5e5709006e4088f2deec8a6c88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99e66e5e5709006e4088f2deec8a6c88">&#9670;&nbsp;</a></span>operator|() <span class="overload">[2/2]</span></h2>
+<a id="a2527663e464fde5b7f19672e8c31f104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2527663e464fde5b7f19672e8c31f104">&#9670;&nbsp;</a></span>operator|() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -474,15 +474,15 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ui32 operator| </td>
+          <td class="memname">std::uint32_t operator| </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a>&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="_event_8hpp.html#ae56cfea8652691cc923685b812df29c6">EventType</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d">EventType</a>&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -508,7 +508,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1ff81008302cb45769f1dab653ab23f8.html">Events</a></li><li class="navelem"><a class="el" href="_event_8hpp.html">Event.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

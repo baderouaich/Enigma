@@ -112,21 +112,21 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a20573928a0d53fb96d929513bc5acde6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf09cd6cb412086dc039e28cdb059f0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#aaf09cd6cb412086dc039e28cdb059f0d">Run</a> ()</td></tr>
 <tr class="separator:aaf09cd6cb412086dc039e28cdb059f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a92c2df2ae7e02f468158acbe507342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a5a92c2df2ae7e02f468158acbe507342">Exit</a> (const String &amp;message, const i32 exit_code) noexcept</td></tr>
-<tr class="separator:a5a92c2df2ae7e02f468158acbe507342"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac54cf61096533ff3534f7f014e111b84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ac54cf61096533ff3534f7f014e111b84">LaunchWorkerThread</a> (<a class="el" href="class_scene.html">Scene</a> *scene, const String &amp;loading_text, const std::function&lt; void()&gt; &amp;work_func)</td></tr>
-<tr class="memdesc:ac54cf61096533ff3534f7f014e111b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launches detached thread seperated from main UI thread.  <a href="class_application.html#ac54cf61096533ff3534f7f014e111b84">More...</a><br /></td></tr>
-<tr class="separator:ac54cf61096533ff3534f7f014e111b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab832d28b8d0f3a2ba1e182b022ef98c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ab832d28b8d0f3a2ba1e182b022ef98c9">Exit</a> (const std::string &amp;message, const std::int32_t exit_code) noexcept</td></tr>
+<tr class="separator:ab832d28b8d0f3a2ba1e182b022ef98c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a387e8bca2205c8048775f3818ee0df22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a387e8bca2205c8048775f3818ee0df22">LaunchWorkerThread</a> (<a class="el" href="class_scene.html">Scene</a> *scene, const std::string &amp;loading_text, const std::function&lt; void()&gt; &amp;work_func)</td></tr>
+<tr class="memdesc:a387e8bca2205c8048775f3818ee0df22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launches detached thread seperated from main UI thread.  <a href="class_application.html#a387e8bca2205c8048775f3818ee0df22">More...</a><br /></td></tr>
+<tr class="separator:a387e8bca2205c8048775f3818ee0df22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e4f4db86437b9b8aecc9594c9c8dccc"><td class="memItemLeft" align="right" valign="top">const std::unique_ptr&lt; <a class="el" href="class_window.html">Window</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a1e4f4db86437b9b8aecc9594c9c8dccc">GetWindow</a> () const noexcept</td></tr>
 <tr class="separator:a1e4f4db86437b9b8aecc9594c9c8dccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88ded7fc048236d848d1a4c3e08af4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ad88ded7fc048236d848d1a4c3e08af4d">EndApplication</a> () noexcept</td></tr>
 <tr class="separator:ad88ded7fc048236d848d1a4c3e08af4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfedce599775ca40f26d8a7246f43e1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#abfedce599775ca40f26d8a7246f43e1e">PushScene</a> (std::unique_ptr&lt; <a class="el" href="class_scene.html">Scene</a> &gt; scene)</td></tr>
 <tr class="separator:abfedce599775ca40f26d8a7246f43e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35058d373a4752f073f32107542e3c0a"><td class="memItemLeft" align="right" valign="top">ui32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a35058d373a4752f073f32107542e3c0a">GetFPS</a> () const noexcept</td></tr>
-<tr class="separator:a35058d373a4752f073f32107542e3c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7d20473b2aa9cd4bbb1821212efb711"><td class="memItemLeft" align="right" valign="top">f32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#aa7d20473b2aa9cd4bbb1821212efb711">GetDeltaTime</a> () const noexcept</td></tr>
-<tr class="separator:aa7d20473b2aa9cd4bbb1821212efb711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31f268a4dabe9f3979a7d8a94b31bbc3"><td class="memItemLeft" align="right" valign="top">std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a31f268a4dabe9f3979a7d8a94b31bbc3">GetFPS</a> () const noexcept</td></tr>
+<tr class="separator:a31f268a4dabe9f3979a7d8a94b31bbc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac24755c59b839bd899cc1d2552203c8f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#ac24755c59b839bd899cc1d2552203c8f">GetDeltaTime</a> () const noexcept</td></tr>
+<tr class="separator:ac24755c59b839bd899cc1d2552203c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeaa8b370d4bad89fd2b8802c16644bff"><td class="memItemLeft" align="right" valign="top">constexpr const std::unique_ptr&lt; <a class="el" href="class_r_a_m_info.html">RAMInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#aeaa8b370d4bad89fd2b8802c16644bff">GetRAMInfo</a> () const noexcept</td></tr>
 <tr class="separator:aeaa8b370d4bad89fd2b8802c16644bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f7e61cc3f73709d358bbfb4460b9cac"><td class="memItemLeft" align="right" valign="top">constexpr const std::unique_ptr&lt; <a class="el" href="class_c_p_u_info.html">CPUInfo</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#a9f7e61cc3f73709d358bbfb4460b9cac">GetCPUInfo</a> () const noexcept</td></tr>
@@ -144,8 +144,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8d8827ea04a741b69ecde6a7140fa26"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application.html#af8d8827ea04a741b69ecde6a7140fa26">OnFrameBufferResize</a> (<a class="el" href="class_frame_buffer_resize_event.html">FrameBufferResizeEvent</a> &amp;event)</td></tr>
 <tr class="separator:af8d8827ea04a741b69ecde6a7140fa26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_single_process_instance"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_single_process_instance')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_single_process_instance.html">SingleProcessInstance</a></td></tr>
-<tr class="memitem:a38ad8dd1f225f159313a0ee725db0b8a inherit pub_methods_class_single_process_instance"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#a38ad8dd1f225f159313a0ee725db0b8a">SingleProcessInstance</a> (const ui16 port) noexcept</td></tr>
-<tr class="separator:a38ad8dd1f225f159313a0ee725db0b8a inherit pub_methods_class_single_process_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3c0d816c8d41919db93001545cfb3f inherit pub_methods_class_single_process_instance"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance</a> (const std::uint16_t port) noexcept</td></tr>
+<tr class="separator:abd3c0d816c8d41919db93001545cfb3f inherit pub_methods_class_single_process_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1375b7a2e96d52d0b2361a8d1e4bf660 inherit pub_methods_class_single_process_instance"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660">IsUnique</a> () const noexcept</td></tr>
 <tr class="separator:a1375b7a2e96d52d0b2361a8d1e4bf660 inherit pub_methods_class_single_process_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49eef7354dc4d8eb604221b35b44b7f6 inherit pub_methods_class_single_process_instance"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">~SingleProcessInstance</a> () noexcept</td></tr>
@@ -236,8 +236,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a92c2df2ae7e02f468158acbe507342"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a92c2df2ae7e02f468158acbe507342">&#9670;&nbsp;</a></span>Exit()</h2>
+<a id="ab832d28b8d0f3a2ba1e182b022ef98c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab832d28b8d0f3a2ba1e182b022ef98c9">&#9670;&nbsp;</a></span>Exit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,13 +248,13 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Application::Exit </td>
           <td>(</td>
-          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>message</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const i32&#160;</td>
+          <td class="paramtype">const std::int32_t&#160;</td>
           <td class="paramname"><em>exit_code</em>&#160;</td>
         </tr>
         <tr>
@@ -307,8 +307,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa7d20473b2aa9cd4bbb1821212efb711"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7d20473b2aa9cd4bbb1821212efb711">&#9670;&nbsp;</a></span>GetDeltaTime()</h2>
+<a id="ac24755c59b839bd899cc1d2552203c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac24755c59b839bd899cc1d2552203c8f">&#9670;&nbsp;</a></span>GetDeltaTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,7 +317,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">f32 Application::GetDeltaTime </td>
+          <td class="memname">float Application::GetDeltaTime </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -363,8 +363,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a35058d373a4752f073f32107542e3c0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35058d373a4752f073f32107542e3c0a">&#9670;&nbsp;</a></span>GetFPS()</h2>
+<a id="a31f268a4dabe9f3979a7d8a94b31bbc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f268a4dabe9f3979a7d8a94b31bbc3">&#9670;&nbsp;</a></span>GetFPS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,7 +373,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ui32 Application::GetFPS </td>
+          <td class="memname">std::uint32_t Application::GetFPS </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -475,8 +475,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac54cf61096533ff3534f7f014e111b84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac54cf61096533ff3534f7f014e111b84">&#9670;&nbsp;</a></span>LaunchWorkerThread()</h2>
+<a id="a387e8bca2205c8048775f3818ee0df22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a387e8bca2205c8048775f3818ee0df22">&#9670;&nbsp;</a></span>LaunchWorkerThread()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -490,7 +490,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>loading_text</em>, </td>
         </tr>
         <tr>
@@ -647,7 +647,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_application.html">Application</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

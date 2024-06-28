@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('_my_encryptions_scene_8hpp_source.html
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;private: <span class="comment">/* Overrides */</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> OnCreate() override;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    [[maybe_unused]] <span class="keywordtype">void</span> OnUpdate(const <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a>&amp;) override;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    [[maybe_unused]] <span class="keywordtype">void</span> OnUpdate(const <span class="keywordtype">float</span>&amp;) override;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> OnDraw() override;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> OnImGuiDraw() override;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    [[maybe_unused]] <span class="keywordtype">void</span> OnEvent(<a class="code" href="class_event.html">Event</a>&amp;) override;</div>
@@ -111,9 +111,9 @@ $(document).ready(function(){initNavTree('_my_encryptions_scene_8hpp_source.html
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;private: <span class="comment">/* Callbacks */</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> OnBackButtonPressed();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> OnViewEncryptionButtonPressed(const <a class="code" href="namespace_enigma.html#ac7a6d6bd5bf67992a4d088b4fcfedf8e">i64</a> ide);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> OnViewEncryptionButtonPressed(const std::int64_t ide);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// returns true if item deleted successfully to notify draw loop that vector range changed</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">bool</span> OnDeleteEncryptionButtonPressed(const <a class="code" href="namespace_enigma.html#ac7a6d6bd5bf67992a4d088b4fcfedf8e">i64</a> ide);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">bool</span> OnDeleteEncryptionButtonPressed(const std::int64_t ide);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> OnSearchEncryptionsByTitle();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> OnDeleteAllEncryptions();</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">//void OnExportAllEncryptionsJSON();</span></div>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('_my_encryptions_scene_8hpp_source.html
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5b">Database::Order</a> m_order = <a class="code" href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b">Database::Order::Descending</a>; <span class="comment">// order desc/asc</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">String</a> m_query{}; <span class="comment">// title search query</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    std::string m_query{}; <span class="comment">// title search query</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">bool</span> m_isSearching{ <span class="keyword">false</span> };</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
@@ -146,9 +146,6 @@ $(document).ready(function(){initNavTree('_my_encryptions_scene_8hpp_source.html
 <div class="ttc" id="aclass_my_encryptions_scene_html"><div class="ttname"><a href="class_my_encryptions_scene.html">MyEncryptionsScene</a></div><div class="ttdef"><b>Definition:</b> <a href="_my_encryptions_scene_8hpp_source.html#l00008">MyEncryptionsScene.hpp:9</a></div></div>
 <div class="ttc" id="aclass_my_encryptions_scene_html_a0ab849564132d9bdd4d65a710c7ec122"><div class="ttname"><a href="class_my_encryptions_scene.html#a0ab849564132d9bdd4d65a710c7ec122">MyEncryptionsScene::MyEncryptionsScene</a></div><div class="ttdeci">MyEncryptionsScene()</div></div>
 <div class="ttc" id="aclass_my_encryptions_scene_html_a63b4a18d50e6dd979eadc934f2401e2f"><div class="ttname"><a href="class_my_encryptions_scene.html#a63b4a18d50e6dd979eadc934f2401e2f">MyEncryptionsScene::~MyEncryptionsScene</a></div><div class="ttdeci">virtual ~MyEncryptionsScene() noexcept=default</div></div>
-<div class="ttc" id="anamespace_enigma_html_a19e9ac18a724d47eb32f1adcbca70c70"><div class="ttname"><a href="namespace_enigma.html#a19e9ac18a724d47eb32f1adcbca70c70">Enigma::String</a></div><div class="ttdeci">std::string String</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00025">Types.hpp:25</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_a7b499ae2cc14c02b337b7f89b0f14187"><div class="ttname"><a href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">Enigma::f32</a></div><div class="ttdeci">float f32</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00020">Types.hpp:20</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_ac7a6d6bd5bf67992a4d088b4fcfedf8e"><div class="ttname"><a href="namespace_enigma.html#ac7a6d6bd5bf67992a4d088b4fcfedf8e">Enigma::i64</a></div><div class="ttdeci">std::int64_t i64</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00015">Types.hpp:15</a></div></div>
 <div class="ttc" id="astruct_encryption_html"><div class="ttname"><a href="struct_encryption.html">Encryption</a></div><div class="ttdef"><b>Definition:</b> <a href="_encryption_8hpp_source.html#l00015">Encryption.hpp:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -156,7 +153,7 @@ $(document).ready(function(){initNavTree('_my_encryptions_scene_8hpp_source.html
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d665af80335f773f8bfcf2f56b3f3e8a.html">Scenes</a></li><li class="navelem"><a class="el" href="_my_encryptions_scene_8hpp.html">MyEncryptionsScene.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

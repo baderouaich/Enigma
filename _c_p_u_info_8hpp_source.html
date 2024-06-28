@@ -125,18 +125,18 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;public:</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_c_p_u_info.html#a3b482afc245efad8cac0bc188f5ca419">   44</a></span>&#160;    <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> GetCPUUsage() noexcept;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_c_p_u_info.html#aff81467f165dec472666078964cb3304">   44</a></span>&#160;    <span class="keywordtype">float</span> GetCPUUsage() noexcept;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_c_p_u_info.html#a309cff22aa0f405abb686bc160319ba4">   49</a></span>&#160;    <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> GetProcessCPUUsage() noexcept;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_c_p_u_info.html#a5cefef754a9bf832d43714ffb1c52eef">   49</a></span>&#160;    <span class="keywordtype">float</span> GetProcessCPUUsage() noexcept;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;private: </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS) || defined(ENIGMA_PLATFORM_MACOS)</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> CalculateCPULoad(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> idle_ticks, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_ticks)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">float</span> CalculateCPULoad(<span class="keyword">const</span> std::uint64_t idle_ticks, <span class="keyword">const</span> std::uint64_t total_ticks)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">const</span> std::uint64_t total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">const</span> std::uint64_t idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> rate = 1.0f - ((total_ticks_since_last_time &gt; 0) ? <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> rate = 1.0f - ((total_ticks_since_last_time &gt; 0) ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        m_cpu_previous_total_ticks = total_ticks;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        m_cpu_previous_idle_ticks = idle_ticks;</div>
@@ -151,25 +151,25 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_total_ticks{ 0 };</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_idle_ticks{ 0 };</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::uint64_t m_cpu_previous_total_ticks{ 0 };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    std::uint64_t m_cpu_previous_idle_ticks{ 0 };</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> FileTimeToUInt64(<span class="keyword">const</span> FILETIME&amp; file_time)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    std::uint64_t FileTimeToUInt64(<span class="keyword">const</span> FILETIME&amp; file_time)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a><span class="keyword">&gt;</span>(file_time.dwHighDateTime) &lt;&lt; 32) | <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a><span class="keyword">&gt;</span>(file_time.dwLowDateTime);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span>std::uint64_t<span class="keyword">&gt;</span>(file_time.dwHighDateTime) &lt;&lt; 32) | <span class="keyword">static_cast&lt;</span>std::uint64_t<span class="keyword">&gt;</span>(file_time.dwLowDateTime);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#elif defined(ENIGMA_PLATFORM_LINUX)</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_user{ 0 };</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_user_low{ 0 };</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_sys{ 0 };</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_idle{ 0 };</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    std::uint64_t m_last_total_user{ 0 };</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    std::uint64_t m_last_total_user_low{ 0 };</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::uint64_t m_last_total_sys{ 0 };</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    std::uint64_t m_last_total_idle{ 0 };</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#elif defined(ENIGMA_PLATFORM_MACOS)</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_total_ticks{ 0 };</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_idle_ticks{ 0 };</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    std::uint64_t m_cpu_previous_total_ticks{ 0 };</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    std::uint64_t m_cpu_previous_idle_ticks{ 0 };</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    host_cpu_load_info_data_t m_cpu_info{};</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    mach_msg_type_number_t m_count = HOST_CPU_LOAD_INFO_COUNT;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
@@ -267,16 +267,16 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">/*</span></div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">    *   Returns cpu usage (in percentage [0% -&gt; 100%])</span></div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> <a class="code" href="class_c_p_u_info.html">CPUInfo</a>::GetCPUUsage() noexcept</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_c_p_u_info.html">CPUInfo</a>::GetCPUUsage() noexcept</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> percentage{ 0.0f };</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordtype">float</span> percentage{ 0.0f };</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keywordflow">if</span> (::GetSystemTimes(&amp;m_idle_time, &amp;m_kernel_time, &amp;m_user_time))</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        {</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> idle_ticks = this-&gt;FileTimeToUInt64(m_idle_time);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_ticks = this-&gt;FileTimeToUInt64(m_kernel_time) + this-&gt;FileTimeToUInt64(m_user_time);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keyword">const</span> std::uint64_t idle_ticks = this-&gt;FileTimeToUInt64(m_idle_time);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <span class="keyword">const</span> std::uint64_t total_ticks = this-&gt;FileTimeToUInt64(m_kernel_time) + this-&gt;FileTimeToUInt64(m_user_time);</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            percentage = this-&gt;CalculateCPULoad(idle_ticks, total_ticks);</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">else</span></div>
@@ -284,7 +284,7 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">#elif defined(ENIGMA_PLATFORM_LINUX)</span></div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        std::uint64_t total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        std::FILE* file = std::fopen(<span class="stringliteral">&quot;/proc/stat&quot;</span>, <span class="stringliteral">&quot;r&quot;</span>);</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        std::fscanf(file, <span class="stringliteral">&quot;cpu %llu %llu %llu %llu&quot;</span>,</div>
@@ -301,7 +301,7 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        {</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            total = (total_user - m_last_total_user) + (total_user_low - m_last_total_user_low) + (total_sys - m_last_total_sys);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            percentage = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(total);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            percentage = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(total);</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            total += (total_idle - m_last_total_idle);</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            percentage /= total;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            percentage *= 100.0f;</div>
@@ -315,10 +315,10 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="preprocessor">#elif defined(ENIGMA_PLATFORM_MACOS)</span></div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">if</span> (host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, (host_info_t)&amp;m_cpu_info, &amp;m_count) == KERN_SUCCESS)</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        {</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_ticks{ 0 };</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            std::uint64_t total_ticks{ 0 };</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; CPU_STATE_MAX; ++i)</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                total_ticks += m_cpu_info.cpu_ticks[i];</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keyword">const</span> std::uint64_t idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            percentage = this-&gt;CalculateCPULoad(idle_ticks, total_ticks);</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        }</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordflow">else</span></div>
@@ -332,7 +332,7 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="comment">/*</span></div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">    *   Returns cpu usage by current process (in percentage [0% -&gt; 100%])</span></div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> GetProcessCPUUsage() noexcept</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordtype">float</span> GetProcessCPUUsage() noexcept</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    {</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
@@ -345,9 +345,9 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        std::memcpy(&amp;sys, &amp;m_kernel_time, <span class="keyword">sizeof</span>(FILETIME));</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        std::memcpy(&amp;user, &amp;m_user_time, <span class="keyword">sizeof</span>(FILETIME));</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> percent = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(sys.QuadPart - m_last_sys_cpu.QuadPart) + <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(user.QuadPart - m_last_user_cpu.QuadPart);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(now.QuadPart - m_last_cpu.QuadPart);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(m_num_processors);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="keywordtype">float</span> percent = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sys.QuadPart - m_last_sys_cpu.QuadPart) + <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(user.QuadPart - m_last_user_cpu.QuadPart);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(now.QuadPart - m_last_cpu.QuadPart);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(m_num_processors);</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        </div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        m_last_cpu = now;</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        m_last_user_cpu = user;</div>
@@ -368,12 +368,12 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="comment">/*</span></div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">        *   Calculates CPU Load percentage by idle and total ticks for (used for Windows &amp; MacOS)</span></div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment">        */</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> CalculateCPULoad(<span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> idle_ticks, <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_ticks)</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordtype">float</span> CalculateCPULoad(<span class="keyword">const</span> std::uint64_t idle_ticks, <span class="keyword">const</span> std::uint64_t total_ticks)</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;        {</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keyword">const</span> std::uint64_t total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="keyword">const</span> std::uint64_t idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a> rate = 1.0f - ((total_ticks_since_last_time &gt; 0) ? <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">f32</a><span class="keyword">&gt;</span>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">float</span> rate = 1.0f - ((total_ticks_since_last_time &gt; 0) ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            m_cpu_previous_total_ticks = total_ticks;</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            m_cpu_previous_idle_ticks = idle_ticks;</div>
@@ -388,29 +388,29 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    ULARGE_INTEGER m_last_cpu{}, m_last_user_cpu{}, m_last_sys_cpu{};</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <a class="code" href="namespace_enigma.html#aadb754fee2ef15f3b524b37315d41f48">i32</a> m_num_processors{};</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    std::int32_t m_num_processors{};</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_total_ticks{ 0 };</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_idle_ticks{ 0 };</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    std::uint64_t m_cpu_previous_total_ticks{ 0 };</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    std::uint64_t m_cpu_previous_idle_ticks{ 0 };</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> FileTimeToUInt64(<span class="keyword">const</span> FILETIME&amp; file_time)</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    std::uint64_t FileTimeToUInt64(<span class="keyword">const</span> FILETIME&amp; file_time)</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a><span class="keyword">&gt;</span>(file_time.dwHighDateTime) &lt;&lt; 32) | <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a><span class="keyword">&gt;</span>(file_time.dwLowDateTime);</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span>std::uint64_t<span class="keyword">&gt;</span>(file_time.dwHighDateTime) &lt;&lt; 32) | <span class="keyword">static_cast&lt;</span>std::uint64_t<span class="keyword">&gt;</span>(file_time.dwLowDateTime);</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    }</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#elif defined(ENIGMA_PLATFORM_LINUX)</span></div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_user{ 0 };</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_user_low{ 0 };</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_sys{ 0 };</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_last_total_idle{ 0 };</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    std::uint64_t m_last_total_user{ 0 };</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    std::uint64_t m_last_total_user_low{ 0 };</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    std::uint64_t m_last_total_sys{ 0 };</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    std::uint64_t m_last_total_idle{ 0 };</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <a class="code" href="namespace_enigma.html#aadb754fee2ef15f3b524b37315d41f48">i32</a> m_num_processors{};</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    std::int32_t m_num_processors{};</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="preprocessor">#elif defined(ENIGMA_PLATFORM_MACOS)</span></div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_total_ticks{ 0 };</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <a class="code" href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">ui64</a> m_cpu_previous_idle_ticks{ 0 };</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    std::uint64_t m_cpu_previous_total_ticks{ 0 };</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    std::uint64_t m_cpu_previous_idle_ticks{ 0 };</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    host_cpu_load_info_data_t m_cpu_info{};</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    mach_msg_type_number_t m_count = HOST_CPU_LOAD_INFO_COUNT;</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
@@ -455,16 +455,13 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="ttc" id="a_macros_8hpp_html_ab4c4e2285229c6645de4aec58a0b2af9"><div class="ttname"><a href="_macros_8hpp.html#ab4c4e2285229c6645de4aec58a0b2af9">ENIGMA_NON_COPYABLE</a></div><div class="ttdeci">#define ENIGMA_NON_COPYABLE(Class)</div><div class="ttdoc">Prevent class copying or moving.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00137">Macros.hpp:137</a></div></div>
 <div class="ttc" id="aclass_c_p_u_info_html"><div class="ttname"><a href="class_c_p_u_info.html">CPUInfo</a></div><div class="ttdef"><b>Definition:</b> <a href="_c_p_u_info_8hpp_source.html#l00030">CPUInfo.hpp:31</a></div></div>
 <div class="ttc" id="aclass_c_p_u_info_html_a1a84abc67473ee2efbfab1bc329da799"><div class="ttname"><a href="class_c_p_u_info.html#a1a84abc67473ee2efbfab1bc329da799">CPUInfo::CPUInfo</a></div><div class="ttdeci">CPUInfo() noexcept</div></div>
-<div class="ttc" id="anamespace_enigma_html_a7b499ae2cc14c02b337b7f89b0f14187"><div class="ttname"><a href="namespace_enigma.html#a7b499ae2cc14c02b337b7f89b0f14187">Enigma::f32</a></div><div class="ttdeci">float f32</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00020">Types.hpp:20</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_aadb754fee2ef15f3b524b37315d41f48"><div class="ttname"><a href="namespace_enigma.html#aadb754fee2ef15f3b524b37315d41f48">Enigma::i32</a></div><div class="ttdeci">std::int32_t i32</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00014">Types.hpp:14</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_ae352e77d093ac30da656aec27cc10f65"><div class="ttname"><a href="namespace_enigma.html#ae352e77d093ac30da656aec27cc10f65">Enigma::ui64</a></div><div class="ttdeci">std::uint64_t ui64</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00019">Types.hpp:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_811a50a910043cbe90a26ab632ccbb01.html">Analytics</a></li><li class="navelem"><a class="el" href="dir_03c47aa1f304aa96a438ba06c48d9da0.html">Hardware</a></li><li class="navelem"><a class="el" href="dir_435bb7af3480145d358999902bfed25c.html">CPU</a></li><li class="navelem"><a class="el" href="_c_p_u_info_8hpp.html">CPUInfo.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

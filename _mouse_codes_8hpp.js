@@ -14,19 +14,19 @@ var _mouse_codes_8hpp =
     [ "ENIGMA_MOUSE_BUTTON_RIGHT", "_mouse_codes_8hpp.html#a6036f52580d37abd2fc5d5c06c422a2d", null ],
     [ "ENIGMA_MOUSE_CODES_H", "_mouse_codes_8hpp.html#aaf4378067063027dd09e9ca816397c7c", null ],
     [ "Mouse", "_mouse_codes_8hpp.html#a8584acb16eb493c569a383089d1d7f43", null ],
-    [ "MouseCode", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424", [
-      [ "Button0", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424adf18fdbdb36feb48df7a2b683a732543", null ],
-      [ "Button1", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a6475a3746209a62a6ce6289a3741d07e", null ],
-      [ "Button2", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424ae165925a7c2d5ea94209b91389aa189f", null ],
-      [ "Button3", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a6d0c69e60d65a93dd244ae95f90e679c", null ],
-      [ "Button4", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a91ff24acfc01cc2c3a4238a272a37d07", null ],
-      [ "Button5", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424af8849babaeaee3344306b87310664d65", null ],
-      [ "Button6", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a375ccc6b3a6125cc5c67f2c700a55b72", null ],
-      [ "Button7", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424aa00c628d1b186fa4fe9c7f633426979e", null ],
-      [ "ButtonLast", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a4b79ada84511c1c15c9eb834dab2e350", null ],
-      [ "ButtonLeft", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a73bbc53e5b81f06eb4b1d68052a36187", null ],
-      [ "ButtonRight", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a93c4a961054f2fa59f45f358526b02ad", null ],
-      [ "ButtonMiddle", "_mouse_codes_8hpp.html#a5b21de8337a852191da6a735fbb19424a330fb6bc14c7210c411202d9168b3bf1", null ]
+    [ "MouseCode", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531", [
+      [ "Button0", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531adf18fdbdb36feb48df7a2b683a732543", null ],
+      [ "Button1", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a6475a3746209a62a6ce6289a3741d07e", null ],
+      [ "Button2", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531ae165925a7c2d5ea94209b91389aa189f", null ],
+      [ "Button3", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a6d0c69e60d65a93dd244ae95f90e679c", null ],
+      [ "Button4", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a91ff24acfc01cc2c3a4238a272a37d07", null ],
+      [ "Button5", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531af8849babaeaee3344306b87310664d65", null ],
+      [ "Button6", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a375ccc6b3a6125cc5c67f2c700a55b72", null ],
+      [ "Button7", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531aa00c628d1b186fa4fe9c7f633426979e", null ],
+      [ "ButtonLast", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a4b79ada84511c1c15c9eb834dab2e350", null ],
+      [ "ButtonLeft", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a73bbc53e5b81f06eb4b1d68052a36187", null ],
+      [ "ButtonRight", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a93c4a961054f2fa59f45f358526b02ad", null ],
+      [ "ButtonMiddle", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a330fb6bc14c7210c411202d9168b3bf1", null ]
     ] ],
     [ "operator<<", "_mouse_codes_8hpp.html#ad49ab1293d6fe22a626d96cd0afe4c73", null ]
 ];

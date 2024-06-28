@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('_macros_8hpp_source.html',''); initRes
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="_macros_8hpp.html#ad27cc17b25bb93134368d5eb21126eae">   99</a></span>&#160;<span class="preprocessor">#define BIT(x) (1 &lt;&lt; x)</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="_macros_8hpp.html#a0096cb0231e220a5a22389350edadf03">  103</a></span>&#160;<span class="preprocessor">#define ENIGMA_ARRAY_SIZE(arr) static_cast&lt;::Enigma::size_t&gt;(sizeof(arr) / sizeof((arr)[0]))</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="_macros_8hpp.html#a0096cb0231e220a5a22389350edadf03">  103</a></span>&#160;<span class="preprocessor">#define ENIGMA_ARRAY_SIZE(arr) static_cast&lt;::Enigma::std::size_t&gt;(sizeof(arr) / sizeof((arr)[0]))</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="_macros_8hpp.html#aa00ecb7cd175181c5254be40771a854f">  107</a></span>&#160;<span class="preprocessor">#define ENIGMA_IS_BETWEEN(v, mi, ma) (v &gt;= mi &amp;&amp; v &lt;= ma)</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
@@ -251,12 +251,12 @@ $(document).ready(function(){initNavTree('_macros_8hpp_source.html',''); initRes
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="comment">//static void TimedFunction(</span></div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">//  const std::function&lt;void()&gt;&amp; onStart,</span></div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">//  const std::function&lt;void()&gt;&amp; func,</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">//  const std::function&lt;void(::Enigma::f64)&gt;&amp; onFinish)</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">//  const std::function&lt;void(::Enigma::double)&gt;&amp; onFinish)</span></div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">//{</span></div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="comment">//  onStart();</span></div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="comment">//  ENIGMA_BEGIN_TIMER(t1);</span></div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">//      func();</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">//  ::Enigma::f64 elapsed = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="comment">//  ::Enigma::double elapsed = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;</span></div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="comment">//  onFinish(elapsed);</span></div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="comment">//}</span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
@@ -270,7 +270,7 @@ $(document).ready(function(){initNavTree('_macros_8hpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="_macros_8hpp.html">Macros.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 11:14:36 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jun 28 2024 21:46:39 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

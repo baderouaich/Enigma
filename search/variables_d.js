@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['refresh_5frate_1588',['refresh_rate',['../struct_window_settings.html#a4dffa8459e71582b80790c3f78af72a4',1,'WindowSettings']]]
+  ['refresh_5frate_1566',['refresh_rate',['../struct_window_settings.html#adb743de79ebe98addb9b7278d1041c57',1,'WindowSettings']]]
 ];

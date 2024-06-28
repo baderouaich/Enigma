@@ -2,6 +2,6 @@ var class_twofish =
 [
     [ "Twofish", "class_twofish.html#a9ddab45f10d26ad3958df73c7e4c673b", null ],
     [ "~Twofish", "class_twofish.html#a215ec9e9be8bd1a1ba02ef00162d1eba", null ],
-    [ "Decrypt", "class_twofish.html#aedfbe04067a69d68ad5f0d6ec0821e1e", null ],
-    [ "Encrypt", "class_twofish.html#ac757f9cd1b23950c4ac07aefbce4eddb", null ]
+    [ "Decrypt", "class_twofish.html#a29fba240167c91329e6eff5170222a51", null ],
+    [ "Encrypt", "class_twofish.html#ac8f0bdc897aa0569a568c137e3a42a74", null ]
 ];

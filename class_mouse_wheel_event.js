@@ -1,7 +1,7 @@
 var class_mouse_wheel_event =
 [
-    [ "MouseWheelEvent", "class_mouse_wheel_event.html#a6bc79871638ed208c7007312a0e8f1f9", null ],
-    [ "GetXOffset", "class_mouse_wheel_event.html#a685b9b84c83f0f1b32ae8339267fde37", null ],
-    [ "GetYOffset", "class_mouse_wheel_event.html#a880659928c27d9315fe814bb4dc95393", null ],
-    [ "ToString", "class_mouse_wheel_event.html#a085d0b4aa9d6410538e2b6f5068e3452", null ]
+    [ "MouseWheelEvent", "class_mouse_wheel_event.html#ad0c4478f262ed485e7edbad949fcaa29", null ],
+    [ "GetXOffset", "class_mouse_wheel_event.html#a680f35cf02d8bc747660f24ea488054c", null ],
+    [ "GetYOffset", "class_mouse_wheel_event.html#a5e17e8500b2ce75068268a4daa29da5a", null ],
+    [ "ToString", "class_mouse_wheel_event.html#a827852c22bee507c3b186a3e368f5ff9", null ]
 ];

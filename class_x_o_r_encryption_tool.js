@@ -7,6 +7,6 @@ var class_x_o_r_encryption_tool =
     [ "OnDestroy", "class_x_o_r_encryption_tool.html#a1118eb8bc5ce99cc2c3ec7109de89152", null ],
     [ "OnDraw", "class_x_o_r_encryption_tool.html#a1263116a85f6b291fa8f96784927931d", null ],
     [ "OnEncryptButtonPressed", "class_x_o_r_encryption_tool.html#a16c044f2ddef37c19e363ba23724dabf", null ],
-    [ "XORDecrypt", "class_x_o_r_encryption_tool.html#ae73125b9e96626039c96a21b7d5df2c6", null ],
-    [ "XOREncrypt", "class_x_o_r_encryption_tool.html#aa34594721b1bf89b37651b62ea30113f", null ]
+    [ "XORDecrypt", "class_x_o_r_encryption_tool.html#a544f0fa82ae042a2215e58c1913b4506", null ],
+    [ "XOREncrypt", "class_x_o_r_encryption_tool.html#aeabe5673baff344eb6285ab8b4116d5d", null ]
 ];
