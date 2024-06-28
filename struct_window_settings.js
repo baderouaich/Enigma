@@ -1,0 +1,27 @@
+var struct_window_settings =
+[
+    [ "WindowSettings", "struct_window_settings.html#ad35a936d4923cb03273e7af39addc811", null ],
+    [ "WindowSettings", "struct_window_settings.html#a237991469a70521082982dbe74e194cf", null ],
+    [ "toString", "struct_window_settings.html#a86cdb5f5adb870375e36e1c17115ee6f", null ],
+    [ "height", "struct_window_settings.html#a032fd38826aed1b211c4a9ec5f565583", null ],
+    [ "is_auto_iconify", "struct_window_settings.html#ae9c3fb70a187e45e39dbf71337c81e95", null ],
+    [ "is_decorated", "struct_window_settings.html#ac212749bd6c069a8bcba854e127c4453", null ],
+    [ "is_floating", "struct_window_settings.html#a5120b33682429cd6aa62aace2f718911", null ],
+    [ "is_focused", "struct_window_settings.html#abf1cad36452ed0de25c7fb8d3c82b33d", null ],
+    [ "is_fullscreen", "struct_window_settings.html#aca08ff626931e090f649d770695d150c", null ],
+    [ "is_maximized", "struct_window_settings.html#a21537d56e38aa3f28182d1b278ac229f", null ],
+    [ "is_resizable", "struct_window_settings.html#a94043ec717da34a2b2515ea8f8757808", null ],
+    [ "is_show_cpu_usage", "struct_window_settings.html#adff1cfc334e9828dd2e2fca3376c2e6e", null ],
+    [ "is_show_fps", "struct_window_settings.html#a06ccebd947ce344e1c6213f9581a64fd", null ],
+    [ "is_show_ram_usage", "struct_window_settings.html#a459ddc4c430274d1bfa83c853d3a463d", null ],
+    [ "is_visible", "struct_window_settings.html#a74ad0a4e3108092c75c9ebc5afadc6cf", null ],
+    [ "maximum_height", "struct_window_settings.html#a2c25054efb92aa2f4e9d4bc0a9a1961e", null ],
+    [ "maximum_width", "struct_window_settings.html#a1e87516f8d190d191a60d164f5b5b0c3", null ],
+    [ "minimum_height", "struct_window_settings.html#a0acf196181046db3f262be61cf96a485", null ],
+    [ "minimum_width", "struct_window_settings.html#af7673a347cdf8932d1522aa3aba24a23", null ],
+    [ "refresh_rate", "struct_window_settings.html#a4dffa8459e71582b80790c3f78af72a4", null ],
+    [ "samples", "struct_window_settings.html#a7177a02fa941cc029126b28966d791e1", null ],
+    [ "swap_interval", "struct_window_settings.html#ad1bb7751484941cfd21a8fabee5444cf", null ],
+    [ "title", "struct_window_settings.html#a3f1759d099d25799b7a9dea93b306b7e", null ],
+    [ "width", "struct_window_settings.html#a90c8a6fe38d39a542ea8e322473c5c2c", null ]
+];
