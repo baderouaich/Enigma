@@ -64,6 +64,7 @@ if(WIN32)
     _CRT_SECURE_NO_DEPRECATE
     _CRT_SECURE_NO_WARNINGS
     _CRT_NONSTDC_NO_WARNINGS
+    STRSAFE_NO_DEPRECATE # for strcpy_instead_use_StringCbCopyA_or_StringCchCopyA
   )
 elseif (UNIX AND NOT APPLE)
   # No need, will be defined by Core/Platform.hpp

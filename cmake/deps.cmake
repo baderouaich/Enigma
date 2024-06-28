@@ -2,11 +2,13 @@ include(FetchContent)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cryptopp.cmake)
 
-FetchContent_Declare(Catch2
-        GIT_REPOSITORY "https://github.com/catchorg/Catch2"
-        GIT_TAG        "v3.6.0"
-)
-FetchContent_MakeAvailable(Catch2)
+if (ENIGMA_BUILD_TESTS)
+    FetchContent_Declare(Catch2
+            GIT_REPOSITORY "https://github.com/catchorg/Catch2"
+            GIT_TAG        "v3.6.0"
+    )
+    FetchContent_MakeAvailable(Catch2)
+endif ()
 
 FetchContent_Declare(cpr
         GIT_REPOSITORY "https://github.com/libcpr/cpr"
@@ -51,11 +53,6 @@ FetchContent_Declare(json
 )
 FetchContent_MakeAvailable(json)
 
-#FetchContent_Declare(mbedtls
-#  GIT_REPOSITORY "https://github.com/Mbed-TLS/mbedtls"
-#  GIT_TAG        "v3.6.0"
-#)
-#FetchContent_MakeAvailable(mbedtls)
 
 FetchContent_Declare(portable_file_dialogs
         GIT_REPOSITORY "https://github.com/samhocevar/portable-file-dialogs"
@@ -101,7 +98,6 @@ set(ENIGMA_DEPENDENCIES
         infoware
         inih
         nlohmann_json::nlohmann_json
-        #mbedtls
         portable_file_dialogs
         spdlog
         SQLiteCpp
@@ -109,3 +105,7 @@ set(ENIGMA_DEPENDENCIES
         tabulate
         zlib
 )
+# Append Catch2 if we're testing
+if (ENIGMA_BUILD_TESTS)
+    set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Catch2::Catch2WithMain)
+endif ()
