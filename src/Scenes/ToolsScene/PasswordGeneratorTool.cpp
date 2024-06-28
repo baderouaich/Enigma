@@ -93,7 +93,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			// Password Settings
 			// Wrap password settings in columns to order things up
 			//ImGui::PushFont(font_montserrat_medium_14);
-				ImGui::BeginColumns("Password Settings", 5,  ImGuiColumnsFlags_NoResize);
+				ImGui::BeginColumns("Password Settings", 5,  ImGuiOldColumnFlags_::ImGuiOldColumnFlags_NoResize);
 					// Length Combo Box
 					/*
 					ImGui::Combo("Length", &m_selected_length_index, m_lengths.data(), m_lengths.size(), -1);

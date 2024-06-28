@@ -23,6 +23,8 @@ typedef struct sysinfo memory_status_t;
 	#include <mach/mach.h>  // mach_task_basic_info
 	#include <mach/mach_host.h>
 typedef struct vm_statistics_data_t memory_status_t;
+#else
+  #error "Unsupported Platform"
 #endif
 
 NS_ENIGMA_BEGIN

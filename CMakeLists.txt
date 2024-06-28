@@ -3,7 +3,7 @@ project(Enigma VERSION "3.0.0" DESCRIPTION "A Simple, Reliable and Efficient UI 
 
 ################# Options ###########################
 option(ENIGMA_ENABLE_TESTS "Enable/Disable building of tests" OFF)
-option(ENIGMA_BUILD_DOCS "Build doxygen API documentation" OFF)
+option(ENIGMA_BUILD_DOCS "Build Doxygen API documentation" OFF)
 #####################################################
 
 ###### Doxygen Documentation ######
@@ -56,13 +56,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 
 ############ Platform macros ############
-if(WIN32)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_WINDOWS)
-elseif (UNIX AND NOT APPLE)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_LINUX)
-else()
-  message(FATAL_ERROR "Unsupported platform")
-endif()
+#if(WIN32)
+#  target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_WINDOWS)
+#elseif (UNIX AND NOT APPLE)
+#  target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_LINUX)
+#else()
+#  message(FATAL_ERROR "Unsupported platform")
+#endif()
 ########################################
 
 

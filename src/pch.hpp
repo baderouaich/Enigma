@@ -34,6 +34,7 @@
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
+#include <spdlog/common.h>
 ///
 
 /// pfd: portable file dialog
@@ -55,6 +56,7 @@
 /// nlohmann-json: json parser library
 #include <nlohmann/json.hpp> // nlohmann-json
 ///
+
 
 /// the C++ Standard Libraries
 #include <algorithm>
@@ -82,15 +84,21 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+///
 
-#include <cassert>
-#include <cmath>
-#include <csignal>
-#include <cstdint>
+/// the C Standard Libraries
+#include <cctype>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include <climits>
+#include <cwchar>
+#include <cmath>
+#include <cstdarg>
+#include <cerrno>
+#include <cassert>
+#include <csignal>
+#include <cstdint>
 ///
-
 #pragma warning(pop)
