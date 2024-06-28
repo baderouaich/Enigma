@@ -19,9 +19,9 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
 	//const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 
-	//const auto button_size = Vec2f(win_w / 2.6f, 40.0f);
+	//const auto button_size = ImVec2(win_w / 2.6f, 40.0f);
 
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static auto& fonts = Application::GetInstance()->GetFonts();
 	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -61,7 +61,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 				ImGui::Text("%s:", ("Input"));
 
 				// Input text/cipher
-				const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
+				const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
 				ImGuiWidgets::InputTextMultiline("##text1", &m_input, input_text_size);
 
 				// Bytes count
@@ -79,7 +79,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 				// Label
 				ImGui::Text("%s:", ("Password"));
 				// Input text
-				ImGuiWidgets::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+				ImGuiWidgets::InputText("##text2", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			}
 			ImGui::PopFont();
 
@@ -122,7 +122,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 				ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER);  // buttons color hover
 				ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
 				{
-					const auto button_size = Vec2f(win_w / 2.9f, 33.0f);
+					const auto button_size = ImVec2(win_w / 2.9f, 33.0f);
 					ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
 					//ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 10.0f);
 					const auto btn_txt = m_intent == Algorithm::Intent::Encrypt ? "Encrypt" : "Decrypt";
@@ -187,7 +187,7 @@ void XOREncryptionTool::OnEncryptButtonPressed()
 	}
 	catch (...)
 	{
-		const String err_msg = ("Encryption Failure: UNKNOWN ERROR");
+		const std::string err_msg = ("Encryption Failure: UNKNOWN ERROR");
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
@@ -220,7 +220,7 @@ void XOREncryptionTool::OnDecryptButtonPressed()
 	}
 	catch (...)
 	{
-		const String err_msg = ("Decryption Failure: UNKNOWN ERROR");
+		const std::string err_msg = ("Decryption Failure: UNKNOWN ERROR");
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}

@@ -44,7 +44,7 @@ public:
 	}
 
 	/*
-	*	Convert GL Error Enum macro name to a String, returns "Unknown GLenum" on non detected macros 
+	*	Convert GL Error Enum macro name to a std::string, returns "Unknown GLenum" on non detected macros
 	*/
 	static constexpr const char* GetGLErrorEnumString(const GLenum& _enum) noexcept
 	{

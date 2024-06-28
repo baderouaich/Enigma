@@ -13,7 +13,7 @@
 
 NS_ENIGMA_BEGIN
 
-CLI::CLI(const i32 argc, const char* const* argv)
+CLI::CLI(const std::int32_t argc, const char* const* argv)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 	try
@@ -65,7 +65,7 @@ CLI::CLI(const i32 argc, const char* const* argv)
 	}
 }
 
-i32 CLI::Run()
+std::int32_t CLI::Run()
 {
 	const auto& r = *m_parse_result;
 
@@ -98,11 +98,11 @@ i32 CLI::Run()
 
 	std::unique_ptr<Algorithm> algorithm{}; // Polymorphic algorithm to be created by mode name with Algorithm::CreateFromName
 	Algorithm::Intent intent{}; // Encrypt or Decrypt? to save memory resources not needed in a specific operation
-	String algo{}; // "aes", "tripledes"..
-	String password{}; // Encryption password 
-	String text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
-	String infilename{}; // In file to encrypt if mode is --encrypt, otherwise file to be decrypted
-	String outfilename{}; // Out file to ouput encrypted cipher to if mode is --encrypt, otherwise decrypted file
+	std::string algo{}; // "aes", "tripledes"..
+	std::string password{}; // Encryption password
+	std::string text{}; // Text to encrypt if mode is --encrypt, otherwise cipher base64 to decrypt
+	std::string infilename{}; // In file to encrypt if mode is --encrypt, otherwise file to be decrypted
+	std::string outfilename{}; // Out file to ouput encrypted cipher to if mode is --encrypt, otherwise decrypted file
 	const bool save_to_database = !!r.count("save"); // Save encryption record to database
 	try
 	{
@@ -123,7 +123,7 @@ i32 CLI::Run()
 		// Which algorithm are we using ?
 		if (r.count("a") || r.count("algorithm")) // --a=aes or --algorithm=aes or chacha..
 		{
-			algo = r["a"].as<String>();
+			algo = r["a"].as<std::string>();
 			//LOG("Algorithm: {0}", m);
 		}
 		else if(intent & Algorithm::Intent::Encrypt) // If intent is encrypting, algorithm is required, otherwise we can detect which mode used for encryption.
@@ -131,7 +131,7 @@ i32 CLI::Run()
 		// What is the encryption/decryption password?
 		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
 		{
-			password = r["p"].as<String>();
+			password = r["p"].as<std::string>();
 
 			//LOG("Password: {0}", password);
 		}
@@ -142,7 +142,7 @@ i32 CLI::Run()
 		// Is there a text to encrypt/decrypt?
 		if (r.count("t") || r.count("text")) // -t "lorem" | --text="lorem"
 		{
-			text = r["t"].as<String>();
+			text = r["t"].as<std::string>();
 
 			//LOG("Text: {0}", text);
 		}
@@ -150,13 +150,13 @@ i32 CLI::Run()
 		// Or Is there a file to encrypt/decrypt?
 		if (r.count("i") || r.count("infile")) // -i "C:/file" | --infile="C:/file_to_encrypt.txt"
 		{
-			infilename = r["i"].as<String>();
+			infilename = r["i"].as<std::string>();
 
 			//LOG("In File name: {0}", infilename);
 		}
 		if (r.count("o") || r.count("outfile")) // -o "C:/file" | --outfile="C:/file"
 		{
-			outfilename = r["o"].as<String>();
+			outfilename = r["o"].as<std::string>();
 
 			//LOG("Out File name: {0}", outfilename);
 		}
@@ -255,17 +255,17 @@ i32 CLI::Run()
 	return EXIT_SUCCESS;
 }
 
-void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool save_to_database)
+void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& text, const bool save_to_database)
 {
 	// assert the pw size is 6 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH,
 		fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
 
-	String cipher{}, cipher_base64{};
-	f64 elapsed_seconds{ 0.0 };
+	std::string cipher{}, cipher_base64{};
+	double elapsed_seconds{ 0.0 };
 
 	// Compression
-	const String compressed_text = GZip::Compress(text);
+	const std::string compressed_text = GZip::Compress(text);
 	ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), ("Failed to compress text"));
 
 	ENIGMA_BEGIN_TIMER(t1);
@@ -278,7 +278,7 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		cipher_base64 = Base64::Encode(cipher);
 		ENIGMA_ASSERT_OR_THROW(!cipher_base64.empty(), "Failed to encode cipher to base64");
 
-		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+		elapsed_seconds = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 	}
 
 	ENIGMA_INFO(cipher_base64);
@@ -288,7 +288,7 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// Save encryption record to database on option -s | --save 
 	if(save_to_database)
 	{
-		String title{};
+		std::string title{};
 		ENIGMA_INFO("Save encryption to database, please enter encryption title (example My Github Password). it helps with searching through encryptions from the database in the future: ");
 		std::cout << "> ";
 		std::getline(std::cin, title);
@@ -308,14 +308,14 @@ void CLI::OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	cipher_base64.clear();
 }
 
-void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& cipher_base64)
+void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& cipher_base64)
 {
 	// assert the pw size is 6 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
 		fmt::format("Password is too weak! encryption passwords are mimimum {} characters", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 
-	String cipher{}, decrypted_text{};
-	f64 elapsed_seconds{ 0.0 };
+	std::string cipher{}, decrypted_text{};
+	double elapsed_seconds{ 0.0 };
 
 	ENIGMA_BEGIN_TIMER(t1);
 	{
@@ -327,10 +327,10 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		decrypted_text = algorithm->Decrypt(password, cipher);
 		ENIGMA_ASSERT_OR_THROW(!decrypted_text.empty(), "Failed to decrypt cipher");
 
-		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+		elapsed_seconds = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 	}
 	// Decompress 
-	const String recovered_text = GZip::Decompress(decrypted_text);
+	const std::string recovered_text = GZip::Decompress(decrypted_text);
 	ENIGMA_ASSERT_OR_THROW(!recovered_text.empty(), ("Failed to decompress recovered text"));
 
 	ENIGMA_INFO(recovered_text);
@@ -340,7 +340,7 @@ void CLI::OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	decrypted_text.clear();
 }
 
-void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool save_to_database)
+void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename, const std::string& out_filename_encypted, const bool save_to_database)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
@@ -351,8 +351,8 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(in_filename), "Input file " + in_filename + " is empty");
 
 
-	String buffer{}, cipher{};
-	f64 elapsed_seconds{ 0.0 };
+	std::string buffer{}, cipher{};
+	double elapsed_seconds{ 0.0 };
 
 	// Read buffer from file
 	ENIGMA_TRACE("Reading buffer from " + in_filename + "...");
@@ -375,7 +375,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		cipher = algorithm->Encrypt(password, buffer);
 		ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to encrypt file content");
 		
-		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+		elapsed_seconds = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 	}
 
 	// Write cipher to file
@@ -388,7 +388,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	// Save encryption record to database on option -s | --save (Note: file buffer forced to be compressed above if saving to database)
 	if (save_to_database)
 	{
-		String title{};
+		std::string title{};
 		ENIGMA_INFO("Save encryption to database, please enter encryption title (e.g: My Image): ");
 		std::cout << "> ";
 		std::getline(std::cin, title);
@@ -410,7 +410,7 @@ void CLI::OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	cipher.clear();
 }
 
-void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted)
+void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename_encrypted, const std::string& out_filename_decrypted)
 {
 	// assert the pw size is 9 or more
 	ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, 
@@ -421,8 +421,8 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(in_filename_encrypted), "Input file " + in_filename_encrypted + " is empty");
 	 
 
-	String cipher{}, buffer{}; // buffer: recovered file content
-	f64 elapsed_seconds{ 0.0 };
+	std::string cipher{}, buffer{}; // buffer: recovered file content
+	double elapsed_seconds{ 0.0 };
 
 	// Read cipher from file
 	ENIGMA_TRACE("Reading Cipher from " + in_filename_encrypted + "...");
@@ -435,7 +435,7 @@ void CLI::OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const Strin
 		ENIGMA_TRACE("Decrypting Cipher with " + algorithm->GetTypeString() + " Algorithm ...");
 		buffer = algorithm->Decrypt(password, cipher);
 		ENIGMA_ASSERT_OR_THROW(!buffer.empty(), "Failed to decrypt file content");
-		elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+		elapsed_seconds = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 	}
 
 	// Decompression 	
@@ -477,7 +477,7 @@ void CLI::OnListEncryptionRecords()
 	table.add_row({ "ID", "Title", "Date Time", "Size", "Format" });
 
 	// Make table header
-	for (size_t i = 0; i < table.row(0).size(); i++)
+	for (std::size_t i = 0; i < table.row(0).size(); i++)
 		table
 		.column(i)
 		.format()
@@ -492,7 +492,7 @@ void CLI::OnListEncryptionRecords()
 		const auto& [ide, title, cipher, date_time, size, is_file, file_ext] = *e;
 		
 		//substr title to 50 chars only
-		String sub_title = title;
+		std::string sub_title = title;
 		if (sub_title.size() > 50)
 			sub_title = sub_title.substr(0, 50) + "...";
 
@@ -557,7 +557,7 @@ void CLI::OnCheckForUpdates()
 	if (!info)
 		return;
 
-	const auto current_version = "v" + String(ENIGMA_VERSION);
+	const auto current_version = "v" + std::string(ENIGMA_VERSION);
 	std::ostringstream oss{};
 	if (info->tag_name == current_version)
 	{

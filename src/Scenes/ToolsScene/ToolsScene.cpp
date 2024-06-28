@@ -37,7 +37,7 @@ void ToolsScene::OnCreate()
 	}
 }
 
-void ToolsScene::OnUpdate(const f32&)
+void ToolsScene::OnUpdate(const float&)
 {}
 
 void ToolsScene::OnDraw()
@@ -51,8 +51,8 @@ void ToolsScene::OnImGuiDraw()
 	static const auto& io = ImGui::GetIO();
 
 
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -68,7 +68,7 @@ void ToolsScene::OnImGuiDraw()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 		// Back button [<] & Title
@@ -96,7 +96,7 @@ void ToolsScene::OnImGuiDraw()
 				ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 				ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 				{
-					(void)ImGui::ButtonEx(title, ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+					(void)ImGui::ButtonEx(title, ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 				}
 				ImGui::PopStyleColor(2);
 				ImGui::PopFont();

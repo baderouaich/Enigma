@@ -41,24 +41,24 @@ public:
 	/**
 	*	Returns cpu usage (in percentage [0% -> 100%])
 	*/
-	f32 GetCPUUsage() noexcept;
+	float GetCPUUsage() noexcept;
 
 	/**
 	*	Returns cpu usage by current process (in percentage [0% -> 100%])
 	*/
-	f32 GetProcessCPUUsage() noexcept;
+	float GetProcessCPUUsage() noexcept;
 
 private: /** Platform Functions */
 #if defined(ENIGMA_PLATFORM_WINDOWS) || defined(ENIGMA_PLATFORM_MACOS)
 	/**
 	*	Calculates CPU Load percentage by idle and total ticks for (used for Windows & MacOS)
 	*/
-	f32 CalculateCPULoad(const ui64 idle_ticks, const ui64 total_ticks)
+	float CalculateCPULoad(const std::uint64_t idle_ticks, const std::uint64_t total_ticks)
 	{
-		const ui64 total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
-		const ui64 idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
+		const std::uint64_t total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
+		const std::uint64_t idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
 
-		const f32 rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<f32>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
+		const float rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<float>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
 
 		m_cpu_previous_total_ticks = total_ticks;
 		m_cpu_previous_idle_ticks = idle_ticks;
@@ -73,25 +73,25 @@ private: /** Platform Variables */
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
 	FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};
-	ui64 m_cpu_previous_total_ticks{ 0 };
-	ui64 m_cpu_previous_idle_ticks{ 0 };
+	std::uint64_t m_cpu_previous_total_ticks{ 0 };
+	std::uint64_t m_cpu_previous_idle_ticks{ 0 };
 
-	ui64 FileTimeToUInt64(const FILETIME& file_time)
+	std::uint64_t FileTimeToUInt64(const FILETIME& file_time)
 	{
-		return (static_cast<ui64>(file_time.dwHighDateTime) << 32) | static_cast<ui64>(file_time.dwLowDateTime);
+		return (static_cast<std::uint64_t>(file_time.dwHighDateTime) << 32) | static_cast<std::uint64_t>(file_time.dwLowDateTime);
 	}
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-	ui64 m_last_total_user{ 0 };
-	ui64 m_last_total_user_low{ 0 };
-	ui64 m_last_total_sys{ 0 };
-	ui64 m_last_total_idle{ 0 };
+	std::uint64_t m_last_total_user{ 0 };
+	std::uint64_t m_last_total_user_low{ 0 };
+	std::uint64_t m_last_total_sys{ 0 };
+	std::uint64_t m_last_total_idle{ 0 };
 
 #elif defined(ENIGMA_PLATFORM_MACOS)
 
-	ui64 m_cpu_previous_total_ticks{ 0 };
-	ui64 m_cpu_previous_idle_ticks{ 0 };
+	std::uint64_t m_cpu_previous_total_ticks{ 0 };
+	std::uint64_t m_cpu_previous_idle_ticks{ 0 };
 	host_cpu_load_info_data_t m_cpu_info{};
 	mach_msg_type_number_t m_count = HOST_CPU_LOAD_INFO_COUNT;
 
@@ -189,16 +189,16 @@ public:
 	/*
 	*	Returns cpu usage (in percentage [0% -> 100%])
 	*/
-	f32 CPUInfo::GetCPUUsage() noexcept
+	float CPUInfo::GetCPUUsage() noexcept
 	{
-		f32 percentage{ 0.0f };
+		float percentage{ 0.0f };
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
 		if (::GetSystemTimes(&m_idle_time, &m_kernel_time, &m_user_time))
 		{
-			const ui64 idle_ticks = this->FileTimeToUInt64(m_idle_time);
-			const ui64 total_ticks = this->FileTimeToUInt64(m_kernel_time) + this->FileTimeToUInt64(m_user_time);
+			const std::uint64_t idle_ticks = this->FileTimeToUInt64(m_idle_time);
+			const std::uint64_t total_ticks = this->FileTimeToUInt64(m_kernel_time) + this->FileTimeToUInt64(m_user_time);
 			percentage = this->CalculateCPULoad(idle_ticks, total_ticks);
 		}
 		else
@@ -206,7 +206,7 @@ public:
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-		ui64 total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};
+		std::uint64_t total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};
 
 		std::FILE* file = std::fopen("/proc/stat", "r");
 		std::fscanf(file, "cpu %llu %llu %llu %llu",
@@ -223,7 +223,7 @@ public:
 		else
 		{
 			total = (total_user - m_last_total_user) + (total_user_low - m_last_total_user_low) + (total_sys - m_last_total_sys);
-			percentage = static_cast<f32>(total);
+			percentage = static_cast<float>(total);
 			total += (total_idle - m_last_total_idle);
 			percentage /= total;
 			percentage *= 100.0f;
@@ -237,10 +237,10 @@ public:
 #elif defined(ENIGMA_PLATFORM_MACOS)
 		if (host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, (host_info_t)&m_cpu_info, &m_count) == KERN_SUCCESS)
 		{
-			ui64 total_ticks{ 0 };
+			std::uint64_t total_ticks{ 0 };
 			for (auto i = 0; i < CPU_STATE_MAX; ++i)
 				total_ticks += m_cpu_info.cpu_ticks[i];
-			const ui64 idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];
+			const std::uint64_t idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];
 			percentage = this->CalculateCPULoad(idle_ticks, total_ticks);
 		}
 		else
@@ -254,7 +254,7 @@ public:
 	/*
 	*	Returns cpu usage by current process (in percentage [0% -> 100%])
 	*/
-	f32 GetProcessCPUUsage() noexcept
+	float GetProcessCPUUsage() noexcept
 	{
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
@@ -267,9 +267,9 @@ public:
 		std::memcpy(&sys, &m_kernel_time, sizeof(FILETIME));
 		std::memcpy(&user, &m_user_time, sizeof(FILETIME));
 
-		f32 percent = static_cast<f32>(sys.QuadPart - m_last_sys_cpu.QuadPart) + static_cast<f32>(user.QuadPart - m_last_user_cpu.QuadPart);
-		percent /= static_cast<f32>(now.QuadPart - m_last_cpu.QuadPart);
-		percent /= static_cast<f32>(m_num_processors);
+		float percent = static_cast<float>(sys.QuadPart - m_last_sys_cpu.QuadPart) + static_cast<float>(user.QuadPart - m_last_user_cpu.QuadPart);
+		percent /= static_cast<float>(now.QuadPart - m_last_cpu.QuadPart);
+		percent /= static_cast<float>(m_num_processors);
 		
 		m_last_cpu = now;
 		m_last_user_cpu = user;
@@ -290,12 +290,12 @@ private: /* Platform Functions */
 		/*
 		*	Calculates CPU Load percentage by idle and total ticks for (used for Windows & MacOS)
 		*/
-		f32 CalculateCPULoad(const ui64 idle_ticks, const ui64 total_ticks)
+		float CalculateCPULoad(const std::uint64_t idle_ticks, const std::uint64_t total_ticks)
 		{
-			const ui64 total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
-			const ui64 idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
+			const std::uint64_t total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
+			const std::uint64_t idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
 
-			const f32 rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<f32>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
+			const float rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<float>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
 
 			m_cpu_previous_total_ticks = total_ticks;
 			m_cpu_previous_idle_ticks = idle_ticks;
@@ -310,29 +310,29 @@ private: /* Platform Variables */
 
 	FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};
 	ULARGE_INTEGER m_last_cpu{}, m_last_user_cpu{}, m_last_sys_cpu{};
-	i32 m_num_processors{};
+	std::int32_t m_num_processors{};
 
-	ui64 m_cpu_previous_total_ticks{ 0 };
-	ui64 m_cpu_previous_idle_ticks{ 0 };
+	std::uint64_t m_cpu_previous_total_ticks{ 0 };
+	std::uint64_t m_cpu_previous_idle_ticks{ 0 };
 
-	ui64 FileTimeToUInt64(const FILETIME& file_time)
+	std::uint64_t FileTimeToUInt64(const FILETIME& file_time)
 	{
-		return (static_cast<ui64>(file_time.dwHighDateTime) << 32) | static_cast<ui64>(file_time.dwLowDateTime);
+		return (static_cast<std::uint64_t>(file_time.dwHighDateTime) << 32) | static_cast<std::uint64_t>(file_time.dwLowDateTime);
 	}
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-	ui64 m_last_total_user{ 0 };
-	ui64 m_last_total_user_low{ 0 };
-	ui64 m_last_total_sys{ 0 };
-	ui64 m_last_total_idle{ 0 };
+	std::uint64_t m_last_total_user{ 0 };
+	std::uint64_t m_last_total_user_low{ 0 };
+	std::uint64_t m_last_total_sys{ 0 };
+	std::uint64_t m_last_total_idle{ 0 };
 
-	i32 m_num_processors{};
+	std::int32_t m_num_processors{};
 
 #elif defined(ENIGMA_PLATFORM_MACOS)
 
-	ui64 m_cpu_previous_total_ticks{ 0 };
-	ui64 m_cpu_previous_idle_ticks{ 0 };
+	std::uint64_t m_cpu_previous_total_ticks{ 0 };
+	std::uint64_t m_cpu_previous_idle_ticks{ 0 };
 	host_cpu_load_info_data_t m_cpu_info{};
 	mach_msg_type_number_t m_count = HOST_CPU_LOAD_INFO_COUNT;
 

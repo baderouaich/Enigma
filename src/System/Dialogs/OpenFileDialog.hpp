@@ -20,23 +20,23 @@ public: /* Constructors / Destructor */
 	*	@param allow_multiselect:  to allow selecting multiple files
 	*	@param filters: The filter list enumerates filter names and corresponded space-separated wildcard lists. It defaults to { "All Files", "*" }
 	*/
-	OpenFileDialog(const String& title,
-		const String& initial_path = ".",
+	OpenFileDialog(const std::string& title,
+		const std::string& initial_path = ".",
 		const bool allow_multiselect = true,
-		const std::initializer_list<String>& filters = { "All Files", "*" });
+		const std::initializer_list<std::string>& filters = { "All Files", "*" });
 	~OpenFileDialog() noexcept = default;
 
 public: /* Accessors */
 	/**
 	*	Spawns Open File Dialog and returns selected file(s) paths
 	*/
-	std::vector<String> Show() const;
+	std::vector<std::string> Show() const;
 
 private: 
-	String m_title; /*< Dialog title */
-	String m_initial_path; /*< Dialog initial path */
+	std::string m_title; /*< Dialog title */
+	std::string m_initial_path; /*< Dialog initial path */
 	bool m_allow_multiselect; /*< Shall allow multi file selection ? */
-	std::vector<String> m_filters; /*< Which files to allow e.g .txt, .jpg... */
+	std::vector<std::string> m_filters; /*< Which files to allow e.g .txt, .jpg... */
 };
 
 NS_ENIGMA_END

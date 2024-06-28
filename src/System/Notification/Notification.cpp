@@ -3,7 +3,7 @@
 
 NS_ENIGMA_BEGIN
 
-Notification::Notification(const String& title, const String& message, Icon icon)
+Notification::Notification(const std::string& title, const std::string& message, Icon icon)
 	:
 	m_title(title),
 	m_message(message),

@@ -24,25 +24,25 @@ public:
 	/** Comparable Version struct, an instance can be made from a version string e.g "1.0.0" */
 	struct Version
 	{
-		ui16 major;
-		ui16 minor;
-		ui16 patch;
+		std::uint16_t major;
+		std::uint16_t minor;
+		std::uint16_t patch;
 
 		Version() : major(0), minor(0), patch(0) {}
-		Version(const String& tag_name)
+		Version(const std::string& tag_name)
 		{
 			Parse(tag_name);
 		}
 
-		void Parse(const String& tag_name)
+		void Parse(const std::string& tag_name)
 		{
-			const std::vector<String> parts = StringUtils::Split(tag_name, '.');
+			const std::vector<std::string> parts = StringUtils::Split(tag_name, '.');
 			ENIGMA_ASSERT_OR_THROW(parts.size() == 3, fmt::format("Version tag_name is malformed, expected major.minor.patch (%d.%d.%d) but received {}", tag_name));
 
-			// Convert string parts to ui16 major minor patch
-			const auto stoui16 = [](const String& str) -> ui16
+			// Convert string parts to std::uint16_t major minor patch
+			const auto stoui16 = [](const std::string& str) -> std::uint16_t
 			{
-				ui16 i{};
+				std::uint16_t i{};
 				std::stringstream oss(str);
 				oss >> i;
 				return i;
@@ -86,13 +86,13 @@ public:
 	/** Latest Enigma release information data struct */
 	struct LatestReleaseInfo
 	{
-		String name;   // "name": "Enigma Release (Windows x64, Linux x64)",
-		String tag_name; // version e.g 1.0.0
-		String created_at;//"created_at": "2021-02-06T11:41:26Z",
-		String published_at;	//"published_at" : "2021-02-06T12:16:37Z",
-		String body;	//  "body": "Enigma first stable release for Windows x64 and Linux x64 using:\r\n- Crypto++ v8.4.0\r\n- GLFW v3.3.2\r\n- ImGui v1.79\r\n- spdlog v1.8.0\r\n- and other libraries"
-		String tarball_url; // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
-		String zipball_url;	// "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
+		std::string name;   // "name": "Enigma Release (Windows x64, Linux x64)",
+		std::string tag_name; // version e.g 1.0.0
+		std::string created_at;//"created_at": "2021-02-06T11:41:26Z",
+		std::string published_at;	//"published_at" : "2021-02-06T12:16:37Z",
+		std::string body;	//  "body": "Enigma first stable release for Windows x64 and Linux x64 using:\r\n- Crypto++ v8.4.0\r\n- GLFW v3.3.2\r\n- ImGui v1.79\r\n- spdlog v1.8.0\r\n- and other libraries"
+		std::string tarball_url; // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
+		std::string zipball_url;	// "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
 		Version version; // parsed comparable version
 
 		LatestReleaseInfo() noexcept
@@ -134,7 +134,7 @@ public:
 #undef CC
 		}
 		
-		String toString() noexcept
+		std::string toString() noexcept
 		{
 			std::ostringstream oss;
 			if (!name.empty())

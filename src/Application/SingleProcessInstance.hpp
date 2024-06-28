@@ -19,7 +19,7 @@
 #else //#elif defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)
 	// Linux/Unix libraries will work in macos aswell.
 	#include <netinet/in.h>
-	using socket_t = Enigma::i32;
+	using socket_t = std::int32_t;
 	constexpr socket_t M_INVALID_SOCKET = -1;
 #endif
 
@@ -36,7 +36,7 @@ public:
 	/** Single process instance class constructor
 	*	@param port: Application's unique port
 	*/
-	explicit SingleProcessInstance(const ui16 port) noexcept
+	explicit SingleProcessInstance(const std::uint16_t port) noexcept
 		:
 		m_socket_fd(M_INVALID_SOCKET),
 		m_port(port),
@@ -120,8 +120,8 @@ public:
 
 private:
 	socket_t m_socket_fd{}; /**< Socket file descriptor, will be SOCKET in windows, int in linux */
-	ui16 m_port{}; /**< Application's unique port */
-	i32 m_rc{}; /**< Return code of bind socket function 0 means no error, when < 0 is an error */
+	std::uint16_t m_port{}; /**< Application's unique port */
+	std::int32_t m_rc{}; /**< Return code of bind socket function 0 means no error, when < 0 is an error */
 };
 NS_ENIGMA_END
 

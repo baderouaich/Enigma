@@ -12,10 +12,10 @@ class ENIGMA_API Clipboard final
 	ENIGMA_STATIC_CLASS(Clipboard);
 public:
 	/** Get Clipboard text */
-	static String Get();
+	static std::string Get();
 
 	/** Set Clipboard text */
-	static void Set(const String& buffer);
+	static void Set(const std::string& buffer);
 };
 
 NS_ENIGMA_END

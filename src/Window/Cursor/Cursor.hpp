@@ -39,7 +39,7 @@ public:
 	/*
 	*	Creates Image Based Cursor 
 	*/
-	explicit Cursor(const String& image_path, const i32 xhot = 0, const i32 yhot = 0);
+	explicit Cursor(const fs::path& image_path, const std::int32_t xhot = 0, const std::int32_t yhot = 0);
 
 	~Cursor();
 

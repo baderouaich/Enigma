@@ -14,7 +14,7 @@ void PasswordGeneratorTool::OnCreate()
 
 #if 0
 	// Make Available lengths
-	for (i32 i = 2; i <= 4096; i *= 2)
+	for (std::int32_t i = 2; i <= 4096; i *= 2)
 	{
 		char* s = new char[10];
 		std::sprintf(s, "%d", i); // will add \000 at the end which is required for imgui combo box
@@ -23,7 +23,7 @@ void PasswordGeneratorTool::OnCreate()
 #endif
 	// Make Available lengths
 	m_lengths.reserve(4096 - 5);
-	for (i32 i = 5; i <= 4096; ++i)
+	for (std::int32_t i = 5; i <= 4096; ++i)
 	{
 		char* s = new char[10];
 		std::sprintf(s, "%d", i); // will add \000 at the end which is required for imgui combo box
@@ -37,9 +37,9 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
 	//const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 
-	//const auto button_size = Vec2f(win_w / 2.6f, 40.0f);
+	//const auto button_size = ImVec2(win_w / 2.6f, 40.0f);
 
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static auto& fonts = Application::GetInstance()->GetFonts();
 	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -61,7 +61,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			// Copy Generated password button 10% of width
 			//ImGui::PushFont(font_montserrat_medium_20);
 			ImGui::PushID("CopyGeneratedPw");
-			if (ImGuiWidgets::Button(("Copy"), Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+			if (ImGuiWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 			{
 				this->OnCopyPasswordButtonPressed();
 			}
@@ -70,13 +70,13 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			ImGui::SameLine();
 
 			// Output password input text 65% of width
-			ImGuiWidgets::InputTextMultiline("##input_pw", &m_password, Vec2f(win_w * 0.70f, 33.0f));
+			ImGuiWidgets::InputTextMultiline("##input_pw", &m_password, ImVec2(win_w * 0.70f, 33.0f));
 			//
 
 			ImGui::SameLine();
 
 			// Generate button 25% of width
-			if (ImGuiWidgets::Button(("Generate"), Vec2f(win_w * 0.20f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
+			if (ImGuiWidgets::Button(("Generate"), ImVec2(win_w * 0.20f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
 			{
 				Application::GetInstance()->LaunchWorkerThread(parent, ("Generating Password..."), [this]()
 				{
@@ -106,7 +106,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 					ImGui::NextColumn();
 					ImGui::Checkbox("Special Characters (+*~.#^)", &m_special_characters);
 					*/
-					ImGui::Combo(("Length"), &m_selected_length_index, m_lengths.data(), static_cast<i32>(m_lengths.size()), -1);
+					ImGui::Combo(("Length"), &m_selected_length_index, m_lengths.data(), static_cast<std::int32_t>(m_lengths.size()), -1);
 					ImGui::NextColumn();
 					ImGui::Checkbox(("Numbers"), &m_digits);
 					ImGui::NextColumn();
@@ -126,13 +126,13 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			{
 				ImGui::BulletText("%s:", ("Remember Your Password"));
 				ImGui::PushID("CopyRememberPw");
-				if (ImGuiWidgets::Button(("Copy"), Vec2f(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+				if (ImGuiWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 				{
 					this->OnCopyRememberPasswordSentenceButtonPressed();
 				}
 				ImGui::PopID();
 				ImGui::SameLine();
-				ImGuiWidgets::InputTextMultiline("##output_rmb_pw", &m_remember_password_sentence, Vec2f(-1.0f, 33.0f));
+				ImGuiWidgets::InputTextMultiline("##output_rmb_pw", &m_remember_password_sentence, ImVec2(-1.0f, 33.0f));
 				ImGui::NewLine();
 			}
 			//
@@ -165,8 +165,8 @@ void PasswordGeneratorTool::OnGenerateButtonPressed()
 		return;
 
 	// get desired length
-	const size_t length = std::stoull(m_lengths[m_selected_length_index]);
-	const String special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
+	const std::size_t length = std::stoull(m_lengths[m_selected_length_index]);
+	const std::string special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
 
 	Random::Reseed();
 	m_password.clear();
@@ -174,7 +174,7 @@ void PasswordGeneratorTool::OnGenerateButtonPressed()
 	{
 		char c = '\000';
 	again:
-		const ui16 r = Random::Int<ui16>(1, 4);
+		const std::uint16_t r = Random::Int<std::uint16_t>(1, 4);
 		switch (r)
 		{
 		case 1: // m_digits
@@ -201,7 +201,7 @@ void PasswordGeneratorTool::OnGenerateButtonPressed()
 		case 4: // m_special_characters
 			if (m_special_characters)
 			{
-				c = special_characters[Random::Int<size_t>(0, special_characters.size() - 1)];
+				c = special_characters[Random::Int<std::size_t>(0, special_characters.size() - 1)];
 			}
 			else goto again;
 			break;

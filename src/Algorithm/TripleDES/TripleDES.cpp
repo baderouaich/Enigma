@@ -28,7 +28,7 @@ TripleDES::~TripleDES() noexcept
 {
 }
 
-String TripleDES::Encrypt(const String& password, const String& buffer)
+std::string TripleDES::Encrypt(const std::string& password, const std::string& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
@@ -40,7 +40,7 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	}
 
 	// Randomly generated IV
-	const String iv = Algorithm::GenerateRandomIV(CryptoPP::DES_EDE3::BLOCKSIZE);
+	const std::string iv = Algorithm::GenerateRandomIV(CryptoPP::DES_EDE3::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::DES_EDE3::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::DES_EDE3::BLOCKSIZE)); // Encryption key to be generated from user password + IV
@@ -58,7 +58,7 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	m_tripledes_encryptor->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	String cipher{}; // Final encrypted buffer
+	std::string cipher{}; // Final encrypted buffer
 	[[maybe_unused]] const auto ss = CryptoPP::StringSource(
 		buffer,
 		true,
@@ -77,15 +77,15 @@ String TripleDES::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String TripleDES::Decrypt(const String& password, const String& algotype_iv_cipher)
+std::string TripleDES::Decrypt(const std::string& password, const std::string& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT_OR_THROW(m_tripledes_decryptor, "TripleDES Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
-	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::DES_EDE3::BLOCKSIZE);
+	const std::string iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::DES_EDE3::BLOCKSIZE);
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_cipher");
-	const String cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::DES_EDE3::BLOCKSIZE, algotype_iv_cipher.size() - 1);
+	const std::string cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::DES_EDE3::BLOCKSIZE, algotype_iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_cipher");
 
 	// Prepare Key
@@ -103,7 +103,7 @@ String TripleDES::Decrypt(const String& password, const String& algotype_iv_ciph
 	m_tripledes_decryptor->SetKeyWithIV(key, CryptoPP::DES_EDE3::MAX_KEYLENGTH, key + CryptoPP::DES_EDE3::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	String decrypted{}; // Recovered buffer
+	std::string decrypted{}; // Recovered buffer
 	const CryptoPP::StringSource decryptor(
 		cipher,
 		true,

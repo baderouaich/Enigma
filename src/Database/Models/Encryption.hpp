@@ -14,13 +14,13 @@ NS_ENIGMA_BEGIN
 */
 struct Encryption
 {
-	i64 ide{};  /**< auto incremental id in range [0, SIZE_MAX] */
-	String title{}; /**< encryption title, e.g: "this is my Email password" */
+	std::int64_t ide{};  /**< auto incremental id in range [0, SIZE_MAX] */
+	std::string title{}; /**< encryption title, e.g: "this is my Email password" */
 	Cipher cipher{}; /**< encryption encrypted data, aka cipher. from another table for performance reasons */
-	String date_time{}; /**< date & time saved by sqlite3 */
-	i64 size{}; /**< size of compressed cipher in bytes */
+	std::string date_time{}; /**< date & time saved by sqlite3 */
+	std::int64_t size{}; /**< size of compressed cipher in bytes */
 	bool is_file{}; /**< whether its a text or file encryption */
-	String file_ext{}; /**< file extension to remember file type on decryption */
+	std::string file_ext{}; /**< file extension to remember file type on decryption */
 
 	~Encryption() noexcept 
 	{
@@ -41,7 +41,7 @@ public:
 			<< "file_ext:" << e.file_ext << ')';
 		
 	}
-	String toString() noexcept
+	std::string toString() noexcept
 	{
 		std::ostringstream oss{};
 		oss << *this;

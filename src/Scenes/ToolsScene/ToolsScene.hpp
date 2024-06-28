@@ -12,7 +12,7 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32&) override;
+	[[maybe_unused]] void OnUpdate(const float&) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
 	[[maybe_unused]] void OnEvent(Event&) override;

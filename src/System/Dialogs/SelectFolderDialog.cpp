@@ -3,7 +3,7 @@
 
 NS_ENIGMA_BEGIN
 
-SelectFolderDialog::SelectFolderDialog(const String& title, const String& initial_path, const bool force_path)
+SelectFolderDialog::SelectFolderDialog(const std::string& title, const std::string& initial_path, const bool force_path)
 	:
 	m_title(title),
 	m_initial_path(initial_path),
@@ -11,7 +11,7 @@ SelectFolderDialog::SelectFolderDialog(const String& title, const String& initia
 {
 }
 
-String SelectFolderDialog::Show() const
+std::string SelectFolderDialog::Show() const
 {
 	return pfd::select_folder(
 		m_title,

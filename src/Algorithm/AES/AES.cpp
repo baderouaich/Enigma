@@ -29,7 +29,7 @@ AES::~AES() noexcept
 {
 }
 
-String AES::Encrypt(const String& password, const String& buffer)
+std::string AES::Encrypt(const std::string& password, const std::string& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
@@ -40,7 +40,7 @@ String AES::Encrypt(const String& password, const String& buffer)
 	}
 
 	// Randomly generated IV
-	const String iv = Algorithm::GenerateRandomIV(CryptoPP::AES::BLOCKSIZE);
+	const std::string iv = Algorithm::GenerateRandomIV(CryptoPP::AES::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::AES::BLOCKSIZE)); // Encryption key to be generated from user password + IV
@@ -58,7 +58,7 @@ String AES::Encrypt(const String& password, const String& buffer)
 	m_aes_encryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Output encrypted buffer
-	String cipher{};
+	std::string cipher{};
 	// Encrypt
 	[[maybe_unused]] const CryptoPP::StringSource ss(
 		buffer,
@@ -79,15 +79,15 @@ String AES::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String AES::Decrypt(const String& password, const String& algotype_iv_cipher)
+std::string AES::Decrypt(const std::string& password, const std::string& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT(m_aes_decryptor, "AES Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
-	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
+	const std::string iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::AES::BLOCKSIZE);
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_cipher");
-	const String cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, algotype_iv_cipher.size() - 1);
+	const std::string cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::AES::BLOCKSIZE, algotype_iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_cipher");
 
 	// Prepare Key
@@ -105,7 +105,7 @@ String AES::Decrypt(const String& password, const String& algotype_iv_cipher)
 	m_aes_decryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Recovered cipher
-	String decrypted{};
+	std::string decrypted{};
 	// Decrypt
 	[[maybe_unused]] const auto ss = CryptoPP::StringSource(
 		cipher,

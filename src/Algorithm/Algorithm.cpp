@@ -27,9 +27,9 @@ Algorithm::Algorithm(Type type, Intent intent) noexcept
 Algorithm::~Algorithm() noexcept {}
 
 
-std::unique_ptr<Algorithm> Algorithm::CreateFromName(const String& algorithm_name, const Intent intent)
+std::unique_ptr<Algorithm> Algorithm::CreateFromName(const std::string& algorithm_name, const Intent intent)
 {
-	const String algo = StringUtils::LowerCopy(algorithm_name);
+	const std::string algo = StringUtils::LowerCopy(algorithm_name);
 
 	const auto AlgoIn = [&algo](const std::vector<std::string_view>& v) noexcept -> bool
 	{
@@ -60,15 +60,15 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromType(const Type type, const Inte
 }
 
 
-String Algorithm::GenerateRandomIV(const size_t size)
+std::string Algorithm::GenerateRandomIV(const std::size_t size)
 {
 	ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Random seeder is not initialized properly");
-	String iv(size, '\000');
+	std::string iv(size, '\000');
 	m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
 	return iv;
 }
 
-Algorithm::Type Algorithm::DetectFromCipher(const String& cipher)
+Algorithm::Type Algorithm::DetectFromCipher(const std::string& cipher)
 {
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Cannot auto-detect algorithm without cipher text");
 
@@ -83,12 +83,12 @@ Algorithm::Type Algorithm::DetectFromCipher(const String& cipher)
 	return static_cast<Algorithm::Type>(cipher_first_byte);
 }
 
-Algorithm::Type Algorithm::DetectFromCipherBase64(const String& cipher_base64)
+Algorithm::Type Algorithm::DetectFromCipherBase64(const std::string& cipher_base64)
 {
 	ENIGMA_ASSERT_OR_THROW(!cipher_base64.empty(), "Cannot auto-detect algorithm without cipher base64 text");
 
 	// Decode base64 to cipher
-	String cipher = Base64::Decode(cipher_base64);
+	std::string cipher = Base64::Decode(cipher_base64);
 	// check if successfully decoded
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher base64 text you had in encryption");
 	//NOTE: no need to decompress, since files and text are encrypted after compressed.
@@ -98,7 +98,7 @@ Algorithm::Type Algorithm::DetectFromCipherBase64(const String& cipher_base64)
 	return DetectFromCipher(cipher);
 }
 
-Algorithm::Type Algorithm::DetectFromFile(const String& filename)
+Algorithm::Type Algorithm::DetectFromFile(const std::string& filename)
 {
 	// check if the infile exists
 	ENIGMA_ASSERT_OR_THROW(!filename.empty(), "input file name is empty");
@@ -107,7 +107,7 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(filename), "input file is not a regular file");
 
 	//// Read file cipher
-	//String cipher{};
+	//std::string cipher{};
 	//ENIGMA_ASSERT_OR_THROW(FileUtils::Read(filename, cipher), "Failed to read file " + filename);
 	////NOTE: no need to decompress, since files and text are encrypted after compressed.
 
@@ -127,9 +127,9 @@ Algorithm::Type Algorithm::DetectFromFile(const String& filename)
 }
 
 
-String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
+std::string Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 {
-#define CASE_RET(e) case Algorithm::Type::e: return String(#e)
+#define CASE_RET(e) case Algorithm::Type::e: return std::string(#e)
 	switch (e)
 	{
 		CASE_RET(AES);
@@ -145,9 +145,9 @@ String Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 }
 
 
-String Algorithm::GetSupportedAlgorithmsStr() noexcept
+std::string Algorithm::GetSupportedAlgorithmsStr() noexcept
 {
-	String out = "[";
+	std::string out = "[";
 	for (byte i = static_cast<byte>(Algorithm::Type::BEGIN); i <= static_cast<byte>(Algorithm::Type::END); i++)
 	{
 		out += AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)) + (i != static_cast<byte>(Algorithm::Type::END) ? ", " : "");
@@ -156,12 +156,12 @@ String Algorithm::GetSupportedAlgorithmsStr() noexcept
 	return out;
 }
 
-std::vector<std::pair<String, Algorithm::Type>> Algorithm::GetSupportedAlgorithms() noexcept
+std::vector<std::pair<std::string, Algorithm::Type>> Algorithm::GetSupportedAlgorithms() noexcept
 {
-	std::vector<std::pair<String, Algorithm::Type>> algos(static_cast<size_t>(Algorithm::Type::END));
+	std::vector<std::pair<std::string, Algorithm::Type>> algos(static_cast<std::size_t>(Algorithm::Type::END));
 	for (byte i = static_cast<byte>(Algorithm::Type::BEGIN); i <= static_cast<byte>(Algorithm::Type::END); i++)
 	{
-		algos[static_cast<size_t>(i) - 1] = std::make_pair(AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)), static_cast<Algorithm::Type>(i));
+		algos[static_cast<std::size_t>(i) - 1] = std::make_pair(AlgoTypeEnumToStr(static_cast<Algorithm::Type>(i)), static_cast<Algorithm::Type>(i));
 	}
 	return algos;
 }

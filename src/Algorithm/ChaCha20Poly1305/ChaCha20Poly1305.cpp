@@ -29,7 +29,7 @@ ChaCha20Poly1305::~ChaCha20Poly1305() noexcept
 {
 }
 
-String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
+std::string ChaCha20Poly1305::Encrypt(const std::string& password, const std::string& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
@@ -40,7 +40,7 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 	}
 	
 	// Randomly generated iv
-	const String iv = Algorithm::GenerateRandomIV(m_chacha_encryptor->MaxIVLength()); 
+	const std::string iv = Algorithm::GenerateRandomIV(m_chacha_encryptor->MaxIVLength());
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(m_chacha_encryptor->MaxKeyLength() + m_chacha_encryptor->MaxIVLength());
@@ -61,15 +61,15 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 	m_chacha_encryptor->SetKeyWithIV(key, m_chacha_encryptor->MaxKeyLength(), key + m_chacha_encryptor->MaxKeyLength()); // key, kl, iv, ivl
 
 	// Output encrypted buffer
-	String cipher(buffer.size(), '\000'); 
+	std::string cipher(buffer.size(), '\000');
 	// Output calculated MAC
-	String mac(16, '\000');
+	std::string mac(16, '\000');
 
 	// Encrypt & Authenticate (Thanks to @mcoret who mentioned this in https://github.com/baderouaich/Enigma/issues/4)
 	m_chacha_encryptor->EncryptAndAuthenticate(
 		reinterpret_cast<byte*>(cipher.data()), // output cipher (encrypted buffer)
 		reinterpret_cast<byte*>(mac.data()), mac.size(),  // output calculated MAC
-		reinterpret_cast<const byte*>(iv.data()), static_cast<i32>(iv.size()), // iv
+		reinterpret_cast<const byte*>(iv.data()), static_cast<std::int32_t>(iv.size()), // iv
 		nullptr, 0, // aad buffer (additional authenticated data)
 		reinterpret_cast<const byte*>(buffer.data()), buffer.size() // buffer to encrypt
 	);
@@ -84,19 +84,19 @@ String ChaCha20Poly1305::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_iv_mac_cipher)
+std::string ChaCha20Poly1305::Decrypt(const std::string& password, const std::string& algotype_iv_mac_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, "ChaCha20Poly1305 Decryptor is not initialized properly");
 
 	// Extract IV, mac and cipher from algotype_iv_mac_cipher (algotype_iv_mac_cipher is the output we got from encryption shipped with IV, MAC, Cipher, Algo type enum id)
-	const String iv = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type), m_chacha_decryptor->MaxIVLength());
+	const std::string iv = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type), m_chacha_decryptor->MaxIVLength());
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_mac_cipher");
 		
-	const String mac = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size(), 16); // mac is 16 bytes
+	const std::string mac = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size(), 16); // mac is 16 bytes
 	ENIGMA_ASSERT_OR_THROW(!mac.empty(), "Failed to extract MAC part from algotype_iv_mac_cipher");
 
-	const String cipher = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size() + 16, algotype_iv_mac_cipher.size() - 1);
+	const std::string cipher = algotype_iv_mac_cipher.substr(sizeof(Algorithm::Type) + iv.size() + 16, algotype_iv_mac_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_mac_cipher");
 
 	// Prepare Key
@@ -118,13 +118,13 @@ String ChaCha20Poly1305::Decrypt(const String& password, const String& algotype_
 	m_chacha_decryptor->SetKeyWithIV(key, m_chacha_decryptor->MaxKeyLength(), key + m_chacha_decryptor->MaxKeyLength()); // key, kl, iv, ivl
 
 	// Recovered cipher
-	String decrypted(cipher.size(), '\000');
+	std::string decrypted(cipher.size(), '\000');
 
 	// Decrypt and verify MAC
 	const bool mac_verified = m_chacha_decryptor->DecryptAndVerify(
 		reinterpret_cast<byte*>(decrypted.data()), // output buffer (decrypted cipher)
 		reinterpret_cast<const byte*>(mac.data()), mac.size(), // input MAC (calculated in encryption)
-		reinterpret_cast<const byte*>(iv.data()), static_cast<i32>(iv.size()), // input IV (generated in encryption)
+		reinterpret_cast<const byte*>(iv.data()), static_cast<std::int32_t>(iv.size()), // input IV (generated in encryption)
 		nullptr, 0, // aad buffer (additional authenticated data)
 		reinterpret_cast<const byte*>(cipher.data()), cipher.size() // cipher to decrypt
 	);

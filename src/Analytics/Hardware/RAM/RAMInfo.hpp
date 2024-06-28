@@ -49,32 +49,32 @@ public:
 	/**
 	*	Returns the total physical memory reserved by all processes (in bytes)
 	*/
-	size_t GetUsedRAM() const noexcept;
+	std::size_t GetUsedRAM() const noexcept;
 
 	/**
 	*	Returns the total physical memory used by this process (in bytes)
 	*/
-	size_t GetProcessUsedRAM() const noexcept;
+	std::size_t GetProcessUsedRAM() const noexcept;
 
 	/**
 	*	Returns the total physical memory free (in bytes)
 	*/
-	size_t GetFreeRAM() const noexcept;
+	std::size_t GetFreeRAM() const noexcept;
 
 	/**
 	*	Returns the max available memory on the system (in bytes)
 	*/
-	size_t GetAvailableRAM() const noexcept;
+	std::size_t GetAvailableRAM() const noexcept;
 
 	/**
 	*	Returns memory usage by all processes (in percentage [0% -> 100%])
 	*/
-	f32 GetRAMUsage() noexcept;
+	float GetRAMUsage() noexcept;
 
 	/**
 	*	Returns memory usage by current process (in percentage [0% -> 100%])
 	*/
-	f32 GetProcessRAMUsage() noexcept;
+	float GetProcessRAMUsage() noexcept;
 
 
 private:

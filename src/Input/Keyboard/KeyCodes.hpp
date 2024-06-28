@@ -8,7 +8,7 @@
 NS_ENIGMA_BEGIN
 
 /** Keyboard codes From glfw3.h */
-typedef enum class KeyCode : ui16
+typedef enum class KeyCode : std::uint16_t
 {
 	Space = GLFW_KEY_SPACE,
 	Apostrophe = GLFW_KEY_APOSTROPHE, /* ' */
@@ -145,7 +145,7 @@ typedef enum class KeyCode : ui16
 
 inline std::ostream& operator<<(std::ostream& os, const KeyCode& keyCode)
 {
-	return os << static_cast<ui16>(keyCode);
+	return os << static_cast<std::uint16_t>(keyCode);
 }
 
 

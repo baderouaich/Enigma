@@ -30,14 +30,14 @@ private: // Password settings
 	bool m_digits, m_uppercase_alphabets, m_lowercase_alphabets, m_special_characters;
 
 	std::vector<const char*> m_lengths{}; // length combo box items (heap allocated elements with new[])
-	i32 m_selected_length_index{0}; // selected length index from combo box
+	std::int32_t m_selected_length_index{0}; // selected length index from combo box
 
-	//inline static constexpr size_t MAX_LENGTHS_ITEMS = 100; // max length combo box items
+	//inline static constexpr std::size_t MAX_LENGTHS_ITEMS = 100; // max length combo box items
 	//const char** m_lengths; // length combo box (heap allocated with new[])
-	//i32 m_selected_length_index = 0; // selected length index from combo box
+	//std::int32_t m_selected_length_index = 0; // selected length index from combo box
 	
-	String m_password{}; // generated password container
-	String m_remember_password_sentence{}; // a helpful sentence to remember ur password based on password characters
+	std::string m_password{}; // generated password container
+	std::string m_remember_password_sentence{}; // a helpful sentence to remember ur password based on password characters
 	inline static const std::unordered_map<char, std::string_view> m_remember_password_char_words // letter, word dictionary
 	{
 		{'a', "alpha"},

@@ -37,7 +37,7 @@ void DecryptFileScene::OnCreate()
 
 }
 
-void DecryptFileScene::OnUpdate(const f32&)
+void DecryptFileScene::OnUpdate(const float&)
 {}
 
 void DecryptFileScene::OnDraw()
@@ -52,10 +52,10 @@ void DecryptFileScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
+	const auto button_size = ImVec2(win_w / 2.5f, 40.0f);
 
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -72,12 +72,12 @@ void DecryptFileScene::OnImGuiDraw()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 #pragma region Back button [<] & Scene Title
 		static const auto& title_font = font_audiowide_regular_30;
-		static const String title = ("Decrypt File");
+		static const std::string title = ("Decrypt File");
 		static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
 		static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -99,7 +99,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 			{
-				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 			}
 			ImGui::PopStyleColor(2);
 			ImGui::PopFont();
@@ -224,7 +224,7 @@ void DecryptFileScene::OnImGuiDraw()
 			ImGui::Text("%s:", ("Password"));
 
 			// Input text
-			ImGuiWidgets::InputText("##text3", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text3", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -303,7 +303,7 @@ void DecryptFileScene::OnBrowseInFileButtonPressed()
 		);
 
 	ENIGMA_TRACE("Selecting a file to decrypt...");
-	const std::vector<String> selected_file_paths = ofd->Show();
+	const std::vector<std::string> selected_file_paths = ofd->Show();
 	if (selected_file_paths.empty())
 	{
 		ENIGMA_TRACE("Nothing is selected.");
@@ -322,7 +322,7 @@ void DecryptFileScene::OnBrowseOutFileLocationButtonPressed()
 		);
 
 	ENIGMA_TRACE("Selecting a location to save decrypted file to...");
-	const String selected_location = ofd->Show();
+	const std::string selected_location = ofd->Show();
 	if (selected_location.empty())
 	{
 		ENIGMA_TRACE("Nothing is selected.");
@@ -383,13 +383,13 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(algorithm, ("Failed to create algorithm from type"));
 
 			// Read in file cipher
-			String cipher{};
+			std::string cipher{};
 			const bool file_read_success = FileUtils::Read(m_in_filename, cipher);
 			ENIGMA_ASSERT_OR_THROW(file_read_success, ("Failed to read cipher from file {}", m_in_filename));
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ("File {} is empty", m_in_filename));
 
 			// Decrypt file cipher
-			String buffer = algorithm->Decrypt(m_password, cipher);
+			std::string buffer = algorithm->Decrypt(m_password, cipher);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ("Failed to decrypt file cipher"));
 
 			/*
@@ -410,7 +410,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 
 #if 0
 			// Decompression (if used in encryption)
-			size_t increased_bytes{ 0 };
+			std::size_t increased_bytes{ 0 };
 			if (m_decompress)
 			{
 				ENIGMA_TRACE("Decompressing file buffer {0} ...", m_in_filename);
@@ -430,7 +430,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(file_written_success, ("Failed to write buffer to file {}", m_out_filename));
 
 			// Alert user that decryption was successfull
-			const String msg = fmt::format("Decrypted {} to {} successfully, decompression increased file size by {}",
+			const std::string msg = fmt::format("Decrypted {} to {} successfully, decompression increased file size by {}",
 				fs::path(m_in_filename).filename(),
 				fs::path(m_out_filename).filename(),
 				SizeUtils::FriendlySize(increased_bytes));
@@ -439,7 +439,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 		}
 		catch (const CryptoPP::Exception& e)
 		{
-			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+			const std::string err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 			ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
 			(void)DialogUtils::Error(("Decryption Failure"), err_msg);
 		}
@@ -450,7 +450,7 @@ void DecryptFileScene::OnDecryptButtonPressed()
 		}
 		catch (...)
 		{
-			const String err_msg = ("Decryption Failure UNKNOWN ERROR");
+			const std::string err_msg = ("Decryption Failure UNKNOWN ERROR");
 			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}

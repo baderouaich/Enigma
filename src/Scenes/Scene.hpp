@@ -32,7 +32,7 @@ public:
 	/* Scene Life Cycle */
 	virtual void OnCreate() = 0;
 	virtual void OnEvent(Event& event) = 0;
-	virtual void OnUpdate(const f32& dt) = 0;
+	virtual void OnUpdate(const float& dt) = 0;
 	virtual void OnDraw() = 0;
 	virtual void OnImGuiDraw() = 0;
 	virtual void OnDestroy() = 0;

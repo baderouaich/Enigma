@@ -13,53 +13,53 @@ struct ENIGMA_API WindowSettings
 	/*
 	*	Title of the window (Displayed in the title bar)
 	*/
-	String title = "Enigma";
+	std::string title = "Enigma";
 
 	/*
 	*	Width in pixels of the window
 	*/
-	i32 width = 640;
+	std::int32_t width = 640;
 
 	/*
 	*	Height in pixels of the window
 	*/
-	i32 height = 480;
+	std::int32_t height = 480;
 
 	/*
 	*	Minimum width of the window.
 	*/
-	i32 minimum_width = GLFW_DONT_CARE;
+	std::int32_t minimum_width = GLFW_DONT_CARE;
 
 	/*
 	*	Minimum height of the window.
 	*/
-	i32 minimum_height = GLFW_DONT_CARE;
+	std::int32_t minimum_height = GLFW_DONT_CARE;
 
 	/*
 	*	Maximum width of the window.
 	*/
-	i32 maximum_width = GLFW_DONT_CARE;
+	std::int32_t maximum_width = GLFW_DONT_CARE;
 
 	/*
 	*	Maximum height of the window.
 	*/
-	i32 maximum_height = GLFW_DONT_CARE;
+	std::int32_t maximum_height = GLFW_DONT_CARE;
 
 	/*
 	*	Window Maximum Frames Per Second.
 	*/
-	//ui32 maximum_fps = 60;
+	//std::uint32_t maximum_fps = 60;
 
 	/*
 	*	 Specifies the desired refresh rate for full screen windows. If set to -1, the highest
 	*	 available refresh rate will be used. This hint is ignored for windowed mode windows.
 	*/
-	i32 refresh_rate = GLFW_DONT_CARE;
+	std::int32_t refresh_rate = GLFW_DONT_CARE;
 
 	/*
 	*	 Defines the number of samples to use (For anti-aliasing)
 	*/
-	ui32 samples = 4;
+	std::uint32_t samples = 4;
 
 
 	/*
@@ -69,7 +69,7 @@ struct ENIGMA_API WindowSettings
 	*	Interval 1: 60 FPS
 	*	Interval 2: 30 FPS
 	*/
-	i32 swap_interval = 2;
+	std::int32_t swap_interval = 2;
 
 
 	/*
@@ -86,7 +86,7 @@ struct ENIGMA_API WindowSettings
 
 	/*
 	*	Specifies whether the windowed mode window will be resizable by the user. The window will still be resizable using
-	*	the "SetSize(i32, i32)" method of the "Window" class. This hint is ignored for full screen windows
+	*	the "SetSize(std::int32_t, std::int32_t)" method of the "Window" class. This hint is ignored for full screen windows
 	*/
 	bool is_resizable = true;
 
@@ -165,7 +165,7 @@ struct ENIGMA_API WindowSettings
 	}
 
 public:
-	String toString() noexcept 
+	std::string toString() noexcept
 	{
 		std::ostringstream oss{};
 		oss << "[ title:" << title << ", width:" << width << ", height:" << height

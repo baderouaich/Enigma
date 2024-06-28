@@ -3,7 +3,7 @@
 
 NS_ENIGMA_BEGIN
 
-MessageBox::MessageBox(const String& title, const String& message, Icon icon, Choice choice)
+MessageBox::MessageBox(const std::string& title, const std::string& message, Icon icon, Choice choice)
 	:
 	m_title(title),
 	m_message(message),

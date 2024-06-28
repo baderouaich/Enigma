@@ -21,23 +21,23 @@ public: /* Constructors / Destructor */
 	*	@param filters: The filter list enumerates filter names and corresponded space-separated wildcard lists.
 						It defaults to { "All Files", "*" }
 	*/
-	SaveFileDialog(const String& title,
-		const String& initial_path = ".",
+	SaveFileDialog(const std::string& title,
+		const std::string& initial_path = ".",
 		const bool force_overwrite = true,
-		const std::initializer_list<String>& filters = { "All Files", "*" });
+		const std::initializer_list<std::string>& filters = { "All Files", "*" });
 	~SaveFileDialog() noexcept = default;
 
 public: /* Accessors */
 	/**
 	*	Spawn Save file dialog and get selected path
 	*/
-	String Show() const;
+	std::string Show() const;
 
 private:
-	String m_title; /*< Dialog title */
-	String m_initial_path; /*< Dialog initial path */
+	std::string m_title; /*< Dialog title */
+	std::string m_initial_path; /*< Dialog initial path */
 	bool m_force_overwrite; /*< Shall force file overwriting? */
-	std::vector<String> m_filters; /*< Which files to allow to save e.g .txt, .jpg... { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }, */
+	std::vector<std::string> m_filters; /*< Which files to allow to save e.g .txt, .jpg... { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }, */
 };
 
 NS_ENIGMA_END

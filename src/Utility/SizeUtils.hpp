@@ -16,20 +16,20 @@ public:
 	/*
 	*	Converts bytes to human friendly readable format, e.g (100 KB, 30 Bytes, 5.23 MB...)
 	*/
-	static String FriendlySize(const size_t bytes) noexcept
+	static std::string FriendlySize(const std::size_t bytes) noexcept
 	{
-		constexpr const size_t KB = 1024;
+		constexpr const std::size_t KB = 1024;
 
 		if (bytes < KB)  
 			return std::to_string(bytes) + " Bytes";
 
 		constexpr const char* sizes[]{ "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-		const size_t i = static_cast<size_t>(std::floor(static_cast<f64>(std::log(bytes) / std::log(KB))));
+		const std::size_t i = static_cast<std::size_t>(std::floor(static_cast<double>(std::log(bytes) / std::log(KB))));
 
 		std::ostringstream oss{};
 		oss << std::fixed
 			<< std::setprecision(2)
-			<< static_cast<f32>(bytes / std::pow(KB, i))
+			<< static_cast<float>(bytes / std::pow(KB, i))
 			<< ' '
 			<< sizes[i];
 
@@ -39,16 +39,16 @@ public:
 };
 
 /// Convert bytes to kb, mb, gb, tb
-#define ENIGMA_BYTES_TO_KB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f)
-#define ENIGMA_BYTES_TO_MB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f)
-#define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f)
-#define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::f32>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
+#define ENIGMA_BYTES_TO_KB(bytes) (static_cast<::Enigma::float>(bytes) / 1024.0f)
+#define ENIGMA_BYTES_TO_MB(bytes) (static_cast<::Enigma::float>(bytes) / 1024.0f / 1024.0f)
+#define ENIGMA_BYTES_TO_GB(bytes) (static_cast<::Enigma::float>(bytes) / 1024.0f / 1024.0f / 1024.0f)
+#define ENIGMA_BYTES_TO_TB(bytes) (static_cast<::Enigma::float>(bytes) / 1024.0f / 1024.0f / 1024.0f / 1024.0f)
 
 /// Convert mb to bytes, kb, gb, tb
-#define ENIGMA_MB_TO_BYTES(mb) (static_cast<::Enigma::size_t>(mb) * 1024 * 1024)
-#define ENIGMA_MB_TO_KB(mb)    (static_cast<::Enigma::size_t>(mb) * 1024)
-#define ENIGMA_MB_TO_GB(mb)    (static_cast<::Enigma::f32>(mb) / 1024.0f)
-#define ENIGMA_MB_TO_TB(mb)    (static_cast<::Enigma::f32>(mb) / 1024.0f / 1024.0f)
+#define ENIGMA_MB_TO_BYTES(mb) (static_cast<::Enigma::std::size_t>(mb) * 1024 * 1024)
+#define ENIGMA_MB_TO_KB(mb)    (static_cast<::Enigma::std::size_t>(mb) * 1024)
+#define ENIGMA_MB_TO_GB(mb)    (static_cast<::Enigma::float>(mb) / 1024.0f)
+#define ENIGMA_MB_TO_TB(mb)    (static_cast<::Enigma::float>(mb) / 1024.0f / 1024.0f)
 
 NS_ENIGMA_END
 

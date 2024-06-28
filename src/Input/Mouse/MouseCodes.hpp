@@ -8,7 +8,7 @@
 NS_ENIGMA_BEGIN
 
 /** Mouse codes From glfw3.h */
-typedef enum class MouseCode : ui16
+typedef enum class MouseCode : std::uint16_t
 {
 	Button0 = GLFW_MOUSE_BUTTON_1,
 	Button1 = GLFW_MOUSE_BUTTON_2,
@@ -27,7 +27,7 @@ typedef enum class MouseCode : ui16
 
 inline std::ostream& operator<<(std::ostream& os, const MouseCode& keyCode)
 {
-	return os << static_cast<ui16>(keyCode);
+	return os << static_cast<std::uint16_t>(keyCode);
 }
 
 

@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 	Logger::Initialize();
 	Database::Initialize();
 
-	i32 exit_code = -1;
+	std::int32_t exit_code = -1;
 	try
 	{
 		//========= CLI Entry =========//

@@ -20,7 +20,7 @@ void HashingTool::OnDraw(Scene* parent)
 {
 	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
 
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static auto& fonts = Application::GetInstance()->GetFonts();
 	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -42,7 +42,7 @@ void HashingTool::OnDraw(Scene* parent)
 
 			// Hashing algorithms
 			ImGui::BulletText("%s:", ("Algorithms"));
-			for (i32 i = static_cast<i32>(HashAlgorithm::BEGIN); i <= static_cast<i32>(HashAlgorithm::END); ++i)
+			for (std::int32_t i = static_cast<std::int32_t>(HashAlgorithm::BEGIN); i <= static_cast<std::int32_t>(HashAlgorithm::END); ++i)
 			{
 				if (ImGui::RadioButton(*static_cast<HashAlgorithm>(i), m_selected_hash == static_cast<HashAlgorithm>(i)))
 				{
@@ -70,7 +70,7 @@ void HashingTool::OnDraw(Scene* parent)
 			ImGui::BulletText("%s:", ("Input"));
 			ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 60.0f));
 			ImGui::SameLine();
-			if (ImGuiWidgets::Button(("Calculate"), Vec2f(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
+			if (ImGuiWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
 			{
 				Application::GetInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]()
 					{
@@ -85,10 +85,10 @@ void HashingTool::OnDraw(Scene* parent)
 			if (!m_output.empty())
 			{
 				ImGui::BulletText("%s:", ("Output (Hex Encoded)"));
-				ImGuiWidgets::InputTextMultiline("##output1", &m_output, Vec2f(win_w * 0.85f, 60.0f), ImGuiInputTextFlags_ReadOnly);
+				ImGuiWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 60.0f), ImGuiInputTextFlags_ReadOnly);
 				ImGui::SameLine();
 				ImGui::PushID("CopyCalculatedHash");
-				if (ImGuiWidgets::Button(("Copy"), Vec2f(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+				if (ImGuiWidgets::Button(("Copy"), ImVec2(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 				{
 					this->OnCopyHashButtonPressed();
 				}
@@ -275,19 +275,19 @@ void HashingTool::OnCalculateHashButtonPressed()
 	}
 	catch (const CryptoPP::Exception& e) 
 	{
-		const String err_msg = ("Hashing Failure: ") + CryptoPPUtils::GetFullErrorMessage(e);
+		const std::string err_msg = ("Hashing Failure: ") + CryptoPPUtils::GetFullErrorMessage(e);
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
 	catch (const std::exception& e)
 	{
-		const String err_msg = ("Hashing Failure: ") + String(e.what());
+		const std::string err_msg = ("Hashing Failure: ") + std::string(e.what());
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}
 	catch (...)
 	{
-		const String err_msg = ("Hashing Failure UNKNOWN ERROR");
+		const std::string err_msg = ("Hashing Failure UNKNOWN ERROR");
 		ENIGMA_ERROR(err_msg);
 		(void)DialogUtils::Error(err_msg);
 	}

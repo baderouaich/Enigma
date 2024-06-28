@@ -11,7 +11,7 @@
 
 NS_ENIGMA_BEGIN
 
-ViewEncryptionScene::ViewEncryptionScene(const i64 encryption_id)
+ViewEncryptionScene::ViewEncryptionScene(const std::int64_t encryption_id)
 	:
 	Enigma::Scene()
 {
@@ -31,7 +31,7 @@ void ViewEncryptionScene::OnCreate()
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
-void ViewEncryptionScene::OnUpdate(const f32&)
+void ViewEncryptionScene::OnUpdate(const float&)
 {
 }
 
@@ -47,10 +47,10 @@ void ViewEncryptionScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.6f, 40.0f);
+	const auto button_size = ImVec2(win_w / 2.6f, 40.0f);
 
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); ImGui::SameLine(); };
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); ImGui::SameLine(); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -66,12 +66,12 @@ void ViewEncryptionScene::OnImGuiDraw()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 #pragma region Back button [<] & Scene Title
 		static const auto& title_font = font_audiowide_regular_30;
-		static const String title = ("View Encryption");
+		static const std::string title = ("View Encryption");
 		static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
 		static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -93,7 +93,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 			{
-				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 			}
 			ImGui::PopStyleColor(2);
 			ImGui::PopFont();
@@ -117,15 +117,15 @@ void ViewEncryptionScene::OnImGuiDraw()
 			// Date time  - size
 			ImGui::PushFont(font_montserrat_medium_18);
 			{
-				static const String format = String("Format: ") +  (m_encryption->is_file ? ("File") : ("Text"));
+				static const std::string format = std::string("Format: ") +  (m_encryption->is_file ? ("File") : ("Text"));
 				ImGui::ButtonEx(format.c_str(), { 0.0f, 0.0f }, ImGuiItemFlags_Disabled);
 				inline_dummy(6.0f, 0.0f);
 
-				static const String date_time = String("Date Time: ") +  m_encryption->date_time;
+				static const std::string date_time = std::string("Date Time: ") +  m_encryption->date_time;
 				ImGui::ButtonEx(date_time.c_str(), { 0.0f, 0.0f }, ImGuiItemFlags_Disabled);
 				inline_dummy(6.0f, 0.0f);
 
-				static const String size = SizeUtils::FriendlySize(m_encryption->size);
+				static const std::string size = SizeUtils::FriendlySize(m_encryption->size);
 				ImGui::ButtonEx(size.c_str(), { 0.0f, 0.0f }, ImGuiItemFlags_Disabled);
 
 			}
@@ -148,7 +148,7 @@ void ViewEncryptionScene::OnImGuiDraw()
 			ImGui::Text("%s:", "Password");
 
 			// Input text
-			ImGuiWidgets::InputText("##password", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##password", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -272,7 +272,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 		if (m_encryption->is_file) 
 		{
 			// Decrypt cipher
-			String buffer = algorithm->Decrypt(m_password, cipher->data);
+			std::string buffer = algorithm->Decrypt(m_password, cipher->data);
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), ("Failed to decrypt file cipher"));
 
 			// Decompress buffer
@@ -287,8 +287,8 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 
 			// Ask where to save decrypted file ?
 			// Get path to where decrypted file should be saved
-			const std::initializer_list<String> filters = { (m_encryption->file_ext.empty() ? String() : String('*' + m_encryption->file_ext)), "All Files", "*" }; // { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }
-			if (const String output_filename = SaveFileDialog("Select A Location To Save Decrypted File To", ".", true, filters).Show(); !output_filename.empty())
+			const std::initializer_list<std::string> filters = { (m_encryption->file_ext.empty() ? std::string() : std::string('*' + m_encryption->file_ext)), "All Files", "*" }; // { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }
+			if (const std::string output_filename = SaveFileDialog("Select A Location To Save Decrypted File To", ".", true, filters).Show(); !output_filename.empty())
 			{
 				// Ensure selected output filename has an extension and it is the same one used in encryption
 				if (!m_encryption->file_ext.empty() && fs::path(output_filename).extension() != m_encryption->file_ext)
@@ -329,7 +329,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 	}
 	catch (const CryptoPP::Exception& e)
 	{
-		const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+		const std::string err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 		ENIGMA_ERROR("Decryption Failure: {0}", err_msg);
 		(void)DialogUtils::Error(("Decryption Failure"), err_msg);
 	}
@@ -340,7 +340,7 @@ void ViewEncryptionScene::OnDecryptButtonPressed()
 	}
 	catch (...)
 	{
-		const String err_msg = "Decryption Failure: Unknown Error";
+		const std::string err_msg = "Decryption Failure: Unknown Error";
 		ENIGMA_ERROR(("Decryption Failure UNKNOWN ERROR"));
 		(void)DialogUtils::Error(err_msg);
 	}

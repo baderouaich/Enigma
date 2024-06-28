@@ -37,7 +37,7 @@ void EncryptFileScene::OnCreate()
 
 }
 
-void EncryptFileScene::OnUpdate(const f32& /*dt*/)
+void EncryptFileScene::OnUpdate(const float& /*dt*/)
 {}
 
 void EncryptFileScene::OnDraw()
@@ -52,10 +52,10 @@ void EncryptFileScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
+	const auto button_size = ImVec2(win_w / 2.5f, 40.0f);
 
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -72,12 +72,12 @@ void EncryptFileScene::OnImGuiDraw()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 #pragma region Back button [<] & Scene Title
 		static const auto& title_font = font_audiowide_regular_30;
-		static const String title = ("Encrypt File");
+		static const std::string title = ("Encrypt File");
 		static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
 		static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -99,7 +99,7 @@ void EncryptFileScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 			{
-				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 			}
 			ImGui::PopStyleColor(2);
 			ImGui::PopFont();
@@ -256,9 +256,9 @@ void EncryptFileScene::OnImGuiDraw()
 			// Label
 			ImGui::Text("%s:", ("Password"));
 			// Input text
-			ImGuiWidgets::InputText("##text3", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text3", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::Text("%s:", ("Confirm Password"));
-			ImGuiWidgets::InputText("##text4", &m_confirm_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text4", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -357,7 +357,7 @@ void EncryptFileScene::OnBrowseInFileButtonPressed()
 	);
 	
 	ENIGMA_TRACE("Selecting a file to encrypt...");
-	const std::vector<String> selected_file_paths = ofd->Show();
+	const std::vector<std::string> selected_file_paths = ofd->Show();
 	if (selected_file_paths.empty())
 	{
 		ENIGMA_TRACE("Nothing is selected.");
@@ -375,7 +375,7 @@ void EncryptFileScene::OnBrowseOutFileLocationButtonPressed()
 		);
 
 	ENIGMA_TRACE("Selecting a location to save encrypted file to...");
-	const String selected_location = ofd->Show();
+	const std::string selected_location = ofd->Show();
 	if (selected_location.empty())
 	{
 		ENIGMA_TRACE("Nothing is selected.");
@@ -437,7 +437,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			ENIGMA_ASSERT_OR_THROW(algorithm, ("Failed to create algorithm from type"));
 
 			// Read in file buffer
-			String buffer{};
+			std::string buffer{};
 			ENIGMA_ASSERT_OR_THROW(FileUtils::Read(m_in_filename, buffer), fmt::format("Failed to read buffer from file {}", m_in_filename));
 			ENIGMA_ASSERT_OR_THROW(!buffer.empty(), fmt::format("Nothing to encrypt! File {} is empty", m_in_filename));
 			
@@ -449,14 +449,14 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			*/
 			// Compression
 			ENIGMA_TRACE("Compressing file buffer {0} ...", m_in_filename);
-			String compressed_buffer = GZip::Compress(buffer);
+			std::string compressed_buffer = GZip::Compress(buffer);
 			const auto old_buffer_size = buffer.size();
 			const auto new_buffer_size = compressed_buffer.size();
 			const auto decreased_bytes = new_buffer_size < old_buffer_size ? (old_buffer_size - new_buffer_size) : 0;
 			ENIGMA_TRACE("File size decreased by {0}", SizeUtils::FriendlySize(decreased_bytes));
 
 			// Encrypt file buffer
-			String cipher = algorithm->Encrypt(m_password, compressed_buffer);
+			std::string cipher = algorithm->Encrypt(m_password, compressed_buffer);
 			ENIGMA_ASSERT_OR_THROW(!cipher.empty(), ("Failed to encrypt file buffer"));
 
 			// Write cipher to out file
@@ -476,7 +476,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 			}
 
 			// Alert user that encryption was successful
-			const String msg = fmt::format("Encrypted {} to {} Successfully\nCompression Status: File size decreased by {}",
+			const std::string msg = fmt::format("Encrypted {} to {} Successfully\nCompression Status: File size decreased by {}",
 				fs::path(m_in_filename).filename(),
 				fs::path(m_out_filename).filename(),
 				SizeUtils::FriendlySize(decreased_bytes));
@@ -486,7 +486,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 		}
 		catch (const CryptoPP::Exception& e)
 		{
-			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+			const std::string err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 			ENIGMA_ERROR("Encryption Failure: {0}", err_msg);
 			(void)DialogUtils::Error(("Encryption Failure"), err_msg);
 		}
@@ -497,7 +497,7 @@ void EncryptFileScene::OnEncryptButtonPressed()
 		}
 		catch (...)
 		{
-			const String err_msg = ("Encryption Failure: UNKNOWN ERROR");
+			const std::string err_msg = ("Encryption Failure: UNKNOWN ERROR");
 			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}

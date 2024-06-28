@@ -29,7 +29,7 @@ IDEA::~IDEA() noexcept
 {
 }
 
-String IDEA::Encrypt(const String& password, const String& buffer)
+std::string IDEA::Encrypt(const std::string& password, const std::string& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
@@ -42,7 +42,7 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 
 
 	// Randomly generated IV
-	const String iv = Algorithm::GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE);
+	const std::string iv = Algorithm::GenerateRandomIV(CryptoPP::IDEA::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::IDEA::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::IDEA::BLOCKSIZE)); // Encryption key to be generated from user password + IV
@@ -60,7 +60,7 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	m_idea_encryptor->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	String cipher{}; // Final encrypted buffer
+	std::string cipher{}; // Final encrypted buffer
 	[[maybe_unused]] const auto ss = CryptoPP::StringSource(
 		buffer,
 		true,
@@ -80,15 +80,15 @@ String IDEA::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String IDEA::Decrypt(const String& password, const String& algotype_iv_cipher)
+std::string IDEA::Decrypt(const std::string& password, const std::string& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT_OR_THROW(m_idea_decryptor, "IDEA Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
-	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
+	const std::string iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::IDEA::BLOCKSIZE);
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_cipher");
-	const String cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::IDEA::BLOCKSIZE, algotype_iv_cipher.size() - 1);
+	const std::string cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::IDEA::BLOCKSIZE, algotype_iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_cipher");
 
 	// Prepare Key
@@ -106,7 +106,7 @@ String IDEA::Decrypt(const String& password, const String& algotype_iv_cipher)
 	m_idea_decryptor->SetKeyWithIV(key, CryptoPP::IDEA::MAX_KEYLENGTH, key + CryptoPP::IDEA::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	String decrypted{}; // Recovered buffer
+	std::string decrypted{}; // Recovered buffer
 	const CryptoPP::StringSource ss(
 		cipher,
 		true,

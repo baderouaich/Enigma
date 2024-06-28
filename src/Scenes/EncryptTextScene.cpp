@@ -32,7 +32,7 @@ void EncryptTextScene::OnCreate()
 
 }
 
-void EncryptTextScene::OnUpdate(const f32& /*dt*/)
+void EncryptTextScene::OnUpdate(const float& /*dt*/)
 {}
 
 void EncryptTextScene::OnDraw()
@@ -47,12 +47,12 @@ void EncryptTextScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.5f, 40.0f);
+	const auto button_size = ImVec2(win_w / 2.5f, 40.0f);
 
-	static constexpr const auto dummy = [](const f32& x, const f32& y) noexcept { ImGui::Dummy(ImVec2(x, y)); };
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
-	static constexpr const auto inline_spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); } };
+	static constexpr const auto dummy = [](const float& x, const float& y) noexcept { ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); } };
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -70,12 +70,12 @@ void EncryptTextScene::OnImGuiDraw()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 #pragma region Back button [<] & Scene Title
 		static const auto& title_font = font_audiowide_regular_30;
-		static const String title = ("Encrypt Text");
+		static const std::string title = ("Encrypt Text");
 		static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
 		static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -97,7 +97,7 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 			{
-				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 			}
 			ImGui::PopStyleColor(2);
 			ImGui::PopFont();
@@ -172,7 +172,7 @@ void EncryptTextScene::OnImGuiDraw()
 			ImGui::Text("%s:", ("Text"));
 
 			// Input text
-			const ImVec2 input_text_size(static_cast<f32>(win_w), ImGui::GetTextLineHeightWithSpacing() * 5);
+			const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 5);
 			ImGuiWidgets::InputTextMultiline("##text1", &m_text, input_text_size);
 
 			// Bytes count
@@ -203,9 +203,9 @@ void EncryptTextScene::OnImGuiDraw()
 			// Label
 			ImGui::Text("%s:", ("Password"));
 			// Input text
-			ImGuiWidgets::InputText("##text2", &m_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text2", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::Text("%s:", ("Confirm Password"));
-			ImGuiWidgets::InputText("##text3", &m_confirm_password, static_cast<f32>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+			ImGuiWidgets::InputText("##text3", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 			ImGui::PopStyleColor();
 			// Bytes count
 			ImGui::PushFont(font_montserrat_medium_12);
@@ -345,7 +345,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 			*/
 
 			// Compress text before encrypting
-			const String compressed_text = GZip::Compress(m_text);
+			const std::string compressed_text = GZip::Compress(m_text);
 			ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), ("Failed to compress text"));
 
 			// Encrypt text
@@ -397,7 +397,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		}
 		catch (const CryptoPP::Exception& e)
 		{
-			const String err_msg = CryptoPPUtils::GetFullErrorMessage(e);
+			const std::string err_msg = CryptoPPUtils::GetFullErrorMessage(e);
 			ENIGMA_ERROR("Encryption Failure: {0}", err_msg);
 			(void)DialogUtils::Error(("Encryption Failure"), err_msg);
 		}
@@ -408,7 +408,7 @@ void EncryptTextScene::OnEncryptButtonPressed()
 		}
 		catch (...)
 		{
-			const String err_msg = ("Encryption Failure UNKNOWN ERROR");
+			const std::string err_msg = ("Encryption Failure UNKNOWN ERROR");
 			ENIGMA_ERROR(err_msg);
 			(void)DialogUtils::Error(err_msg);
 		}

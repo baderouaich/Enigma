@@ -1,6 +1,7 @@
 #include <pch.hpp>
 #include "Database.hpp"
 #include <Utility/FileUtils.hpp>
+#include <Utility/ResourceUtils.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -10,13 +11,14 @@ void Database::Initialize()
 
 	// Check first if we are next to ./res/ folder for CLI to work
 	{
-		if (!fs::is_directory(fs::path(RES_DIR)))
+    const fs::path resDir = ::Enigma::ResourceUtils::GetResourcesDir();
+		if (!fs::is_directory(resDir))
 		{
-			ENIGMA_CRITICAL("Couldn't find {0} folder next to Enigma executable, if you running CLI please make sure you put {1} Directory next to Enigma executable.", fs::path(RES_DIR).string(), fs::path(RES_DIR).string());
+			ENIGMA_CRITICAL("Couldn't find {0} folder next to Enigma executable, if you running CLI please make sure you put {1} Directory next to Enigma executable.", fs::path(resDir).string(), fs::path(resDir).string());
 			std::exit(EXIT_FAILURE);
 		}
 #if defined(ENIGMA_DEBUG)
-			ENIGMA_INFO("Resources Dir Path: {0}", fs::path(RES_DIR).string());
+			ENIGMA_INFO("Resources Dir Path: {0}", fs::path(resDir).string());
 #endif
 	}
 
@@ -27,12 +29,13 @@ void Database::Initialize()
 	try
 	{
 		//Create db dir if not exists
-		if (!fs::is_directory(fs::path(DATABASE_DIR)))
+    const fs::path dbDir = ::Enigma::ResourceUtils::GetResourcesDir() / "database";
+		if (!fs::is_directory(dbDir))
 		{
-			ENIGMA_INFO("Creating Database Directory {0} ...", fs::path(DATABASE_DIR).string());
-			if (!fs::create_directory(fs::path(DATABASE_DIR)))
+			ENIGMA_INFO("Creating Database Directory {0} ...", dbDir.string());
+			if (!fs::create_directory(dbDir))
 			{
-				ENIGMA_CRITICAL("Failed to create database directory: {0}", fs::path(DATABASE_DIR).string());
+				ENIGMA_CRITICAL("Failed to create database directory: {0}", dbDir.string());
 				std::exit(EXIT_FAILURE);
 			}
 		}
@@ -55,11 +58,11 @@ void Database::Initialize()
 				*m_database,
 				create_table_sql.data()
 				);
-			const i32 status = query->exec(); // status 0 == SQLite::OK
+			const std::int32_t status = query->exec(); // status 0 == SQLite::OK
 			ENIGMA_ASSERT_OR_THROW(status == SQLite::OK,
 				"Database failed to create tables with error code " +
 				std::to_string(query->getErrorCode()) + 
-				" and message: " + String(query->getErrorMsg()));
+				" and message: " + std::string(query->getErrorMsg()));
 		}
 	}
 	catch (const SQLite::Exception& e)
@@ -81,7 +84,7 @@ void Database::Shutdown()
 }
 
 // Add Encryption to Encryptions table, returns true on success
-i64 Database::AddEncryption(const std::unique_ptr<Encryption>& e)
+std::int64_t Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -98,15 +101,15 @@ i64 Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bindNoCopy(1, e->title);
 			query->bind(2, e->size);
-			query->bind(3, static_cast<i32>(e->is_file));
+			query->bind(3, static_cast<std::int32_t>(e->is_file));
 			if (e->is_file)
 				query->bind(4, e->file_ext);
-			const i32 r = query->exec(); // returns num rows effected
+			const std::int32_t r = query->exec(); // returns num rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert encryption record");
 		}
 		
 		// Get inserted encryption id
-		const i64 last_inserted_encryption_id = m_database->getLastInsertRowid();
+		const std::int64_t last_inserted_encryption_id = m_database->getLastInsertRowid();
 		
 		// Insert cipher
 		{
@@ -115,10 +118,10 @@ i64 Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 			ENIGMA_LOG("SQL: {0}", sql);
 #endif
 			const auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
-			query->bindNoCopy(1, e->cipher.data.data(), static_cast<i32>(e->cipher.data.size())); // bind blob
+			query->bindNoCopy(1, e->cipher.data.data(), static_cast<std::int32_t>(e->cipher.data.size())); // bind blob
 			//query->bindNoCopy(1, e->cipher.data); // bind blob (same as bindText..)
 			query->bind(2, last_inserted_encryption_id);
-			const i32 r = query->exec(); // returns # of rows effected
+			const std::int32_t r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert cipher record");
 		}
 		
@@ -130,12 +133,12 @@ i64 Database::AddEncryption(const std::unique_ptr<Encryption>& e)
 	catch (const SQLite::Exception& e)
 	{
 		ENIGMA_ERROR(e.what());
-		return i64(-1);
+		return std::int64_t(-1);
 	}
 
 }
 
-std::unique_ptr<Cipher> Database::GetCipherByEncryptionID(const i64 ide)
+std::unique_ptr<Cipher> Database::GetCipherByEncryptionID(const std::int64_t ide)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", nullptr);
@@ -170,7 +173,7 @@ std::unique_ptr<Cipher> Database::GetCipherByEncryptionID(const i64 ide)
 }
 
 // Delete Encryption record by id, returns true if successfully deleted
-bool Database::DeleteEncryption(const i64 ide)
+bool Database::DeleteEncryption(const std::int64_t ide)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -187,7 +190,7 @@ bool Database::DeleteEncryption(const i64 ide)
 #endif
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bind(1, ide);
-			i32 r = query->exec(); // returns # of rows effected
+			std::int32_t r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to delete cipher record");
 		}
 
@@ -199,7 +202,7 @@ bool Database::DeleteEncryption(const i64 ide)
 #endif
 			auto query = std::make_unique<SQLite::Statement>(*m_database, sql);
 			query->bind(1, ide);
-			i32 r = query->exec(); // returns # of rows effected
+			std::int32_t r = query->exec(); // returns # of rows effected
 			ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to delete encyption record");
 		}
 
@@ -255,7 +258,7 @@ bool Database::DeleteAllEncryptions()
 	}
 }
 
-i64 Database::GetEncryptionsCount()
+std::int64_t Database::GetEncryptionsCount()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", 0);
@@ -287,7 +290,7 @@ void Database::Vacuum() noexcept
 	(void)m_database->exec("VACUUM");*/
 
 	// Only vacuum if changes to the database were made.
-	const i32 total_changes = m_database->getTotalChanges();
+	const std::int32_t total_changes = m_database->getTotalChanges();
 	if (total_changes > 0)
 	{
 		ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);

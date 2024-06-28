@@ -15,11 +15,11 @@ public: /* Enums */
 	/**
 	* Notification Icon type
 	*/
-	enum class Icon : ui8
+	enum class Icon : std::uint8_t
 	{
-		Info    = static_cast<ui8>(pfd::icon::info),
-		Warning = static_cast<ui8>(pfd::icon::warning),
-		Error   = static_cast<ui8>(pfd::icon::error)
+		Info    = static_cast<std::uint8_t>(pfd::icon::info),
+		Warning = static_cast<std::uint8_t>(pfd::icon::warning),
+		Error   = static_cast<std::uint8_t>(pfd::icon::error)
 	};
 
 public: /* Constructors / Destructor */
@@ -28,7 +28,7 @@ public: /* Constructors / Destructor */
 	*	@param message: description of the notification
 	*	@param icon: Icon type of the notification
 	*/
-	Notification(const String& title, const String& message, Icon icon = Icon::Info);
+	Notification(const std::string& title, const std::string& message, Icon icon = Icon::Info);
 	~Notification() noexcept = default;
 
 public: /* Accessors */
@@ -38,8 +38,8 @@ public: /* Accessors */
 	void Show() const;
 
 private:
-	const String m_title;	/*< Notification title */
-	const String m_message; /*< Notification message */
+	const std::string m_title;	/*< Notification title */
+	const std::string m_message; /*< Notification message */
 	const Icon m_icon;		/*< Notification icon (Info, Error or Warning) */
 };
 

@@ -30,7 +30,7 @@ Blowfish::~Blowfish() noexcept
 }
 
 
-String Blowfish::Encrypt(const String& password, const String& buffer)
+std::string Blowfish::Encrypt(const std::string& password, const std::string& buffer)
 {
 	// Make sure encryption mode and the seeder are initialized & Validate Arguments
 	{
@@ -42,7 +42,7 @@ String Blowfish::Encrypt(const String& password, const String& buffer)
 	}
 
 	// Randomly generated IV
-	const String iv = Algorithm::GenerateRandomIV(CryptoPP::Blowfish::BLOCKSIZE); 
+	const std::string iv = Algorithm::GenerateRandomIV(CryptoPP::Blowfish::BLOCKSIZE);
 
 	// Prepare key
 	CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::Blowfish::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::Blowfish::BLOCKSIZE)); // Encryption key to be generated from user password + IV
@@ -60,7 +60,7 @@ String Blowfish::Encrypt(const String& password, const String& buffer)
 	m_blowfish_encryptor->SetKeyWithIV(key, CryptoPP::Blowfish::MAX_KEYLENGTH, key + CryptoPP::Blowfish::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Encrypt
-	String cipher{}; // encrypted buffer
+	std::string cipher{}; // encrypted buffer
 	[[maybe_unused]] const auto ss = CryptoPP::StringSource(
 		buffer,
 		true,
@@ -79,15 +79,15 @@ String Blowfish::Encrypt(const String& password, const String& buffer)
 	return output.str();
 }
 
-String Blowfish::Decrypt(const String& password, const String& algotype_iv_cipher)
+std::string Blowfish::Decrypt(const std::string& password, const std::string& algotype_iv_cipher)
 {
 	// Make sure decryption mode is initialized
 	ENIGMA_ASSERT(m_blowfish_decryptor, "Blowfish Decryptor is not initialized properly");
 
 	// Extract IV and Cipher from algotype_iv_cipher (we output cipher as AlgoType + IV + Cipher)
-	const String iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::Blowfish::BLOCKSIZE);
+	const std::string iv = algotype_iv_cipher.substr(sizeof(Algorithm::Type), CryptoPP::Blowfish::BLOCKSIZE);
 	ENIGMA_ASSERT_OR_THROW(!iv.empty(), "Failed to extract IV part from algotype_iv_cipher");
-	const String cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::Blowfish::BLOCKSIZE, algotype_iv_cipher.size() - 1);
+	const std::string cipher = algotype_iv_cipher.substr(sizeof(Algorithm::Type) + CryptoPP::Blowfish::BLOCKSIZE, algotype_iv_cipher.size() - 1);
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to extract cipher part from algotype_iv_cipher");
 
 	// Prepare Key
@@ -105,7 +105,7 @@ String Blowfish::Decrypt(const String& password, const String& algotype_iv_ciphe
 	m_blowfish_decryptor->SetKeyWithIV(key, CryptoPP::Blowfish::MAX_KEYLENGTH, key + CryptoPP::Blowfish::MAX_KEYLENGTH); // key, kl, iv, ivl
 
 	// Decrypt
-	String decrypted{}; // Recovered buffer
+	std::string decrypted{}; // Recovered buffer
 	const CryptoPP::StringSource ss(
 		cipher,
 		true,

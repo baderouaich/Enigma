@@ -97,25 +97,25 @@ public:
 
 public: // Encryption Operations
 	/** Add Encryption record to database table
-	*	@return inserted encryption id i64>=0 on success, -1 on failure
+	*	@return inserted encryption id std::int64_t>=0 on success, -1 on failure
 	*/
-	static i64 AddEncryption(const std::unique_ptr<Encryption>& e);
+	static std::int64_t AddEncryption(const std::unique_ptr<Encryption>& e);
 
 	/** Returns cipher from database by encryption id */
-	static std::unique_ptr<Cipher> GetCipherByEncryptionID(const i64 ide);
+	static std::unique_ptr<Cipher> GetCipherByEncryptionID(const std::int64_t ide);
 
 	/** Delete Encryption record by id, returns true if successfully deleted */
-	static bool DeleteEncryption(const i64 ide);
+	static bool DeleteEncryption(const std::int64_t ide);
 
 	/** Delete all saved encryptions from the database (with their cipher) */
 	static bool DeleteAllEncryptions();
 
 	/** Returns how many encryption records are saved */
-	static i64 GetEncryptionsCount();
+	static std::int64_t GetEncryptionsCount();
 
 	/** Get an Encryption by id with desired columns for optimization */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext>
-	inline static std::unique_ptr<Encryption> GetEncryptionByID(const i64 ide)
+	inline static std::unique_ptr<Encryption> GetEncryptionByID(const std::int64_t ide)
 	{
 		ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -147,7 +147,7 @@ public: // Encryption Operations
 
 			if (query->executeStep())
 			{
-				i32 i{ 0 }; // for getColumn, use index starts by 0
+				std::int32_t i{ 0 }; // for getColumn, use index starts by 0
 				e->ide = query->getColumn(i++).getInt64();
 				if constexpr (title) e->title = query->getColumn(i++).getString();
 				if constexpr (cipher)
@@ -209,7 +209,7 @@ public: // Encryption Operations
 			{
 				auto e = std::make_unique<Encryption>();
 
-				i32 i{ 0 }; // for getColumn, use index starts by 0
+				std::int32_t i{ 0 }; // for getColumn, use index starts by 0
 				e->ide = query->getColumn(i++).getInt64();
 				if constexpr (title) e->title = query->getColumn(i++).getString();
 				if constexpr (cipher)
@@ -236,7 +236,7 @@ public: // Encryption Operations
 
 	/** Search Encryptions by title using keyword LIKE %QUERY% */
 	template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext> // select which columns to return (for optimization)
-	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const String& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
+	inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const std::string& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending)
 	{
 		ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -271,7 +271,7 @@ public: // Encryption Operations
 			{
 				auto e = std::make_unique<Encryption>();
 
-				i32 i{ 0 }; // for getColumn, use index starts by 0
+				std::int32_t i{ 0 }; // for getColumn, use index starts by 0
 				e->ide = query->getColumn(i++).getInt64();
 				if constexpr (title) e->title = query->getColumn(i++).getString();
 				if constexpr (cipher)

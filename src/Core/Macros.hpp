@@ -100,7 +100,7 @@ do { \
 ///
 
 /// Array Size
-#define ENIGMA_ARRAY_SIZE(arr) static_cast<::Enigma::size_t>(sizeof(arr) / sizeof((arr)[0]))
+#define ENIGMA_ARRAY_SIZE(arr) static_cast<::Enigma::std::size_t>(sizeof(arr) / sizeof((arr)[0]))
 ///
 
 /// Check if value is between or equal a range
@@ -194,12 +194,12 @@ do { \
 //static void TimedFunction(
 //	const std::function<void()>& onStart,
 //	const std::function<void()>& func,
-//	const std::function<void(::Enigma::f64)>& onFinish)
+//	const std::function<void(::Enigma::double)>& onFinish)
 //{
 //	onStart();
 //	ENIGMA_BEGIN_TIMER(t1);
 //		func();
-//	::Enigma::f64 elapsed = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
+//	::Enigma::double elapsed = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 //	onFinish(elapsed);
 //}
 

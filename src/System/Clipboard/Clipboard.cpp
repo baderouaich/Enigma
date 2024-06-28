@@ -6,13 +6,13 @@
 
 NS_ENIGMA_BEGIN
 
-String Clipboard::Get()
+std::string Clipboard::Get()
 {
 	auto glfw_window = Application::GetInstance()->GetWindow()->GetGLFWwindow();
-	return String(glfwGetClipboardString(glfw_window));
+	return std::string(glfwGetClipboardString(glfw_window));
 }
 
-void Clipboard::Set(const String& buffer)
+void Clipboard::Set(const std::string& buffer)
 {
 	auto glfw_window = Application::GetInstance()->GetWindow()->GetGLFWwindow();
 	glfwSetClipboardString(glfw_window, buffer.c_str());

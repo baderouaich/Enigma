@@ -54,13 +54,14 @@ Cursor::Cursor(CursorMode mode)
 	ENIGMA_ASSERT(m_GLFWcursor, "Could not Create Standard Cursor");
 }
 
-Cursor::Cursor(const String& image_path, const i32 xhot, const i32 yhot)
+Cursor::Cursor(const fs::path& image_path, const std::int32_t xhot, const std::int32_t yhot)
 	:
 	m_mode(CursorMode::NONE)
 {
-	i32 width{}, height{}, channels{};
+  ENIGMA_ASSERT(fs::is_regular_file(image_path), "Invalid image path");
+	std::int32_t width{}, height{}, channels{};
 	stbi_set_flip_vertically_on_load(false);
-	byte* pixels = stbi_load(image_path.c_str(), &width, &height, &channels, 4);
+	byte* pixels = stbi_load(image_path.string().c_str(), &width, &height, &channels, 4);
 	ENIGMA_ASSERT(pixels, "Failed to load image");
 	//the alpha channel isn't necessary
 	//ENIGMA_ASSERT(channels == 4, "Image must be RGBA");

@@ -78,8 +78,8 @@ void ImGuiRenderer::End()
   auto& io = ImGui::GetIO();
   const auto& app = *Application::GetInstance();
   io.DisplaySize = ImVec2(
-      static_cast<f32>(app.GetWindow()->GetWidth()),
-      static_cast<f32>(app.GetWindow()->GetHeight())
+      static_cast<float>(app.GetWindow()->GetWidth()),
+      static_cast<float>(app.GetWindow()->GetHeight())
   );
 
   // Rendering

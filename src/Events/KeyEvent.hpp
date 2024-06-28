@@ -31,14 +31,14 @@ protected:
 class KeyPressedEvent : public KeyEvent
 {
 public:
-	KeyPressedEvent(const KeyCode keycode, const ui16 repeat_count)
+	KeyPressedEvent(const KeyCode keycode, const std::uint16_t repeat_count)
 		:
 		KeyEvent(keycode),
 		m_repeat_count(repeat_count) {}
 
-	ui16 GetRepeatCount() const noexcept { return m_repeat_count; }
+	std::uint16_t GetRepeatCount() const noexcept { return m_repeat_count; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "KeyPressedEvent: " << m_key_code << " (" << m_repeat_count << " repeats)";
@@ -48,7 +48,7 @@ public:
 	EVENT_CLASS_TYPE(EventType::KEY_PRESSED)
 
 private:
-	ui16 m_repeat_count;
+	std::uint16_t m_repeat_count;
 };
 
 /** Keyboard button release Event */
@@ -60,7 +60,7 @@ public:
 		KeyEvent(keyCode) 
 	{}
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "KeyReleasedEvent: " << m_key_code;
@@ -78,7 +78,7 @@ public:
 		:
 		KeyEvent(keyCode) {}
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "KeyTypedEvent: " << m_key_code;

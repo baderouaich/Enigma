@@ -96,7 +96,7 @@ public:
 	*	@return (Algo type enum id + IV + Cipher)
 	*	@exception throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Encrypt(const String& password, const String& buffer) = 0;
+	virtual std::string Encrypt(const std::string& password, const std::string& buffer) = 0;
 
 	/**
 	*	Decrypts cipher with password
@@ -105,14 +105,14 @@ public:
 	*	@return Recovered Buffer
 	*	@exception throws CryptoPP::Exception, std::exception on failure
 	*/
-	virtual String Decrypt(const String& password, const String& cipher) = 0;
+	virtual std::string Decrypt(const std::string& password, const std::string& cipher) = 0;
 
 public: /* Create polymorphic algorithm by either mode name or type*/
 	/** 
 	*	Creates polymorphic algorithm from algorithm type name
 	*	@see CreateFromType()
 	*/
-	static std::unique_ptr<Algorithm> CreateFromName(const String& name, const Intent intent);
+	static std::unique_ptr<Algorithm> CreateFromName(const std::string& name, const Intent intent);
 	/** 
 	*	Creates polymorphic algorithm from algorithm type
 	*/
@@ -121,44 +121,44 @@ public: /* Create polymorphic algorithm by either mode name or type*/
 public:
 	Type GetType() const noexcept { return m_type; }
 	void SetType(const Type type) noexcept { this->m_type = type; }
-	String GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
+	std::string GetTypeString() const noexcept { return AlgoTypeEnumToStr(m_type); }
 
 protected:
 	/**
 	*	Generates random IV (aka Salt) with a desired length
 	*/
-	static String GenerateRandomIV(const size_t size);
+	static std::string GenerateRandomIV(const std::size_t size);
 
 public:
 	/**
 	*	Auto detect algorithm used for encryption from cipher text
 	*/
-	static Type DetectFromCipher(const String& cipher);
+	static Type DetectFromCipher(const std::string& cipher);
 
 	/**
 	*	Auto detect algorithm used for encryption from cipher base64 text
 	*/
-	static Type DetectFromCipherBase64(const String& cipher_base64);
+	static Type DetectFromCipherBase64(const std::string& cipher_base64);
 
 	/**
 	*	Auto detect algorithm used for encryption from encrypted file
 	*/
-	static Type DetectFromFile(const String& filename);
+	static Type DetectFromFile(const std::string& filename);
 
 	/**
-	*	Converts Algorithm::Type to String
+	*	Converts Algorithm::Type to std::string
 	*/
-	static String AlgoTypeEnumToStr(const Algorithm::Type e) noexcept;
+	static std::string AlgoTypeEnumToStr(const Algorithm::Type e) noexcept;
 
 	/**
 	*	Returns a string of supported algorithms represented as "[Algo1, Algo2, Algo3...]" orderd as enum Type
 	*/
-	static String GetSupportedAlgorithmsStr() noexcept;
+	static std::string GetSupportedAlgorithmsStr() noexcept;
 
 	/**
 	*	Returns a vector of supported algorithms represented as pair of algo name string, algo type. orderd as enum Type
 	*/
-	static std::vector<std::pair<String, Algorithm::Type>> GetSupportedAlgorithms() noexcept;
+	static std::vector<std::pair<std::string, Algorithm::Type>> GetSupportedAlgorithms() noexcept;
 
 protected:
 	Type m_type; /**< Algorithm type: AES, ChaCha, TripleDES... */

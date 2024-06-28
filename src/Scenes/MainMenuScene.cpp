@@ -38,7 +38,7 @@ void MainMenuScene::OnCreate()
 	//m_logo = std::make_unique<ImGuiWidgets::Image>(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH);
 }
 
-void MainMenuScene::OnUpdate(const f32&) {}
+void MainMenuScene::OnUpdate(const float&) {}
 
 void MainMenuScene::OnDraw()
 {
@@ -53,9 +53,9 @@ void MainMenuScene::OnImGuiDraw()
 	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.5f, 45.0f);
+	const auto button_size = ImVec2(win_w / 2.5f, 45.0f);
 
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
 	static const auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
@@ -72,7 +72,7 @@ void MainMenuScene::OnImGuiDraw()
 
 
 	ImGui::Begin("MainMenuContainer", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as main app window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as main app window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 		// Menu bar
@@ -101,7 +101,7 @@ void MainMenuScene::OnImGuiDraw()
 				/*
 				if (ImGui::BeginMenu(("Language")))
 				{
-					for (ui16 i = static_cast<ui16>(Translation::Language::BEGIN); i <= static_cast<ui16>(Translation::Language::END); ++i)
+					for (std::uint16_t i = static_cast<std::uint16_t>(Translation::Language::BEGIN); i <= static_cast<std::uint16_t>(Translation::Language::END); ++i)
 					{
 						bool selected = Translation::GetLanguage() == static_cast<Translation::Language>(i);
 						if (ImGui::MenuItem(Translation::StringifyLanguageEnum(static_cast<Translation::Language>(i)).c_str(), nullptr, &selected))
@@ -204,10 +204,10 @@ void MainMenuScene::OnImGuiDraw()
 #else // use logo
 		// Enigma Logo
 		{
-			const f32 logo_width = static_cast<f32>(m_logo->GetWidth());
-			const f32 logo_height = static_cast<f32>(m_logo->GetHeight());
-			const f32 logo_x = (win_w - logo_width) / 2.0f;
-			const f32 logo_y = ImGui::GetFrameHeight(); // GetFrameHeight ~=> Menubar height
+			const float logo_width = static_cast<float>(m_logo->GetWidth());
+			const float logo_height = static_cast<float>(m_logo->GetHeight());
+			const float logo_x = (win_w - logo_width) / 2.0f;
+			const float logo_y = ImGui::GetFrameHeight(); // GetFrameHeight ~=> Menubar height
 			m_logo->Draw({ logo_x,  logo_y }, logo_width, logo_height);
 		}
 #endif
@@ -358,7 +358,7 @@ void MainMenuScene::OnToolsButtonPressed()
 void MainMenuScene::OnReportIssueMenuButtonPressed()
 {
 	// Open Enigma's github repository issues page in a browser
-	const String url = Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues";
+	const std::string url = Constants::Links::ENIGMA_GITHUB_REPOSITORY + "/issues";
 	ENIGMA_TRACE("Reporting issue to {0}", url);
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
@@ -367,7 +367,7 @@ void MainMenuScene::OnReportIssueMenuButtonPressed()
 	
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-	const String cmd = "xdg-open " + url;
+	const std::string cmd = "xdg-open " + url;
 	[[maybe_unused]] auto _ = std::system(cmd.c_str());
 
 #else
@@ -428,7 +428,7 @@ void MainMenuScene::OnCheckForUpdatesMenuButtonPressed()
 	if (!info) 
 		return;
 	
-	const auto current_version = "v" + String(ENIGMA_VERSION);
+	const auto current_version = "v" + std::string(ENIGMA_VERSION);
 	std::ostringstream oss{};
 	if (info->tag_name == current_version)
 	{

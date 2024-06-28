@@ -47,7 +47,7 @@ public:
 	*	@param p: Probability of true (50% by default)
 	*	@return Returns a Random bool value, either 'true' or 'false'
 	*/
-	static bool Bool(const f64 p = 0.5)
+	static bool Bool(const double p = 0.5)
 	{
 		std::bernoulli_distribution dist(p);
 		return !!dist(m_engine);
@@ -57,11 +57,11 @@ public:
 	/** @brief Generates a random string
 	*	@param length: length of the random string to generate
 	*	@param parallel: if true, a random string will be generated as fast as possible using multiple threads (usefull when string is too large)
-	*	@returns a random String with specified length consists of alphanumeric and special characters
+	*	@returns a random std::string with specified length consists of alphanumeric and special characters
 	*/
-	static String Str(const size_t length, const bool parallel = false) noexcept
+	static std::string Str(const std::size_t length, const bool parallel = false) noexcept
 	{
-		String out(length, '\000');
+		std::string out(length, '\000');
 		const std::string_view special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
 #if 0
 		if (parallel)
@@ -70,14 +70,14 @@ public:
 			std::for_each(std::execution::par, out.begin(), out.end(), [&special_characters, &mtx](char& c)
 				{
 					std::scoped_lock<std::mutex> guard{ mtx }; // guard scope, note that most of functions bellow us assertions, without guarding can result on bad rare behavior where two threads assert at the same time. its just nasty, use lock guards.
-					if (const ui16 r = Random::Int<ui16>(0, 3); r == 0)
-						c = static_cast<char>(Random::Int(ui16('a'), ui16('z'))); // alpha lower
+					if (const std::uint16_t r = Random::Int<std::uint16_t>(0, 3); r == 0)
+						c = static_cast<char>(Random::Int(std::uint16_t('a'), std::uint16_t('z'))); // alpha lower
 					else if (r == 1) // alpha upper
-						c = static_cast<char>(Random::Int(ui16('A'), ui16('Z')));
+						c = static_cast<char>(Random::Int(std::uint16_t('A'), std::uint16_t('Z')));
 					else if (r == 2) // digits
-						c = static_cast<char>(Random::Int(ui16('0'), ui16('9')));
+						c = static_cast<char>(Random::Int(std::uint16_t('0'), std::uint16_t('9')));
 					else if (r == 3) // special characters
-						c = special_characters[Random::Int<size_t>(0, special_characters.size() - 1)];
+						c = special_characters[Random::Int<std::size_t>(0, special_characters.size() - 1)];
 				});
 		}
 		else
@@ -85,14 +85,14 @@ public:
 		{
 			for (char& c : out)
 			{
-				if (const ui16 r = Random::Int<ui16>(0, 3); r == 0)
-					c = static_cast<char>(Random::Int(ui16('a'), ui16('z'))); // alpha lower
+				if (const std::uint16_t r = Random::Int<std::uint16_t>(0, 3); r == 0)
+					c = static_cast<char>(Random::Int(std::uint16_t('a'), std::uint16_t('z'))); // alpha lower
 				else if (r == 1) // alpha upper
-					c = static_cast<char>(Random::Int(ui16('A'), ui16('Z')));
+					c = static_cast<char>(Random::Int(std::uint16_t('A'), std::uint16_t('Z')));
 				else if (r == 2) // digits
-					c = static_cast<char>(Random::Int(ui16('0'), ui16('9')));
+					c = static_cast<char>(Random::Int(std::uint16_t('0'), std::uint16_t('9')));
 				else if (r == 3) // special characters
-					c = special_characters[Random::Int<size_t>(0, special_characters.size() - 1)];
+					c = special_characters[Random::Int<std::size_t>(0, special_characters.size() - 1)];
 			}
 		}
 		return out;

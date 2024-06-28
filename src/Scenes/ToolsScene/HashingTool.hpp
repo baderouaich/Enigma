@@ -92,8 +92,8 @@ private: /* Callbacks */
 	void OnCopyHashButtonPressed();
 
 private: /* Hash Algorithms */
-	String m_input{}; // text to calculate hash for (Message)
-	String m_output{}; // calculated hash (Digest)
+	std::string m_input{}; // text to calculate hash for (Message)
+	std::string m_output{}; // calculated hash (Digest)
 
 	HashAlgorithm m_selected_hash; // Radio buttons selected hash algorithm
 	std::unique_ptr<CryptoPP::MD2> m_md2{nullptr};

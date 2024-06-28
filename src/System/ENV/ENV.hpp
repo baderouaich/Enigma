@@ -17,12 +17,12 @@ public:
 	/**
 	*	Get process runtime environment variable value
 	*/
-	static String Get(const std::string_view& key);
+	static std::string Get(const std::string& key);
 
 	/**
 	*	Set process runtime environment variable
 	*/
-	static void Set(const std::string_view& key, const std::string_view& value);
+	static void Set(const std::string& key, const std::string& value);
 
 #if 0
 	/**
@@ -31,13 +31,13 @@ public:
 	static void SetPermanent(const std::string_view& key, const std::string_view& value)
 	{
 		using std::operator""s;
-		String cmd{};
+		std::string cmd{};
 #if defined(ENIGMA_PLATFORM_WINDOWS)
-		cmd = "setx "s + String(key) + " \"" + String(value) + "\" /m";
+		cmd = "setx "s + std::string(key) + " \"" + std::string(value) + "\" /m";
 #elif  defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)
-		cmd = "export "s + String(key) + "=\""s + String(value) + '\"';
+		cmd = "export "s + std::string(key) + "=\""s + std::string(value) + '\"';
 #endif
-		const i32 status = std::system(cmd.c_str());
+		const std::int32_t status = std::system(cmd.c_str());
 		(void)std::printf("CMD: %s\nStatus: %d\n\n", cmd.c_str(), status);
 
 		std::printf(Get(key).c_str());
@@ -47,7 +47,7 @@ public:
 	/**
 	*	Unset process runtime environment variable
 	*/
-	static void Delete(const std::string_view& key);
+	static void Delete(const std::string& key);
 
 };
 

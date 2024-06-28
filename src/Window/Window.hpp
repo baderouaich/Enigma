@@ -51,38 +51,38 @@ public:	/* Accessors */
 	/*
 	*	Returns size (width, height) of this window
 	*/
-	[[nodiscard]] const std::pair<i32, i32>& GetSize() const noexcept;
+	[[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetSize() const noexcept;
 
 	/*
 	*	Returns the width of this window
 	*/
-	i32 GetWidth() const noexcept;
+	std::int32_t GetWidth() const noexcept;
 
 	/*
 	*	Returns the height of this window
 	*/
-	i32 GetHeight() const noexcept;
+	std::int32_t GetHeight() const noexcept;
 
 	/*
 	*	Returns frame buffer size of this window
 	*/
-	[[nodiscard]] const std::pair<i32, i32>& GetFrameBufferSize() noexcept;
+	[[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetFrameBufferSize() noexcept;
 
 	/*
 	*	Returns frame buffer width of this window
 	*/
-	i32 GetFrameBufferWidth() noexcept;
+	std::int32_t GetFrameBufferWidth() noexcept;
 	
 	/*
 	*	Returns frame buffer height of this window
 	*/
-	i32 GetFrameBufferHeight() noexcept;
+	std::int32_t GetFrameBufferHeight() noexcept;
 
 	/*
 	*	Returns the aspect ratio ( width / height ) of this window
 	*	Returns 1.0f if height is 0 (to avoid division by zero error)
 	*/
-	f32 GetAspectRatio() const noexcept;
+	float GetAspectRatio() const noexcept;
 
 	/*
 	*	Returns const pointer of GLFW window
@@ -97,22 +97,22 @@ public:	/* Accessors */
 	/*
 	*	Returns the title of this window
 	*/
-	[[nodiscard]] const String& GetTitle() const noexcept;
+	[[nodiscard]] const std::string& GetTitle() const noexcept;
 	
 	/*
 	*	Returns minimum width, height of this window
 	*/
-	[[nodiscard]] const std::pair<i32, i32>& GetMinimumSize() const noexcept;
+	[[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetMinimumSize() const noexcept;
 
 	/*
 	*	Returns maximum width, height of this window
 	*/
-	[[nodiscard]] const std::pair<i32, i32>& GetMaximumSize() const noexcept;
+	[[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetMaximumSize() const noexcept;
 
 	/*
 	*	Returns window top left position
 	*/
-	[[nodiscard]] const std::pair<i32, i32>& GetPosition() const noexcept;
+	[[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetPosition() const noexcept;
 	
 	/*
 	*	Returns vsync swap interval level
@@ -120,7 +120,7 @@ public:	/* Accessors */
 	*	Interval 1: 60 FPS
 	*	Interval 2: 30 FPS
 	*/
-	i32 GetSwapInterval() const noexcept;
+	std::int32_t GetSwapInterval() const noexcept;
 
 	/*
 	*	Returns true if the window should be closed
@@ -170,12 +170,12 @@ public:	/* Accessors */
 	/*
 	*	Returns refresh rate of this window
 	*/
-	i32 GetRefreshRate() noexcept;
+	std::int32_t GetRefreshRate() noexcept;
 	
 	/*
 	*	Returns size (width, height) of the primary monitor
 	*/
-	std::pair<i32, i32> GetMonitorSize() noexcept;
+	std::pair<std::int32_t, std::int32_t> GetMonitorSize() noexcept;
 
 public: /* Modifiers */
 	/*
@@ -186,12 +186,12 @@ public: /* Modifiers */
 	/*
 	*	Set window minimum width, height
 	*/
-	void SetMinimumSize(const i32 minimum_width, const i32 minimum_height) noexcept;
+	void SetMinimumSize(const std::int32_t minimum_width, const std::int32_t minimum_height) noexcept;
 
 	/*
 	*	Set window maximum width, height
 	*/
-	void SetMaximumSize(const i32 maximum_width, const i32 maximum_height) noexcept;
+	void SetMaximumSize(const std::int32_t maximum_width, const std::int32_t maximum_height) noexcept;
 
 	/*
 	*	Close Window
@@ -204,23 +204,23 @@ public: /* Modifiers */
 	*	Interval 1: 60 FPS
 	*	Interval 2: 30 FPS
 	*/
-	void SetSwapInterval(const i32 interval) noexcept;
+	void SetSwapInterval(const std::int32_t interval) noexcept;
 	
 	/*
 	*	Set Window Title
 	*/
-	//void SetTitle(const String& title) noexcept;
-	void SetTitle(const String& title, const std::unique_ptr<ui32>& fps, const std::unique_ptr<RAMInfo>& ram_info, const std::unique_ptr<CPUInfo>& cpu_info) noexcept;
+	//void SetTitle(const std::string& title) noexcept;
+	void SetTitle(const std::string& title, const std::unique_ptr<std::uint32_t>& fps, const std::unique_ptr<RAMInfo>& ram_info, const std::unique_ptr<CPUInfo>& cpu_info) noexcept;
 	
 	/*
 	*	Set window top left position
 	*/
-	void SetPosition(const i32 x, const i32 y) const noexcept;
+	void SetPosition(const std::int32_t x, const std::int32_t y) const noexcept;
 
 	/*
 	*	Set Window runtime icon
 	*/
-	void SetIcon(const String& icon_path) noexcept;
+	void SetIcon(const std::string& icon_path) noexcept;
 	
 	/*
 	*	Set Window cursor mode
@@ -230,7 +230,7 @@ public: /* Modifiers */
 	/*
 	*	Set Window cursor image
 	*/
-	void SetCursor(const String& image_path, const i32 xhot, const i32 yhot) noexcept;
+	void SetCursor(const std::string& image_path, const std::int32_t xhot, const std::int32_t yhot) noexcept;
 
 	/*
 	*	Disable Window Cursor
@@ -250,7 +250,7 @@ public: /* Modifiers */
 	/*
 	*	Sets cursor position at given point
 	*/
-	void SetCursorPosition(const f64 xPos, const f64 yPos) const noexcept;
+	void SetCursorPosition(const double xPos, const double yPos) const noexcept;
 	
 	/*
 	*	Minimize Window
@@ -290,7 +290,7 @@ public: /* Modifiers */
 	/*
 	*	Set window refresh rate
 	*/
-	void SetRefreshRate(const i32 refresh_rate) noexcept;
+	void SetRefreshRate(const std::int32_t refresh_rate) noexcept;
 
 private: /* Initializer Functions */
 	bool InitGLFW(const WindowSettings& window_settings);
@@ -305,13 +305,13 @@ private: /* Events */
 
 private: /* Properties */
 	// Window properties
-	String m_title;
-	std::pair<i32, i32> m_position;
-	std::pair<i32, i32> m_size;
-	std::pair<i32, i32> m_minimum_size;
-	std::pair<i32, i32> m_maximum_size;
-	std::pair<i32, i32> m_frame_buffer_size;
-	i32 m_swap_interval;
+	std::string m_title;
+	std::pair<std::int32_t, std::int32_t> m_position;
+	std::pair<std::int32_t, std::int32_t> m_size;
+	std::pair<std::int32_t, std::int32_t> m_minimum_size;
+	std::pair<std::int32_t, std::int32_t> m_maximum_size;
+	std::pair<std::int32_t, std::int32_t> m_frame_buffer_size;
+	std::int32_t m_swap_interval;
 
 	// Monitor & Video Mode
 	GLFWwindow* m_GLFWwindow;

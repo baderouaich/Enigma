@@ -74,14 +74,14 @@ void Application::InitWindow(const WindowSettings& window_settings)
 		// Set window top left position at center
 		const auto  [monitor_width, monitor_height] = m_window->GetMonitorSize();
 		const auto& [window_width, window_height] = m_window->GetSize();
-		m_window->SetPosition(static_cast<i32>((monitor_width - window_width) / 2), static_cast<i32>((monitor_height - window_height) / 2));
+		m_window->SetPosition(static_cast<std::int32_t>((monitor_width - window_width) / 2), static_cast<std::int32_t>((monitor_height - window_height) / 2));
 
 		// Set window's default cursor mode
 		//m_window->SetCursor(CursorMode::CrossHair);
 	}
 	catch (const std::exception& e)
 	{
-		const String err_msg = "Couldn't Construct Window: " + String(e.what());
+		const std::string err_msg = "Couldn't Construct Window: " + std::string(e.what());
 		// console alert
 		ENIGMA_CRITICAL(err_msg);
 		// ui alert
@@ -99,7 +99,7 @@ void Application::InitImGuiRenderer()
 void Application::InitHardwareInfo(const WindowSettings& window_settings)
 {
 	if (window_settings.is_show_fps)
-		m_FPS = std::make_unique<ui32>(0);
+		m_FPS = std::make_unique<std::uint32_t>(0);
 	if (window_settings.is_show_ram_usage)
 		m_ram_info = std::make_unique<RAMInfo>();
 	if (window_settings.is_show_cpu_usage)
@@ -163,7 +163,7 @@ void Application::InitImGuiFonts()
 		}
 		else
 		{
-			const String err_msg = "Failed to load font " + String(font_name);
+			const std::string err_msg = "Failed to load font " + std::string(font_name);
 			// console alert
 			ENIGMA_ERROR(err_msg);
 			// ui alert
@@ -187,7 +187,7 @@ void Application::PushScene(std::unique_ptr<Scene> scene)
 }
 
 
-void Application::LaunchWorkerThread(Scene* scene, const String& loading_text, const std::function<void()>& work_func)
+void Application::LaunchWorkerThread(Scene* scene, const std::string& loading_text, const std::function<void()>& work_func)
 {
 	ENIGMA_ASSERT(scene, "Scene is nullptr!");
 	ENIGMA_ASSERT(work_func, "Work function is empty!");
@@ -388,9 +388,9 @@ void Application::Run()
 }
 
 
-void Application::Exit(const String& message, const i32 exit_code) noexcept
+void Application::Exit(const std::string& message, const std::int32_t exit_code) noexcept
 {
-	const String msg = "Enigma Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
+	const std::string msg = "Enigma Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
 	
 	if (Logger::GetLogger())
 		ENIGMA_CRITICAL(msg);
@@ -403,7 +403,7 @@ void Application::Exit(const String& message, const i32 exit_code) noexcept
 
 void Application::UpdateDeltaTime() noexcept
 {
-	m_current_frame_time = static_cast<f32>(glfwGetTime());
+	m_current_frame_time = static_cast<float>(glfwGetTime());
 	m_delta_time = m_current_frame_time - m_last_frame_time;
 	m_last_frame_time = m_current_frame_time;
 }

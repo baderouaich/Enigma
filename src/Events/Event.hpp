@@ -6,7 +6,7 @@
 
 
 NS_ENIGMA_BEGIN
-enum class EventType : ui32
+enum class EventType : std::uint32_t
 {
 	NONE = 0,
 
@@ -42,10 +42,10 @@ enum class EventType : ui32
 	JOYSTICK_CONNECTED,
 	JOYSTICK_DISCONNECTED
 };
-inline ui32 operator |(const EventType a, const EventType b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
-inline ui32 operator &(const EventType a, const EventType b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
+inline std::uint32_t operator |(const EventType a, const EventType b) { return static_cast<std::uint32_t>(a) | static_cast<std::uint32_t>(b); }
+inline std::uint32_t operator &(const EventType a, const EventType b) { return static_cast<std::uint32_t>(a) & static_cast<std::uint32_t>(b); }
 
-enum class EventCategory : ui32
+enum class EventCategory : std::uint32_t
 {
 	NONE = 0,
 	APPLICATION = BIT(0),
@@ -55,25 +55,25 @@ enum class EventCategory : ui32
 	MOUSE_BUTTON = BIT(4),
 	JOYSTICK = BIT(5)
 };
-inline ui32 operator |(const EventCategory a, const EventCategory b) { return static_cast<ui32>(a) | static_cast<ui32>(b); }
-inline ui32 operator &(const EventCategory a, const EventCategory b) { return static_cast<ui32>(a) & static_cast<ui32>(b); }
+inline std::uint32_t operator |(const EventCategory a, const EventCategory b) { return static_cast<std::uint32_t>(a) | static_cast<std::uint32_t>(b); }
+inline std::uint32_t operator &(const EventCategory a, const EventCategory b) { return static_cast<std::uint32_t>(a) & static_cast<std::uint32_t>(b); }
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return type; } \
 								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override { return #type; }
-#define EVENT_CLASS_CATEGORY(category) virtual ui32 GetCategoryFlags() const override { return static_cast<ui32>(category); }
+#define EVENT_CLASS_CATEGORY(category) virtual std::uint32_t GetCategoryFlags() const override { return static_cast<std::uint32_t>(category); }
 
 class ENIGMA_API Event
 {
 public:
 	virtual EventType GetEventType() const = 0;
 	virtual const char* GetName() const = 0;
-	virtual ui32 GetCategoryFlags() const = 0;
-	virtual String ToString() const { return GetName(); }
+	virtual std::uint32_t GetCategoryFlags() const = 0;
+	virtual std::string ToString() const { return GetName(); }
 
 	bool IsInCategory(EventCategory category) const noexcept
 	{
-		return GetCategoryFlags() & static_cast<ui32>(category);
+		return GetCategoryFlags() & static_cast<std::uint32_t>(category);
 	}
 
 	bool IsHandled() const noexcept { return m_isHandled; }

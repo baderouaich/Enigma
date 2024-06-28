@@ -11,9 +11,9 @@ class ENIGMA_API CryptoPPUtils final
 	ENIGMA_STATIC_CLASS(CryptoPPUtils);
 public:
 	/*
-	*	Converts Crypto++ ErrorType into String
+	*	Converts Crypto++ ErrorType into std::string
 	*/
-	static const String GetErrorString(const enum CryptoPP::Exception::ErrorType error_type) noexcept
+	static const std::string GetErrorString(const enum CryptoPP::Exception::ErrorType error_type) noexcept
 	{
 #define CASE_RETURN(e) case CryptoPP::Exception::ErrorType::e: return #e
 		switch (error_type)
@@ -37,7 +37,7 @@ public:
 #undef CASE_RETURN
 	}
 
-	static const String GetErrorReason(const enum CryptoPP::Exception::ErrorType error_type)
+	static const std::string GetErrorReason(const enum CryptoPP::Exception::ErrorType error_type)
 	{
 		using ErrorType = CryptoPP::Exception::ErrorType;
 #define CASE_RETURN(c, ret) case c: return ret
@@ -53,7 +53,7 @@ public:
 #undef CASE_RETURN
 	}
 	
-	static const String GetFullErrorMessage(const CryptoPP::Exception& e)
+	static const std::string GetFullErrorMessage(const CryptoPP::Exception& e)
 	{
 		std::ostringstream oss{};
 		oss << "Error Type: " << GetErrorString(e.GetErrorType()) << '\n'

@@ -35,7 +35,7 @@ void MyEncryptionsScene::OnCreate()
 	this->ReformatEncryptionsDateTime();
 }
 
-void MyEncryptionsScene::OnUpdate(const f32&)
+void MyEncryptionsScene::OnUpdate(const float&)
 {}
 
 void MyEncryptionsScene::OnDraw()
@@ -51,11 +51,11 @@ void MyEncryptionsScene::OnImGuiDraw()
 
 	static const auto& io = ImGui::GetIO();
 
-	const auto button_size = Vec2f(win_w / 2.6f, 40.0f);
+	const auto button_size = ImVec2(win_w / 2.6f, 40.0f);
 
-	static constexpr const auto inline_dummy = [](const f32& x, const f32& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
-	static constexpr const auto spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) ImGui::Spacing(); };
-	static constexpr const auto inline_spacing = [](const ui8& n) noexcept { for (ui8 i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine(); }};
+	static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
+	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
+	static constexpr const auto inline_spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine(); }};
 
 	static auto& fonts = Application::GetInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -71,12 +71,12 @@ void MyEncryptionsScene::OnImGuiDraw()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
 
 	ImGui::Begin("Container", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{
 #pragma region Back button [<] & Scene Title
 		static const auto& title_font = font_audiowide_regular_30;
-		static const String title = "My Encryptions";
+		static const std::string title = "My Encryptions";
 		static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
 		static const ImVec2 back_button_size(45.0f, title_size.y);
 
@@ -98,7 +98,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 			ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
 			ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
 			{
-				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<f32>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+				(void)ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
 			}
 			ImGui::PopStyleColor(2);
 			ImGui::PopFont();
@@ -338,7 +338,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 						// Operation (View|delete...)
 						ImGui::TableSetColumnIndex(5);
 						{
-							ImGui::PushID(static_cast<i32>(id)); // Special id for button
+							ImGui::PushID(static_cast<std::int32_t>(id)); // Special id for button
 							if (ImGuiWidgets::Button(("View")))
 							{
 								this->OnViewEncryptionButtonPressed(id);
@@ -347,7 +347,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 
 							ImGui::SameLine();
 
-							ImGui::PushID(static_cast<i32>(id)); // Special id for button
+							ImGui::PushID(static_cast<std::int32_t>(id)); // Special id for button
 							if (ImGuiWidgets::Button(("Delete"), ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 							{
 								// if item is deleted, vector size is changed so break loop.
@@ -475,20 +475,20 @@ void MyEncryptionsScene::ReformatEncryptionsDateTime()
 	for (const auto& enc_ptr : m_encryptions)
 	{
 		try {
-			static const std::map<ui16, String> months = { {1, "Jan"}, {2, "Feb"}, {3, "Mar"}, {4, "Apr"}, {5, "May"}, {6, "Jun"}, {7, "Jul"}, {8, "Aug"}, {9, "Sep"}, {10, "Oct"}, {11, "Nov"}, {12, "Dec"} };
+			static const std::map<std::uint16_t, std::string> months = { {1, "Jan"}, {2, "Feb"}, {3, "Mar"}, {4, "Apr"}, {5, "May"}, {6, "Jun"}, {7, "Jul"}, {8, "Aug"}, {9, "Sep"}, {10, "Oct"}, {11, "Nov"}, {12, "Dec"} };
 			// default sqlite3 date format "2021-12-14 20:40:24"
 			//													   year:1		 month:2			day:3			hour:4	  minute:5   second:6	
 			static const std::regex rgx("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})");
 			std::smatch matches{};
 			if (std::regex_match(enc_ptr->date_time, matches, rgx) && matches.size() == 6 + 1) // +1 extra match for the entire text
 			{
-				const String year = matches[1].str();
-				const String month = months.at(StringUtils::To<ui16>(matches[2].str()));
-				const String day = matches[3].str();
-				const String hour = matches[4].str();
-				const String minute = matches[5].str();
-				const String second = matches[6].str();
-				enc_ptr->date_time = month + ' ' + day + ' ' + year + ' ' + hour + ':' + minute + ':' + second + ' ' + (StringUtils::To<ui16>(hour) >= 12 ? "PM" : "AM");
+				const std::string year = matches[1].str();
+				const std::string month = months.at(StringUtils::To<std::uint16_t>(matches[2].str()));
+				const std::string day = matches[3].str();
+				const std::string hour = matches[4].str();
+				const std::string minute = matches[5].str();
+				const std::string second = matches[6].str();
+				enc_ptr->date_time = month + ' ' + day + ' ' + year + ' ' + hour + ':' + minute + ':' + second + ' ' + (StringUtils::To<std::uint16_t>(hour) >= 12 ? "PM" : "AM");
 			}
 		}
 		catch (const std::exception& e) { // On any failure, just keep the default sqlite3 date_time format.
@@ -504,7 +504,7 @@ void MyEncryptionsScene::OnBackButtonPressed()
 	Scene::EndScene();
 }
 
-void MyEncryptionsScene::OnViewEncryptionButtonPressed(const i64 ide)
+void MyEncryptionsScene::OnViewEncryptionButtonPressed(const std::int64_t ide)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -514,7 +514,7 @@ void MyEncryptionsScene::OnViewEncryptionButtonPressed(const i64 ide)
 }
 
 // returns true if item deleted successfully to notify draw loop that vector range changed
-bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
+bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const std::int64_t ide)
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
@@ -543,7 +543,7 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const i64 ide)
 		}
 		else
 		{
-			const String msg = fmt::format("Couldn't delete encryption record with id {} from database", ide);
+			const std::string msg = fmt::format("Couldn't delete encryption record with id {} from database", ide);
 			ENIGMA_ERROR(msg);
 			(void)DialogUtils::Error(msg);
 			return false;

@@ -9,12 +9,12 @@
 #include <algorithm>	// std::all_of
 #include <utility>		// std::transform
 #include <codecvt>		// helps converting between UTF-X strings
-#include <locale>			// required for Linux & Darwin causes error: ‘wstring_convert’ is not a member of ‘std’
+#include <locale>			// required for Linux & Darwin causes error: ï¿½wstring_convertï¿½ is not a member of ï¿½stdï¿½
 #include <vector>
 
 NS_ENIGMA_BEGIN
 /*
-*	UTF-8 & UTF-16 String Utility
+*	UTF-8 & UTF-16 std::string Utility
 */
 class ENIGMA_API StringUtils final
 {
@@ -136,11 +136,11 @@ public:
 	*	Splits string at a delimiter into parts
 	*/
 	template<typename StringType>
-	static std::vector<StringType> Split(const StringType& str, const typename String::value_type delimiter)
+	static std::vector<StringType> Split(const StringType& str, const typename std::string::value_type delimiter)
 	{
 		std::vector<StringType> parts{};
 		std::stringstream ss(str);
-		String line{};
+		std::string line{};
 		while (std::getline(ss, line, delimiter))
 		{
 			parts.push_back(line);
@@ -161,7 +161,7 @@ public:
 	/*
 	*	Converts UTF-8 std::string to UTF-16 std::wstring
 	*/
-	static WString StringToWString(const String& str)
+	static std::wstring StringToWString(const std::string& str)
 	{
 		using convert_type = std::codecvt_utf8<wchar_t>;
 		static std::wstring_convert<convert_type, wchar_t> converter;
@@ -172,7 +172,7 @@ public:
 	/*
 	*	Converts UTF-16 std::wstring to UTF-8 std::string
 	*/
-	static String WStringToString(const WString& wstr)
+	static std::string WStringToString(const std::wstring& wstr)
 	{
 		using convert_type = std::codecvt_utf8<wchar_t>;
 		static std::wstring_convert<convert_type, wchar_t> converter;
@@ -197,16 +197,16 @@ public:
 	/*
 	*	Cleanup a string (remove string from string)
 	*/
-	static String Cleanup(const String& expr, const String& remove)
+	static std::string Cleanup(const std::string& expr, const std::string& remove)
 	{
-		const size_t N = expr.size();
-		const size_t K = remove.size();
-		String result(N, '\000');
-		size_t srcIndex = 0;
-		size_t dstIndex = 0;
+		const std::size_t N = expr.size();
+		const std::size_t K = remove.size();
+		std::string result(N, '\000');
+		std::size_t srcIndex = 0;
+		std::size_t dstIndex = 0;
 		while (srcIndex < N)
 		{
-			size_t matchIndex = 0;
+			std::size_t matchIndex = 0;
 			while (matchIndex < K - 1 && srcIndex + matchIndex < N - 1 && expr[srcIndex + matchIndex] == remove[matchIndex])
 			{
 				matchIndex++;
@@ -219,16 +219,16 @@ public:
 		result.resize(dstIndex, '\000'); // resize to fit string after removing other str
 		return result;
 	}
-	static WString Cleanup(const WString& expr, const WString& remove)
+	static std::wstring Cleanup(const std::wstring& expr, const std::wstring& remove)
 	{
-		const size_t N = expr.size();
-		const size_t K = remove.size();
-		WString result(N, L'\000');
-		size_t srcIndex = 0;
-		size_t dstIndex = 0;
+		const std::size_t N = expr.size();
+		const std::size_t K = remove.size();
+		std::wstring result(N, L'\000');
+		std::size_t srcIndex = 0;
+		std::size_t dstIndex = 0;
 		while (srcIndex < N)
 		{
-			size_t matchIndex = 0;
+			std::size_t matchIndex = 0;
 			while (matchIndex < K - 1 && srcIndex + matchIndex < N - 1 && expr[srcIndex + matchIndex] == remove[matchIndex])
 				matchIndex++;
 			if (matchIndex == K - 1)
@@ -240,21 +240,21 @@ public:
 		return result;
 	}
 
-	template <size_t N>
+	template <std::size_t N>
 	struct CleanupResult // wrapper to keep data variable alive in the stack after going out of scope of Cleanup function
 	{
 		char data[N];
 	};
-	template <size_t N, size_t K>
+	template <std::size_t N, std::size_t K>
 	static auto Cleanup(const char(&expr)[N], const char(&remove)[K])
 	{
 		CleanupResult<N> result{};
-		size_t srcIndex = 0;
-		size_t dstIndex = 0;
+		std::size_t srcIndex = 0;
+		std::size_t dstIndex = 0;
 		//while constexpr (srcIndex < N)
 		while (srcIndex < N)
 		{
-			size_t matchIndex = 0;
+			std::size_t matchIndex = 0;
 			while (matchIndex < K - 1 && srcIndex + matchIndex < N - 1 && expr[srcIndex + matchIndex] == remove[matchIndex])
 				matchIndex++;
 			if (matchIndex == K - 1)

@@ -282,7 +282,7 @@ public:
 			ImGui::SetWindowSize(ImVec2(container_width, container_height)); // set spinner container's size same size as window (to centerize it)
 			ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 
-			static const ui32 COLOR = ImGui::GetColorU32(spinner_color);  // 0xrrggbbaa
+			static const std::uint32_t COLOR = ImGui::GetColorU32(spinner_color);  // 0xrrggbbaa
 			ImGui::SetCursorPos(spinner_position);
 			ImGuiWidgets::LoadingSpinner("##spinner", spinner_radius, spinner_thickness, COLOR);
 				ImGui::PushFont(font_audiowide_regular_20); // text font
@@ -309,7 +309,7 @@ public:
 		{
 			// Load from file
 			byte* buffer = stbi_load(file_name, &m_width, &m_height, nullptr, 4);
-			ENIGMA_ASSERT(buffer, String("Failed to read image from ") + file_name);
+			ENIGMA_ASSERT(buffer, std::string("Failed to read image from ") + file_name);
 
 			// Create a OpenGL texture identifier
 			glAssert( glGenTextures(1, &m_id) );
@@ -325,7 +325,7 @@ public:
 #if defined(GL_UNPACK_ROW_LENGTH) && !defined(__EMSCRIPTEN__)
 			glAssert( glPixelStorei(GL_UNPACK_ROW_LENGTH, 0) );
 #endif
-			ENIGMA_INFO("Storing texture #{0} {1} to GPU Memory", m_id, SizeUtils::FriendlySize((size_t)m_width * (size_t)m_height * sizeof(byte)));
+			ENIGMA_INFO("Storing texture #{0} {1} to GPU Memory", m_id, SizeUtils::FriendlySize((std::size_t)m_width * (std::size_t)m_height * sizeof(byte)));
 
 			glAssert( glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer) );
 
@@ -339,21 +339,21 @@ public:
 			glAssert( glDeleteTextures(1, &m_id) );
 		}
 
-		void Draw(const ImVec2& position, const f32 width, const f32 height)
+		void Draw(const ImVec2& position, const float width, const float height)
 		{
 			ImGui::SetCursorPos(position);
 			ImGui::Image((void*)(std::intptr_t)m_id, ImVec2(width, height));
 		}
 
 	public:
-		i32 GetWidth() const noexcept { return m_width; };
-		i32 GetHeight() const noexcept { return m_height; };
+		std::int32_t GetWidth() const noexcept { return m_width; };
+		std::int32_t GetHeight() const noexcept { return m_height; };
 		GLuint GetID() const noexcept { return m_id; };
 
 	private:
 		GLuint m_id{}; // OpenGL texture id
-		i32 m_width{};
-		i32 m_height{};
+		std::int32_t m_width{};
+		std::int32_t m_height{};
 
 	};
 };

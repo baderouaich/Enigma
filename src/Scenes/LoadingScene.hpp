@@ -10,7 +10,7 @@ public:
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32& dt) override;
+	[[maybe_unused]] void OnUpdate(const float& dt) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
 	void OnEvent(Enigma::Event& event) override;
@@ -18,12 +18,12 @@ private: /* Overrides */
 
 public:
 	void SetLoadingText(const std::string_view& text) noexcept { m_loading_text = text; }
-	const String& GetLoadingText() const noexcept { return m_loading_text; }
+	const std::string& GetLoadingText() const noexcept { return m_loading_text; }
 
 private:
-	String m_loading_text; // loading text from a scene to appear bellow loading spinner to inform user of whats happening
-	inline static constexpr const f32 SPINNER_RADIUS = 66.66f;
-	inline static constexpr const f32 SPINNER_THICKNESS = 4.0f;
+	std::string m_loading_text; // loading text from a scene to appear bellow loading spinner to inform user of whats happening
+	inline static constexpr const float SPINNER_RADIUS = 66.66f;
+	inline static constexpr const float SPINNER_THICKNESS = 4.0f;
 };
 NS_ENIGMA_END
 

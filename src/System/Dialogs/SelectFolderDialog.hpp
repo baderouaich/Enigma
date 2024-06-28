@@ -19,8 +19,8 @@ public: /* Constructors / Destructor */
 	*	@param initial_path: the default path of the dialog.
 	*	@param force_path: to force the operating system to use the provided path. Some systems default to the most recently used path, if applicable.
 	*/
-	SelectFolderDialog(const String& title,
-		const String& initial_path = ".",
+	SelectFolderDialog(const std::string& title,
+		const std::string& initial_path = ".",
 		const bool force_path = true);
 	~SelectFolderDialog() noexcept = default;
 
@@ -28,11 +28,11 @@ public: /* Accessors */
 	/**
 	*	Spawns Select Folder Dialog and returns selected folder path
 	*/
-	String Show() const;
+	std::string Show() const;
 
 private:
-	String m_title; /*< Dialog title */
-	String m_initial_path;  /*< Dialog initial path */
+	std::string m_title; /*< Dialog title */
+	std::string m_initial_path;  /*< Dialog initial path */
 	bool m_force_path;  /*< Shall force the operating system to use the provided path? Some systems default to the most recently used path, if applicable. */
 };
 

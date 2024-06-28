@@ -46,24 +46,24 @@ public:
 	*	@param argc: number of arguments from main entry point
 	*	@param argv: arguments values array from main entry point
 	*/
-	CLI(const i32 argc, const char* const* argv);
+	CLI(const std::int32_t argc, const char* const* argv);
 	~CLI() noexcept = default;
 
 public:
 	/** Processes arguments and invokes scenarios bellow
 	*	@returns exit code
 	*/
-	i32 Run();
+	std::int32_t Run();
 
 private: /* Scenarios (divide and conquer) */
 	/** Scenario when encrypting a text */
-	void OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& text, const bool save_to_database);
+	void OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& text, const bool save_to_database);
 	/** Scenario when decrypting a text */
-	void OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& cipher_base64);
+	void OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& cipher_base64);
 	/** Scenario when encrypting a file */
-	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename, const String& out_filename_encypted, const bool save_to_database);
+	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename, const std::string& out_filename_encypted, const bool save_to_database);
 	/** Scenario when decrypting a file */
-	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const String& password, const String& in_filename_encrypted, const String& out_filename_decrypted);
+	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename_encrypted, const std::string& out_filename_decrypted);
 
 	/** Scenario when --list arg processed to list saved encryptions from database */
 	void OnListEncryptionRecords();
@@ -87,25 +87,25 @@ NS_ENIGMA_END
 #pragma region todo 
 #if 0
 	/** Scenario when encrypting a text with RSA (the only algorithm that should be handled differently)*/
-	void OnRSAEncryptText(const std::unique_ptr<Algorithm>& algorithm, const size_t key_size, const String& text)
+	void OnRSAEncryptText(const std::unique_ptr<Algorithm>& algorithm, const std::size_t key_size, const std::string& text)
 	{
 		 RSA* rsa = static_cast<RSA*>(algorithm.get());
 
 		 // Check if key size is valid
 		 ENIGMA_ASSERT_OR_THROW(
-			 std::any_of(RSA::RSA_KEY_SIZES.begin(), RSA::RSA_KEY_SIZES.end(), [&key_size](const size_t& key) { return key_size == key; }),
+			 std::any_of(RSA::RSA_KEY_SIZES.begin(), RSA::RSA_KEY_SIZES.end(), [&key_size](const std::size_t& key) { return key_size == key; }),
 			 fmt::format("Key size {} is not supported", key_size));
 
 		 // Compression
-		 String compressed_text = GZip::Compress(text);
+		 std::string compressed_text = GZip::Compress(text);
 		 ENIGMA_ASSERT_OR_THROW(!compressed_text.empty(), "Failed to compress text");
 		
 		 // Check if buffer size is valid
-		 const size_t max_buffer_size = rsa->GetMaximumBufferSize();
+		 const std::size_t max_buffer_size = rsa->GetMaximumBufferSize();
 		 ENIGMA_ASSERT_OR_THROW(compressed_text.size() <= max_buffer_size, fmt::format("RSA with key length {} requires maximum {} buffer length to encrypt", key_size, max_buffer_size));
 
-		 String cipher, cipher_base64;
-		 f64 elapsed_seconds{ 0.0 };
+		 std::string cipher, cipher_base64;
+		 double elapsed_seconds{ 0.0 };
 
 		 ENIGMA_BEGIN_TIMER(t1);
 		 {
@@ -117,15 +117,15 @@ NS_ENIGMA_END
 			 cipher_base64 = Base64::Encode(cipher);
 			 ENIGMA_ASSERT_OR_THROW(!cipher_base64.empty(), "Failed to encode cipher to base64");
 
-			 elapsed_seconds = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+			 elapsed_seconds = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 		 }
 
 		 ENIGMA_LOG("Encrypted {0} in {1:0.3f} seconds. (Please save cipher base64, private and public keys bellow in a safe place)",
 			 SizeUtils::FriendlySize(text.size()), elapsed_seconds);
 
 
-		 String private_key = rsa->GetPrivateKey();
-		 String public_key = rsa->GetPrivateKey();
+		 std::string private_key = rsa->GetPrivateKey();
+		 std::string public_key = rsa->GetPrivateKey();
 		 ENIGMA_INFO(cipher_base64);
 		 ENIGMA_INFO(private_key);
 		 ENIGMA_INFO(public_key);
@@ -140,7 +140,7 @@ NS_ENIGMA_END
 	}
 	
 	/** Scenario when decrypting a text with RSA (the only algorithm that should be handled differently)*/
-	void OnRSADecryptText(const std::unique_ptr<Algorithm>& algorithm, const String& private_key, const String& cipher)
+	void OnRSADecryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& private_key, const std::string& cipher)
 	{
 
 	}

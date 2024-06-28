@@ -15,15 +15,15 @@ NS_ENIGMA_BEGIN
 class WindowResizeEvent : public Event
 {
 public:
-	WindowResizeEvent(const i32 width, const i32 height)
+	WindowResizeEvent(const std::int32_t width, const std::int32_t height)
 		:
 		m_width(width),
 		m_height(height) {}
 
-	i32 GetWidth()  const noexcept { return m_width; }
-	i32 GetHeight() const noexcept { return m_height; }
+	std::int32_t GetWidth()  const noexcept { return m_width; }
+	std::int32_t GetHeight() const noexcept { return m_height; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "WindowResizeEvent: " << m_width << ", " << m_height;
@@ -35,22 +35,22 @@ public:
 
 
 private:
-	i32 m_width, m_height;
+	std::int32_t m_width, m_height;
 };
 
 /** Frame buffer size changed Event */
 class FrameBufferResizeEvent : public Event
 {
 public:
-	FrameBufferResizeEvent(const i32 width, const i32 height)
+	FrameBufferResizeEvent(const std::int32_t width, const std::int32_t height)
 		:
 		m_width(width),
 		m_height(height) {}
 
-	i32 GetWidth()  const noexcept { return m_width; }
-	i32 GetHeight() const noexcept { return m_height; }
+	std::int32_t GetWidth()  const noexcept { return m_width; }
+	std::int32_t GetHeight() const noexcept { return m_height; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "FrameBufferResizeEvent: " << m_width << ", " << m_height;
@@ -62,22 +62,22 @@ public:
 
 
 private:
-	i32 m_width, m_height;
+	std::int32_t m_width, m_height;
 };
 
 /** Window position changed Event */
 class WindowMoveEvent : public Event
 {
 public:
-	WindowMoveEvent(const i32 x, const i32 y)
+	WindowMoveEvent(const std::int32_t x, const std::int32_t y)
 		:
 		m_xPos(x),
 		m_yPos(y) {}
 
-	i32 GetTopLeftX() const noexcept { return m_xPos; }
-	i32 GetTopLeftY() const noexcept { return m_yPos; }
+	std::int32_t GetTopLeftX() const noexcept { return m_xPos; }
+	std::int32_t GetTopLeftY() const noexcept { return m_yPos; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "WindowMoveEvent: (" << m_xPos << ", " << m_yPos << ")";
@@ -88,7 +88,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::APPLICATION);
 
 private:
-	i32 m_xPos, m_yPos;
+	std::int32_t m_xPos, m_yPos;
 };
 
 /** Window maximized Event */
@@ -101,11 +101,11 @@ public:
 
 	bool IsMaximized() const noexcept { return m_isMaximized; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		if (m_isMaximized)
-			return String("WindowMaximizeEvent: maximized");
-		return String("WindowMaximizeEvent: unmaximized");
+			return std::string("WindowMaximizeEvent: maximized");
+		return std::string("WindowMaximizeEvent: unmaximized");
 	}
 
 	EVENT_CLASS_TYPE(EventType::WINDOW_MAXIMIZED);

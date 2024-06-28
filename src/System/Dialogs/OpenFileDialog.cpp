@@ -3,7 +3,7 @@
 
 
 NS_ENIGMA_BEGIN
-OpenFileDialog::OpenFileDialog(const String& title, const String& initial_path, const bool allow_multiselect, const std::initializer_list<String>& filters)
+OpenFileDialog::OpenFileDialog(const std::string& title, const std::string& initial_path, const bool allow_multiselect, const std::initializer_list<std::string>& filters)
 	:
 	m_title(title),
 	m_initial_path(initial_path),
@@ -12,7 +12,7 @@ OpenFileDialog::OpenFileDialog(const String& title, const String& initial_path, 
 {
 }
 
-std::vector<String> OpenFileDialog::Show() const
+std::vector<std::string> OpenFileDialog::Show() const
 {
 	return pfd::open_file(
 		m_title,

@@ -13,7 +13,7 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32&) override;
+	[[maybe_unused]] void OnUpdate(const float&) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
 	[[maybe_unused]] void OnEvent(Event&) override;
@@ -21,9 +21,9 @@ private: /* Overrides */
 
 private: /* Callbacks */
 	void OnBackButtonPressed();
-	void OnViewEncryptionButtonPressed(const i64 ide);
+	void OnViewEncryptionButtonPressed(const std::int64_t ide);
 	// returns true if item deleted successfully to notify draw loop that vector range changed
-	bool OnDeleteEncryptionButtonPressed(const i64 ide);
+	bool OnDeleteEncryptionButtonPressed(const std::int64_t ide);
 	void OnSearchEncryptionsByTitle();
 	void OnDeleteAllEncryptions();
 	//void OnExportAllEncryptionsJSON();
@@ -40,7 +40,7 @@ private:
 	Database::Order m_order = Database::Order::Descending; // order desc/asc
 	
 	
-	String m_query{}; // title search query
+	std::string m_query{}; // title search query
 	bool m_isSearching{ false };
 };
 

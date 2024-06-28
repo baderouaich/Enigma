@@ -5,11 +5,11 @@ NS_ENIGMA_BEGIN
 
 #define USE_METHOD_1 false
 
-String GZip::Compress(const String& buffer, const DeflateLevel level)
+std::string GZip::Compress(const std::string& buffer, const DeflateLevel level)
 {
 #if USE_METHOD_1 // m1
-	String compressed{};
-	m_zipper.reset(new CryptoPP::Gzip(nullptr, static_cast<i32>(level)));
+	std::string compressed{};
+	m_zipper.reset(new CryptoPP::Gzip(nullptr, static_cast<std::int32_t>(level)));
 	m_zipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
 	m_zipper->MessageEnd();
 
@@ -23,18 +23,18 @@ String GZip::Compress(const String& buffer, const DeflateLevel level)
 
 #else
 	// m2
-	String compressed{};
-	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::StringSink(compressed), static_cast<ui32>(level)));
+	std::string compressed{};
+	m_zipper.reset(new CryptoPP::Gzip(new CryptoPP::StringSink(compressed), static_cast<std::uint32_t>(level)));
 	m_zipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
 	m_zipper->MessageEnd();
 	return compressed;
 #endif
 }
 
-String GZip::Decompress(const String& buffer)
+std::string GZip::Decompress(const std::string& buffer)
 {
 #if USE_METHOD_1 // m1
-	String decompressed{};
+	std::string decompressed{};
 	m_unzipper.reset(new CryptoPP::Gunzip());
 	m_unzipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
 	m_unzipper->MessageEnd();
@@ -48,7 +48,7 @@ String GZip::Decompress(const String& buffer)
 	return decompressed;
 #else
 	// m2
-	String decompressed{};
+	std::string decompressed{};
 	m_unzipper.reset(new CryptoPP::Gunzip(new CryptoPP::StringSink(decompressed)));
 	m_unzipper->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
 	m_unzipper->MessageEnd();

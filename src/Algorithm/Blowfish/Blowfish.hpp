@@ -18,8 +18,8 @@ public:
 	virtual ~Blowfish() noexcept;
 
 public:
-	String Encrypt(const String& password, const String& buffer) override;
-	String Decrypt(const String& password, const String& algotype_iv_cipher) override;
+	std::string Encrypt(const std::string& password, const std::string& buffer) override;
+	std::string Decrypt(const std::string& password, const std::string& algotype_iv_cipher) override;
 
 private:
 	std::unique_ptr<CryptoPP::EAX<CryptoPP::Blowfish>::Encryption> m_blowfish_encryptor; /**< Blowfish-EAX encryptor */

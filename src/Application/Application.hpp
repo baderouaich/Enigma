@@ -41,14 +41,14 @@ public:
 	*	@param message: reason of exiting
 	*	@param exit_code: exit code e.g EXIT_FAILURE
 	*/
-	void Exit(const String& message, const i32 exit_code) noexcept;
+	void Exit(const std::string& message, const std::int32_t exit_code) noexcept;
 
 	/** @brief Launches detached thread seperated from main UI thread
 	*	@param loading_text: the reason behind launching this worker thread, will appear bellow loading spinner e.g: "Encrypting file..."
 	*	@param scene: pointer to scene which spawns the worker thread
 	*	@param work_func: function has work code to run in parallel
 	*/
-	void LaunchWorkerThread(Scene* scene, const String& loading_text, const std::function<void()>& work_func);
+	void LaunchWorkerThread(Scene* scene, const std::string& loading_text, const std::function<void()>& work_func);
 
 
 public: //https://www.doxygen.nl/manual/grouping.html#memgroup
@@ -81,10 +81,10 @@ public: // Accessors
 	void PushScene(std::unique_ptr<Scene> scene);
 
 	/** Returns FPS (Frames Per Second) (if enabled in WindowSettings.ini, otherwise 0) */
-	ui32 GetFPS() const noexcept { return m_FPS ? *m_FPS : 0u; }
+	std::uint32_t GetFPS() const noexcept { return m_FPS ? *m_FPS : 0u; }
 
 	/** Returns delta time value (the time difference between the previous frame the current frame) */
-	f32 GetDeltaTime() const noexcept { return m_delta_time; }
+	float GetDeltaTime() const noexcept { return m_delta_time; }
 
 	/** Returns Realtime RAM usage informations (if enabled in WindowSettings.ini, otherwise nullptr) */
 	constexpr const std::unique_ptr<RAMInfo>& GetRAMInfo() const noexcept { return m_ram_info; }
@@ -122,14 +122,14 @@ private: // Scenes
 											user from interacting with scene ui until worker thread is finished */
 
 private: // Delta time
-	f32 m_last_frame_time; /**< Last frame time, helps calculating m_delta_time */
-	f32 m_current_frame_time; /**< Current frame time, helps calculating m_delta_time */
-	f32 m_delta_time; /**< Delta time between frames */
+	float m_last_frame_time; /**< Last frame time, helps calculating m_delta_time */
+	float m_current_frame_time; /**< Current frame time, helps calculating m_delta_time */
+	float m_delta_time; /**< Delta time between frames */
 
 private: // Realtime Hardware Info (FPS, CPU, RAM info... if enabled in WindowSettings.ini, otherwise nullptr)
-	static constexpr f32 HARWARE_INFO_UPDATE_TIME = 1.0f; /**< Time to wait for each hardware info update -> 1 second */
-	f32 m_hardware_info_timer; /**< Timer to update info each HARWARE_INFO_UPDATE_TIME */
-	std::unique_ptr<ui32> m_FPS; /**< FPS counter */
+	static constexpr float HARWARE_INFO_UPDATE_TIME = 1.0f; /**< Time to wait for each hardware info update -> 1 second */
+	float m_hardware_info_timer; /**< Timer to update info each HARWARE_INFO_UPDATE_TIME */
+	std::unique_ptr<std::uint32_t> m_FPS; /**< FPS counter */
 	std::unique_ptr<RAMInfo> m_ram_info; /**< RAM info */
 	std::unique_ptr<CPUInfo> m_cpu_info; /**< CPU info */
 

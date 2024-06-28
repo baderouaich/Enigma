@@ -11,7 +11,7 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32& dt) override;
+	[[maybe_unused]] void OnUpdate(const float& dt) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
 	void OnEvent(Event& event) override;
@@ -25,13 +25,13 @@ private: /* Callbacks */
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
-	String m_in_filename; // In File to encrypt
-	String m_out_filename; // Out File encrypted location
-	String m_password, m_confirm_password;
+	std::string m_in_filename; // In File to encrypt
+	std::string m_out_filename; // Out File encrypted location
+	std::string m_password, m_confirm_password;
 	//unused, by default compression is enabled now. bool m_compress{ true }; // Whether to compress file with Gzip before encrypting 
 
 	// Save to database 
-	String m_db_title;
+	std::string m_db_title;
 	bool m_save_to_database{ false };
 
 };

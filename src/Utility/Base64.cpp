@@ -4,9 +4,9 @@
 
 NS_ENIGMA_BEGIN
 
-String Base64::Encode(const std::string_view& buffer)
+std::string Base64::Encode(const std::string_view& buffer)
 {
-	String encoded{};
+	std::string encoded{};
 
 	const auto encoder = std::make_unique<CryptoPP::Base64Encoder>();
 	encoder->Put(reinterpret_cast<const byte*>(buffer.data()), buffer.size());
@@ -22,9 +22,9 @@ String Base64::Encode(const std::string_view& buffer)
 	return encoded;
 }
 
-String Base64::Decode(const std::string_view& encoded_buffer)
+std::string Base64::Decode(const std::string_view& encoded_buffer)
 {
-	String decoded{};
+	std::string decoded{};
 
 	const auto decoder = std::make_unique<CryptoPP::Base64Decoder>();
 	decoder->Put(reinterpret_cast<const byte*>(encoded_buffer.data()), encoded_buffer.size());

@@ -8,16 +8,16 @@ CPUInfo::CPUInfo() noexcept
 {
 }
 
-f32 CPUInfo::GetCPUUsage() noexcept
+float CPUInfo::GetCPUUsage() noexcept
 {
-	f32 percentage{ 0.0f };
+	float percentage{ 0.0f };
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
 	if (::GetSystemTimes(&m_idle_time, &m_kernel_time, &m_user_time))
 	{
-		const ui64 idle_ticks = this->FileTimeToUInt64(m_idle_time);
-		const ui64 total_ticks = this->FileTimeToUInt64(m_kernel_time) + this->FileTimeToUInt64(m_user_time);
+		const std::uint64_t idle_ticks = this->FileTimeToUInt64(m_idle_time);
+		const std::uint64_t total_ticks = this->FileTimeToUInt64(m_kernel_time) + this->FileTimeToUInt64(m_user_time);
 		percentage = this->CalculateCPULoad(idle_ticks, total_ticks);
 	}
 	else
@@ -25,7 +25,7 @@ f32 CPUInfo::GetCPUUsage() noexcept
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-	ui64 total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};
+	std::uint64_t total_user{}, total_user_low{}, total_sys{}, total_idle{}, total{};
 
 	std::FILE* file = std::fopen("/proc/stat", "r");
 	std::fscanf(file, "cpu %zu %zu %zu %zu",
@@ -42,7 +42,7 @@ f32 CPUInfo::GetCPUUsage() noexcept
 	else
 	{
 		total = (total_user - m_last_total_user) + (total_user_low - m_last_total_user_low) + (total_sys - m_last_total_sys);
-		percentage = static_cast<f32>(total);
+		percentage = static_cast<float>(total);
 		total += (total_idle - m_last_total_idle);
 		percentage /= total;
 		percentage *= 100.0f;
@@ -56,10 +56,10 @@ f32 CPUInfo::GetCPUUsage() noexcept
 #elif defined(ENIGMA_PLATFORM_MACOS)
 	if (host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, (host_info_t)&m_cpu_info, &m_count) == KERN_SUCCESS)
 	{
-		ui64 total_ticks{ 0 };
+		std::uint64_t total_ticks{ 0 };
 		for (auto i = 0; i < CPU_STATE_MAX; ++i)
 			total_ticks += m_cpu_info.cpu_ticks[i];
-		const ui64 idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];
+		const std::uint64_t idle_ticks = m_cpu_info.cpu_ticks[CPU_STATE_IDLE];
 		percentage = this->CalculateCPULoad(idle_ticks, total_ticks);
 	}
 	else
@@ -71,15 +71,15 @@ f32 CPUInfo::GetCPUUsage() noexcept
 
 
 
-f32 CPUInfo::GetProcessCPUUsage() noexcept
+float CPUInfo::GetProcessCPUUsage() noexcept
 {
-	f32 percentage = 0.0f;
+	float percentage = 0.0f;
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
 	static ::SYSTEM_INFO sys_info{};
 	::GetSystemInfo(&sys_info);
-	static i32 num_processors = sys_info.dwNumberOfProcessors;
+	static std::int32_t num_processors = sys_info.dwNumberOfProcessors;
 	static ::ULARGE_INTEGER last_sys_cpu{}, last_cpu{}, last_user_cpu{};
 
 	::ULARGE_INTEGER now{}, sys{}, user{};
@@ -91,9 +91,9 @@ f32 CPUInfo::GetProcessCPUUsage() noexcept
 	std::memcpy(&sys, &m_kernel_time, sizeof(::FILETIME));
 	std::memcpy(&user, &m_user_time, sizeof(::FILETIME));
 
-	percentage = static_cast<f32>(sys.QuadPart - last_sys_cpu.QuadPart) + static_cast<f32>(user.QuadPart - last_user_cpu.QuadPart);
-	percentage /= static_cast<f32>(now.QuadPart - last_cpu.QuadPart);
-	percentage /= static_cast<f32>(num_processors);
+	percentage = static_cast<float>(sys.QuadPart - last_sys_cpu.QuadPart) + static_cast<float>(user.QuadPart - last_user_cpu.QuadPart);
+	percentage /= static_cast<float>(now.QuadPart - last_cpu.QuadPart);
+	percentage /= static_cast<float>(num_processors);
 
 	last_cpu = now;
 	last_user_cpu = user;

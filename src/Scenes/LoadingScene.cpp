@@ -16,7 +16,7 @@ void LoadingScene::OnCreate()
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 }
 
-void LoadingScene::OnUpdate(const f32& /*dt*/)
+void LoadingScene::OnUpdate(const float& /*dt*/)
 {}
 
 void LoadingScene::OnDraw()
@@ -34,7 +34,7 @@ void LoadingScene::OnImGuiDraw()
 
 
 	ImGui::Begin("Loading", nullptr, container_flags);
-	ImGui::SetWindowSize(ImVec2(static_cast<f32>(win_w), static_cast<f32>(win_h))); // same size as window
+	ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as window
 	ImGui::SetWindowPos(ImVec2(0.0f, 0.0f)); // top left
 	{		
 		/*
@@ -52,15 +52,15 @@ void LoadingScene::OnImGuiDraw()
 			SPINNER_RADIUS,
 			SPINNER_THICKNESS,
 			Constants::Colors::LOADING_SPINNER_COLOR,
-			static_cast<f32>(win_w), 
-			static_cast<f32>(win_h)
+			static_cast<float>(win_w),
+			static_cast<float>(win_h)
 		);
 
 		
 		/*
 		static constexpr const float RADIUS = 45;
 		static constexpr const float THICKNESS = 6;
-		static const ui32 COLOR = ImGui::GetColorU32(Constants::Colors::LOADING_SPINNER_COLOR);  // 0xrrggbbaa
+		static const std::uint32_t COLOR = ImGui::GetColorU32(Constants::Colors::LOADING_SPINNER_COLOR);  // 0xrrggbbaa
 		ImGui::SetCursorPos({ (io.DisplaySize.x - ((RADIUS * THICKNESS)/2.0f)) / 2.0f,  (io.DisplaySize.y - ((RADIUS * THICKNESS) / 2.0f)) / 2.0f });
 		ImGuiWidgets::LoadingSpinner("##spinner", RADIUS, THICKNESS, COLOR);
 		//ImGuiWidgets::LoadingBar("##loadingbar", 20.0f, {win_w /2.0f, 15.0f}, ImGui::GetColorU32(Constants::Colors::MENUBAR_BACKGROUND_COLOR), ImGui::GetColorU32(Constants::Colors::BUTTON_COLOR));

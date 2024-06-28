@@ -11,7 +11,7 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32& dt) override;
+	[[maybe_unused]] void OnUpdate(const float& dt) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
 	void OnEvent(Enigma::Event& event) override;
@@ -24,13 +24,13 @@ private: /* Callbacks */
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
-	String m_text; // Text to encrypt
-	String m_cipher; // Encrypted text
-	String m_cipher_base64; // Encrypted text in Base64
-	String m_password, m_confirm_password; // Encryption password
+	std::string m_text; // Text to encrypt
+	std::string m_cipher; // Encrypted text
+	std::string m_cipher_base64; // Encrypted text in Base64
+	std::string m_password, m_confirm_password; // Encryption password
 
 	// Save to database 
-	String m_db_title;
+	std::string m_db_title;
 	bool m_save_to_database{ false };
 
 };

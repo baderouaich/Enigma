@@ -11,7 +11,7 @@ public:	/* Constructors / Destructor */
 
 private: /* Overrides */
 	void OnCreate() override;
-	[[maybe_unused]] void OnUpdate(const f32& dt) override;
+	[[maybe_unused]] void OnUpdate(const float& dt) override;
 	void OnDraw() override;
 	void OnImGuiDraw() override;
 	void OnEvent(Event& event) override;
@@ -24,10 +24,10 @@ private: /* Callbacks */
 
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
-	String m_recovered_text; // Decrypted Text
-	String m_cipher; // Encrypted text
-	String m_cipher_base64; // Encrypted text in Base64 to be Decrypted
-	String m_password; // Encryption password
+	std::string m_recovered_text; // Decrypted Text
+	std::string m_cipher; // Encrypted text
+	std::string m_cipher_base64; // Encrypted text in Base64 to be Decrypted
+	std::string m_password; // Encryption password
 
 };
 NS_ENIGMA_END

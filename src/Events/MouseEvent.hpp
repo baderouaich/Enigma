@@ -15,16 +15,16 @@ NS_ENIGMA_BEGIN
 class MouseMotionEvent : public Event
 {
 public:
-	MouseMotionEvent(const f32 x, const f32 y)
+	MouseMotionEvent(const float x, const float y)
 		:
 		m_mouseX(x),
 		m_mouseY(y) 
 	{}
 
-	f32 GetX() const noexcept { return m_mouseX; }
-	f32 GetY() const noexcept { return m_mouseY; }
+	float GetX() const noexcept { return m_mouseX; }
+	float GetY() const noexcept { return m_mouseY; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "MouseMotionEvent: " << m_mouseX << ", " << m_mouseY;
@@ -35,23 +35,23 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::MOUSE | EventCategory::INPUT)
 
 private:
-	f32 m_mouseX, m_mouseY;
+	float m_mouseX, m_mouseY;
 };
 
 /** Mouse Wheel Scroll Event */
 class MouseWheelEvent : public Event
 {
 public:
-	MouseWheelEvent(const f32 xOffset, const f32 yOffset)
+	MouseWheelEvent(const float xOffset, const float yOffset)
 		:
 		m_XOffset(xOffset),
 		m_YOffset(yOffset)
 	{}
 
-	f32 GetXOffset() const noexcept { return m_XOffset; }
-	f32 GetYOffset() const noexcept { return m_YOffset; }
+	float GetXOffset() const noexcept { return m_XOffset; }
+	float GetYOffset() const noexcept { return m_YOffset; }
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "MouseWheelEvent: " << m_XOffset << ", " << m_YOffset;
@@ -62,7 +62,7 @@ public:
 	EVENT_CLASS_CATEGORY(EventCategory::MOUSE | EventCategory::INPUT)
 
 private:
-	f32 m_XOffset, m_YOffset;
+	float m_XOffset, m_YOffset;
 };
 
 /** Mouse Button Click, Hold Event */
@@ -71,7 +71,7 @@ class MouseButtonEvent : public Event
 public:
 	MouseCode GetMouseButton() const noexcept { return m_button; }
 
-	virtual String ToString() const override = 0;
+	virtual std::string ToString() const override = 0;
 
 	EVENT_CLASS_CATEGORY(EventCategory::MOUSE | EventCategory::INPUT)
 protected:
@@ -92,7 +92,7 @@ public:
 		MouseButtonEvent(button) 
 	{}
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "MouseButtonPressedEvent: " << m_button;
@@ -111,7 +111,7 @@ public:
 		MouseButtonEvent(button)
 	{}
 
-	String ToString() const override
+	std::string ToString() const override
 	{
 		std::ostringstream ss;
 		ss << "MouseButtonReleasedEvent: " << m_button;

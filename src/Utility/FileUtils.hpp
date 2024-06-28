@@ -22,72 +22,11 @@ class ENIGMA_API FileUtils final
 {
 	ENIGMA_STATIC_CLASS(FileUtils);
 public:
-	/*
-	*	Returns path to Enigma.exe file e.g( "C:/Users/user/Enigma/Enigma.exe" )
-	*/
-//	static fs::path GetEnigmaExecutableFilePath()
-//	{
-//#if defined(ENIGMA_PLATFORM_WINDOWS)
-//		wchar_t path[MAX_PATH]{ 0 };
-//		::GetModuleFileName(NULL, path, MAX_PATH);
-//		return fs::path(path);
-//#else
-//		char result[PATH_MAX]{ 0 };
-//		const ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
-//		const std::string path(result, (count > 0) ? count : 0);
-//		return fs::path(path);
-//#endif
-//	}
-
-
-	/*
-	*	Returns dir which contains Enigma.exe file e.g( "C:/Users/username/Enigma/" )
-	*/
-//	static fs::path GetEnigmaExecutableDir()
-//	{
-//		return GetEnigmaExecutableFilePath().parent_path();
-//	}
-//
-//
-#if 0
-	enum class ResourcePath : ui16
-	{
-		EXECUTABLE_DIR = 0x00,
-		FONTS_DIR,
-		BRANDING_DIR,
-		CONFIG_DIR,
-		DATABASE_DIR,
-
-		EXECUTABLE_FILE,
-		FONT_AUDIOWIDE_REGULAR_FILE,
-		...
-	};
-	static fs::path GetResourcePath(const ResourcePath res_path)
-	{
-		switch (res_path)
-		{
-		case ResourcePath::EXECUTABLE_DIR:
-			return GetEnigmaExecutableDir();
-		case ResourcePath::FONTS_DIR:
-			return GetEnigmaExecutableDir() / "Fonts";
-		case ResourcePath::BRANDING_DIR:
-			return GetEnigmaExecutableDir() / "Branding";
-		case ResourcePath::CONFIG_DIR:
-			return GetEnigmaExecutableDir() / "Config";
-		case ResourcePath::DATABASE_DIR:
-			return GetEnigmaExecutableDir() / "Database";
-		}
-		ENIGMA_ASSERT(false, "<unknown resource path>");
-	}
-#endif
-
-
-public:
-	static bool Read(const fs::path& filename, String& buffer)
+	static bool Read(const fs::path& filename, std::string& buffer)
 	{
 		if (std::ifstream ifs{ filename, std::ios::binary | std::ios::ate }) // ate: open at the end
 		{
-			const size_t file_size = static_cast<size_t>(ifs.tellg());
+			const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
 			buffer.resize(file_size, '\000');
 			ifs.seekg(0, std::ios::beg);
 			ifs.read(buffer.data(), file_size);

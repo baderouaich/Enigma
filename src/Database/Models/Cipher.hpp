@@ -11,14 +11,11 @@ NS_ENIGMA_BEGIN
 */
 struct Cipher
 {
-	i64 idc{}; /**< auto incremental id */
-	String data{}; /**< BLOB compressed text or file binary cipher */
-	i64 ide{}; /**< foreign key references Encryption(id) */
+	std::int64_t idc{}; /**< auto incremental id */
+	std::string data{}; /**< BLOB compressed text or file binary cipher */
+	std::int64_t ide{}; /**< foreign key references Encryption(id) */
 
-	~Cipher() noexcept
-	{
-		data.clear();
-	}
+	~Cipher() = default;
 
 public:	
 	constexpr bool operator==(const Cipher& c) const noexcept { return idc == c.idc; }
@@ -29,7 +26,7 @@ public:
 			<< "data: " << c.data << ','
 			<< "ide: " << c.ide << ')';
 	}
-	String toString() noexcept
+	std::string toString() const noexcept
 	{
 		std::ostringstream oss{};
 		oss << *this;

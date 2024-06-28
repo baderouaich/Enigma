@@ -28,7 +28,7 @@ public:
 	*/
 	template<typename T>
 	inline typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value, T>::type
-	Get(const String& section, const String& name, const T& default_value) const
+	Get(const std::string& section, const std::string& name, const T& default_value) const
 	{
 		return static_cast<T>(m_ini_reader->GetInteger(section, name, default_value));
 	}
@@ -40,7 +40,7 @@ public:
 	*/
 	template<typename T>
 	inline typename std::enable_if<std::is_floating_point<T>::value, T>::type
-	Get(const String& section, const String& name, const T& default_value) const
+	Get(const std::string& section, const std::string& name, const T& default_value) const
 	{
 		return static_cast<T>(m_ini_reader->GetReal(section, name, default_value));
 	}
@@ -52,19 +52,19 @@ public:
 	*/
 	template<typename T>
 	inline typename std::enable_if<std::is_same<T, bool>::value , T>::type
-	Get(const String& section, const String& name, const T& default_value) const
+	Get(const std::string& section, const std::string& name, const T& default_value) const
 	{
 		return m_ini_reader->GetBoolean(section, name, default_value);
 	}
 
-	/** Get String fields from loaded config file
+	/** Get std::string fields from loaded config file
 	*	@param section: section name
 	*	@param name: field name
 	*	@param default_value: default value to return if field not found
 	*/
 	template<typename T>
-	inline typename std::enable_if<std::is_same<T, String>::value, T>::type
-	Get(const String& section, const String& name, const T& default_value) const
+	inline typename std::enable_if<std::is_same<T, std::string>::value, T>::type
+	Get(const std::string& section, const std::string& name, const T& default_value) const
 	{
 		return m_ini_reader->GetString(section, name, default_value);
 	}

@@ -206,7 +206,7 @@ bool Window::InitGLFWCallbacks()
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
 
 			std::vector<fs::path> filenames{};
-			filenames.reserve(static_cast<size_t>(path_count));
+			filenames.reserve(static_cast<std::size_t>(path_count));
 			for (int i = 0; i < path_count; i++)
 			{
 				filenames.emplace_back(paths[i]);
@@ -283,7 +283,7 @@ bool Window::InitGLFWCallbacks()
 	glfwSetScrollCallback(m_GLFWwindow, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-			MouseWheelEvent event(static_cast<f32>(xOffset), static_cast<f32>(yOffset));
+			MouseWheelEvent event(static_cast<float>(xOffset), static_cast<float>(yOffset));
 			this_window.m_event_callback(event); 
 		});
 
@@ -291,7 +291,7 @@ bool Window::InitGLFWCallbacks()
 	glfwSetCursorPosCallback(m_GLFWwindow, [](GLFWwindow* window, double xPos, double yPos)
 		{
 			Window& this_window = *static_cast<Window*>(glfwGetWindowUserPointer(window));
-			MouseMotionEvent event(static_cast<f32>(xPos), static_cast<f32>(yPos));
+			MouseMotionEvent event(static_cast<float>(xPos), static_cast<float>(yPos));
 			this_window.m_event_callback(event); //dispatch event
 		});
 	
@@ -359,45 +359,45 @@ void Window::SwapBuffers() const noexcept
 }
 
 
-const std::pair<i32, i32>& Window::GetSize() const noexcept
+const std::pair<std::int32_t, std::int32_t>& Window::GetSize() const noexcept
 {
 	return m_size;
 }
 
-i32 Window::GetWidth() const noexcept
+std::int32_t Window::GetWidth() const noexcept
 {
 	return m_size.first;
 }
 
-i32 Window::GetHeight() const noexcept
+std::int32_t Window::GetHeight() const noexcept
 {
 	return m_size.second;
 }
 
-const std::pair<i32, i32>& Window::GetFrameBufferSize() noexcept
+const std::pair<std::int32_t, std::int32_t>& Window::GetFrameBufferSize() noexcept
 {
 	auto& [fbw, fbh] = m_frame_buffer_size;
 	glfwGetFramebufferSize(m_GLFWwindow, &fbw, &fbh);
 	return m_frame_buffer_size;
 }
 
-i32 Window::GetFrameBufferWidth() noexcept
+std::int32_t Window::GetFrameBufferWidth() noexcept
 {
 	const auto& [w, h] = GetFrameBufferSize();
 	return w;
 }
 
-i32 Window::GetFrameBufferHeight() noexcept
+std::int32_t Window::GetFrameBufferHeight() noexcept
 {
 	const auto& [w, h] = GetFrameBufferSize(); 
 	return h; 
 }
 
-f32 Window::GetAspectRatio() const noexcept
+float Window::GetAspectRatio() const noexcept
 {
 	const auto& [width, height] = m_size;
 	if (width > 0 && height > 0)
-		return static_cast<f32>(width) / static_cast<f32>(height);
+		return static_cast<float>(width) / static_cast<float>(height);
 	return 1.0f;
 }
 
@@ -411,22 +411,22 @@ GLFWwindow* Window::GetGLFWwindow() noexcept
 	return m_GLFWwindow;
 }
 
-const String& Window::GetTitle() const noexcept
+const std::string& Window::GetTitle() const noexcept
 {
 	return m_title;
 }
 
-const std::pair<i32, i32>& Window::GetMinimumSize() const noexcept
+const std::pair<std::int32_t, std::int32_t>& Window::GetMinimumSize() const noexcept
 {
 	return m_minimum_size;
 }
 
-const std::pair<i32, i32>& Window::GetMaximumSize() const noexcept
+const std::pair<std::int32_t, std::int32_t>& Window::GetMaximumSize() const noexcept
 {
 	return m_maximum_size;
 }
 
-const std::pair<i32, i32>& Window::GetPosition() const noexcept
+const std::pair<std::int32_t, std::int32_t>& Window::GetPosition() const noexcept
 {
 	return m_position;
 }
@@ -471,7 +471,7 @@ bool Window::IsMaximized() const noexcept
 	return glfwGetWindowAttrib(m_GLFWwindow, GLFW_MAXIMIZED) == GLFW_TRUE;
 }
 
-i32 Window::GetSwapInterval() const noexcept
+std::int32_t Window::GetSwapInterval() const noexcept
 {
 	return m_swap_interval;
 }
@@ -481,7 +481,7 @@ bool Window::IsFullscreen() const noexcept
 	return glfwGetWindowMonitor(m_GLFWwindow) != nullptr;
 }
 
-i32 Window::GetRefreshRate() noexcept
+std::int32_t Window::GetRefreshRate() noexcept
 {
 	// Get resolution of monitor
 	m_monitor = glfwGetPrimaryMonitor();
@@ -489,7 +489,7 @@ i32 Window::GetRefreshRate() noexcept
 	return m_video_mode->refreshRate;
 }
 
-std::pair<i32, i32> Window::GetMonitorSize() noexcept
+std::pair<std::int32_t, std::int32_t> Window::GetMonitorSize() noexcept
 {
 	// Get resolution of monitor
 	m_monitor = glfwGetPrimaryMonitor();
@@ -524,12 +524,12 @@ void Window::SetFullscreen(bool full_screen) noexcept
 }
 
 
-void Window::SetRefreshRate(const i32 refresh_rate) noexcept
+void Window::SetRefreshRate(const std::int32_t refresh_rate) noexcept
 {
 	glfwWindowHint(GLFW_REFRESH_RATE, refresh_rate);
 }
 
-void Window::SetSwapInterval(const i32 interval) noexcept
+void Window::SetSwapInterval(const std::int32_t interval) noexcept
 {
 	m_swap_interval = interval;
 	glfwSwapInterval(interval);
@@ -540,7 +540,7 @@ void Window::SetEventCallback(const EventCallback& callback) noexcept
 	m_event_callback = callback;
 }
 
-void Window::SetMinimumSize(const i32 minimum_width, const i32 minimum_height) noexcept
+void Window::SetMinimumSize(const std::int32_t minimum_width, const std::int32_t minimum_height) noexcept
 {
 	auto& [min_w, min_h] = m_minimum_size;
 	const auto& [max_w, max_h] = m_maximum_size;
@@ -551,7 +551,7 @@ void Window::SetMinimumSize(const i32 minimum_width, const i32 minimum_height) n
 	glfwSetWindowSizeLimits(m_GLFWwindow, min_w, min_h, max_w, max_h);
 }
 
-void Window::SetMaximumSize(const i32 maximum_width, const i32 maximum_height) noexcept
+void Window::SetMaximumSize(const std::int32_t maximum_width, const std::int32_t maximum_height) noexcept
 {
 	const auto& [min_w, min_h] = m_minimum_size;
 	auto& [max_w, max_h] = m_maximum_size;
@@ -567,8 +567,8 @@ void Window::SetShouldClose(const bool close) const noexcept
 	glfwSetWindowShouldClose(m_GLFWwindow, close);
 }
 
-void Window::SetTitle(const String& title,
-	const std::unique_ptr<ui32>& fps,
+void Window::SetTitle(const std::string& title,
+	const std::unique_ptr<std::uint32_t>& fps,
 	const std::unique_ptr<RAMInfo>& ram_info,
 	const std::unique_ptr<CPUInfo>& cpu_info) noexcept
 {
@@ -586,15 +586,15 @@ void Window::SetTitle(const String& title,
 	if (ram_info)
 	{
 		ram_info->Update();
-		const f32 used_ram_percentage_by_me = ram_info->GetProcessRAMUsage();
-		const size_t used_ram_bytes_by_me = ram_info->GetProcessUsedRAM();
+		const float used_ram_percentage_by_me = ram_info->GetProcessRAMUsage();
+		const std::size_t used_ram_bytes_by_me = ram_info->GetProcessUsedRAM();
 		oss << " - RAM Usage: " << SizeUtils::FriendlySize(used_ram_bytes_by_me) << " (" << std::fixed << std::setprecision(2) << used_ram_percentage_by_me << "%)";
 	}
 
 	//CPU Usage
 	if (cpu_info)
 	{
-		const f32 used_cpu_percentage_by_me = cpu_info->GetProcessCPUUsage();
+		const float used_cpu_percentage_by_me = cpu_info->GetProcessCPUUsage();
 		oss << " - CPU Usage: " << std::fixed << std::setprecision(2) << used_cpu_percentage_by_me << '%';
 	}
 
@@ -609,7 +609,7 @@ void Window::SetTitle(const String& title,
 	//FPS
 	if (m_is_show_fps)
 	{
-		const ui32& FPS = Application::GetInstance()->GetFPS();
+		const std::uint32_t& FPS = Application::GetInstance()->GetFPS();
 		oss << " - FPS: " << FPS;
 		//oss << " - FPS: " << FPS << " (" << std::fixed << std::setprecision(3) << Application::GetInstance()->GetDeltaTime() << "ms)";
 	}
@@ -619,7 +619,7 @@ void Window::SetTitle(const String& title,
 	{
 		const auto& ram_info = Application::GetInstance()->GetRAMInfo();
 		ram_info->Update();
-		const f32 percentage = ram_info->GetRAMUsage();
+		const float percentage = ram_info->GetRAMUsage();
 		oss << " - RAM Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
 	}	
 
@@ -627,7 +627,7 @@ void Window::SetTitle(const String& title,
 	if (m_is_show_cpu_usage)
 	{
 		const auto& cpu_info = Application::GetInstance()->GetCPUInfo();
-		const f32 percentage = cpu_info->GetCPUUsage();
+		const float percentage = cpu_info->GetCPUUsage();
 		oss << " - CPU Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
 	}
 
@@ -638,8 +638,8 @@ void Window::SetTitle(const String& title,
 	// title - FPS: x
 	if (m_is_show_fps)
 	{
-		const ui32& FPS = Application::GetInstance()->GetFPS();
-		const String title_with_fps = title + " - FPS: " + std::to_string(FPS);
+		const std::uint32_t& FPS = Application::GetInstance()->GetFPS();
+		const std::string title_with_fps = title + " - FPS: " + std::to_string(FPS);
 		glfwSetWindowTitle(m_GLFWwindow, title_with_fps.c_str());
 	}
 	// title - FPS: x
@@ -647,9 +647,9 @@ void Window::SetTitle(const String& title,
 	{
 		RAMInfo& ram_info = Application::GetInstance()->GetRAMInfo();
 		ram_info.Update();
-		const f32 percentage = ram_info.GetRAMUsage();
+		const float percentage = ram_info.GetRAMUsage();
 
-		const String title_with_ram_usage = title + " - " + std::to_string(percentage) + "% Memory";
+		const std::string title_with_ram_usage = title + " - " + std::to_string(percentage) + "% Memory";
 		glfwSetWindowTitle(m_GLFWwindow, title_with_ram_usage.c_str());
 	}
 	else
@@ -663,14 +663,14 @@ void Window::SetTitle(const String& title,
 
 
 
-void Window::SetPosition(const i32 x, const i32 y) const noexcept
+void Window::SetPosition(const std::int32_t x, const std::int32_t y) const noexcept
 {
 	glfwSetWindowPos(m_GLFWwindow, x ,y);
 }
 
-void Window::SetIcon(const String& icon_path) noexcept
+void Window::SetIcon(const std::string& icon_path) noexcept
 {
-	i32 width{}, height{}, channels{};
+	std::int32_t width{}, height{}, channels{};
 	stbi_set_flip_vertically_on_load(false);
 	byte* pixels = stbi_load(icon_path.c_str(), &width, &height, &channels, 4);
 
@@ -682,7 +682,7 @@ void Window::SetIcon(const String& icon_path) noexcept
 	images[0].pixels = pixels;
 	images[0].width = width;
 	images[0].height = height;
-	glfwSetWindowIcon(m_GLFWwindow, static_cast<i32>(images.size()), images.data());
+	glfwSetWindowIcon(m_GLFWwindow, static_cast<std::int32_t>(images.size()), images.data());
 
 	stbi_image_free(pixels);
 	pixels = nullptr;
@@ -694,7 +694,7 @@ void Window::SetCursor(CursorMode mode) noexcept
 	glfwSetCursor(m_GLFWwindow, m_cursor->GetGLFWCursor());
 }
 
-void Window::SetCursor(const String& image_path, const i32 xhot, const i32 yhot) noexcept
+void Window::SetCursor(const std::string& image_path, const std::int32_t xhot, const std::int32_t yhot) noexcept
 {
 	m_cursor.reset(new Cursor(image_path, xhot, yhot));
 	glfwSetCursor(m_GLFWwindow, m_cursor->GetGLFWCursor());
@@ -715,7 +715,7 @@ void Window::HideCursor() const noexcept
 	glfwSetInputMode(m_GLFWwindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 }
 
-void Window::SetCursorPosition(const f64 xPos, const f64 yPos) const noexcept
+void Window::SetCursorPosition(const double xPos, const double yPos) const noexcept
 {
 	glfwSetCursorPos(m_GLFWwindow, xPos, yPos);
 }

@@ -20,39 +20,39 @@ public: /* Enums */
 	/**
 	* Message box Icon type
 	*/
-	enum class Icon : ui8
+	enum class Icon : std::uint8_t
 	{
-		Info			= static_cast<ui8>(pfd::icon::info),
-		Warning		= static_cast<ui8>(pfd::icon::warning),
-		Error			= static_cast<ui8>(pfd::icon::error),
-		Question	= static_cast<ui8>(pfd::icon::question)
+		Info			= static_cast<std::uint8_t>(pfd::icon::info),
+		Warning		= static_cast<std::uint8_t>(pfd::icon::warning),
+		Error			= static_cast<std::uint8_t>(pfd::icon::error),
+		Question	= static_cast<std::uint8_t>(pfd::icon::question)
 	};
 
 	/**
 	*	Message box button layout choices
 	*/
-	enum class Choice : ui8
+	enum class Choice : std::uint8_t
 	{
-		Ok									= static_cast<ui8>(pfd::choice::ok),
-		Ok_Cancel						= static_cast<ui8>(pfd::choice::ok_cancel),
-		Yes_No							= static_cast<ui8>(pfd::choice::yes_no),
-		Yes_No_Cancel				= static_cast<ui8>(pfd::choice::yes_no_cancel),
-		Retry_Cancel				= static_cast<ui8>(pfd::choice::retry_cancel),
-		Abort_Retry_Ignore	= static_cast<ui8>(pfd::choice::abort_retry_ignore)
+		Ok									= static_cast<std::uint8_t>(pfd::choice::ok),
+		Ok_Cancel						= static_cast<std::uint8_t>(pfd::choice::ok_cancel),
+		Yes_No							= static_cast<std::uint8_t>(pfd::choice::yes_no),
+		Yes_No_Cancel				= static_cast<std::uint8_t>(pfd::choice::yes_no_cancel),
+		Retry_Cancel				= static_cast<std::uint8_t>(pfd::choice::retry_cancel),
+		Abort_Retry_Ignore	= static_cast<std::uint8_t>(pfd::choice::abort_retry_ignore)
 	};
 
 	/**
 	*	User Performed Action Result
 	*/
-	enum class Action : i8
+	enum class Action : std::int8_t
 	{
-		Cancel	= static_cast<i8>(pfd::button::cancel),
-		Ok		  = static_cast<i8>(pfd::button::ok),
-		Yes		  = static_cast<i8>(pfd::button::yes),
-		No		  = static_cast<i8>(pfd::button::no),
-		Abort	  = static_cast<i8>(pfd::button::abort),
-		Retry	  = static_cast<i8>(pfd::button::retry),
-		Ignore	= static_cast<i8>(pfd::button::ignore)
+		Cancel	= static_cast<std::int8_t>(pfd::button::cancel),
+		Ok		  = static_cast<std::int8_t>(pfd::button::ok),
+		Yes		  = static_cast<std::int8_t>(pfd::button::yes),
+		No		  = static_cast<std::int8_t>(pfd::button::no),
+		Abort	  = static_cast<std::int8_t>(pfd::button::abort),
+		Retry	  = static_cast<std::int8_t>(pfd::button::retry),
+		Ignore	= static_cast<std::int8_t>(pfd::button::ignore)
 	};
 
 public: /* Constructors / Destructor */
@@ -63,7 +63,7 @@ public: /* Constructors / Destructor */
 	*	@param icon: Icon type of the message box Info, Warning, Error or Question
 	*	@param choice: buttons layout of the message box
 	*/
-	MessageBox(const String& title, const String& message,
+	MessageBox(const std::string& title, const std::string& message,
 		Icon icon = Icon::Info,
 		Choice choice = Choice::Ok_Cancel);
 	~MessageBox() noexcept = default;
@@ -75,8 +75,8 @@ public: /* Accessors */
 	MessageBox::Action Show() const;
 	
 private:
-	String m_title;	  /*< MessageBox title */
-	String m_message; /*< MessageBox message */
+	std::string m_title;	  /*< MessageBox title */
+	std::string m_message; /*< MessageBox message */
 	Icon m_icon;	  /*< MessageBox icon */
 	Choice m_choice;  /*< MessageBox choice/button template */
 					  

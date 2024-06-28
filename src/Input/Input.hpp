@@ -28,13 +28,13 @@ public: /* Mouse */
 	static bool IsMouseButtonPressed(const MouseCode button) noexcept;
 
 	/** Returns x,y coords of the mouse positon relative to application's window */
-	static std::pair<f32, f32> GetMousePosition() noexcept;
+	static std::pair<float, float> GetMousePosition() noexcept;
 
 	/** Returns x coord of the mouse positon relative to application's window */
-	static f32 GetMouseX() noexcept;
+	static float GetMouseX() noexcept;
 
 	/** Returns y coord of the mouse positon relative to application's window */
-	static f32 GetMouseY() noexcept;
+	static float GetMouseY() noexcept;
 };
 
 NS_ENIGMA_END
