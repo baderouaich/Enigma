@@ -105,12 +105,12 @@ set(ENIGMA_DEPENDENCIES
         tabulate
         zlib
 )
+# Append Ws2_32 if we're on windows for the SingleProcessInstance socket
+if(WIN32)
+    set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Ws2_32)
+endif ()
+
 # Append Catch2 if we're testing
 if (ENIGMA_BUILD_TESTS)
     set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Catch2::Catch2WithMain)
-endif ()
-
-# Append Ws2_32 if we're on windows
-if(WIN32)
-    set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Ws2_32)
 endif ()

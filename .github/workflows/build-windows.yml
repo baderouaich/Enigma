@@ -38,6 +38,6 @@ jobs:
       run: cd build && make -j%NUMBER_OF_PROCESSORS%
 
     - name: Run Enigma
-      run: .\build\Enigma.exe --version
+      run: cd build && Enigma.exe --version
       
 # todo    make test if -DENIGMA_ENABLE_TESTS=ON
