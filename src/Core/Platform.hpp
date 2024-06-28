@@ -1,9 +1,6 @@
 #pragma once
-#ifndef ENIGMA_PLATFORM_H
-#define ENIGMA_PLATFORM_H
-
 /**
-*	Detects current platform
+*	Detects current platform and defines ENIGMA_PLATFORM_X for each platform.
 */
 
 #ifdef _WIN32
@@ -45,4 +42,3 @@
 	#error "Unknown platform!"
 #endif 
 
-#endif // !ENIGMA_PLATFORM_H
