@@ -109,3 +109,8 @@ set(ENIGMA_DEPENDENCIES
 if (ENIGMA_BUILD_TESTS)
     set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Catch2::Catch2WithMain)
 endif ()
+
+# Append Ws2_32 if we're on windows
+if(WIN32)
+    set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Ws2_32)
+endif ()

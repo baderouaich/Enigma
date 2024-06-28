@@ -56,31 +56,37 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 
 ############ Platform macros ############
-if(WIN32)
+if (WIN32)
   # No need, will be defined by Core/Platform.hpp
   # target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_WINDOWS)
+
   # Common MSVC warnings defines
-  target_compile_definitions(${PROJECT_NAME} PRIVATE
-    _CRT_SECURE_NO_DEPRECATE
-    _CRT_SECURE_NO_WARNINGS
-    _CRT_NONSTDC_NO_WARNINGS
-    STRSAFE_NO_DEPRECATE # for strcpy_instead_use_StringCbCopyA_or_StringCchCopyA
-  )
+  if (MSVC)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+      _CRT_SECURE_NO_DEPRECATE
+      _CRT_SECURE_NO_WARNINGS
+      _CRT_NONSTDC_NO_WARNINGS
+    )
+  elseif (MINGW)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+      STRSAFE_NO_DEPRECATE # for strcpy_instead_use_StringCbCopyA_or_StringCchCopyA
+    )
+  endif ()
 elseif (UNIX AND NOT APPLE)
   # No need, will be defined by Core/Platform.hpp
   # target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_LINUX)
-else()
+else ()
   message(FATAL_ERROR "Unsupported platform")
-endif()
+endif ()
 ########################################
 
 
 ###### Tests ######
 if (ENIGMA_ENABLE_TESTS)
   message(STATUS "Building tests is enabled")
-# to add in tests/Cmakelists.txt  target_link_libraries(${PROJECT_NAME} PRIVATE
-#    Catch2::Catch2WithMain
-#  )
+  # to add in tests/Cmakelists.txt  target_link_libraries(${PROJECT_NAME} PRIVATE
+  #    Catch2::Catch2WithMain
+  #  )
   enable_testing()
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif ()

@@ -139,29 +139,29 @@ struct ENIGMA_API WindowSettings
 	WindowSettings() = default;
 
 	/** Construct WindowSettings from a Config file (.ini) */
-	WindowSettings(const Config& config)
-	{
-		title = config.Get<decltype(WindowSettings::title)>("window", "title", "Enigma");
-		width = config.Get<decltype(WindowSettings::width)>("window", "width", 800);
-		height = config.Get<decltype(WindowSettings::height)>("window", "height", 600);
-		minimum_width = config.Get<decltype(WindowSettings::minimum_width)>("window", "minimum_width", -1);
-		minimum_height = config.Get<decltype(WindowSettings::minimum_height)>("window", "minimum_height", -1);
-		maximum_width = config.Get<decltype(WindowSettings::maximum_width)>("window", "maximum_width", -1);
-		maximum_height = config.Get<decltype(WindowSettings::maximum_height)>("window", "maximum_height", -1);
-		refresh_rate = config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1);
-		samples = config.Get<decltype(WindowSettings::samples)>("window", "samples", 4);
-		swap_interval = config.Get<decltype(WindowSettings::swap_interval)>("window", "swap_interval", 2);
-		is_resizable = config.Get<decltype(WindowSettings::is_resizable)>("window", "resizable", true);
-		is_fullscreen = config.Get<decltype(WindowSettings::is_fullscreen)>("window", "fullscreen", false);
-		is_decorated = config.Get<decltype(WindowSettings::is_decorated)>("window", "decorated", true);
-		is_focused = config.Get<decltype(WindowSettings::is_focused)>("window", "focused", true);
-		is_maximized = config.Get<decltype(WindowSettings::is_maximized)>("window", "maximized", false);
-		is_floating = config.Get<decltype(WindowSettings::is_floating)>("window", "floating", false);
-		is_visible = config.Get<decltype(WindowSettings::is_visible)>("window", "visible", true);
-		is_auto_iconify = config.Get<decltype(WindowSettings::is_auto_iconify)>("window", "auto_iconify", true);
-		is_show_fps = config.Get<decltype(WindowSettings::is_show_fps)>("window", "show_fps", true);
-		is_show_ram_usage = config.Get<decltype(WindowSettings::is_show_ram_usage)>("window", "show_ram_usage", true);
-		is_show_cpu_usage = config.Get<decltype(WindowSettings::is_show_cpu_usage)>("window", "show_cpu_usage", true);
+	explicit WindowSettings(const Config& config) :
+		title(config.Get<decltype(WindowSettings::title)>("window", "title", "Enigma")),
+		width(config.Get<decltype(WindowSettings::width)>("window", "width", 800)),
+		height(config.Get<decltype(WindowSettings::height)>("window", "height", 600)),
+		minimum_width(config.Get<decltype(WindowSettings::minimum_width)>("window", "minimum_width", -1)),
+		minimum_height(config.Get<decltype(WindowSettings::minimum_height)>("window", "minimum_height", -1)),
+		maximum_width(config.Get<decltype(WindowSettings::maximum_width)>("window", "maximum_width", -1)),
+		maximum_height(config.Get<decltype(WindowSettings::maximum_height)>("window", "maximum_height", -1)),
+		refresh_rate(config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1)),
+		samples(config.Get<decltype(WindowSettings::samples)>("window", "samples", 4)),
+		swap_interval(config.Get<decltype(WindowSettings::swap_interval)>("window", "swap_interval", 2)),
+		is_resizable(config.Get<decltype(WindowSettings::is_resizable)>("window", "resizable", true)),
+		is_fullscreen(config.Get<decltype(WindowSettings::is_fullscreen)>("window", "fullscreen", false)),
+		is_decorated(config.Get<decltype(WindowSettings::is_decorated)>("window", "decorated", true)),
+		is_focused(config.Get<decltype(WindowSettings::is_focused)>("window", "focused", true)),
+		is_maximized(config.Get<decltype(WindowSettings::is_maximized)>("window", "maximized", false)),
+		is_floating(config.Get<decltype(WindowSettings::is_floating)>("window", "floating", false)),
+		is_visible(config.Get<decltype(WindowSettings::is_visible)>("window", "visible", true)),
+		is_auto_iconify(config.Get<decltype(WindowSettings::is_auto_iconify)>("window", "auto_iconify", true)),
+		is_show_fps(config.Get<decltype(WindowSettings::is_show_fps)>("window", "show_fps", true)),
+		is_show_ram_usage(config.Get<decltype(WindowSettings::is_show_ram_usage)>("window", "show_ram_usage", true)),
+		is_show_cpu_usage(config.Get<decltype(WindowSettings::is_show_cpu_usage)>("window", "show_cpu_usage", true))
+  {
 	}
 
 public:
