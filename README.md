@@ -64,6 +64,18 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - Import/Export your database by copying or replacing database file `Enigma.db` located in `./res/database/`
 -->
 
+## Enigma UI
+- Main Menu
+![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/ad83827a-f1f8-41f3-a9f3-be78a8f5623a)
+- Straight forward
+![Straightforward](https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d)
+- Save Encryptions to a local database (an SQLite3 database which you can export/import)
+![My-Encryptions-Demo](https://github.com/baderouaich/Enigma/assets/49657842/09e10396-070d-4324-b80e-13c346b28b4a)
+- Compression is ON by default
+![2](https://github.com/baderouaich/Enigma/assets/49657842/31a9751c-d3cd-4cdd-b5d7-19f08c10ceeb)
+- Extra Utilities
+![Tools-Demo](https://github.com/baderouaich/Enigma/assets/49657842/6d17ab20-4faf-43f1-b074-ef99473dfbcd)
+
 ## Enigma CLI
 ```text
 Usage:
@@ -104,15 +116,7 @@ $ ./Enigma -e -a AES --password "My@pa$$W0rd" --infile="/home/user/Desktop/Data.
 $ ./Enigma --decrypt --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
 ```
 <!-- <img src="res/screenshots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
-<img src="res/screenshots/4.png"/><br>
-
-
-
-## Enigma UI
-<img src="res/screenshots/Main-Menu-Demo.png"/>
-<img src="res/screenshots/2.png"/>
-<img src="res/screenshots/My-Encryptions-Demo.png"/>
-<img src="res/screenshots/Tools-Demo.png"/>
+![4](https://github.com/baderouaich/Enigma/assets/49657842/5a65fa0a-e28a-44a3-8b60-7bbb748582b1)
 
 <!--
 <img width="300" src="res/screenshots/UI-MainMenuScene.png"/>  <img width="300" src="res/screenshots/UI-EncryptText-Demo.png"/>  <img width="300" src="res/screenshots/UI-DecryptText-Demo.png"/>  <img width="300" src="res/screenshots/UI-EncryptFile-Demo.png"/>  <img width="300" src="res/screenshots/UI-DecryptFile-Demo.png"/>
