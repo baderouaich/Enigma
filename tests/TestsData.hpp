@@ -6,16 +6,16 @@
 namespace Enigma
 {
 	// multiply string
-	String operator*(const String& str, const size_t mult)
+	String operator*(const String& str, const std::size_t mult)
 	{
 		String out(str.size() * mult, '\000');
-		size_t j{ 0 };
-		for (size_t i{ 0 }; i < mult; ++i)
+		std::size_t j{ 0 };
+		for (std::size_t i{ 0 }; i < mult; ++i)
 			for (const auto& c : str)
 				out[j++] = c;
 		return out;
 	}
-	String operator*(const std::string_view& str, const size_t mult)
+	String operator*(const std::string_view& str, const std::size_t mult)
 	{
 		return operator*(String(str), mult);
 	}

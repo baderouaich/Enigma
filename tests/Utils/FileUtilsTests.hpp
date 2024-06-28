@@ -17,7 +17,7 @@ TEST_CASE("File Utils Tests", "FileUtils")
 
 	std::vector<Enigma::byte> buffer{};
 
-	const size_t max_chunk_size = 9; // 9 bytes per chunk
+	const std::size_t max_chunk_size = 9; // 9 bytes per chunk
 	Enigma::FileUtils::ReadChunks(filename, max_chunk_size,
 		[&buffer](std::vector<Enigma::byte>&& chunk) -> bool
 		{

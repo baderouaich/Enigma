@@ -49,7 +49,7 @@ TEST_CASE("RSA Encryption and Decryption")
 
 		std::cout << "Encrypting... " << std::endl << std::endl;
 		String cipher = rsa->Encrypt("", buffer);
-		auto s = ENIGMA_END_TIMER(t1, f64, std::milli) / 1000.0;
+		auto s = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 
 		String private_key = rsa->GetPrivateKey();
 		String public_key = rsa->GetPublicKey();

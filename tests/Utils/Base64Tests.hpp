@@ -21,9 +21,9 @@ TEST_CASE("Base64 Encode And Decode Cipher With AES", "Base64")
 	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 50)), true);
+	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<size_t>(1, 5)), true);
+	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
 	// Encrypted buffer (aka cipher)
 	String encrypted = aes->Encrypt(password, buffer);
 	// Encode cipher to Base64
@@ -49,7 +49,7 @@ TEST_CASE("Encode and Decode text", "Base64")
 {
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	String buffer = LOREM_IPSUM * Random::Int<size_t>(10, 10000);
+	String buffer = LOREM_IPSUM * Random::Int<std::size_t>(10, 10000);
 
 	BEGIN_TIMER(t1);
     String base64_encoded = Base64::Encode(buffer);
