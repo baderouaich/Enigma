@@ -12,8 +12,8 @@
 		#define _WIN32_WINNT 0x06000100
 	#endif
 	#include <SDKDDKVer.h>
+	#include <Winsock2.h> # WARNING: make sure winsock is included before windows.h
 	#include <Windows.h>
-	#include <Winsock2.h>
 	using socket_t = SOCKET;
 	constexpr socket_t M_INVALID_SOCKET = INVALID_SOCKET;
 #else //#elif defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)
