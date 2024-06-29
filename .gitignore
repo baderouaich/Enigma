@@ -1,5 +1,6 @@
 # Enigma.db & Databases
-res/Database/*.db
+res/database/*
+res/logs/*
 
 cmake-build-*
 
