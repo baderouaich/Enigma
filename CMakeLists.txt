@@ -68,7 +68,7 @@ if (WIN32)
 
   # Use Enigma.rc resource file
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Enigma.rc.in ${CMAKE_CURRENT_BINARY_DIR}/Enigma.rc)
-  config(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Enigma.rc)
+  target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Enigma.rc)
 
   # Common MSVC warnings defines
   if (MSVC)
