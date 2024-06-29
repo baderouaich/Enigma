@@ -118,12 +118,12 @@ Inheritance diagram for Algorithm:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ade1999272a6c6525dbb23f1afca4cb73"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a> : byte { <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0 &lt;&lt; 0
-, <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a611d29c748a7931c825a247fcf3f290e">Encrypt</a> = 1 &lt;&lt; 1
-, <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a762e3a77ecdd773da2b859e6807529a2">Decrypt</a> = 1 &lt;&lt; 2
-, <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73ab1c94ca2fbc3e78fc30069c8d0f01680">All</a> = Encrypt | Decrypt
+<tr class="memitem:ae8a542c0aebeb6e59c9b7d0b6bd90b35"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a> : Enigma::byte { <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0 &lt;&lt; 0
+, <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a611d29c748a7931c825a247fcf3f290e">Encrypt</a> = 1 &lt;&lt; 1
+, <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a762e3a77ecdd773da2b859e6807529a2">Decrypt</a> = 1 &lt;&lt; 2
+, <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35ab1c94ca2fbc3e78fc30069c8d0f01680">All</a> = Encrypt | Decrypt
  }</td></tr>
-<tr class="separator:ade1999272a6c6525dbb23f1afca4cb73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ae8a542c0aebeb6e59c9b7d0b6bd90b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfa56bd0469d341e959bb510f4fac41b"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> : byte { <br />
 &#160;&#160;<a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba76b7593457e2ab50befe2dcd63cf388f">AES</a> = 0x01
 , <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba1d664bb4fa1dd8440600b66fc4e8d1ef">Twofish</a>
@@ -138,9 +138,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aea8a41c3b0d6235f8777103dda2c7fbc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#aea8a41c3b0d6235f8777103dda2c7fbc">ENIGMA_ENUM_CLASS_BITWISE_OPERATORS</a> (<a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a>, byte)</td></tr>
-<tr class="separator:aea8a41c3b0d6235f8777103dda2c7fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47f9be0e5d341b289d086a1067769320"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a47f9be0e5d341b289d086a1067769320">Algorithm</a> (const <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> type, const <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a> intent=<a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a611d29c748a7931c825a247fcf3f290e">Intent::Encrypt</a>|<a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a762e3a77ecdd773da2b859e6807529a2">Intent::Decrypt</a>) noexcept</td></tr>
+<tr class="memitem:a9bab58ce82d50573ff99a247eae6f850"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a9bab58ce82d50573ff99a247eae6f850">ENIGMA_ENUM_CLASS_BITWISE_OPERATORS</a> (<a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a>, <a class="el" href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">Enigma::byte</a>)</td></tr>
+<tr class="separator:a9bab58ce82d50573ff99a247eae6f850"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47f9be0e5d341b289d086a1067769320"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a47f9be0e5d341b289d086a1067769320">Algorithm</a> (const <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> type, const <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a> intent=<a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a611d29c748a7931c825a247fcf3f290e">Intent::Encrypt</a>|<a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a762e3a77ecdd773da2b859e6807529a2">Intent::Decrypt</a>) noexcept</td></tr>
 <tr class="separator:a47f9be0e5d341b289d086a1067769320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d50bd605f1ce4fc2e9d71a46b433b6b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a4d50bd605f1ce4fc2e9d71a46b433b6b">~Algorithm</a> () noexcept</td></tr>
 <tr class="separator:a4d50bd605f1ce4fc2e9d71a46b433b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,9 +157,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a89c4e24a98651df1ae6859497b2e2fa5"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="class_algorithm.html">Algorithm</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a89c4e24a98651df1ae6859497b2e2fa5">CreateFromName</a> (const std::string &amp;name, const <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a> intent)</td></tr>
+<tr class="memitem:a89c4e24a98651df1ae6859497b2e2fa5"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="class_algorithm.html">Algorithm</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a89c4e24a98651df1ae6859497b2e2fa5">CreateFromName</a> (const std::string &amp;name, const <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a> intent)</td></tr>
 <tr class="separator:a89c4e24a98651df1ae6859497b2e2fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb16ca4d8280a63f1879a85734b283cf"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="class_algorithm.html">Algorithm</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#abb16ca4d8280a63f1879a85734b283cf">CreateFromType</a> (const <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> type, const <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a> intent)</td></tr>
+<tr class="memitem:abb16ca4d8280a63f1879a85734b283cf"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="class_algorithm.html">Algorithm</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#abb16ca4d8280a63f1879a85734b283cf">CreateFromType</a> (const <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> type, const <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a> intent)</td></tr>
 <tr class="separator:abb16ca4d8280a63f1879a85734b283cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a069a9478bea292931e470727e6d7468c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a069a9478bea292931e470727e6d7468c">DetectFromCipher</a> (const std::string &amp;cipher)</td></tr>
 <tr class="separator:a069a9478bea292931e470727e6d7468c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,14 +181,14 @@ Static Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a4149bad1914f21bf2d145fc3d4acfa5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a4149bad1914f21bf2d145fc3d4acfa5d">m_type</a></td></tr>
+<tr class="memitem:a4149bad1914f21bf2d145fc3d4acfa5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a4149bad1914f21bf2d145fc3d4acfa5d">m_type</a> {}</td></tr>
 <tr class="separator:a4149bad1914f21bf2d145fc3d4acfa5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8989bb50a2ef53a437c531dd061cf39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#af8989bb50a2ef53a437c531dd061cf39">m_intent</a></td></tr>
+<tr class="memitem:af8989bb50a2ef53a437c531dd061cf39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#af8989bb50a2ef53a437c531dd061cf39">m_intent</a> {}</td></tr>
 <tr class="separator:af8989bb50a2ef53a437c531dd061cf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a8156b440a1edcfc56fa3d027da60ea5c"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; CryptoPP::AutoSeededRandomPool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a8156b440a1edcfc56fa3d027da60ea5c">m_auto_seeded_random_pool</a></td></tr>
+<tr class="memitem:a8156b440a1edcfc56fa3d027da60ea5c"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; CryptoPP::AutoSeededRandomPool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_algorithm.html#a8156b440a1edcfc56fa3d027da60ea5c">m_auto_seeded_random_pool</a> {nullptr}</td></tr>
 <tr class="separator:a8156b440a1edcfc56fa3d027da60ea5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -197,8 +197,8 @@ Static Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00051">51</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="ade1999272a6c6525dbb23f1afca4cb73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade1999272a6c6525dbb23f1afca4cb73">&#9670;&nbsp;</a></span>Intent</h2>
+<a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8a542c0aebeb6e59c9b7d0b6bd90b35">&#9670;&nbsp;</a></span>Intent</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +207,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Algorithm::Intent</a> : byte</td>
+          <td class="memname">enum <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Algorithm::Intent</a> : <a class="el" href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">Enigma::byte</a></td>
         </tr>
       </table>
   </td>
@@ -219,13 +219,13 @@ Static Protected Attributes</h2></td></tr>
 <p>Intention of creating an instance of an <a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a>.</p>
 <p>helps to avoid initializing resources not needed for an specific operation. (for example when encrypting, we initialize a random seeder which is not needed when decrypting) </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ade1999272a6c6525dbb23f1afca4cb73a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ade1999272a6c6525dbb23f1afca4cb73a611d29c748a7931c825a247fcf3f290e"></a>Encrypt&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ade1999272a6c6525dbb23f1afca4cb73a762e3a77ecdd773da2b859e6807529a2"></a>Decrypt&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ade1999272a6c6525dbb23f1afca4cb73ab1c94ca2fbc3e78fc30069c8d0f01680"></a>All&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35a611d29c748a7931c825a247fcf3f290e"></a>Encrypt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35a762e3a77ecdd773da2b859e6807529a2"></a>Decrypt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35ab1c94ca2fbc3e78fc30069c8d0f01680"></a>All&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00061">61</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00060">60</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -258,7 +258,7 @@ Static Protected Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d"></a>ChaCha20Poly1305&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00073">73</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00072">72</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -281,8 +281,8 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a>&#160;</td>
-          <td class="paramname"><em>intent</em> = <code><a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a611d29c748a7931c825a247fcf3f290e">Intent::Encrypt</a>|<a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a762e3a77ecdd773da2b859e6807529a2">Intent::Decrypt</a></code>&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a>&#160;</td>
+          <td class="paramname"><em>intent</em> = <code><a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a611d29c748a7931c825a247fcf3f290e">Intent::Encrypt</a>|<a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a762e3a77ecdd773da2b859e6807529a2">Intent::Decrypt</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -370,7 +370,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a>&#160;</td>
           <td class="paramname"><em>intent</em>&#160;</td>
         </tr>
         <tr>
@@ -407,7 +407,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a>&#160;</td>
           <td class="paramname"><em>intent</em>&#160;</td>
         </tr>
         <tr>
@@ -611,8 +611,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aea8a41c3b0d6235f8777103dda2c7fbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea8a41c3b0d6235f8777103dda2c7fbc">&#9670;&nbsp;</a></span>ENIGMA_ENUM_CLASS_BITWISE_OPERATORS()</h2>
+<a id="a9bab58ce82d50573ff99a247eae6f850"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bab58ce82d50573ff99a247eae6f850">&#9670;&nbsp;</a></span>ENIGMA_ENUM_CLASS_BITWISE_OPERATORS()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -620,13 +620,13 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">Algorithm::ENIGMA_ENUM_CLASS_BITWISE_OPERATORS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">byte&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">Enigma::byte</a>&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -741,7 +741,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00122">122</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00120">120</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -768,7 +768,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00124">124</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00122">122</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -796,7 +796,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00123">123</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00121">121</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -811,7 +811,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;CryptoPP::AutoSeededRandomPool&gt; Algorithm::m_auto_seeded_random_pool</td>
+          <td class="memname">std::unique_ptr&lt;CryptoPP::AutoSeededRandomPool&gt; Algorithm::m_auto_seeded_random_pool {nullptr}</td>
         </tr>
       </table>
   </td>
@@ -822,7 +822,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>To generate random IV on encryption </p>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00166">166</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00164">164</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -836,7 +836,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73">Intent</a> Algorithm::m_intent</td>
+          <td class="memname"><a class="el" href="class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35">Intent</a> Algorithm::m_intent {}</td>
         </tr>
       </table>
   </td>
@@ -847,7 +847,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Operation, Encrypt or Decrypt </p>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00165">165</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00163">163</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -861,7 +861,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> Algorithm::m_type</td>
+          <td class="memname"><a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Type</a> Algorithm::m_type {}</td>
         </tr>
       </table>
   </td>
@@ -872,7 +872,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a> type: <a class="el" href="class_a_e_s.html">AES</a>, ChaCha, <a class="el" href="class_triple_d_e_s.html">TripleDES</a>... </p>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00164">164</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00162">162</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -885,7 +885,7 @@ Static Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_algorithm.html">Algorithm</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

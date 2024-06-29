@@ -95,43 +95,44 @@ $(document).ready(function(){initNavTree('_g_zip_8hpp_source.html',''); initResi
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_core_8hpp.html">Core/Core.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Crypto++ GZip Ref: https://www.cryptopp.com/wiki/Gzip &amp;&amp; https://www.cryptopp.com/wiki/Gunzip</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;gzip.h&gt;</span>   <span class="comment">// Gzip &amp; Gunzip</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;gzip.h&gt;</span> <span class="comment">// Gzip &amp; Gunzip</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">*   .gz Compressor &amp; Decompressor</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_g_zip.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a> <a class="code" href="class_g_zip.html">GZip</a> final</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">ENIGMA_STATIC_CLASS</a>(<a class="code" href="class_g_zip.html">GZip</a>);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">   19</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">DeflateLevel</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        MIN = CryptoPP::Gzip::MIN_DEFLATE_LEVEL,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        DEFAULT = CryptoPP::Gzip::DEFAULT_DEFLATE_LEVEL,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        MAX = CryptoPP::Gzip::MAX_DEFLATE_LEVEL</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    };</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_g_zip.html#a3322062675ff7d868534faa98c3ef998">   29</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_g_zip.html#a3322062675ff7d868534faa98c3ef998">Compress</a>(<span class="keyword">const</span> std::string&amp; buffer, <span class="keyword">const</span> <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">DeflateLevel</a> level = DeflateLevel::MAX);</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_g_zip.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_g_zip.html">GZip</a> final {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    ENIGMA_STATIC_CLASS(<a class="code" href="class_g_zip.html">GZip</a>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">   19</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">DeflateLevel</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156ace31e2a082d17e038fcc6e3006166653">MIN</a> = CryptoPP::Gzip::MIN_DEFLATE_LEVEL,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;      <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156a5b39c8b553c821e7cddc6da64b5bd2ee">DEFAULT</a> = CryptoPP::Gzip::DEFAULT_DEFLATE_LEVEL,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156a26a4b44a837bf97b972628509912b4a5">MAX</a> = CryptoPP::Gzip::MAX_DEFLATE_LEVEL</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    };</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_g_zip.html#a3322062675ff7d868534faa98c3ef998">   29</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_g_zip.html#a3322062675ff7d868534faa98c3ef998">Compress</a>(<span class="keyword">const</span> std::string&amp; buffer, <span class="keyword">const</span> <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">DeflateLevel</a> level = <a class="code" href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156a26a4b44a837bf97b972628509912b4a5">DeflateLevel::MAX</a>);</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_g_zip.html#aa71d4958434ac85d146227e42c768662">   30</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_g_zip.html#aa71d4958434ac85d146227e42c768662">Decompress</a>(<span class="keyword">const</span> std::string&amp; buffer);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::unique_ptr&lt;CryptoPP::Gzip&gt; m_zipper{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::unique_ptr&lt;CryptoPP::Gunzip&gt; m_unzipper{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::unique_ptr&lt;CryptoPP::Gzip&gt; m_zipper{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::unique_ptr&lt;CryptoPP::Gunzip&gt; m_unzipper{<span class="keyword">nullptr</span>};</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_GZIP_COMPRESSOR_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
-<div class="ttc" id="a_core_8hpp_html_abd951424e242d065209e958e30b73aed"><div class="ttname"><a href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a></div><div class="ttdeci">#define ENIGMA_API</div><div class="ttdoc">API import &amp; export macros.</div><div class="ttdef"><b>Definition:</b> <a href="_core_8hpp_source.html#l00035">Core.hpp:35</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
-<div class="ttc" id="a_macros_8hpp_html_a1ded40091ba715d9798dc6d607fc34e8"><div class="ttname"><a href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">ENIGMA_STATIC_CLASS</a></div><div class="ttdeci">#define ENIGMA_STATIC_CLASS(Class)</div><div class="ttdoc">Makes a class static, which will prevent creating instances from it and only use it as Class::Func()....</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00146">Macros.hpp:146</a></div></div>
-<div class="ttc" id="aclass_g_zip_html"><div class="ttname"><a href="class_g_zip.html">GZip</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_zip_8hpp_source.html#l00015">GZip.hpp:16</a></div></div>
+<div class="ttc" id="aclass_g_zip_html"><div class="ttname"><a href="class_g_zip.html">GZip</a></div><div class="ttdef"><b>Definition:</b> <a href="_g_zip_8hpp_source.html#l00015">GZip.hpp:15</a></div></div>
 <div class="ttc" id="aclass_g_zip_html_a3322062675ff7d868534faa98c3ef998"><div class="ttname"><a href="class_g_zip.html#a3322062675ff7d868534faa98c3ef998">GZip::Compress</a></div><div class="ttdeci">static std::string Compress(const std::string &amp;buffer, const DeflateLevel level=DeflateLevel::MAX)</div></div>
-<div class="ttc" id="aclass_g_zip_html_a97a317e363c7f7cd9f57a939737b0156"><div class="ttname"><a href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">GZip::DeflateLevel</a></div><div class="ttdeci">DeflateLevel</div><div class="ttdef"><b>Definition:</b> <a href="_g_zip_8hpp_source.html#l00019">GZip.hpp:20</a></div></div>
+<div class="ttc" id="aclass_g_zip_html_a97a317e363c7f7cd9f57a939737b0156"><div class="ttname"><a href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156">GZip::DeflateLevel</a></div><div class="ttdeci">DeflateLevel</div><div class="ttdef"><b>Definition:</b> <a href="_g_zip_8hpp_source.html#l00019">GZip.hpp:19</a></div></div>
+<div class="ttc" id="aclass_g_zip_html_a97a317e363c7f7cd9f57a939737b0156a26a4b44a837bf97b972628509912b4a5"><div class="ttname"><a href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156a26a4b44a837bf97b972628509912b4a5">GZip::DeflateLevel::MAX</a></div><div class="ttdeci">@ MAX</div><div class="ttdoc">Minimum deflation level, slowest speed (9)</div></div>
+<div class="ttc" id="aclass_g_zip_html_a97a317e363c7f7cd9f57a939737b0156a5b39c8b553c821e7cddc6da64b5bd2ee"><div class="ttname"><a href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156a5b39c8b553c821e7cddc6da64b5bd2ee">GZip::DeflateLevel::DEFAULT</a></div><div class="ttdeci">@ DEFAULT</div><div class="ttdoc">Default deflation level, compromise between speed (6)</div></div>
+<div class="ttc" id="aclass_g_zip_html_a97a317e363c7f7cd9f57a939737b0156ace31e2a082d17e038fcc6e3006166653"><div class="ttname"><a href="class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156ace31e2a082d17e038fcc6e3006166653">GZip::DeflateLevel::MIN</a></div><div class="ttdeci">@ MIN</div><div class="ttdoc">Minimum deflation level, fastest speed (0)</div></div>
 <div class="ttc" id="aclass_g_zip_html_aa71d4958434ac85d146227e42c768662"><div class="ttname"><a href="class_g_zip.html#aa71d4958434ac85d146227e42c768662">GZip::Decompress</a></div><div class="ttdeci">static std::string Decompress(const std::string &amp;buffer)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -139,7 +140,7 @@ $(document).ready(function(){initNavTree('_g_zip_8hpp_source.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_g_zip_8hpp.html">GZip.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

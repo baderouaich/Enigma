@@ -98,59 +98,55 @@ $(document).ready(function(){initNavTree('_cursor_8hpp_source.html',''); initRes
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/*Ref https://www.glfw.org/docs/3.4/group__shapes.html */</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">   11</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> : <a class="code" href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">byte</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e">Arrow</a>   = 0,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea4ca8b47601e7a843e23d0139a8a4ff61">IBeam</a>,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7eaf46589b20911b4e26f8c8c6f7e957ea9">CrossHair</a>,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7eaa78b1ac16c0cd02168097fc9a9bd7604">Hand</a>,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7eac622a9f0794743593901abb0812dd6fc">HResize</a>,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea93a638f3f74a90ce3d236ea57e36e6b9">VResize</a>,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea62c4efd8e2438b9b47581c21e9f3e0ba">NumCursors</a>,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dab50339a10e1de285ac99d4c3990b8693">NONE</a> = <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e">Arrow</a></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_cursor.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a> <a class="code" href="class_cursor.html">Cursor</a></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    *   Default Constructor</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_cursor.html#ab5727d91b3455aa81b058afcf0bde738">   32</a></span>&#160;    <a class="code" href="class_cursor.html#ab5727d91b3455aa81b058afcf0bde738">Cursor</a>() noexcept;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    *   Creates Standard Cursor </span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_cursor.html#ac94bc3e470e11cb14db663a7505ef6b5">   37</a></span>&#160;    explicit <a class="code" href="class_cursor.html">Cursor</a>(<a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> mode);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    *   Creates Image Based Cursor </span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_cursor.html#a32dc807cbc63464721935224e9e6d428">   42</a></span>&#160;    explicit <a class="code" href="class_cursor.html">Cursor</a>(const fs::path&amp; image_path, const std::int32_t xhot = 0, const std::int32_t yhot = 0);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_cursor.html#a025d505a120236dc61a889bd5b0aef16">   44</a></span>&#160;    ~<a class="code" href="class_cursor.html">Cursor</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_cursor.html#ac2e2e8ed8aed15e611bf429729902aca">   46</a></span>&#160;    <span class="keywordtype">void</span> Destroy();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;public:</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_cursor.html#a642a6cd82884444a85db3e74ac722db6">   49</a></span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> GetMode() const noexcept { <span class="keywordflow">return</span> m_mode; }</div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_cursor.html#a1534178640fb8e353c04d64ded2f1587">   50</a></span>&#160;    <span class="keyword">const</span> GLFWcursor* <a class="code" href="class_cursor.html#a1534178640fb8e353c04d64ded2f1587">GetGLFWCursor</a>() const noexcept { <span class="keywordflow">return</span> m_GLFWcursor; }</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_cursor.html#ae021fb6c3d8ac2d04e227c3cc2fa1114">   51</a></span>&#160;    GLFWcursor* <a class="code" href="class_cursor.html#ae021fb6c3d8ac2d04e227c3cc2fa1114">GetGLFWCursor</a>() noexcept { <span class="keywordflow">return</span> m_GLFWcursor; }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> m_mode;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    GLFWcursor* m_GLFWcursor;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_CURSOR_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">   11</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> : <a class="code" href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">byte</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e">Arrow</a> = 0,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea4ca8b47601e7a843e23d0139a8a4ff61">IBeam</a>,</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7eaf46589b20911b4e26f8c8c6f7e957ea9">CrossHair</a>,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7eaa78b1ac16c0cd02168097fc9a9bd7604">Hand</a>,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7eac622a9f0794743593901abb0812dd6fc">HResize</a>,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea93a638f3f74a90ce3d236ea57e36e6b9">VResize</a>,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea62c4efd8e2438b9b47581c21e9f3e0ba">NumCursors</a>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <a class="code" href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dab50339a10e1de285ac99d4c3990b8693">NONE</a> = <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e">Arrow</a></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_cursor.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_cursor.html">Cursor</a> {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    *   Default Constructor</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_cursor.html#ab5727d91b3455aa81b058afcf0bde738">   29</a></span>&#160;    <a class="code" href="class_cursor.html#ab5727d91b3455aa81b058afcf0bde738">Cursor</a>() noexcept;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    *   Creates Standard Cursor</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_cursor.html#ac94bc3e470e11cb14db663a7505ef6b5">   34</a></span>&#160;    explicit <a class="code" href="class_cursor.html">Cursor</a>(<a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> mode);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    *   Creates Image Based Cursor</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_cursor.html#a32dc807cbc63464721935224e9e6d428">   39</a></span>&#160;    explicit <a class="code" href="class_cursor.html">Cursor</a>(const fs::path&amp; image_path, const std::int32_t xhot = 0, const std::int32_t yhot = 0);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_cursor.html#a025d505a120236dc61a889bd5b0aef16">   41</a></span>&#160;    ~<a class="code" href="class_cursor.html">Cursor</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_cursor.html#ac2e2e8ed8aed15e611bf429729902aca">   43</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_cursor.html#ac2e2e8ed8aed15e611bf429729902aca">Destroy</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  public:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_cursor.html#a642a6cd82884444a85db3e74ac722db6">   46</a></span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> <a class="code" href="class_cursor.html#a642a6cd82884444a85db3e74ac722db6">GetMode</a>() const noexcept { <span class="keywordflow">return</span> m_mode; }</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_cursor.html#a1534178640fb8e353c04d64ded2f1587">   47</a></span>&#160;    <span class="keyword">const</span> GLFWcursor *<a class="code" href="class_cursor.html#a1534178640fb8e353c04d64ded2f1587">GetGLFWCursor</a>() const noexcept { <span class="keywordflow">return</span> m_GLFWcursor; }</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_cursor.html#ae021fb6c3d8ac2d04e227c3cc2fa1114">   48</a></span>&#160;    GLFWcursor *<a class="code" href="class_cursor.html#ae021fb6c3d8ac2d04e227c3cc2fa1114">GetGLFWCursor</a>() noexcept { <span class="keywordflow">return</span> m_GLFWcursor; }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a> m_mode;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    GLFWcursor *m_GLFWcursor;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_CURSOR_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
-<div class="ttc" id="a_core_8hpp_html_abd951424e242d065209e958e30b73aed"><div class="ttname"><a href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a></div><div class="ttdeci">#define ENIGMA_API</div><div class="ttdoc">API import &amp; export macros.</div><div class="ttdef"><b>Definition:</b> <a href="_core_8hpp_source.html#l00035">Core.hpp:35</a></div></div>
-<div class="ttc" id="a_cursor_8hpp_html_a58a2d4949a47c3856230629f08d7ee7e"><div class="ttname"><a href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a></div><div class="ttdeci">CursorMode</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00011">Cursor.hpp:12</a></div></div>
+<div class="ttc" id="a_cursor_8hpp_html_a58a2d4949a47c3856230629f08d7ee7e"><div class="ttname"><a href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7e">CursorMode</a></div><div class="ttdeci">CursorMode</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00011">Cursor.hpp:11</a></div></div>
 <div class="ttc" id="a_cursor_8hpp_html_a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e"><div class="ttname"><a href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e">CursorMode::Arrow</a></div><div class="ttdeci">@ Arrow</div></div>
 <div class="ttc" id="a_cursor_8hpp_html_a58a2d4949a47c3856230629f08d7ee7ea4ca8b47601e7a843e23d0139a8a4ff61"><div class="ttname"><a href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea4ca8b47601e7a843e23d0139a8a4ff61">CursorMode::IBeam</a></div><div class="ttdeci">@ IBeam</div></div>
 <div class="ttc" id="a_cursor_8hpp_html_a58a2d4949a47c3856230629f08d7ee7ea62c4efd8e2438b9b47581c21e9f3e0ba"><div class="ttname"><a href="_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea62c4efd8e2438b9b47581c21e9f3e0ba">CursorMode::NumCursors</a></div><div class="ttdeci">@ NumCursors</div></div>
@@ -161,10 +157,12 @@ $(document).ready(function(){initNavTree('_cursor_8hpp_source.html',''); initRes
 <div class="ttc" id="a_event_8hpp_html_af047f6eec65afba68db2bb5ded11908dab50339a10e1de285ac99d4c3990b8693"><div class="ttname"><a href="_event_8hpp.html#af047f6eec65afba68db2bb5ded11908dab50339a10e1de285ac99d4c3990b8693">EventType::NONE</a></div><div class="ttdeci">@ NONE</div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
-<div class="ttc" id="aclass_cursor_html"><div class="ttname"><a href="class_cursor.html">Cursor</a></div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00025">Cursor.hpp:27</a></div></div>
-<div class="ttc" id="aclass_cursor_html_a1534178640fb8e353c04d64ded2f1587"><div class="ttname"><a href="class_cursor.html#a1534178640fb8e353c04d64ded2f1587">Cursor::GetGLFWCursor</a></div><div class="ttdeci">const GLFWcursor * GetGLFWCursor() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00050">Cursor.hpp:50</a></div></div>
+<div class="ttc" id="aclass_cursor_html"><div class="ttname"><a href="class_cursor.html">Cursor</a></div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00024">Cursor.hpp:24</a></div></div>
+<div class="ttc" id="aclass_cursor_html_a1534178640fb8e353c04d64ded2f1587"><div class="ttname"><a href="class_cursor.html#a1534178640fb8e353c04d64ded2f1587">Cursor::GetGLFWCursor</a></div><div class="ttdeci">const GLFWcursor * GetGLFWCursor() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00047">Cursor.hpp:47</a></div></div>
+<div class="ttc" id="aclass_cursor_html_a642a6cd82884444a85db3e74ac722db6"><div class="ttname"><a href="class_cursor.html#a642a6cd82884444a85db3e74ac722db6">Cursor::GetMode</a></div><div class="ttdeci">CursorMode GetMode() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00046">Cursor.hpp:46</a></div></div>
 <div class="ttc" id="aclass_cursor_html_ab5727d91b3455aa81b058afcf0bde738"><div class="ttname"><a href="class_cursor.html#ab5727d91b3455aa81b058afcf0bde738">Cursor::Cursor</a></div><div class="ttdeci">Cursor() noexcept</div></div>
-<div class="ttc" id="aclass_cursor_html_ae021fb6c3d8ac2d04e227c3cc2fa1114"><div class="ttname"><a href="class_cursor.html#ae021fb6c3d8ac2d04e227c3cc2fa1114">Cursor::GetGLFWCursor</a></div><div class="ttdeci">GLFWcursor * GetGLFWCursor() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00051">Cursor.hpp:51</a></div></div>
+<div class="ttc" id="aclass_cursor_html_ac2e2e8ed8aed15e611bf429729902aca"><div class="ttname"><a href="class_cursor.html#ac2e2e8ed8aed15e611bf429729902aca">Cursor::Destroy</a></div><div class="ttdeci">void Destroy()</div></div>
+<div class="ttc" id="aclass_cursor_html_ae021fb6c3d8ac2d04e227c3cc2fa1114"><div class="ttname"><a href="class_cursor.html#ae021fb6c3d8ac2d04e227c3cc2fa1114">Cursor::GetGLFWCursor</a></div><div class="ttdeci">GLFWcursor * GetGLFWCursor() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_cursor_8hpp_source.html#l00048">Cursor.hpp:48</a></div></div>
 <div class="ttc" id="anamespace_enigma_html_af2a42f76a7252581a38e63841d73ee64"><div class="ttname"><a href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">Enigma::byte</a></div><div class="ttdeci">std::uint8_t byte</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00012">Types.hpp:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -172,7 +170,7 @@ $(document).ready(function(){initNavTree('_cursor_8hpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_343c8e1280c801c8fa105e57ce623dd0.html">Window</a></li><li class="navelem"><a class="el" href="dir_9310e8a2f06de41a230334e80b16bf02.html">Cursor</a></li><li class="navelem"><a class="el" href="_cursor_8hpp.html">Cursor.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

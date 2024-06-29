@@ -91,12 +91,12 @@ $(document).ready(function(){initNavTree('_database_8hpp.html',''); initResizabl
 <div class="title">Database.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="_core_8hpp_source.html">Core/Core.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_encryption_8hpp_source.html">Models/Encryption.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="_core_8hpp_source.html">Core/Core.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_logger_8hpp_source.html">Logger/Logger.hpp</a>&gt;</code><br />
-<code>#include &quot;<a class="el" href="_encryption_8hpp_source.html">Models/Encryption.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="_file_utils_8hpp_source.html">Utility/FileUtils.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_size_utils_8hpp_source.html">Utility/SizeUtils.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_string_utils_8hpp_source.html">Utility/StringUtils.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="_file_utils_8hpp_source.html">Utility/FileUtils.hpp</a>&gt;</code><br />
 <code>#include &lt;SQLiteCpp/SQLiteCpp.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="_g_zip_8hpp_source.html">Utility/GZip.hpp</a>&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
@@ -113,9 +113,9 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a9cf5556479455b04db91eea2ae5111df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_database_8hpp.html#a9cf5556479455b04db91eea2ae5111df">ENIGMA_DATABASE_H</a></td></tr>
 <tr class="separator:a9cf5556479455b04db91eea2ae5111df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c0f2e398b23d7263d9fa3e2f0ca010"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010">CASE_STR</a>(e)&#160;&#160;&#160;case OrderBy::e: return #e</td></tr>
+<tr class="memitem:aa3c0f2e398b23d7263d9fa3e2f0ca010"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010">CASE_STR</a>(e)</td></tr>
 <tr class="separator:aa3c0f2e398b23d7263d9fa3e2f0ca010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3c0f2e398b23d7263d9fa3e2f0ca010"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010">CASE_STR</a>(e)&#160;&#160;&#160;case Order::e: return #e</td></tr>
+<tr class="memitem:aa3c0f2e398b23d7263d9fa3e2f0ca010"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010">CASE_STR</a>(e)</td></tr>
 <tr class="separator:aa3c0f2e398b23d7263d9fa3e2f0ca010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -130,11 +130,13 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">e</td><td>)</td>
-          <td>&#160;&#160;&#160;case OrderBy::e: return #e</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">case</span> OrderBy::e:  \</div>
+<div class="line">    return #e</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="aa3c0f2e398b23d7263d9fa3e2f0ca010"></a>
@@ -148,11 +150,13 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">e</td><td>)</td>
-          <td>&#160;&#160;&#160;case Order::e: return #e</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">case</span> Order::e:    \</div>
+<div class="line">    return #e</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a9cf5556479455b04db91eea2ae5111df"></a>
@@ -177,7 +181,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e95107e76c1ba4922be3f343acf5dcf1.html">Database</a></li><li class="navelem"><a class="el" href="_database_8hpp.html">Database.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

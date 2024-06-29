@@ -92,104 +92,89 @@ $(document).ready(function(){initNavTree('_file_utils_8hpp_source.html',''); ini
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef ENIGMA_FILE_UTILS_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="_file_utils_8hpp.html#a007d629ae9f00a3eb686069aeffa3c50">    3</a></span>&#160;<span class="preprocessor">#define ENIGMA_FILE_UTILS_H</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;version&gt;</span>  <span class="comment">// version include has yvals_core.h include so we can use __cpp_lib_filesystem &amp; __cpp_lib_experimental_filesystem defines</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_core_8hpp.html">Core/Core.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8hpp.html">Logger/Logger.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_core_8hpp.html">Core/Core.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8hpp.html">Logger/Logger.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;version&gt;</span> <span class="comment">// version include has yvals_core.h include so we can use __cpp_lib_filesystem &amp; __cpp_lib_experimental_filesystem defines</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#if defined(__cpp_lib_filesystem)</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">    #include &lt;filesystem&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">namespace </span>fs = std::filesystem;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>fs = std::filesystem;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#elif defined(__cpp_lib_experimental_filesystem)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">    #include &lt;experimental/filesystem&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">namespace </span>fs = std::experimental::filesystem;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;experimental/filesystem&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>fs = std::experimental::filesystem;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">    #error compiler does not support std::filesystem</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#error compiler does not support std::filesystem</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_file_utils.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a> <a class="code" href="class_file_utils.html">FileUtils</a> final</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">ENIGMA_STATIC_CLASS</a>(<a class="code" href="class_file_utils.html">FileUtils</a>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_file_utils.html#a96081a7020e89c889d22ef3b9a0566b5">   25</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_file_utils.html#a96081a7020e89c889d22ef3b9a0566b5">Read</a>(<span class="keyword">const</span> fs::path&amp; filename, std::string&amp; buffer)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">if</span> (std::ifstream ifs{ filename, std::ios::binary | std::ios::ate }) <span class="comment">// ate: open at the end</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">const</span> std::size_t file_size = <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(ifs.tellg());</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            buffer.resize(file_size, <span class="charliteral">&#39;\000&#39;</span>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            ifs.seekg(0, std::ios::beg);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            ifs.read(buffer.data(), file_size);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            ifs.close();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to read file {0}&quot;</span>, filename.string());</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">   43</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">Write</a>(<span class="keyword">const</span> fs::path&amp; filename, <span class="keyword">const</span> std::string_view&amp; buffer)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (std::ofstream ofs{ filename, std::ios::binary })</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            ofs.write(buffer.data(), buffer.size());</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            ofs.close();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to write file {0}&quot;</span>, filename.string());</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    *   Reads a file chunk by chunk</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">   62</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">ReadChunks</a>(<span class="keyword">const</span> fs::path &amp;filename, <span class="keyword">const</span> std::size_t max_chunk_size, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">bool</span>(std::vector&lt;byte&gt;&amp;&amp;)&gt;&amp; callback)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (std::ifstream ifs{ filename, std::ios::binary }) </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">while</span> (!ifs.eof())</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                std::vector&lt;std::uint8_t&gt; chunk(max_chunk_size, <span class="charliteral">&#39;\000&#39;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                ifs.read((<span class="keywordtype">char</span>*)chunk.data(), chunk.size());</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="comment">// resize chunk if we read bytes less than max_chunk_size</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keyword">const</span> <span class="keyword">auto</span> bytes_read = <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(ifs.gcount());</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordflow">if</span> (bytes_read &lt; max_chunk_size)</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    chunk.resize(bytes_read);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="comment">// serve chunk and see if true was returned from callback to stop reading loop.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">bool</span> should_stop = callback(std::move(chunk));</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="keywordflow">if</span> (should_stop)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            ifs.close();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to read file chunks {0}&quot;</span>, filename.string());</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_FILE_UTILS_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_file_utils.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_file_utils.html">FileUtils</a> final {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ENIGMA_STATIC_CLASS(<a class="code" href="class_file_utils.html">FileUtils</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_file_utils.html#a96081a7020e89c889d22ef3b9a0566b5">   25</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_file_utils.html#a96081a7020e89c889d22ef3b9a0566b5">Read</a>(<span class="keyword">const</span> fs::path&amp; filename, std::string&amp; buffer) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      <span class="keywordflow">if</span> (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) <span class="comment">// ate: open at the end</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">const</span> std::size_t file_size = <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(ifs.tellg());</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        buffer.resize(file_size, <span class="charliteral">&#39;\000&#39;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        ifs.seekg(0, std::ios::beg);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        ifs.read(buffer.data(), file_size);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        ifs.close();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to read file {0}&quot;</span>, filename.string());</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">   40</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">Write</a>(<span class="keyword">const</span> fs::path&amp; filename, <span class="keyword">const</span> std::string_view&amp; buffer) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">if</span> (std::ofstream ofs{filename, std::ios::binary}) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        ofs.write(buffer.data(), buffer.size());</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        ofs.close();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to write file {0}&quot;</span>, filename.string());</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    *   Reads a file chunk by chunk</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">   55</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">ReadChunks</a>(<span class="keyword">const</span> fs::path&amp; filename, <span class="keyword">const</span> std::size_t max_chunk_size, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">bool</span>(std::vector&lt;byte&gt;&amp;&amp;)&gt;&amp; callback) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keywordflow">if</span> (std::ifstream ifs{filename, std::ios::binary}) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">while</span> (!ifs.eof()) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;          std::vector&lt;std::uint8_t&gt; chunk(max_chunk_size, <span class="charliteral">&#39;\000&#39;</span>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;          ifs.read((<span class="keywordtype">char</span> *) chunk.data(), chunk.size());</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;          <span class="comment">// resize chunk if we read bytes less than max_chunk_size</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;          <span class="keyword">const</span> <span class="keyword">auto</span> bytes_read = <span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(ifs.gcount());</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;          <span class="keywordflow">if</span> (bytes_read &lt; max_chunk_size)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            chunk.resize(bytes_read);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;          <span class="comment">// serve chunk and see if true was returned from callback to stop reading loop.</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          <span class="keyword">const</span> <span class="keywordtype">bool</span> should_stop = callback(std::move(chunk));</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;          <span class="keywordflow">if</span> (should_stop)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        ifs.close();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to read file chunks {0}&quot;</span>, filename.string());</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_FILE_UTILS_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
-<div class="ttc" id="a_core_8hpp_html_abd951424e242d065209e958e30b73aed"><div class="ttname"><a href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a></div><div class="ttdeci">#define ENIGMA_API</div><div class="ttdoc">API import &amp; export macros.</div><div class="ttdef"><b>Definition:</b> <a href="_core_8hpp_source.html#l00035">Core.hpp:35</a></div></div>
 <div class="ttc" id="a_logger_8hpp_html"><div class="ttname"><a href="_logger_8hpp.html">Logger.hpp</a></div></div>
 <div class="ttc" id="a_logger_8hpp_html_a9cef80543fd8b59cb62e4dfeb9c69fb3"><div class="ttname"><a href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a></div><div class="ttdeci">#define ENIGMA_ERROR(...)</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8hpp_source.html#l00043">Logger.hpp:43</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
-<div class="ttc" id="a_macros_8hpp_html_a1ded40091ba715d9798dc6d607fc34e8"><div class="ttname"><a href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">ENIGMA_STATIC_CLASS</a></div><div class="ttdeci">#define ENIGMA_STATIC_CLASS(Class)</div><div class="ttdoc">Makes a class static, which will prevent creating instances from it and only use it as Class::Func()....</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00146">Macros.hpp:146</a></div></div>
-<div class="ttc" id="aclass_file_utils_html"><div class="ttname"><a href="class_file_utils.html">FileUtils</a></div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00021">FileUtils.hpp:22</a></div></div>
-<div class="ttc" id="aclass_file_utils_html_a356040beed278abf36ce1e67017cdd1b"><div class="ttname"><a href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">FileUtils::Write</a></div><div class="ttdeci">static bool Write(const fs::path &amp;filename, const std::string_view &amp;buffer)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00043">FileUtils.hpp:43</a></div></div>
-<div class="ttc" id="aclass_file_utils_html_a82868ec41085affb96cb5a6e2538c607"><div class="ttname"><a href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">FileUtils::ReadChunks</a></div><div class="ttdeci">static void ReadChunks(const fs::path &amp;filename, const std::size_t max_chunk_size, const std::function&lt; bool(std::vector&lt; byte &gt; &amp;&amp;)&gt; &amp;callback)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00062">FileUtils.hpp:62</a></div></div>
+<div class="ttc" id="aclass_file_utils_html"><div class="ttname"><a href="class_file_utils.html">FileUtils</a></div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00021">FileUtils.hpp:21</a></div></div>
+<div class="ttc" id="aclass_file_utils_html_a356040beed278abf36ce1e67017cdd1b"><div class="ttname"><a href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">FileUtils::Write</a></div><div class="ttdeci">static bool Write(const fs::path &amp;filename, const std::string_view &amp;buffer)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00040">FileUtils.hpp:40</a></div></div>
+<div class="ttc" id="aclass_file_utils_html_a82868ec41085affb96cb5a6e2538c607"><div class="ttname"><a href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">FileUtils::ReadChunks</a></div><div class="ttdeci">static void ReadChunks(const fs::path &amp;filename, const std::size_t max_chunk_size, const std::function&lt; bool(std::vector&lt; byte &gt; &amp;&amp;)&gt; &amp;callback)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00055">FileUtils.hpp:55</a></div></div>
 <div class="ttc" id="aclass_file_utils_html_a96081a7020e89c889d22ef3b9a0566b5"><div class="ttname"><a href="class_file_utils.html#a96081a7020e89c889d22ef3b9a0566b5">FileUtils::Read</a></div><div class="ttdeci">static bool Read(const fs::path &amp;filename, std::string &amp;buffer)</div><div class="ttdef"><b>Definition:</b> <a href="_file_utils_8hpp_source.html#l00025">FileUtils.hpp:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -197,7 +182,7 @@ $(document).ready(function(){initNavTree('_file_utils_8hpp_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_file_utils_8hpp.html">FileUtils.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

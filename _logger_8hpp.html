@@ -92,8 +92,8 @@ $(document).ready(function(){initNavTree('_logger_8hpp.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="_core_8hpp_source.html">Core/Core.hpp</a>&gt;</code><br />
-<code>#include &lt;spdlog/spdlog.h&gt;</code><br />
 <code>#include &lt;spdlog/fmt/ostr.h&gt;</code><br />
+<code>#include &lt;spdlog/spdlog.h&gt;</code><br />
 </div>
 <p><a href="_logger_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -119,17 +119,17 @@ Macros</h2></td></tr>
 <tr class="separator:a9cef80543fd8b59cb62e4dfeb9c69fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ae56792b58f2fe376e95addc8cbcc71"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(...)&#160;&#160;&#160;::Enigma::Logger::GetLogger()-&gt;critical(&quot;{}\n{}:{}\n{}&quot;, fmt::format(__VA_ARGS__), __FILE__, __LINE__, <a class="el" href="_macros_8hpp.html#afacbad14c9d6c70a7b46ffe1f572b5b0">ENIGMA_CURRENT_FUNCTION</a>)</td></tr>
 <tr class="separator:a6ae56792b58f2fe376e95addc8cbcc71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93b02c19aec9a94c3ec7783c36381d12"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a93b02c19aec9a94c3ec7783c36381d12">ENIGMA_TRACE_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a93b02c19aec9a94c3ec7783c36381d12"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a93b02c19aec9a94c3ec7783c36381d12">ENIGMA_TRACE_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a93b02c19aec9a94c3ec7783c36381d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0907e31523224d41c85c50fb65300b7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a0907e31523224d41c85c50fb65300b7f">ENIGMA_LOG_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a0907e31523224d41c85c50fb65300b7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a0907e31523224d41c85c50fb65300b7f">ENIGMA_LOG_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a0907e31523224d41c85c50fb65300b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa89baef561246024ca7f0bea63a2746f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#aa89baef561246024ca7f0bea63a2746f">ENIGMA_INFO_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:aa89baef561246024ca7f0bea63a2746f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#aa89baef561246024ca7f0bea63a2746f">ENIGMA_INFO_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:aa89baef561246024ca7f0bea63a2746f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacf0e146e852ff4593a13c9d48da73e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#aacf0e146e852ff4593a13c9d48da73e8">ENIGMA_WARN_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:aacf0e146e852ff4593a13c9d48da73e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#aacf0e146e852ff4593a13c9d48da73e8">ENIGMA_WARN_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:aacf0e146e852ff4593a13c9d48da73e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42952a536febb76e9726f0c5a8d40eb8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a42952a536febb76e9726f0c5a8d40eb8">ENIGMA_ERROR_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a42952a536febb76e9726f0c5a8d40eb8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a42952a536febb76e9726f0c5a8d40eb8">ENIGMA_ERROR_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a42952a536febb76e9726f0c5a8d40eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af24ced185e8035c115b7e1c0e448f9f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#af24ced185e8035c115b7e1c0e448f9f5">ENIGMA_CRITICAL_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:af24ced185e8035c115b7e1c0e448f9f5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#af24ced185e8035c115b7e1c0e448f9f5">ENIGMA_CRITICAL_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:af24ced185e8035c115b7e1c0e448f9f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af89cb876e6e1d43cfeacdd58a7c9b78c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#af89cb876e6e1d43cfeacdd58a7c9b78c">log_trace</a>(...)&#160;&#160;&#160;<a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__)</td></tr>
 <tr class="separator:af89cb876e6e1d43cfeacdd58a7c9b78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,17 +143,17 @@ Macros</h2></td></tr>
 <tr class="separator:a6ae72553ea9805dd87a463d6f710364d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd453c0af726853da9a48d643189ccf1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#acd453c0af726853da9a48d643189ccf1">log_critical</a>(...)&#160;&#160;&#160;<a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__)</td></tr>
 <tr class="separator:acd453c0af726853da9a48d643189ccf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22699b3a727bd9d32a0d3bf0cc6fecfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a22699b3a727bd9d32a0d3bf0cc6fecfa">log_trace_if</a>(...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a22699b3a727bd9d32a0d3bf0cc6fecfa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a22699b3a727bd9d32a0d3bf0cc6fecfa">log_trace_if</a>(...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a22699b3a727bd9d32a0d3bf0cc6fecfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f384b6ab5b3ea4e01ed682c0c64a94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a99f384b6ab5b3ea4e01ed682c0c64a94">log_debug_if</a>(...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a99f384b6ab5b3ea4e01ed682c0c64a94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a99f384b6ab5b3ea4e01ed682c0c64a94">log_debug_if</a>(...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a99f384b6ab5b3ea4e01ed682c0c64a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ac74d940ad88d9cd5cce45e3b36bb83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a4ac74d940ad88d9cd5cce45e3b36bb83">log_info_if</a>(...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a4ac74d940ad88d9cd5cce45e3b36bb83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a4ac74d940ad88d9cd5cce45e3b36bb83">log_info_if</a>(...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a4ac74d940ad88d9cd5cce45e3b36bb83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88be09517337c2dbf2f7e95a1dc4dfad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a88be09517337c2dbf2f7e95a1dc4dfad">log_warn_if</a>(...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a88be09517337c2dbf2f7e95a1dc4dfad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a88be09517337c2dbf2f7e95a1dc4dfad">log_warn_if</a>(...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a88be09517337c2dbf2f7e95a1dc4dfad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bc1dedf10c9a9faf3b0d6f65fe5199e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a0bc1dedf10c9a9faf3b0d6f65fe5199e">log_error_if</a>(...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a0bc1dedf10c9a9faf3b0d6f65fe5199e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a0bc1dedf10c9a9faf3b0d6f65fe5199e">log_error_if</a>(...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a0bc1dedf10c9a9faf3b0d6f65fe5199e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7a892c1d0e923599762fa57d9b78572"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#ad7a892c1d0e923599762fa57d9b78572">log_critical_if</a>(...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:ad7a892c1d0e923599762fa57d9b78572"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#ad7a892c1d0e923599762fa57d9b78572">log_critical_if</a>(...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:ad7a892c1d0e923599762fa57d9b78572"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58c994180e09d2f6400133b19b1d7036"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a58c994180e09d2f6400133b19b1d7036">LOG_TRACE</a>(...)&#160;&#160;&#160;<a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__)</td></tr>
 <tr class="separator:a58c994180e09d2f6400133b19b1d7036"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,17 +167,17 @@ Macros</h2></td></tr>
 <tr class="separator:ad4a9117ce894e3319e903142347a0f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4091a2d7d849a8b5eded40d8723b8768"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a4091a2d7d849a8b5eded40d8723b8768">LOG_CRITICAL</a>(...)&#160;&#160;&#160;<a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__)</td></tr>
 <tr class="separator:a4091a2d7d849a8b5eded40d8723b8768"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c5a61764f831ab0f52c5bea58240f44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a6c5a61764f831ab0f52c5bea58240f44">LOG_TRACE_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a6c5a61764f831ab0f52c5bea58240f44"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a6c5a61764f831ab0f52c5bea58240f44">LOG_TRACE_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a6c5a61764f831ab0f52c5bea58240f44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21a82d6570ceca7c84c52e85291262e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a21a82d6570ceca7c84c52e85291262e5">LOG_LOG_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a21a82d6570ceca7c84c52e85291262e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a21a82d6570ceca7c84c52e85291262e5">LOG_LOG_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a21a82d6570ceca7c84c52e85291262e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0af97efc62c06085631f50650ace3041"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a0af97efc62c06085631f50650ace3041">LOG_INFO_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a0af97efc62c06085631f50650ace3041"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a0af97efc62c06085631f50650ace3041">LOG_INFO_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a0af97efc62c06085631f50650ace3041"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f046b67eea47c45a1a85ee9e0b990ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a3f046b67eea47c45a1a85ee9e0b990ea">LOG_WARN_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a3f046b67eea47c45a1a85ee9e0b990ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a3f046b67eea47c45a1a85ee9e0b990ea">LOG_WARN_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a3f046b67eea47c45a1a85ee9e0b990ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a677f18e28c13dee3000a4d35d4e79961"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a677f18e28c13dee3000a4d35d4e79961">LOG_ERROR_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:a677f18e28c13dee3000a4d35d4e79961"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#a677f18e28c13dee3000a4d35d4e79961">LOG_ERROR_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:a677f18e28c13dee3000a4d35d4e79961"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9a06c8e4b7a075e1c94975a0bd93e88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#ae9a06c8e4b7a075e1c94975a0bd93e88">LOG_CRITICAL_IF</a>(condition, ...)&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td></tr>
+<tr class="memitem:ae9a06c8e4b7a075e1c94975a0bd93e88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_logger_8hpp.html#ae9a06c8e4b7a075e1c94975a0bd93e88">LOG_CRITICAL_IF</a>(condition, ...)&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td></tr>
 <tr class="separator:ae9a06c8e4b7a075e1c94975a0bd93e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -222,12 +222,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00051">51</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00056">56</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -272,12 +272,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00050">50</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00054">54</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,12 +322,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00048">48</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00050">50</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -372,12 +372,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00047">47</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00048">48</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +440,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -490,12 +490,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00049">49</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00052">52</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -515,7 +515,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00058">58</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00064">64</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -535,7 +535,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00072">72</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00084">84</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -550,12 +550,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td>
+          <td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00065">65</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00076">76</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -580,12 +580,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a6ae56792b58f2fe376e95addc8cbcc71">ENIGMA_CRITICAL</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00079">79</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00096">96</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -605,7 +605,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00054">54</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00060">60</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -625,7 +625,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00068">68</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00080">80</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -640,12 +640,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td>
+          <td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00061">61</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00068">68</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -665,7 +665,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00057">57</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00063">63</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -685,7 +685,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00071">71</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00083">83</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -700,12 +700,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td>
+          <td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00064">64</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00074">74</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -730,12 +730,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00078">78</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00094">94</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -755,7 +755,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00055">55</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00061">61</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -775,7 +775,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00069">69</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00081">81</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -790,12 +790,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td>
+          <td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00062">62</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00070">70</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -820,12 +820,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00076">76</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00090">90</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -850,12 +850,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a361186d6c8315631d055e20417f78cc8">ENIGMA_LOG</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00075">75</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00088">88</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -875,7 +875,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00053">53</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00059">59</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -895,7 +895,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00067">67</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00079">79</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -910,12 +910,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td>
+          <td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00060">60</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00066">66</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -940,12 +940,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#a2e3f294104c130f650feb4e18117cec3">ENIGMA_TRACE</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00074">74</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00086">86</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -965,7 +965,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00056">56</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00062">62</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -985,7 +985,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00070">70</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00082">82</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -1000,12 +1000,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td>
+          <td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00063">63</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00072">72</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -1030,12 +1030,12 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;if((condition))  <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td>
+          <td></td><td>&#160;&#160;&#160;  if ((condition)) <a class="el" href="_logger_8hpp.html#ade032227164316c091f94d10802b5596">ENIGMA_WARN</a>(__VA_ARGS__);</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00077">77</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_logger_8hpp_source.html#l00092">92</a> of file <a class="el" href="_logger_8hpp_source.html">Logger.hpp</a>.</p>
 
 </div>
 </div>
@@ -1045,7 +1045,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ce44ad55c7286bf5a6cd8cf01717cab8.html">Logger</a></li><li class="navelem"><a class="el" href="_logger_8hpp.html">Logger.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

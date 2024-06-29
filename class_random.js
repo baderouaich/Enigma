@@ -4,5 +4,5 @@ var class_random =
     [ "Int", "class_random.html#a6dd16775002ce89c60bef0749b35ff3b", null ],
     [ "Real", "class_random.html#a9c8eecba49e71c80dbbc84b093b1b09f", null ],
     [ "Reseed", "class_random.html#aa813b66cca7fd2e7416c0a03c2225732", null ],
-    [ "Str", "class_random.html#ac81322b985c48f2d695c798f68a0c9ca", null ]
+    [ "Str", "class_random.html#abd88f50c53f3a878f14ce529e4522f4c", null ]
 ];

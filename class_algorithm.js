@@ -1,10 +1,10 @@
 var class_algorithm =
 [
-    [ "Intent", "class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73", [
-      [ "None", "class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a6adf97f83acf6453d4a6a4b1070f3754", null ],
-      [ "Encrypt", "class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a611d29c748a7931c825a247fcf3f290e", null ],
-      [ "Decrypt", "class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73a762e3a77ecdd773da2b859e6807529a2", null ],
-      [ "All", "class_algorithm.html#ade1999272a6c6525dbb23f1afca4cb73ab1c94ca2fbc3e78fc30069c8d0f01680", null ]
+    [ "Intent", "class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35", [
+      [ "None", "class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a6adf97f83acf6453d4a6a4b1070f3754", null ],
+      [ "Encrypt", "class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a611d29c748a7931c825a247fcf3f290e", null ],
+      [ "Decrypt", "class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35a762e3a77ecdd773da2b859e6807529a2", null ],
+      [ "All", "class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35ab1c94ca2fbc3e78fc30069c8d0f01680", null ]
     ] ],
     [ "Type", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b", [
       [ "AES", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba76b7593457e2ab50befe2dcd63cf388f", null ],
@@ -24,7 +24,7 @@ var class_algorithm =
     [ "DetectFromCipherBase64", "class_algorithm.html#a8eb47cfefba049a06da6c7db886e470f", null ],
     [ "DetectFromFile", "class_algorithm.html#a2a0ed9392a2b70f4f19ce4c5b3cf13f6", null ],
     [ "Encrypt", "class_algorithm.html#a71fedb547ebe10639adbd34326af7460", null ],
-    [ "ENIGMA_ENUM_CLASS_BITWISE_OPERATORS", "class_algorithm.html#aea8a41c3b0d6235f8777103dda2c7fbc", null ],
+    [ "ENIGMA_ENUM_CLASS_BITWISE_OPERATORS", "class_algorithm.html#a9bab58ce82d50573ff99a247eae6f850", null ],
     [ "GenerateRandomIV", "class_algorithm.html#ab494d803154a9b9808b54980d05ff6e6", null ],
     [ "GetSupportedAlgorithms", "class_algorithm.html#a82dadc8cc03e3e7b5ec8d82173838587", null ],
     [ "GetSupportedAlgorithmsStr", "class_algorithm.html#acd60cca15054f190f10b2b77c861278e", null ],

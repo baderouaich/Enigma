@@ -89,43 +89,38 @@ $(document).ready(function(){initNavTree('_open_file_dialog_8hpp_source.html',''
 </div><!--header-->
 <div class="contents">
 <a href="_open_file_dialog_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef ENIGMA_OPEN_FILE_DIALOG_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="_open_file_dialog_8hpp.html#a1078f661d9fbb2d83ea371f7132d0423">    3</a></span>&#160;<span class="preprocessor">#define ENIGMA_OPEN_FILE_DIALOG_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;portable-file-dialogs.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_core_8hpp.html">Core/Core.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;portable-file-dialogs.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a> <a class="code" href="class_open_file_dialog.html">OpenFileDialog</a> </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>: <span class="comment">/* Constructors / Destructor */</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html#a535c3866e2b66ac9d1d812759521e453">   23</a></span>&#160;    <a class="code" href="class_open_file_dialog.html#a535c3866e2b66ac9d1d812759521e453">OpenFileDialog</a>(<span class="keyword">const</span> std::string&amp; title,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">const</span> std::string&amp; initial_path = <span class="stringliteral">&quot;.&quot;</span>,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">bool</span> allow_multiselect = <span class="keyword">true</span>,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">const</span> std::initializer_list&lt;std::string&gt;&amp; filters = { <span class="stringliteral">&quot;All Files&quot;</span>, <span class="stringliteral">&quot;*&quot;</span> });</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html#aefe3bbf12e0ef2c0375f3a0617474728">   27</a></span>&#160;    <a class="code" href="class_open_file_dialog.html#aefe3bbf12e0ef2c0375f3a0617474728">~OpenFileDialog</a>() noexcept = default;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;public: <span class="comment">/* Accessors */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html#a2ca3d073ea47f72cc2b61e7c96c20856">   33</a></span>&#160;    std::vector&lt;std::<span class="keywordtype">string</span>&gt; Show() const;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;private: </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    std::<span class="keywordtype">string</span> m_title; <span class="comment">/*&lt; Dialog title */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::<span class="keywordtype">string</span> m_initial_path; <span class="comment">/*&lt; Dialog initial path */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span> m_allow_multiselect; <span class="comment">/*&lt; Shall allow multi file selection ? */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::vector&lt;std::<span class="keywordtype">string</span>&gt; m_filters; <span class="comment">/*&lt; Which files to allow e.g .txt, .jpg... */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_OPEN_FILE_DIALOG_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_open_file_dialog.html">OpenFileDialog</a> {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html#aec529a5ef9c2f7480103e54ba821bcb3">   21</a></span>&#160;    <a class="code" href="class_open_file_dialog.html#aec529a5ef9c2f7480103e54ba821bcb3">OpenFileDialog</a>(<span class="keyword">const</span> std::string&amp; title,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                   <span class="keyword">const</span> std::string&amp; initial_path = <span class="stringliteral">&quot;.&quot;</span>,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">bool</span> allow_multiselect = <span class="keyword">true</span>,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                   <span class="keyword">const</span> std::initializer_list&lt;std::string&gt;&amp; filters = {<span class="stringliteral">&quot;All Files&quot;</span>, <span class="stringliteral">&quot;*&quot;</span>});</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html#aefe3bbf12e0ef2c0375f3a0617474728">   25</a></span>&#160;    <a class="code" href="class_open_file_dialog.html#aefe3bbf12e0ef2c0375f3a0617474728">~OpenFileDialog</a>() noexcept = default;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  public: <span class="comment">/* Accessors */</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_open_file_dialog.html#a2ca3d073ea47f72cc2b61e7c96c20856">   31</a></span>&#160;    std::vector&lt;std::<span class="keywordtype">string</span>&gt; <a class="code" href="class_open_file_dialog.html#a2ca3d073ea47f72cc2b61e7c96c20856">Show</a>() const;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  private:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::<span class="keywordtype">string</span> m_title;                <span class="comment">/*&lt; Dialog title */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::<span class="keywordtype">string</span> m_initial_path;         <span class="comment">/*&lt; Dialog initial path */</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> m_allow_multiselect;           <span class="comment">/*&lt; Shall allow multi file selection ? */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::vector&lt;std::<span class="keywordtype">string</span>&gt; m_filters; <span class="comment">/*&lt; Which files to allow e.g .txt, .jpg... */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
-<div class="ttc" id="a_core_8hpp_html_abd951424e242d065209e958e30b73aed"><div class="ttname"><a href="_core_8hpp.html#abd951424e242d065209e958e30b73aed">ENIGMA_API</a></div><div class="ttdeci">#define ENIGMA_API</div><div class="ttdoc">API import &amp; export macros.</div><div class="ttdef"><b>Definition:</b> <a href="_core_8hpp_source.html#l00035">Core.hpp:35</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
-<div class="ttc" id="aclass_open_file_dialog_html"><div class="ttname"><a href="class_open_file_dialog.html">OpenFileDialog</a></div><div class="ttdef"><b>Definition:</b> <a href="_open_file_dialog_8hpp_source.html#l00013">OpenFileDialog.hpp:14</a></div></div>
-<div class="ttc" id="aclass_open_file_dialog_html_a535c3866e2b66ac9d1d812759521e453"><div class="ttname"><a href="class_open_file_dialog.html#a535c3866e2b66ac9d1d812759521e453">OpenFileDialog::OpenFileDialog</a></div><div class="ttdeci">OpenFileDialog(const std::string &amp;title, const std::string &amp;initial_path=&quot;.&quot;, const bool allow_multiselect=true, const std::initializer_list&lt; std::string &gt; &amp;filters={ &quot;All Files&quot;, &quot;*&quot; })</div></div>
+<div class="ttc" id="aclass_open_file_dialog_html"><div class="ttname"><a href="class_open_file_dialog.html">OpenFileDialog</a></div><div class="ttdef"><b>Definition:</b> <a href="_open_file_dialog_8hpp_source.html#l00012">OpenFileDialog.hpp:12</a></div></div>
+<div class="ttc" id="aclass_open_file_dialog_html_a2ca3d073ea47f72cc2b61e7c96c20856"><div class="ttname"><a href="class_open_file_dialog.html#a2ca3d073ea47f72cc2b61e7c96c20856">OpenFileDialog::Show</a></div><div class="ttdeci">std::vector&lt; std::string &gt; Show() const</div><div class="ttdoc">Spawns Open File Dialog and returns selected file(s) paths.</div></div>
+<div class="ttc" id="aclass_open_file_dialog_html_aec529a5ef9c2f7480103e54ba821bcb3"><div class="ttname"><a href="class_open_file_dialog.html#aec529a5ef9c2f7480103e54ba821bcb3">OpenFileDialog::OpenFileDialog</a></div><div class="ttdeci">OpenFileDialog(const std::string &amp;title, const std::string &amp;initial_path=&quot;.&quot;, const bool allow_multiselect=true, const std::initializer_list&lt; std::string &gt; &amp;filters={&quot;All Files&quot;, &quot;*&quot;})</div></div>
 <div class="ttc" id="aclass_open_file_dialog_html_aefe3bbf12e0ef2c0375f3a0617474728"><div class="ttname"><a href="class_open_file_dialog.html#aefe3bbf12e0ef2c0375f3a0617474728">OpenFileDialog::~OpenFileDialog</a></div><div class="ttdeci">~OpenFileDialog() noexcept=default</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -133,7 +128,7 @@ $(document).ready(function(){initNavTree('_open_file_dialog_8hpp_source.html',''
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ef68f1e1f5148ff8ef7fb1c955106c3c.html">System</a></li><li class="navelem"><a class="el" href="dir_3f46c916329686e528204c6b24abaef2.html">Dialogs</a></li><li class="navelem"><a class="el" href="_open_file_dialog_8hpp.html">OpenFileDialog.hpp</a></li>
-    <li class="footer">Generated on Fri Jun 28 2024 22:07:34 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 11:16:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

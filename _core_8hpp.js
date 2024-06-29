@@ -1,6 +1,5 @@
 var _core_8hpp =
 [
-    [ "ENIGMA_API", "_core_8hpp.html#abd951424e242d065209e958e30b73aed", null ],
     [ "ENIGMA_CORE_H", "_core_8hpp.html#a1c87c14c942d847df4d9cd429a3abc30", null ],
     [ "ENIGMA_DEBUG_BREAK", "_core_8hpp.html#a29af6e2e5aa0afc9d6e1bb1b6a75f464", null ],
     [ "ENIGMA_GL_VERSION_MAJOR", "_core_8hpp.html#aba702bca58bec7947704f42c1a864d59", null ],
