@@ -439,15 +439,15 @@ void MainMenuScene::OnAboutMenuButtonPressed() {
 
 void MainMenuScene::OnExportEncryptionsButtonPressed() {
   const fs::path defaultExportFilename = ResourceUtils::GetResourcesDir() / DateTimeUtils::now("Enigma_export_%Y_%m_%d_%H_%M_%S.db");
-  const SaveFileDialog sfd("Export Database to ...", defaultExportFilename, true);
-  const fs::path outputFilename = sfd.Show();
+  const SaveFileDialog sfd("Export Database to ...", defaultExportFilename.string(), true);
+  const std::string outputFilename = sfd.Show();
   if (outputFilename.empty()) return;
 
   ENIGMA_INFO("Exporting database to {}", outputFilename);
-  Application::GetInstance()->LaunchWorkerThread(this, "Exporting database to\n" + outputFilename.string(), [outputFilename]() {
+  Application::GetInstance()->LaunchWorkerThread(this, "Exporting database to\n" + outputFilename, [outputFilename]() {
     try {
       Database::Export(outputFilename);
-      DialogUtils::Info("Backup successfully saved to\n" + outputFilename.string());
+      DialogUtils::Info("Backup successfully saved to\n" + outputFilename);
     } catch (const std::exception& e) {
       ENIGMA_ERROR(e.what());
       DialogUtils::Error(e.what());
@@ -455,10 +455,10 @@ void MainMenuScene::OnExportEncryptionsButtonPressed() {
   });
 }
 void MainMenuScene::OnImportEncryptionsButtonPressed() {
-  const OpenFileDialog ofd("Import Database from ...", ResourceUtils::GetResourcesDir(), false);
+  const OpenFileDialog ofd("Import Database from ...", ResourceUtils::GetResourcesDir().string(), false);
   const std::vector<std::string> selectedFiles = ofd.Show();
   if (selectedFiles.empty()) return;
-  const fs::path inputFilename = selectedFiles[0];
+  const std::string inputFilename = selectedFiles[0];
 
   if (const auto action = DialogUtils::Question("Importing will overwrite all saved encryptions.\nExport the current database first if needed.\nContinue importing?",
                                                 Enigma::MessageBox::Choice::Yes_No_Cancel);
@@ -468,10 +468,10 @@ void MainMenuScene::OnImportEncryptionsButtonPressed() {
 
   ENIGMA_INFO("Importing database from {}", inputFilename);
 
-  Application::GetInstance()->LaunchWorkerThread(this, "Importing database from\n" + inputFilename.string(), [inputFilename]() {
+  Application::GetInstance()->LaunchWorkerThread(this, "Importing database from\n" + inputFilename, [inputFilename]() {
     try {
       Database::Import(inputFilename);
-      DialogUtils::Info("Database successfully imported from\n" + inputFilename.string());
+      DialogUtils::Info("Database successfully imported from\n" + inputFilename);
     } catch (const std::exception& e) {
       ENIGMA_ERROR(e.what());
       DialogUtils::Error(e.what());
