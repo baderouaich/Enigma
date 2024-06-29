@@ -31,7 +31,13 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps.cmake")
 
 ################## Main Project ##########################
 file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/**.cpp")
-add_executable(${PROJECT_NAME} ${SOURCES})
+if(ENIGMA_ENABLE_TESTS)
+  # Tests enabled? Build Enigma as a static lib so EnigmaTests will link with it.
+  add_library(${PROJECT_NAME} STATIC ${SOURCES})
+else ()
+  # Tests off? build Enigma as an application
+  add_executable(${PROJECT_NAME} ${SOURCES})
+endif ()
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 target_precompile_headers(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.hpp")
@@ -60,6 +66,10 @@ if (WIN32)
   # No need, will be defined by Core/Platform.hpp
   # target_compile_definitions(${PROJECT_NAME} PRIVATE ENIGMA_PLATFORM_WINDOWS)
 
+  # Use Enigma.rc resource file
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Enigma.rc.in ${CMAKE_CURRENT_BINARY_DIR}/Enigma.rc)
+  config(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Enigma.rc)
+
   # Common MSVC warnings defines
   if (MSVC)
     target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -84,9 +94,6 @@ endif ()
 ###### Tests ######
 if (ENIGMA_ENABLE_TESTS)
   message(STATUS "Building tests is enabled")
-  # to add in tests/Cmakelists.txt  target_link_libraries(${PROJECT_NAME} PRIVATE
-  #    Catch2::Catch2WithMain
-  #  )
   enable_testing()
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif ()
