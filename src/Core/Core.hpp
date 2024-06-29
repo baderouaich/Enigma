@@ -24,20 +24,6 @@
 ///
 
 
-/// API import & export macros
-#if ENIGMA_DYNAMIC_LINK
-#ifdef ENIGMA_BUILD_DLL
-	#define ENIGMA_API __declspec(dllexport)
-#else
-	#define ENIGMA_API __declspec(dllimport)
-#endif
-#else
-	#define ENIGMA_API
-#endif
-///
-
-
-
 /// Multi platform break debug function
 #ifdef ENIGMA_DEBUG
 	//Break debug

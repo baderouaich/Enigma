@@ -5,9 +5,9 @@
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 
+#include <Events/ApplicationEvent.hpp>
 #include <Events/Event.hpp>
 #include <Events/EventDispatcher.hpp>
-#include <Events/ApplicationEvent.hpp>
 #include <Events/KeyEvent.hpp>
 #include <Events/MouseEvent.hpp>
 
@@ -17,39 +17,38 @@ NS_ENIGMA_BEGIN
 /*
 *	Scene Abstract class
 */
-class ENIGMA_API Scene
-{
-public:
-	friend class Application;
+class Scene {
+  public:
+    friend class Application;
 
-	ENIGMA_NON_COPYABLE(Scene);
-	ENIGMA_NON_MOVEABLE(Scene);
+    ENIGMA_NON_COPYABLE(Scene);
+    ENIGMA_NON_MOVEABLE(Scene);
 
-public:
-	Scene() noexcept;
-	virtual ~Scene() noexcept = default;
+  public:
+    Scene() noexcept;
+    virtual ~Scene() noexcept = default;
 
-	/* Scene Life Cycle */
-	virtual void OnCreate() = 0;
-	virtual void OnEvent(Event& event) = 0;
-	virtual void OnUpdate(const float& dt) = 0;
-	virtual void OnDraw() = 0;
-	virtual void OnImGuiDraw() = 0;
-	virtual void OnDestroy() = 0;
+    /* Scene Life Cycle */
+    virtual void OnCreate() = 0;
+    virtual void OnEvent(Event& event) = 0;
+    virtual void OnUpdate(const float& dt) = 0;
+    virtual void OnDraw() = 0;
+    virtual void OnImGuiDraw() = 0;
+    virtual void OnDestroy() = 0;
 
-public: /*Accessors*/
-	const bool WantsToQuit() const noexcept { return m_quit; }
-	const bool IsLoading() const noexcept { return m_isLoading; }
-	std::mutex& GetMutex() noexcept { return m_mutex; }
+  public: /*Accessors*/
+    const bool WantsToQuit() const noexcept { return m_quit; }
+    const bool IsLoading() const noexcept { return m_isLoading; }
+    std::mutex& GetMutex() noexcept { return m_mutex; }
 
-public: /*Modifiers*/
-	void EndScene() noexcept { m_quit = true; }
-	void SetLoading(const bool loading) noexcept { m_isLoading = loading; }
+  public: /*Modifiers*/
+    void EndScene() noexcept { m_quit = true; }
+    void SetLoading(const bool loading) noexcept { m_isLoading = loading; }
 
-protected:
-	std::mutex m_mutex{}; // each scene has a mutex, which will guard code running by worker thread separated from UI main thread. | used by std::scoped_lock
-	bool m_quit{};
-	bool m_isLoading{};
+  protected:
+    std::mutex m_mutex{}; // each scene has a mutex, which will guard code running by worker thread separated from UI main thread. | used by std::scoped_lock
+    bool m_quit{};
+    bool m_isLoading{};
 };
 
 NS_ENIGMA_END

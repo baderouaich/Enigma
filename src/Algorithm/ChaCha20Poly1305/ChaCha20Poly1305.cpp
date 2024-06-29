@@ -7,22 +7,11 @@ ChaCha20Poly1305::ChaCha20Poly1305(const Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::ChaCha20Poly1305, intent)
 {
-	// Encrypting & Decrypting
-	if (intent & Intent::All)
-	{
+
+  if (static_cast<bool>(intent & Intent::Encrypt))
 		m_chacha_encryptor = std::make_unique<CryptoPP::ChaCha20Poly1305::Encryption>();
+  if (static_cast<bool>(intent & Intent::Decrypt))
 		m_chacha_decryptor = std::make_unique<CryptoPP::ChaCha20Poly1305::Decryption>();
-	}
-	// Encrypting only
-	else if (intent & Intent::Encrypt)
-	{
-		m_chacha_encryptor = std::make_unique<CryptoPP::ChaCha20Poly1305::Encryption>();
-	}
-	// Decrypting only
-	else if (intent & Intent::Decrypt)
-	{
-		m_chacha_decryptor = std::make_unique<CryptoPP::ChaCha20Poly1305::Decryption>();
-	}
 }
 
 ChaCha20Poly1305::~ChaCha20Poly1305() noexcept

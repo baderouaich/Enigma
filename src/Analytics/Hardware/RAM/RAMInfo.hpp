@@ -6,79 +6,78 @@
 #include <Logger/Logger.hpp>
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
-	//https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex
-	#include <Windows.h>
-	#include <psapi.h>
+//https://docs.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-memorystatusex
+#include <Windows.h>
+#include <psapi.h>
 typedef MEMORYSTATUSEX memory_status_t;
 #elif defined(ENIGMA_PLATFORM_LINUX)
-	//https://man7.org/linux/man-pages/man2/sysinfo.2.html
-	#include <stdio.h>  // fopen
-	#include <sys/sysinfo.h>
-	#include <unistd.h> // syscall
-	#include <sys/syscall.h>
+//https://man7.org/linux/man-pages/man2/sysinfo.2.html
+#include <stdio.h> // fopen
+#include <sys/sysinfo.h>
+#include <unistd.h> // syscall
+#include <sys/syscall.h>
 typedef struct sysinfo memory_status_t;
 #elif defined(ENIGMA_PLATFORM_MACOS)
-	//https://stackoverflow.com/questions/5012886/determining-the-available-amount-of-ram-on-an-ios-device
-	#include <mach/vm_statistics.h>
-	#include <mach/mach.h>  // mach_task_basic_info
-	#include <mach/mach_host.h>
+//https://stackoverflow.com/questions/5012886/determining-the-available-amount-of-ram-on-an-ios-device
+#include <mach/vm_statistics.h>
+#include <mach/mach.h> // mach_task_basic_info
+#include <mach/mach_host.h>
 typedef struct vm_statistics_data_t memory_status_t;
 #else
-  #error "Unsupported Platform"
+#error "Unsupported Platform"
 #endif
 
 NS_ENIGMA_BEGIN
 /**
-*	RAMInfo class will gather informations about the RAM at runtime
+*	RAMInfo class will gather information about the RAM at runtime
 */
-class ENIGMA_API RAMInfo
-{
-public:
-	RAMInfo() noexcept;
-	~RAMInfo() noexcept = default;
+class RAMInfo {
+  public:
+    RAMInfo() noexcept;
+    ~RAMInfo() noexcept = default;
 
-	ENIGMA_NON_COPYABLE(RAMInfo);
-	ENIGMA_NON_MOVEABLE(RAMInfo);
+    ENIGMA_NON_COPYABLE(RAMInfo);
+    ENIGMA_NON_MOVEABLE(RAMInfo);
 
-public:
-	/**
+  public:
+    /**
 	*	Updates the RAM status at runtime
 	*/
-	void Update();
+    void Update();
 
-	/**
+    /**
 	*	Returns the total physical memory reserved by all processes (in bytes)
 	*/
-	std::size_t GetUsedRAM() const noexcept;
+    std::size_t GetUsedRAM() const noexcept;
 
-	/**
+    /**
 	*	Returns the total physical memory used by this process (in bytes)
 	*/
-	std::size_t GetProcessUsedRAM() const noexcept;
+    std::size_t GetProcessUsedRAM() const noexcept;
 
-	/**
+    /**
 	*	Returns the total physical memory free (in bytes)
 	*/
-	std::size_t GetFreeRAM() const noexcept;
+    std::size_t GetFreeRAM() const noexcept;
 
-	/**
+    /**
 	*	Returns the max available memory on the system (in bytes)
 	*/
-	std::size_t GetAvailableRAM() const noexcept;
+    std::size_t GetAvailableRAM() const noexcept;
 
-	/**
+    /**
 	*	Returns memory usage by all processes (in percentage [0% -> 100%])
 	*/
-	float GetRAMUsage() noexcept;
+    float GetRAMUsage() noexcept;
 
-	/**
+    /**
 	*	Returns memory usage by current process (in percentage [0% -> 100%])
 	*/
-	float GetProcessRAMUsage() noexcept;
+    float GetProcessRAMUsage() noexcept;
 
 
-private:
-	 memory_status_t m_memory_status; /**< memory_status_t will be MEMORYSTATUSEX in windows, sysinfo in linux, vm_statistics_data_t in macos */
+  private:
+    memory_status_t m_memory_status; /**< memory_status_t will be MEMORYSTATUSEX in windows, sysinfo in linux, vm_statistics_data_t in macos */
 };
 
 

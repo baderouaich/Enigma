@@ -126,7 +126,7 @@ std::int32_t CLI::Run()
 			algo = r["a"].as<std::string>();
 			//LOG("Algorithm: {0}", m);
 		}
-		else if(intent & Algorithm::Intent::Encrypt) // If intent is encrypting, algorithm is required, otherwise we can detect which mode used for encryption.
+		else if(static_cast<bool>(intent & Algorithm::Intent::Encrypt)) // If intent is encrypting, algorithm is required, otherwise we can detect which mode used for encryption.
 			throw std::runtime_error("You should specify an encryption algorithm example -a aes, unless you are decrypting, then we can auto-detect the algorithm used for encryption.");
 		// What is the encryption/decryption password?
 		if (r.count("p") || r.count("password")) // -p "mypass" | --password="mypass"
@@ -193,7 +193,7 @@ std::int32_t CLI::Run()
 		if (!text.empty())
 		{
 			// Check intention
-			if(intent & Algorithm::Intent::Encrypt)
+			if(static_cast<bool>(intent & Algorithm::Intent::Encrypt))
 				this->OnEncryptText(algorithm, password, text, save_to_database);
 			else 
 				this->OnDecryptText(algorithm, password, text);
@@ -216,7 +216,7 @@ std::int32_t CLI::Run()
 		{
 
 			// Check intention
-			if(intent & Algorithm::Intent::Encrypt)
+			if(static_cast<bool>(intent & Algorithm::Intent::Encrypt))
 				this->OnEncryptFile(algorithm, password, infilename, outfilename, save_to_database);
 			else 
 				this->OnDecryptFile(algorithm, password, infilename, outfilename);

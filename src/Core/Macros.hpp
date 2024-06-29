@@ -37,7 +37,7 @@
 				ENIGMA_ERROR("Assertion Failed: {0}", __VA_ARGS__); \
 				ENIGMA_DEBUG_BREAK(); \
 			} \
-		} while(false) 
+		} while(false)
 #else
 	#define ENIGMA_ASSERT(x, ...)
 	#define ENIGMA_ASSERT(x, ...)
@@ -69,7 +69,7 @@
 
 
 
-///Enigma Memory Safe Operations 
+///Enigma Memory Safe Operations
 #define ENIGMA_SAFE_DELETE_PTR(ptr) \
 do { \
 	if ((ptr)){ \
@@ -138,7 +138,7 @@ do { \
     Class& operator=(const Class& obj) = delete;  \
     Class(const Class& obj) = delete;
 #define ENIGMA_NON_MOVEABLE(Class)                       \
-    Class& operator=(Class&& obj) = delete;        
+    Class& operator=(Class&& obj) = delete;
 ///
 
 
@@ -181,13 +181,15 @@ do { \
 
 /// Implements bitwise operators for enum classes
 #define ENIGMA_ENUM_CLASS_BITWISE_OPERATORS(_enum, _type) \
-	friend inline constexpr _enum operator~ (const _enum i) noexcept { return static_cast<_enum>(~static_cast<const _type>(i)); }  \
-	friend inline constexpr _enum operator| (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) | static_cast<const _type>(b)); } \
-	friend inline constexpr  bool operator& (const _enum a, const _enum b) noexcept { return static_cast<bool>(static_cast<const _type>(a) & static_cast<const _type>(b)); } \
-	friend inline constexpr _enum operator^ (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) ^ static_cast<const _type>(b)); } \
-	friend inline constexpr _enum operator|= (_enum & a, const _enum b) noexcept { return (_enum&)((_type&)(a) |= (const _type)(b)); } \
-	friend inline constexpr _enum operator&= (_enum & a, const _enum b) noexcept { return (_enum&)((_type&)(a) &= (const _type)(b)); } \
-	friend inline constexpr _enum operator^= (_enum & a, const _enum b) noexcept { return (_enum&)((_type&)(a) ^= (const _type)(b)); }
+    friend inline constexpr _enum operator~ (const _enum i) noexcept { return static_cast<_enum>(~static_cast<const _type>(i)); }  \
+    friend inline constexpr _enum operator| (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) | static_cast<const _type>(b)); } \
+    friend inline constexpr _enum operator& (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) & static_cast<const _type>(b)); } \
+    friend inline constexpr _enum operator^ (const _enum a, const _enum b) noexcept { return static_cast<_enum>(static_cast<const _type>(a) ^ static_cast<const _type>(b)); } \
+    friend inline constexpr _enum& operator|= (_enum& a, const _enum b) noexcept { a = a | b; return a; } \
+    friend inline constexpr _enum& operator&= (_enum& a, const _enum b) noexcept { a = a & b; return a; } \
+    friend inline constexpr _enum& operator^= (_enum& a, const _enum b) noexcept { a = a ^ b; return a; }
+
+
 ///
 
 

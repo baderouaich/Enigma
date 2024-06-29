@@ -20,7 +20,7 @@ Algorithm::Algorithm(Type type, Intent intent) noexcept
 	m_intent(intent)
 {
 	// we only need random seeder to generate random iv when encrypting
-	if (intent & Intent::Encrypt && !m_auto_seeded_random_pool)
+	if (static_cast<bool>(intent & Intent::Encrypt) && !m_auto_seeded_random_pool)
 		m_auto_seeded_random_pool = std::make_unique<CryptoPP::AutoSeededRandomPool>();
 }
 

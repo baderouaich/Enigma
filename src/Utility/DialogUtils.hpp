@@ -11,99 +11,83 @@
 
 NS_ENIGMA_BEGIN
 
-class ENIGMA_API DialogUtils final
-{
-	ENIGMA_STATIC_CLASS(DialogUtils);
-public:
-	static Enigma::MessageBox::Action Error(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			title,
-			message,
-			Enigma::MessageBox::Icon::Error,
-			choice
-			);
-		return msgbox->Show();
-	}
+class DialogUtils final {
+    ENIGMA_STATIC_CLASS(DialogUtils);
 
-	static Enigma::MessageBox::Action Error(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			"Enigma",
-			message,
-			Enigma::MessageBox::Icon::Error,
-			choice
-			);
-		return msgbox->Show();
-	}
-   
-	static Enigma::MessageBox::Action Warn(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			title,
-			message,
-			Enigma::MessageBox::Icon::Warning,
-			choice
-			);
-		return msgbox->Show();
-	}
+  public:
+    static Enigma::MessageBox::Action Error(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        title,
+        message,
+        Enigma::MessageBox::Icon::Error,
+        choice);
+      return msgbox->Show();
+    }
 
-    static Enigma::MessageBox::Action Warn(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			"Enigma",
-			message,
-			Enigma::MessageBox::Icon::Warning,
-			choice
-			);
-		return msgbox->Show();
-	}
+    static Enigma::MessageBox::Action Error(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        "Enigma",
+        message,
+        Enigma::MessageBox::Icon::Error,
+        choice);
+      return msgbox->Show();
+    }
 
-	static Enigma::MessageBox::Action Question(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Yes_No)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			title,
-			message,
-			Enigma::MessageBox::Icon::Question,
-			choice
-			);
-		return msgbox->Show();
-	}
+    static Enigma::MessageBox::Action Warn(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        title,
+        message,
+        Enigma::MessageBox::Icon::Warning,
+        choice);
+      return msgbox->Show();
+    }
 
-	static Enigma::MessageBox::Action Question(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Yes_No)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			"Enigma",
-			message,
-			Enigma::MessageBox::Icon::Question,
-			choice
-			);
-		return msgbox->Show();
-	}
+    static Enigma::MessageBox::Action Warn(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        "Enigma",
+        message,
+        Enigma::MessageBox::Icon::Warning,
+        choice);
+      return msgbox->Show();
+    }
 
-	static Enigma::MessageBox::Action Info(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			title,
-			message,
-			Enigma::MessageBox::Icon::Info,
-			choice
-			);
-		return msgbox->Show();
-	}
+    static Enigma::MessageBox::Action Question(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Yes_No) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        title,
+        message,
+        Enigma::MessageBox::Icon::Question,
+        choice);
+      return msgbox->Show();
+    }
 
-	static Enigma::MessageBox::Action Info(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok)
-	{
-		const auto msgbox = std::make_unique<Enigma::MessageBox>(
-			"Enigma",
-			message,
-			Enigma::MessageBox::Icon::Info,
-			choice
-			);
-		return msgbox->Show();
-	}
+    static Enigma::MessageBox::Action Question(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Yes_No) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        "Enigma",
+        message,
+        Enigma::MessageBox::Icon::Question,
+        choice);
+      return msgbox->Show();
+    }
 
-	/*
+    static Enigma::MessageBox::Action Info(const std::string& title, const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        title,
+        message,
+        Enigma::MessageBox::Icon::Info,
+        choice);
+      return msgbox->Show();
+    }
+
+    static Enigma::MessageBox::Action Info(const std::string& message, const Enigma::MessageBox::Choice choice = Enigma::MessageBox::Choice::Ok) {
+      const auto msgbox = std::make_unique<Enigma::MessageBox>(
+        "Enigma",
+        message,
+        Enigma::MessageBox::Icon::Info,
+        choice);
+      return msgbox->Show();
+    }
+
+    /*
 	static fs::path SelectFolder(const std::string& title, const std::string& initial_path = FileUtils::GetEnigmaExecutableDir().string(), const bool force_path = true)
 	{
 		const auto sfd = std::make_unique<Enigma::SelectFolderDialog>(
@@ -129,4 +113,4 @@ public:
 NS_ENIGMA_END
 
 
-#endif	// !ENIGMA_DIALOG_UTILS_H
+#endif // !ENIGMA_DIALOG_UTILS_H

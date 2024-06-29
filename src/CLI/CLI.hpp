@@ -8,9 +8,9 @@
 // Algorithms
 #include <Algorithm/AES/AES.hpp>
 #include <Algorithm/ChaCha20Poly1305/ChaCha20Poly1305.hpp>
+#include <Algorithm/IDEA/IDEA.hpp>
 #include <Algorithm/TripleDES/TripleDES.hpp>
 #include <Algorithm/Twofish/Twofish.hpp>
-#include <Algorithm/IDEA/IDEA.hpp>
 //#include <Algorithm/RSA/RSA.hpp>
 
 /// cxxopts: CMD parser library
@@ -38,53 +38,52 @@ $ ./Enigma -d --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypt
 
 NS_ENIGMA_BEGIN
 /** Command Line Interface */
-class ENIGMA_API CLI
-{
-public:
-	/** CLI Constructor
+class CLI {
+  public:
+    /** CLI Constructor
 	*	Parses arguments in constructor's body
 	*	@param argc: number of arguments from main entry point
 	*	@param argv: arguments values array from main entry point
 	*/
-	CLI(const std::int32_t argc, const char* const* argv);
-	~CLI() noexcept = default;
+    CLI(const std::int32_t argc, const char *const *argv);
+    ~CLI() noexcept = default;
 
-public:
-	/** Processes arguments and invokes scenarios bellow
+  public:
+    /** Processes arguments and invokes scenarios bellow
 	*	@returns exit code
 	*/
-	std::int32_t Run();
+    std::int32_t Run();
 
-private: /* Scenarios (divide and conquer) */
-	/** Scenario when encrypting a text */
-	void OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& text, const bool save_to_database);
-	/** Scenario when decrypting a text */
-	void OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& cipher_base64);
-	/** Scenario when encrypting a file */
-	void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename, const std::string& out_filename_encypted, const bool save_to_database);
-	/** Scenario when decrypting a file */
-	void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename_encrypted, const std::string& out_filename_decrypted);
+  private: /* Scenarios (divide and conquer) */
+    /** Scenario when encrypting a text */
+    void OnEncryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& text, const bool save_to_database);
+    /** Scenario when decrypting a text */
+    void OnDecryptText(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& cipher_base64);
+    /** Scenario when encrypting a file */
+    void OnEncryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename, const std::string& out_filename_encypted, const bool save_to_database);
+    /** Scenario when decrypting a file */
+    void OnDecryptFile(const std::unique_ptr<Algorithm>& algorithm, const std::string& password, const std::string& in_filename_encrypted, const std::string& out_filename_decrypted);
 
-	/** Scenario when --list arg processed to list saved encryptions from database */
-	void OnListEncryptionRecords();
+    /** Scenario when --list arg processed to list saved encryptions from database */
+    void OnListEncryptionRecords();
 
-	/** Scenario when --help arg processed to display help message */
-	void OnHelp();
-	/** Scenario when --version arg processed to display Enigma's current version */
-	void OnVersion();
-	/** Scenario when --check-for-updates arg processed to check for new releases of Enigma */
-	void OnCheckForUpdates();
+    /** Scenario when --help arg processed to display help message */
+    void OnHelp();
+    /** Scenario when --version arg processed to display Enigma's current version */
+    void OnVersion();
+    /** Scenario when --check-for-updates arg processed to check for new releases of Enigma */
+    void OnCheckForUpdates();
 
-private:
-	std::unique_ptr<cxxopts::Options> m_options; /**< cxxopts command line arguments processor */
-	std::unique_ptr<cxxopts::ParseResult> m_parse_result; /**< cxxopts command line arguments parser */
+  private:
+    std::unique_ptr<cxxopts::Options> m_options;          /**< cxxopts command line arguments processor */
+    std::unique_ptr<cxxopts::ParseResult> m_parse_result; /**< cxxopts command line arguments parser */
 };
 NS_ENIGMA_END
 
 #endif // !ENIGMA_CLI_H
 
 
-#pragma region todo 
+#pragma region todo
 #if 0
 	/** Scenario when encrypting a text with RSA (the only algorithm that should be handled differently)*/
 	void OnRSAEncryptText(const std::unique_ptr<Algorithm>& algorithm, const std::size_t key_size, const std::string& text)

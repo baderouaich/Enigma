@@ -4,19 +4,6 @@ set(BUILD_STATIC_LIBS ON CACHE BOOL "Build static libraries" FORCE)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cryptopp.cmake)
 
-if (ENIGMA_BUILD_TESTS)
-  set(CATCH_INSTALL_DOCS OFF CACHE BOOL "" FORCE)
-  set(CATCH_INSTALL_EXTRAS OFF CACHE BOOL "" FORCE)
-  set(CATCH_DEVELOPMENT_BUILD OFF CACHE BOOL "" FORCE)
-  set(CATCH_ENABLE_REPRODUCIBLE_BUILD OFF CACHE BOOL "" FORCE)
-  FetchContent_Declare(Catch2
-    GIT_REPOSITORY "https://github.com/catchorg/Catch2"
-    GIT_TAG "v3.6.0"
-    EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
-  )
-  FetchContent_MakeAvailable(Catch2)
-endif ()
-
 FetchContent_Declare(cpr
   GIT_REPOSITORY "https://github.com/libcpr/cpr"
   GIT_TAG "1.10.5"
@@ -111,6 +98,18 @@ FetchContent_Declare(zlib
 )
 FetchContent_MakeAvailable(zlib)
 
+if (ENIGMA_ENABLE_TESTS)
+  set(CATCH_INSTALL_DOCS OFF CACHE BOOL "" FORCE)
+  set(CATCH_INSTALL_EXTRAS OFF CACHE BOOL "" FORCE)
+  set(CATCH_DEVELOPMENT_BUILD OFF CACHE BOOL "" FORCE)
+  set(CATCH_ENABLE_REPRODUCIBLE_BUILD OFF CACHE BOOL "" FORCE)
+  FetchContent_Declare(Catch2
+    GIT_REPOSITORY "https://github.com/catchorg/Catch2"
+    GIT_TAG "v3.6.0"
+    EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
+  )
+  FetchContent_MakeAvailable(Catch2)
+endif ()
 
 set(ENIGMA_DEPENDENCIES
   cpr
@@ -135,6 +134,6 @@ if (WIN32)
 endif ()
 
 # Append Catch2 if we're testing
-if (ENIGMA_BUILD_TESTS)
+if (ENIGMA_ENABLE_TESTS)
   set(ENIGMA_DEPENDENCIES ${ENIGMA_DEPENDENCIES} Catch2::Catch2WithMain)
 endif ()

@@ -11,15 +11,15 @@
 #include <Windows.h>
 #elif defined(ENIGMA_PLATFORM_LINUX)
 // Linux Includes
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <sys/times.h>
 #elif defined(ENIGMA_PLATFORM_MACOS)
 // MacOS Includes
-#include <mach/mach_init.h>
 #include <mach/mach_error.h>
 #include <mach/mach_host.h>
+#include <mach/mach_init.h>
 #include <mach/vm_map.h>
 #endif
 
@@ -27,73 +27,69 @@ NS_ENIGMA_BEGIN
 /**
 *	CPUInfo class will gather informations about the CPU at runtime
 */
-class ENIGMA_API CPUInfo
-{
-public:
-	CPUInfo() noexcept;
-	~CPUInfo() noexcept = default;
+class CPUInfo {
+  public:
+    CPUInfo() noexcept;
+    ~CPUInfo() noexcept = default;
 
-	ENIGMA_NON_COPYABLE(CPUInfo);
-	ENIGMA_NON_MOVEABLE(CPUInfo);
+    ENIGMA_NON_COPYABLE(CPUInfo);
+    ENIGMA_NON_MOVEABLE(CPUInfo);
 
 
-public:
-	/**
+  public:
+    /**
 	*	Returns cpu usage (in percentage [0% -> 100%])
 	*/
-	float GetCPUUsage() noexcept;
+    float GetCPUUsage() noexcept;
 
-	/**
+    /**
 	*	Returns cpu usage by current process (in percentage [0% -> 100%])
 	*/
-	float GetProcessCPUUsage() noexcept;
+    float GetProcessCPUUsage() noexcept;
 
-private: /** Platform Functions */
+  private: /** Platform Functions */
 #if defined(ENIGMA_PLATFORM_WINDOWS) || defined(ENIGMA_PLATFORM_MACOS)
-	/**
+    /**
 	*	Calculates CPU Load percentage by idle and total ticks for (used for Windows & MacOS)
 	*/
-	float CalculateCPULoad(const std::uint64_t idle_ticks, const std::uint64_t total_ticks)
-	{
-		const std::uint64_t total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
-		const std::uint64_t idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
+    float CalculateCPULoad(const std::uint64_t idle_ticks, const std::uint64_t total_ticks) {
+      const std::uint64_t total_ticks_since_last_time = total_ticks - m_cpu_previous_total_ticks;
+      const std::uint64_t idle_ticks_since_last_time = idle_ticks - m_cpu_previous_idle_ticks;
 
-		const float rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<float>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
+      const float rate = 1.0f - ((total_ticks_since_last_time > 0) ? static_cast<float>(idle_ticks_since_last_time) / total_ticks_since_last_time : 0.0f);
 
-		m_cpu_previous_total_ticks = total_ticks;
-		m_cpu_previous_idle_ticks = idle_ticks;
+      m_cpu_previous_total_ticks = total_ticks;
+      m_cpu_previous_idle_ticks = idle_ticks;
 
-		return (rate * 100.0f);
-	}
+      return (rate * 100.0f);
+    }
 #endif
 
 
-
-private: /** Platform Variables */
+  private: /** Platform Variables */
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 
-	FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};
-	std::uint64_t m_cpu_previous_total_ticks{ 0 };
-	std::uint64_t m_cpu_previous_idle_ticks{ 0 };
+    FILETIME m_idle_time{}, m_kernel_time{}, m_user_time{};
+    std::uint64_t m_cpu_previous_total_ticks{0};
+    std::uint64_t m_cpu_previous_idle_ticks{0};
 
-	std::uint64_t FileTimeToUInt64(const FILETIME& file_time)
-	{
-		return (static_cast<std::uint64_t>(file_time.dwHighDateTime) << 32) | static_cast<std::uint64_t>(file_time.dwLowDateTime);
-	}
+    std::uint64_t FileTimeToUInt64(const FILETIME& file_time) {
+      return (static_cast<std::uint64_t>(file_time.dwHighDateTime) << 32) | static_cast<std::uint64_t>(file_time.dwLowDateTime);
+    }
 
 #elif defined(ENIGMA_PLATFORM_LINUX)
 
-	std::uint64_t m_last_total_user{ 0 };
-	std::uint64_t m_last_total_user_low{ 0 };
-	std::uint64_t m_last_total_sys{ 0 };
-	std::uint64_t m_last_total_idle{ 0 };
+    std::uint64_t m_last_total_user{0};
+    std::uint64_t m_last_total_user_low{0};
+    std::uint64_t m_last_total_sys{0};
+    std::uint64_t m_last_total_idle{0};
 
 #elif defined(ENIGMA_PLATFORM_MACOS)
 
-	std::uint64_t m_cpu_previous_total_ticks{ 0 };
-	std::uint64_t m_cpu_previous_idle_ticks{ 0 };
-	host_cpu_load_info_data_t m_cpu_info{};
-	mach_msg_type_number_t m_count = HOST_CPU_LOAD_INFO_COUNT;
+    std::uint64_t m_cpu_previous_total_ticks{0};
+    std::uint64_t m_cpu_previous_idle_ticks{0};
+    host_cpu_load_info_data_t m_cpu_info{};
+    mach_msg_type_number_t m_count = HOST_CPU_LOAD_INFO_COUNT;
 
 #endif
 };
@@ -103,13 +99,6 @@ NS_ENIGMA_END
 
 
 #endif // !ENIGMA_CPU_INFO_H
-
-
-
-
-
-
-
 
 
 #if 0
@@ -133,9 +122,9 @@ NS_ENIGMA_END
 #include <sys/vtimes.h>
 #elif defined(ENIGMA_PLATFORM_MACOS)
 // MacOS Includes
-#include <mach/mach_init.h>
 #include <mach/mach_error.h>
 #include <mach/mach_host.h>
+#include <mach/mach_init.h>
 #include <mach/vm_map.h>
 #endif
 
@@ -143,7 +132,7 @@ NS_ENIGMA_BEGIN
 /*
 *	CPUInfo class will gather informations about the CPU at runtime
 */
-class ENIGMA_API CPUInfo
+class CPUInfo
 {
 public: /* Constructors / Destructor */
 	CPUInfo() noexcept
@@ -345,26 +334,3 @@ NS_ENIGMA_END
 
 #endif // !ENIGMA_CPU_INFO_H
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

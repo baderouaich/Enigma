@@ -7,22 +7,10 @@ IDEA::IDEA(const Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::IDEA, intent)
 {
-	// Encrypting & Decrypting
-	if (intent & Intent::All)
-	{
+  if (static_cast<bool>(intent & Intent::Encrypt))
 		m_idea_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>();
+  if (static_cast<bool>(intent & Intent::Decrypt))
 		m_idea_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>();
-	}
-	// Encrypting only
-	else if (intent & Intent::Encrypt)
-	{
-		m_idea_encryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Encryption>();
-	}
-	// Decrypting only
-	else if (intent & Intent::Decrypt)
-	{
-		m_idea_decryptor = std::make_unique<CryptoPP::EAX<CryptoPP::IDEA>::Decryption>();
-	}
 }
 
 IDEA::~IDEA() noexcept

@@ -7,22 +7,10 @@ Twofish::Twofish(const Algorithm::Intent intent) noexcept
 	:
 	Algorithm(Algorithm::Type::Twofish, intent)
 {
-	// Encrypting & Decrypting
-	if (intent & Intent::All)
-	{
+  if (static_cast<bool>(intent & Intent::Encrypt))
 		m_twofish_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>();
+  if (static_cast<bool>(intent & Intent::Decrypt))
 		m_twofish_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>();
-	}
-	// Encrypting only
-	else if (intent & Intent::Encrypt)
-	{
-		m_twofish_encryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Encryption>();
-	}
-	// Decrypting only
-	else if (intent & Intent::Decrypt)
-	{
-		m_twofish_decryptor = std::make_unique<CryptoPP::GCM<CryptoPP::Twofish>::Decryption>();
-	}
 }
 Twofish::~Twofish() noexcept
 {

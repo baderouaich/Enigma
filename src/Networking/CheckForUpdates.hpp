@@ -17,169 +17,151 @@
 
 
 NS_ENIGMA_BEGIN
-class ENIGMA_API CheckForUpdates final
-{
-	ENIGMA_STATIC_CLASS(CheckForUpdates);
-public:
-	/** Comparable Version struct, an instance can be made from a version string e.g "1.0.0" */
-	struct Version
-	{
-		std::uint16_t major;
-		std::uint16_t minor;
-		std::uint16_t patch;
+class CheckForUpdates final {
+    ENIGMA_STATIC_CLASS(CheckForUpdates);
 
-		Version() : major(0), minor(0), patch(0) {}
-		Version(const std::string& tag_name)
-		{
-			Parse(tag_name);
-		}
+  public:
+    /** Comparable Version struct, an instance can be made from a version string e.g "1.0.0" */
+    struct Version {
+        std::uint16_t major;
+        std::uint16_t minor;
+        std::uint16_t patch;
 
-		void Parse(const std::string& tag_name)
-		{
-			const std::vector<std::string> parts = StringUtils::Split(tag_name, '.');
-			ENIGMA_ASSERT_OR_THROW(parts.size() == 3, fmt::format("Version tag_name is malformed, expected major.minor.patch (%d.%d.%d) but received {}", tag_name));
+        Version() : major(0), minor(0), patch(0) {}
+        Version(const std::string& tag_name) {
+          Parse(tag_name);
+        }
 
-			// Convert string parts to std::uint16_t major minor patch
-			const auto stoui16 = [](const std::string& str) -> std::uint16_t
-			{
-				std::uint16_t i{};
-				std::stringstream oss(str);
-				oss >> i;
-				return i;
-			};
+        void Parse(const std::string& tag_name) {
+          const std::vector<std::string> parts = StringUtils::Split(tag_name, '.');
+          ENIGMA_ASSERT_OR_THROW(parts.size() == 3, fmt::format("Version tag_name is malformed, expected major.minor.patch (%d.%d.%d) but received {}", tag_name));
 
-			major = stoui16(parts[0]);
-			minor = stoui16(parts[1]);
-			patch = stoui16(parts[2]);
-		}
+          // Convert string parts to std::uint16_t major minor patch
+          const auto stoui16 = [](const std::string& str) -> std::uint16_t {
+            std::uint16_t i{};
+            std::stringstream oss(str);
+            oss >> i;
+            return i;
+          };
+
+          major = stoui16(parts[0]);
+          minor = stoui16(parts[1]);
+          patch = stoui16(parts[2]);
+        }
 
 
-    constexpr bool operator>(const Version& other) const noexcept {
-      if (major > other.major) return true;
-      if (major < other.major) return false;
-      // At this point, major == other.major
-      if (minor > other.minor) return true;
-      if (minor < other.minor) return false;
-      // At this point, minor == other.minor
-      return patch > other.patch;
-    }
+        constexpr bool operator>(const Version& other) const noexcept {
+          if (major > other.major) return true;
+          if (major < other.major) return false;
+          // At this point, major == other.major
+          if (minor > other.minor) return true;
+          if (minor < other.minor) return false;
+          // At this point, minor == other.minor
+          return patch > other.patch;
+        }
 
-    constexpr bool operator<(const Version& other) const noexcept {
-      if (major < other.major) return true;
-      if (major > other.major) return false;
-      // At this point, major == other.major
-      if (minor < other.minor) return true;
-      if (minor > other.minor) return false;
-      // At this point, minor == other.minor
-      return patch < other.patch;
-    }
+        constexpr bool operator<(const Version& other) const noexcept {
+          if (major < other.major) return true;
+          if (major > other.major) return false;
+          // At this point, major == other.major
+          if (minor < other.minor) return true;
+          if (minor > other.minor) return false;
+          // At this point, minor == other.minor
+          return patch < other.patch;
+        }
 
-    constexpr bool operator==(const Version& other) const noexcept {
-      return major == other.major && minor == other.minor && patch == other.patch;
-    }
+        constexpr bool operator==(const Version& other) const noexcept {
+          return major == other.major && minor == other.minor && patch == other.patch;
+        }
 
-    friend std::ostream& operator<<(std::ostream& os, const Version& v) noexcept {
-      return os << v.major <<'.' << v.minor << '.' << v.patch;
-    }
-	};
+        friend std::ostream& operator<<(std::ostream& os, const Version& v) noexcept {
+          return os << v.major << '.' << v.minor << '.' << v.patch;
+        }
+    };
 
-	/** Latest Enigma release information data struct */
-	struct LatestReleaseInfo
-	{
-		std::string name;   // "name": "Enigma Release (Windows x64, Linux x64)",
-		std::string tag_name; // version e.g 1.0.0
-		std::string created_at;//"created_at": "2021-02-06T11:41:26Z",
-		std::string published_at;	//"published_at" : "2021-02-06T12:16:37Z",
-		std::string body;	//  "body": "Enigma first stable release for Windows x64 and Linux x64 using:\r\n- Crypto++ v8.4.0\r\n- GLFW v3.3.2\r\n- ImGui v1.79\r\n- spdlog v1.8.0\r\n- and other libraries"
-		std::string tarball_url; // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
-		std::string zipball_url;	// "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
-		Version version; // parsed comparable version
+    /** Latest Enigma release information data struct */
+    struct LatestReleaseInfo {
+        std::string name;         // "name": "Enigma Release (Windows x64, Linux x64)",
+        std::string tag_name;     // version e.g 1.0.0
+        std::string created_at;   //"created_at": "2021-02-06T11:41:26Z",
+        std::string published_at; //"published_at" : "2021-02-06T12:16:37Z",
+        std::string body;         //  "body": "Enigma first stable release for Windows x64 and Linux x64 using:\r\n- Crypto++ v8.4.0\r\n- GLFW v3.3.2\r\n- ImGui v1.79\r\n- spdlog v1.8.0\r\n- and other libraries"
+        std::string tarball_url;  // "tarball_url": "https://api.github.com/repos/BaderEddineOuaich/Enigma/tarball/v1.0.0",
+        std::string zipball_url;  // "zipball_url" : "https://api.github.com/repos/BaderEddineOuaich/Enigma/zipball/v1.0.0",
+        Version version;          // parsed comparable version
 
-		LatestReleaseInfo() noexcept
-			:
-			tag_name("<unknown>"),
-			name("<unknown>"),
-			created_at("<unknown>"),
-			published_at("<unknown>"),
-			body("<unknown>"),
-			tarball_url("<unknown>"),
-			zipball_url("<unknown>"),
-			version()
-		{}
-		
-		~LatestReleaseInfo() noexcept = default;
+        LatestReleaseInfo() noexcept
+            : tag_name("<unknown>"),
+              name("<unknown>"),
+              created_at("<unknown>"),
+              published_at("<unknown>"),
+              body("<unknown>"),
+              tarball_url("<unknown>"),
+              zipball_url("<unknown>"),
+              version() {}
 
-		static std::unique_ptr<LatestReleaseInfo> FromJson(const nlohmann::json& obj)
-		{
+        ~LatestReleaseInfo() noexcept = default;
+
+        static std::unique_ptr<LatestReleaseInfo> FromJson(const nlohmann::json& obj) {
 #define CC1(a, b) a##b
 #define CC(a, b) CC1(a, b)
-#define ASSIGN_IF(var, field, json_type) \
-		if(!obj[field].is_null() && CC(obj[field].is_, json_type)()) \
-			(var) = obj[field].get<decltype(var)>(); 
+#define ASSIGN_IF(var, field, json_type)                        \
+  if (!obj[field].is_null() && CC(obj[field].is_, json_type)()) \
+    (var) = obj[field].get<decltype(var)>();
 
-			std::unique_ptr<LatestReleaseInfo> info = std::make_unique<LatestReleaseInfo>();
-			ASSIGN_IF(info->name, "name", string);
-			ASSIGN_IF(info->tag_name, "tag_name", string);
-			ASSIGN_IF(info->created_at, "created_at", string);
-			ASSIGN_IF(info->published_at, "published_at", string);
-			ASSIGN_IF(info->body, "body", string);
-			ASSIGN_IF(info->tarball_url, "tarball_url", string);
-			ASSIGN_IF(info->zipball_url, "zipball_url", string);
+          std::unique_ptr<LatestReleaseInfo> info = std::make_unique<LatestReleaseInfo>();
+          ASSIGN_IF(info->name, "name", string);
+          ASSIGN_IF(info->tag_name, "tag_name", string);
+          ASSIGN_IF(info->created_at, "created_at", string);
+          ASSIGN_IF(info->published_at, "published_at", string);
+          ASSIGN_IF(info->body, "body", string);
+          ASSIGN_IF(info->tarball_url, "tarball_url", string);
+          ASSIGN_IF(info->zipball_url, "zipball_url", string);
 
-			info->version.Parse(info->tag_name); // parse version by tagname
-			return info;
+          info->version.Parse(info->tag_name); // parse version by tagname
+          return info;
 
 #undef ASSIGN_IF
 #undef CC1
 #undef CC
-		}
-		
-		std::string toString() noexcept
-		{
-			std::ostringstream oss;
-			if (!name.empty())
-				oss << "name: " << name << " ";
-			if (!tag_name.empty())
-				oss << "tag name: " << tag_name << " ";
-			if (!created_at.empty())
-				oss << "created at: " << created_at << " ";
-			if (!published_at.empty())
-				oss << "published at: " << published_at << " ";
-			if (!body.empty())
-				oss << "body: " << body << " ";
-			if (!tarball_url.empty())
-				oss << "tarball_url: " << tarball_url << " ";
-			if (!zipball_url.empty())
-				oss << "zipball_url: " << zipball_url << " ";
-			return oss.str();
-		}
+        }
 
-		
-	};
+        std::string toString() noexcept {
+          std::ostringstream oss;
+          if (!name.empty())
+            oss << "name: " << name << " ";
+          if (!tag_name.empty())
+            oss << "tag name: " << tag_name << " ";
+          if (!created_at.empty())
+            oss << "created at: " << created_at << " ";
+          if (!published_at.empty())
+            oss << "published at: " << published_at << " ";
+          if (!body.empty())
+            oss << "body: " << body << " ";
+          if (!tarball_url.empty())
+            oss << "tarball_url: " << tarball_url << " ";
+          if (!zipball_url.empty())
+            oss << "zipball_url: " << zipball_url << " ";
+          return oss.str();
+        }
+    };
 
-public:
-	/** Returns the Latest Enigma release information using GitHub API */
-	static std::unique_ptr<LatestReleaseInfo> GetLatestReleaseInfo()
-	{
-		try
-		{
-			cpr::Url url = Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE;
-			cpr::Response response = cpr::Get(url);
-			if (response.status_code == cpr::status::HTTP_OK)
-			{
-				nlohmann::json data = nlohmann::json::parse(response.text);
-				return LatestReleaseInfo::FromJson(data);
-			}
-			else
-				ENIGMA_WARN("Failed to get latest release info with status code {0}", response.status_code);
-		}
-		catch (const std::exception& e)
-		{
-			ENIGMA_WARN("Failed to get latest release info with exception {0}", e.what());
-		}
-		return nullptr;
-	}
-
+  public:
+    /** Returns the Latest Enigma release information using GitHub API */
+    static std::unique_ptr<LatestReleaseInfo> GetLatestReleaseInfo() {
+      try {
+        cpr::Url url = Constants::Links::ENIGMA_GITHUB_API_LATEST_RELEASE;
+        cpr::Response response = cpr::Get(url);
+        if (response.status_code == cpr::status::HTTP_OK) {
+          nlohmann::json data = nlohmann::json::parse(response.text);
+          return LatestReleaseInfo::FromJson(data);
+        } else
+          ENIGMA_WARN("Failed to get latest release info with status code {0}", response.status_code);
+      } catch (const std::exception& e) {
+        ENIGMA_WARN("Failed to get latest release info with exception {0}", e.what());
+      }
+      return nullptr;
+    }
 };
 NS_ENIGMA_END
 

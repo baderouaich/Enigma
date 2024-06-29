@@ -10,24 +10,23 @@ NS_ENIGMA_BEGIN
 * 
 *	@note: see examples/example_glfw_opengl3/main.cpp/
 */
-class ENIGMA_API ImGuiRenderer
-{
-public:
-	/** Constructor
+class ImGuiRenderer {
+  public:
+    /** Constructor
 	*	Initializes ImGui context
 	*/
-	ImGuiRenderer();
+    ImGuiRenderer();
 
-	/** Destructor
+    /** Destructor
 	*	Shuts down ImGui context
 	*/
-	~ImGuiRenderer();
+    ~ImGuiRenderer();
 
-	/** Begin imgui rendering */
-	void Begin();
+    /** Begin imgui rendering */
+    void Begin();
 
-	/** End imgui rendering */
-	void End();
+    /** End imgui rendering */
+    void End();
 };
 
 NS_ENIGMA_END

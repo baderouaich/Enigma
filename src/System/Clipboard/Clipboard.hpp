@@ -7,15 +7,15 @@
 NS_ENIGMA_BEGIN
 
 /** Clipboard Manager static class */
-class ENIGMA_API Clipboard final
-{
-	ENIGMA_STATIC_CLASS(Clipboard);
-public:
-	/** Get Clipboard text */
-	static std::string Get();
+class Clipboard final {
+  ENIGMA_STATIC_CLASS(Clipboard);
 
-	/** Set Clipboard text */
-	static void Set(const std::string& buffer);
+public:
+  /** Get Clipboard text */
+  static std::string Get();
+
+  /** Set Clipboard text */
+  static void Set(const std::string& buffer);
 };
 
 NS_ENIGMA_END
