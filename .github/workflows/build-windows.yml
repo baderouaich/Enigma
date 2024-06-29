@@ -74,4 +74,4 @@ jobs:
         run: cd build && make EnigmaTests -j%NUMBER_OF_PROCESSORS%
 
       - name: Run Enigma Tests
-        run: build/tests/EnigmaTests
+        run: .\build\tests\EnigmaTests
