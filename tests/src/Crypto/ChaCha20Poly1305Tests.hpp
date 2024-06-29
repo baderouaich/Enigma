@@ -1,29 +1,29 @@
 #pragma once
 #include <catch2/catch_all.hpp>
-#include <Algorithm/Twofish/Twofish.hpp>
+#include <Algorithm/ChaCha20Poly1305/ChaCha20Poly1305.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <Tests/TestsData.hpp>
+#include "TestsData.hpp"
 
 using namespace Enigma;
 using namespace Catch::Matchers;
 
 
-TEST_CASE("Twofish Encryption and Decryption")
+TEST_CASE("ChaCha20Poly1305 Encryption and Decryption")
 {
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	// Make TripleDES algorithm with intention to Encrypt and Decrypt
-	std::unique_ptr<Twofish> twofish(new Twofish(Twofish::Intent::Encrypt | Twofish::Intent::Decrypt));
+	// Make ChaCha20Poly1305 algorithm with intention to Encrypt and Decrypt
+	std::unique_ptr<ChaCha20Poly1305> chacha(new ChaCha20Poly1305(ChaCha20Poly1305::Intent::Encrypt | ChaCha20Poly1305::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
+	std::string buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
+	std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 
 	// Encrypted buffer (aka cipher)
-	String encrypted = twofish->Encrypt(password, buffer);
+	std::string encrypted = chacha->Encrypt(password, buffer);
 	// Decrypted cipher (aka recovered)
-	String decrypted = twofish->Decrypt(password, encrypted);
+	std::string decrypted = chacha->Decrypt(password, encrypted);
 
 	SECTION("Comparing buffers")
 	{

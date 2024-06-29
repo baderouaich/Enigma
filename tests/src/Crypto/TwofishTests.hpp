@@ -1,29 +1,28 @@
 #pragma once
 #include <catch2/catch_all.hpp>
-#include <Algorithm/TripleDES/TripleDES.hpp>
+#include <Algorithm/Twofish/Twofish.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <Tests/TestsData.hpp>
-
+#include "TestsData.hpp"
 using namespace Enigma;
 using namespace Catch::Matchers;
 
 
-TEST_CASE("TripleDES Encryption and Decryption")
+TEST_CASE("Twofish Encryption and Decryption")
 {
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
-	
+
 	// Make TripleDES algorithm with intention to Encrypt and Decrypt
-	std::unique_ptr<TripleDES> idea(new TripleDES(TripleDES::Intent::Encrypt | TripleDES::Intent::Decrypt));
+	std::unique_ptr<Twofish> twofish(new Twofish(Twofish::Intent::Encrypt | Twofish::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
+	std::string buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
+	std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 
 	// Encrypted buffer (aka cipher)
-	String encrypted = idea->Encrypt(password, buffer);
+	std::string encrypted = twofish->Encrypt(password, buffer);
 	// Decrypted cipher (aka recovered)
-	String decrypted = idea->Decrypt(password, encrypted);
+	std::string decrypted = twofish->Decrypt(password, encrypted);
 
 	SECTION("Comparing buffers")
 	{

@@ -4,7 +4,7 @@
 #include <Utility/Base64.hpp>
 #include <Utility/SizeUtils.hpp>
 #include <Algorithm/AES/AES.hpp>
-#include <Tests/TestsData.hpp>
+#include "TestsData.hpp"
 
 using namespace Enigma;
 using namespace Catch;
@@ -21,17 +21,17 @@ TEST_CASE("Base64 Encode And Decode Cipher With AES", "Base64")
 	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
+	std::string buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
+	std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 	// Encrypted buffer (aka cipher)
-	String encrypted = aes->Encrypt(password, buffer);
+	std::string encrypted = aes->Encrypt(password, buffer);
 	// Encode cipher to Base64
-	String encoded_cipher = Base64::Encode(encrypted);
+	std::string encoded_cipher = Base64::Encode(encrypted);
 	// Decode encoded cipher base64 to cipher
-	String decoded_cipher = Base64::Decode(encoded_cipher);
+	std::string decoded_cipher = Base64::Decode(encoded_cipher);
 	// Decrypted cipher (aka recovered)
-	String decrypted = aes->Decrypt(password, decoded_cipher);
+	std::string decrypted = aes->Decrypt(password, decoded_cipher);
 	
 
 	// Decoded must match cipher
@@ -49,15 +49,15 @@ TEST_CASE("Encode and Decode text", "Base64")
 {
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	String buffer = LOREM_IPSUM * Random::Int<std::size_t>(10, 10000);
+	std::string buffer = LOREM_IPSUM * Random::Int<std::size_t>(10, 10000);
 
 	BEGIN_TIMER(t1);
-    String base64_encoded = Base64::Encode(buffer);
+    std::string base64_encoded = Base64::Encode(buffer);
 	auto en_ms = END_TIMER(t1, milliseconds);
 	std::cout << "Encoded " << SizeUtils::FriendlySize(buffer.size()) << " in " << en_ms << "ms\n";
 
 	BEGIN_TIMER(t2);
-	String base64_decoded = Base64::Decode(base64_encoded);
+	std::string base64_decoded = Base64::Decode(base64_encoded);
 	auto de_ms = END_TIMER(t2, milliseconds);
 	std::cout << "Decoded " << SizeUtils::FriendlySize(base64_encoded.size()) << " in " << de_ms << "ms\n";
 

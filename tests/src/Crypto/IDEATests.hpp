@@ -2,8 +2,7 @@
 #include <catch2/catch_all.hpp>
 #include <Algorithm/IDEA/IDEA.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <Tests/TestsData.hpp>
-
+#include "TestsData.hpp"
 using namespace Enigma;
 using namespace Catch::Matchers;
 
@@ -15,14 +14,14 @@ TEST_CASE("IDEA Encryption and Decryption")
 	std::unique_ptr<IDEA> idea(new IDEA(IDEA::Intent::Encrypt | IDEA::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
+	std::string buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
+	std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 
 	// Encrypted buffer (aka cipher)
-	String encrypted = idea->Encrypt(password, buffer);
+	std::string encrypted = idea->Encrypt(password, buffer);
 	// Decrypted cipher (aka recovered)
-	String decrypted = idea->Decrypt(password, encrypted);
+	std::string decrypted = idea->Decrypt(password, encrypted);
 
 	SECTION("Comparing buffers")
 	{

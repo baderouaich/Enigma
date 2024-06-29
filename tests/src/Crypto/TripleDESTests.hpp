@@ -1,31 +1,29 @@
 #pragma once
 #include <catch2/catch_all.hpp>
-#include <Algorithm/Blowfish/Blowfish.hpp>
-#include <System/Dialogs/OpenFileDialog.hpp>
-#include <Utility/FileUtils.hpp>
+#include <Algorithm/TripleDES/TripleDES.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <Tests/TestsData.hpp>
-#include <iostream>
+#include "TestsData.hpp"
 
 using namespace Enigma;
 using namespace Catch::Matchers;
 
-TEST_CASE("Blowfish-GCM Encryption and Decryption")
+
+TEST_CASE("TripleDES Encryption and Decryption")
 {
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
-
-	// Make Blowfish algorithm with intention to Encrypt and Decrypt
-	std::unique_ptr<Blowfish> blowfish(new Blowfish(Blowfish::Intent::Encrypt | Blowfish::Intent::Decrypt));
+	
+	// Make TripleDES algorithm with intention to Encrypt and Decrypt
+	std::unique_ptr<TripleDES> idea(new TripleDES(TripleDES::Intent::Encrypt | TripleDES::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
+	std::string buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
+	std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 
 	// Encrypted buffer (aka cipher)
-	String encrypted = blowfish->Encrypt(password, buffer);
+	std::string encrypted = idea->Encrypt(password, buffer);
 	// Decrypted cipher (aka recovered)
-	String decrypted = blowfish->Decrypt(password, encrypted);
+	std::string decrypted = idea->Decrypt(password, encrypted);
 
 	SECTION("Comparing buffers")
 	{

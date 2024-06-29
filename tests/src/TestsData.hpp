@@ -6,18 +6,18 @@
 namespace Enigma
 {
 	// multiply string
-	String operator*(const String& str, const std::size_t mult)
+	std::string operator*(const std::string& str, const std::size_t mult)
 	{
-		String out(str.size() * mult, '\000');
+		std::string out(str.size() * mult, '\000');
 		std::size_t j{ 0 };
 		for (std::size_t i{ 0 }; i < mult; ++i)
 			for (const auto& c : str)
 				out[j++] = c;
 		return out;
 	}
-	String operator*(const std::string_view& str, const std::size_t mult)
+	std::string operator*(const std::string_view& str, const std::size_t mult)
 	{
-		return operator*(String(str), mult);
+		return operator*(std::string(str), mult);
 	}
 
 	static constexpr const std::string_view LOREM_IPSUM = R"(Lorem ipsum dolor sit amet, consectetur adipiscing elit.

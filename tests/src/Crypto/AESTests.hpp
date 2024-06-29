@@ -5,7 +5,7 @@
 #include <Utility/SizeUtils.hpp>
 #include <Utility/Random.hpp>
 #include <System/Dialogs/OpenFileDialog.hpp>
-#include <Tests/TestsData.hpp>
+#include "TestsData.hpp"
 
 using namespace Enigma;
 using namespace Catch::Matchers;
@@ -15,7 +15,7 @@ using namespace std;
 
 #if TESTING_FILES
 
-String GetSelectedFilePath()
+std::string GetSelectedFilePath()
 {
 	Enigma::OpenFileDialog ofd("Select a file to encrypt", ".", false);
 	if (const auto files = ofd.Show(); !files.empty())
@@ -35,11 +35,11 @@ TEST_CASE("AES File Encryption and Decryption")
 	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
 	// Encryption password
-	String password = Random::Str(4096);
+	std::string password = Random::Str(4096);
 
 	// File to encrypt
-	String filename_to_encrypt = GetSelectedFilePath();
-	String buffer;
+	std::string filename_to_encrypt = GetSelectedFilePath();
+	std::string buffer;
 	if (!FileUtils::Read(filename_to_encrypt, buffer))
 	{
 		std::cerr << "Failed to read file\n";
@@ -47,10 +47,10 @@ TEST_CASE("AES File Encryption and Decryption")
 	}
 	
 	// Encrypt file buffer
-	String encrypted = aes->Encrypt(password, buffer);
+	std::string encrypted = aes->Encrypt(password, buffer);
 
 	// Decrypt file buffer
-	String decrypted = aes->Decrypt(password, encrypted);
+	std::string decrypted = aes->Decrypt(password, encrypted);
 	
 	// Buffer must not match cipher
 	REQUIRE_THAT(buffer, !Equals(encrypted));
@@ -82,14 +82,14 @@ TEST_CASE("AES-GCM Encryption and Decryption")
 	std::unique_ptr<AES> aes(new AES(AES::Intent::Encrypt | AES::Intent::Decrypt));
 
 	// Buffer to encrypt
-	String buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)), true);
+	std::string buffer = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
 	// Encryption password
-	String password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)), true);
+	std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 
 	// Encrypted buffer (aka cipher)
-	String encrypted = aes->Encrypt(password, buffer);
+	std::string encrypted = aes->Encrypt(password, buffer);
 	// Decrypted cipher (aka recovered)
-	String decrypted = aes->Decrypt(password, encrypted);
+	std::string decrypted = aes->Decrypt(password, encrypted);
 
 	SECTION("Comparing buffers")
 	{
