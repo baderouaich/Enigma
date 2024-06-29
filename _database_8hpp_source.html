@@ -361,67 +361,70 @@ $(document).ready(function(){initNavTree('_database_8hpp_source.html',''); initR
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  <span class="keyword">public</span>: <span class="comment">// Modifiers</span></div>
 <div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="class_database.html#af4daead17615fc64497e2f1212b121bf">  301</a></span>&#160;<span class="comment"></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_database.html#af4daead17615fc64497e2f1212b121bf">Vacuum</a>() noexcept;</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  private:</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    inline static std::unique_ptr&lt;SQLite::<a class="code" href="class_database.html">Database</a>&gt; m_database{<span class="keyword">nullptr</span>}; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;};</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_DATABASE_H</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="preprocessor">#if 0</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">// TODO</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">// Export all encryptions data to a json file</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> ExportAllEncryptionsJSON(<span class="keyword">const</span> fs::path&amp; filename)</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <a class="code" href="_macros_8hpp.html#ad952be9546d5a30a7cd4806a936900dc">ENIGMA_TRACE_CURRENT_FUNCTION</a>();</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <a class="code" href="_macros_8hpp.html#adbd17ad6c475316b2fa73bf2a5f9fcde">ENIGMA_ASSERT_OR_RETURN</a>(m_database, <span class="stringliteral">&quot;Database was not initialized&quot;</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordflow">try</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Getting all encryptions from database to export to json file {}...&quot;</span>, filename.string());</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        std::vector&lt;std::unique_ptr&lt;Encryption&gt;&gt; encryptions = Database::GetAllEncryptions&lt;true, true, true, true, true&gt;();</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Got {0} Encryption records.&quot;</span>, encryptions.size());</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        <span class="comment">// Make json </span></div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <span class="keyword">using namespace </span>nlohmann;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        json json_encryptions = json::array();</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; encryption_ptr : encryptions)</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            <span class="comment">// expand Encryption </span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; [ide, title, cipher, date_time, size, is_file] = *encryption_ptr;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160; </div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            <span class="comment">// make encryption object</span></div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            json enc_obj{};</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            enc_obj[<span class="stringliteral">&quot;ide&quot;</span>] = ide;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            enc_obj[<span class="stringliteral">&quot;title&quot;</span>] = title;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            json cipher_obj{};</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            cipher_obj[<span class="stringliteral">&quot;idc&quot;</span>] = cipher.idc;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            cipher_obj[<span class="stringliteral">&quot;ide&quot;</span>] = cipher.ide;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            cipher_obj[<span class="stringliteral">&quot;data&quot;</span>] = cipher.data;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            enc_obj[<span class="stringliteral">&quot;cipher&quot;</span>] = cipher_obj;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            enc_obj[<span class="stringliteral">&quot;date_time&quot;</span>] = date_time;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            enc_obj[<span class="stringliteral">&quot;size&quot;</span>] = size;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            enc_obj[<span class="stringliteral">&quot;is_file&quot;</span>] = is_file;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            <span class="comment">// add obj to array</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            json_encryptions.push_back(std::move(enc_obj));</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        }</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="comment">// we can freeup the memory now.</span></div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        encryptions.clear();</div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="class_database.html#ac6f71c66260d0b74a6381bc5bd50f6b5">  303</a></span>&#160;    static <span class="keywordtype">void</span> <a class="code" href="class_database.html#ac6f71c66260d0b74a6381bc5bd50f6b5">Export</a>(const fs::path&amp; filename);</div>
+<div class="line"><a name="l00304"></a><span class="lineno"><a class="line" href="class_database.html#a946954852fb5a30b683750badd38d0a7">  304</a></span>&#160;    static <span class="keywordtype">void</span> <a class="code" href="class_database.html#a946954852fb5a30b683750badd38d0a7">Import</a>(const fs::path&amp; filename);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  private:</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    inline static std::unique_ptr&lt;SQLite::<a class="code" href="class_database.html">Database</a>&gt; m_database{<span class="keyword">nullptr</span>}; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;};</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_DATABASE_H</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">// TODO</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">// Export all encryptions data to a json file</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> ExportAllEncryptionsJSON(<span class="keyword">const</span> fs::path&amp; filename)</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;{</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <a class="code" href="_macros_8hpp.html#ad952be9546d5a30a7cd4806a936900dc">ENIGMA_TRACE_CURRENT_FUNCTION</a>();</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <a class="code" href="_macros_8hpp.html#adbd17ad6c475316b2fa73bf2a5f9fcde">ENIGMA_ASSERT_OR_RETURN</a>(m_database, <span class="stringliteral">&quot;Database was not initialized&quot;</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordflow">try</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Getting all encryptions from database to export to json file {}...&quot;</span>, filename.string());</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        std::vector&lt;std::unique_ptr&lt;Encryption&gt;&gt; encryptions = Database::GetAllEncryptions&lt;true, true, true, true, true&gt;();</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Got {0} Encryption records.&quot;</span>, encryptions.size());</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160; </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="comment">// Make json </span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keyword">using namespace </span>nlohmann;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        json json_encryptions = json::array();</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; encryption_ptr : encryptions)</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        {</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            <span class="comment">// expand Encryption </span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; [ide, title, cipher, date_time, size, is_file] = *encryption_ptr;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <span class="comment">// make encryption object</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            json enc_obj{};</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            enc_obj[<span class="stringliteral">&quot;ide&quot;</span>] = ide;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            enc_obj[<span class="stringliteral">&quot;title&quot;</span>] = title;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            json cipher_obj{};</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            cipher_obj[<span class="stringliteral">&quot;idc&quot;</span>] = cipher.idc;</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            cipher_obj[<span class="stringliteral">&quot;ide&quot;</span>] = cipher.ide;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            cipher_obj[<span class="stringliteral">&quot;data&quot;</span>] = cipher.data;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            enc_obj[<span class="stringliteral">&quot;cipher&quot;</span>] = cipher_obj;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            enc_obj[<span class="stringliteral">&quot;date_time&quot;</span>] = date_time;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            enc_obj[<span class="stringliteral">&quot;size&quot;</span>] = size;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            enc_obj[<span class="stringliteral">&quot;is_file&quot;</span>] = is_file;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <span class="comment">// add obj to array</span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            json_encryptions.push_back(std::move(enc_obj));</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        }</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="comment">// save made json array to file</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">FileUtils::Write</a>(filename, json_encryptions.dump(-1, 32, <span class="keyword">false</span>, json::error_handler_t::replace));</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    }</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordflow">catch</span> (<span class="keyword">const</span> SQLite::Exception&amp; e)</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    {</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(e.what());</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;}</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="comment">// we can freeup the memory now.</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        encryptions.clear();</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <span class="comment">// save made json array to file</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">FileUtils::Write</a>(filename, json_encryptions.dump(-1, 32, <span class="keyword">false</span>, json::error_handler_t::replace));</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    }</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">catch</span> (<span class="keyword">const</span> SQLite::Exception&amp; e)</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    {</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(e.what());</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    }</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;}</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_database_8hpp_html_aa3c0f2e398b23d7263d9fa3e2f0ca010"><div class="ttname"><a href="_database_8hpp.html#aa3c0f2e398b23d7263d9fa3e2f0ca010">CASE_STR</a></div><div class="ttdeci">#define CASE_STR(e)</div></div>
 <div class="ttc" id="a_encryption_8hpp_html"><div class="ttname"><a href="_encryption_8hpp.html">Encryption.hpp</a></div></div>
@@ -448,6 +451,7 @@ $(document).ready(function(){initNavTree('_database_8hpp_source.html',''); initR
 <div class="ttc" id="aclass_database_html_a4c1682f9c07dc77a2d617f9afbebe5ee"><div class="ttname"><a href="class_database.html#a4c1682f9c07dc77a2d617f9afbebe5ee">Database::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const Order order) noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_database_8hpp_source.html#l00095">Database.hpp:95</a></div></div>
 <div class="ttc" id="aclass_database_html_a82a5e57a35d878e58a366994d9ce15c9"><div class="ttname"><a href="class_database.html#a82a5e57a35d878e58a366994d9ce15c9">Database::AddEncryption</a></div><div class="ttdeci">static std::int64_t AddEncryption(const std::unique_ptr&lt; Encryption &gt; &amp;e)</div></div>
 <div class="ttc" id="aclass_database_html_a8c42e2e9026d3cf88b9138fe37597552"><div class="ttname"><a href="class_database.html#a8c42e2e9026d3cf88b9138fe37597552">Database::GetAllEncryptions</a></div><div class="ttdeci">static std::vector&lt; std::unique_ptr&lt; Encryption &gt; &gt; GetAllEncryptions(OrderBy order_by=OrderBy::ID, Order order=Order::Descending)</div><div class="ttdef"><b>Definition:</b> <a href="_database_8hpp_source.html#l00179">Database.hpp:179</a></div></div>
+<div class="ttc" id="aclass_database_html_a946954852fb5a30b683750badd38d0a7"><div class="ttname"><a href="class_database.html#a946954852fb5a30b683750badd38d0a7">Database::Import</a></div><div class="ttdeci">static void Import(const fs::path &amp;filename)</div></div>
 <div class="ttc" id="aclass_database_html_a9bd75f5fcaa90e5b61a9076059049b6b"><div class="ttname"><a href="class_database.html#a9bd75f5fcaa90e5b61a9076059049b6b">Database::Initialize</a></div><div class="ttdeci">static void Initialize()</div></div>
 <div class="ttc" id="aclass_database_html_a9fb4733553b57c5de32e3ad0165f1af0"><div class="ttname"><a href="class_database.html#a9fb4733553b57c5de32e3ad0165f1af0">Database::DeleteEncryption</a></div><div class="ttdeci">static bool DeleteEncryption(const std::int64_t ide)</div></div>
 <div class="ttc" id="aclass_database_html_aa1f2f378f89317278066230c52cb2d22"><div class="ttname"><a href="class_database.html#aa1f2f378f89317278066230c52cb2d22">Database::GetEncryptionsCount</a></div><div class="ttdeci">static std::int64_t GetEncryptionsCount()</div></div>
@@ -458,6 +462,7 @@ $(document).ready(function(){initNavTree('_database_8hpp_source.html',''); initR
 <div class="ttc" id="aclass_database_html_ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b"><div class="ttname"><a href="class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bae3cf5ac19407b1a62c6fccaff675a53b">Database::Order::Descending</a></div><div class="ttdeci">@ Descending</div></div>
 <div class="ttc" id="aclass_database_html_abe593832130d352012424639347f4af0"><div class="ttname"><a href="class_database.html#abe593832130d352012424639347f4af0">Database::GetCipherByEncryptionID</a></div><div class="ttdeci">static std::unique_ptr&lt; Cipher &gt; GetCipherByEncryptionID(const std::int64_t ide)</div></div>
 <div class="ttc" id="aclass_database_html_ac474aa0a55a9f1894809f83263423682"><div class="ttname"><a href="class_database.html#ac474aa0a55a9f1894809f83263423682">Database::DeleteAllEncryptions</a></div><div class="ttdeci">static bool DeleteAllEncryptions()</div></div>
+<div class="ttc" id="aclass_database_html_ac6f71c66260d0b74a6381bc5bd50f6b5"><div class="ttname"><a href="class_database.html#ac6f71c66260d0b74a6381bc5bd50f6b5">Database::Export</a></div><div class="ttdeci">static void Export(const fs::path &amp;filename)</div></div>
 <div class="ttc" id="aclass_database_html_acfae334d0d409590e8acd1f8011eb99e"><div class="ttname"><a href="class_database.html#acfae334d0d409590e8acd1f8011eb99e">Database::operator*</a></div><div class="ttdeci">friend const char * operator*(OrderBy order_by)</div><div class="ttdef"><b>Definition:</b> <a href="_database_8hpp_source.html#l00040">Database.hpp:40</a></div></div>
 <div class="ttc" id="aclass_database_html_ae00addd756eaf674f059f4e04b3756fa"><div class="ttname"><a href="class_database.html#ae00addd756eaf674f059f4e04b3756fa">Database::Shutdown</a></div><div class="ttdeci">static void Shutdown()</div></div>
 <div class="ttc" id="aclass_database_html_ae2226546a049cbad66c0674047982a6d"><div class="ttname"><a href="class_database.html#ae2226546a049cbad66c0674047982a6d">Database::GetEncryptionByID</a></div><div class="ttdeci">static std::unique_ptr&lt; Encryption &gt; GetEncryptionByID(const std::int64_t ide)</div><div class="ttdef"><b>Definition:</b> <a href="_database_8hpp_source.html#l00126">Database.hpp:126</a></div></div>
@@ -474,7 +479,7 @@ $(document).ready(function(){initNavTree('_database_8hpp_source.html',''); initR
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e95107e76c1ba4922be3f343acf5dcf1.html">Database</a></li><li class="navelem"><a class="el" href="_database_8hpp.html">Database.hpp</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 11:39:37 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 12:10:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

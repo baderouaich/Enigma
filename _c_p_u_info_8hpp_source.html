@@ -325,20 +325,20 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    {</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        ULARGE_INTEGER now{}, sys{}, user{};</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        ULARGE_INTEGER <a class="code" href="namespace_enigma_1_1_date_time_utils.html#ad5280f325c2e6a90ab617bcfee8caafa">now</a>{}, sys{}, user{};</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        ::GetSystemTimeAsFileTime(&amp;m_idle_time);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        std::memcpy(&amp;now, &amp;m_idle_time, <span class="keyword">sizeof</span>(FILETIME));</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        std::memcpy(&amp;<a class="code" href="namespace_enigma_1_1_date_time_utils.html#ad5280f325c2e6a90ab617bcfee8caafa">now</a>, &amp;m_idle_time, <span class="keyword">sizeof</span>(FILETIME));</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        ::GetProcessTimes(::GetCurrentProcess(), &amp;m_idle_time, &amp;m_idle_time, &amp;m_kernel_time, &amp;m_user_time);</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        std::memcpy(&amp;sys, &amp;m_kernel_time, <span class="keyword">sizeof</span>(FILETIME));</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        std::memcpy(&amp;user, &amp;m_user_time, <span class="keyword">sizeof</span>(FILETIME));</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordtype">float</span> percent = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sys.QuadPart - m_last_sys_cpu.QuadPart) + <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(user.QuadPart - m_last_user_cpu.QuadPart);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(now.QuadPart - m_last_cpu.QuadPart);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(<a class="code" href="namespace_enigma_1_1_date_time_utils.html#ad5280f325c2e6a90ab617bcfee8caafa">now</a>.QuadPart - m_last_cpu.QuadPart);</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        percent /= <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(m_num_processors);</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        m_last_cpu = now;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        m_last_cpu = <a class="code" href="namespace_enigma_1_1_date_time_utils.html#ad5280f325c2e6a90ab617bcfee8caafa">now</a>;</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        m_last_user_cpu = user;</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        m_last_sys_cpu = sys;</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
@@ -423,13 +423,14 @@ $(document).ready(function(){initNavTree('_c_p_u_info_8hpp_source.html',''); ini
 <div class="ttc" id="aclass_c_p_u_info_html_a80e5dbdf1d286dff3b0fdce77b7c2b40"><div class="ttname"><a href="class_c_p_u_info.html#a80e5dbdf1d286dff3b0fdce77b7c2b40">CPUInfo::~CPUInfo</a></div><div class="ttdeci">~CPUInfo() noexcept=default</div></div>
 <div class="ttc" id="aclass_c_p_u_info_html_ad61423e53fc9a3c90efc8a0dc0e9cf5e"><div class="ttname"><a href="class_c_p_u_info.html#ad61423e53fc9a3c90efc8a0dc0e9cf5e">CPUInfo::ENIGMA_NON_COPYABLE</a></div><div class="ttdeci">ENIGMA_NON_COPYABLE(CPUInfo)</div></div>
 <div class="ttc" id="aclass_c_p_u_info_html_aff81467f165dec472666078964cb3304"><div class="ttname"><a href="class_c_p_u_info.html#aff81467f165dec472666078964cb3304">CPUInfo::GetCPUUsage</a></div><div class="ttdeci">float GetCPUUsage() noexcept</div></div>
+<div class="ttc" id="anamespace_enigma_1_1_date_time_utils_html_ad5280f325c2e6a90ab617bcfee8caafa"><div class="ttname"><a href="namespace_enigma_1_1_date_time_utils.html#ad5280f325c2e6a90ab617bcfee8caafa">Enigma::DateTimeUtils::now</a></div><div class="ttdeci">static std::string now(const std::string_view &amp;format=&quot;%Y-%m-%d %H:%M:%S&quot;)</div><div class="ttdoc">returns current date and time as a string with a specific format</div><div class="ttdef"><b>Definition:</b> <a href="_date_time_utils_8hpp_source.html#l00040">DateTimeUtils.hpp:40</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_811a50a910043cbe90a26ab632ccbb01.html">Analytics</a></li><li class="navelem"><a class="el" href="dir_03c47aa1f304aa96a438ba06c48d9da0.html">Hardware</a></li><li class="navelem"><a class="el" href="dir_435bb7af3480145d358999902bfed25c.html">CPU</a></li><li class="navelem"><a class="el" href="_c_p_u_info_8hpp.html">CPUInfo.hpp</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 11:39:37 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Jun 29 2024 12:10:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

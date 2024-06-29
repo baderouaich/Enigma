@@ -2,6 +2,7 @@ var dir_9761b53e3d9349800c0cb59b71c8cd3d =
 [
     [ "Base64.hpp", "_base64_8hpp.html", "_base64_8hpp" ],
     [ "CryptoPPUtils.hpp", "_crypto_p_p_utils_8hpp.html", "_crypto_p_p_utils_8hpp" ],
+    [ "DateTimeUtils.hpp", "_date_time_utils_8hpp.html", "_date_time_utils_8hpp" ],
     [ "DialogUtils.hpp", "_dialog_utils_8hpp.html", "_dialog_utils_8hpp" ],
     [ "FileUtils.hpp", "_file_utils_8hpp.html", "_file_utils_8hpp" ],
     [ "GZip.hpp", "_g_zip_8hpp.html", "_g_zip_8hpp" ],
