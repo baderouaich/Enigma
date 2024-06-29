@@ -458,7 +458,7 @@ void MainMenuScene::OnImportEncryptionsButtonPressed() {
   const OpenFileDialog ofd("Import Database from ...", ResourceUtils::GetResourcesDir().string(), false);
   const std::vector<std::string> selectedFiles = ofd.Show();
   if (selectedFiles.empty()) return;
-  const std::string inputFilename = selectedFiles[0];
+  const std::string& inputFilename = selectedFiles[0];
 
   if (const auto action = DialogUtils::Question("Importing will overwrite all saved encryptions.\nExport the current database first if needed.\nContinue importing?",
                                                 Enigma::MessageBox::Choice::Yes_No_Cancel);
