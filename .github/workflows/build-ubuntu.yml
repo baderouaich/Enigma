@@ -70,4 +70,4 @@ jobs:
         run: cd build && ninja EnigmaTests -j$(nproc)
 
       - name: Running Enigma Tests
-        run: ./build/EnigmaTests
+        run: ./build/tests/EnigmaTests
