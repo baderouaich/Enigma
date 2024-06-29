@@ -30,7 +30,7 @@ jobs:
       - name: Installing necessary system libraries
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
-      - name: Generating Ninja build fi$les
+      - name: Generating Ninja build files
         run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release
 
       - name: Building Enigma
@@ -41,3 +41,33 @@ jobs:
 
       - name: Running Enigma
         run: ./build/Enigma --version
+
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: [ x64 ] #architecture: [x86, x64]
+        build-platform: [ x64 ] #build-platform: [x86, x64]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installing Latest gcc & g++ Compiler
+        run: |
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt update
+          sudo apt install gcc-12 g++-12
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
+
+      - name: Installing necessary system libraries
+        run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
+
+      - name: Generating Ninja build files
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON
+
+      - name: Building Enigma Tests
+        run: cd build && ninja EnigmaTests -j$(nproc)
+
+      - name: Running Enigma Tests
+        run: ./build/EnigmaTests
