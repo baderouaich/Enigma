@@ -11,8 +11,8 @@
 		#undef _WIN32_WINNT
 		#define _WIN32_WINNT 0x06000100
 	#endif
-	#include <SDKDDKVer.h>
 	#include <Winsock2.h> # WARNING: make sure winsock is included before windows.h
+	#include <SDKDDKVer.h>
 	#include <Windows.h>
 	using socket_t = SOCKET;
 	constexpr socket_t M_INVALID_SOCKET = INVALID_SOCKET;

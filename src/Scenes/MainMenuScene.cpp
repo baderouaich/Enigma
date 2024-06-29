@@ -86,7 +86,7 @@ void MainMenuScene::OnImGuiDraw() {
           ImGui::EndMenu();
         }
 
-        if (ImGui::BeginMenu("Menu")) {
+        if (ImGui::BeginMenu("View")) {
           if (ImGui::MenuItem("Encrypt File", "E+F")) { this->OnEncryptFileButtonPressed(); }
 
           if (ImGui::MenuItem("Decrypt File", "D+F")) { this->OnDecryptFileButtonPressed(); }
