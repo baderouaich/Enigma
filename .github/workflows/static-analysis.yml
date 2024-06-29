@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Make report output dir
-        run: mkdir ./output
+      - name: Make report outputs dir
+        run: mkdir ./outputs
 
-      # CppCheck analysis task
+      # CppCheck analysis task win64
       - name: cppcheck
         uses: deep5050/cppcheck-action@main
         with:
@@ -33,17 +33,35 @@ jobs:
           force_language: c++
           force: enable
           max_ctu_depth: 12
-          #platform: 
+          platform: win64
           std: c++20
-          output_file: ./output/CppCheckReport.txt
+          output_file: ./outputs/cppcheck-report-win64.txt
+
+      # CppCheck analysis task unix64
+      - name: cppcheck
+        uses: deep5050/cppcheck-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          check_library: disable
+          skip_preprocessor: disable
+          enable: performance,portability,warning
+          exclude_check: ./lib/
+          inconclusive: disable
+          inline_suppression: disable
+          force_language: c++
+          force: enable
+          max_ctu_depth: 12
+          platform: unix64
+          std: c++20
+          output_file: ./outputs/cppcheck-report-unix64.txt
 
       - name: Publish cppcheck report
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # NOTE you must enable Read+write permissions in repository Settings -> Actions -> Workflow permissions -> toggle on Read and write permissions
           publish_branch: static-analysis-reports
-          publish_dir: ./output # from
+          publish_dir: ./outputs # from
           destination_dir: . # to - deploy to a subdirectory: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-deploy-to-subdirectory-destination_dir
-          commit_message: cppcheck report - ${{ github.event.head_commit.message }}
+          commit_message: cppcheck reports - ${{ github.event.head_commit.message }}
           enable_jekyll: false
 
