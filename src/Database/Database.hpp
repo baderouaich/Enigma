@@ -300,6 +300,9 @@ class Database final {
 	*/
     static void Vacuum() noexcept;
 
+    static void Export(const fs::path& filename);
+    static void Import(const fs::path& filename);
+
   private:
     inline static std::unique_ptr<SQLite::Database> m_database{nullptr}; /**< Database connection configured on Initialize() */
 };

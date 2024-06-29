@@ -300,4 +300,11 @@ void Database::Vacuum() noexcept
 	//	ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");
 }
 
+void Database::Export(const fs::path& filename) {
+    m_database->backup(filename.string().c_str(), SQLite::Database::BackupType::Save);
+}
+void Database::Import(const fs::path& filename) {
+  m_database->backup(filename.string().c_str(), SQLite::Database::BackupType::Load);
+}
+
 NS_ENIGMA_END

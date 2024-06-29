@@ -56,5 +56,9 @@ std::string GZip::Decompress(const std::string& buffer)
 #endif
 }
 
+void GZip::Compress(const fs::path& infilename, const fs::path& outfilename, const GZip::DeflateLevel level) {
+  assert(!"TODO: needs implementation");
+}
+
 NS_ENIGMA_END
 

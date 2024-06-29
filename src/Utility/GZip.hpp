@@ -29,6 +29,8 @@ class GZip final {
     static std::string Compress(const std::string& buffer, const DeflateLevel level = DeflateLevel::MAX);
     static std::string Decompress(const std::string& buffer);
 
+    static void Compress(const fs::path& infilename, const fs::path& outfilename, const DeflateLevel level = DeflateLevel::MAX);
+
   private:
     inline static std::unique_ptr<CryptoPP::Gzip> m_zipper{nullptr};
     inline static std::unique_ptr<CryptoPP::Gunzip> m_unzipper{nullptr};

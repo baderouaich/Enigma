@@ -30,6 +30,9 @@ private: /* Callbacks */
 	void OnCheckForUpdatesMenuButtonPressed();
 	void OnAboutMenuButtonPressed();
 
+  void OnExportEncryptionsButtonPressed();
+  void OnImportEncryptionsButtonPressed();
+
 private:
 	//std::unique_ptr<ImGuiWidgets::Image> m_logo{};
 };
