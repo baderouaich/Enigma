@@ -51,6 +51,7 @@ namespace Enigma {
   struct EnigmaCipherChunk {
       magic_t magic{ENIGMA_CIPHER_CHUNK_MAGIC};
       std::vector<byte> cipher;
+      std::vector<byte> extra;
 
       [[nodiscard]] constexpr size_type sizeInBytes() const noexcept;
 

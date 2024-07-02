@@ -158,8 +158,11 @@ EnigmaFooter EnigmaFooter::fromFile(const fs::path& filename) {
 
 
 constexpr size_type EnigmaCipherChunk::sizeInBytes() const noexcept {
-  return sizeof(magic) + sizeof(size_type) /*cipherSize*/ + cipher.size();
+  return sizeof(magic) +
+         sizeof(size_type) /*cipherSize*/ + cipher.size()+
+         sizeof(size_type) + extra.size();
 }
+
 std::vector<byte> EnigmaCipherChunk::toBytes() const {
   std::vector<byte> out(this->sizeInBytes(), '\000');
   byte *pos = out.data();
@@ -174,7 +177,16 @@ std::vector<byte> EnigmaCipherChunk::toBytes() const {
 
   // Copy cipher
   std::memcpy(pos, cipher.data(), cipher.size());
-  //pos += cipher.size();
+  pos += cipher.size();
+
+  // Copy extra
+  std::memcpy(pos, extra.data(), extra.size());
+  pos += extra.size();
+
+  // Copy extra size
+  size_type extraSize = extra.size();
+  std::memcpy(pos, &extraSize, sizeof(extraSize));
+  pos += sizeof(extraSize);
 
   return out;
 }
@@ -232,6 +244,14 @@ void readCipherChunks(const fs::path& filename, const std::function<bool(EnigmaC
       cipherChunk.cipher.resize(cipherSize);
       ifs.read(reinterpret_cast<char *>(cipherChunk.cipher.data()), cipherSize);
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read cipher from file " + filename.string());
+      // read extra size
+      size_type extraSize{};
+      ifs.read(reinterpret_cast<char *>(&extraSize), sizeof(extraSize));
+      ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read extra size from file " + filename.string());
+      // read extra
+      cipherChunk.extra.resize(extraSize);
+      ifs.read(reinterpret_cast<char *>(cipherChunk.extra.data()), extraSize);
+      ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read extra from file " + filename.string());
 
       // Serve
       if (!callback(std::move(cipherChunk))) break;
