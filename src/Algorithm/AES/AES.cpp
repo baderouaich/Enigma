@@ -36,7 +36,7 @@ std::vector<byte> AES::Encrypt(const std::string& password, const std::vector<by
     reinterpret_cast<const byte *>(footer.iv.data()), footer.iv.size(),
     nullptr, 0);
   // Set Key and IV to the encryptor
-  m_aes_encryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+  m_aes_encryptor->SetKeyWithIV(key, static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH), key + static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH)); // key, kl, iv, ivl
 
   // Encrypt
   std::vector<byte> cipher;
@@ -73,7 +73,7 @@ std::vector<byte> AES::Decrypt(const std::string& password, const std::vector<by
     nullptr, 0);
 
   // Set Key and IV to the decrypter
-  m_aes_decryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+  m_aes_decryptor->SetKeyWithIV(key, static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH), key + static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH)); // key, kl, iv, ivl
 
   // Decrypt
   std::vector<byte> decrypted;
@@ -121,7 +121,7 @@ void AES::Encrypt(const std::string& password, const fs::path& in_filename, cons
     try {
       // Encrypt chunk
       // Set Key and IV to the encryptor
-      m_aes_encryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+      m_aes_encryptor->SetKeyWithIV(key, static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH), key + static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH)); // key, kl, iv, ivl
 
       EnigmaCipherChunk cipherChunk{};
       cipherChunk.magic = ENIGMA_CIPHER_CHUNK_MAGIC;
@@ -191,7 +191,7 @@ void AES::Decrypt(const std::string& password, const fs::path& in_filename, cons
     try {
       // Decrypt chunk
       // Set Key and IV to the decrypter
-      m_aes_decryptor->SetKeyWithIV(key, CryptoPP::AES::MAX_KEYLENGTH, key + CryptoPP::AES::MAX_KEYLENGTH); // key, kl, iv, ivl
+      m_aes_decryptor->SetKeyWithIV(key, static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH), key + static_cast<std::size_t>(CryptoPP::AES::MAX_KEYLENGTH)); // key, kl, iv, ivl
 
       std::vector<byte> decrypted{};
       [[maybe_unused]] const auto ss = CryptoPP::VectorSource(
