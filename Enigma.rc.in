@@ -1,7 +1,7 @@
 // Ref: https://stackoverflow.com/questions/1903702/associate-file-type-and-icon
 
 #include <windows.h>
-#define ENIGMA_ASSOCIATE_FILE_VERSION  3,0,0,0 // !!DOESN'T WORK YET!! associate .enigma file extension version
+#define ENIGMA_ASSOCIATE_FILE_VERSION  @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0 // !!DOESN'T WORK YET!! associate .enigma file extension version
 #define ENIGMA_MAINTAINER "Bader-Eddine Ouaich"
 
 #define IDI_APP    100
