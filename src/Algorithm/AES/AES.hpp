@@ -20,8 +20,10 @@ public:
 	virtual ~AES() noexcept;
 
 public:
-	std::string Encrypt(const std::string& password, const std::string& buffer) override;
-	std::string Decrypt(const std::string& password, const std::string& algotype_iv_cipher) override;
+  std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
+  std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) override;
+  void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
+  void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
 
 private:
 	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryptor; /**< AES-GCM encryptor */
