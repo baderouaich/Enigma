@@ -64,6 +64,7 @@
 #include <Utility/GZip.hpp>
 #include <Utility/SizeUtils.hpp>
 #include <Utility/MathUtils.hpp>
+#include <Utility/HashUtils.hpp>
 //
 
 // Analytics: Hardware info RAM, CPU
@@ -81,6 +82,10 @@
 
 // Database
 #include <Database/Database.hpp>
+//
+
+// Metadata
+#include <Meta/Meta.hpp>
 //
 
 #endif // !ENIGMA_H

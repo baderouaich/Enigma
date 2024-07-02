@@ -113,13 +113,13 @@ class Algorithm {
     virtual std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) = 0;
 
     /**
-    *	Decrypt a file with password
+    *	Decrypts a file with password
     *	@param password: Password used in encryption
     *	@param in_filename: Filename to decrypt
     *	@param out_filename: Filename to recover
     *	@exception throws CryptoPP::Exception, std::exception on failure
     */
-    virtual void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {};
+    virtual void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) = 0;
 
   public: /* Create polymorphic algorithm by either mode name or type*/
     /**
