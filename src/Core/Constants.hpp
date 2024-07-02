@@ -5,7 +5,7 @@
 
 namespace Enigma {
   namespace Constants {
-    using namespace std::string_literals; // using std::operator""s;
+    using namespace std::string_literals;
 
     static constexpr const std::uint16_t ENIGMA_SINGLE_PROCESS_UNIQUE_PORT = 36363; // unique app socket port used to avoid multiple instances
     //static constexpr const auto ENIGMA_PACKAGE_NAME = "com.badereddineouaich.enigma"; // unique app id used to avoid multiple instances
@@ -14,7 +14,7 @@ namespace Enigma {
     namespace Algorithm {
       // Notes:
       // GCM is defined for block ciphers with a block size of 128 bits. https://en.m.wikipedia.org/wiki/Galois/Counter_Mode
-      // No max password check since we using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
+      // No max password check since we're using KDF SHA-256, his allows you to use a password smaller or larger than the cipher's key size: https://crypto.stackexchange.com/questions/68299/length-of-password-requirement-using-openssl-aes-256-cbc
       // Why GCM & EAX Modes: https://crypto.stackexchange.com/questions/18860/choice-of-authenticated-encryption-mode-for-whole-messages
       // https://i.stack.imgur.com/0hNsK.jpg
 

@@ -93,16 +93,6 @@ class Algorithm {
     *	@exception throws CryptoPP::Exception, std::exception on failure
     */
     virtual std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) = 0;
-
-    /**
-    *	Encrypts a file with password
-    *	@param password: Encryption password
-    *	@param in_filename: Filename to encrypt
-    *	@param out_filename: Filename to store encrypted cipher
-    *	@exception throws CryptoPP::Exception, std::exception on failure
-    */
-    virtual void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) = 0;
-
     /**
     *	Decrypts cipher with password
     *	@param password: Password used in encryption
@@ -112,6 +102,14 @@ class Algorithm {
     */
     virtual std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) = 0;
 
+    /**
+    *	Encrypts a file with password
+    *	@param password: Encryption password
+    *	@param in_filename: Filename to encrypt
+    *	@param out_filename: Filename to store encrypted cipher
+    *	@exception throws CryptoPP::Exception, std::exception on failure
+    */
+    virtual void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) = 0;
     /**
     *	Decrypts a file with password
     *	@param password: Password used in encryption

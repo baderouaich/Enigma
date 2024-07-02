@@ -92,8 +92,9 @@ std::vector<byte> AES::Decrypt(const std::string& password, const std::vector<by
 
 
 void AES::Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {
-  ENIGMA_ASSERT_OR_THROW(m_aes_encryptor, "AES Encryptor is not initialized properly");
+  ENIGMA_ASSERT_OR_THROW(!isEnigmaFile(in_filename), in_filename.filename().string() + " is already encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "AES Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
+  ENIGMA_ASSERT_OR_THROW(m_aes_encryptor, "AES Encryptor is not initialized properly");
 
   EnigmaFooter footer{};
   footer.magic = ENIGMA_MAGIC;
