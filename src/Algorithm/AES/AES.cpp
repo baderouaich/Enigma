@@ -150,10 +150,10 @@ void AES::Encrypt(const std::string& password, const fs::path& in_filename, cons
   });
 
   // No need to keep out_filename on failed encryption
-  if(!ok) {
+  if (!ok) {
     ofs.close();
     fs::remove(out_filename);
-    throw std::runtime_error("Could not encrypt file "+ in_filename.string());
+    throw std::runtime_error("Could not encrypt file " + in_filename.string());
   }
 
   // Alles gut!
@@ -164,28 +164,6 @@ void AES::Encrypt(const std::string& password, const fs::path& in_filename, cons
   ofs.write(reinterpret_cast<const char *>(footerBytes.data()), footerBytes.size());
   ENIGMA_ASSERT_OR_THROW(ofs.good(), "Failed to write footer bytes");
   ofs.close();
-
-
-#if METHOD_1
-  std::ifstream ifs{in_filename, std::ios::binary};
-  ENIGMA_ASSERT_OR_THROW(ifs.good(), "No such file " + in_filename.string());
-  std::ofstream ofs{out_filename, std::ios::binary};
-  ENIGMA_ASSERT_OR_THROW(ofs.good(), "Could not create file " + out_filename.string());
-
-  const CryptoPP::FileSource vs(
-    ifs,
-    true,
-    new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
-      *m_aes_encryptor,
-      new CryptoPP::FileSink(ofs))); //NOTE: VectorSource will auto clean the allocated memory
-
-  // Append enigma footer info
-  ofs.seekp(0, std::ios::end);
-  std::vector<byte> footerBytes = footer.toBytes();
-  ofs.write(reinterpret_cast<const char *>(footerBytes.data()), footerBytes.size());
-  ENIGMA_ASSERT_OR_THROW(ofs.good(), "Failed to write footer bytes");
-  ofs.close();
-#endif
 }
 
 void AES::Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {
@@ -239,10 +217,10 @@ void AES::Decrypt(const std::string& password, const fs::path& in_filename, cons
     return ok;
   });
   // No need to keep out_filename on failed decryption
-  if(!ok) {
+  if (!ok) {
     ofs.close();
     fs::remove(out_filename);
-    throw std::runtime_error("Could not decrypt file "+ in_filename.string());
+    throw std::runtime_error("Could not decrypt file " + in_filename.string());
   }
   ofs.close();
 
@@ -252,4 +230,5 @@ void AES::Decrypt(const std::string& password, const fs::path& in_filename, cons
   ENIGMA_INFO("Verifying SHA256 hash of {} ...", out_filename.filename().string());
   ENIGMA_ASSERT_OR_THROW(digest == footer.hash, "Decryption failure. Original SHA256 hash of file does not match decrypted hash");
 }
+
 NS_ENIGMA_END

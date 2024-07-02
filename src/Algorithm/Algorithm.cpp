@@ -59,12 +59,11 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromType(const Type type, const Inte
 	return CreateFromName(AlgoTypeEnumToStr(type), intent);
 }
 
-
-std::string Algorithm::GenerateRandomIV(const std::size_t size)
+std::vector<byte> Algorithm::GenerateRandomIV(const std::size_t size)
 {
 	ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "Random seeder is not initialized properly");
-	std::string iv(size, '\000');
-	m_auto_seeded_random_pool->GenerateBlock(reinterpret_cast<byte*>(iv.data()), iv.size());
+  std::vector<byte> iv(size, '\000');
+	m_auto_seeded_random_pool->GenerateBlock(iv.data(), iv.size());
 	return iv;
 }
 

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ENIGMA_ALGORITHM_H
-#define ENIGMA_ALGORITHM_H
 
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
@@ -51,12 +49,12 @@ class ChaCha20Poly1305;
 class Algorithm {
   public:
     /**
-	*	Intention of creating an instance of an Algorithm.
-	* 
-	*	helps to avoid initializing resources not needed for an specific operation.
-	*	(for example when encrypting, we initialize a random seeder which is not needed
-	*   when decrypting)
-	*/
+    *	Intention of creating an instance of an Algorithm.
+    *
+    *	helps to avoid initializing resources not needed for an specific operation.
+    *	(for example when encrypting, we initialize a random seeder which is not needed
+    *   when decrypting)
+	  */
     enum class Intent : Enigma::byte {
       None = 0 << 0,
       Encrypt = 1 << 1,
@@ -88,32 +86,50 @@ class Algorithm {
 
   public:
     /**
-	*	Encrypts buffer with password
-	*	@param password: Encryption password
-	*	@param buffer: Buffer to encrypt (text, binary...)
-	*	@return (Algo type enum id + IV + Cipher)
-	*	@exception throws CryptoPP::Exception, std::exception on failure
-	*/
-    virtual std::string Encrypt(const std::string& password, const std::string& buffer) = 0;
+    *	Encrypts buffer with password
+    *	@param password: Encryption password
+    *	@param buffer: Buffer to encrypt (text, binary...) an array of bytes
+    *	@return Cipher with Enigma meta data
+    *	@exception throws CryptoPP::Exception, std::exception on failure
+    */
+    virtual std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) = 0;
 
     /**
-	*	Decrypts cipher with password
-	*	@param password: Password used to Encyrpt buffer
-	*	@param cipher: can contain more than cipher part, like IV, algorithm used for encryption, MAC and so on, depending on the algorithm implementation.
-	*	@return Recovered Buffer
-	*	@exception throws CryptoPP::Exception, std::exception on failure
-	*/
-    virtual std::string Decrypt(const std::string& password, const std::string& cipher) = 0;
+    *	Encrypts a file with password
+    *	@param password: Encryption password
+    *	@param in_filename: Filename to encrypt
+    *	@param out_filename: Filename to store encrypted cipher
+    *	@exception throws CryptoPP::Exception, std::exception on failure
+    */
+    virtual void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) = 0;
+
+    /**
+    *	Decrypts cipher with password
+    *	@param password: Password used in encryption
+    *	@param cipher: Cipher with Enigma meta data
+    *	@return Recovered Buffer
+    *	@exception throws CryptoPP::Exception, std::exception on failure
+    */
+    virtual std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) = 0;
+
+    /**
+    *	Decrypt a file with password
+    *	@param password: Password used in encryption
+    *	@param in_filename: Filename to decrypt
+    *	@param out_filename: Filename to recover
+    *	@exception throws CryptoPP::Exception, std::exception on failure
+    */
+    virtual void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {};
 
   public: /* Create polymorphic algorithm by either mode name or type*/
     /**
-	*	Creates polymorphic algorithm from algorithm type name
-	*	@see CreateFromType()
-	*/
+    *	Creates polymorphic algorithm from algorithm type name
+    *	@see CreateFromType()
+    */
     static std::unique_ptr<Algorithm> CreateFromName(const std::string& name, const Intent intent);
     /**
-	*	Creates polymorphic algorithm from algorithm type
-	*/
+    *	Creates polymorphic algorithm from algorithm type
+    */
     static std::unique_ptr<Algorithm> CreateFromType(const Type type, const Intent intent);
 
   public:
@@ -123,39 +139,40 @@ class Algorithm {
 
   protected:
     /**
-	*	Generates random IV (aka Salt) with a desired length
-	*/
-    static std::string GenerateRandomIV(const std::size_t size);
+    *	Generates random IV (aka Salt) with a desired length
+    */
+    static std::vector<byte> GenerateRandomIV(const std::size_t size);
+
 
   public:
     /**
-	*	Auto detect algorithm used for encryption from cipher text
-	*/
+    *	Auto detect algorithm used for encryption from cipher text
+    */
     static Type DetectFromCipher(const std::string& cipher);
 
     /**
-	*	Auto detect algorithm used for encryption from cipher base64 text
-	*/
+    *	Auto detect algorithm used for encryption from cipher base64 text
+    */
     static Type DetectFromCipherBase64(const std::string& cipher_base64);
 
     /**
-	*	Auto detect algorithm used for encryption from encrypted file
-	*/
+    *	Auto detect algorithm used for encryption from encrypted file
+    */
     static Type DetectFromFile(const std::string& filename);
 
     /**
-	*	Converts Algorithm::Type to std::string
-	*/
+    *	Converts Algorithm::Type to std::string
+    */
     static std::string AlgoTypeEnumToStr(const Algorithm::Type e) noexcept;
 
     /**
-	*	Returns a string of supported algorithms represented as "[Algo1, Algo2, Algo3...]" orderd as enum Type
-	*/
+    *	Returns a string of supported algorithms represented as "[Algo1, Algo2, Algo3...]" orderd as enum Type
+    */
     static std::string GetSupportedAlgorithmsStr() noexcept;
 
     /**
-	*	Returns a vector of supported algorithms represented as pair of algo name string, algo type. orderd as enum Type
-	*/
+    *	Returns a vector of supported algorithms represented as pair of algo name string, algo type. orderd as enum Type
+    */
     static std::vector<std::pair<std::string, Algorithm::Type>> GetSupportedAlgorithms() noexcept;
 
   protected:
@@ -165,5 +182,3 @@ class Algorithm {
 };
 
 NS_ENIGMA_END
-
-#endif // !ENIGMA_ALGORITHM_H

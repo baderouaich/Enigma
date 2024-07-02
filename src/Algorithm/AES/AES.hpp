@@ -1,7 +1,4 @@
 #pragma once
-#ifndef ENIGMA_AES_H
-#define ENIGMA_AES_H
-
 #include <Algorithm/Algorithm.hpp>
 
 NS_ENIGMA_BEGIN
@@ -10,26 +7,23 @@ NS_ENIGMA_BEGIN
 * 
 *	AES symmetric cipher is recommended to be used with GCM mode
 */
-class AES : public Algorithm
-{
-public:
-	/**
-	*	@param intent: Operation, Encrypt or Decrypt
-	*/
-	explicit AES(const Algorithm::Intent intent) noexcept;
-	virtual ~AES() noexcept;
+class AES : public Algorithm {
+  public:
+    /**
+    *	@param intent: Operation, Encrypt or Decrypt
+    */
+    explicit AES(const Algorithm::Intent intent) noexcept;
+    virtual ~AES() noexcept;
 
-public:
-  std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
-  std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) override;
-  void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
-  void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
+  public:
+    std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
+    std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) override;
+    void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
+    void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
 
-private:
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryptor; /**< AES-GCM encryptor */
-	std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryptor; /**< AES-GCM decryptor */
+  private:
+    std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Encryption> m_aes_encryptor; /**< AES-GCM encryptor */
+    std::unique_ptr<CryptoPP::GCM<CryptoPP::AES>::Decryption> m_aes_decryptor; /**< AES-GCM decryptor */
 };
 
 NS_ENIGMA_END
-#endif // !ENIGMA_AES_H
-
