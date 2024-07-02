@@ -70,8 +70,10 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 ![Straightforward](https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d)
 - Save Encryptions to a local database (an SQLite3 database which you can export/import)
 ![My-Encryptions-Demo](https://github.com/baderouaich/Enigma/assets/49657842/09e10396-070d-4324-b80e-13c346b28b4a)
-- Compression is ON by default
-![2](https://github.com/baderouaich/Enigma/assets/49657842/31a9751c-d3cd-4cdd-b5d7-19f08c10ceeb)
+
+[//]: # (- Compression is ON by default)
+[//]: # (![2]&#40;https://github.com/baderouaich/Enigma/assets/49657842/31a9751c-d3cd-4cdd-b5d7-19f08c10ceeb&#41;)
+
 - Extra Utilities
 ![Tools-Demo](https://github.com/baderouaich/Enigma/assets/49657842/6d17ab20-4faf-43f1-b074-ef99473dfbcd)
 
