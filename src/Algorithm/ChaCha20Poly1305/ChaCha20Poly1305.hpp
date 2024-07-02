@@ -12,24 +12,24 @@ NS_ENIGMA_BEGIN
 *	The scheme uses the IETF versions of the ciphers because it is defined in RFC 8439, ChaCha20and Poly1305 for IETF Protocols.
 *	The scheme is somewhat unique because it pairs a stream cipher with an authenticator(most authenticated encryption modes pair a block cipher).
 */
-class ChaCha20Poly1305 : public Algorithm
-{
-public:
-	/**
-	*	@param intent: Operation, Encrypt or Decrypt
-	*/
-	explicit ChaCha20Poly1305(const Algorithm::Intent intent) noexcept;
-	virtual ~ChaCha20Poly1305() noexcept;
+class ChaCha20Poly1305 : public Algorithm {
+  public:
+    /**
+    *	@param intent: Operation, Encrypt or Decrypt
+    */
+    explicit ChaCha20Poly1305(const Algorithm::Intent intent) noexcept;
+    virtual ~ChaCha20Poly1305() noexcept;
 
-public:
-	std::string Encrypt(const std::string& password, const std::string& buffer) override;
-	std::string Decrypt(const std::string& password, const std::string& algotype_iv_mac_cipher) override;
-private:
-	std::unique_ptr<CryptoPP::ChaCha20Poly1305::Encryption> m_chacha_encryptor; /**< ChaCha20Poly1305 encryptor */
-	std::unique_ptr<CryptoPP::ChaCha20Poly1305::Decryption> m_chacha_decryptor; /**< ChaCha20Poly1305 decryptor */
+  public:
+    std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
+    std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) override;
+    void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
+    void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
 
+  private:
+    std::unique_ptr<CryptoPP::ChaCha20Poly1305::Encryption> m_chacha_encryptor; /**< ChaCha20Poly1305 encryptor */
+    std::unique_ptr<CryptoPP::ChaCha20Poly1305::Decryption> m_chacha_decryptor; /**< ChaCha20Poly1305 decryptor */
 };
 
 NS_ENIGMA_END
 #endif // !ENIGMA_CHACHA_H
-
