@@ -14,16 +14,16 @@ Blowfish::Blowfish(const Algorithm::Intent intent) noexcept
 Blowfish::~Blowfish() noexcept {
 }
 
-std::vector<byte> Blowfish::Encrypt(const std::string& password, const std::vector<byte>& buffer) {
+std::vector<byte> Blowfish::Encrypt(const std::string& password, const byte *buffer, const std::size_t buffSize) {
   ENIGMA_ASSERT_OR_THROW(m_blowfish_encryptor, "Blowfish Encryptor is not initialized properly");
   ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "For security reasons, Blowfish minimum password length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 
-  EnigmaFooter footer{};
-  footer.magic = ENIGMA_MAGIC;
+  Meta::EnigmaFooter footer{};
+  footer.magic = Meta::ENIGMA_MAGIC;
   footer.version = ENIGMA_VERSION_MAJOR * 100'000 + ENIGMA_VERSION_MINOR * 1000 + ENIGMA_VERSION_PATCH;
-  footer.algo = static_cast<byte>(this->GetType());
+  footer.algo = this->GetType();
   footer.iv = Algorithm::GenerateRandomIV(CryptoPP::Blowfish::BLOCKSIZE);
-  footer.hash = HashUtils::bytes<CryptoPP::SHA256>(buffer);
+  footer.hash = HashUtils::bytes<CryptoPP::SHA256>(buffer, buffSize);
   footer.extra = {};
 
   // Encryption key to be generated from user password + IV
@@ -40,8 +40,9 @@ std::vector<byte> Blowfish::Encrypt(const std::string& password, const std::vect
 
   // Encrypt
   std::vector<byte> cipher;
-  const CryptoPP::VectorSource vs(
+  const CryptoPP::ArraySource vs(
     buffer,
+    buffSize,
     true,
     new CryptoPP::AuthenticatedEncryptionFilter( // note: for GCM mode, use AuthenticatedEncryptionFilter instead of StreamTransformationFilter
       *m_blowfish_encryptor,
@@ -56,12 +57,16 @@ std::vector<byte> Blowfish::Encrypt(const std::string& password, const std::vect
   return out;
 }
 
-std::vector<byte> Blowfish::Decrypt(const std::string& password, const std::vector<byte>& cipher) {
-  ENIGMA_ASSERT_OR_THROW(isEnigmaCipher(cipher), "Given cipher is malformed or was not encrypted with Enigma");
+std::vector<byte> Blowfish::Encrypt(const std::string& password, const std::vector<byte>& buffer) {
+  return Encrypt(password, buffer.data(), buffer.size());
+}
+
+std::vector<byte> Blowfish::Decrypt(const std::string& password, const byte *cipher, const std::size_t cipherSize) {
+  ENIGMA_ASSERT_OR_THROW(Meta::isEnigmaCipher(cipher, cipherSize), "Given cipher is malformed or was not encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(m_blowfish_decryptor, "Blowfish Decryptor is not initialized properly");
 
   // Extract footer
-  EnigmaFooter footer = EnigmaFooter::fromBytes(cipher);
+  Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromBytes(cipher, cipherSize);
   // Prepare Key
   CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::Blowfish::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::Blowfish::BLOCKSIZE));
   // Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
@@ -78,8 +83,8 @@ std::vector<byte> Blowfish::Decrypt(const std::string& password, const std::vect
   // Decrypt
   std::vector<byte> decrypted;
   [[maybe_unused]] const auto ss = CryptoPP::ArraySource(
-    cipher.data(),
-    cipher.size() - footer.sizeInBytes(),
+    cipher,
+    cipherSize - footer.sizeInBytes(),
     true,
     new CryptoPP::AuthenticatedDecryptionFilter(
       *m_blowfish_decryptor,
@@ -89,17 +94,20 @@ std::vector<byte> Blowfish::Decrypt(const std::string& password, const std::vect
   ENIGMA_ASSERT_OR_THROW(HashUtils::bytes<CryptoPP::SHA256>(decrypted) == footer.hash, "Decryption failure. Original SHA256 hash of buffer does not match decrypted hash");
   return decrypted;
 }
+std::vector<byte> Blowfish::Decrypt(const std::string& password, const std::vector<byte>& cipher) {
+  return Decrypt(password, cipher.data(), cipher.size());
+}
 
 
 void Blowfish::Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {
-  ENIGMA_ASSERT_OR_THROW(!isEnigmaFile(in_filename), in_filename.filename().string() + " is already encrypted with Enigma");
+  ENIGMA_ASSERT_OR_THROW(!Meta::isEnigmaFile(in_filename), in_filename.filename().string() + " is already encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "Blowfish Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
   ENIGMA_ASSERT_OR_THROW(m_blowfish_encryptor, "Blowfish Encryptor is not initialized properly");
 
-  EnigmaFooter footer{};
-  footer.magic = ENIGMA_MAGIC;
+  Meta::EnigmaFooter footer{};
+  footer.magic = Meta::ENIGMA_MAGIC;
   footer.version = ENIGMA_VERSION_MAJOR * 100'000 + ENIGMA_VERSION_MINOR * 1000 + ENIGMA_VERSION_PATCH;
-  footer.algo = static_cast<byte>(this->GetType());
+  footer.algo = this->GetType();
   footer.iv = Algorithm::GenerateRandomIV(CryptoPP::Blowfish::BLOCKSIZE);
   footer.extra = {};
 
@@ -117,14 +125,14 @@ void Blowfish::Encrypt(const std::string& password, const fs::path& in_filename,
   std::ofstream ofs{out_filename, std::ios::binary};
   CryptoPP::SHA256 sha256{};
   bool ok = ofs.good();
-  FileUtils::ReadChunks(in_filename, ENIGMA_BUFFER_DEFAULT_SIZE, [this, &ok, &ofs, &key, &sha256](std::vector<byte>&& chunk) -> bool {
+  FileUtils::ReadChunks(in_filename, Meta::ENIGMA_BUFFER_DEFAULT_SIZE, [this, &ok, &ofs, &key, &sha256](std::vector<byte>&& chunk) -> bool {
     try {
       // Encrypt chunk
       // Set Key and IV to the encryptor
       m_blowfish_encryptor->SetKeyWithIV(key, static_cast<std::size_t>(CryptoPP::Blowfish::MAX_KEYLENGTH), key + static_cast<std::size_t>(CryptoPP::Blowfish::MAX_KEYLENGTH)); // key, kl, iv, ivl
 
-      EnigmaCipherChunk cipherChunk{};
-      cipherChunk.magic = ENIGMA_CIPHER_CHUNK_MAGIC;
+      Meta::EnigmaCipherChunk cipherChunk{};
+      cipherChunk.magic = Meta::ENIGMA_CIPHER_CHUNK_MAGIC;
       const CryptoPP::VectorSource vs(
         chunk,
         true,
@@ -168,11 +176,11 @@ void Blowfish::Encrypt(const std::string& password, const fs::path& in_filename,
 }
 
 void Blowfish::Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {
-  ENIGMA_ASSERT_OR_THROW(isEnigmaFile(in_filename), "Given file " + in_filename.string() + " is malformed or was not encrypted with Enigma");
+  ENIGMA_ASSERT_OR_THROW(Meta::isEnigmaFile(in_filename), "Given file " + in_filename.string() + " is malformed or was not encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(m_blowfish_decryptor, "Blowfish Decryptor is not initialized properly");
 
   // Extract footer from encrypted file
-  EnigmaFooter footer = EnigmaFooter::fromFile(in_filename);
+  Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromFile(in_filename);
   // Prepare Key
   CryptoPP::SecByteBlock key(static_cast<std::size_t>(CryptoPP::Blowfish::MAX_KEYLENGTH) + static_cast<std::size_t>(CryptoPP::Blowfish::BLOCKSIZE));
   // Convert key to KDF SHA-256, which allows you to use a password smaller or larger than the cipher's key size
@@ -187,7 +195,7 @@ void Blowfish::Decrypt(const std::string& password, const fs::path& in_filename,
   std::ofstream ofs{out_filename, std::ios::binary};
   CryptoPP::SHA256 sha256;
   bool ok = ofs.good();
-  readCipherChunks(in_filename, [this, &ok, &ofs, &key, &sha256](EnigmaCipherChunk&& cipherChunk) -> bool {
+  Meta::readCipherChunks(in_filename, [this, &ok, &ofs, &key, &sha256](Meta::EnigmaCipherChunk&& cipherChunk) -> bool {
     try {
       // Decrypt chunk
       // Set Key and IV to the decrypter
@@ -231,5 +239,6 @@ void Blowfish::Decrypt(const std::string& password, const fs::path& in_filename,
   ENIGMA_INFO("Verifying SHA256 hash of {} ...", out_filename.filename().string());
   ENIGMA_ASSERT_OR_THROW(digest == footer.hash, "Decryption failure. Original SHA256 hash of file does not match decrypted hash");
 }
+
 
 NS_ENIGMA_END
