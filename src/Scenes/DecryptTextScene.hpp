@@ -25,7 +25,7 @@ private: /* Callbacks */
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
 	std::string m_recovered_text; // Decrypted Text
-	std::string m_cipher; // Encrypted text
+	std::vector<byte> m_cipher; // Encrypted text
 	std::string m_cipher_base64; // Encrypted text in Base64 to be Decrypted
 	std::string m_password; // Encryption password
 
