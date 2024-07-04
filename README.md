@@ -11,7 +11,7 @@
 <img src="res/branding/Logo.png" width="250" />
 
 <!--DESCRIOTION-->
-A Simple, Reliable and Efficient UI + CLI Encryption Tool<br>
+A Simple, Reliable and Efficient Encryption Tool<br>
 <!--
 Built to solve 3 problems i had:
 - huge personnel files take too much space in storage clouds <strong>(Solved by Compression)</strong>
