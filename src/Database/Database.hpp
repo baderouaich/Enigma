@@ -1,8 +1,5 @@
 #pragma once
-#ifndef ENIGMA_DATABASE_H
-#define ENIGMA_DATABASE_H
 
-#include "Models/Encryption.hpp"
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include <Utility/FileUtils.hpp>
@@ -10,8 +7,8 @@
 #include <Utility/StringUtils.hpp>
 
 #include <SQLiteCpp/SQLiteCpp.h>
-#include <Utility/GZip.hpp>
-
+//#include <Utility/GZip.hpp>
+#include "Models/Encryption.hpp"
 #include <memory>
 #include <vector>
 
@@ -25,8 +22,8 @@ NS_ENIGMA_BEGIN
 */
 class Database final {
     ENIGMA_STATIC_CLASS(Database);
-
   public:
+#pragma region enums
     /** Encryption Table order by column */
     enum class OrderBy : byte {
       ID,
@@ -55,16 +52,16 @@ class Database final {
     {
       switch (order_by) {
         case OrderBy::ID:
-          os << " e.ide";
+          os << "ide";
           break;
         case OrderBy::Title:
-          os << " e.title";
+          os << "title";
           break;
         case OrderBy::DateTime:
-          os << " e.date_time";
+          os << "date_time";
           break;
         case OrderBy::Size:
-          os << " e.size";
+          os << "size";
           break;
         default:
           break;
@@ -94,201 +91,64 @@ class Database final {
 
     friend std::ostream& operator<<(std::ostream& os, const Order order) noexcept // for constructing sql
     {
-      return os << (order == Order::Ascending ? " ASC" : " DESC");
+      return os << (order == Order::Ascending ? "ASC" : "DESC");
     }
+#pragma endregion enums
 
   public:
     /** Initializes SQLite database connection */
-    static void Initialize();
+    static void initialize();
     /** Shuts down SQLite connection */
-    static void Shutdown();
+    static void shutdown();
 
-  public: // Encryption Operations
+  public:
     /** Add Encryption record to database table
-	*	@return inserted encryption id std::int64_t>=0 on success, -1 on failure
-	*/
-    static std::int64_t AddEncryption(const std::unique_ptr<Encryption>& e);
+    *	@return inserted encryption id std::int64_t>=0 on success, -1 on failure
+    */
+    static std::int64_t addEncryption(const std::unique_ptr<Encryption>& e);
 
-    /** Returns cipher from database by encryption id */
-    static std::unique_ptr<Cipher> GetCipherByEncryptionID(const std::int64_t ide);
+    /** Add CipherChunk record to database table
+    * @param ide: Encryption id this CipherChunk belongs to
+    *	@return inserted CipherChunk id std::int64_t>=0 on success, -1 on failure
+    */
+    static std::int64_t addCipherChunk(const std::unique_ptr<CipherChunk>& cc);
 
-    /** Delete Encryption record by id, returns true if successfully deleted */
-    static bool DeleteEncryption(const std::int64_t ide);
+    /** Get an Encryption by id */
+    static std::unique_ptr<Encryption> getEncryption(const std::int64_t ide);
 
-    /** Delete all saved encryptions from the database (with their cipher) */
-    static bool DeleteAllEncryptions();
+    /** Get a CipherChunk by Encryption id
+     * Used for small text encryptions
+     **/
+    static std::unique_ptr<CipherChunk> getCipherChunk(const std::int64_t ide);
 
-    /** Returns how many encryption records are saved */
-    static std::int64_t GetEncryptionsCount();
+    /** Get CipherChunks iteratively by Encryption id, ordered by offset from 0 -> LAST
+     * Used for large files encryptions
+     * */
+    static void getCipherChunks(const std::int64_t ide, const std::function<bool(std::unique_ptr<CipherChunk>&& cc)>& callback);
 
-    /** Get an Encryption by id with desired columns for optimization */
-    template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext>
-    inline static std::unique_ptr<Encryption> GetEncryptionByID(const std::int64_t ide) {
-      ENIGMA_TRACE_CURRENT_FUNCTION();
+    /** Get a CipherChunk by Encryption id */
+    static std::vector<std::unique_ptr<Encryption>> getAllEncryptions(const OrderBy order_by = OrderBy::ID, const Order order = Order::Descending);
 
-      ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", nullptr);
-      try {
-        // Select e.id, e.title, c.data, e.date_time, e.is_file, e.file_ext from Encryptions e JOIN Ciphers c ON e.id = c.id_enc
+    /** Delete Encryption record by id, returns true if successfully deleted
+     * Note: all associated CipherChunks with this encryption will be automatically
+     * deleted due ON DELETE CASCADE
+     */
+    static bool deleteEncryption(const std::int64_t ide);
 
-        // Construct SQL
-        std::ostringstream sql{};
-        {
-          sql << "SELECT e.ide";
-          if constexpr (title) sql << ", e.title";
-          if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
-          if constexpr (date_time) sql << ", e.date_time";
-          if constexpr (size) sql << ", e.size";
-          if constexpr (is_file) sql << ", e.is_file";
-          if constexpr (file_ext) sql << ", e.file_ext";
-          sql << " FROM Encryption e";
-          if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.ide";
-          sql << " WHERE e.ide = " << ide;
-#if defined(ENIGMA_DEBUG)
-          ENIGMA_LOG("SQL: {0}", sql.str());
-#endif
-        }
+    /** Delete all Encryption records by id, returns true if successfully deleted
+     * Note: all associated CipherChunks with all encryptions will be automatically
+     * deleted due ON DELETE CASCADE
+     */
+    static bool deleteAllEncryptions();
 
-        const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-        auto e = std::make_unique<Encryption>();
-
-        if (query->executeStep()) {
-          std::int32_t i{0}; // for getColumn, use index starts by 0
-          e->ide = query->getColumn(i++).getInt64();
-          if constexpr (title) e->title = query->getColumn(i++).getString();
-          if constexpr (cipher) {
-            e->cipher.idc = query->getColumn(i++).getInt64();
-            //e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
-            e->cipher.data = std::move(query->getColumn(i++).getString());
-            e->cipher.ide = query->getColumn(i++).getInt64();
-          }
-          if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
-          if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
-          if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
-          if constexpr (file_ext) e->file_ext = query->getColumn(i++).getString();
-        }
-
-        return e;
-      } catch (const SQLite::Exception& e) {
-        ENIGMA_ERROR("{0}", e.what());
-        return nullptr;
-      }
-    }
-
-    /** Get all Encryptions with desired columns for optimization */
-    template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext>
-    inline static std::vector<std::unique_ptr<Encryption>> GetAllEncryptions(OrderBy order_by = OrderBy::ID, Order order = Order::Descending) {
-      ENIGMA_TRACE_CURRENT_FUNCTION();
-
-      ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});
-
-      std::vector<std::unique_ptr<Encryption>> encryptions{};
-      try {
-        // Construct SQL
-        std::ostringstream sql{};
-        {
-          sql << "SELECT e.ide";
-          if constexpr (title) sql << ", e.title";
-          if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
-          if constexpr (date_time) sql << ", e.date_time";
-          if constexpr (size) sql << ", e.size";
-          if constexpr (is_file) sql << ", e.is_file";
-          if constexpr (file_ext) sql << ", e.file_ext";
-          sql << " FROM Encryption e";
-          if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
-          sql << " ORDER BY" << order_by << order;
-        }
-
-#if defined(ENIGMA_DEBUG)
-        ENIGMA_LOG("SQL: {0}", sql.str());
-#endif
-
-        const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-
-        // Loop to execute the query step by step, to get rows of result
-        while (query->executeStep()) {
-          auto e = std::make_unique<Encryption>();
-
-          std::int32_t i{0}; // for getColumn, use index starts by 0
-          e->ide = query->getColumn(i++).getInt64();
-          if constexpr (title) e->title = query->getColumn(i++).getString();
-          if constexpr (cipher) {
-            e->cipher.idc = query->getColumn(i++).getInt64();
-            //e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
-            e->cipher.data = std::move(query->getColumn(i++).getString());
-            e->cipher.ide = query->getColumn(i++).getInt64();
-          }
-          if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
-          if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
-          if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
-          if constexpr (file_ext) e->file_ext = query->getColumn(i++).getString();
-
-          encryptions.emplace_back(std::move(e));
-        }
-      } catch (const SQLite::Exception& e) {
-        ENIGMA_ERROR("{0}", e.what());
-      }
-      return encryptions;
-    }
-
-    /** Search Encryptions by title using keyword LIKE %QUERY% */
-    template<const bool title, const bool cipher, const bool date_time, const bool size, const bool is_file, const bool file_ext> // select which columns to return (for optimization)
-    inline static std::vector<std::unique_ptr<Encryption>> SearchEncryptionsByTitle(const std::string& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending) {
-      ENIGMA_TRACE_CURRENT_FUNCTION();
-
-      ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", {});
-
-      std::vector<std::unique_ptr<Encryption>> encryptions{};
-      try {
-        // Construct SQL
-        std::ostringstream sql{};
-        {
-          sql << "SELECT e.ide";
-          if constexpr (title) sql << ", e.title";
-          if constexpr (cipher) sql << ", c.idc, c.data, c.ide";
-          if constexpr (date_time) sql << ", e.date_time";
-          if constexpr (size) sql << ", e.size";
-          if constexpr (is_file) sql << ", e.is_file";
-          if constexpr (file_ext) sql << ", e.file_ext";
-          sql << " FROM Encryption e";
-          if constexpr (cipher) sql << " JOIN Cipher c ON e.ide = c.idc";
-          sql << " WHERE LOWER(e.title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%'";
-          sql << " ORDER BY" << order_by << order;
-        }
-
-#if defined(ENIGMA_DEBUG)
-        ENIGMA_LOG("SQL: {0}", sql.str());
-#endif
-        const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-
-        // Loop to execute the query step by step, to get rows of result
-        while (query->executeStep()) {
-          auto e = std::make_unique<Encryption>();
-
-          std::int32_t i{0}; // for getColumn, use index starts by 0
-          e->ide = query->getColumn(i++).getInt64();
-          if constexpr (title) e->title = query->getColumn(i++).getString();
-          if constexpr (cipher) {
-            e->cipher.idc = query->getColumn(i++).getInt64();
-            //e->cipher.data = reinterpret_cast<const char*>(query->getColumn(i++).getBlob());
-            e->cipher.data = std::move(query->getColumn(i++).getString());
-            e->cipher.ide = query->getColumn(i++).getInt64();
-          }
-          if constexpr (date_time) e->date_time = query->getColumn(i++).getString();
-          if constexpr (size) e->size = static_cast<decltype(Encryption::size)>(query->getColumn(i++).getInt64());
-          if constexpr (is_file) e->is_file = static_cast<decltype(Encryption::is_file)>(query->getColumn(i++).getInt());
-          if constexpr (file_ext) e->file_ext = query->getColumn(i++).getString();
-
-          encryptions.emplace_back(std::move(e));
-        }
-      } catch (const SQLite::Exception& e) {
-        ENIGMA_ERROR("{0}", e.what());
-      }
-      return encryptions;
-    }
+    /**
+     * Search Encryptions by title using keyword LIKE %QUERY%
+     */
+    static std::vector<std::unique_ptr<Encryption>> searchEncryptionsByTitle(const std::string& qtitle, OrderBy order_by = OrderBy::ID, Order order = Order::Descending);
 
   public: // Accessors
     /** Returns SQLite database connection instance */
-    static const std::unique_ptr<SQLite::Database>& GetInstance() noexcept { return m_database; }
+    static const std::unique_ptr<SQLite::Database>& getStorage() noexcept { return m_database; }
 
   public: // Modifiers
     /**
@@ -304,7 +164,7 @@ class Database final {
     static void Import(const fs::path& filename);
 
   private:
-    inline static std::unique_ptr<SQLite::Database> m_database{nullptr}; /**< Database connection configured on Initialize() */
+    inline static std::unique_ptr<SQLite::Database> m_database{nullptr}; /**< Database connection created on initialize() */
 };
 
 /**
@@ -314,59 +174,3 @@ class Database final {
 */
 
 NS_ENIGMA_END
-#endif // !ENIGMA_DATABASE_H
-
-
-#if 0
-// TODO
-// Export all encryptions data to a json file
-static bool ExportAllEncryptionsJSON(const fs::path& filename)
-{
-	ENIGMA_TRACE_CURRENT_FUNCTION();
-	ENIGMA_ASSERT_OR_RETURN(m_database, "Database was not initialized", false);
-	try
-	{
-		ENIGMA_INFO("Getting all encryptions from database to export to json file {}...", filename.string());
-		std::vector<std::unique_ptr<Encryption>> encryptions = Database::GetAllEncryptions<true, true, true, true, true>();
-		ENIGMA_INFO("Got {0} Encryption records.", encryptions.size());
-
-		// Make json 
-		using namespace nlohmann;
-		json json_encryptions = json::array();
-		for (const auto& encryption_ptr : encryptions)
-		{
-			// expand Encryption 
-			const auto& [ide, title, cipher, date_time, size, is_file] = *encryption_ptr;
-
-			// make encryption object
-			json enc_obj{};
-			enc_obj["ide"] = ide;
-			enc_obj["title"] = title;
-
-			json cipher_obj{};
-			cipher_obj["idc"] = cipher.idc;
-			cipher_obj["ide"] = cipher.ide;
-			cipher_obj["data"] = cipher.data;
-			enc_obj["cipher"] = cipher_obj;
-
-			enc_obj["date_time"] = date_time;
-			enc_obj["size"] = size;
-			enc_obj["is_file"] = is_file;
-
-			// add obj to array
-			json_encryptions.push_back(std::move(enc_obj));
-		}
-
-		// we can freeup the memory now.
-		encryptions.clear();
-
-		// save made json array to file
-		return FileUtils::Write(filename, json_encryptions.dump(-1, 32, false, json::error_handler_t::replace));
-	}
-	catch (const SQLite::Exception& e)
-	{
-		ENIGMA_ERROR(e.what());
-		return false;
-	}
-}
-#endif
