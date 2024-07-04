@@ -15,16 +15,16 @@ ChaCha20Poly1305::ChaCha20Poly1305(const Algorithm::Intent intent) noexcept
 ChaCha20Poly1305::~ChaCha20Poly1305() noexcept {
 }
 
-std::vector<byte> ChaCha20Poly1305::Encrypt(const std::string& password, const std::vector<byte>& buffer) {
+std::vector<byte> ChaCha20Poly1305::Encrypt(const std::string& password, const byte *buffer, const std::size_t buffSize) {
   ENIGMA_ASSERT_OR_THROW(m_chacha_encryptor, "ChaCha20Poly1305 Encryptor is not initialized properly");
   ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "For security reasons, ChaCha20Poly1305 minimum password length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 
-  EnigmaFooter footer{};
-  footer.magic = ENIGMA_MAGIC;
+  Meta::EnigmaFooter footer{};
+  footer.magic = Meta::ENIGMA_MAGIC;
   footer.version = ENIGMA_VERSION_MAJOR * 100'000 + ENIGMA_VERSION_MINOR * 1000 + ENIGMA_VERSION_PATCH;
-  footer.algo = static_cast<byte>(this->GetType());
+  footer.algo = this->GetType();
   footer.iv = Algorithm::GenerateRandomIV(m_chacha_encryptor->MaxIVLength());
-  footer.hash = HashUtils::bytes<CryptoPP::SHA256>(buffer);
+  footer.hash = HashUtils::bytes<CryptoPP::SHA256>(buffer, buffSize);
 
   // Prepare key
   CryptoPP::SecByteBlock key(m_chacha_encryptor->MaxKeyLength() + m_chacha_encryptor->MaxIVLength());
@@ -45,7 +45,7 @@ std::vector<byte> ChaCha20Poly1305::Encrypt(const std::string& password, const s
   m_chacha_encryptor->SetKeyWithIV(key, m_chacha_encryptor->MaxKeyLength(), key + m_chacha_encryptor->MaxKeyLength()); // key, kl, iv, ivl
 
   // Output encrypted buffer
-  std::vector<byte> cipher(buffer.size(), '\000');
+  std::vector<byte> cipher(buffSize, '\000');
   // Output calculated MAC
   std::vector<byte> mac(16, '\000');
 
@@ -55,7 +55,7 @@ std::vector<byte> ChaCha20Poly1305::Encrypt(const std::string& password, const s
     mac.data(), mac.size(),             // output calculated MAC
     footer.iv.data(), footer.iv.size(), // iv
     nullptr, 0,                         // aad buffer (additional authenticated data)
-    buffer.data(), buffer.size()        // buffer to encrypt
+    buffer, buffSize                    // buffer to encrypt
   );
   // Make sure you store mac as an extra
   footer.extra = std::move(mac);
@@ -70,12 +70,16 @@ std::vector<byte> ChaCha20Poly1305::Encrypt(const std::string& password, const s
   return out;
 }
 
-std::vector<byte> ChaCha20Poly1305::Decrypt(const std::string& password, const std::vector<byte>& cipher) {
-  ENIGMA_ASSERT_OR_THROW(isEnigmaCipher(cipher), "Given cipher is malformed or was not encrypted with Enigma");
+std::vector<byte> ChaCha20Poly1305::Encrypt(const std::string& password, const std::vector<byte>& buffer) {
+  return Encrypt(password, buffer.data(), buffer.size());
+}
+
+std::vector<byte> ChaCha20Poly1305::Decrypt(const std::string& password, const byte *cipher, const std::size_t cipherSize) {
+  ENIGMA_ASSERT_OR_THROW(Meta::isEnigmaCipher(cipher, cipherSize), "Given cipher is malformed or was not encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, "ChaCha20Poly1305 Decryptor is not initialized properly");
 
   // Extract footer
-  EnigmaFooter footer = EnigmaFooter::fromBytes(cipher);
+  Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromBytes(cipher, cipherSize);
   const std::vector<byte>& mac = footer.extra;
   // Prepare Key
   CryptoPP::SecByteBlock key(m_chacha_decryptor->MaxKeyLength() + m_chacha_decryptor->MaxIVLength());
@@ -95,15 +99,15 @@ std::vector<byte> ChaCha20Poly1305::Decrypt(const std::string& password, const s
   m_chacha_decryptor->SetKeyWithIV(key, m_chacha_decryptor->MaxKeyLength(), key + m_chacha_decryptor->MaxKeyLength()); // key, kl, iv, ivl
 
   // Recovered cipher
-  std::vector<byte> decrypted(cipher.size(), '\000');
+  std::vector<byte> decrypted(cipherSize - footer.sizeInBytes(), '\000'); // make sure your exclude footer
 
   // Decrypt and verify MAC
   const bool macVerified = m_chacha_decryptor->DecryptAndVerify(
-    decrypted.data(),                   // output buffer (decrypted cipher)
-    mac.data(), mac.size(),             // input MAC (calculated in encryption)
-    footer.iv.data(), footer.iv.size(), // input IV (generated in encryption)
-    nullptr, 0,                         // aad buffer (additional authenticated data)
-    cipher.data(), cipher.size()        // cipher to decrypt
+    decrypted.data(),                         // output buffer (decrypted cipher)
+    mac.data(), mac.size(),                   // input MAC (calculated in encryption)
+    footer.iv.data(), footer.iv.size(),       // input IV (generated in encryption)
+    nullptr, 0,                               // aad buffer (additional authenticated data)
+    cipher, cipherSize - footer.sizeInBytes() // cipher to decrypt (make sure your exclude footer)
   );
 
   // Throw an exception if mac was not verified (mac is auto calculated at encryption by encryptor->EncryptAndAuthenticate)
@@ -114,16 +118,19 @@ std::vector<byte> ChaCha20Poly1305::Decrypt(const std::string& password, const s
 
   return decrypted;
 }
+std::vector<byte> ChaCha20Poly1305::Decrypt(const std::string& password, const std::vector<byte>& cipher) {
+  return Decrypt(password, cipher.data(), cipher.size());
+}
 
 void ChaCha20Poly1305::Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {
-  ENIGMA_ASSERT_OR_THROW(!isEnigmaFile(in_filename), in_filename.filename().string() + " is already encrypted with Enigma");
+  ENIGMA_ASSERT_OR_THROW(!Meta::isEnigmaFile(in_filename), in_filename.filename().string() + " is already encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "For security reasons, ChaCha20Poly1305 Minimum Password Length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
   ENIGMA_ASSERT_OR_THROW(m_chacha_encryptor, "ChaCha20Poly1305 Encryptor is not initialized properly");
 
-  EnigmaFooter footer{};
-  footer.magic = ENIGMA_MAGIC;
+  Meta::EnigmaFooter footer{};
+  footer.magic = Meta::ENIGMA_MAGIC;
   footer.version = ENIGMA_VERSION_MAJOR * 100'000 + ENIGMA_VERSION_MINOR * 1000 + ENIGMA_VERSION_PATCH;
-  footer.algo = static_cast<byte>(this->GetType());
+  footer.algo = this->GetType();
   footer.iv = Algorithm::GenerateRandomIV(m_chacha_encryptor->MaxIVLength());
 
   // Prepare key
@@ -145,14 +152,14 @@ void ChaCha20Poly1305::Encrypt(const std::string& password, const fs::path& in_f
   std::ofstream ofs{out_filename, std::ios::binary};
   CryptoPP::SHA256 sha256{};
   bool ok = ofs.good();
-  FileUtils::ReadChunks(in_filename, ENIGMA_BUFFER_DEFAULT_SIZE, [this, &ok, &ofs, &key, &sha256, &footer](std::vector<byte>&& chunk) -> bool {
+  FileUtils::ReadChunks(in_filename, Meta::ENIGMA_BUFFER_DEFAULT_SIZE, [this, &ok, &ofs, &key, &sha256, &footer](std::vector<byte>&& chunk) -> bool {
     try {
       // Encrypt chunk
       // Set Key and IV to the encryptor
       m_chacha_encryptor->SetKeyWithIV(key, m_chacha_encryptor->MaxKeyLength(), key + m_chacha_encryptor->MaxKeyLength()); // key, kl, iv, ivl
 
-      EnigmaCipherChunk cipherChunk{};
-      cipherChunk.magic = ENIGMA_CIPHER_CHUNK_MAGIC;
+      Meta::EnigmaCipherChunk cipherChunk{};
+      cipherChunk.magic = Meta::ENIGMA_CIPHER_CHUNK_MAGIC;
       cipherChunk.cipher.resize(chunk.size(), '\000');
       // Output calculated MAC
       std::vector<byte> mac(16, '\000');
@@ -204,11 +211,12 @@ void ChaCha20Poly1305::Encrypt(const std::string& password, const fs::path& in_f
 }
 
 void ChaCha20Poly1305::Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) {
-  ENIGMA_ASSERT_OR_THROW(isEnigmaFile(in_filename), "Given file " + in_filename.string() + " is malformed or was not encrypted with Enigma");
+  ENIGMA_ASSERT_OR_THROW(Meta::isEnigmaFile(in_filename), "Given file " + in_filename.string() + " is malformed or was not encrypted with Enigma");
   ENIGMA_ASSERT_OR_THROW(m_chacha_decryptor, "ChaCha20Poly1305 Decryptor is not initialized properly");
 
   // Extract footer from encrypted file
-  EnigmaFooter footer = EnigmaFooter::fromFile(in_filename);
+  Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromFile(in_filename);
+
   // Prepare key
   CryptoPP::SecByteBlock key(m_chacha_decryptor->MaxKeyLength() + m_chacha_decryptor->MaxIVLength());
 
@@ -228,14 +236,15 @@ void ChaCha20Poly1305::Decrypt(const std::string& password, const fs::path& in_f
   std::ofstream ofs{out_filename, std::ios::binary};
   CryptoPP::SHA256 sha256;
   bool ok = ofs.good();
-  readCipherChunks(in_filename, [this, &ok, &ofs, &key, &sha256, &footer](EnigmaCipherChunk&& cipherChunk) -> bool {
+  Meta::readCipherChunks(in_filename, [this, &ok, &ofs, &key, &sha256, &footer](Meta::EnigmaCipherChunk&& cipherChunk) -> bool {
     try {
       // Decrypt chunk
       // Set Key and IV to the decrypter
       m_chacha_decryptor->SetKeyWithIV(key, m_chacha_decryptor->MaxKeyLength(), key + m_chacha_decryptor->MaxKeyLength()); // key, kl, iv, ivl
-                                                                                                                           // Recovered cipher
-      std::vector<byte> decrypted(cipherChunk.cipher.size(), '\000');
+
+      std::vector<byte> decrypted(cipherChunk.cipher.size() /*- footer.sizeInBytes()*/, '\000'); // (make sure your exclude footer)
       const std::vector<byte>& mac = cipherChunk.extra;
+      ENIGMA_ASSERT_OR_THROW(!mac.empty(), "Could not read ChaCha20Poly1305 MAC from EnigmaCipherChunk");
 
       // Decrypt and verify MAC
       const bool macVerified = m_chacha_decryptor->DecryptAndVerify(
@@ -243,7 +252,7 @@ void ChaCha20Poly1305::Decrypt(const std::string& password, const fs::path& in_f
         mac.data(), mac.size(),                              // input MAC (calculated in encryption)
         footer.iv.data(), footer.iv.size(),                  // input IV (generated in encryption)
         nullptr, 0,                                          // aad buffer (additional authenticated data)
-        cipherChunk.cipher.data(), cipherChunk.cipher.size() // cipher to decrypt
+        cipherChunk.cipher.data(), cipherChunk.cipher.size()/* - footer.sizeInBytes()*/ // cipher to decrypt (make sure your exclude footer)
       );
       // Throw an exception if mac was not verified (mac is auto calculated at encryption by encryptor->EncryptAndAuthenticate)
       ENIGMA_ASSERT_OR_THROW(macVerified, "Failed to verify ChaCha20Poly1305 MAC");
@@ -279,4 +288,6 @@ void ChaCha20Poly1305::Decrypt(const std::string& password, const fs::path& in_f
   ENIGMA_INFO("Verifying SHA256 hash of {} ...", out_filename.filename().string());
   ENIGMA_ASSERT_OR_THROW(digest == footer.hash, "Decryption failure. Original SHA256 hash of file does not match decrypted hash");
 }
+
+
 NS_ENIGMA_END

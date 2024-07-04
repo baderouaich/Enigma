@@ -18,10 +18,12 @@ class ChaCha20Poly1305 : public Algorithm {
     *	@param intent: Operation, Encrypt or Decrypt
     */
     explicit ChaCha20Poly1305(const Algorithm::Intent intent) noexcept;
-    virtual ~ChaCha20Poly1305() noexcept;
+    ~ChaCha20Poly1305() noexcept override;
 
   public:
+    std::vector<byte> Encrypt(const std::string& password, const byte* buffer, const std::size_t buffSize) override;
     std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
+    std::vector<byte> Decrypt(const std::string& password, const byte* cipher, const std::size_t cipherSize) override;
     std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) override;
     void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
     void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
