@@ -66,7 +66,7 @@ class Application final : public SingleProcessInstance {
 
   public: // Accessors
     /** Returns the instance of this Application */
-    static Application *GetInstance() noexcept { return m_instance; }
+    static Application *getInstance() noexcept { return m_instance; }
 
     /** Returns the Window of this Application */
     const std::unique_ptr<Window>& GetWindow() const noexcept { return m_window; }

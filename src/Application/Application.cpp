@@ -392,7 +392,7 @@ void Application::Exit(const std::string& message, const std::int32_t exit_code)
 {
 	const std::string msg = "Enigma Application has exited with code " + std::to_string(exit_code) + " (" + message + ")\n";
 	
-	if (Logger::GetLogger())
+	if (Logger::getLogger())
 		ENIGMA_CRITICAL(msg);
 	else
 		std::cerr << msg << std::endl;
