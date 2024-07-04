@@ -11,7 +11,7 @@
 <img src="res/branding/Logo.png" width="250" />
 
 <!--DESCRIOTION-->
-A Simple, Reliable and Efficient Encryption Tool<br>
+A Simple, Reliable and Efficient Encryption Tool <small>(for personal use)</small><br>
 <!--
 Built to solve 3 problems i had:
 - huge personnel files take too much space in storage clouds <strong>(Solved by Compression)</strong>
@@ -63,7 +63,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - Import/Export your database by copying or replacing database file `Enigma.db` located in `./res/database/`
 -->
 
-## Enigma UI
+## UI
 - Main Menu
 ![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/ad83827a-f1f8-41f3-a9f3-be78a8f5623a)
 - Straight forward
@@ -77,60 +77,6 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - Extra Utilities
 ![Tools-Demo](https://github.com/baderouaich/Enigma/assets/49657842/6d17ab20-4faf-43f1-b074-ef99473dfbcd)
 
-## Enigma CLI
-```text
-Usage:
-  Enigma [OPTION...]
-
-  -e, --encrypt                 Encrypt operation
-  -d, --decrypt                 Decrypt operation
-  -a, --algorithm [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption algorithm (default: AES)
-  -p, --password arg            Encryption password
-  -t, --text arg                Text to Encrypt or Decrypt (base64)
-  -i, --infile arg              Input File to Encrypt/Decrypt
-  -o, --outfile arg             Output File to Encrypt/Decrypt
-  -s, --save                    Save encryption record to database
-  -l, --list                    List saved encryption records from database
-  -h, --help                    Displays help message
-  -v, --version                 Displays Enigma's version
-      --check-for-updates       Check for new version releases
-```
-
-- Example encypting a text with AES-GCM:<br>
-```batch
-$ ./Enigma --encrypt --algorithm=aes --password="My@pa$$W0rd" --text="my important data securly encrypted!"
-output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT
-```
-- Example decrypting a text with AES-GCM:<br>
-```batch
-$ ./Enigma -d -p "My@pa$$W0rd" -t "AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT"
-output: my important data securly encrypted!
-```
-<!--<img src="res/screenshots/CLI-EncryptDecryptText-Demo.png"/><br>-->
-
-- Example encypting a file with AES-GCM:<br>
-```batch
-$ ./Enigma -e -a AES --password "My@pa$$W0rd" --infile="/home/user/Desktop/Data.txt" --outfile="/home/user/Desktop/Data_encrypted.txt.enigma"
-```
-- Example decypting a file with AES-GCM:<br>
-```batch
-$ ./Enigma --decrypt --password="My@pa$$W0rd" --infile="/home/user/Desktop/Data_encrypted.txt.enigma" --outfile="/home/user/Desktop/Data_decrypted.txt"
-```
-<!-- <img src="res/screenshots/CLI-EncryptDecryptFile-Demo.png"/><br> -->
-![4](https://github.com/baderouaich/Enigma/assets/49657842/5a65fa0a-e28a-44a3-8b60-7bbb748582b1)
-
-<!--
-<img width="300" src="res/screenshots/UI-MainMenuScene.png"/>  <img width="300" src="res/screenshots/UI-EncryptText-Demo.png"/>  <img width="300" src="res/screenshots/UI-DecryptText-Demo.png"/>  <img width="300" src="res/screenshots/UI-EncryptFile-Demo.png"/>  <img width="300" src="res/screenshots/UI-DecryptFile-Demo.png"/>
--->
-
-<!--
-Latest Test on `Windows 10 Version 20H2`
-<img src="res/Dev Process/Windows-Latest.png"/>
-<br>
-Latest Test on `Linux Mint Cinnamon 19.3 Tricia`
-<img src="res/Dev Process/Linux-Latest.png"/>
--->
-
 
 ### Compiling & Installing
 ```shell
@@ -140,8 +86,9 @@ mkdir build && cd build
 cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows
 ```
+- No `sudo` or `Administrator` privileges are needed for installation.
 - All Enigma files will be installed to `/home/$(whoami)/Enigma/` (**Linux**) |  `C:\Program Files\Enigma\` (**Windows**)
-- To uninstall simply remove the installed `Enigma/` directory
+- To uninstall simply remove the installed `Enigma/` directory. Please make sure you export your encryptions from menu `File -> Export`before removing the directory.
 
 <!--
 ## Compiling
