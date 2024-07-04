@@ -23,7 +23,7 @@ TEST_CASE("File Utils Tests", "FileUtils")
 			//std::cout << "Read Chunk Size: " << chunk.size() << std::endl;
 			buffer.insert(buffer.begin(), chunk.begin(), chunk.end());
 
-			return false; // keep reading chunks.. don't stop
+			return true; // keep reading chunks.. don't stop
 		});
 
 	// buffer size must match file size

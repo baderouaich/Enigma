@@ -1,8 +1,8 @@
 #pragma once
-#include <catch2/catch_all.hpp>
-#include <Utility/GZip.hpp>
-#include <Utility/SizeUtils.hpp>
 #include "TestsData.hpp"
+#include <Utility/GZip.hpp.ignore>
+#include <Utility/SizeUtils.hpp>
+#include <catch2/catch_all.hpp>
 using namespace Enigma;
 using namespace Catch;
 using namespace Catch::Matchers;

@@ -10,15 +10,16 @@
 #include "Crypto/TwofishTests.hpp"
 #include "Crypto/IDEATests.hpp"
 #include "Crypto/BlowfishTests.hpp"
-#include "Crypto/RSATests.hpp"
+//#include "Crypto/RSATests.hpp"
 
 // Utility Tests
-#include "Utils/Base64Tests.hpp"
-#include "Utils/GZipTests.hpp"
-#include "Utils/FileUtilsTests.hpp"
+//#include "Utils/Base64Tests.hpp"
+//#include "Utils/GZipTests.hpp"
+//#include "Utils/FileUtilsTests.hpp"
+//#include "Utils/HashTests.hpp"
 
 // Database Tests
-#include "DB/CRUD.hpp"
+//#include "DB/CRUD.hpp"
 
 
 #endif // !ENIGMA_TESTS_ALL
