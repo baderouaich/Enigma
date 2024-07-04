@@ -45,15 +45,15 @@ void MainMenuScene::OnDraw() {
 
 
 void MainMenuScene::OnImGuiDraw() {
-  const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
-  const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
+  const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
+  const auto& [win_x, win_y] = Application::getInstance()->GetWindow()->GetPosition();
   static const auto& io = ImGui::GetIO();
 
   const auto button_size = ImVec2(win_w / 2.5f, 45.0f);
 
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static const auto& fonts = Application::GetInstance()->GetFonts();
+  static const auto& fonts = Application::getInstance()->GetFonts();
   static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
   static ImFont *const& font_audiowide_regular_60 = fonts.at("Audiowide-Regular-60");
   static ImFont *const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -116,12 +116,12 @@ void MainMenuScene::OnImGuiDraw() {
 				*/
         if (ImGui::BeginMenu("Help")) {
           if (ImGui::MenuItem("Report an issue")) {
-            Application::GetInstance()->LaunchWorkerThread(this, ("Reporting issue..."), [this]() -> void {
+            Application::getInstance()->LaunchWorkerThread(this, ("Reporting issue..."), [this]() -> void {
               this->OnReportIssueMenuButtonPressed();
             });
           }
           if (ImGui::MenuItem("Check for updates")) {
-            Application::GetInstance()->LaunchWorkerThread(this, ("Checking for updates..."), [this]() -> void {
+            Application::getInstance()->LaunchWorkerThread(this, ("Checking for updates..."), [this]() -> void {
               this->OnCheckForUpdatesMenuButtonPressed();
             });
           }
@@ -311,27 +311,27 @@ void MainMenuScene::OnDestroy() {
 }
 
 void MainMenuScene::OnEncryptFileButtonPressed() {
-  Application::GetInstance()->PushScene(std::make_unique<EncryptFileScene>());
+  Application::getInstance()->PushScene(std::make_unique<EncryptFileScene>());
 }
 
 void MainMenuScene::OnDecryptFileButtonPressed() {
-  Application::GetInstance()->PushScene(std::make_unique<DecryptFileScene>());
+  Application::getInstance()->PushScene(std::make_unique<DecryptFileScene>());
 }
 
 void MainMenuScene::OnEncryptTextButtonPressed() {
-  Application::GetInstance()->PushScene(std::make_unique<EncryptTextScene>());
+  Application::getInstance()->PushScene(std::make_unique<EncryptTextScene>());
 }
 
 void MainMenuScene::OnDecryptTextButtonPressed() {
-  Application::GetInstance()->PushScene(std::make_unique<DecryptTextScene>());
+  Application::getInstance()->PushScene(std::make_unique<DecryptTextScene>());
 }
 
 void MainMenuScene::OnMyEncryptionsButtonPressed() {
-  Application::GetInstance()->PushScene(std::make_unique<MyEncryptionsScene>());
+  Application::getInstance()->PushScene(std::make_unique<MyEncryptionsScene>());
 }
 
 void MainMenuScene::OnToolsButtonPressed() {
-  Application::GetInstance()->PushScene(std::make_unique<ToolsScene>());
+  Application::getInstance()->PushScene(std::make_unique<ToolsScene>());
 }
 
 void MainMenuScene::OnReportIssueMenuButtonPressed() {
@@ -444,7 +444,7 @@ void MainMenuScene::OnExportEncryptionsButtonPressed() {
   if (outputFilename.empty()) return;
 
   ENIGMA_INFO("Exporting database to {}", outputFilename);
-  Application::GetInstance()->LaunchWorkerThread(this, "Exporting database to\n" + outputFilename, [outputFilename]() {
+  Application::getInstance()->LaunchWorkerThread(this, "Exporting database to\n" + outputFilename, [outputFilename]() {
     try {
       Database::Export(outputFilename);
       DialogUtils::Info("Backup successfully saved to\n" + outputFilename);
@@ -468,7 +468,7 @@ void MainMenuScene::OnImportEncryptionsButtonPressed() {
 
   ENIGMA_INFO("Importing database from {}", inputFilename);
 
-  Application::GetInstance()->LaunchWorkerThread(this, "Importing database from\n" + inputFilename, [inputFilename]() {
+  Application::getInstance()->LaunchWorkerThread(this, "Importing database from\n" + inputFilename, [inputFilename]() {
     try {
       Database::Import(inputFilename);
       DialogUtils::Info("Database successfully imported from\n" + inputFilename);
