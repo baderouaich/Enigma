@@ -13,10 +13,12 @@ class AES : public Algorithm {
     *	@param intent: Operation, Encrypt or Decrypt
     */
     explicit AES(const Algorithm::Intent intent) noexcept;
-    virtual ~AES() noexcept;
+    ~AES() noexcept override;
 
   public:
+    std::vector<byte> Encrypt(const std::string& password, const byte* buffer, const std::size_t buffSize) override;
     std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
+    std::vector<byte> Decrypt(const std::string& password, const byte* cipher, const std::size_t cipherSize) override;
     std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) override;
     void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
     void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
