@@ -4,7 +4,7 @@ var struct_meta_1_1_enigma_footer =
     [ "fromBytes", "struct_meta_1_1_enigma_footer.html#acca664a4819383d84742d903251882d0", null ],
     [ "fromBytes", "struct_meta_1_1_enigma_footer.html#a536d1c02dbd79fdbede4edb10ecf7d1b", null ],
     [ "fromFile", "struct_meta_1_1_enigma_footer.html#a6de6e45bd8a6dfa0511aef8b537b0768", null ],
-    [ "sizeInBytes", "struct_meta_1_1_enigma_footer.html#aa9d8cd64ac350b766b83b593c447aa0d", null ],
+    [ "sizeInBytes", "struct_meta_1_1_enigma_footer.html#ab03fec62dde759912abe75fa2e537369", null ],
     [ "toBytes", "struct_meta_1_1_enigma_footer.html#a4f3cfcb154ca2ba7daf39bf4086aec08", null ],
     [ "algo", "struct_meta_1_1_enigma_footer.html#a2740fe887daf39747ddc46e05cefa999", null ],
     [ "extra", "struct_meta_1_1_enigma_footer.html#ac022a9ac466c139191db080898cf4adb", null ],

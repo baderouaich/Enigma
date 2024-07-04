@@ -37,7 +37,7 @@ var searchData=
   ['size_873',['size',['../struct_cipher_chunk.html#a50ba87a6b1ce6777b81e3c90c826f21d',1,'CipherChunk::size()'],['../struct_encryption.html#a82bd3bb69a3703c55dfc3d9a65f91314',1,'Encryption::size()']]],
   ['size_874',['Size',['../class_database.html#a00d53c27f0ac09d7158d4b2c388ceed7a6f6cb72d544962fa333e2e34ce64f719',1,'Database']]],
   ['size_5ftype_875',['size_type',['../class_meta.html#a49ea32e861d15e3075f0d55e36da0052',1,'Meta']]],
-  ['sizeinbytes_876',['sizeInBytes',['../struct_meta_1_1_enigma_footer.html#aa9d8cd64ac350b766b83b593c447aa0d',1,'Meta::EnigmaFooter::sizeInBytes()'],['../struct_meta_1_1_enigma_cipher_chunk.html#a1e9c3d5531fa09a46eb267ebd3b44823',1,'Meta::EnigmaCipherChunk::sizeInBytes()']]],
+  ['sizeinbytes_876',['sizeInBytes',['../struct_meta_1_1_enigma_footer.html#ab03fec62dde759912abe75fa2e537369',1,'Meta::EnigmaFooter::sizeInBytes()'],['../struct_meta_1_1_enigma_cipher_chunk.html#a87afb81879ee09ee4b211c83a92832e7',1,'Meta::EnigmaCipherChunk::sizeInBytes()']]],
   ['sizeutils_877',['SizeUtils',['../class_size_utils.html',1,'']]],
   ['sizeutils_2ehpp_878',['SizeUtils.hpp',['../_size_utils_8hpp.html',1,'']]],
   ['slash_879',['Slash',['../_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a358cfe58715d680d9ab09f82e4010cbc',1,'KeyCodes.hpp']]],
