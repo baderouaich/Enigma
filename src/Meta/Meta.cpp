@@ -3,7 +3,7 @@
 
 NS_ENIGMA_BEGIN
 
-constexpr Meta::size_type Meta::EnigmaFooter::sizeInBytes() const noexcept {
+Meta::size_type Meta::EnigmaFooter::sizeInBytes() const noexcept {
   // NOTE: make sure you include any new member size here
   return sizeof(magic) +
          sizeof(version) +
@@ -164,7 +164,7 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromBase64(const std::string& base64) {
 }
 
 
-constexpr Meta::size_type Meta::EnigmaCipherChunk::sizeInBytes() const noexcept {
+Meta::size_type Meta::EnigmaCipherChunk::sizeInBytes() const noexcept {
   return sizeof(magic) +
          sizeof(size_type) /*cipherSize*/ + cipher.size() +
          sizeof(size_type) /*extraSize*/ + extra.size();

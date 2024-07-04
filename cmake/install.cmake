@@ -45,6 +45,7 @@ Type=Application
 Name=${PROJECT_NAME}
 Version=${PROJECT_VERSION}
 Comment=${PROJECT_DESCRIPTION}
+GenericName=${PROJECT_NAME}
 Exec=${INSTALL_BASE_DIR}/Enigma
 Icon=${INSTALL_BASE_DIR}/res/branding/Logo.png
 Categories=Utility;Security

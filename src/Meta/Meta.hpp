@@ -41,7 +41,7 @@ class Meta final {
         std::vector<byte> extra{};
 
 
-        [[nodiscard]] constexpr size_type sizeInBytes() const noexcept;
+        [[nodiscard]] size_type sizeInBytes() const noexcept;
 
         /// Convert instance of this struct to an array of bytes.
         [[nodiscard]] std::vector<byte> toBytes() const;
@@ -57,7 +57,7 @@ class Meta final {
         std::vector<byte> cipher;
         std::vector<byte> extra;
 
-        [[nodiscard]] constexpr size_type sizeInBytes() const noexcept;
+        [[nodiscard]] size_type sizeInBytes() const noexcept;
 
         [[nodiscard]] std::vector<byte> toBytes() const;
 
