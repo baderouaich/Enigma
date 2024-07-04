@@ -56,16 +56,14 @@ namespace Enigma {
     namespace Database {
       static const fs::path DATABASE_FILE_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "database" / "Enigma.db";
       // Unfortunately, u cant create multiple tables at once..
-      static constexpr const std::array<std::string_view, 2> CREATE_TABLES_SQL =
-        {
-          // Encryptions table
-          R"(
-					CREATE TABLE IF NOT EXISTS Encryption
+      static constexpr const std::array<std::string_view, 2> CREATE_TABLES_SQL = {
+        R"(
+					CREATE TABLE IF NOT EXISTS Encryptions
 					(
-						ide		INTEGER PRIMARY KEY AUTOINCREMENT,
-						title		VARCHAR(255) NOT NULL,
+						ide		    INTEGER PRIMARY KEY AUTOINCREMENT,
+						title		  VARCHAR(255) NOT NULL,
 						date_time	DATETIME NOT NULL,
-						size		INTEGER NOT NULL,			-- size of compressed cipher in bytes
+						size		  INTEGER NOT NULL,			-- size of compressed cipher in bytes
 						is_file		BOOLEAN NOT NULL,
 						file_ext	VARCHAR(9),				-- file extension to remember file type on decryption
 
@@ -73,17 +71,20 @@ namespace Enigma {
 					);
 				)",
 
-          // Ciphers table holds either cipher text or file binary cipher for optimization
-          R"(
-					CREATE TABLE IF NOT EXISTS Cipher
-					(
-						idc		INTEGER PRIMARY KEY AUTOINCREMENT,
-						data		BLOB NOT NULL,				-- cipher text or file binary cipher compressed             
-						ide		INTEGER,
+        R"(
+            CREATE TABLE IF NOT EXISTS CipherChunks
+            (
+              idc	   INTEGER PRIMARY KEY AUTOINCREMENT,
+              ide		 INTEGER NOT NULL,
+              offset INTEGER NOT NULL,
+              size   INTEGER NOT NULL,
+              bytes	 BLOB NOT NULL,
 
-						FOREIGN KEY(ide) REFERENCES Encryption(ide) ON DELETE CASCADE --  when an Encryption record is deleted, all associated Cipher records will also be auto deleted.
-					);
-				)"};
+              FOREIGN KEY(ide) REFERENCES Encryptions(ide) ON DELETE CASCADE --  when an Encryption record is deleted, all associated Cipher records will also be deleted automatically.
+            );
+        )"
+
+      };
 
     }
 
