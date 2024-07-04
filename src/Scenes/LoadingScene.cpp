@@ -24,7 +24,7 @@ void LoadingScene::OnDraw()
 
 void LoadingScene::OnImGuiDraw()
 {
-	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
+	const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
 	static const auto& io = ImGui::GetIO();
 
 	static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove;
