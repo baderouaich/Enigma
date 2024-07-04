@@ -579,7 +579,7 @@ void Window::SetTitle(const std::string& title,
 	if (fps)
 	{
 		oss << " - FPS: " << *fps;
-		//oss << " - FPS: " << FPS << " (" << std::fixed << std::setprecision(3) << Application::GetInstance()->GetDeltaTime() << "ms)";
+		//oss << " - FPS: " << FPS << " (" << std::fixed << std::setprecision(3) << Application::getInstance()->GetDeltaTime() << "ms)";
 	}
 
 	//RAM Usage
@@ -609,15 +609,15 @@ void Window::SetTitle(const std::string& title,
 	//FPS
 	if (m_is_show_fps)
 	{
-		const std::uint32_t& FPS = Application::GetInstance()->GetFPS();
+		const std::uint32_t& FPS = Application::getInstance()->GetFPS();
 		oss << " - FPS: " << FPS;
-		//oss << " - FPS: " << FPS << " (" << std::fixed << std::setprecision(3) << Application::GetInstance()->GetDeltaTime() << "ms)";
+		//oss << " - FPS: " << FPS << " (" << std::fixed << std::setprecision(3) << Application::getInstance()->GetDeltaTime() << "ms)";
 	}
 
 	//RAM Usage
 	if (m_is_show_ram_usage)
 	{
-		const auto& ram_info = Application::GetInstance()->GetRAMInfo();
+		const auto& ram_info = Application::getInstance()->GetRAMInfo();
 		ram_info->Update();
 		const float percentage = ram_info->GetRAMUsage();
 		oss << " - RAM Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
@@ -626,7 +626,7 @@ void Window::SetTitle(const std::string& title,
 	//CPU Usage
 	if (m_is_show_cpu_usage)
 	{
-		const auto& cpu_info = Application::GetInstance()->GetCPUInfo();
+		const auto& cpu_info = Application::getInstance()->GetCPUInfo();
 		const float percentage = cpu_info->GetCPUUsage();
 		oss << " - CPU Usage: " << std::fixed << std::setprecision(2) << percentage << '%';
 	}
@@ -638,14 +638,14 @@ void Window::SetTitle(const std::string& title,
 	// title - FPS: x
 	if (m_is_show_fps)
 	{
-		const std::uint32_t& FPS = Application::GetInstance()->GetFPS();
+		const std::uint32_t& FPS = Application::getInstance()->GetFPS();
 		const std::string title_with_fps = title + " - FPS: " + std::to_string(FPS);
 		glfwSetWindowTitle(m_GLFWwindow, title_with_fps.c_str());
 	}
 	// title - FPS: x
 	else if (m_is_show_ram_usage)
 	{
-		RAMInfo& ram_info = Application::GetInstance()->GetRAMInfo();
+		RAMInfo& ram_info = Application::getInstance()->GetRAMInfo();
 		ram_info.Update();
 		const float percentage = ram_info.GetRAMUsage();
 

@@ -17,15 +17,17 @@ int main(int argc, char *argv[]) {
   std::signal(SIGBREAK, SignalHandler); // On Windows, a click on console window close button will raise SIGBREAK
 #endif
 
-  Logger::Initialize();
-  Database::Initialize();
+  Logger::initialize();
+  Database::initialize();
 
   std::int32_t exit_code = -1;
   try {
     //========= CLI Entry =========//
-    if (argc > 1) {
-      CLI cli(argc, argv);
-      exit_code = cli.Run();
+    if (argc > 1 && (!std::strcmp(argv[1], "--version") || !std::strcmp(argv[1], "-v"))) {
+      std::cout << ENIGMA_VERSION << std::endl;
+      exit_code = EXIT_SUCCESS;
+      //      CLI cli(argc, argv);
+      //      exit_code = cli.Run();
     }
     //========= UI Entry =========//
     else {
@@ -40,8 +42,8 @@ int main(int argc, char *argv[]) {
     exit_code = EXIT_FAILURE;
   }
 
-  Database::Shutdown();
-  Logger::Shutdown();
+  Database::shutdown();
+  Logger::shutdown();
 
   return exit_code;
 }
@@ -72,14 +74,14 @@ static void SignalHandler(const int sig) {
     }
   };
 
-  if (Enigma::Logger::GetLogger()) {
+  if (Enigma::Logger::getLogger()) {
     ENIGMA_INFO("Signal handler invoked due abnormal exit with signal: {} ({})", sig, stringify_signal());
     ENIGMA_INFO("Exiting gracefully...");
   }
 
-  if (Enigma::Application::GetInstance()) Enigma::Application::GetInstance()->~Application();
-  if (Enigma::Database::GetInstance()) Enigma::Database::Shutdown();
-  if (Enigma::Logger::GetLogger()) Enigma::Logger::Shutdown();
+  if (Enigma::Application::getInstance()) Enigma::Application::getInstance()->~Application();
+  if (Enigma::Database::getStorage()) Enigma::Database::shutdown();
+  if (Enigma::Logger::getLogger()) Enigma::Logger::shutdown();
 
   std::exit(EXIT_SUCCESS);
 }
