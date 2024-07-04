@@ -334,7 +334,7 @@ void EncryptFileScene::OnBrowseInFileButtonPressed() {
   }
   m_in_filename = *selected_file_paths.begin();
 
-  if(m_out_filename.empty()) {
+  if (m_out_filename.empty()) {
     m_out_filename = m_in_filename + ".enigma";
   }
 }
@@ -357,11 +357,10 @@ void EncryptFileScene::OnBrowseOutFileLocationButtonPressed() {
 }
 static std::string extractFileExtension(const fs::path& filename) {
   fs::path fname = filename;
-  while(fname.extension().string() == ".enigma") {
+  while (fname.extension().string() == ".enigma") {
     fname.replace_extension("");
   }
   return fname.extension().string();
-
 }
 void EncryptFileScene::OnEncryptButtonPressed() {
   // Validate fields
@@ -431,7 +430,7 @@ void EncryptFileScene::OnEncryptButtonPressed() {
       // CipherChunks
       bool ok = true;
       std::int64_t offset{0};
-      FileUtils::ReadChunks(m_out_filename, Meta::ENIGMA_BUFFER_DEFAULT_SIZE, [ide = e->ide, &offset, &ok](std::vector<byte>&& bytes)-> bool {
+      FileUtils::ReadChunks(m_out_filename, Meta::ENIGMA_BUFFER_DEFAULT_SIZE, [ide = e->ide, &offset, &ok](std::vector<byte>&& bytes) -> bool {
         auto cc = std::make_unique<CipherChunk>();
         cc->ide = ide;
         cc->offset = offset;
@@ -444,44 +443,12 @@ void EncryptFileScene::OnEncryptButtonPressed() {
         return ok;
       });
 
-      // TODO: how to properly save an encrypted file to database
-      // - maybe save as cipherchunks but we will get issues with decrypt(pw, cipher) expectes footer as whole..
-      // - maybe save file as normal chunks, then on decryption reassemble the file in tmp from chunks and decrypt it with algo->decryopt(pw, fs;;path)
-      // if thats the case what about normal cipherchunks (text encryptions) ? no problem, we save cipher chunks normal but we have
-      // to rename the table from CipherChunks to ? or maybe we keep it with that name and just note that cipherchunk is literally
-      // the whole file content not just the cipher chunk... that can be misleading, lets call it then table EncryptedFileAndTextContents
-
-     // Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromFile(m_out_filename);
-//      bool ok = true;
-//      std::int64_t offset{0};
-//      Meta::readCipherChunks(fs::path(m_out_filename), [ide = e->ide, &offset, &ok](Meta::EnigmaCipherChunk&& ecc) -> bool {
-//        auto cc = std::make_unique<CipherChunk>();
-//        std::vector<byte> eccBytes = ecc.toBytes();
-////        std::vector<byte> footerBytes = footer.toBytes();
-////        // embed footer bytes too
-////        eccBytes.insert(eccBytes.end(), footerBytes.begin(), footerBytes.end());
-//
-//        cc->ide = ide;
-//        cc->offset = offset;
-//        cc->size = eccBytes.size();
-//        cc->bytes = std::move(eccBytes);
-//        cc->idc = Database::addCipherChunk(cc);
-//
-//        ok &= cc->idc >= 0;
-//        offset += cc->size;
-//        return ok;
-//      });
-
-      if(ok)
-      {
+      if (ok) {
         transaction.commit();
-      }
-      else
-      {
+      } else {
         throw std::runtime_error("Failed to save cipher chunk to database");
       }
     }
-
 
     // Alert user that encryption was successful
     const std::string msg = fmt::format("Encrypted {} to {} successfully",
