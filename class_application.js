@@ -8,7 +8,7 @@ var class_application =
     [ "GetDeltaTime", "class_application.html#ac24755c59b839bd899cc1d2552203c8f", null ],
     [ "GetFonts", "class_application.html#a79f80c2b5780524bccc1059dcbba7351", null ],
     [ "GetFPS", "class_application.html#a31f268a4dabe9f3979a7d8a94b31bbc3", null ],
-    [ "GetInstance", "class_application.html#a8eafd87cbd746fd01461f326b2783290", null ],
+    [ "getInstance", "class_application.html#a3c7c4032f258f147ab9c1eda98fd59f3", null ],
     [ "GetRAMInfo", "class_application.html#aeaa8b370d4bad89fd2b8802c16644bff", null ],
     [ "GetWindow", "class_application.html#a1e4f4db86437b9b8aecc9594c9c8dccc", null ],
     [ "LaunchWorkerThread", "class_application.html#a387e8bca2205c8048775f3818ee0df22", null ],

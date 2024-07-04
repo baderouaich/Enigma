@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['keyevent_1043',['KeyEvent',['../class_key_event.html',1,'']]],
-  ['keypressedevent_1044',['KeyPressedEvent',['../class_key_pressed_event.html',1,'']]],
-  ['keyreleasedevent_1045',['KeyReleasedEvent',['../class_key_released_event.html',1,'']]],
-  ['keytypedevent_1046',['KeyTypedEvent',['../class_key_typed_event.html',1,'']]]
+  ['latestreleaseinfo_1061',['LatestReleaseInfo',['../struct_check_for_updates_1_1_latest_release_info.html',1,'CheckForUpdates']]],
+  ['loadingscene_1062',['LoadingScene',['../class_loading_scene.html',1,'']]],
+  ['logger_1063',['Logger',['../class_logger.html',1,'']]]
 ];

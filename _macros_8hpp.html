@@ -107,7 +107,7 @@ Macros</h2></td></tr>
 <tr class="separator:abd463c45bb82cecc3d5e0d7f088094e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8b164e20e899efd409c262973f72cb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#ab8b164e20e899efd409c262973f72cb0">enigma</a>&#160;&#160;&#160;Enigma</td></tr>
 <tr class="separator:ab8b164e20e899efd409c262973f72cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cff31b1ac87b18a07ab2e570eeee589"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a7cff31b1ac87b18a07ab2e570eeee589">ENIGMA_BIND_FUN</a>(fun)&#160;&#160;&#160;[this](auto&amp;&amp;... args) -&gt; decltype(auto) { return this-&gt;fun(std::forward&lt;decltype(args)&gt;(args)...); }</td></tr>
+<tr class="memitem:a7cff31b1ac87b18a07ab2e570eeee589"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a7cff31b1ac87b18a07ab2e570eeee589">ENIGMA_BIND_FUN</a>(fun)&#160;&#160;&#160;[this](auto&amp;&amp;...args) -&gt; decltype(auto) { return this-&gt;fun(std::forward&lt;decltype(args)&gt;(args)...); }</td></tr>
 <tr class="memdesc:a7cff31b1ac87b18a07ab2e570eeee589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bind <a class="el" href="class_event.html">Event</a> function call back macro (alternative to std::bind for modern &amp; better c++)  <a href="_macros_8hpp.html#a7cff31b1ac87b18a07ab2e570eeee589">More...</a><br /></td></tr>
 <tr class="separator:a7cff31b1ac87b18a07ab2e570eeee589"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96241f328dcf0a7006576fccc4e67c38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a96241f328dcf0a7006576fccc4e67c38">ENIGMA_ASSERT</a>(x, ...)</td></tr>
@@ -141,7 +141,7 @@ Macros</h2></td></tr>
 <tr class="memitem:ab4c4e2285229c6645de4aec58a0b2af9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#ab4c4e2285229c6645de4aec58a0b2af9">ENIGMA_NON_COPYABLE</a>(Class)</td></tr>
 <tr class="memdesc:ab4c4e2285229c6645de4aec58a0b2af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent class copying or moving.  <a href="_macros_8hpp.html#ab4c4e2285229c6645de4aec58a0b2af9">More...</a><br /></td></tr>
 <tr class="separator:ab4c4e2285229c6645de4aec58a0b2af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93015dd464614ff775c55c7fdd9eba89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a93015dd464614ff775c55c7fdd9eba89">ENIGMA_NON_MOVEABLE</a>(Class)&#160;&#160;&#160;    Class&amp; operator=(Class&amp;&amp; obj) = delete;</td></tr>
+<tr class="memitem:a93015dd464614ff775c55c7fdd9eba89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a93015dd464614ff775c55c7fdd9eba89">ENIGMA_NON_MOVEABLE</a>(Class)&#160;&#160;&#160;  Class&amp; operator=(Class&amp;&amp; obj) = delete;</td></tr>
 <tr class="separator:a93015dd464614ff775c55c7fdd9eba89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ded40091ba715d9798dc6d607fc34e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">ENIGMA_STATIC_CLASS</a>(Class)</td></tr>
 <tr class="memdesc:a1ded40091ba715d9798dc6d607fc34e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes a class static, which will prevent creating instances from it and only use it as Class::Func()..  <a href="_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8">More...</a><br /></td></tr>
@@ -180,7 +180,7 @@ Macros</h2></td></tr>
 
 <p>Bit Shift. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00099">99</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00075">75</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -218,7 +218,7 @@ Macros</h2></td></tr>
 
 <p>Array Size. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00103">103</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00079">79</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +250,7 @@ Macros</h2></td></tr>
 
 <p>Asserts. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00043">43</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00039">39</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -282,7 +282,7 @@ Macros</h2></td></tr>
 
 <p>Asserts. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00043">43</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00039">39</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -317,16 +317,11 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> \</div>
-<div class="line">    { \</div>
-<div class="line">        if(!(x)) \</div>
-<div class="line">        { \</div>
-<div class="line">            ENIGMA_ASSERT(<span class="keyword">false</span>, msg); \</div>
-<div class="line">            return ret; \</div>
-<div class="line">        } \</div>
-<div class="line">    } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">if</span> (!(x)) {                                \</div>
+<div class="line">    return ret;                              \</div>
+<div class="line">  }                                          \</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00056">56</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00047">47</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -355,16 +350,11 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> \</div>
-<div class="line">    { \</div>
-<div class="line">        if(!(x)) \</div>
-<div class="line">        { \</div>
-<div class="line">            ENIGMA_ASSERT(<span class="keyword">false</span>, msg); \</div>
-<div class="line">            throw std::runtime_error(msg); \</div>
-<div class="line">        } \</div>
-<div class="line">    } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">if</span> (!(x)) {                          \</div>
+<div class="line">    throw std::runtime_error(msg);     \</div>
+<div class="line">  }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00046">46</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00042">42</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -386,7 +376,7 @@ Macros</h2></td></tr>
 
 <p>Begin and end timer with a unit. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00158">158</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00133">133</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +391,7 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">fun</td><td>)</td>
-          <td>&#160;&#160;&#160;[this](auto&amp;&amp;... args) -&gt; decltype(auto) { return this-&gt;fun(std::forward&lt;decltype(args)&gt;(args)...); }</td>
+          <td>&#160;&#160;&#160;[this](auto&amp;&amp;...args) -&gt; decltype(auto) { return this-&gt;fun(std::forward&lt;decltype(args)&gt;(args)...); }</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -425,7 +415,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <p>Resolve which function signature macro will be used. Note that this only is resolved when the (pre)compiler starts, so the syntax highlighting could mark the wrong one in your editor! </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00130">130</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00106">106</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -461,7 +451,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00159">159</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00134">134</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -490,19 +480,28 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">friend</span> <span class="keyword">inline</span> constexpr _enum operator~ (<span class="keyword">const</span> _enum i) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(~static_cast&lt;const _type&gt;(i)); }  \</div>
-<div class="line">    friend <span class="keyword">inline</span> constexpr _enum <a class="code" href="_event_8hpp.html#a2527663e464fde5b7f19672e8c31f104">operator| </a>(<span class="keyword">const</span> _enum a, <span class="keyword">const</span> _enum b) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(a) | <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(b)); } \</div>
-<div class="line">    friend <span class="keyword">inline</span> constexpr _enum <a class="code" href="_event_8hpp.html#a919f067e6d4cee719d0276f30dbbc4fa">operator&amp; </a>(<span class="keyword">const</span> _enum a, <span class="keyword">const</span> _enum b) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(a) &amp; <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(b)); } \</div>
-<div class="line">    friend <span class="keyword">inline</span> constexpr _enum operator^ (<span class="keyword">const</span> _enum a, <span class="keyword">const</span> _enum b) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(a) ^ <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(b)); } \</div>
-<div class="line">    friend <span class="keyword">inline</span> constexpr _enum&amp; operator|= (_enum&amp; a, <span class="keyword">const</span> _enum b) noexcept { a = a | b; <span class="keywordflow">return</span> a; } \</div>
-<div class="line">    friend <span class="keyword">inline</span> constexpr _enum&amp; operator&amp;= (_enum&amp; a, <span class="keyword">const</span> _enum b) noexcept { a = a &amp; b; <span class="keywordflow">return</span> a; } \</div>
-<div class="line">    friend <span class="keyword">inline</span> constexpr _enum&amp; operator^= (_enum&amp; a, <span class="keyword">const</span> _enum b) noexcept { a = a ^ b; <span class="keywordflow">return</span> a; }</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keyword">friend</span> <span class="keyword">inline</span> constexpr _enum operator~(<span class="keyword">const</span> _enum i) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(~static_cast&lt;const _type&gt;(i)); }                                             \</div>
+<div class="line">  friend <span class="keyword">inline</span> constexpr _enum <a class="code" href="_event_8hpp.html#a2527663e464fde5b7f19672e8c31f104">operator|</a>(<span class="keyword">const</span> _enum a, <span class="keyword">const</span> _enum b) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(a) | <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(b)); } \</div>
+<div class="line">  friend <span class="keyword">inline</span> constexpr _enum <a class="code" href="_event_8hpp.html#a919f067e6d4cee719d0276f30dbbc4fa">operator&amp;</a>(<span class="keyword">const</span> _enum a, <span class="keyword">const</span> _enum b) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(a) &amp; <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(b)); } \</div>
+<div class="line">  friend <span class="keyword">inline</span> constexpr _enum operator^(<span class="keyword">const</span> _enum a, <span class="keyword">const</span> _enum b) noexcept { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_enum<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(a) ^ <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>_type<span class="keyword">&gt;</span>(b)); } \</div>
+<div class="line">  friend <span class="keyword">inline</span> constexpr _enum&amp; operator|=(_enum&amp; a, <span class="keyword">const</span> _enum b) noexcept {                                                                                            \</div>
+<div class="line">    a = a | b;                                                                                                                                                             \</div>
+<div class="line">    return a;                                                                                                                                                              \</div>
+<div class="line">  }                                                                                                                                                                        \</div>
+<div class="line">  friend <span class="keyword">inline</span> constexpr _enum&amp; operator&amp;=(_enum&amp; a, <span class="keyword">const</span> _enum b) noexcept {                                                                                            \</div>
+<div class="line">    a = a &amp; b;                                                                                                                                                             \</div>
+<div class="line">    return a;                                                                                                                                                              \</div>
+<div class="line">  }                                                                                                                                                                        \</div>
+<div class="line">  friend <span class="keyword">inline</span> constexpr _enum&amp; operator^=(_enum&amp; a, <span class="keyword">const</span> _enum b) noexcept {                                                                                            \</div>
+<div class="line">    a = a ^ b;                                                                                                                                                             \</div>
+<div class="line">    return a;                                                                                                                                                              \</div>
+<div class="line">  }</div>
 <div class="ttc" id="a_event_8hpp_html_a2527663e464fde5b7f19672e8c31f104"><div class="ttname"><a href="_event_8hpp.html#a2527663e464fde5b7f19672e8c31f104">operator|</a></div><div class="ttdeci">std::uint32_t operator|(const EventType a, const EventType b)</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00044">Event.hpp:44</a></div></div>
 <div class="ttc" id="a_event_8hpp_html_a919f067e6d4cee719d0276f30dbbc4fa"><div class="ttname"><a href="_event_8hpp.html#a919f067e6d4cee719d0276f30dbbc4fa">operator&amp;</a></div><div class="ttdeci">std::uint32_t operator&amp;(const EventType a, const EventType b)</div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00045">Event.hpp:45</a></div></div>
 </div><!-- fragment -->
 <p>Implements bitwise operators for enum classes. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00183">183</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00156">156</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -521,13 +520,13 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    __HALT__, \</div>
-<div class="line">    BEGIN = begin, \</div>
+<b>Value:</b><div class="fragment"><div class="line">  __HALT__,                                  \</div>
+<div class="line">    BEGIN = begin,                           \</div>
 <div class="line">    END = __HALT__ - 1</div>
 </div><!-- fragment -->
 <p>Allows looping over an enum by providing a BEGIN and END enum values NOTE: should be placed at the end of the enum, providing the first element of the enum. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00176">176</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00149">149</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -565,7 +564,7 @@ Macros</h2></td></tr>
 
 <p>Check if value is between or equal a range. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00107">107</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00083">83</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -600,12 +599,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    Class&amp; operator=(<span class="keyword">const</span> Class&amp; obj) = <span class="keyword">delete</span>;  \</div>
-<div class="line">    Class(<span class="keyword">const</span> Class&amp; obj) = <span class="keyword">delete</span>;</div>
+<b>Value:</b><div class="fragment"><div class="line">  Class&amp; operator=(<span class="keyword">const</span> Class&amp; obj) = <span class="keyword">delete</span>; \</div>
+<div class="line">  Class(<span class="keyword">const</span> Class&amp; obj) = <span class="keyword">delete</span>;</div>
 </div><!-- fragment -->
 <p>Prevent class copying or moving. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00137">137</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00112">112</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -620,12 +619,12 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">Class</td><td>)</td>
-          <td>&#160;&#160;&#160;    Class&amp; operator=(Class&amp;&amp; obj) = delete;</td>
+          <td>&#160;&#160;&#160;  Class&amp; operator=(Class&amp;&amp; obj) = delete;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00140">140</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00115">115</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -644,14 +643,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
-<div class="line">    if ((ptr)) { \</div>
-<div class="line">        delete[](ptr); \</div>
-<div class="line">        (ptr) = <span class="keyword">nullptr</span>; \</div>
-<div class="line">    } \</div>
-<div class="line">} <span class="keywordflow">while</span>(<span class="keyword">false</span>)</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">if</span> ((ptr)) {                            \</div>
+<div class="line">    delete[] (ptr);                       \</div>
+<div class="line">    (ptr) = <span class="keyword">nullptr</span>;                      \</div>
+<div class="line">  }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00081">81</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00061">61</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -670,14 +667,12 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
-<div class="line">    if (((list)[0])){ \</div>
-<div class="line">        for (<span class="keyword">auto</span>&amp; ptr : list) \</div>
-<div class="line">            ENIGMA_SAFE_DELETE_PTR(ptr); \</div>
-<div class="line">    } \</div>
-<div class="line">} <span class="keywordflow">while</span> (<span class="keyword">false</span>);</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">if</span> (((list)[0])) {                      \</div>
+<div class="line">    for (<span class="keyword">auto</span>&amp; ptr: list)                 \</div>
+<div class="line">      ENIGMA_SAFE_DELETE_PTR(ptr);        \</div>
+<div class="line">  }                                       \</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00089">89</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00067">67</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -696,16 +691,14 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
-<div class="line">    if ((ptr)){ \</div>
-<div class="line">        delete (ptr); \</div>
-<div class="line">        (ptr) = <span class="keyword">nullptr</span>; \</div>
-<div class="line">    } \</div>
-<div class="line">} <span class="keywordflow">while</span>(<span class="keyword">false</span>)</div>
+<b>Value:</b><div class="fragment"><div class="line">  <span class="keywordflow">if</span> ((ptr)) {                      \</div>
+<div class="line">    delete (ptr);                   \</div>
+<div class="line">    (ptr) = <span class="keyword">nullptr</span>;                \</div>
+<div class="line">  }</div>
 </div><!-- fragment -->
 <p><a class="el" href="namespace_enigma.html">Enigma</a> Memory Safe Operations. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00073">73</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00055">55</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -724,16 +717,17 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keyword">public</span>: \</div>
-<div class="line">            ENIGMA_NON_COPYABLE(Class) \</div>
-<div class="line">            ENIGMA_NON_MOVEABLE(Class) \</div>
-<div class="line">            Class() = <span class="keyword">delete</span>; \</div>
-<div class="line">            ~Class() = <span class="keyword">delete</span>; \</div>
-<div class="line">        private:</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">public</span>:                            \</div>
+<div class="line">  ENIGMA_NON_COPYABLE(Class)       \</div>
+<div class="line">  ENIGMA_NON_MOVEABLE(Class)       \</div>
+<div class="line">  Class() = <span class="keyword">delete</span>;                \</div>
+<div class="line">  ~Class() = <span class="keyword">delete</span>;               \</div>
+<div class="line">                                   \</div>
+<div class="line">private:</div>
 </div><!-- fragment -->
 <p>Makes a class static, which will prevent creating instances from it and only use it as Class::Func().. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00146">146</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00121">121</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -754,7 +748,7 @@ Macros</h2></td></tr>
 
 <p>Logs current function for debugging. </p>
 
-<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00171">171</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_macros_8hpp_source.html#l00144">144</a> of file <a class="el" href="_macros_8hpp_source.html">Macros.hpp</a>.</p>
 
 </div>
 </div>
@@ -817,7 +811,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="_macros_8hpp.html">Macros.hpp</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 13:18:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

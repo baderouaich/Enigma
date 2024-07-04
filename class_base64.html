@@ -96,17 +96,61 @@ $(document).ready(function(){initNavTree('class_base64.html',''); initResizable(
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1012d79465d56feadb5f4872b2e4481f"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#a1012d79465d56feadb5f4872b2e4481f">Encode</a> (const std::string_view &amp;buffer)</td></tr>
-<tr class="separator:a1012d79465d56feadb5f4872b2e4481f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cf76c0fd22fde40e1deaae7af7fb8fc"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#a3cf76c0fd22fde40e1deaae7af7fb8fc">Decode</a> (const std::string_view &amp;encoded_buffer)</td></tr>
-<tr class="separator:a3cf76c0fd22fde40e1deaae7af7fb8fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0008005858afa1017c00af8637a17271"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; byte &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#a0008005858afa1017c00af8637a17271">Encode</a> (const std::vector&lt; byte &gt; &amp;buffer)</td></tr>
+<tr class="separator:a0008005858afa1017c00af8637a17271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c3cc59cb6cdd46aa15958439ae8fd14"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; byte &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14">Encode</a> (const byte *buffer, const std::size_t buffLen)</td></tr>
+<tr class="separator:a9c3cc59cb6cdd46aa15958439ae8fd14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25139dee392bddc811d579837a75d0f9"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#a25139dee392bddc811d579837a75d0f9">Encode</a> (const std::string &amp;buffer)</td></tr>
+<tr class="separator:a25139dee392bddc811d579837a75d0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae647cddbe69257613c6fe780d5eecb4f"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; byte &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#ae647cddbe69257613c6fe780d5eecb4f">Decode</a> (const std::vector&lt; byte &gt; &amp;encoded_buffer)</td></tr>
+<tr class="separator:ae647cddbe69257613c6fe780d5eecb4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bfd1c5f378788be5167c465a8cb2ff"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; byte &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#ac8bfd1c5f378788be5167c465a8cb2ff">Decode</a> (const byte *buffer, const std::size_t buffLen)</td></tr>
+<tr class="separator:ac8bfd1c5f378788be5167c465a8cb2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afec2bd94e12809ca93d73fa7f9a98008"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base64.html#afec2bd94e12809ca93d73fa7f9a98008">Decode</a> (const std::string &amp;encoded)</td></tr>
+<tr class="separator:afec2bd94e12809ca93d73fa7f9a98008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_base64_8hpp_source.html#l00008">8</a> of file <a class="el" href="_base64_8hpp_source.html">Base64.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3cf76c0fd22fde40e1deaae7af7fb8fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cf76c0fd22fde40e1deaae7af7fb8fc">&#9670;&nbsp;</a></span>Decode()</h2>
+<a id="ac8bfd1c5f378788be5167c465a8cb2ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8bfd1c5f378788be5167c465a8cb2ff">&#9670;&nbsp;</a></span>Decode() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt;byte&gt; Base64::Decode </td>
+          <td>(</td>
+          <td class="paramtype">const byte *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::size_t&#160;</td>
+          <td class="paramname"><em>buffLen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afec2bd94e12809ca93d73fa7f9a98008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec2bd94e12809ca93d73fa7f9a98008">&#9670;&nbsp;</a></span>Decode() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -117,7 +161,33 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static std::string Base64::Decode </td>
           <td>(</td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>encoded</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae647cddbe69257613c6fe780d5eecb4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae647cddbe69257613c6fe780d5eecb4f">&#9670;&nbsp;</a></span>Decode() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt;byte&gt; Base64::Decode </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; byte &gt; &amp;&#160;</td>
           <td class="paramname"><em>encoded_buffer</em></td><td>)</td>
           <td></td>
         </tr>
@@ -131,8 +201,44 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1012d79465d56feadb5f4872b2e4481f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1012d79465d56feadb5f4872b2e4481f">&#9670;&nbsp;</a></span>Encode()</h2>
+<a id="a9c3cc59cb6cdd46aa15958439ae8fd14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c3cc59cb6cdd46aa15958439ae8fd14">&#9670;&nbsp;</a></span>Encode() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt;byte&gt; Base64::Encode </td>
+          <td>(</td>
+          <td class="paramtype">const byte *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::size_t&#160;</td>
+          <td class="paramname"><em>buffLen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25139dee392bddc811d579837a75d0f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25139dee392bddc811d579837a75d0f9">&#9670;&nbsp;</a></span>Encode() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +249,33 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static std::string Base64::Encode </td>
           <td>(</td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0008005858afa1017c00af8637a17271"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0008005858afa1017c00af8637a17271">&#9670;&nbsp;</a></span>Encode() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt;byte&gt; Base64::Encode </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; byte &gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
           <td></td>
         </tr>
@@ -166,7 +298,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_base64.html">Base64</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 13:18:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

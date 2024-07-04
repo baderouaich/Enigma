@@ -6,5 +6,7 @@ var dir_d537ec303f13b8e88e2bd2506dfe6a9e =
     [ "IDEA", "dir_52feaadfb4f914366d9650e7c6263b01.html", "dir_52feaadfb4f914366d9650e7c6263b01" ],
     [ "TripleDES", "dir_78642b7eddd5c53f51a2e8cffd57f3f9.html", "dir_78642b7eddd5c53f51a2e8cffd57f3f9" ],
     [ "Twofish", "dir_af031666c25e6544e62f28ac9758b2ac.html", "dir_af031666c25e6544e62f28ac9758b2ac" ],
-    [ "Algorithm.hpp", "_algorithm_8hpp.html", "_algorithm_8hpp" ]
+    [ "Algorithm.hpp", "_algorithm_8hpp.html", [
+      [ "Algorithm", "class_algorithm.html", "class_algorithm" ]
+    ] ]
 ];

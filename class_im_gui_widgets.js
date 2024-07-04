@@ -9,6 +9,6 @@ var class_im_gui_widgets =
     [ "InputTextMultiline", "class_im_gui_widgets.html#a1d584ecd4cf613a31a80ae2bc9ddc436", null ],
     [ "InputTextWithHint", "class_im_gui_widgets.html#a56a669405eebdc355b7463cb054146b6", null ],
     [ "LoadingBar", "class_im_gui_widgets.html#a099cdf74ed2c4064379f59252d07c7ee", null ],
-    [ "LoadingDialog", "class_im_gui_widgets.html#a42d1ab43fbe393487002ce6c3118d8cf", null ],
+    [ "LoadingDialog", "class_im_gui_widgets.html#a3893b270408bbff2291c0acc927adb9c", null ],
     [ "LoadingSpinner", "class_im_gui_widgets.html#abdc26aa44894a249d30dc5515d0f8782", null ]
 ];

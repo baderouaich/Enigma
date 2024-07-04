@@ -88,15 +88,15 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>GenerateRandomIV()
-: <a class="el" href="class_algorithm.html#ab494d803154a9b9808b54980d05ff6e6">Algorithm</a>
+: <a class="el" href="class_algorithm.html#a7c91146c77ca8788fc99132f0d4f48da">Algorithm</a>
 </li>
 <li>Get()
 : <a class="el" href="class_clipboard.html#a61ea9d865a62fbb691e30cc01aabb57e">Clipboard</a>
 , <a class="el" href="class_config.html#ac9e6f9c8e13634a084cf25e6f1e75a09">Config</a>
 , <a class="el" href="class_e_n_v.html#a97c923374e78c83b8b240acfbf4a81c5">ENV</a>
 </li>
-<li>GetAllEncryptions()
-: <a class="el" href="class_database.html#a8c42e2e9026d3cf88b9138fe37597552">Database</a>
+<li>getAllEncryptions()
+: <a class="el" href="class_database.html#aa339d4917fe77fa85db994ae13dbb897">Database</a>
 </li>
 <li>GetAspectRatio()
 : <a class="el" href="class_window.html#a418e22fac4424c399e3feb6456279383">Window</a>
@@ -107,8 +107,11 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>GetCategoryFlags()
 : <a class="el" href="class_event.html#aaa95adbe8a37c97446feb3bb5699759a">Event</a>
 </li>
-<li>GetCipherByEncryptionID()
-: <a class="el" href="class_database.html#abe593832130d352012424639347f4af0">Database</a>
+<li>getCipherChunk()
+: <a class="el" href="class_database.html#a1f195efcd0f900500bc4f317ad6cd97f">Database</a>
+</li>
+<li>getCipherChunks()
+: <a class="el" href="class_database.html#ab1f87b1446b8e3a2362682df0a57e78a">Database</a>
 </li>
 <li>GetCPUInfo()
 : <a class="el" href="class_application.html#a9f7e61cc3f73709d358bbfb4460b9cac">Application</a>
@@ -119,11 +122,8 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>GetDeltaTime()
 : <a class="el" href="class_application.html#ac24755c59b839bd899cc1d2552203c8f">Application</a>
 </li>
-<li>GetEncryptionByID()
-: <a class="el" href="class_database.html#ae2226546a049cbad66c0674047982a6d">Database</a>
-</li>
-<li>GetEncryptionsCount()
-: <a class="el" href="class_database.html#aa1f2f378f89317278066230c52cb2d22">Database</a>
+<li>getEncryption()
+: <a class="el" href="class_database.html#a4bca9bd0e83eb216ce35525977fa2509">Database</a>
 </li>
 <li>GetErrorReason()
 : <a class="el" href="class_crypto_p_p_utils.html#afc97b830859ed0c30aa0df1e36e95562">CryptoPPUtils</a>
@@ -179,9 +179,8 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>getInstallBaseDir()
 : <a class="el" href="class_enigma_1_1_resource_utils.html#ab48e495b06613c3d74ed678cca7d0d42">Enigma::ResourceUtils</a>
 </li>
-<li>GetInstance()
-: <a class="el" href="class_application.html#a8eafd87cbd746fd01461f326b2783290">Application</a>
-, <a class="el" href="class_database.html#af06bd291304b896a45a3bc121720c555">Database</a>
+<li>getInstance()
+: <a class="el" href="class_application.html#a3c7c4032f258f147ab9c1eda98fd59f3">Application</a>
 </li>
 <li>GetKeyCode()
 : <a class="el" href="class_key_event.html#a436216eeefc10a12c9e7e172809a33e1">KeyEvent</a>
@@ -192,8 +191,8 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>GetLoadingText()
 : <a class="el" href="class_loading_scene.html#ad007769a38fd4647ec66fd72db0b38dc">LoadingScene</a>
 </li>
-<li>GetLogger()
-: <a class="el" href="class_logger.html#aefc20924638420a17cab0740421cfe75">Logger</a>
+<li>getLogger()
+: <a class="el" href="class_logger.html#af21a154f28fc9f7cf4f890082b6deed0">Logger</a>
 </li>
 <li>GetMaximumSize()
 : <a class="el" href="class_window.html#a74407f78a17faf6ff03f930df6549a9d">Window</a>
@@ -255,6 +254,9 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <li>GetSize()
 : <a class="el" href="class_window.html#a7eea0a5d1595f488aecf83938ac2bee4">Window</a>
 </li>
+<li>getStorage()
+: <a class="el" href="class_database.html#a451e10a2cd63dcb748708979bc3ea9b6">Database</a>
+</li>
 <li>GetSupportedAlgorithms()
 : <a class="el" href="class_algorithm.html#a82dadc8cc03e3e7b5ec8d82173838587">Algorithm</a>
 </li>
@@ -309,7 +311,7 @@ $(document).ready(function(){initNavTree('functions_g.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Jun 29 2024 13:18:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

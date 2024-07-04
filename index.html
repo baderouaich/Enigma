@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a><a href="https://github.com/baderouaich/Enigma/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-yellow" alt="MIT License" class="inline"/></a> <a href="https://github.com/baderouaich/Enigma/actions?workflow=static-analysis"><img src="https://github.com/baderouaich/Enigma/workflows/static-analysis/badge.svg" alt="Static Analysis Status" style="pointer-events: none;" class="inline"/></a> <a href="https://baderouaich.github.io/Enigma"><img src="https://codedocs.xyz/doxygen/doxygen.svg" alt="Docs" style="pointer-events: none;" class="inline"/></a> <a href="https://img.shields.io/badge/C++-20-blue.svg?style=flat&amp;logo=c%2B%2B"><img src="https://img.shields.io/badge/C++-20-blue.svg?style=flat&amp;logo=c%2B%2B" alt="Language" style="pointer-events: none;" class="inline"/></a></p>
 <p><img src="res/branding/Logo.png" alt="" width="250" class="inline"/></p>
-<p>A Simple, Reliable and Efficient UI + <a class="el" href="class_c_l_i.html" title="cxxopts: CMD parser library">CLI</a> <a class="el" href="struct_encryption.html">Encryption</a> <a class="el" href="class_tool.html">Tool</a><br  />
+<p>A Simple, Reliable and Efficient <a class="el" href="struct_encryption.html">Encryption</a> <a class="el" href="class_tool.html">Tool</a> <small>(for personal use)</small><br  />
 </p>
 <h2>CI Status</h2>
 <table class="markdownTable">
@@ -117,47 +117,13 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li>XOR <a class="el" href="struct_encryption.html">Encryption</a></li>
 <li>System &amp; Hardware Information</li>
 </ul>
-<h1><a class="el" href="namespace_enigma.html">Enigma</a> UI</h1>
+<h1>UI</h1>
 <ul>
 <li>Main Menu <img src="https://github.com/baderouaich/Enigma/assets/49657842/ad83827a-f1f8-41f3-a9f3-be78a8f5623a" alt="Main-Menu-Demo" class="inline"/></li>
 <li>Straight forward <img src="https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d" alt="Straightforward" class="inline"/></li>
 <li>Save Encryptions to a local database (an SQLite3 database which you can export/import) <img src="https://github.com/baderouaich/Enigma/assets/49657842/09e10396-070d-4324-b80e-13c346b28b4a" alt="My-Encryptions-Demo" class="inline"/></li>
-<li>Compression is ON by default <img src="https://github.com/baderouaich/Enigma/assets/49657842/31a9751c-d3cd-4cdd-b5d7-19f08c10ceeb" alt="2" class="inline"/></li>
 <li>Extra Utilities <img src="https://github.com/baderouaich/Enigma/assets/49657842/6d17ab20-4faf-43f1-b074-ef99473dfbcd" alt="Tools-Demo" class="inline"/></li>
 </ul>
-<h1><a class="el" href="namespace_enigma.html">Enigma</a> <a class="el" href="class_c_l_i.html" title="cxxopts: CMD parser library">CLI</a></h1>
-<div class="fragment"><div class="line">Usage:</div>
-<div class="line">  Enigma [OPTION...]</div>
-<div class="line"> </div>
-<div class="line">  -e, --encrypt                 Encrypt operation</div>
-<div class="line">  -d, --decrypt                 Decrypt operation</div>
-<div class="line">  -a, --algorithm [AES, Twofish, TripleDES, Blowfish, IDEA, ChaCha20] Encryption/Decryption algorithm (default: AES)</div>
-<div class="line">  -p, --password arg            Encryption password</div>
-<div class="line">  -t, --text arg                Text to Encrypt or Decrypt (base64)</div>
-<div class="line">  -i, --infile arg              Input File to Encrypt/Decrypt</div>
-<div class="line">  -o, --outfile arg             Output File to Encrypt/Decrypt</div>
-<div class="line">  -s, --save                    Save encryption record to database</div>
-<div class="line">  -l, --list                    List saved encryption records from database</div>
-<div class="line">  -h, --help                    Displays help message</div>
-<div class="line">  -v, --version                 Displays Enigma&#39;s version</div>
-<div class="line">      --check-for-updates       Check for new version releases</div>
-</div><!-- fragment --><ul>
-<li>Example encypting a text with AES-GCM:<br  />
- <div class="fragment"><div class="line">$ ./Enigma --encrypt --algorithm=aes --password=&quot;My@pa$$W0rd&quot; --text=&quot;my important data securly encrypted!&quot;</div>
-<div class="line">output: AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT</div>
-</div><!-- fragment --></li>
-<li>Example decrypting a text with AES-GCM:<br  />
- <div class="fragment"><div class="line">$ ./Enigma -d -p &quot;My@pa$$W0rd&quot; -t &quot;AaxsjxUSbOmTIjmT90WrYlqg7I7dFY7e+OqPaX20DusVnBLpkg4LW0f/fWpKES8gzFb1SrglpVt0goGfijzVHx+ULjuT&quot;</div>
-<div class="line">output: my important data securly encrypted!</div>
-</div><!-- fragment --></li>
-<li>Example encypting a file with AES-GCM:<br  />
- <div class="fragment"><div class="line">$ ./Enigma -e -a AES --password &quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data.txt&quot; --outfile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot;</div>
-</div><!-- fragment --></li>
-<li>Example decypting a file with AES-GCM:<br  />
- <div class="fragment"><div class="line">$ ./Enigma --decrypt --password=&quot;My@pa$$W0rd&quot; --infile=&quot;/home/user/Desktop/Data_encrypted.txt.enigma&quot; --outfile=&quot;/home/user/Desktop/Data_decrypted.txt&quot;</div>
-</div><!-- fragment --></li>
-</ul>
-<p><img src="https://github.com/baderouaich/Enigma/assets/49657842/5a65fa0a-e28a-44a3-8b60-7bbb748582b1" alt="4" class="inline"/></p>
 <h2>Compiling &amp; Installing</h2>
 <div class="fragment"><div class="line">git clone https://github.com/baderouaich/Enigma</div>
 <div class="line">cd Enigma</div>
@@ -165,8 +131,9 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line">cmake .. -G&quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=Release</div>
 <div class="line">make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows</div>
 </div><!-- fragment --><ul>
+<li>No <code>sudo</code> or <code>Administrator</code> privileges are needed for installation.</li>
 <li>All <a class="el" href="namespace_enigma.html">Enigma</a> files will be installed to <code>/home//Enigma/</code> (<b>Linux</b>) | <code>C:\Program Files\<a class="el" href="namespace_enigma.html">Enigma</a>\</code> (<b>Windows</b>)</li>
-<li>To uninstall simply remove the installed <code>Enigma/</code> directory</li>
+<li>To uninstall simply remove the installed <code>Enigma/</code> directory. Please make sure you export your encryptions from menu <code>File -&gt; Export</code>before removing the directory.</li>
 </ul>
 <h1>License</h1>
 <p><a class="el" href="md__l_i_c_e_n_s_e.html">MIT License</a></p>
@@ -178,7 +145,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat Jun 29 2024 13:18:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

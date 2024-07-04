@@ -45,6 +45,7 @@ var NAVTREE =
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Related Functions", "functions_rela.html", null ]
       ] ]
@@ -66,11 +67,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_e_s_8hpp.html",
-"_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a453fb623e752c5993f65bc410fd74fe5",
-"_macros_8hpp.html#a1ded40091ba715d9798dc6d607fc34e8",
-"class_clipboard.html#a61ea9d865a62fbb691e30cc01aabb57e",
-"class_r_a_m_info.html#a29b077b4dcbdb34aed4e78a8849239ed",
-"functions_func_n.html"
+"_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a4bd45bf12e08f60072b6962e9f7794c2",
+"_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2",
+"class_cha_cha20_poly1305.html#ac64cf79fa85a84f6537727eccb24e540",
+"class_my_encryptions_scene.html#a0ab849564132d9bdd4d65a710c7ec122",
+"dir_9310e8a2f06de41a230334e80b16bf02.html",
+"struct_window_settings.html#a921d2575c6e7aecd9ab365c7d173f167"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

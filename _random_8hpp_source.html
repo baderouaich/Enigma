@@ -125,53 +125,62 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_random.html#abd88f50c53f3a878f14ce529e4522f4c">   58</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_random.html#abd88f50c53f3a878f14ce529e4522f4c">Str</a>(<span class="keyword">const</span> std::size_t length) noexcept {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      std::string out(length, <span class="charliteral">&#39;\000&#39;</span>);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keyword">const</span> std::string_view special_characters = <a class="code" href="namespace_enigma_1_1_constants_1_1_algorithm.html#a414477db274446deb285380cff1e9ede">Constants::Algorithm::SPECIAL_CHARACTERS</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">char</span>&amp; c: out) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">const</span> std::uint16_t r = Random::Int&lt;std::uint16_t&gt;(0, 3); r == 0)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;          c = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(<a class="code" href="class_random.html#a6dd16775002ce89c60bef0749b35ff3b">Random::Int</a>(std::uint16_t(<span class="charliteral">&#39;a&#39;</span>), std::uint16_t(<span class="charliteral">&#39;z&#39;</span>))); <span class="comment">// alpha lower</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (r == 1)                                                              <span class="comment">// alpha upper</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;          c = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(<a class="code" href="class_random.html#a6dd16775002ce89c60bef0749b35ff3b">Random::Int</a>(std::uint16_t(<span class="charliteral">&#39;A&#39;</span>), std::uint16_t(<span class="charliteral">&#39;Z&#39;</span>)));</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (r == 2) <span class="comment">// digits</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          c = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(<a class="code" href="class_random.html#a6dd16775002ce89c60bef0749b35ff3b">Random::Int</a>(std::uint16_t(<span class="charliteral">&#39;0&#39;</span>), std::uint16_t(<span class="charliteral">&#39;9&#39;</span>)));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (r == 3) <span class="comment">// special characters</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;          c = special_characters[Random::Int&lt;std::size_t&gt;(0, special_characters.size() - 1)];</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">return</span> out;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">   77</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Reseed</a>() {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      m_engine.seed(m_seed());</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::random_device m_seed{};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::default_random_engine m_engine{m_seed()};</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_RANDOM_H</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keyword">static</span> std::random_device seed{};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keyword">static</span> std::default_random_engine engine{seed()};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keyword">static</span> std::uniform_int_distribution&lt;short&gt; choice(0, 2);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keyword">static</span> std::uniform_int_distribution&lt;int&gt; lowercaseAlpha(<span class="charliteral">&#39;a&#39;</span>, <span class="charliteral">&#39;z&#39;</span>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keyword">static</span> std::uniform_int_distribution&lt;int&gt; uppercaseAlpha(<span class="charliteral">&#39;A&#39;</span>, <span class="charliteral">&#39;Z&#39;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keyword">static</span> std::uniform_int_distribution&lt;int&gt; digits(<span class="charliteral">&#39;0&#39;</span>, <span class="charliteral">&#39;9&#39;</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      std::string str(length, <span class="charliteral">&#39;\000&#39;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">char</span>&amp; c: str) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">switch</span> (choice(engine)) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;          <span class="keywordflow">case</span> 0: <span class="comment">// a-z</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            c = lowercaseAlpha(engine);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;          <span class="keywordflow">case</span> 1: <span class="comment">// A-Z</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            c = uppercaseAlpha(engine);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;          <span class="keywordflow">case</span> 2: <span class="comment">// 0-9</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            c = digits(engine);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;          <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="keywordflow">return</span> str;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">   87</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Reseed</a>() {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      m_engine.seed(m_seed());</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::random_device m_seed{};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::default_random_engine m_engine{m_seed()};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_RANDOM_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_key_codes_8hpp_html_a2947a2ca8156371b14dcc077072dcaf5ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5ab9ece18c950afbfa6b0fdbfa4ff731d3">KeyCode::T</a></div><div class="ttdeci">@ T</div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
-<div class="ttc" id="a_macros_8hpp_html_a96241f328dcf0a7006576fccc4e67c38"><div class="ttname"><a href="_macros_8hpp.html#a96241f328dcf0a7006576fccc4e67c38">ENIGMA_ASSERT</a></div><div class="ttdeci">#define ENIGMA_ASSERT(x,...)</div><div class="ttdoc">Asserts.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00043">Macros.hpp:43</a></div></div>
+<div class="ttc" id="a_macros_8hpp_html_a96241f328dcf0a7006576fccc4e67c38"><div class="ttname"><a href="_macros_8hpp.html#a96241f328dcf0a7006576fccc4e67c38">ENIGMA_ASSERT</a></div><div class="ttdeci">#define ENIGMA_ASSERT(x,...)</div><div class="ttdoc">Asserts.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00039">Macros.hpp:39</a></div></div>
 <div class="ttc" id="aclass_random_html"><div class="ttname"><a href="class_random.html">Random</a></div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00011">Random.hpp:11</a></div></div>
 <div class="ttc" id="aclass_random_html_a309a91e60c6ec9e868b94ee7fd08c453"><div class="ttname"><a href="class_random.html#a309a91e60c6ec9e868b94ee7fd08c453">Random::Bool</a></div><div class="ttdeci">static bool Bool(const double p=0.5)</div><div class="ttdoc">Generates a random boolean value.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00048">Random.hpp:48</a></div></div>
 <div class="ttc" id="aclass_random_html_a6dd16775002ce89c60bef0749b35ff3b"><div class="ttname"><a href="class_random.html#a6dd16775002ce89c60bef0749b35ff3b">Random::Int</a></div><div class="ttdeci">static std::enable_if&lt; std::is_integral&lt; T &gt;::value &amp;&amp;!std::is_same&lt; T, bool &gt;::value, T &gt;::type Int(const T min, const T max)</div><div class="ttdoc">Generates a random integer between a range.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00037">Random.hpp:37</a></div></div>
 <div class="ttc" id="aclass_random_html_a9c8eecba49e71c80dbbc84b093b1b09f"><div class="ttname"><a href="class_random.html#a9c8eecba49e71c80dbbc84b093b1b09f">Random::Real</a></div><div class="ttdeci">static std::enable_if&lt; std::is_floating_point&lt; T &gt;::value, T &gt;::type Real(const T min, const T max)</div><div class="ttdoc">Generates a random real between a range.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00023">Random.hpp:23</a></div></div>
-<div class="ttc" id="aclass_random_html_aa813b66cca7fd2e7416c0a03c2225732"><div class="ttname"><a href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Random::Reseed</a></div><div class="ttdeci">static void Reseed()</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00077">Random.hpp:77</a></div></div>
+<div class="ttc" id="aclass_random_html_aa813b66cca7fd2e7416c0a03c2225732"><div class="ttname"><a href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Random::Reseed</a></div><div class="ttdeci">static void Reseed()</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00087">Random.hpp:87</a></div></div>
 <div class="ttc" id="aclass_random_html_abd88f50c53f3a878f14ce529e4522f4c"><div class="ttname"><a href="class_random.html#abd88f50c53f3a878f14ce529e4522f4c">Random::Str</a></div><div class="ttdeci">static std::string Str(const std::size_t length) noexcept</div><div class="ttdoc">Generates a random string.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00058">Random.hpp:58</a></div></div>
-<div class="ttc" id="anamespace_enigma_1_1_constants_1_1_algorithm_html_a414477db274446deb285380cff1e9ede"><div class="ttname"><a href="namespace_enigma_1_1_constants_1_1_algorithm.html#a414477db274446deb285380cff1e9ede">Enigma::Constants::Algorithm::SPECIAL_CHARACTERS</a></div><div class="ttdeci">static constexpr const char * SPECIAL_CHARACTERS</div><div class="ttdef"><b>Definition:</b> <a href="_constants_8hpp_source.html#l00022">Constants.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_random_8hpp.html">Random.hpp</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 13:18:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

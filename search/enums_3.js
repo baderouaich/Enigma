@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['eventcategory_1602',['EventCategory',['../_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3',1,'Event.hpp']]],
-  ['eventtype_1603',['EventType',['../_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d',1,'Event.hpp']]]
+  ['icon_1641',['Icon',['../class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37',1,'MessageBox::Icon()'],['../class_notification.html#a19c5d398f953120d38dd490cdb2a40d0',1,'Notification::Icon()']]],
+  ['intent_1642',['Intent',['../class_algorithm.html#ae8a542c0aebeb6e59c9b7d0b6bd90b35',1,'Algorithm']]]
 ];

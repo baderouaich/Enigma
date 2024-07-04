@@ -96,10 +96,10 @@ $(document).ready(function(){initNavTree('class_file_utils.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a96081a7020e89c889d22ef3b9a0566b5"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_utils.html#a96081a7020e89c889d22ef3b9a0566b5">Read</a> (const fs::path &amp;filename, std::string &amp;buffer)</td></tr>
-<tr class="separator:a96081a7020e89c889d22ef3b9a0566b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a356040beed278abf36ce1e67017cdd1b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_utils.html#a356040beed278abf36ce1e67017cdd1b">Write</a> (const fs::path &amp;filename, const std::string_view &amp;buffer)</td></tr>
-<tr class="separator:a356040beed278abf36ce1e67017cdd1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada4356f141a0b6c40ada94696489db84"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_utils.html#ada4356f141a0b6c40ada94696489db84">Read</a> (const fs::path &amp;filename, std::vector&lt; byte &gt; &amp;buffer)</td></tr>
+<tr class="separator:ada4356f141a0b6c40ada94696489db84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42c94edfebe0e5ad803ee7fa056ff3f9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_utils.html#a42c94edfebe0e5ad803ee7fa056ff3f9">Write</a> (const fs::path &amp;filename, const std::vector&lt; byte &gt; &amp;buffer)</td></tr>
+<tr class="separator:a42c94edfebe0e5ad803ee7fa056ff3f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82868ec41085affb96cb5a6e2538c607"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file_utils.html#a82868ec41085affb96cb5a6e2538c607">ReadChunks</a> (const fs::path &amp;filename, const std::size_t max_chunk_size, const std::function&lt; bool(std::vector&lt; byte &gt; &amp;&amp;)&gt; &amp;callback)</td></tr>
 <tr class="separator:a82868ec41085affb96cb5a6e2538c607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -107,8 +107,8 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_file_utils_8hpp_source.html#l00021">21</a> of file <a class="el" href="_file_utils_8hpp_source.html">FileUtils.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a96081a7020e89c889d22ef3b9a0566b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96081a7020e89c889d22ef3b9a0566b5">&#9670;&nbsp;</a></span>Read()</h2>
+<a id="ada4356f141a0b6c40ada94696489db84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada4356f141a0b6c40ada94696489db84">&#9670;&nbsp;</a></span>Read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +125,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; byte &gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em>&#160;</td>
         </tr>
         <tr>
@@ -189,8 +189,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a356040beed278abf36ce1e67017cdd1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a356040beed278abf36ce1e67017cdd1b">&#9670;&nbsp;</a></span>Write()</h2>
+<a id="a42c94edfebe0e5ad803ee7fa056ff3f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42c94edfebe0e5ad803ee7fa056ff3f9">&#9670;&nbsp;</a></span>Write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +207,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string_view &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; byte &gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em>&#160;</td>
         </tr>
         <tr>
@@ -236,7 +236,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_file_utils.html">FileUtils</a></li>
-    <li class="footer">Generated on Sat Jun 29 2024 13:18:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['deflatelevel_1601',['DeflateLevel',['../class_g_zip.html#a97a317e363c7f7cd9f57a939737b0156',1,'GZip']]]
+  ['eventcategory_1639',['EventCategory',['../_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3',1,'Event.hpp']]],
+  ['eventtype_1640',['EventType',['../_event_8hpp.html#af047f6eec65afba68db2bb5ded11908d',1,'Event.hpp']]]
 ];
