@@ -48,7 +48,7 @@ class SizeUtils final {
 #define ENIGMA_MB_TO_GB(mb) (static_cast<float>(mb) / 1024.0f)
 #define ENIGMA_MB_TO_TB(mb) (static_cast<float>(mb) / 1024.0f / 1024.0f)
 
-#define ENIGMA_KB_TO_BYTES(kb) (static_cast<std::size_t>(mb) * 1024)
+#define ENIGMA_KB_TO_BYTES(kb) (static_cast<std::size_t>(kb) * 1024)
 
 NS_ENIGMA_END
 

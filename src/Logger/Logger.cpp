@@ -4,7 +4,7 @@
 
 NS_ENIGMA_BEGIN
 
-void Logger::Initialize()
+void Logger::initialize()
 {
 	// Make 2 log sinks, Console and File.
 	std::array<std::shared_ptr<spdlog::sinks::sink>, 2> log_sinks{};
@@ -43,7 +43,7 @@ void Logger::Initialize()
 #endif
 }
 
-void Logger::Shutdown()
+void Logger::shutdown()
 {
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 

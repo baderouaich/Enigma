@@ -20,15 +20,15 @@ class Logger final {
     /**
 	*	Initialize Enigma Logger
 	*/
-    static void Initialize();
+    static void initialize();
 
     /**
 	*	Shutdown Enigma Logger (cleans up spdlog stuff, remains optional to call at the exit of the app)
 	*/
-    static void Shutdown();
+    static void shutdown();
 
   public: /* Accessors */
-    static const std::shared_ptr<spdlog::logger>& GetLogger() noexcept { return m_logger; }
+    static const std::shared_ptr<spdlog::logger>& getLogger() noexcept { return m_logger; }
 
   private:
     inline static std::shared_ptr<spdlog::logger> m_logger{nullptr};
@@ -36,12 +36,12 @@ class Logger final {
 
 
 /// Enigma Log Macros
-#define ENIGMA_TRACE(...) ::Enigma::Logger::GetLogger()->trace(__VA_ARGS__)
-#define ENIGMA_LOG(...) ::Enigma::Logger::GetLogger()->debug(__VA_ARGS__)
-#define ENIGMA_INFO(...) ::Enigma::Logger::GetLogger()->info(__VA_ARGS__)
-#define ENIGMA_WARN(...) ::Enigma::Logger::GetLogger()->warn("{}\n{}:{}\n{}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
-#define ENIGMA_ERROR(...) ::Enigma::Logger::GetLogger()->error("{}\n{}:{}\n{}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
-#define ENIGMA_CRITICAL(...) ::Enigma::Logger::GetLogger()->critical("{}\n{}:{}\n{}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+#define ENIGMA_TRACE(...) ::Enigma::Logger::getLogger()->trace(__VA_ARGS__)
+#define ENIGMA_LOG(...) ::Enigma::Logger::getLogger()->debug(__VA_ARGS__)
+#define ENIGMA_INFO(...) ::Enigma::Logger::getLogger()->info(__VA_ARGS__)
+#define ENIGMA_WARN(...) ::Enigma::Logger::getLogger()->warn("{}\n{}:{}\n{}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+#define ENIGMA_ERROR(...) ::Enigma::Logger::getLogger()->error("{}\n{}:{}\n{}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
+#define ENIGMA_CRITICAL(...) ::Enigma::Logger::getLogger()->critical("{}\n{}:{}\n{}", fmt::format(__VA_ARGS__), __FILE__, __LINE__, ENIGMA_CURRENT_FUNCTION)
 
 #define ENIGMA_TRACE_IF(condition, ...) \
   if ((condition)) ENIGMA_TRACE(__VA_ARGS__);

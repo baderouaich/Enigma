@@ -22,13 +22,13 @@ class FileUtils final {
     ENIGMA_STATIC_CLASS(FileUtils);
 
   public:
-    static bool Read(const fs::path& filename, std::string& buffer) {
+    static bool Read(const fs::path& filename, std::vector<byte>& buffer) {
       if (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) // ate: open at the end
       {
         const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
         buffer.resize(file_size, '\000');
         ifs.seekg(0, std::ios::beg);
-        ifs.read(buffer.data(), file_size);
+        ifs.read(reinterpret_cast<char *>(buffer.data()), file_size);
         ifs.close();
         return true;
       } else {
@@ -37,9 +37,9 @@ class FileUtils final {
       }
     }
 
-    static bool Write(const fs::path& filename, const std::string_view& buffer) {
+    static bool Write(const fs::path& filename, const std::vector<byte>& buffer) {
       if (std::ofstream ofs{filename, std::ios::binary}) {
-        ofs.write(buffer.data(), buffer.size());
+        ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
         ofs.close();
         return true;
       } else {

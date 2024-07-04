@@ -21,12 +21,18 @@ class HashUtils final {
     ENIGMA_STATIC_CLASS(HashUtils);
 
   public:
+
     template<typename Algo = CryptoPP::SHA256>
-    static std::array<byte, Algo::DIGESTSIZE> bytes(const std::vector<byte>& buffer) {
+    static std::array<byte, Algo::DIGESTSIZE> bytes(const byte* buffer, const std::size_t buffSize) {
       std::array<byte, Algo::DIGESTSIZE> out{};
       Algo algo{};
-      const CryptoPP::VectorSource vs(buffer, true, new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
+      const CryptoPP::ArraySource vs(buffer, buffSize, true, new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
       return out;
+    }
+
+    template<typename Algo = CryptoPP::SHA256>
+    static std::array<byte, Algo::DIGESTSIZE> bytes(const std::vector<byte>& buffer) {
+      return bytes<Algo>(buffer.data(), buffer.size());
     }
 
     template<typename Algo = CryptoPP::SHA256>

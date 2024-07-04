@@ -52,24 +52,34 @@ class Random final {
 
 
     /** @brief Generates a random string
-	*	@param length: length of the random string to generate
-	*	@returns a random std::string with specified length consists of alphanumeric and special characters
-	*/
+    *	@param length: length of the random string to generate
+    *	@returns a random std::string a-zA-Z0-9
+    */
     static std::string Str(const std::size_t length) noexcept {
-      std::string out(length, '\000');
-      const std::string_view special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
-      for (char& c: out) {
-        if (const std::uint16_t r = Random::Int<std::uint16_t>(0, 3); r == 0)
-          c = static_cast<char>(Random::Int(std::uint16_t('a'), std::uint16_t('z'))); // alpha lower
-        else if (r == 1)                                                              // alpha upper
-          c = static_cast<char>(Random::Int(std::uint16_t('A'), std::uint16_t('Z')));
-        else if (r == 2) // digits
-          c = static_cast<char>(Random::Int(std::uint16_t('0'), std::uint16_t('9')));
-        else if (r == 3) // special characters
-          c = special_characters[Random::Int<std::size_t>(0, special_characters.size() - 1)];
-      }
+      static std::random_device seed{};
+      static std::default_random_engine engine{seed()};
+      static std::uniform_int_distribution<short> choice(0, 2);
+      static std::uniform_int_distribution<int> lowercaseAlpha('a', 'z');
+      static std::uniform_int_distribution<int> uppercaseAlpha('A', 'Z');
+      static std::uniform_int_distribution<int> digits('0', '9');
 
-      return out;
+      std::string str(length, '\000');
+      for (char& c: str) {
+        switch (choice(engine)) {
+          case 0: // a-z
+            c = lowercaseAlpha(engine);
+            break;
+          case 1: // A-Z
+            c = uppercaseAlpha(engine);
+            break;
+          case 2: // 0-9
+            c = digits(engine);
+            break;
+          default:
+            break;
+        }
+      }
+      return str;
     }
 
 

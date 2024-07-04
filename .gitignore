@@ -1,7 +1,7 @@
 # Enigma.db & Databases
 res/database/*
 res/logs/*
-
+*.ignore
 cmake-build-*
 
 # Ignore visual studio .sln .vcxproj...
