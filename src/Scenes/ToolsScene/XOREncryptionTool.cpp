@@ -16,14 +16,14 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 {
 	static const auto& io = ImGui::GetIO();
 
-	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
-	//const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
+	const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
+	//const auto& [win_x, win_y] = Application::getInstance()->GetWindow()->GetPosition();
 
 	//const auto button_size = ImVec2(win_w / 2.6f, 40.0f);
 
 	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-	static auto& fonts = Application::GetInstance()->GetFonts();
+	static auto& fonts = Application::getInstance()->GetFonts();
 	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
 	//static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
@@ -130,7 +130,7 @@ void XOREncryptionTool::OnDraw(Scene* parent)
 					if (ImGui::Button((btn_txt), button_size))
 					{
 						const auto loading_txt = m_intent == Algorithm::Intent::Encrypt ? "Encrypting text..." : "Decrypting text...";
-						Application::GetInstance()->LaunchWorkerThread(parent, (loading_txt), [this]() -> void
+						Application::getInstance()->LaunchWorkerThread(parent, (loading_txt), [this]() -> void
 							{
 								if(m_intent == Algorithm::Intent::Encrypt)
 									this->OnEncryptButtonPressed();

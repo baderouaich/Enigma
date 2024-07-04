@@ -34,14 +34,14 @@ void PasswordGeneratorTool::OnCreate()
 
 void PasswordGeneratorTool::OnDraw(Scene* parent)
 {
-	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
-	//const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
+	const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
+	//const auto& [win_x, win_y] = Application::getInstance()->GetWindow()->GetPosition();
 
 	//const auto button_size = ImVec2(win_w / 2.6f, 40.0f);
 
 	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-	static auto& fonts = Application::GetInstance()->GetFonts();
+	static auto& fonts = Application::getInstance()->GetFonts();
 	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
 	//static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
@@ -78,7 +78,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent)
 			// Generate button 25% of width
 			if (ImGuiWidgets::Button(("Generate"), ImVec2(win_w * 0.20f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
 			{
-				Application::GetInstance()->LaunchWorkerThread(parent, ("Generating Password..."), [this]()
+				Application::getInstance()->LaunchWorkerThread(parent, ("Generating Password..."), [this]()
 				{
 					this->OnGenerateButtonPressed();
 				});

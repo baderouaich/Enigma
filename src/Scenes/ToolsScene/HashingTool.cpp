@@ -18,11 +18,11 @@ void HashingTool::OnCreate()
 
 void HashingTool::OnDraw(Scene* parent)
 {
-	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
+	const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
 
 	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-	static auto& fonts = Application::GetInstance()->GetFonts();
+	static auto& fonts = Application::getInstance()->GetFonts();
 	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
 	//static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
@@ -72,11 +72,12 @@ void HashingTool::OnDraw(Scene* parent)
 			ImGui::SameLine();
 			if (ImGuiWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
 			{
-				Application::GetInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]()
+				Application::getInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]()
 					{
 						this->OnCalculateHashButtonPressed();
 					});
 			}
+
 
 			spacing(2);
 
@@ -118,7 +119,7 @@ void HashingTool::OnCalculateHashButtonPressed()
 			case Enigma::HashingTool::HashAlgorithm::hash_algo: \
 			{ \
 				if (!var) var = std::make_unique<CryptoPP::cryptopp_hash_name>(); \
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true, new CryptoPP::HashFilter(*var, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))); \
+				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true, new CryptoPP::HashFilter(*var, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output), false))); \
 				break; \
 			}
 
