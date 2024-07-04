@@ -92,6 +92,7 @@ class Algorithm {
     *	@return Cipher with Enigma meta data
     *	@exception throws CryptoPP::Exception, std::exception on failure
     */
+    virtual std::vector<byte> Encrypt(const std::string& password, const byte* buffer, const std::size_t buffSize) = 0;
     virtual std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) = 0;
     /**
     *	Decrypts cipher with password
@@ -100,6 +101,7 @@ class Algorithm {
     *	@return Recovered Buffer
     *	@exception throws CryptoPP::Exception, std::exception on failure
     */
+    virtual std::vector<byte> Decrypt(const std::string& password, const byte* cipher, const std::size_t cipherSize) = 0;
     virtual std::vector<byte> Decrypt(const std::string& password, const std::vector<byte>& cipher) = 0;
 
     /**
@@ -143,6 +145,7 @@ class Algorithm {
 
 
   public:
+#if 0
     /**
     *	Auto detect algorithm used for encryption from cipher text
     */
@@ -157,6 +160,7 @@ class Algorithm {
     *	Auto detect algorithm used for encryption from encrypted file
     */
     static Type DetectFromFile(const std::string& filename);
+#endif
 
     /**
     *	Converts Algorithm::Type to std::string

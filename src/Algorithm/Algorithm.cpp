@@ -67,6 +67,7 @@ std::vector<byte> Algorithm::GenerateRandomIV(const std::size_t size)
 	return iv;
 }
 
+#if 0
 Algorithm::Type Algorithm::DetectFromCipher(const std::string& cipher)
 {
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Cannot auto-detect algorithm without cipher text");
@@ -87,7 +88,7 @@ Algorithm::Type Algorithm::DetectFromCipherBase64(const std::string& cipher_base
 	ENIGMA_ASSERT_OR_THROW(!cipher_base64.empty(), "Cannot auto-detect algorithm without cipher base64 text");
 
 	// Decode base64 to cipher
-	std::string cipher = Base64::Decode(cipher_base64);
+	std::vector<byte> cipher = Base64::Decode(reinterpret_cast<const byte *>(cipher_base64.data()), cipher_base64.size());
 	// check if successfully decoded
 	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher base64 text you had in encryption");
 	//NOTE: no need to decompress, since files and text are encrypted after compressed.
@@ -125,7 +126,7 @@ Algorithm::Type Algorithm::DetectFromFile(const std::string& filename)
 	return static_cast<Algorithm::Type>(cipher_first_byte);
 }
 
-
+#endif
 std::string Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept
 {
 #define CASE_RET(e) case Algorithm::Type::e: return std::string(#e)
