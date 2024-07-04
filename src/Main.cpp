@@ -4,7 +4,10 @@
 static void SignalHandler(const int sig);
 
 int main(int argc, char *argv[]) {
-  using namespace Enigma;
+  if (argc > 1 && (!std::strcmp(argv[1], "--version") || !std::strcmp(argv[1], "-v"))) {
+    std::cout << ENIGMA_VERSION << std::endl;
+    return EXIT_SUCCESS;
+  }
 
   // Handle abnormal exists to normally end program and release resources gracefully
   std::signal(SIGABRT, SignalHandler); // Abnormal termination triggered by abort call
@@ -17,26 +20,18 @@ int main(int argc, char *argv[]) {
   std::signal(SIGBREAK, SignalHandler); // On Windows, a click on console window close button will raise SIGBREAK
 #endif
 
+  using namespace Enigma;
+
   Logger::initialize();
   Database::initialize();
 
   std::int32_t exit_code = -1;
   try {
-    //========= CLI Entry =========//
-    if (argc > 1 && (!std::strcmp(argv[1], "--version") || !std::strcmp(argv[1], "-v"))) {
-      std::cout << ENIGMA_VERSION << std::endl;
-      exit_code = EXIT_SUCCESS;
-      //      CLI cli(argc, argv);
-      //      exit_code = cli.Run();
-    }
-    //========= UI Entry =========//
-    else {
-      const Config windowConfig(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
-      const WindowSettings windowSettings(windowConfig);
-      Application app(windowSettings);
-      app.Run();
-      exit_code = EXIT_SUCCESS;
-    }
+    const Config windowConfig(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
+    const WindowSettings windowSettings(windowConfig);
+    Application app(windowSettings);
+    app.Run();
+    exit_code = EXIT_SUCCESS;
   } catch (const std::exception& e) {
     ENIGMA_CRITICAL(e.what());
     exit_code = EXIT_FAILURE;
@@ -79,6 +74,10 @@ static void SignalHandler(const int sig) {
     ENIGMA_INFO("Exiting gracefully...");
   }
 
+  /** Note:
+   * When a signal is raised, destructors will not be called..
+   * sadly we must cleanup manually in this case
+   */
   if (Enigma::Application::getInstance()) Enigma::Application::getInstance()->~Application();
   if (Enigma::Database::getStorage()) Enigma::Database::shutdown();
   if (Enigma::Logger::getLogger()) Enigma::Logger::shutdown();

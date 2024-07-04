@@ -1,9 +1,17 @@
 # 3.0.0
-- Complete build system migration from Premake to CMake
+- Complete build system migration from Premake to CMake.
+- Large files support. Now you can encrypt large files in chunks with less memory usage.
+- Install Enigma user-wide. Now you can `make install` Enigma user wide. All Enigma files will be installed to `/home/$(whoami)/Enigma/` (**Linux**) |  `C:\Program Files\Enigma\` (**Windows**)
+- Export & Import your saved encryptions. Now you can use menu items in `File -> Export/Import` to export or import your SQLite3 database file which contains your saved encryption ciphers.
+- CLI is no longer supported as I noticed the main use is UI, maybe it will be back
+in the upcoming versions if requested.
+- Fixed some bugs with MessageDialog displaying only a portion of message text.
+- Upgraded ImGui from v1.83 to v1.90.8
+- Upgraded Crypto++ from v8.4 to v8.9.0
+- Upgraded GLFW from v3.3.0 to v3.4
 
 # 2.2.0
-- Fixed wrong text displayed in 'My Encryptions Scene' when searching for unexistent encryption, it displays "No encryption saved yet" instead of "No encryption found".
-
+- Fixed wrong text displayed in 'My Encryptions Scene' when searching for nonexistent encryption, it displays "No encryption saved yet" instead of "No encryption found".
 
 # 2.1.0
 - Reduced program CPU usage by adding `GLFW 3+ glfwWaitEvents()` in the main loop to wait for events. 
