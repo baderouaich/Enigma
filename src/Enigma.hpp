@@ -53,18 +53,19 @@
 #include <Scenes/Scene.hpp>
 //
 
-// Utility 
-#include <Utility/Random.hpp>
+// Utility
 #include <Utility/Base64.hpp>
-#include <Utility/FileUtils.hpp>
-#include <Utility/StringUtils.hpp>
-#include <Utility/OpenGLUtils.hpp>
 #include <Utility/CryptoPPUtils.hpp>
 #include <Utility/DialogUtils.hpp>
-#include <Utility/GZip.hpp>
-#include <Utility/SizeUtils.hpp>
-#include <Utility/MathUtils.hpp>
+#include <Utility/FileUtils.hpp>
+//#include <Utility/GZip.hpp>
 #include <Utility/HashUtils.hpp>
+#include <Utility/MathUtils.hpp>
+#include <Utility/OpenGLUtils.hpp>
+#include <Utility/Random.hpp>
+#include <Utility/SizeUtils.hpp>
+#include <Utility/StringUtils.hpp>
+#include <Utility/FinalAction.hpp>
 //
 
 // Analytics: Hardware info RAM, CPU
@@ -73,7 +74,7 @@
 //
 
 // Enigma Command line interface
-#include <CLI/CLI.hpp>
+//#include <CLI/CLI.hpp>
 //
 
 // Networking
