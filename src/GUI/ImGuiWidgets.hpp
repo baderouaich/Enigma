@@ -254,12 +254,12 @@ class ImGuiWidgets final {
 	*	@note: https://github.com/ocornut/imgui/issues/249
 	*/
     static void LoadingDialog(const char *text, const ImVec2& spinner_position, const float spinner_radius, const float spinner_thickness, const ImVec4& spinner_color,
-                              const float container_width = (float) Application::GetInstance()->GetWindow()->GetSize().first,
-                              const float container_height = (float) Application::GetInstance()->GetWindow()->GetSize().second) {
+                              const float container_width = (float) Application::getInstance()->GetWindow()->GetWidth(),
+                              const float container_height = (float) Application::getInstance()->GetWindow()->GetHeight()) {
       static constexpr auto popup_id = "loadingDialog";
 
-      const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
-      static const auto& fonts = Application::GetInstance()->GetFonts();
+      const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
+      static const auto& fonts = Application::getInstance()->GetFonts();
       static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
 
       ImGui::OpenPopup(popup_id, ImGuiPopupFlags_AnyPopup);
