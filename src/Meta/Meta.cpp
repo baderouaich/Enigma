@@ -1,8 +1,9 @@
 #include "Meta.hpp"
+#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 
-constexpr size_type EnigmaFooter::sizeInBytes() const noexcept {
+constexpr Meta::size_type Meta::EnigmaFooter::sizeInBytes() const noexcept {
   // NOTE: make sure you include any new member size here
   return sizeof(magic) +
          sizeof(version) +
@@ -12,7 +13,7 @@ constexpr size_type EnigmaFooter::sizeInBytes() const noexcept {
          sizeof(size_type) + extra.size();
 }
 
-std::vector<byte> EnigmaFooter::toBytes() const {
+std::vector<byte> Meta::EnigmaFooter::toBytes() const {
   std::vector<byte> out(this->sizeInBytes(), '\000');
   // Keep track of the current position in the output vector
   byte *pos = out.data();
@@ -52,9 +53,9 @@ std::vector<byte> EnigmaFooter::toBytes() const {
   return out;
 }
 
-EnigmaFooter EnigmaFooter::fromBytes(const std::vector<byte>& bytes) {
+Meta::EnigmaFooter Meta::EnigmaFooter::fromBytes(const byte *bytes, const std::size_t bytesSize) {
   EnigmaFooter footer{};
-  const byte *pos = bytes.data() + bytes.size();
+  const byte *pos = bytes + bytesSize;
 
   // Copy magic (reading from the end)
   pos -= sizeof(footer.magic);
@@ -93,8 +94,11 @@ EnigmaFooter EnigmaFooter::fromBytes(const std::vector<byte>& bytes) {
 
   return footer;
 }
+Meta::EnigmaFooter Meta::EnigmaFooter::fromBytes(const std::vector<byte>& bytes) {
+  return fromBytes(bytes.data(), bytes.size());
+}
 
-EnigmaFooter EnigmaFooter::fromFile(const fs::path& filename) {
+Meta::EnigmaFooter Meta::EnigmaFooter::fromFile(const fs::path& filename) {
   EnigmaFooter footer{};
   std::ifstream ifs{filename, std::ios::binary | std::ios::ate};
   if (!ifs) throw std::runtime_error("Could not open file " + filename.string());
@@ -155,15 +159,18 @@ EnigmaFooter EnigmaFooter::fromFile(const fs::path& filename) {
 
   return footer;
 }
-
-
-constexpr size_type EnigmaCipherChunk::sizeInBytes() const noexcept {
-  return sizeof(magic) +
-         sizeof(size_type) /*cipherSize*/ + cipher.size()+
-         sizeof(size_type) + extra.size();
+Meta::EnigmaFooter Meta::EnigmaFooter::fromBase64(const std::string& base64) {
+  return fromBytes(Base64::Decode(reinterpret_cast<const byte *>(base64.data()), base64.size()));
 }
 
-std::vector<byte> EnigmaCipherChunk::toBytes() const {
+
+constexpr Meta::size_type Meta::EnigmaCipherChunk::sizeInBytes() const noexcept {
+  return sizeof(magic) +
+         sizeof(size_type) /*cipherSize*/ + cipher.size() +
+         sizeof(size_type) /*extraSize*/ + extra.size();
+}
+
+std::vector<byte> Meta::EnigmaCipherChunk::toBytes() const {
   std::vector<byte> out(this->sizeInBytes(), '\000');
   byte *pos = out.data();
   // Copy magic
@@ -179,20 +186,21 @@ std::vector<byte> EnigmaCipherChunk::toBytes() const {
   std::memcpy(pos, cipher.data(), cipher.size());
   pos += cipher.size();
 
-  // Copy extra
-  std::memcpy(pos, extra.data(), extra.size());
-  pos += extra.size();
-
   // Copy extra size
   size_type extraSize = extra.size();
   std::memcpy(pos, &extraSize, sizeof(extraSize));
   pos += sizeof(extraSize);
 
+  // Copy extra
+  std::memcpy(pos, extra.data(), extra.size());
+  pos += extra.size();
+
+
   return out;
 }
 
 
-bool isEnigmaFile(const fs::path& filename) {
+bool Meta::isEnigmaFile(const fs::path& filename) {
   if (!fs::is_regular_file(filename)) {
     ENIGMA_ERROR("Could not open file " + filename.string());
     return false;
@@ -221,23 +229,24 @@ bool isEnigmaFile(const fs::path& filename) {
   return magic == ENIGMA_MAGIC;
 }
 
-
-bool isEnigmaCipher(const std::vector<byte>& cipher) {
-  if (cipher.size() < sizeof(EnigmaFooter)) return false;
-  return EnigmaFooter::fromBytes(cipher).magic == ENIGMA_MAGIC;
+bool Meta::isEnigmaCipher(const byte *cipher, const std::size_t cipherSize) {
+  return EnigmaFooter::fromBytes(cipher, cipherSize).magic == ENIGMA_MAGIC;
+}
+bool Meta::isEnigmaCipher(const std::vector<byte>& cipher) {
+  return Meta::isEnigmaCipher(cipher.data(), cipher.size());
 }
 
-void readCipherChunks(const fs::path& filename, const std::function<bool(EnigmaCipherChunk&&)>& callback) {
+void Meta::readCipherChunks(const fs::path& filename, const std::function<bool(Meta::EnigmaCipherChunk&&)>& callback) {
   std::ifstream ifs{filename, std::ios::binary};
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not open file " + filename.string());
 
   while (!ifs.eof()) {
-    magic_t magic{};
+    Meta::magic_t magic{};
     ifs.read(reinterpret_cast<char *>(&magic), sizeof(magic));
-    if (magic == ENIGMA_CIPHER_CHUNK_MAGIC) {
-      EnigmaCipherChunk cipherChunk{};
+    if (magic == Meta::ENIGMA_CIPHER_CHUNK_MAGIC) {
+      Meta::EnigmaCipherChunk cipherChunk{};
       // read cipher size
-      size_type cipherSize{};
+      Meta::size_type cipherSize{};
       ifs.read(reinterpret_cast<char *>(&cipherSize), sizeof(cipherSize));
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read cipher size from file " + filename.string());
       // read cipher
@@ -245,14 +254,13 @@ void readCipherChunks(const fs::path& filename, const std::function<bool(EnigmaC
       ifs.read(reinterpret_cast<char *>(cipherChunk.cipher.data()), cipherSize);
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read cipher from file " + filename.string());
       // read extra size
-      size_type extraSize{};
+      Meta::size_type extraSize{};
       ifs.read(reinterpret_cast<char *>(&extraSize), sizeof(extraSize));
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read extra size from file " + filename.string());
       // read extra
       cipherChunk.extra.resize(extraSize);
       ifs.read(reinterpret_cast<char *>(cipherChunk.extra.data()), extraSize);
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read extra from file " + filename.string());
-
       // Serve
       if (!callback(std::move(cipherChunk))) break;
     }
