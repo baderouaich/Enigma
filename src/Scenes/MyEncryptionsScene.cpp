@@ -46,8 +46,8 @@ void MyEncryptionsScene::OnDraw()
 
 void MyEncryptionsScene::OnImGuiDraw()
 {
-	const auto& [win_w, win_h] = Application::GetInstance()->GetWindow()->GetSize();
-	const auto& [win_x, win_y] = Application::GetInstance()->GetWindow()->GetPosition();
+	const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
+	const auto& [win_x, win_y] = Application::getInstance()->GetWindow()->GetPosition();
 
 	static const auto& io = ImGui::GetIO();
 
@@ -57,7 +57,7 @@ void MyEncryptionsScene::OnImGuiDraw()
 	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 	static constexpr const auto inline_spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine(); }};
 
-	static auto& fonts = Application::GetInstance()->GetFonts();
+	static auto& fonts = Application::getInstance()->GetFonts();
 	static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
 	static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
 	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
@@ -321,12 +321,12 @@ void MyEncryptionsScene::OnImGuiDraw()
 					//for (const auto& enc_ptr : m_isSearching ? m_search_encryptions : m_encryptions)
 					for (const auto& enc_ptr : m_encryptions)
 					{
-						const auto& [id, _title, _, date_time, size, is_file, file_ext] = *enc_ptr;
+						const auto& [ide, _title, date_time, size, is_file, file_ext] = *enc_ptr;
 
 						// id, _title, date_time, size, is_file
 						ImGui::TableNextRow();
 						ImGui::TableSetColumnIndex(0);
-						ImGui::Text("%zd", id);
+						ImGui::Text("%zd", ide);
 						ImGui::TableSetColumnIndex(1);
 						ImGui::TextWrapped("%s", _title.c_str());
 						ImGui::TableSetColumnIndex(2);
@@ -334,24 +334,26 @@ void MyEncryptionsScene::OnImGuiDraw()
 						ImGui::TableSetColumnIndex(3);
 						ImGui::Text("%s", SizeUtils::FriendlySize(size).c_str());
 						ImGui::TableSetColumnIndex(4);
-						ImGui::Text("%s", is_file ? ("File ("+ file_ext + ')').c_str() : ("Text"));
+            const std::string typeStr = is_file ? ("File ("+ file_ext + ')') : ("Text");
+						ImGui::Text("%s", typeStr.c_str());
+
 						// Operation (View|delete...)
 						ImGui::TableSetColumnIndex(5);
 						{
-							ImGui::PushID(static_cast<std::int32_t>(id)); // Special id for button
+							ImGui::PushID(static_cast<std::int32_t>(ide)); // Special id for button
 							if (ImGuiWidgets::Button(("View")))
 							{
-								this->OnViewEncryptionButtonPressed(id);
+								this->OnViewEncryptionButtonPressed(ide);
 							}
 							ImGui::PopID();
 
 							ImGui::SameLine();
 
-							ImGui::PushID(static_cast<std::int32_t>(id)); // Special id for button
+							ImGui::PushID(static_cast<std::int32_t>(ide)); // Special id for button
 							if (ImGuiWidgets::Button(("Delete"), ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE))
 							{
 								// if item is deleted, vector size is changed so break loop.
-								if (this->OnDeleteEncryptionButtonPressed(id))
+								if (this->OnDeleteEncryptionButtonPressed(ide))
 								{
 									ImGui::PopID(); // unregister button id after deletion
 									break;
@@ -465,7 +467,7 @@ void MyEncryptionsScene::GetAllEncryptions()
 	m_encryptions.clear();
 
 	ENIGMA_INFO("Getting all encryptions from database...");
-	m_encryptions = Database::GetAllEncryptions<true, false, true, true, true, true>(m_order_by, m_order);
+	m_encryptions = Database::getAllEncryptions(m_order_by, m_order);
 	ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
 
 }
@@ -510,7 +512,7 @@ void MyEncryptionsScene::OnViewEncryptionButtonPressed(const std::int64_t ide)
 
 	ENIGMA_TRACE("View {0}", ide);
 
-	Application::GetInstance()->PushScene(std::make_unique<ViewEncryptionScene>(ide));
+	Application::getInstance()->PushScene(std::make_unique<ViewEncryptionScene>(ide));
 }
 
 // returns true if item deleted successfully to notify draw loop that vector range changed
@@ -526,7 +528,7 @@ bool MyEncryptionsScene::OnDeleteEncryptionButtonPressed(const std::int64_t ide)
 	{
 		ENIGMA_TRACE("Deleting encryption with id {0} from database...", ide);
 		// Remove from database
-		const bool deleted = Database::DeleteEncryption(ide);
+		const bool deleted = Database::deleteEncryption(ide);
 		if (deleted)
 		{
 			ENIGMA_TRACE("Deleting encryption with id {0} from vector...", ide);
@@ -557,7 +559,7 @@ void MyEncryptionsScene::OnSearchEncryptionsByTitle()
 	ENIGMA_TRACE_CURRENT_FUNCTION();
 
 	m_encryptions.clear();
-	m_encryptions = Database::SearchEncryptionsByTitle<true, false, true, true, true, true>(m_query);
+	m_encryptions = Database::searchEncryptionsByTitle(m_query);
 
 }
 
@@ -576,7 +578,7 @@ void MyEncryptionsScene::OnDeleteAllEncryptions()
 	{
 		ENIGMA_TRACE("Deleting all encryption records from database...");
 		// Delete everything
-		const bool deleted = Database::DeleteAllEncryptions();
+		const bool deleted = Database::deleteAllEncryptions();
 		if (deleted)
 		{
 			ENIGMA_TRACE("Deleting all encryption records from vector...");
