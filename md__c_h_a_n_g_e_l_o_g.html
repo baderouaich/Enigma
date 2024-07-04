@@ -89,11 +89,19 @@ $(document).ready(function(){initNavTree('md__c_h_a_n_g_e_l_o_g.html',''); initR
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><ul>
-<li>Complete build system migration from Premake to CMake</li>
+<li>Complete build system migration from Premake to CMake.</li>
+<li>Large files support. Now you can encrypt large files in chunks with less memory usage.</li>
+<li>Install <a class="el" href="namespace_enigma.html">Enigma</a> user-wide. Now you can <code>make install</code> <a class="el" href="namespace_enigma.html">Enigma</a> user wide. All <a class="el" href="namespace_enigma.html">Enigma</a> files will be installed to <code>/home//Enigma/</code> (<b>Linux</b>) | <code>C:\Program Files\<a class="el" href="namespace_enigma.html">Enigma</a>\</code> (<b>Windows</b>)</li>
+<li>Export &amp; Import your saved encryptions. Now you can use menu items in <code>File -&gt; Export/Import</code> to export or import your SQLite3 database file which contains your saved encryption ciphers.</li>
+<li>CLI is no longer supported as I noticed the main use is UI, maybe it will be back in the upcoming versions if requested.</li>
+<li>Fixed some bugs with MessageDialog displaying only a portion of message text.</li>
+<li>Upgraded ImGui from v1.83 to v1.90.8</li>
+<li>Upgraded Crypto++ from v8.4 to v8.9.0</li>
+<li>Upgraded GLFW from v3.3.0 to v3.4</li>
 </ul>
 <h1>2.2.0</h1>
 <ul>
-<li>Fixed wrong text displayed in 'My Encryptions <a class="el" href="class_scene.html">Scene</a>' when searching for unexistent encryption, it displays "No encryption saved yet" instead of "No encryption found".</li>
+<li>Fixed wrong text displayed in 'My Encryptions <a class="el" href="class_scene.html">Scene</a>' when searching for nonexistent encryption, it displays "No encryption saved yet" instead of "No encryption found".</li>
 </ul>
 <h1>2.1.0</h1>
 <ul>
@@ -174,7 +182,7 @@ If such a setting is enabled, glfwSwapInterval will have no effect." said GLFW.<
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Jul 4 2024 20:44:49 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Thu Jul 4 2024 21:04:09 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
