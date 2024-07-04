@@ -7,7 +7,7 @@ class EncryptTextScene : public Enigma::Scene
 {
 public:	/* Constructors / Destructor */
 	EncryptTextScene();
-	virtual ~EncryptTextScene() noexcept = default;
+	~EncryptTextScene() noexcept override = default;
 
 private: /* Overrides */
 	void OnCreate() override;
@@ -25,8 +25,8 @@ private: /* Callbacks */
 private:
 	Algorithm::Type m_type; // Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm
 	std::string m_text; // Text to encrypt
-	std::string m_cipher; // Encrypted text
-	std::string m_cipher_base64; // Encrypted text in Base64
+	std::vector<byte> m_cipher; // Encrypted text
+  std::string m_cipher_base64; // Encrypted text in Base64
 	std::string m_password, m_confirm_password; // Encryption password
 
 	// Save to database 
