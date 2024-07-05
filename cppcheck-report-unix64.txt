@@ -1,12 +1,12 @@
-src/Analytics/Hardware/CPU/CPUInfo.cpp:31:7: warning: %zu in format string (no. 1) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
- std::fscanf(file, "cpu %zu %zu %zu %zu",
-      ^
-src/Analytics/Hardware/CPU/CPUInfo.cpp:31:7: warning: %zu in format string (no. 2) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
- std::fscanf(file, "cpu %zu %zu %zu %zu",
-      ^
-src/Analytics/Hardware/CPU/CPUInfo.cpp:31:7: warning: %zu in format string (no. 3) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
- std::fscanf(file, "cpu %zu %zu %zu %zu",
-      ^
-src/Analytics/Hardware/CPU/CPUInfo.cpp:31:7: warning: %zu in format string (no. 4) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
- std::fscanf(file, "cpu %zu %zu %zu %zu",
-      ^
+src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 1) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
+  std::fscanf(file, "cpu %zu %zu %zu %zu",
+       ^
+src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 2) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
+  std::fscanf(file, "cpu %zu %zu %zu %zu",
+       ^
+src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 3) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
+  std::fscanf(file, "cpu %zu %zu %zu %zu",
+       ^
+src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 4) requires 'size_t *' but the argument type is 'unsigned long *'. [invalidScanfArgType_int]
+  std::fscanf(file, "cpu %zu %zu %zu %zu",
+       ^
