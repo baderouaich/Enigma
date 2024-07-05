@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Core/Core.hpp>
 #include "CipherChunk.hpp"
+#include <Core/Core.hpp>
 
 #include <sstream> //	std::ostringstream
 

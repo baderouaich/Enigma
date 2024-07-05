@@ -1,18 +1,18 @@
 #pragma once
 #include <Core/Core.hpp>
 #include <array>
-#include <fstream>
-#include <md2.h> // MD2
-#include <md4.h> // MD4
-#include <md5.h> // MD5
-#include <sha.h> // SHA1, SHA244, SHA256, SHA384, SHA512
-#include <keccak.h> // Keccak
-#include <shake.h> // Shake
-#include <tiger.h> // Tiger
-#include <whrlpool.h> // Whirlpool
+#include <files.h>   // HexEncoder
 #include <filters.h> // VectorSource, StringSource, VectorSink, StringSink
-#include <hex.h> // HexEncoder
-#include <files.h> // HexEncoder
+#include <fstream>
+#include <hex.h>      // HexEncoder
+#include <keccak.h>   // Keccak
+#include <md2.h>      // MD2
+#include <md4.h>      // MD4
+#include <md5.h>      // MD5
+#include <sha.h>      // SHA1, SHA244, SHA256, SHA384, SHA512
+#include <shake.h>    // Shake
+#include <tiger.h>    // Tiger
+#include <whrlpool.h> // Whirlpool
 
 
 NS_ENIGMA_BEGIN
@@ -21,9 +21,8 @@ class HashUtils final {
     ENIGMA_STATIC_CLASS(HashUtils);
 
   public:
-
     template<typename Algo = CryptoPP::SHA256>
-    static std::array<byte, Algo::DIGESTSIZE> bytes(const byte* buffer, const std::size_t buffSize) {
+    static std::array<byte, Algo::DIGESTSIZE> bytes(const byte *buffer, const std::size_t buffSize) {
       std::array<byte, Algo::DIGESTSIZE> out{};
       Algo algo{};
       const CryptoPP::ArraySource vs(buffer, buffSize, true, new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
@@ -50,8 +49,8 @@ class HashUtils final {
       std::ifstream file{filename};
       ENIGMA_ASSERT_OR_THROW(file.good(), "No such file " + filename.string());
       const CryptoPP::FileSource fs(file,
-                              true,
-                              new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
+                                    true,
+                                    new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
       file.close();
       return out;
     }
@@ -68,10 +67,9 @@ class HashUtils final {
     }
 
     template<typename Algo = CryptoPP::SHA256>
-    static std::string stringify(const std::array<byte, Algo::DIGESTSIZE>& hash, const bool uppercase = false)
-    {
+    static std::string stringify(const std::array<byte, Algo::DIGESTSIZE>& hash, const bool uppercase = false) {
       std::ostringstream out{};
-      for(const byte digest : hash) {
+      for (const byte digest: hash) {
         out << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(digest);
       }
       return out.str();

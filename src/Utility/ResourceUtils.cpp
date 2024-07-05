@@ -1,11 +1,10 @@
 #include "ResourceUtils.hpp"
-#include <System/ENV/ENV.hpp>
 #include <Core/Core.hpp>
+#include <System/ENV/ENV.hpp>
 
 NS_ENIGMA_BEGIN
 
-fs::path ResourceUtils::getInstallBaseDir()
-{
+fs::path ResourceUtils::getInstallBaseDir() {
   // /home/$(whoami)/Enigma in Linux
   // C:\Program Files\Enigma in Windows
   fs::path installBaseDir{};
@@ -26,7 +25,7 @@ fs::path ResourceUtils::getInstallBaseDir()
 fs::path ResourceUtils::GetResourcesDir() {
   static const fs::path localResDir = fs::path(LOCAL_RES_DIR);
   static const fs::path installedResDir = getInstallBaseDir() / "res";
-   // If Enigma was installed user wide (make enigma_install) target
+  // If Enigma was installed user wide (make enigma_install) target
   if (fs::is_directory(installedResDir))
     return installedResDir;
   else
@@ -34,4 +33,3 @@ fs::path ResourceUtils::GetResourcesDir() {
     return localResDir;
 }
 NS_ENIGMA_END
-

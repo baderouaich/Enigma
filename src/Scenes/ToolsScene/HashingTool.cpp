@@ -1,148 +1,132 @@
-#include <pch.hpp>
 #include "HashingTool.hpp"
-#include <System/Clipboard/Clipboard.hpp>
-#include <Utility/CryptoPPUtils.hpp> 
-#include <Utility/DialogUtils.hpp> 
-#include <Application/Application.hpp> 
+#include <Application/Application.hpp>
 #include <GUI/ImGuiWidgets.hpp>
+#include <System/Clipboard/Clipboard.hpp>
+#include <Utility/CryptoPPUtils.hpp>
+#include <Utility/DialogUtils.hpp>
+#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
-void HashingTool::OnCreate()
-{
-	ENIGMA_TRACE_CURRENT_FUNCTION();
+void HashingTool::OnCreate() {
+  ENIGMA_TRACE_CURRENT_FUNCTION();
 
-	// dm Register Available Hashing Algorithms
-	//m_hash_algorithms[HashAlgorithm::MD5] = std::make_unique<CryptoPP::MD5>();
-	m_selected_hash = HashAlgorithm::MD5; // MD5 selected by default
+  // dm Register Available Hashing Algorithms
+  //m_hash_algorithms[HashAlgorithm::MD5] = std::make_unique<CryptoPP::MD5>();
+  m_selected_hash = HashAlgorithm::MD5; // MD5 selected by default
 }
 
-void HashingTool::OnDraw(Scene* parent)
-{
-	const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
+void HashingTool::OnDraw(Scene *parent) {
+  const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
 
-	static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
+  static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-	static auto& fonts = Application::getInstance()->GetFonts();
-	//static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-	//static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-	static ImFont* const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-	static ImFont* const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-	static ImFont* const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-	static ImFont* const& font_montserrat_medium_14 = fonts.at("Montserrat-Medium-14");
-	//static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static auto& fonts = Application::getInstance()->GetFonts();
+  //static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
+  //static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
+  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
+  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
+  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
+  static ImFont *const& font_montserrat_medium_14 = fonts.at("Montserrat-Medium-14");
+  //static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
 
-	ImGui::PushFont(font_audiowide_regular_20);
-	{		
-		
-		//if (ImGui::CollapsingHeader("Hashing", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen))
-		if (ImGui::CollapsingHeader(("Hashing"), nullptr))
-		{
-			ImGui::PushFont(font_montserrat_medium_18);
-			spacing(3);
+  ImGui::PushFont(font_audiowide_regular_20);
+  {
 
-			// Hashing algorithms
-			ImGui::BulletText("%s:", ("Algorithms"));
-			for (std::int32_t i = static_cast<std::int32_t>(HashAlgorithm::BEGIN); i <= static_cast<std::int32_t>(HashAlgorithm::END); ++i)
-			{
-				if (ImGui::RadioButton(*static_cast<HashAlgorithm>(i), m_selected_hash == static_cast<HashAlgorithm>(i)))
-				{
-					m_selected_hash = static_cast<HashAlgorithm>(i);
-				}
-				// Add new line after each hash kind row
-				switch (static_cast<HashAlgorithm>(i))
-				{
-				case Enigma::HashingTool::HashAlgorithm::MD5:
-				case Enigma::HashingTool::HashAlgorithm::SHA512:
-				case Enigma::HashingTool::HashAlgorithm::SHAKE256:
-				case Enigma::HashingTool::HashAlgorithm::KECCAK512:
-				case Enigma::HashingTool::HashAlgorithm::WHIRLPOOL:
-					//ImGui::NewLine(); // not calling ImGui::SameLine(); will go to next line, if called newline extra padding appears
-					break;
-				default: // else, stay at the same line
-					ImGui::SameLine();
+    //if (ImGui::CollapsingHeader("Hashing", nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen))
+    if (ImGui::CollapsingHeader(("Hashing"), nullptr)) {
+      ImGui::PushFont(font_montserrat_medium_18);
+      spacing(3);
 
-				}
-			}
+      // Hashing algorithms
+      ImGui::BulletText("%s:", ("Algorithms"));
+      for (std::int32_t i = static_cast<std::int32_t>(HashAlgorithm::BEGIN); i <= static_cast<std::int32_t>(HashAlgorithm::END); ++i) {
+        if (ImGui::RadioButton(*static_cast<HashAlgorithm>(i), m_selected_hash == static_cast<HashAlgorithm>(i))) {
+          m_selected_hash = static_cast<HashAlgorithm>(i);
+        }
+        // Add new line after each hash kind row
+        switch (static_cast<HashAlgorithm>(i)) {
+          case Enigma::HashingTool::HashAlgorithm::MD5:
+          case Enigma::HashingTool::HashAlgorithm::SHA512:
+          case Enigma::HashingTool::HashAlgorithm::SHAKE256:
+          case Enigma::HashingTool::HashAlgorithm::KECCAK512:
+          case Enigma::HashingTool::HashAlgorithm::WHIRLPOOL:
+            //ImGui::NewLine(); // not calling ImGui::SameLine(); will go to next line, if called newline extra padding appears
+            break;
+          default: // else, stay at the same line
+            ImGui::SameLine();
+        }
+      }
 
-			spacing(2);
+      spacing(2);
 
-			// Input text to calculate hash for
-			ImGui::BulletText("%s:", ("Input"));
-			ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 60.0f));
-			ImGui::SameLine();
-			if (ImGuiWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE))
-			{
-				Application::getInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]()
-					{
-						this->OnCalculateHashButtonPressed();
-					});
-			}
+      // Input text to calculate hash for
+      ImGui::BulletText("%s:", ("Input"));
+      ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 60.0f));
+      ImGui::SameLine();
+      if (ImGuiWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
+        Application::getInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]() {
+          this->OnCalculateHashButtonPressed();
+        });
+      }
 
 
-			spacing(2);
+      spacing(2);
 
 
-			// Output calculated hash
-			if (!m_output.empty())
-			{
-				ImGui::BulletText("%s:", ("Output (Hex Encoded)"));
-				ImGuiWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 60.0f), ImGuiInputTextFlags_ReadOnly);
-				ImGui::SameLine();
-				ImGui::PushID("CopyCalculatedHash");
-				if (ImGuiWidgets::Button(("Copy"), ImVec2(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
-				{
-					this->OnCopyHashButtonPressed();
-				}
-				ImGui::PopID();
-			}
+      // Output calculated hash
+      if (!m_output.empty()) {
+        ImGui::BulletText("%s:", ("Output (Hex Encoded)"));
+        ImGuiWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 60.0f), ImGuiInputTextFlags_ReadOnly);
+        ImGui::SameLine();
+        ImGui::PushID("CopyCalculatedHash");
+        if (ImGuiWidgets::Button(("Copy"), ImVec2(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
+          this->OnCopyHashButtonPressed();
+        }
+        ImGui::PopID();
+      }
 
 
-			ImGui::PopFont();
-		}
-	}
-	ImGui::PopFont();
+      ImGui::PopFont();
+    }
+  }
+  ImGui::PopFont();
 }
 
-void HashingTool::OnDestroy()
-{
-	ENIGMA_TRACE_CURRENT_FUNCTION();
+void HashingTool::OnDestroy() {
+  ENIGMA_TRACE_CURRENT_FUNCTION();
 }
-void HashingTool::OnCalculateHashButtonPressed()
-{
-	if (m_input.empty()) return;
-	m_output.clear();
-	try
-	{
-		switch (m_selected_hash)
-		{
-#define CASE_PERFORM_HASH(var, hash_algo, cryptopp_hash_name) \
-			case Enigma::HashingTool::HashAlgorithm::hash_algo: \
-			{ \
-				if (!var) var = std::make_unique<CryptoPP::cryptopp_hash_name>(); \
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true, new CryptoPP::HashFilter(*var, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output), false))); \
-				break; \
-			}
+void HashingTool::OnCalculateHashButtonPressed() {
+  if (m_input.empty()) return;
+  m_output.clear();
+  try {
+    switch (m_selected_hash) {
+#define CASE_PERFORM_HASH(var, hash_algo, cryptopp_hash_name)                                                                                                                    \
+  case Enigma::HashingTool::HashAlgorithm::hash_algo: {                                                                                                                          \
+    if (!var) var = std::make_unique<CryptoPP::cryptopp_hash_name>();                                                                                                            \
+    [[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true, new CryptoPP::HashFilter(*var, new CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output), false))); \
+    break;                                                                                                                                                                       \
+  }
 
-			CASE_PERFORM_HASH(m_md2, MD2, MD2);
-			CASE_PERFORM_HASH(m_md4, MD4, MD4);
-			CASE_PERFORM_HASH(m_md5, MD5, MD5);
+      CASE_PERFORM_HASH(m_md2, MD2, Weak::MD2);
+      CASE_PERFORM_HASH(m_md4, MD4, Weak::MD4);
+      CASE_PERFORM_HASH(m_md5, MD5, Weak::MD5);
 
-			CASE_PERFORM_HASH(m_sha1, SHA1, SHA1);
-			CASE_PERFORM_HASH(m_sha224, SHA224, SHA224);
-			CASE_PERFORM_HASH(m_sha256, SHA256, SHA256);
-			CASE_PERFORM_HASH(m_sha384, SHA384, SHA384);
-			CASE_PERFORM_HASH(m_sha512, SHA512, SHA512);
+      CASE_PERFORM_HASH(m_sha1, SHA1, SHA1);
+      CASE_PERFORM_HASH(m_sha224, SHA224, SHA224);
+      CASE_PERFORM_HASH(m_sha256, SHA256, SHA256);
+      CASE_PERFORM_HASH(m_sha384, SHA384, SHA384);
+      CASE_PERFORM_HASH(m_sha512, SHA512, SHA512);
 
-			CASE_PERFORM_HASH(m_shake128, SHAKE128, SHAKE128);
-			CASE_PERFORM_HASH(m_shake256, SHAKE256, SHAKE256);
+      CASE_PERFORM_HASH(m_shake128, SHAKE128, SHAKE128);
+      CASE_PERFORM_HASH(m_shake256, SHAKE256, SHAKE256);
 
-			CASE_PERFORM_HASH(m_keccak224, KECCAK224, Keccak_224);
-			CASE_PERFORM_HASH(m_keccak256, KECCAK256, Keccak_256);
-			CASE_PERFORM_HASH(m_keccak384, KECCAK384, Keccak_384);
-			CASE_PERFORM_HASH(m_keccak512, KECCAK512, Keccak_512);
+      CASE_PERFORM_HASH(m_keccak224, KECCAK224, Keccak_224);
+      CASE_PERFORM_HASH(m_keccak256, KECCAK256, Keccak_256);
+      CASE_PERFORM_HASH(m_keccak384, KECCAK384, Keccak_384);
+      CASE_PERFORM_HASH(m_keccak512, KECCAK512, Keccak_512);
 
-			CASE_PERFORM_HASH(m_tiger, TIGER, Tiger);
-			CASE_PERFORM_HASH(m_whirlpool, WHIRLPOOL, Whirlpool);
+      CASE_PERFORM_HASH(m_tiger, TIGER, Tiger);
+      CASE_PERFORM_HASH(m_whirlpool, WHIRLPOOL, Whirlpool);
 
 #undef CASE_PERFORM_HASH
 
@@ -270,34 +254,27 @@ void HashingTool::OnCalculateHashButtonPressed()
 				break;
 			}
 #endif
-		default:
-			return;
-		}
-	}
-	catch (const CryptoPP::Exception& e) 
-	{
-		const std::string err_msg = ("Hashing Failure: ") + CryptoPPUtils::GetFullErrorMessage(e);
-		ENIGMA_ERROR(err_msg);
-		(void)DialogUtils::Error(err_msg);
-	}
-	catch (const std::exception& e)
-	{
-		const std::string err_msg = ("Hashing Failure: ") + std::string(e.what());
-		ENIGMA_ERROR(err_msg);
-		(void)DialogUtils::Error(err_msg);
-	}
-	catch (...)
-	{
-		const std::string err_msg = ("Hashing Failure UNKNOWN ERROR");
-		ENIGMA_ERROR(err_msg);
-		(void)DialogUtils::Error(err_msg);
-	}
+      default:
+        return;
+    }
+  } catch (const CryptoPP::Exception& e) {
+    const std::string err_msg = ("Hashing Failure: ") + CryptoPPUtils::GetFullErrorMessage(e);
+    ENIGMA_ERROR(err_msg);
+    (void) DialogUtils::Error(err_msg);
+  } catch (const std::exception& e) {
+    const std::string err_msg = ("Hashing Failure: ") + std::string(e.what());
+    ENIGMA_ERROR(err_msg);
+    (void) DialogUtils::Error(err_msg);
+  } catch (...) {
+    const std::string err_msg = ("Hashing Failure UNKNOWN ERROR");
+    ENIGMA_ERROR(err_msg);
+    (void) DialogUtils::Error(err_msg);
+  }
 }
 
-void HashingTool::OnCopyHashButtonPressed()
-{
-	if (!m_output.empty())
-		Clipboard::Set(m_output);
+void HashingTool::OnCopyHashButtonPressed() {
+  if (!m_output.empty())
+    Clipboard::Set(m_output);
 }
 
 NS_ENIGMA_END

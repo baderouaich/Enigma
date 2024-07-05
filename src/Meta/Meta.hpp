@@ -1,8 +1,8 @@
 #pragma once
+#include <Algorithm/Algorithm.hpp>
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <Algorithm/Algorithm.hpp>
 #include <fstream>
 #include <iostream>
 #include <sha.h>

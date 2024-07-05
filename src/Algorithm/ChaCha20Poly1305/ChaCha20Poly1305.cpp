@@ -248,11 +248,11 @@ void ChaCha20Poly1305::Decrypt(const std::string& password, const fs::path& in_f
 
       // Decrypt and verify MAC
       const bool macVerified = m_chacha_decryptor->DecryptAndVerify(
-        decrypted.data(),                                    // output buffer (decrypted cipher)
-        mac.data(), mac.size(),                              // input MAC (calculated in encryption)
-        footer.iv.data(), footer.iv.size(),                  // input IV (generated in encryption)
-        nullptr, 0,                                          // aad buffer (additional authenticated data)
-        cipherChunk.cipher.data(), cipherChunk.cipher.size()/* - footer.sizeInBytes()*/ // cipher to decrypt (make sure your exclude footer)
+        decrypted.data(),                                                                // output buffer (decrypted cipher)
+        mac.data(), mac.size(),                                                          // input MAC (calculated in encryption)
+        footer.iv.data(), footer.iv.size(),                                              // input IV (generated in encryption)
+        nullptr, 0,                                                                      // aad buffer (additional authenticated data)
+        cipherChunk.cipher.data(), cipherChunk.cipher.size() /* - footer.sizeInBytes()*/ // cipher to decrypt (make sure your exclude footer)
       );
       // Throw an exception if mac was not verified (mac is auto calculated at encryption by encryptor->EncryptAndAuthenticate)
       ENIGMA_ASSERT_OR_THROW(macVerified, "Failed to verify ChaCha20Poly1305 MAC");

@@ -22,6 +22,7 @@ NS_ENIGMA_BEGIN
 */
 class Database final {
     ENIGMA_STATIC_CLASS(Database);
+
   public:
 #pragma region enums
     /** Encryption Table order by column */

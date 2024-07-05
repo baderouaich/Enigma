@@ -30,11 +30,11 @@
 ///
 
 /// Logger: SpdLog
+#include <spdlog/common.h>
 #include <spdlog/fmt/fmt.h> /// FMT: already embedded in SpdLog
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
-#include <spdlog/common.h>
 ///
 
 /// pfd: portable file dialog
@@ -87,18 +87,18 @@
 ///
 
 /// the C Standard Libraries
+#include <cassert>
 #include <cctype>
+#include <cerrno>
+#include <climits>
+#include <cmath>
+#include <csignal>
+#include <cstdarg>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
-#include <climits>
 #include <cwchar>
-#include <cmath>
-#include <cstdarg>
-#include <cerrno>
-#include <cassert>
-#include <csignal>
-#include <cstdint>
 ///
 #pragma warning(pop)

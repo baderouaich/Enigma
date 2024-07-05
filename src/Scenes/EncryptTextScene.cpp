@@ -351,9 +351,8 @@ void EncryptTextScene::OnEncryptButtonPressed() {
     }
 
     // Spawn notification alert if window is not focused
-    if (!Application::getInstance()->GetWindow()->IsFocused())
-    {
-    	Notification{ "Enigma", "Text encrypted successfully " }.Show();
+    if (!Application::getInstance()->GetWindow()->IsFocused()) {
+      Notification{"Enigma", "Text encrypted successfully "}.Show();
     }
 
   } catch (const CryptoPP::Exception& e) {
@@ -368,7 +367,6 @@ void EncryptTextScene::OnEncryptButtonPressed() {
     ENIGMA_ERROR(err_msg);
     (void) DialogUtils::Error(err_msg);
   }
-
 }
 
 void EncryptTextScene::OnBackButtonPressed() {

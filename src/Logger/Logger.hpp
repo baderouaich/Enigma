@@ -18,13 +18,13 @@ class Logger final {
 
   public:
     /**
-	*	Initialize Enigma Logger
-	*/
+    *	Initialize Enigma Logger
+    */
     static void initialize();
 
     /**
-	*	Shutdown Enigma Logger (cleans up spdlog stuff, remains optional to call at the exit of the app)
-	*/
+    *	Shutdown Enigma Logger (cleans up spdlog stuff, remains optional to call at the exit of the app)
+    */
     static void shutdown();
 
   public: /* Accessors */

@@ -41,11 +41,13 @@
 
 #define ENIGMA_ASSERT_OR_THROW(x, msg) \
   if (!(x)) {                          \
+    ENIGMA_ERROR(msg);                 \
     throw std::runtime_error(msg);     \
   }
 
 #define ENIGMA_ASSERT_OR_RETURN(x, msg, ret) \
   if (!(x)) {                                \
+    ENIGMA_ERROR(msg);                       \
     return ret;                              \
   }                                          \
 ///

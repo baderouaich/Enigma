@@ -11,20 +11,20 @@ NS_ENIGMA_BEGIN
 class Config {
   public:
     /** Config Constructor
-	*	Loads and initializes config file
-	*	@param file_name: ini config file path
-	*	@throws std::runtime_error on failure
-	*/
+    *	Loads and initializes config file
+    *	@param file_name: ini config file path
+    *	@throws std::runtime_error on failure
+    */
     explicit Config(const fs::path& file_name);
     ~Config() = default;
 
   public:
     /** Get integer fields from loaded config file
-	*	Integers (and make sure its not bool since its also considered integral : https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template)
-	*	@param section: section name
-	*	@param name: field name
-	*	@param default_value: default value to return if field not found
-	*/
+    *	Integers (and make sure its not bool since its also considered integral : https://stackoverflow.com/questions/51859172/recognize-that-a-value-is-bool-in-a-template)
+    *	@param section: section name
+    *	@param name: field name
+    *	@param default_value: default value to return if field not found
+    */
     template<typename T>
     inline typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value, T>::type
     Get(const std::string& section, const std::string& name, const T& default_value) const {
@@ -32,10 +32,10 @@ class Config {
     }
 
     /** Get Floating point fields from loaded config file
-	*	@param section: section name
-	*	@param name: field name
-	*	@param default_value: default value to return if field not found
-	*/
+    *	@param section: section name
+    *	@param name: field name
+    *	@param default_value: default value to return if field not found
+    */
     template<typename T>
     inline typename std::enable_if<std::is_floating_point<T>::value, T>::type
     Get(const std::string& section, const std::string& name, const T& default_value) const {
@@ -43,10 +43,10 @@ class Config {
     }
 
     /** Get Boolean fields from loaded config file
-	*	@param section: section name
-	*	@param name: field name
-	*	@param default_value: default value to return if field not found
-	*/
+    *	@param section: section name
+    *	@param name: field name
+    *	@param default_value: default value to return if field not found
+    */
     template<typename T>
     inline typename std::enable_if<std::is_same<T, bool>::value, T>::type
     Get(const std::string& section, const std::string& name, const T& default_value) const {
@@ -54,10 +54,10 @@ class Config {
     }
 
     /** Get std::string fields from loaded config file
-	*	@param section: section name
-	*	@param name: field name
-	*	@param default_value: default value to return if field not found
-	*/
+    *	@param section: section name
+    *	@param name: field name
+    *	@param default_value: default value to return if field not found
+    */
     template<typename T>
     inline typename std::enable_if<std::is_same<T, std::string>::value, T>::type
     Get(const std::string& section, const std::string& name, const T& default_value) const {

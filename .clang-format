@@ -1,4 +1,5 @@
 # Generated from CLion C/C++ Code Style settings
+# https://zed0.co.uk/clang-format-configurator
 BasedOnStyle: LLVM
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: None
@@ -38,6 +39,7 @@ ContinuationIndentWidth: 2
 IndentCaseLabels: true
 IndentPPDirectives: None
 IndentWidth: 2
+Language: Cpp
 KeepEmptyLinesAtTheStartOfBlocks: true
 MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
@@ -67,3 +69,5 @@ IndentAccessModifiers: true
 AccessModifierOffset: 0
 ReferenceAlignment: Left
 FixNamespaceComments: false
+IncludeBlocks: Preserve
+SortIncludes: Never

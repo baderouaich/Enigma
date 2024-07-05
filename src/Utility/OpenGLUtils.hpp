@@ -1,8 +1,8 @@
 #pragma once
 #ifndef ENIGMA_OPENGL_UTILS_H
 #define ENIGMA_OPENGL_UTILS_H
-#include <Core/Core.hpp>
 #include <glad/glad.h>
+#include <Core/Core.hpp>
 #include <cstring>
 
 // NVX_gpu_memory_info extension defines from https://www.khronos.org/registry/OpenGL/extensions/NVX/NVX_gpu_memory_info.tx

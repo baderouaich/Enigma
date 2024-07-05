@@ -64,8 +64,7 @@ class FileUtils final {
             chunk.resize(bytes_read);
 
           // serve chunk and see if false was returned from callback to stop reading loop.
-          if(!callback(std::move(chunk))) break;
-
+          if (!callback(std::move(chunk))) break;
         }
         ifs.close();
       } else {

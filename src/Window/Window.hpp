@@ -32,263 +32,263 @@ class Window {
 
   private:
     /*
-	*	Polls GLFW Events
-	*/
+    *	Polls GLFW Events
+    */
     void PollEvents() const noexcept;
 
     /*
-	*	Swaps GLFW Buffets
-	*/
+    *	Swaps GLFW Buffets
+    */
     void SwapBuffers() const noexcept;
 
     /*
-	*	Destroys GLFW Window and Terminates
-	*/
+    *	Destroys GLFW Window and Terminates
+    */
     void Destroy() noexcept;
 
   public: /* Accessors */
     /*
-	*	Returns size (width, height) of this window
-	*/
+    *	Returns size (width, height) of this window
+    */
     [[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetSize() const noexcept;
 
     /*
-	*	Returns the width of this window
-	*/
+    *	Returns the width of this window
+    */
     std::int32_t GetWidth() const noexcept;
 
     /*
-	*	Returns the height of this window
-	*/
+    *	Returns the height of this window
+    */
     std::int32_t GetHeight() const noexcept;
 
     /*
-	*	Returns frame buffer size of this window
-	*/
+    *	Returns frame buffer size of this window
+    */
     [[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetFrameBufferSize() noexcept;
 
     /*
-	*	Returns frame buffer width of this window
-	*/
+    *	Returns frame buffer width of this window
+    */
     std::int32_t GetFrameBufferWidth() noexcept;
 
     /*
-	*	Returns frame buffer height of this window
-	*/
+    *	Returns frame buffer height of this window
+    */
     std::int32_t GetFrameBufferHeight() noexcept;
 
     /*
-	*	Returns the aspect ratio ( width / height ) of this window
-	*	Returns 1.0f if height is 0 (to avoid division by zero error)
-	*/
+    *	Returns the aspect ratio ( width / height ) of this window
+    *	Returns 1.0f if height is 0 (to avoid division by zero error)
+    */
     float GetAspectRatio() const noexcept;
 
     /*
-	*	Returns const pointer of GLFW window
-	*/
+    *	Returns const pointer of GLFW window
+    */
     const GLFWwindow *GetGLFWwindow() const noexcept;
 
     /*
-	*	Returns pointer of GLFW window
-	*/
+    *	Returns pointer of GLFW window
+    */
     GLFWwindow *GetGLFWwindow() noexcept;
 
     /*
-	*	Returns the title of this window
-	*/
+    *	Returns the title of this window
+    */
     [[nodiscard]] const std::string& GetTitle() const noexcept;
 
     /*
-	*	Returns minimum width, height of this window
-	*/
+    *	Returns minimum width, height of this window
+    */
     [[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetMinimumSize() const noexcept;
 
     /*
-	*	Returns maximum width, height of this window
-	*/
+    *	Returns maximum width, height of this window
+    */
     [[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetMaximumSize() const noexcept;
 
     /*
-	*	Returns window top left position
-	*/
+    *	Returns window top left position
+    */
     [[nodiscard]] const std::pair<std::int32_t, std::int32_t>& GetPosition() const noexcept;
 
     /*
-	*	Returns vsync swap interval level
-	* 	Interval 0: unlimited FPS
-	*	Interval 1: 60 FPS
-	*	Interval 2: 30 FPS
-	*/
+    *	Returns vsync swap interval level
+    * 	Interval 0: unlimited FPS
+    *	Interval 1: 60 FPS
+    *	Interval 2: 30 FPS
+    */
     std::int32_t GetSwapInterval() const noexcept;
 
     /*
-	*	Returns true if the window should be closed
-	*/
+    *	Returns true if the window should be closed
+    */
     bool ShouldClose() const noexcept;
 
     /*
-	* Return true if the window is hidden
-	*/
+    * Return true if the window is hidden
+    */
     bool IsHidden() const noexcept;
 
     /*
-	* Return true if the window is visible
-	*/
+    * Return true if the window is visible
+    */
     bool IsVisible() const noexcept;
 
-    /*
-	* Return true if the windows is maximized
-	*/
+    /**
+    * Return true if the windows is maximized
+    */
     bool IsMaximized() const noexcept;
 
     /*
-	* Return true if the windows is minimized
-	*/
+    * Return true if the windows is minimized
+    */
     bool IsMinimized() const noexcept;
 
     /*
-	* Return true if the windows is focused
-	*/
+    * Return true if the windows is focused
+    */
     bool IsFocused() const noexcept;
 
     /*
-	* Return true if the windows is resizable
-	*/
+    * Return true if the windows is resizable
+    */
     bool IsResizable() const noexcept;
 
     /*
-	* Return true if the windows is decorated
-	*/
+    * Return true if the windows is decorated
+    */
     bool IsDecorated() const noexcept;
 
     /*
-	*	Returns true if the window is fullscreen mode
-	*/
+    *	Returns true if the window is fullscreen mode
+    */
     bool IsFullscreen() const noexcept;
 
     /*
-	*	Returns refresh rate of this window
-	*/
+    *	Returns refresh rate of this window
+    */
     std::int32_t GetRefreshRate() noexcept;
 
     /*
-	*	Returns size (width, height) of the primary monitor
-	*/
+    *	Returns size (width, height) of the primary monitor
+    */
     std::pair<std::int32_t, std::int32_t> GetMonitorSize() noexcept;
 
   public: /* Modifiers */
     /*
-	*	Sets event callback function
-	*/
+	  *	Sets event callback function
+    */
     void SetEventCallback(const EventCallback& callback) noexcept;
 
     /*
-	*	Set window minimum width, height
-	*/
+    *	Set window minimum width, height
+    */
     void SetMinimumSize(const std::int32_t minimum_width, const std::int32_t minimum_height) noexcept;
 
     /*
-	*	Set window maximum width, height
-	*/
+    *	Set window maximum width, height
+    */
     void SetMaximumSize(const std::int32_t maximum_width, const std::int32_t maximum_height) noexcept;
 
     /*
-	*	Close Window
-	*/
+    *	Close Window
+    */
     void SetShouldClose(const bool close) const noexcept;
 
     /*
-	*	Sets Vertical Sync swap interval 
-	* 	Interval 0: unlimited FPS
-	*	Interval 1: 60 FPS
-	*	Interval 2: 30 FPS
-	*/
+    *	Sets Vertical Sync swap interval
+    * 	Interval 0: unlimited FPS
+    *	Interval 1: 60 FPS
+    *	Interval 2: 30 FPS
+	  */
     void SetSwapInterval(const std::int32_t interval) noexcept;
 
     /*
-	*	Set Window Title
-	*/
+    *	Set Window Title
+    */
     //void SetTitle(const std::string& title) noexcept;
     void SetTitle(const std::string& title, const std::unique_ptr<std::uint32_t>& fps, const std::unique_ptr<RAMInfo>& ram_info, const std::unique_ptr<CPUInfo>& cpu_info) noexcept;
 
     /*
-	*	Set window top left position
-	*/
+    *	Set window top left position
+    */
     void SetPosition(const std::int32_t x, const std::int32_t y) const noexcept;
 
     /*
-	*	Set Window runtime icon
-	*/
+    *	Set Window runtime icon
+    */
     void SetIcon(const std::string& icon_path) noexcept;
 
     /*
-	*	Set Window cursor mode
-	*/
+    *	Set Window cursor mode
+    */
     void SetCursor(CursorMode mode) noexcept;
 
     /*
-	*	Set Window cursor image
-	*/
+    *	Set Window cursor image
+    */
     void SetCursor(const std::string& image_path, const std::int32_t xhot, const std::int32_t yhot) noexcept;
 
     /*
-	*	Disable Window Cursor
-	*/
+    *	Disable Window Cursor
+    */
     void DisableCursor() const noexcept;
 
     /*
-	*	Enable Window Cursor
-	*/
+    *	Enable Window Cursor
+    */
     void EnableCursor() const noexcept;
 
     /*
-	*	Hide Window Cursor
-	*/
+    *	Hide Window Cursor
+    */
     void HideCursor() const noexcept;
 
     /*
-	*	Sets cursor position at given point
-	*/
+    *	Sets cursor position at given point
+    */
     void SetCursorPosition(const double xPos, const double yPos) const noexcept;
 
     /*
-	*	Minimize Window
-	*/
+    *	Minimize Window
+    */
     void Minimize() const noexcept;
 
     /*
-	*	Maximize Window
-	*/
+    *	Maximize Window
+    */
     void Maximize() const noexcept;
 
     /*
-	*	Restore Window
-	*/
+    *	Restore Window
+    */
     void Restore() const noexcept;
 
     /*
-	*	Hide Window
-	*/
+    *	Hide Window
+    */
     void Hide() const noexcept;
 
     /*
-	*	Show Window
-	*/
+    *	Show Window
+    */
     void Show() const noexcept;
 
     /*
-	*	Focus Window
-	*/
+    *	Focus Window
+    */
     void Focus() const noexcept;
 
     /*
-	*	Enable / Disable Fullscreen mode
-	*/
+    *	Enable / Disable Fullscreen mode
+    */
     void SetFullscreen(bool full_screen) noexcept;
 
     /*
-	*	Set window refresh rate
-	*/
+    *	Set window refresh rate
+    */
     void SetRefreshRate(const std::int32_t refresh_rate) noexcept;
 
   private: /* Initializer Functions */

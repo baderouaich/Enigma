@@ -8,14 +8,14 @@ NS_ENIGMA_BEGIN
 
 /** Clipboard Manager static class */
 class Clipboard final {
-  ENIGMA_STATIC_CLASS(Clipboard);
+    ENIGMA_STATIC_CLASS(Clipboard);
 
-public:
-  /** Get Clipboard text */
-  static std::string Get();
+  public:
+    /** Get Clipboard text */
+    static std::string Get();
 
-  /** Set Clipboard text */
-  static void Set(const std::string& buffer);
+    /** Set Clipboard text */
+    static void Set(const std::string& buffer);
 };
 
 NS_ENIGMA_END

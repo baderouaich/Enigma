@@ -13,13 +13,13 @@ NS_ENIGMA_BEGIN
 class ImGuiRenderer {
   public:
     /** Constructor
-	*	Initializes ImGui context
-	*/
+    *	Initializes ImGui context
+    */
     ImGuiRenderer();
 
     /** Destructor
-	*	Shuts down ImGui context
-	*/
+    *	Shuts down ImGui context
+    */
     ~ImGuiRenderer();
 
     /** Begin imgui rendering */

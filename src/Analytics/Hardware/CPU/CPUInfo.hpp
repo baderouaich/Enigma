@@ -38,13 +38,13 @@ class CPUInfo {
 
   public:
     /**
-	*	Returns cpu usage (in percentage [0% -> 100%])
-	*/
+    *	Returns cpu usage (in percentage [0% -> 100%])
+    */
     float GetCPUUsage() noexcept;
 
     /**
-	*	Returns cpu usage by current process (in percentage [0% -> 100%])
-	*/
+    *	Returns cpu usage by current process (in percentage [0% -> 100%])
+    */
     float GetProcessCPUUsage() noexcept;
 
   private: /** Platform Functions */

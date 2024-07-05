@@ -14,7 +14,7 @@ class Base64 final {
     * https://www.cryptopp.com/wiki/Base64Encoder
     */
     static std::vector<byte> Encode(const std::vector<byte>& buffer);
-    static std::vector<byte> Encode(const byte* buffer, const std::size_t buffLen);
+    static std::vector<byte> Encode(const byte *buffer, const std::size_t buffLen);
     static std::string Encode(const std::string& buffer);
 
     /*
@@ -22,9 +22,8 @@ class Base64 final {
     * https://www.cryptopp.com/wiki/Base64Decoder
     */
     static std::vector<byte> Decode(const std::vector<byte>& encoded_buffer);
-    static std::vector<byte> Decode(const byte* buffer, const std::size_t buffLen);
+    static std::vector<byte> Decode(const byte *buffer, const std::size_t buffLen);
     static std::string Decode(const std::string& encoded);
-
 };
 NS_ENIGMA_END
 

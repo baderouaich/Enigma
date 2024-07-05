@@ -14,8 +14,7 @@ AES::AES(const Algorithm::Intent intent) noexcept
 AES::~AES() noexcept {
 }
 
-std::vector<byte> AES::Encrypt(const std::string& password, const byte *buffer, const std::size_t buffSize)
-{
+std::vector<byte> AES::Encrypt(const std::string& password, const byte *buffer, const std::size_t buffSize) {
   ENIGMA_ASSERT_OR_THROW(m_aes_encryptor, "AES Encryptor is not initialized properly");
   ENIGMA_ASSERT_OR_THROW(password.size() >= Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, "For security reasons, AES minimum password length is " + std::to_string(Constants::Algorithm::MINIMUM_PASSWORD_LENGTH));
 

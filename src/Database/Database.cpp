@@ -78,7 +78,7 @@ std::int64_t Database::addEncryption(const std::unique_ptr<Encryption>& e) {
   try {
     // Insert encryption
     std::ostringstream sql{};
-    sql <<  "INSERT INTO " << Encryption::TABLE_NAME  << "(title, date_time, size, is_file, file_ext) VALUES(?, DATETIME(), ?, ?, ?)";
+    sql << "INSERT INTO " << Encryption::TABLE_NAME << "(title, date_time, size, is_file, file_ext) VALUES(?, DATETIME(), ?, ?, ?)";
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -136,7 +136,7 @@ std::unique_ptr<Encryption> Database::getEncryption(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT ide, title, date_time, size, is_file, file_ext FROM "<< Encryption::TABLE_NAME << " WHERE ide = " << ide;
+    sql << "SELECT ide, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE ide = " << ide;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -231,7 +231,7 @@ bool Database::deleteEncryption(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "DELETE FROM "<< Encryption::TABLE_NAME << " WHERE ide = " << ide;
+    sql << "DELETE FROM " << Encryption::TABLE_NAME << " WHERE ide = " << ide;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -309,7 +309,7 @@ std::vector<std::unique_ptr<Encryption>> Database::searchEncryptionsByTitle(cons
   std::vector<std::unique_ptr<Encryption>> encryptions;
   try {
     std::ostringstream sql{};
-    sql << "SELECT * FROM "<< Encryption::TABLE_NAME << " WHERE LOWER(title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%' ORDER BY " << order_by << ' ' << order;
+    sql << "SELECT * FROM " << Encryption::TABLE_NAME << " WHERE LOWER(title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%' ORDER BY " << order_by << ' ' << order;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -333,17 +333,15 @@ std::vector<std::unique_ptr<Encryption>> Database::searchEncryptionsByTitle(cons
   return encryptions;
 }
 
-void Database::Vacuum() noexcept
-{
+void Database::Vacuum() noexcept {
   /*ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
 	(void)m_database->exec("VACUUM");*/
 
   // Only vacuum if changes to the database were made.
   const std::int32_t total_changes = m_database->getTotalChanges();
-  if (total_changes > 0)
-  {
+  if (total_changes > 0) {
     ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);
-    (void)m_database->exec("VACUUM");
+    (void) m_database->exec("VACUUM");
   }
   //else
   //	ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");

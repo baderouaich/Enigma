@@ -1,24 +1,20 @@
-#include <pch.hpp>
 #include "Notification.hpp"
+#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 
 Notification::Notification(const std::string& title, const std::string& message, Icon icon)
-	:
-	m_title(title),
-	m_message(message),
-	m_icon(icon)
-{
+    : m_title(title),
+      m_message(message),
+      m_icon(icon) {
 }
 
 
-void Notification::Show() const
-{
-	[[maybe_unused]] auto r = pfd::notify(
-		m_title,
-		m_message,
-		static_cast<pfd::icon>(m_icon)
-	);
+void Notification::Show() const {
+  [[maybe_unused]] auto r = pfd::notify(
+    m_title,
+    m_message,
+    static_cast<pfd::icon>(m_icon));
 }
 
 
