@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('_base64_8hpp_source.html',''); initRes
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    * https://www.cryptopp.com/wiki/Base64Encoder</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    */</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_base64.html#a0008005858afa1017c00af8637a17271">   16</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_base64.html#a0008005858afa1017c00af8637a17271">Encode</a>(<span class="keyword">const</span> std::vector&lt;byte&gt;&amp; buffer);</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14">   17</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14">Encode</a>(<span class="keyword">const</span> <span class="keywordtype">byte</span>* buffer, <span class="keyword">const</span> std::size_t buffLen);</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14">   17</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14">Encode</a>(<span class="keyword">const</span> <span class="keywordtype">byte</span> *buffer, <span class="keyword">const</span> std::size_t buffLen);</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_base64.html#a25139dee392bddc811d579837a75d0f9">   18</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_base64.html#a25139dee392bddc811d579837a75d0f9">Encode</a>(<span class="keyword">const</span> std::string&amp; buffer);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">/*</span></div>
@@ -112,13 +112,12 @@ $(document).ready(function(){initNavTree('_base64_8hpp_source.html',''); initRes
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    * https://www.cryptopp.com/wiki/Base64Decoder</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    */</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_base64.html#ae647cddbe69257613c6fe780d5eecb4f">   24</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_base64.html#ae647cddbe69257613c6fe780d5eecb4f">Decode</a>(<span class="keyword">const</span> std::vector&lt;byte&gt;&amp; encoded_buffer);</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_base64.html#ac8bfd1c5f378788be5167c465a8cb2ff">   25</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_base64.html#ac8bfd1c5f378788be5167c465a8cb2ff">Decode</a>(<span class="keyword">const</span> <span class="keywordtype">byte</span>* buffer, <span class="keyword">const</span> std::size_t buffLen);</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_base64.html#ac8bfd1c5f378788be5167c465a8cb2ff">   25</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_base64.html#ac8bfd1c5f378788be5167c465a8cb2ff">Decode</a>(<span class="keyword">const</span> <span class="keywordtype">byte</span> *buffer, <span class="keyword">const</span> std::size_t buffLen);</div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_base64.html#afec2bd94e12809ca93d73fa7f9a98008">   26</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_base64.html#afec2bd94e12809ca93d73fa7f9a98008">Decode</a>(<span class="keyword">const</span> std::string&amp; encoded);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_BASE64_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_BASE64_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
@@ -135,7 +134,7 @@ $(document).ready(function(){initNavTree('_base64_8hpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_base64_8hpp.html">Base64.hpp</a></li>
-    <li class="footer">Generated on Fri Jul 5 2024 10:55:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jul 5 2024 15:02:17 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

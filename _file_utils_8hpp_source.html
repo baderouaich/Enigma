@@ -154,18 +154,17 @@ $(document).ready(function(){initNavTree('_file_utils_8hpp_source.html',''); ini
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            chunk.resize(bytes_read);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;          <span class="comment">// serve chunk and see if false was returned from callback to stop reading loop.</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          <span class="keywordflow">if</span>(!callback(std::move(chunk))) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        ifs.close();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to read file chunks {0}&quot;</span>, filename.string());</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_FILE_UTILS_H</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          <span class="keywordflow">if</span> (!callback(std::move(chunk))) <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        ifs.close();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to read file chunks {0}&quot;</span>, filename.string());</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_FILE_UTILS_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_logger_8hpp_html"><div class="ttname"><a href="_logger_8hpp.html">Logger.hpp</a></div></div>
 <div class="ttc" id="a_logger_8hpp_html_a9cef80543fd8b59cb62e4dfeb9c69fb3"><div class="ttname"><a href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a></div><div class="ttdeci">#define ENIGMA_ERROR(...)</div><div class="ttdef"><b>Definition:</b> <a href="_logger_8hpp_source.html#l00043">Logger.hpp:43</a></div></div>
@@ -181,7 +180,7 @@ $(document).ready(function(){initNavTree('_file_utils_8hpp_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_file_utils_8hpp.html">FileUtils.hpp</a></li>
-    <li class="footer">Generated on Fri Jul 5 2024 10:55:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jul 5 2024 15:02:17 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

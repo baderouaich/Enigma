@@ -93,53 +93,51 @@ $(document).ready(function(){initNavTree('_encrypt_file_scene_8hpp_source.html',
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_algorithm_8hpp.html">Algorithm/Algorithm.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_encrypt_file_scene.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_encrypt_file_scene.html">EncryptFileScene</a> : <span class="keyword">public</span> <a class="code" href="class_scene.html">Scene</a></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">public</span>: <span class="comment">/* Constructors / Destructor */</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_encrypt_file_scene.html#a6424c60d537ff073b0700e02fa258fca">    9</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_encrypt_file_scene.html#a6424c60d537ff073b0700e02fa258fca">EncryptFileScene</a>();</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_encrypt_file_scene.html#ad1722b32c0433ff0cb37fe218375dc93">   10</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_encrypt_file_scene.html#ad1722b32c0433ff0cb37fe218375dc93">~EncryptFileScene</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">private</span>: <span class="comment">/* Overrides */</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">void</span> OnCreate() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    [[maybe_unused]] <span class="keywordtype">void</span> OnUpdate(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; dt) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> OnDraw() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> OnImGuiDraw() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> OnEvent(<a class="code" href="class_event.html">Event</a>&amp; event) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> OnDestroy() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>: <span class="comment">/* Callbacks */</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> OnBrowseInFileButtonPressed();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> OnBrowseOutFileLocationButtonPressed();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> OnEncryptButtonPressed();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> OnBackButtonPressed();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Algorithm::Type</a> m_type; <span class="comment">// Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::string m_in_filename; <span class="comment">// In File to encrypt</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::string m_out_filename; <span class="comment">// Out File encrypted location</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::string m_password, m_confirm_password;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">//unused, by default compression is enabled now. bool m_compress{ true }; // Whether to compress file with Gzip before encrypting </span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Save to database </span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::string m_db_title;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> m_save_to_database{ <span class="keyword">false</span> };</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">Note:</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     # Compression</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     - You should compress before encrypting. Encryption turns your data into high-entropy data,</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     usually indistinguishable from a random stream. Compression relies on patterns in order to gain</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     any size reduction. Since encryption destroys such patterns, the compression algorithm would be</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     unable to give you much (if any) reduction in size if you apply it to encrypted data.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="class_encrypt_file_scene.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_encrypt_file_scene.html">EncryptFileScene</a> : <span class="keyword">public</span> <a class="code" href="class_scene.html">Scene</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <span class="keyword">public</span>: <span class="comment">/* Constructors / Destructor */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_encrypt_file_scene.html#a6424c60d537ff073b0700e02fa258fca">    8</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_encrypt_file_scene.html#a6424c60d537ff073b0700e02fa258fca">EncryptFileScene</a>();</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_encrypt_file_scene.html#ad1722b32c0433ff0cb37fe218375dc93">    9</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_encrypt_file_scene.html#ad1722b32c0433ff0cb37fe218375dc93">~EncryptFileScene</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keyword">private</span>: <span class="comment">/* Overrides */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">void</span> OnCreate() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    [[maybe_unused]] <span class="keywordtype">void</span> OnUpdate(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; dt) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">void</span> OnDraw() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> OnImGuiDraw() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> OnEvent(<a class="code" href="class_event.html">Event</a>&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">void</span> OnDestroy() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">private</span>: <span class="comment">/* Callbacks */</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> OnBrowseInFileButtonPressed();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> OnBrowseOutFileLocationButtonPressed();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> OnEncryptButtonPressed();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> OnBackButtonPressed();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Algorithm::Type</a> m_type;     <span class="comment">// Algorithm type, AES, ChaCha, TripleDES... to help us create polymorphic algorithm</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::string m_in_filename;  <span class="comment">// In File to encrypt</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    std::string m_out_filename; <span class="comment">// Out File encrypted location</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::string m_password, m_confirm_password;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//unused, by default compression is enabled now. bool m_compress{ true }; // Whether to compress file with Gzip before encrypting</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Save to database</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::string m_db_title;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> m_save_to_database{<span class="keyword">false</span>};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">Note:</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     # Compression</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     - You should compress before encrypting. Encryption turns your data into high-entropy data,</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     usually indistinguishable from a random stream. Compression relies on patterns in order to gain</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     any size reduction. Since encryption destroys such patterns, the compression algorithm would be</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     unable to give you much (if any) reduction in size if you apply it to encrypted data.</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">*/</span></div>
 <div class="ttc" id="a_algorithm_8hpp_html"><div class="ttname"><a href="_algorithm_8hpp.html">Algorithm.hpp</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
 <div class="ttc" id="a_scene_8hpp_html"><div class="ttname"><a href="_scene_8hpp.html">Scene.hpp</a></div></div>
 <div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41b"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Algorithm::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition:</b> <a href="_algorithm_8hpp_source.html#l00070">Algorithm.hpp:70</a></div></div>
-<div class="ttc" id="aclass_encrypt_file_scene_html"><div class="ttname"><a href="class_encrypt_file_scene.html">EncryptFileScene</a></div><div class="ttdef"><b>Definition:</b> <a href="_encrypt_file_scene_8hpp_source.html#l00006">EncryptFileScene.hpp:7</a></div></div>
+<div class="ttc" id="aclass_encrypt_file_scene_html"><div class="ttname"><a href="class_encrypt_file_scene.html">EncryptFileScene</a></div><div class="ttdef"><b>Definition:</b> <a href="_encrypt_file_scene_8hpp_source.html#l00006">EncryptFileScene.hpp:6</a></div></div>
 <div class="ttc" id="aclass_encrypt_file_scene_html_a6424c60d537ff073b0700e02fa258fca"><div class="ttname"><a href="class_encrypt_file_scene.html#a6424c60d537ff073b0700e02fa258fca">EncryptFileScene::EncryptFileScene</a></div><div class="ttdeci">EncryptFileScene()</div></div>
 <div class="ttc" id="aclass_encrypt_file_scene_html_ad1722b32c0433ff0cb37fe218375dc93"><div class="ttname"><a href="class_encrypt_file_scene.html#ad1722b32c0433ff0cb37fe218375dc93">EncryptFileScene::~EncryptFileScene</a></div><div class="ttdeci">virtual ~EncryptFileScene()=default</div></div>
 <div class="ttc" id="aclass_event_html"><div class="ttname"><a href="class_event.html">Event</a></div><div class="ttdef"><b>Definition:</b> <a href="_event_8hpp_source.html#l00066">Event.hpp:66</a></div></div>
@@ -150,7 +148,7 @@ $(document).ready(function(){initNavTree('_encrypt_file_scene_8hpp_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d665af80335f773f8bfcf2f56b3f3e8a.html">Scenes</a></li><li class="navelem"><a class="el" href="_encrypt_file_scene_8hpp.html">EncryptFileScene.hpp</a></li>
-    <li class="footer">Generated on Fri Jul 5 2024 10:55:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jul 5 2024 15:02:17 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

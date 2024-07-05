@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('class_application.html',''); initResiz
 
 <p>This is the complete list of members for <a class="el" href="class_application.html">Application</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_application.html#a2ea435bf2e62a9779488be8a08bf182f">Application</a>(const WindowSettings &amp;window_settings=WindowSettings())</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_application.html#a2ea435bf2e62a9779488be8a08bf182f">Application</a>(const WindowSettings &amp;window_settings=WindowSettings())</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_application.html#ad88ded7fc048236d848d1a4c3e08af4d">EndApplication</a>() noexcept</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_application.html#ab832d28b8d0f3a2ba1e182b022ef98c9">Exit</a>(const std::string &amp;message, const std::int32_t exit_code) noexcept</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_application.html#a9f7e61cc3f73709d358bbfb4460b9cac">GetCPUInfo</a>() const noexcept</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('class_application.html',''); initResiz
   <tr><td class="entry"><a class="el" href="class_application.html#a3c7c4032f258f147ab9c1eda98fd59f3">getInstance</a>() noexcept</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_application.html#aeaa8b370d4bad89fd2b8802c16644bff">GetRAMInfo</a>() const noexcept</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_application.html#a1e4f4db86437b9b8aecc9594c9c8dccc">GetWindow</a>() const noexcept</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660">IsUnique</a>() const noexcept</td><td class="entry"><a class="el" href="class_single_process_instance.html">SingleProcessInstance</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_single_process_instance.html#a5ec9b1db9cb652de19745cb4f3f385a3">IsUnique</a>() const noexcept</td><td class="entry"><a class="el" href="class_single_process_instance.html">SingleProcessInstance</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_application.html#a387e8bca2205c8048775f3818ee0df22">LaunchWorkerThread</a>(Scene *scene, const std::string &amp;loading_text, const std::function&lt; void()&gt; &amp;work_func)</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_application.html#a0bbe535a299fa5e1cd10599e5d43b0d4">OnEvent</a>(Event &amp;event)</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_application.html#af8d8827ea04a741b69ecde6a7140fa26">OnFrameBufferResize</a>(FrameBufferResizeEvent &amp;event)</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
@@ -110,14 +110,14 @@ $(document).ready(function(){initNavTree('class_application.html',''); initResiz
   <tr class="even"><td class="entry"><a class="el" href="class_application.html#abfedce599775ca40f26d8a7246f43e1e">PushScene</a>(std::unique_ptr&lt; Scene &gt; scene)</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_application.html#aaf09cd6cb412086dc039e28cdb059f0d">Run</a>()</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance</a>(const std::uint16_t port) noexcept</td><td class="entry"><a class="el" href="class_single_process_instance.html">SingleProcessInstance</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">explicit</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_application.html#a20573928a0d53fb96d929513bc5acde6">~Application</a>()</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_application.html#a444b0b6d9162b14d5262b81bd75586df">~Application</a>() override</td><td class="entry"><a class="el" href="class_application.html">Application</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">~SingleProcessInstance</a>() noexcept</td><td class="entry"><a class="el" href="class_single_process_instance.html">SingleProcessInstance</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 5 2024 10:55:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jul 5 2024 15:02:17 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

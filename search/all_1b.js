@@ -2,7 +2,7 @@ var searchData=
 [
   ['_7eaes_978',['~AES',['../class_a_e_s.html#aeaddecc4261ca202abfdb38afe2047d5',1,'AES']]],
   ['_7ealgorithm_979',['~Algorithm',['../class_algorithm.html#a4d50bd605f1ce4fc2e9d71a46b433b6b',1,'Algorithm']]],
-  ['_7eapplication_980',['~Application',['../class_application.html#a20573928a0d53fb96d929513bc5acde6',1,'Application']]],
+  ['_7eapplication_980',['~Application',['../class_application.html#a444b0b6d9162b14d5262b81bd75586df',1,'Application']]],
   ['_7eblowfish_981',['~Blowfish',['../class_blowfish.html#ac37c8feb0750b39de61d1e5e7b8d0b23',1,'Blowfish']]],
   ['_7echacha20poly1305_982',['~ChaCha20Poly1305',['../class_cha_cha20_poly1305.html#a18e7ed777c2fc7ad036f5ae572b5195c',1,'ChaCha20Poly1305']]],
   ['_7ecipherchunk_983',['~CipherChunk',['../struct_cipher_chunk.html#ab4daa5a68bd50d4d0fd3124acc1aa772',1,'CipherChunk']]],

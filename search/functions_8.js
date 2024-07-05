@@ -26,6 +26,6 @@ var searchData=
   ['isminimized_1361',['IsMinimized',['../class_window.html#a0738c5787553d47af1f83859d6ed21d4',1,'Window']]],
   ['ismousebuttonpressed_1362',['IsMouseButtonPressed',['../class_input.html#a1f873ccbe83c3f25093d6458716a91dc',1,'Input']]],
   ['isresizable_1363',['IsResizable',['../class_window.html#a118aae54443b0bce801723b6479453bd',1,'Window']]],
-  ['isunique_1364',['IsUnique',['../class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660',1,'SingleProcessInstance']]],
+  ['isunique_1364',['IsUnique',['../class_single_process_instance.html#a5ec9b1db9cb652de19745cb4f3f385a3',1,'SingleProcessInstance']]],
   ['isvisible_1365',['IsVisible',['../class_window.html#aebb27a50ed20d72599e515918df91886',1,'Window']]]
 ];

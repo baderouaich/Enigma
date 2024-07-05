@@ -96,114 +96,103 @@ $(document).ready(function(){initNavTree('_single_process_instance_8hpp_source.h
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_logger_8hpp.html">Logger/Logger.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">    #define WIN32_LEAN_AND_MEAN</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">    #if defined(_WIN32_WINNT)</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">        #undef _WIN32_WINNT</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">        #define _WIN32_WINNT 0x06000100</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">    #include &lt;Winsock2.h&gt;</span> # WARNING: make sure winsock is included before windows.h</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">    #include &lt;SDKDDKVer.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">    #include &lt;Windows.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">using</span> <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> = SOCKET;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    constexpr <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a> = INVALID_SOCKET;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define WIN32_LEAN_AND_MEAN</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#if defined(_WIN32_WINNT)</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#undef _WIN32_WINNT</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define _WIN32_WINNT 0x06000100</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;Winsock2.h&gt;</span> # WARNING: make sure winsock is included before windows.h</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;SDKDDKVer.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;Windows.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using</span> <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> = SOCKET;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;constexpr <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a> = INVALID_SOCKET;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#else </span><span class="comment">//#elif defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Linux/Unix libraries will work in macos aswell.</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">    #include &lt;netinet/in.h&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">   22</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> = std::int32_t;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">   23</a></span>&#160;    constexpr <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a> = -1;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// Linux/Unix libraries will work in macos aswell.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">   22</a></span>&#160;<span class="keyword">using</span> <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> = std::int32_t;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">   23</a></span>&#160;constexpr <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a> = -1;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_single_process_instance.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_single_process_instance.html">SingleProcessInstance</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">   39</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance</a>(<span class="keyword">const</span> std::uint16_t port) noexcept</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        :</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        m_socket_fd(<a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>),</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        m_port(port),</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        m_rc(-1)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="comment">// Windows Initialize WinSock</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        WSAData data{};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> err = WSAStartup(MAKEWORD(2, 2), &amp;data);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (err != 0)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="comment">// https://docs.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartup</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keyword">auto</span> err_reason = [err]() -&gt; <span class="keyword">const</span> <span class="keywordtype">char</span>*</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">                #define CASE_RET(c, v) case c: return v</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">switch</span> (err)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSASYSNOTREADY, <span class="stringliteral">&quot;The underlying network subsystem is not ready for network communication.&quot;</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAVERNOTSUPPORTED, <span class="stringliteral">&quot;The version of Windows Sockets support requested is not provided by this particular Windows Sockets implementation.&quot;</span>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAEINPROGRESS, <span class="stringliteral">&quot;A blocking Windows Sockets 1.1 operation is in progress.&quot;</span>);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAEPROCLIM, <span class="stringliteral">&quot;A limit on the number of tasks supported by the Windows Sockets implementation has been reached.&quot;</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAEFAULT, <span class="stringliteral">&quot;The lpWSAData parameter is not a valid pointer.&quot;</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">default</span>: <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;unknown winsock err&gt;&quot;</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">                #undef CASE_RET</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            };</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to start WinSock: #{}: {}&quot;</span>, err, err_reason());</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="comment">// Create socket</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        m_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (m_socket_fd != <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="comment">// Bind to socket</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keyword">struct </span>sockaddr_in name{};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            name.sin_family = AF_INET;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            name.sin_port = htons(port);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            name.sin_addr.s_addr = htonl(INADDR_ANY);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            m_rc = bind(m_socket_fd, (<span class="keyword">struct</span> sockaddr*)&amp;name, <span class="keyword">sizeof</span>(name));</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">if</span> (m_rc &lt; 0)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to bind socket: {}&quot;</span>, std::strerror(errno));</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to create socket: {}&quot;</span>, std::strerror(errno));</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Created Single Process Instance Socket: {} Port: {}&quot;</span>, m_socket_fd, m_port);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660">   99</a></span>&#160;    constexpr <span class="keywordtype">bool</span> <a class="code" href="class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660">IsUnique</a>() const noexcept</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> (m_socket_fd != <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>) &amp;&amp; (m_rc == 0); <span class="comment">// valid socket and no binding errors.</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">  107</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">~SingleProcessInstance</a>() noexcept</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">if</span> (m_socket_fd != <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>)</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            closesocket(m_socket_fd);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            WSACleanup(); <span class="comment">// Shutdown WinSock</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            close(m_socket_fd);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Closed Single Process Instance Socket: {} Port: {}&quot;</span>, m_socket_fd, m_port);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> m_socket_fd{}; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    std::uint16_t m_port{}; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    std::int32_t m_rc{}; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;};</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// !ENIGMA_SINGLE_INSTANCE_H</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_single_process_instance.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_single_process_instance.html">SingleProcessInstance</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">   38</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance</a>(<span class="keyword">const</span> std::uint16_t port) noexcept</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        : m_socket_fd(<a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>),</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;          m_port(port),</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;          m_rc(-1) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <span class="comment">// Windows Initialize WinSock</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      WSAData data{};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keyword">const</span> <span class="keyword">auto</span> err = WSAStartup(MAKEWORD(2, 2), &amp;data);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordflow">if</span> (err != 0) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="comment">// https://docs.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartup</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">auto</span> err_reason = [err]() -&gt; <span class="keyword">const</span> <span class="keywordtype">char</span> * {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define CASE_RET(c, v) \</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">  case c:              \</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">    return v</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;          <span class="keywordflow">switch</span> (err) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSASYSNOTREADY, <span class="stringliteral">&quot;The underlying network subsystem is not ready for network communication.&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAVERNOTSUPPORTED, <span class="stringliteral">&quot;The version of Windows Sockets support requested is not provided by this particular Windows Sockets implementation.&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAEINPROGRESS, <span class="stringliteral">&quot;A blocking Windows Sockets 1.1 operation is in progress.&quot;</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAEPROCLIM, <span class="stringliteral">&quot;A limit on the number of tasks supported by the Windows Sockets implementation has been reached.&quot;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a>(WSAEFAULT, <span class="stringliteral">&quot;The lpWSAData parameter is not a valid pointer.&quot;</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;              <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;unknown winsock err&gt;&quot;</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;          }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#undef CASE_RET</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        };</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to start WinSock: #{}: {}&quot;</span>, err, err_reason());</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="comment">// Create socket</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      m_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">if</span> (m_socket_fd != <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="comment">// Bind to socket</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">struct </span>sockaddr_in name {};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        name.sin_family = AF_INET;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        name.sin_port = htons(port);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        name.sin_addr.s_addr = htonl(INADDR_ANY);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        m_rc = bind(m_socket_fd, (<span class="keyword">struct</span> sockaddr *) &amp;name, <span class="keyword">sizeof</span>(name));</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span> (m_rc &lt; 0) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;          <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to bind socket: {}&quot;</span>, std::strerror(errno));</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;          <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="_logger_8hpp.html#a9cef80543fd8b59cb62e4dfeb9c69fb3">ENIGMA_ERROR</a>(<span class="stringliteral">&quot;Failed to create socket: {}&quot;</span>, std::strerror(errno));</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Created Single Process Instance Socket: {} Port: {}&quot;</span>, m_socket_fd, m_port);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_single_process_instance.html#a5ec9b1db9cb652de19745cb4f3f385a3">   91</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_single_process_instance.html#a5ec9b1db9cb652de19745cb4f3f385a3">IsUnique</a>() const noexcept {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keywordflow">return</span> (m_socket_fd != <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>) &amp;&amp; (m_rc == 0); <span class="comment">// valid socket and no binding errors.</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">   98</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">~SingleProcessInstance</a>() noexcept {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordflow">if</span> (m_socket_fd != <a class="code" href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a>) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#if defined(ENIGMA_PLATFORM_WINDOWS)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        closesocket(m_socket_fd);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        WSACleanup(); <span class="comment">// Shutdown WinSock</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        close(m_socket_fd);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <a class="code" href="_logger_8hpp.html#aed860ca0e71faa9894162b6115ffc3ef">ENIGMA_INFO</a>(<span class="stringliteral">&quot;Closed Single Process Instance Socket: {} Port: {}&quot;</span>, m_socket_fd, m_port);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a> m_socket_fd{}; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    std::uint16_t m_port{}; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    std::int32_t m_rc{};    </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;};</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_SINGLE_INSTANCE_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_hashing_tool_8hpp_html_a696b9862f06e2091078a876f074fe9c1"><div class="ttname"><a href="_hashing_tool_8hpp.html#a696b9862f06e2091078a876f074fe9c1">CASE_RET</a></div><div class="ttdeci">#define CASE_RET(c)</div></div>
 <div class="ttc" id="a_logger_8hpp_html"><div class="ttname"><a href="_logger_8hpp.html">Logger.hpp</a></div></div>
@@ -213,17 +202,17 @@ $(document).ready(function(){initNavTree('_single_process_instance_8hpp_source.h
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00015">Macros.hpp:15</a></div></div>
 <div class="ttc" id="a_single_process_instance_8hpp_html_a14eec5e288844f80562846c4fe687dfc"><div class="ttname"><a href="_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc">socket_t</a></div><div class="ttdeci">std::int32_t socket_t</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00022">SingleProcessInstance.hpp:22</a></div></div>
 <div class="ttc" id="a_single_process_instance_8hpp_html_af08929b73edc1da09bc332b749b83c24"><div class="ttname"><a href="_single_process_instance_8hpp.html#af08929b73edc1da09bc332b749b83c24">M_INVALID_SOCKET</a></div><div class="ttdeci">constexpr socket_t M_INVALID_SOCKET</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00023">SingleProcessInstance.hpp:23</a></div></div>
-<div class="ttc" id="aclass_single_process_instance_html"><div class="ttname"><a href="class_single_process_instance.html">SingleProcessInstance</a></div><div class="ttdoc">Single process instance class.</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00033">SingleProcessInstance.hpp:34</a></div></div>
-<div class="ttc" id="aclass_single_process_instance_html_a1375b7a2e96d52d0b2361a8d1e4bf660"><div class="ttname"><a href="class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660">SingleProcessInstance::IsUnique</a></div><div class="ttdeci">constexpr bool IsUnique() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00099">SingleProcessInstance.hpp:99</a></div></div>
-<div class="ttc" id="aclass_single_process_instance_html_a49eef7354dc4d8eb604221b35b44b7f6"><div class="ttname"><a href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">SingleProcessInstance::~SingleProcessInstance</a></div><div class="ttdeci">virtual ~SingleProcessInstance() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00107">SingleProcessInstance.hpp:107</a></div></div>
-<div class="ttc" id="aclass_single_process_instance_html_abd3c0d816c8d41919db93001545cfb3f"><div class="ttname"><a href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance::SingleProcessInstance</a></div><div class="ttdeci">SingleProcessInstance(const std::uint16_t port) noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00039">SingleProcessInstance.hpp:39</a></div></div>
+<div class="ttc" id="aclass_single_process_instance_html"><div class="ttname"><a href="class_single_process_instance.html">SingleProcessInstance</a></div><div class="ttdoc">Single process instance class.</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00033">SingleProcessInstance.hpp:33</a></div></div>
+<div class="ttc" id="aclass_single_process_instance_html_a49eef7354dc4d8eb604221b35b44b7f6"><div class="ttname"><a href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">SingleProcessInstance::~SingleProcessInstance</a></div><div class="ttdeci">virtual ~SingleProcessInstance() noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00098">SingleProcessInstance.hpp:98</a></div></div>
+<div class="ttc" id="aclass_single_process_instance_html_a5ec9b1db9cb652de19745cb4f3f385a3"><div class="ttname"><a href="class_single_process_instance.html#a5ec9b1db9cb652de19745cb4f3f385a3">SingleProcessInstance::IsUnique</a></div><div class="ttdeci">bool IsUnique() const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00091">SingleProcessInstance.hpp:91</a></div></div>
+<div class="ttc" id="aclass_single_process_instance_html_abd3c0d816c8d41919db93001545cfb3f"><div class="ttname"><a href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance::SingleProcessInstance</a></div><div class="ttdeci">SingleProcessInstance(const std::uint16_t port) noexcept</div><div class="ttdef"><b>Definition:</b> <a href="_single_process_instance_8hpp_source.html#l00038">SingleProcessInstance.hpp:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_378992324979dd2b2ee7a83cc14dc244.html">Application</a></li><li class="navelem"><a class="el" href="_single_process_instance_8hpp.html">SingleProcessInstance.hpp</a></li>
-    <li class="footer">Generated on Fri Jul 5 2024 10:55:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jul 5 2024 15:02:17 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

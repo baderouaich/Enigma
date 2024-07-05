@@ -110,8 +110,8 @@ Inheritance diagram for SingleProcessInstance:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abd3c0d816c8d41919db93001545cfb3f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#abd3c0d816c8d41919db93001545cfb3f">SingleProcessInstance</a> (const std::uint16_t port) noexcept</td></tr>
 <tr class="separator:abd3c0d816c8d41919db93001545cfb3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1375b7a2e96d52d0b2361a8d1e4bf660"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#a1375b7a2e96d52d0b2361a8d1e4bf660">IsUnique</a> () const noexcept</td></tr>
-<tr class="separator:a1375b7a2e96d52d0b2361a8d1e4bf660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec9b1db9cb652de19745cb4f3f385a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#a5ec9b1db9cb652de19745cb4f3f385a3">IsUnique</a> () const noexcept</td></tr>
+<tr class="separator:a5ec9b1db9cb652de19745cb4f3f385a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49eef7354dc4d8eb604221b35b44b7f6"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_single_process_instance.html#a49eef7354dc4d8eb604221b35b44b7f6">~SingleProcessInstance</a> () noexcept</td></tr>
 <tr class="separator:a49eef7354dc4d8eb604221b35b44b7f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -151,7 +151,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_single_process_instance_8hpp_source.html#l00039">39</a> of file <a class="el" href="_single_process_instance_8hpp_source.html">SingleProcessInstance.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_single_process_instance_8hpp_source.html#l00038">38</a> of file <a class="el" href="_single_process_instance_8hpp_source.html">SingleProcessInstance.hpp</a>.</p>
 
 </div>
 </div>
@@ -179,13 +179,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Single process instace destructor Closes the socket and shuts down WinSock on windows </p>
 
-<p class="definition">Definition at line <a class="el" href="_single_process_instance_8hpp_source.html#l00107">107</a> of file <a class="el" href="_single_process_instance_8hpp_source.html">SingleProcessInstance.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_single_process_instance_8hpp_source.html#l00098">98</a> of file <a class="el" href="_single_process_instance_8hpp_source.html">SingleProcessInstance.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1375b7a2e96d52d0b2361a8d1e4bf660"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1375b7a2e96d52d0b2361a8d1e4bf660">&#9670;&nbsp;</a></span>IsUnique()</h2>
+<a id="a5ec9b1db9cb652de19745cb4f3f385a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ec9b1db9cb652de19745cb4f3f385a3">&#9670;&nbsp;</a></span>IsUnique()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +194,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool SingleProcessInstance::IsUnique </td>
+          <td class="memname">bool SingleProcessInstance::IsUnique </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -202,13 +202,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Returns true if this is a unique process instance (no other instance of this process is running) </p>
 
-<p class="definition">Definition at line <a class="el" href="_single_process_instance_8hpp_source.html#l00099">99</a> of file <a class="el" href="_single_process_instance_8hpp_source.html">SingleProcessInstance.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_single_process_instance_8hpp_source.html#l00091">91</a> of file <a class="el" href="_single_process_instance_8hpp_source.html">SingleProcessInstance.hpp</a>.</p>
 
 </div>
 </div>
@@ -221,7 +221,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_single_process_instance.html">SingleProcessInstance</a></li>
-    <li class="footer">Generated on Fri Jul 5 2024 10:55:57 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri Jul 5 2024 15:02:17 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

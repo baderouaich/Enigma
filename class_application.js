@@ -1,7 +1,7 @@
 var class_application =
 [
     [ "Application", "class_application.html#a2ea435bf2e62a9779488be8a08bf182f", null ],
-    [ "~Application", "class_application.html#a20573928a0d53fb96d929513bc5acde6", null ],
+    [ "~Application", "class_application.html#a444b0b6d9162b14d5262b81bd75586df", null ],
     [ "EndApplication", "class_application.html#ad88ded7fc048236d848d1a4c3e08af4d", null ],
     [ "Exit", "class_application.html#ab832d28b8d0f3a2ba1e182b022ef98c9", null ],
     [ "GetCPUInfo", "class_application.html#a9f7e61cc3f73709d358bbfb4460b9cac", null ],
