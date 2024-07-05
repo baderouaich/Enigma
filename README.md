@@ -65,7 +65,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 
 ## UI
 - Main Menu
-![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/ad83827a-f1f8-41f3-a9f3-be78a8f5623a)
+![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/72b69cab-af31-48d1-88b5-86914662c27c)
 - Straight forward
 ![Straightforward](https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d)
 - Save Encryptions to a local database (an SQLite3 database which you can export/import)
