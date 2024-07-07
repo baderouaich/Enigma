@@ -1,9 +1,19 @@
 #pragma once
-#if ENABLE
-#include <catch2/catch_all.hpp>
-#include <Crypto/RSA/RSA.hpp>
-#include <Utility/SizeUtils.hpp>
+#include <Algorithm/RSA/RSA.hpp>
 #include "TestsData.hpp"
+#include "Utility/DateTimeUtils.hpp"
+#include <iostream>
+#include "Utility/FinalAction.hpp"
+#include "Utility/HashUtils.hpp"
+#include <System/Dialogs/OpenFileDialog.hpp>
+#include <System/Dialogs/SaveFileDialog.hpp>
+#include <Utility/FileUtils.hpp>
+#include <Utility/Random.hpp>
+#include <Utility/SizeUtils.hpp>
+#include <catch2/catch_all.hpp>
+
+using namespace Enigma;
+using namespace Catch::Matchers;
 
 using namespace Enigma;
 using namespace Catch::Matchers;
@@ -41,31 +51,45 @@ TEST_CASE("RSA Encryption and Decryption")
 	{
 		ENIGMA_BEGIN_TIMER(t1);
 		// Make IDEA algorithm with intention to Encrypt and Decrypt
-		std::unique_ptr<RSA> rsa(new RSA(RSA::Intent::Encrypt | RSA::Intent::Decrypt));
-		rsa->SetKeySize(8192);
+		std::unique_ptr<RSA> encrypter(new RSA(RSA::Intent::Encrypt));
+    const std::size_t keySize = 1024*8;
+    RSA::RSASettings settings =
+      {
+        .keySize = keySize
+      };
+    encrypter->setSettings(std::move(settings));
 		// Buffer to encrypt
-		auto max_buffer_length = rsa->GetMaximumBufferSize();
-		std::cout << "maximum buffer length u can encrypt with keysize " << rsa->GetKeySize() << " is " << max_buffer_length << std::endl;
-		std::string buffer = Random::Str(max_buffer_length);
+		std::size_t max_buffer_length = encrypter->getMaximumBufferSize();
+		std::cout << "maximum buffer length u can encrypt with keysize " <<keySize << " is " << max_buffer_length << std::endl;
+		std::vector<byte> buffer = {'H','e','l','l','o'};
 
 		std::cout << "Encrypting... " << std::endl << std::endl;
-		std::string cipher = rsa->Encrypt("", buffer);
+    std::vector<byte> cipher = encrypter->Encrypt("", buffer);
 		auto s = ENIGMA_END_TIMER(t1, double, std::milli) / 1000.0;
 
-		std::string private_key = rsa->GetPrivateKey();
-		std::string public_key = rsa->GetPublicKey();
-		std::cout << "took: " << s << "s to encrypt with rsa key size " << rsa->GetKeySize() << std::endl << std::endl;
-		std::cout << "buffer: " << buffer << std::endl << std::endl;
-		std::cout << "cipher: " << cipher << std::endl << std::endl;
+		std::string private_key = encrypter->getPrivateKey();
+		std::string public_key = encrypter->getPublicKey();
+		std::cout << "took: " << s << "s to encrypt with rsa key size " << keySize << std::endl << std::endl;
+		std::cout << "buffer: " << std::string(buffer.begin(), buffer.end()) << std::endl << std::endl;
+		std::cout << "cipher: " << std::string(cipher.begin(), cipher.end()) << std::endl << std::endl;
 		std::cout << "private_key: \n" << private_key << std::endl << std::endl;
 		std::cout << "public_key: \n" << public_key << std::endl << std::endl;
 
 
+    std::unique_ptr<RSA> decrypter(new RSA(RSA::Intent::Decrypt));
+    RSA::RSASettings settings1 =
+      {
+        .keySize = keySize,
+        .privateKey = private_key
+      };
+    decrypter->setSettings(std::move(settings1));
 		std::cout << "\nDecrypting... " << std::endl << std::endl;
-		rsa->SetPrivateKey(private_key);
-		rsa->SetPublicKey(public_key);
-		std::string recovered = rsa->Decrypt("", cipher);
-		std::cout << "recovered: " << recovered << std::endl << std::endl;
+		std::cout << "Setting Priv key... " << std::endl;
+    decrypter->setPrivateKey(private_key);
+    std::cout << "Setting Pub key... " << std::endl;
+    decrypter->setPublicKey(public_key);
+		std::vector<byte> recovered = decrypter->Decrypt("", cipher);
+		std::cout << "recovered: " << std::string(recovered.begin(), recovered.end()) << std::endl << std::endl;
 
 		REQUIRE(buffer != cipher);
 		REQUIRE(buffer == recovered);
@@ -79,4 +103,3 @@ TEST_CASE("RSA Encryption and Decryption")
 #endif
 }
 
-#endif
