@@ -24,31 +24,18 @@ class XOREncryptionTool : public Tool {
 
   public:
     /** XOR Encrypts buffer string (with no padding)
-	*	@param password: Encryption key
-	*	@param buffer: Buffer string to encrypt
-	*	@returns cipher (aka encrypted buffer)
-	*/
-    std::string XOREncrypt(const std::string& password, const std::string& buffer) {
-      // 0 & 1 => 1
-      // 1 & 0 => 1
-      // 0 & 0 => 0
-      // 1 & 1 => 0
-      std::string cipher = buffer;
-      for (std::size_t i = 0; i < buffer.size(); i++) // loops and scrambles bits in the string
-        cipher[i] = buffer[i] ^ password[i % password.size()];
-      return cipher;
-    }
+    *	@param password: Encryption key
+    *	@param buffer: Buffer string to encrypt
+    *	@returns cipher (aka encrypted buffer)
+    */
+    std::string XOREncrypt(const std::string& password, const std::string& buffer);
 
     /** XOR Decrypts cipher string
-	*	@param password: Encryption key
-	*	@param cipher: Encrypted buffer (aka cipher)
-	*	@returns recovered buffer
-	*/
-    std::string XORDecrypt(const std::string& password, const std::string& cipher) {
-      // Just redo XOR operation to recover buffer
-      return XOREncrypt(password, cipher);
-    }
-
+    *	@param password: Encryption key
+    *	@param cipher: Encrypted buffer (aka cipher)
+    *	@returns recovered buffer
+    */
+    std::string XORDecrypt(const std::string& password, const std::string& cipher);
 
   private:
     Algorithm::Intent m_intent; // Are we Encryption or Decrypting?

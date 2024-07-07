@@ -167,7 +167,7 @@ std::unique_ptr<CipherChunk> Database::getCipherChunk(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT idc, ide, offset, size, bytes FROM CipherChunks WHERE ide = " << ide;
+    sql << "SELECT idc, ide, offset, size, bytes FROM " << CipherChunk::TABLE_NAME << " WHERE ide = " << ide;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -254,7 +254,7 @@ void Database::getCipherChunks(const std::int64_t ide, const std::function<bool(
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT idc, ide, offset, size, bytes FROM CipherChunks WHERE ide = " << ide << " ORDER BY offset ASC"; // NOTE: order by offset 0 -> MAX to get chunks respectively in order
+    sql << "SELECT idc, ide, offset, size, bytes FROM " << CipherChunk::TABLE_NAME << " WHERE ide = " << ide << " ORDER BY offset ASC"; // NOTE: order by offset 0 -> MAX to get chunks respectively in order
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif

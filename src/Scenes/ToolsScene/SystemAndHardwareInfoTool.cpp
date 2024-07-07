@@ -167,7 +167,9 @@ void SystemAndHardwareInfoTool::OnDraw(Scene *) {
 #define GPU_INFO_MINIMAL 1
 #if GPU_INFO_MINIMAL
           // if infoware doesn't provide OpenGL implementation yet, make a minimal approach until then.
-          ImGui::TextColored(Constants::Colors::ORANGE, ("GPUs Information not yet available, here are some minimal info about your GPU until this feature is fully implemented"));
+          ImGui::TextColored(Constants::Colors::ORANGE, ("GPUs Information not available yet,\n"
+                                                         "here are some minimal info about your GPU\n"
+                                                         "until this feature is fully implemented"));
           static const GLubyte *vendor = glGetString(GL_VENDOR);
           static const GLubyte *renderer = glGetString(GL_RENDERER);
           static const GLubyte *version = glGetString(GL_VERSION);

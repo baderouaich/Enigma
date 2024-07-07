@@ -348,11 +348,10 @@ void MyEncryptionsScene::OnImGuiDraw() {
       ImGui::PushFont(font_montserrat_medium_18);                          // text font
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
       {
-
         const char *text = m_isSearching ? ("No Encryptions found") : ("No Encryptions saved yet");
         static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
         ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
-        ImGui::Text(text);
+        ImGui::Text("%s", text);
       }
       ImGui::PopStyleColor(1);
       ImGui::PopFont();

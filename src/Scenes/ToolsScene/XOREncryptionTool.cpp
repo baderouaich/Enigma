@@ -38,12 +38,12 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
 
 
       // Opearation Radio buttons
-      ImGui::Text("%s:", ("Operation"));
-      if (ImGui::RadioButton(("Encrypt"), m_intent == Algorithm::Intent::Encrypt)) {
+      ImGui::Text("%s:", "Operation");
+      if (ImGui::RadioButton("Encrypt", m_intent == Algorithm::Intent::Encrypt)) {
         m_intent = Algorithm::Intent::Encrypt;
       }
       ImGui::SameLine();
-      if (ImGui::RadioButton(("Decrypt"), m_intent == Algorithm::Intent::Decrypt)) {
+      if (ImGui::RadioButton("Decrypt", m_intent == Algorithm::Intent::Decrypt)) {
         m_intent = Algorithm::Intent::Decrypt;
       }
 
@@ -198,4 +198,18 @@ void XOREncryptionTool::OnDecryptButtonPressed() {
   }
 }
 
+std::string XOREncryptionTool::XOREncrypt(const std::string& password, const std::string& buffer) {
+  // 0 & 1 => 1
+  // 1 & 0 => 1
+  // 0 & 0 => 0
+  // 1 & 1 => 0
+  std::string cipher = buffer;
+  for (std::size_t i = 0; i < buffer.size(); i++) // loops and scrambles bits in the string
+    cipher[i] = buffer[i] ^ password[i % password.size()];
+  return cipher;
+}
+std::string XOREncryptionTool::XORDecrypt(const std::string& password, const std::string& cipher) {
+  // Just redo XOR operation to recover buffer
+  return XOREncrypt(password, cipher);
+}
 NS_ENIGMA_END
