@@ -42,6 +42,9 @@ FetchContent_Declare(infoware
   GIT_TAG "v0.6.0"
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
+if (UNIX AND NOT APPLE)
+  set(INFOWARE_USE_X11 ON CACHE BOOL "" FORCE)
+endif ()
 FetchContent_MakeAvailable(infoware)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/inih EXCLUDE_FROM_ALL)
