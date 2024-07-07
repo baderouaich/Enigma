@@ -136,6 +136,7 @@ void Application::InitImGuiFonts() {
   m_fonts["Ubuntu-Regular-45"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 45.0f, &fontConfig);
   m_fonts["Ubuntu-Regular-30"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 30.0f, &fontConfig);
   m_fonts["Ubuntu-Regular-20"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 20.0f, &fontConfig);
+  m_fonts["Ubuntu-Regular-18"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 18.0f, &fontConfig);
 
   m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 45.0f, &fontConfig);
   m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 20.0f, &fontConfig);
