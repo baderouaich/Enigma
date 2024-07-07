@@ -39,7 +39,7 @@ class TripleDES;
 class Blowfish;
 class IDEA;
 class ChaCha20Poly1305;
-//class RSA;
+class RSA;
 
 /**
 *	@brief Algorithm abstract class
@@ -74,7 +74,7 @@ class Algorithm {
       Blowfish,         // Blowfish-EAX
       IDEA,             // IDEA-EAX
       ChaCha20Poly1305, // ChaCha20Poly1305
-      //RSA,							// RSA N/A yet
+      RSA,							// RSA N/A yet
 
       ENIGMA_ENUM_DECLARE_BEGIN_END(AES)
     };

@@ -7,6 +7,7 @@
 #include "IDEA/IDEA.hpp"
 #include "TripleDES/TripleDES.hpp"
 #include "Twofish/Twofish.hpp"
+#include "RSA/RSA.hpp"
 //#include "RSA/RSA.hpp"
 #include <Utility/Base64.hpp>
 #include <Utility/FileUtils.hpp>
@@ -18,7 +19,7 @@ Algorithm::Algorithm(Type type, Intent intent) noexcept
     : m_type(type),
       m_intent(intent) {
   // we only need random seeder to generate random iv when encrypting
-  if (static_cast<bool>(intent & Intent::Encrypt) && !m_auto_seeded_random_pool)
+  if ((static_cast<bool>(intent & Intent::Encrypt) || m_type == Type::RSA) && !m_auto_seeded_random_pool )
     m_auto_seeded_random_pool = std::make_unique<CryptoPP::AutoSeededRandomPool>();
 }
 
@@ -44,8 +45,8 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const std::string& algorith
     return std::make_unique<IDEA>(intent);
   else if (AlgoIn({"blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax"}))
     return std::make_unique<Blowfish>(intent);
-  //else if (AlgoIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
-  //	return std::make_unique<RSA>(intent);
+  else if (AlgoIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
+  	return std::make_unique<RSA>(intent);
   else
     throw std::runtime_error("Unsupported algorithm: " + algorithm_name);
 }
@@ -132,7 +133,7 @@ std::string Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept {
     CASE_RET(Blowfish);
     CASE_RET(IDEA);
     CASE_RET(ChaCha20Poly1305);
-      //	CASE_RET(RSA);
+    CASE_RET(RSA);
     default:
       return "<unknown algorithm>";
   }
