@@ -26,8 +26,56 @@ std::vector<byte> RSA::Encrypt(const std::string& password, const byte *buffer, 
   ENIGMA_ASSERT_OR_THROW(m_private_key, "RSA Private key is not initialized properly");
   ENIGMA_ASSERT_OR_THROW(password.empty(), "RSA Algorithm does not need a password");
   ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "AutoSeededRandomPool is not initialized properly");
-  //ENIGMA_ASSERT_OR_THROW(m_rsa_encryptor->FixedMaxPlaintextLength() <= buffSize, "Buffer size exceeds RSA fixed max plain text length");
 
+  Meta::EnigmaFooter footer{};
+  footer.magic = Meta::ENIGMA_MAGIC;
+  footer.version = ENIGMA_VERSION_MAJOR * 100'000 + ENIGMA_VERSION_MINOR * 1000 + ENIGMA_VERSION_PATCH;
+  footer.algo = this->GetType();
+  footer.iv = {}; // no iv
+  footer.hash = HashUtils::bytes<CryptoPP::SHA256>(buffer, buffSize);
+  std::vector<byte> extra(sizeof(m_settings->keySize), '\000');
+  std::memcpy(extra.data(), &m_settings->keySize, sizeof(m_settings->keySize));
+  footer.extra = std::move(extra); // remember keysize
+
+
+  const std::size_t maxBufferSize = m_rsa_encryptor->FixedMaxPlaintextLength();
+  std::size_t offset = 0;
+
+  std::vector<byte> out;
+  while (offset < buffSize) {
+    std::size_t bufferChunkSize = std::min(maxBufferSize, buffSize - offset);
+    const byte* bufferChunk = buffer + offset;
+
+    // Encrypt chunk
+    std::vector<byte> cipherChunk;
+    const CryptoPP::ArraySource vs(
+      bufferChunk,
+      bufferChunkSize,
+      true,
+      new CryptoPP::PK_EncryptorFilter(
+        *m_auto_seeded_random_pool,
+        *m_rsa_encryptor,
+        new CryptoPP::VectorSink(cipherChunk)));
+
+    // Append cipher chunk size
+    const std::size_t cipherChunkSize = cipherChunk.size();
+    std::vector<byte> cipherChunkSizeBytes(sizeof(cipherChunkSize), '\000');
+    std::memcpy(cipherChunkSizeBytes.data(), &cipherChunkSize, sizeof(cipherChunkSize));
+    out.insert(out.end(), cipherChunkSizeBytes.begin(), cipherChunkSizeBytes.end());
+    // Append cipher chunk
+    out.insert(out.end(), cipherChunk.begin(), cipherChunk.end());
+
+    // Advance to next chunk
+    offset += bufferChunkSize;
+  }
+
+  // Append EnigmaFooter
+  std::vector<byte> footerBytes = footer.toBytes();
+  out.insert(out.end(), footerBytes.begin(), footerBytes.end());
+  return out;
+
+#if SINGLE_CHUNK // This old implementation requires the input buffer to be less or equal to the FixedMaxPlaintextLength(),
+                 // Which means we'l have to limit user input.
   Meta::EnigmaFooter footer{};
   footer.magic = Meta::ENIGMA_MAGIC;
   footer.version = ENIGMA_VERSION_MAJOR * 100'000 + ENIGMA_VERSION_MINOR * 1000 + ENIGMA_VERSION_PATCH;
@@ -55,6 +103,7 @@ std::vector<byte> RSA::Encrypt(const std::string& password, const byte *buffer, 
   std::vector<byte> footerBytes = footer.toBytes();
   out.insert(out.end(), footerBytes.begin(), footerBytes.end());
   return out;
+#endif
 }
 
 std::vector<byte> RSA::Encrypt(const std::string& password, const std::vector<byte>& buffer) {
@@ -64,31 +113,50 @@ std::vector<byte> RSA::Encrypt(const std::string& password, const std::vector<by
 std::vector<byte> RSA::Decrypt(const std::string& password, const byte *cipher, const std::size_t cipherSize) {
   ENIGMA_ASSERT_OR_THROW(m_settings, "RSA settings was not set");
   ENIGMA_ASSERT_OR_THROW(Meta::isEnigmaCipher(cipher, cipherSize), "Given cipher is malformed or was not encrypted with Enigma");
-  ENIGMA_ASSERT_OR_THROW(m_public_key, "RSA Public key is not initialized properly");
-  ENIGMA_ASSERT_OR_THROW(m_private_key, "RSA Private key is not initialized properly");
+  ENIGMA_ASSERT_OR_THROW(m_private_key, "RSA Private key is not initialized properly"); // We only need priv key to decrypt
   ENIGMA_ASSERT_OR_THROW(password.empty(), "RSA Algorithm does not need a password");
   ENIGMA_ASSERT_OR_THROW(m_rsa_decryptor, "RSA Decrypter is not initialized properly");
   ENIGMA_ASSERT_OR_THROW(m_auto_seeded_random_pool, "AutoSeededRandomPool is not initialized properly");
 
   // Extract footer
   Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromBytes(cipher, cipherSize);
+//  ENIGMA_ASSERT_OR_THROW(footer.extra.size() == sizeof(RSASettings::keySize), "Could not read key size from EnigmaFooter::extra");
+//  std::size_t keySize{};
+//  std::memcpy((void*)&keySize, footer.extra.data(), footer.extra.size());
+//
+//  // Calculate fixed max buffer size used in encryption using key size
+//  std::size_t maxBufferSize = RSA::getMaximumBufferSizeFromKeySize(keySize);
 
+  // Process chunks...
+  // Note, each chunk starts with its size of bytes
+  std::vector<byte> out;
+  std::size_t offset = 0;
+  while(offset < cipherSize - footer.sizeInBytes())
+  {
+    std::size_t cipherChunkSize{};
+    std::memcpy(&cipherChunkSize, cipher + offset,  sizeof(cipherChunkSize));
+    const byte* cipherChunk = cipher + sizeof(cipherChunkSize) + offset;
 
-  // Decrypt
-  std::vector<byte> decrypted;
-  [[maybe_unused]] const auto ss = CryptoPP::ArraySource(
-    cipher,
-    cipherSize - footer.sizeInBytes(),
-    true,
-    new CryptoPP::PK_DecryptorFilter(
-      *m_auto_seeded_random_pool,
-      *m_rsa_decryptor,
-      new CryptoPP::VectorSink(decrypted)
-        ));
+    // Decrypt cipher chunk
+    std::vector<byte> decrypted;
+    [[maybe_unused]] const auto ss = CryptoPP::ArraySource(
+      cipherChunk,
+      cipherChunkSize,
+      true,
+      new CryptoPP::PK_DecryptorFilter(
+        *m_auto_seeded_random_pool,
+        *m_rsa_decryptor,
+        new CryptoPP::VectorSink(decrypted)
+          ));
 
-  // Ensure decryption is successful
-  ENIGMA_ASSERT_OR_THROW(HashUtils::bytes<CryptoPP::SHA256>(decrypted) == footer.hash, "Decryption failure. Original SHA256 hash of buffer does not match decrypted hash");
-  return decrypted;
+    // Append buffer
+    out.insert(out.end(), decrypted.begin(), decrypted.end());
+
+    // Advance to next chunk
+    offset += sizeof(cipherChunkSize) + cipherChunkSize;
+  }
+
+  return out;
 }
 
 std::vector<byte> RSA::Decrypt(const std::string& password, const std::vector<byte>& cipher) {

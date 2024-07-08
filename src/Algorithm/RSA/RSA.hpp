@@ -67,7 +67,7 @@ class RSA : public Algorithm {
     void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
 
 
-  public:
+  private:
 
     void setPrivateKey(const std::string& privateKey) {
       std::string privateKeyBase64 = privateKey;
@@ -104,6 +104,7 @@ class RSA : public Algorithm {
       m_public_key->Load(as);
     }
 
+  public:
     std::string getPrivateKey() const {
       std::string derPrivateKey;
       CryptoPP::StringSink derSink(derPrivateKey);
@@ -128,6 +129,7 @@ class RSA : public Algorithm {
       return BEGIN_RSA_PUBLIC_KEY_HEADER + base64PublicKey + END_RSA_PUBLIC_KEY_FOOTER;
     }
 
+  public:
     std::size_t getMaximumBufferSize() const {
       ENIGMA_ASSERT_OR_THROW(m_rsa_encryptor, "RSA encryptor was not initialized properly");
       return m_rsa_encryptor->FixedMaxPlaintextLength();
@@ -135,6 +137,9 @@ class RSA : public Algorithm {
 //    std::size_t getKeySize() const {
 //      ENIGMA_ASSERT_OR_THROW(m_params, "RSA params was not initialized properly");
 //    }
+    static constexpr std::size_t getMaximumBufferSizeFromKeySize(const std::size_t keySize) {
+      return keySize / 8 - 2 * static_cast<std::size_t>(CryptoPP::SHA256::DIGESTSIZE) - 2;
+    }
 
   private:
     std::unique_ptr<CryptoPP::RSAES<CryptoPP::OAEP<CryptoPP::SHA256>>::Encryptor> m_rsa_encryptor; /**< RSA encryptor */
