@@ -137,14 +137,14 @@ void EncryptTextScene::OnImGuiDraw() {
 
     // RSA Key sizes
     ImGui::PushFont(font_ubuntu_regular_18);
-    if(m_type == Algorithm::Type::RSA) {
+    if (m_type == Algorithm::Type::RSA) {
       ImGui::Text("%s:", ("Key Size"));
       ImGui::NewLine();
-      for(const auto& [keySize, description] : m_rsa_keysizes) {
+      for (const auto& [keySize, description]: m_rsa_keysizes) {
         inline_dummy(1.0f, 0.0f);
         ImGui::SameLine();
         const std::string keySizeStr = std::to_string(keySize);
-        if(ImGui::RadioButton(keySizeStr.c_str(), m_selected_rsa_keySize == keySize)) {
+        if (ImGui::RadioButton(keySizeStr.c_str(), m_selected_rsa_keySize == keySize)) {
           m_selected_rsa_keySize = keySize;
         }
         if (ImGui::IsItemHovered())
@@ -186,7 +186,6 @@ void EncryptTextScene::OnImGuiDraw() {
       // Input text
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 5);
       ImGuiWidgets::InputTextMultiline("##text1", &m_text, input_text_size);
-
       // Bytes count
       ImGui::PushFont(font_montserrat_medium_12);
       ImGui::Text("%s", SizeUtils::FriendlySize(m_text.size()).c_str());
@@ -198,53 +197,49 @@ void EncryptTextScene::OnImGuiDraw() {
     ImGui::Separator();
     spacing(3);
 
-    // Encryption Password & Confirm password
-    if(m_type == Algorithm::Type::RSA)
-    {
+    // Encryption Password & Confirm password (Private & Public keys for RSA)
+    if (m_type == Algorithm::Type::RSA) {
       ImGui::PushFont(font_ubuntu_regular_18);
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 7);
-      if(!m_rsa_private_key.empty())
-      {
+      if (!m_rsa_private_key.empty()) {
         ImGui::Text("%s:", "Private Key");
         ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
         ImGui::PushID("CopyPrivateKeyButton");
-        if(ImGuiWidgets::Button("Copy")) {
-            Clipboard::Set(m_rsa_private_key);
+        if (ImGuiWidgets::Button("Copy")) {
+          Clipboard::Set(m_rsa_private_key);
         }
         ImGui::PopID();
         ImGui::SameLine();
         ImGui::PushID("SavePrivateKeyToFileButton");
-        if(ImGuiWidgets::Button("Save to file...")) {
-            SaveFileDialog sfd{"Save Private Key", ".", true, {"*.pem *.privkey", "All Files", "*"}};
-            if(std::string filename = sfd.Show(); !filename.empty()) {
-              FileUtils::Write(filename, std::vector<byte>(m_rsa_private_key.begin(), m_rsa_private_key.end()));
-            }
+        if (ImGuiWidgets::Button("Save to file...")) {
+          SaveFileDialog sfd{"Save Private Key", ".", true, {"*.pem *.privkey", "All Files", "*"}};
+          if (std::string filename = sfd.Show(); !filename.empty()) {
+            FileUtils::Write(filename, std::vector<byte>(m_rsa_private_key.begin(), m_rsa_private_key.end()));
+          }
         }
         ImGui::PopID();
       }
       spacing(2);
-      if(!m_rsa_public_key.empty())
-      {
+      if (!m_rsa_public_key.empty()) {
         ImGui::Text("%s:", "Public Key");
         ImGuiWidgets::InputTextMultiline("##public_key", &m_rsa_public_key, input_text_size);
         ImGui::PushID("CopyPublicKeyButton");
-        if(ImGuiWidgets::Button("Copy")) {
+        if (ImGuiWidgets::Button("Copy")) {
           Clipboard::Set(m_rsa_public_key);
         }
         ImGui::PopID();
         ImGui::SameLine();
         ImGui::PushID("SavePublicKeyToFileButton");
-        if(ImGuiWidgets::Button("Save to file...")) {
+        if (ImGuiWidgets::Button("Save to file...")) {
           SaveFileDialog sfd{"Save Public Key", ".", true, {"*.pem *.pubkey", "All Files", "*"}};
-          if(std::string filename = sfd.Show(); !filename.empty()) {
+          if (std::string filename = sfd.Show(); !filename.empty()) {
             FileUtils::Write(filename, std::vector<byte>(m_rsa_public_key.begin(), m_rsa_public_key.end()));
           }
         }
         ImGui::PopID();
       }
       ImGui::PopFont();
-    }
-    else // RSA Doesnt need password
+    } else // RSA Doesnt need password
     {
       ImGui::PushFont(font_montserrat_medium_20);
       {
@@ -381,10 +376,10 @@ void EncryptTextScene::OnEncryptButtonPressed() {
     const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
     ENIGMA_ASSERT_OR_THROW(algorithm, ("Failed to create algorithm from type"));
     // RSA SETTINGS
-    if(algorithm->GetType() == Algorithm::Type::RSA) {
+    if (algorithm->GetType() == Algorithm::Type::RSA) {
       RSA::RSASettings settings{};
       settings.keySize = m_selected_rsa_keySize;
-      dynamic_cast<RSA*>(algorithm.get())->setSettings(std::move(settings));
+      dynamic_cast<RSA *>(algorithm.get())->setSettings(std::move(settings));
     }
 
     // Encrypt text
@@ -399,9 +394,9 @@ void EncryptTextScene::OnEncryptButtonPressed() {
     ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), ("Failed to encode cipher text to Base64"));
 
     // TODO put public & private keys to text fields with copy button & save button
-    if(m_type == Algorithm::Type::RSA){
-      m_rsa_private_key = dynamic_cast<RSA*>(algorithm.get())->getPrivateKey();
-      m_rsa_public_key = dynamic_cast<RSA*>(algorithm.get())->getPublicKey();
+    if (m_type == Algorithm::Type::RSA) {
+      m_rsa_private_key = dynamic_cast<RSA *>(algorithm.get())->getPrivateKey();
+      m_rsa_public_key = dynamic_cast<RSA *>(algorithm.get())->getPublicKey();
     }
 
     // Save to database

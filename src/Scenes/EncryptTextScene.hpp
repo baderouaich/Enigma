@@ -36,8 +36,6 @@ class EncryptTextScene : public Enigma::Scene {
     std::string m_rsa_private_key;
     std::string m_rsa_public_key;
     inline static const std::map<std::size_t, std::string_view> m_rsa_keysizes = {
-      {512, "Insecure, easily broken."},
-      {1024, "Insecure, not recommended for any new applications."},
       {2048, "Secure for use at least until 2030."},
       {3072, "Secure for use beyond 2030."},
       {4096, "Secure for longer-term security needs."},
