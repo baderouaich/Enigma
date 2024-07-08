@@ -13,11 +13,11 @@ class Random final {
 
   public:
     /**
-	*	@brief Generates a random real between a range
-	*	@param min: minimum value of range (included in range)
-	*	@param max: maximum value of range (included in range)
-	*	@return Random real between min and max
-	*/
+    *	@brief Generates a random real between a range
+    *	@param min: minimum value of range (included in range)
+    *	@param max: maximum value of range (included in range)
+    *	@return Random real between min and max
+    */
     template<typename T>
     static typename std::enable_if<std::is_floating_point<T>::value, T>::type
     Real(const T min, const T max) {
@@ -27,11 +27,11 @@ class Random final {
     }
 
     /**
-	*	@brief Generates a random integer between a range
-	*	@param min: minimum value of range (included in range)
-	*	@param max: maximum value of range (included in range)
-	*	@return Random integer between min and max
-	*/
+    *	@brief Generates a random integer between a range
+    *	@param min: minimum value of range (included in range)
+    *	@param max: maximum value of range (included in range)
+    *	@return Random integer between min and max
+    */
     template<typename T>
     static typename std::enable_if<std::is_integral<T>::value && !std::is_same<T, bool>::value, T>::type
     Int(const T min, const T max) {
@@ -41,10 +41,10 @@ class Random final {
     }
 
     /**
-	*	@brief Generates a random boolean value
-	*	@param p: Probability of true (50% by default)
-	*	@return Returns a Random bool value, either 'true' or 'false'
-	*/
+    *	@brief Generates a random boolean value
+    *	@param p: Probability of true (50% by default)
+    *	@return Returns a Random bool value, either 'true' or 'false'
+    */
     static bool Bool(const double p = 0.5) {
       std::bernoulli_distribution dist(p);
       return !!dist(m_engine);
@@ -80,6 +80,18 @@ class Random final {
         }
       }
       return str;
+    }
+
+    /** @brief Generates a random vector of bytes
+    *	@param length: length of the random string to generate
+    *	@returns a random std::string a-zA-Z0-9
+    */
+    static std::vector<byte> Bytes(const std::size_t length) noexcept {
+      using random_bytes_engine = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, byte>;
+      random_bytes_engine rbe{};
+      std::vector<byte> bytes(length);
+      std::generate(bytes.begin(), bytes.end(), std::ref(rbe));
+      return bytes;
     }
 
 
