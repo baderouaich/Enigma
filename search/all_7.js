@@ -36,7 +36,7 @@ var searchData=
   ['getloadingtext_501',['GetLoadingText',['../class_loading_scene.html#ad007769a38fd4647ec66fd72db0b38dc',1,'LoadingScene']]],
   ['getlogger_502',['getLogger',['../class_logger.html#af21a154f28fc9f7cf4f890082b6deed0',1,'Logger']]],
   ['getmaximumbuffersize_503',['getMaximumBufferSize',['../class_r_s_a.html#a34205bb7600a0579045099a8fc74242d',1,'RSA']]],
-  ['getmaximumbuffersizefromkeysize_504',['getMaximumBufferSizeFromKeySize',['../class_r_s_a.html#a663542e978269e4a1ba4ca2702a9907f',1,'RSA']]],
+  ['getmaximumbuffersizefromkeysize_504',['getMaximumBufferSizeFromKeySize',['../class_r_s_a.html#af342991ba12be033f3d24cd5886f0760',1,'RSA']]],
   ['getmaximumsize_505',['GetMaximumSize',['../class_window.html#a74407f78a17faf6ff03f930df6549a9d',1,'Window']]],
   ['getminimumsize_506',['GetMinimumSize',['../class_window.html#a9a0688a6862d3b52b247cfd88b4de61c',1,'Window']]],
   ['getmode_507',['GetMode',['../class_cursor.html#a642a6cd82884444a85db3e74ac722db6',1,'Cursor']]],

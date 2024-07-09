@@ -10,7 +10,7 @@ var class_r_s_a =
     [ "Encrypt", "class_r_s_a.html#a75be936f7bfaba97862153941c5239f6", null ],
     [ "Encrypt", "class_r_s_a.html#a403e818b63cec8ae18ad1c71654278dd", null ],
     [ "getMaximumBufferSize", "class_r_s_a.html#a34205bb7600a0579045099a8fc74242d", null ],
-    [ "getMaximumBufferSizeFromKeySize", "class_r_s_a.html#a663542e978269e4a1ba4ca2702a9907f", null ],
+    [ "getMaximumBufferSizeFromKeySize", "class_r_s_a.html#af342991ba12be033f3d24cd5886f0760", null ],
     [ "getPrivateKey", "class_r_s_a.html#af6fefa1a03f7303b24173c779b42272c", null ],
     [ "getPublicKey", "class_r_s_a.html#aad11dff6dce00e348a717f7a85ed5e3f", null ],
     [ "setSettings", "class_r_s_a.html#ae3da458c3d313f31bcec395f7e34eef0", null ],
