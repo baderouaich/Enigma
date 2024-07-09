@@ -78,7 +78,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 git clone https://github.com/baderouaich/Enigma
 cd Enigma
 mkdir build && cd build
-cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release # or -G"Visual Studio 17 2022" to use the MSVC compiler
 make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows
 ```
 - No `sudo` or `Administrator` privileges are needed for installation.

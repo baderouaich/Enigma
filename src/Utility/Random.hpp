@@ -88,10 +88,18 @@ class Random final {
     *	@returns a random std::string a-zA-Z0-9
     */
     static std::vector<byte> Bytes(const std::size_t length) noexcept {
-      using random_bytes_engine = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, byte>;
-      static random_bytes_engine rbe{m_engine};
       std::vector<byte> bytes(length);
-      std::generate(bytes.begin(), bytes.end(), std::ref(rbe));
+#ifndef _MSC_VER
+      using random_bytes_engine = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, byte>;
+      static random_bytes_engine gen{m_engine};
+      std::generate(bytes.begin(), bytes.end(), std::ref(gen));
+#else
+      // MSVC's std::independent_bits_engine doesn't take std::uint8_t
+      std::uniform_int_distribution<std::uint16_t> dist{static_cast<std::uint16_t>(std::numeric_limits<byte>::min()), static_cast<std::uint16_t>(std::numeric_limits<byte>::max())};
+      std::generate(bytes.begin(), bytes.end(), [&]() -> byte {
+        return dist(m_engine);
+      });
+#endif
       return bytes;
     }
 
