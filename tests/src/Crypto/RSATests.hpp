@@ -209,8 +209,8 @@ TEST_CASE("Decrypt lorem_ipsum_RSA.txt.enigma") {
     RSA rsa{RSA::Intent::Decrypt};
     RSA::RSASettings settings{};
     settings.keySize = 2048;
-    //settings.privateKeyFilename = privateKeyFilename; // alternative
-    REQUIRE(FileUtils::ReadString(privateKeyFilename, *settings.privateKey));
+    settings.privateKeyFilename = privateKeyFilename;
+//    REQUIRE(FileUtils::ReadString(privateKeyFilename, *settings.privateKey)); // alternative
     rsa.setSettings(std::move(settings));
     rsa.Decrypt({}, encryptedFilename, decryptedFilename);
 
