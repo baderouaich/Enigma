@@ -365,7 +365,7 @@ std::size_t RSA::getMaximumBufferSize() const {
   ENIGMA_ASSERT_OR_THROW(m_rsa_encryptor, "RSA encryptor was not initialized properly");
   return m_rsa_encryptor->FixedMaxPlaintextLength();
 }
-constexpr std::size_t RSA::getMaximumBufferSizeFromKeySize(const std::size_t keySize) {
+std::size_t RSA::getMaximumBufferSizeFromKeySize(const std::size_t keySize) {
   return keySize / 8 - 2 * static_cast<std::size_t>(CryptoPP::SHA256::DIGESTSIZE) - 2;
 }
 

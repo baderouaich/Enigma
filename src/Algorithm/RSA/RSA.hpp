@@ -93,7 +93,7 @@ class RSA : public Algorithm {
 
   public:
     std::size_t getMaximumBufferSize() const;
-    static constexpr std::size_t getMaximumBufferSizeFromKeySize(const std::size_t keySize);
+    static std::size_t getMaximumBufferSizeFromKeySize(const std::size_t keySize);
 
   private:
     std::unique_ptr<CryptoPP::RSAES<CryptoPP::OAEP<CryptoPP::SHA256>>::Encryptor> m_rsa_encryptor; /**< RSA encryptor */
