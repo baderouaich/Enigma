@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['width_1627',['width',['../struct_window_settings.html#a442d440ad3c89e852a493b7b1ed83369',1,'WindowSettings']]],
-  ['window_5fconfig_5ffile_5fpath_1628',['WINDOW_CONFIG_FILE_PATH',['../namespace_enigma_1_1_constants_1_1_algorithm_1_1_config.html#a2437d3731a5eb42fe0ad7ea9daab8266',1,'Enigma::Constants::Algorithm::Config']]]
+  ['version_1663',['version',['../struct_meta_1_1_enigma_footer.html#a95b4c23e88442f912d0eaefe130c1b57',1,'Meta::EnigmaFooter::version()'],['../struct_check_for_updates_1_1_latest_release_info.html#a307da2765ab052a895a71593c6677836',1,'CheckForUpdates::LatestReleaseInfo::version()']]]
 ];

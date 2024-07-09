@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "Enigma", "index.html", [
-    [ "3.0.0", "md__c_h_a_n_g_e_l_o_g.html", null ],
+    [ "3.1.0", "md__c_h_a_n_g_e_l_o_g.html", null ],
     [ "LICENSE", "md__l_i_c_e_n_s_e.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -69,10 +69,10 @@ var NAVTREEINDEX =
 "_a_e_s_8hpp.html",
 "_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a4bd45bf12e08f60072b6962e9f7794c2",
 "_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2",
-"class_cha_cha20_poly1305.html#ac64cf79fa85a84f6537727eccb24e540",
-"class_my_encryptions_scene.html#a0ab849564132d9bdd4d65a710c7ec122",
-"dir_9310e8a2f06de41a230334e80b16bf02.html",
-"struct_window_settings.html#a921d2575c6e7aecd9ab365c7d173f167"
+"class_cha_cha20_poly1305.html#a8ae6d023d40a265fa69cd93da5dbf6d7",
+"class_mouse_wheel_event.html#a5e17e8500b2ce75068268a4daa29da5a",
+"dir_022f6552a590871b5e744fe7964d6696.html",
+"struct_meta_1_1_enigma_footer.html#a4f3cfcb154ca2ba7daf39bf4086aec08"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

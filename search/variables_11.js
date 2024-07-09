@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_1626',['version',['../struct_meta_1_1_enigma_footer.html#a95b4c23e88442f912d0eaefe130c1b57',1,'Meta::EnigmaFooter::version()'],['../struct_check_for_updates_1_1_latest_release_info.html#a307da2765ab052a895a71593c6677836',1,'CheckForUpdates::LatestReleaseInfo::version()']]]
+  ['ubuntu_5ffont_5fpath_1662',['UBUNTU_FONT_PATH',['../namespace_enigma_1_1_constants_1_1_resources_1_1_fonts.html#a5c388104257f378d2f4a52c682716fa7',1,'Enigma::Constants::Resources::Fonts']]]
 ];

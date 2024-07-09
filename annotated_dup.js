@@ -60,6 +60,7 @@ var annotated_dup =
     [ "PasswordGeneratorTool", "class_password_generator_tool.html", "class_password_generator_tool" ],
     [ "RAMInfo", "class_r_a_m_info.html", "class_r_a_m_info" ],
     [ "Random", "class_random.html", "class_random" ],
+    [ "RSA", "class_r_s_a.html", "class_r_s_a" ],
     [ "SaveFileDialog", "class_save_file_dialog.html", "class_save_file_dialog" ],
     [ "Scene", "class_scene.html", "class_scene" ],
     [ "SelectFolderDialog", "class_select_folder_dialog.html", "class_select_folder_dialog" ],

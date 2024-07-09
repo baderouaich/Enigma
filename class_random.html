@@ -110,12 +110,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:abd88f50c53f3a878f14ce529e4522f4c"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#abd88f50c53f3a878f14ce529e4522f4c">Str</a> (const std::size_t length) noexcept</td></tr>
 <tr class="memdesc:abd88f50c53f3a878f14ce529e4522f4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random string.  <a href="class_random.html#abd88f50c53f3a878f14ce529e4522f4c">More...</a><br /></td></tr>
 <tr class="separator:abd88f50c53f3a878f14ce529e4522f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e23e0969369a6f86aca9e7fbaf8ec0"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; byte &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#a43e23e0969369a6f86aca9e7fbaf8ec0">Bytes</a> (const std::size_t length) noexcept</td></tr>
+<tr class="memdesc:a43e23e0969369a6f86aca9e7fbaf8ec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a random vector of bytes.  <a href="class_random.html#a43e23e0969369a6f86aca9e7fbaf8ec0">More...</a><br /></td></tr>
+<tr class="separator:a43e23e0969369a6f86aca9e7fbaf8ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa813b66cca7fd2e7416c0a03c2225732"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Reseed</a> ()</td></tr>
 <tr class="separator:aa813b66cca7fd2e7416c0a03c2225732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00011">11</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00012">12</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a309a91e60c6ec9e868b94ee7fd08c453"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a309a91e60c6ec9e868b94ee7fd08c453">&#9670;&nbsp;</a></span>Bool()</h2>
@@ -150,7 +153,44 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns a <a class="el" href="class_random.html">Random</a> bool value, either 'true' or 'false' </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00048">48</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00049">49</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a43e23e0969369a6f86aca9e7fbaf8ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e23e0969369a6f86aca9e7fbaf8ec0">&#9670;&nbsp;</a></span>Bytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt;byte&gt; Random::Bytes </td>
+          <td>(</td>
+          <td class="paramtype">const std::size_t&#160;</td>
+          <td class="paramname"><em>length</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generates a random vector of bytes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">length</td><td>length of the random string to generate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a random std::string a-zA-Z0-9 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00090">90</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>
@@ -200,7 +240,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_random.html">Random</a> integer between min and max </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00037">37</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00038">38</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>
@@ -250,7 +290,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_random.html">Random</a> real between min and max </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00023">23</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00024">24</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>
@@ -278,7 +318,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 <p>Reseeds the random engine with a new value </p>
 
-<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00087">87</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00100">100</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>
@@ -315,7 +355,7 @@ template&lt;typename T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a random std::string a-zA-Z0-9 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00058">58</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_random_8hpp_source.html#l00059">59</a> of file <a class="el" href="_random_8hpp_source.html">Random.hpp</a>.</p>
 
 </div>
 </div>
@@ -328,7 +368,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_random.html">Random</a></li>
-    <li class="footer">Generated on Sun Jul 7 2024 12:41:25 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jul 9 2024 13:10:14 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

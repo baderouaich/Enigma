@@ -122,16 +122,13 @@ $(document).ready(function(){initNavTree('_encrypt_file_scene_8hpp_source.html',
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Save to database</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::string m_db_title;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> m_save_to_database{<span class="keyword">false</span>};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">Note:</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     # Compression</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     - You should compress before encrypting. Encryption turns your data into high-entropy data,</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     usually indistinguishable from a random stream. Compression relies on patterns in order to gain</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     any size reduction. Since encryption destroys such patterns, the compression algorithm would be</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     unable to give you much (if any) reduction in size if you apply it to encrypted data.</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Rsa special stuff</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    std::string m_rsa_private_key;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::string m_rsa_public_key;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    std::size_t m_selected_rsa_keySize = 4096;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
 <div class="ttc" id="a_algorithm_8hpp_html"><div class="ttname"><a href="_algorithm_8hpp.html">Algorithm.hpp</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00013">Macros.hpp:13</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
@@ -148,7 +145,7 @@ $(document).ready(function(){initNavTree('_encrypt_file_scene_8hpp_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d665af80335f773f8bfcf2f56b3f3e8a.html">Scenes</a></li><li class="navelem"><a class="el" href="_encrypt_file_scene_8hpp.html">EncryptFileScene.hpp</a></li>
-    <li class="footer">Generated on Sun Jul 7 2024 12:41:25 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jul 9 2024 13:10:14 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

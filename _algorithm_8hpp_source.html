@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('_algorithm_8hpp_source.html',''); init
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">class </span><a class="code" href="class_blowfish.html">Blowfish</a>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">class </span><a class="code" href="class_i_d_e_a.html">IDEA</a>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">class </span><a class="code" href="class_cha_cha20_poly1305.html">ChaCha20Poly1305</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//class RSA;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">class </span><a class="code" href="class_r_s_a.html">RSA</a>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_algorithm.html">   49</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_algorithm.html">Algorithm</a> {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">public</span>:</div>
@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('_algorithm_8hpp_source.html',''); init
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <a class="code" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41badf30d7ec6c752a5a639efc845e26a93a">Blowfish</a>,         <span class="comment">// Blowfish-EAX</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <a class="code" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6">IDEA</a>,             <span class="comment">// IDEA-EAX</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <a class="code" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d">ChaCha20Poly1305</a>, <span class="comment">// ChaCha20Poly1305</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="comment">//RSA,                            // RSA N/A yet</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <a class="code" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba445d0434ad7b42aff5bab616ebb41970">RSA</a>,                          <span class="comment">// RSA N/A yet</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="_macros_8hpp.html#a80f3da42320e764590e315ec103d117d">ENIGMA_ENUM_DECLARE_BEGIN_END</a>(<a class="code" href="class_a_e_s.html">AES</a>)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    };</div>
@@ -224,6 +224,7 @@ $(document).ready(function(){initNavTree('_algorithm_8hpp_source.html',''); init
 <div class="ttc" id="aclass_algorithm_html_abb16ca4d8280a63f1879a85734b283cf"><div class="ttname"><a href="class_algorithm.html#abb16ca4d8280a63f1879a85734b283cf">Algorithm::CreateFromType</a></div><div class="ttdeci">static std::unique_ptr&lt; Algorithm &gt; CreateFromType(const Type type, const Intent intent)</div></div>
 <div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41b"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41b">Algorithm::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition:</b> <a href="_algorithm_8hpp_source.html#l00070">Algorithm.hpp:70</a></div></div>
 <div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41ba1d664bb4fa1dd8440600b66fc4e8d1ef"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba1d664bb4fa1dd8440600b66fc4e8d1ef">Algorithm::Type::Twofish</a></div><div class="ttdeci">@ Twofish</div></div>
+<div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41ba445d0434ad7b42aff5bab616ebb41970"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba445d0434ad7b42aff5bab616ebb41970">Algorithm::Type::RSA</a></div><div class="ttdeci">@ RSA</div></div>
 <div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6">Algorithm::Type::IDEA</a></div><div class="ttdeci">@ IDEA</div></div>
 <div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d">Algorithm::Type::ChaCha20Poly1305</a></div><div class="ttdeci">@ ChaCha20Poly1305</div></div>
 <div class="ttc" id="aclass_algorithm_html_abfa56bd0469d341e959bb510f4fac41badf30d7ec6c752a5a639efc845e26a93a"><div class="ttname"><a href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41badf30d7ec6c752a5a639efc845e26a93a">Algorithm::Type::Blowfish</a></div><div class="ttdeci">@ Blowfish</div></div>
@@ -239,6 +240,7 @@ $(document).ready(function(){initNavTree('_algorithm_8hpp_source.html',''); init
 <div class="ttc" id="aclass_blowfish_html"><div class="ttname"><a href="class_blowfish.html">Blowfish</a></div><div class="ttdef"><b>Definition:</b> <a href="_blowfish_8hpp_source.html#l00008">Blowfish.hpp:8</a></div></div>
 <div class="ttc" id="aclass_cha_cha20_poly1305_html"><div class="ttname"><a href="class_cha_cha20_poly1305.html">ChaCha20Poly1305</a></div><div class="ttdef"><b>Definition:</b> <a href="_cha_cha20_poly1305_8hpp_source.html#l00015">ChaCha20Poly1305.hpp:15</a></div></div>
 <div class="ttc" id="aclass_i_d_e_a_html"><div class="ttname"><a href="class_i_d_e_a.html">IDEA</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_d_e_a_8hpp_source.html#l00011">IDEA.hpp:11</a></div></div>
+<div class="ttc" id="aclass_r_s_a_html"><div class="ttname"><a href="class_r_s_a.html">RSA</a></div><div class="ttdef"><b>Definition:</b> <a href="_r_s_a_8hpp_source.html#l00016">RSA.hpp:16</a></div></div>
 <div class="ttc" id="aclass_triple_d_e_s_html"><div class="ttname"><a href="class_triple_d_e_s.html">TripleDES</a></div><div class="ttdef"><b>Definition:</b> <a href="_triple_d_e_s_8hpp_source.html#l00013">TripleDES.hpp:13</a></div></div>
 <div class="ttc" id="aclass_twofish_html"><div class="ttname"><a href="class_twofish.html">Twofish</a></div><div class="ttdef"><b>Definition:</b> <a href="_twofish_8hpp_source.html#l00008">Twofish.hpp:8</a></div></div>
 <div class="ttc" id="anamespace_enigma_html_af2a42f76a7252581a38e63841d73ee64"><div class="ttname"><a href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">Enigma::byte</a></div><div class="ttdeci">std::uint8_t byte</div><div class="ttdef"><b>Definition:</b> <a href="_types_8hpp_source.html#l00012">Types.hpp:12</a></div></div>
@@ -248,7 +250,7 @@ $(document).ready(function(){initNavTree('_algorithm_8hpp_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d537ec303f13b8e88e2bd2506dfe6a9e.html">Algorithm</a></li><li class="navelem"><a class="el" href="_algorithm_8hpp.html">Algorithm.hpp</a></li>
-    <li class="footer">Generated on Sun Jul 7 2024 12:41:25 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jul 9 2024 13:10:14 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

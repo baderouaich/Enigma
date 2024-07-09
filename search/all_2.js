@@ -34,5 +34,7 @@ var searchData=
   ['buttonmiddle_61',['ButtonMiddle',['../_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a330fb6bc14c7210c411202d9168b3bf1',1,'MouseCodes.hpp']]],
   ['buttonright_62',['ButtonRight',['../_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a93c4a961054f2fa59f45f358526b02ad',1,'MouseCodes.hpp']]],
   ['byte_63',['byte',['../namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64',1,'Enigma']]],
-  ['bytes_64',['bytes',['../struct_cipher_chunk.html#a8ea0d1e079a19174176514b909196d36',1,'CipherChunk::bytes()'],['../class_hash_utils.html#aaa76d32c1712c2b1763fb3a05546b800',1,'HashUtils::bytes(const byte *buffer, const std::size_t buffSize)'],['../class_hash_utils.html#a73235ec110a13d7ced94c7ed02e866e0',1,'HashUtils::bytes(const std::vector&lt; byte &gt; &amp;buffer)']]]
+  ['bytes_64',['bytes',['../struct_cipher_chunk.html#a8ea0d1e079a19174176514b909196d36',1,'CipherChunk::bytes()'],['../class_hash_utils.html#aaa76d32c1712c2b1763fb3a05546b800',1,'HashUtils::bytes()']]],
+  ['bytes_65',['Bytes',['../class_random.html#a43e23e0969369a6f86aca9e7fbaf8ec0',1,'Random']]],
+  ['bytes_66',['bytes',['../class_hash_utils.html#a73235ec110a13d7ced94c7ed02e866e0',1,'HashUtils']]]
 ];

@@ -123,6 +123,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="stringliteral">                    CREATE TABLE IF NOT EXISTS Encryptions</span></div>
 <div class="line"><span class="stringliteral">                    (</span></div>
 <div class="line"><span class="stringliteral">                        ide         INTEGER PRIMARY KEY AUTOINCREMENT,</span></div>
+<div class="line"><span class="stringliteral">            algo          INTEGER NOT NULL,         -- algorithm enum id used in encryption. e.g: AES=1 ..</span></div>
 <div class="line"><span class="stringliteral">                        title         VARCHAR(255) NOT NULL,</span></div>
 <div class="line"><span class="stringliteral">                        date_time   DATETIME NOT NULL,</span></div>
 <div class="line"><span class="stringliteral">                        size          INTEGER NOT NULL,         -- size of compressed cipher in bytes</span></div>
@@ -182,7 +183,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_enigma.html">Enigma</a></li><li class="navelem"><a class="el" href="namespace_enigma_1_1_constants.html">Constants</a></li><li class="navelem"><a class="el" href="namespace_enigma_1_1_constants_1_1_algorithm.html">Algorithm</a></li><li class="navelem"><a class="el" href="namespace_enigma_1_1_constants_1_1_algorithm_1_1_database.html">Database</a></li>
-    <li class="footer">Generated on Sun Jul 7 2024 12:41:25 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jul 9 2024 13:10:14 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

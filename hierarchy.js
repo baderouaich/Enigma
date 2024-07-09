@@ -5,6 +5,7 @@ var hierarchy =
       [ "Blowfish", "class_blowfish.html", null ],
       [ "ChaCha20Poly1305", "class_cha_cha20_poly1305.html", null ],
       [ "IDEA", "class_i_d_e_a.html", null ],
+      [ "RSA", "class_r_s_a.html", null ],
       [ "TripleDES", "class_triple_d_e_s.html", null ],
       [ "Twofish", "class_twofish.html", null ]
     ] ],
@@ -66,6 +67,7 @@ var hierarchy =
     [ "RAMInfo", "class_r_a_m_info.html", null ],
     [ "Random", "class_random.html", null ],
     [ "Enigma::ResourceUtils", "class_enigma_1_1_resource_utils.html", null ],
+    [ "RSA::RSASettings", "struct_r_s_a_1_1_r_s_a_settings.html", null ],
     [ "SaveFileDialog", "class_save_file_dialog.html", null ],
     [ "Enigma::Scene", null, [
       [ "DecryptTextScene", "class_decrypt_text_scene.html", null ],

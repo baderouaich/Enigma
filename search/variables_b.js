@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['offset_1605',['offset',['../struct_cipher_chunk.html#a27b0b65f38e96539350b061aa66aa91f',1,'CipherChunk']]],
-  ['orange_1606',['ORANGE',['../namespace_enigma_1_1_constants_1_1_colors.html#a42e6f95f32f7721bf5344a9cc4e2850a',1,'Enigma::Constants::Colors']]]
+  ['name_1638',['name',['../struct_check_for_updates_1_1_latest_release_info.html#aac2bb2f0c5af4b9cabde6cfafb799d5d',1,'CheckForUpdates::LatestReleaseInfo']]]
 ];
