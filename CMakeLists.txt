@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(Enigma VERSION "3.0.0" DESCRIPTION "A Simple, Reliable and Efficient Encryption Tool" LANGUAGES CXX)
+project(Enigma VERSION "3.1.0" DESCRIPTION "A Simple, Reliable and Efficient Encryption Tool" LANGUAGES CXX)
 
 ################# Options ###########################
 option(ENIGMA_ENABLE_TESTS "Enable/Disable building of tests" OFF)
