@@ -29,9 +29,9 @@ void RSA::initialize() {
     if (m_settings->privateKey)
       setPrivateKey(*m_settings->privateKey);
     else {
-      std::vector<byte> pk;
-      FileUtils::Read(*m_settings->privateKeyFilename, pk);
-      setPrivateKey(std::string(pk.begin(), pk.end()));
+      std::string pk;
+      FileUtils::ReadString(*m_settings->privateKeyFilename, pk);
+      setPrivateKey(pk);
     }
     m_rsa_decryptor = std::make_unique<decltype(m_rsa_decryptor)::element_type>(*m_private_key);
   }
