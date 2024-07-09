@@ -15,11 +15,11 @@ using namespace Catch::Matchers;
 
 
 TEST_CASE("Endianness") {
-  std::cout << "Endianness: ";
+  Catch::cout() << "Endianness: ";
   if (std::endian::native == std::endian::big) {
-    std::cout << "Big";
+    Catch::cout() << "Big";
   } else if (std::endian::native == std::endian::little) {
-    std::cout << "Little";
+    Catch::cout() << "Little";
   } else [[unlikely]] {
     REQUIRE(false);
   }
