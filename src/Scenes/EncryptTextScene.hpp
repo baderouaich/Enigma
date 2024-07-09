@@ -35,6 +35,6 @@ class EncryptTextScene : public Enigma::Scene {
     // Rsa special stuff
     std::string m_rsa_private_key;
     std::string m_rsa_public_key;
-    std::size_t m_selected_rsa_keySize = 2048;
+    std::size_t m_selected_rsa_keySize = 4096;
 };
 NS_ENIGMA_END

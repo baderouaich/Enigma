@@ -61,6 +61,7 @@ namespace Enigma {
 					CREATE TABLE IF NOT EXISTS Encryptions
 					(
 						ide		    INTEGER PRIMARY KEY AUTOINCREMENT,
+            algo		  INTEGER NOT NULL,			-- algorithm enum id used in encryption. e.g: AES=1 ..
 						title		  VARCHAR(255) NOT NULL,
 						date_time	DATETIME NOT NULL,
 						size		  INTEGER NOT NULL,			-- size of compressed cipher in bytes

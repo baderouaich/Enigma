@@ -78,16 +78,17 @@ std::int64_t Database::addEncryption(const std::unique_ptr<Encryption>& e) {
   try {
     // Insert encryption
     std::ostringstream sql{};
-    sql << "INSERT INTO " << Encryption::TABLE_NAME << "(title, date_time, size, is_file, file_ext) VALUES(?, DATETIME(), ?, ?, ?)";
+    sql << "INSERT INTO " << Encryption::TABLE_NAME << "(algo, title, date_time, size, is_file, file_ext) VALUES(?, ?, DATETIME(), ?, ?, ?)";
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
     const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-    query->bindNoCopy(1, e->title);
-    query->bind(2, e->size);
-    query->bind(3, static_cast<std::int32_t>(e->is_file));
-    if (e->is_file)
-      query->bind(4, e->file_ext);
+    std::int32_t i{1};
+    query->bind(i++, static_cast<std::int32_t>(e->algo));
+    query->bindNoCopy(i++, e->title);
+    query->bind(i++, e->size);
+    query->bind(i++, static_cast<std::int32_t>(e->is_file));
+    query->bind(i++, e->is_file ? e->file_ext.c_str() : nullptr);
     const std::int32_t r = query->exec(); // returns num rows effected
     ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to insert encryption record");
 
@@ -136,7 +137,7 @@ std::unique_ptr<Encryption> Database::getEncryption(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT ide, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE ide = " << ide;
+    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE ide = " << ide;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -147,6 +148,7 @@ std::unique_ptr<Encryption> Database::getEncryption(const std::int64_t ide) {
       auto e = std::make_unique<Encryption>();
       std::int32_t i{0};
       e->ide = query->getColumn(i++).getInt64();
+      e->algo = static_cast<Algorithm::Type>(query->getColumn(i++).getUInt());
       e->title = query->getColumn(i++).getString();
       e->date_time = query->getColumn(i++).getString();
       e->size = query->getColumn(i++).getInt64();
@@ -200,7 +202,7 @@ std::vector<std::unique_ptr<Encryption>> Database::getAllEncryptions(const Datab
   std::vector<std::unique_ptr<Encryption>> encryptions;
   try {
     std::ostringstream sql{};
-    sql << "SELECT * FROM " << Encryption::TABLE_NAME << " ORDER BY " << order_by << ' ' << order;
+    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " ORDER BY " << order_by << ' ' << order;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -211,6 +213,7 @@ std::vector<std::unique_ptr<Encryption>> Database::getAllEncryptions(const Datab
       auto e = std::make_unique<Encryption>();
       std::int32_t i{0};
       e->ide = query->getColumn(i++).getInt64();
+      e->algo = static_cast<Algorithm::Type>(query->getColumn(i++).getUInt());
       e->title = query->getColumn(i++).getString();
       e->date_time = query->getColumn(i++).getString();
       e->size = query->getColumn(i++).getInt64();
@@ -309,7 +312,7 @@ std::vector<std::unique_ptr<Encryption>> Database::searchEncryptionsByTitle(cons
   std::vector<std::unique_ptr<Encryption>> encryptions;
   try {
     std::ostringstream sql{};
-    sql << "SELECT * FROM " << Encryption::TABLE_NAME << " WHERE LOWER(title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%' ORDER BY " << order_by << ' ' << order;
+    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE LOWER(title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%' ORDER BY " << order_by << ' ' << order;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
@@ -320,6 +323,7 @@ std::vector<std::unique_ptr<Encryption>> Database::searchEncryptionsByTitle(cons
       auto e = std::make_unique<Encryption>();
       std::int32_t i{0};
       e->ide = query->getColumn(i++).getInt64();
+      e->algo = static_cast<Algorithm::Type>(query->getColumn(i++).getUInt());
       e->title = query->getColumn(i++).getString();
       e->date_time = query->getColumn(i++).getString();
       e->size = query->getColumn(i++).getInt64();
@@ -334,17 +338,12 @@ std::vector<std::unique_ptr<Encryption>> Database::searchEncryptionsByTitle(cons
 }
 
 void Database::Vacuum() noexcept {
-  /*ENIGMA_INFO("Vacuuming SQLite3 database to optimize disk space...");
-	(void)m_database->exec("VACUUM");*/
-
   // Only vacuum if changes to the database were made.
   const std::int32_t total_changes = m_database->getTotalChanges();
   if (total_changes > 0) {
     ENIGMA_INFO("{0} database changes were made, Vacuuming database to optimize disk space...", total_changes);
     (void) m_database->exec("VACUUM");
   }
-  //else
-  //	ENIGMA_INFO("No database changes were made, skipping vacuum disk optimization.");
 }
 
 void Database::Export(const fs::path& filename) {

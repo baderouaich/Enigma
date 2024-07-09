@@ -2,6 +2,7 @@
 
 #include "CipherChunk.hpp"
 #include <Core/Core.hpp>
+#include <Algorithm/Algorithm.hpp>
 
 #include <sstream> //	std::ostringstream
 
@@ -13,8 +14,8 @@ NS_ENIGMA_BEGIN
 struct Encryption {
     static constexpr const std::string_view TABLE_NAME = "Encryptions";
 
-
     std::int64_t ide{};      /**< auto incremental id in range [0, SIZE_MAX] */
+    Algorithm::Type algo{};  /**< algorithm enum id used for encryption e.g: 1=AES ... */
     std::string title{};     /**< encryption title, e.g: "this is my Email password" */
     std::string date_time{}; /**< date & time saved by sqlite3 */
     std::int64_t size{};     /**< size of cipher in bytes */
@@ -28,6 +29,7 @@ struct Encryption {
     friend std::ostream& operator<<(std::ostream& os, const Encryption& e) noexcept {
       return os
              << "Encryptions(ide: " << e.ide << ','
+             << "algo: " << int(e.algo) << ','
              << "title: " << e.title << ','
              << "date_time: " << e.date_time << ','
              << "is_file: " << std::boolalpha << e.is_file << ','

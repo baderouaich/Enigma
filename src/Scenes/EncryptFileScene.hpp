@@ -32,5 +32,10 @@ class EncryptFileScene : public Scene {
     // Save to database
     std::string m_db_title;
     bool m_save_to_database{false};
+
+    // Rsa special stuff
+    std::string m_rsa_private_key;
+    std::string m_rsa_public_key;
+    std::size_t m_selected_rsa_keySize = 4096;
 };
 NS_ENIGMA_END

@@ -30,6 +30,9 @@ class DecryptFileScene : public Scene {
     std::string m_in_filename;  // In File to decrypt
     std::string m_out_filename; // Out File to be recover
     std::string m_password;     // encryption password
-                                //bool m_decompress{ true }; // Whether to deompress file with Gzip after decrypting
+
+    // Rsa special stuff
+    std::string m_rsa_private_key; // Only private key is needed for decryption (pub key used for verification)
+    std::size_t m_selected_rsa_keySize = 4096;
 };
 NS_ENIGMA_END

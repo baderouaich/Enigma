@@ -30,6 +30,6 @@ class DecryptTextScene : public Enigma::Scene {
 
     // Rsa special stuff
     std::string m_rsa_private_key; // Only private key is needed for decryption (pub key used for verification)
-    std::size_t m_selected_rsa_keySize = 2048;
+    std::size_t m_selected_rsa_keySize = 4096;
 };
 NS_ENIGMA_END

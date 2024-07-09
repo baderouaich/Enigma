@@ -1,3 +1,7 @@
+# 3.1.0
+- RSA Algorithm support for text and large files
+- Display algorithm used in encryption in My Encryptions Scene
+
 # 3.0.0
 - Complete build system migration from Premake to CMake.
 - Large files support. Now you can encrypt large files in chunks with less memory usage.

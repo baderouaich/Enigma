@@ -212,7 +212,7 @@ void EncryptTextScene::OnImGuiDraw() {
         ImGui::SameLine();
         ImGui::PushID("SavePrivateKeyToFileButton");
         if (ImGuiWidgets::Button("Save to file...")) {
-          SaveFileDialog sfd{"Save Private Key", ".", true, {"*.pem *.privkey", "All Files", "*"}};
+          SaveFileDialog sfd{"Save Private Key", "PrivateKey.pem", true, {"All Files", "*"}};
           if (std::string filename = sfd.Show(); !filename.empty()) {
             FileUtils::Write(filename, std::vector<byte>(m_rsa_private_key.begin(), m_rsa_private_key.end()));
           }
@@ -231,9 +231,9 @@ void EncryptTextScene::OnImGuiDraw() {
         ImGui::SameLine();
         ImGui::PushID("SavePublicKeyToFileButton");
         if (ImGuiWidgets::Button("Save to file...")) {
-          SaveFileDialog sfd{"Save Public Key", ".", true, {"*.pem *.pubkey", "All Files", "*"}};
+          SaveFileDialog sfd{"Save Public Key", "PublicKey.pem", true, {"All Files", "*"}};
           if (std::string filename = sfd.Show(); !filename.empty()) {
-            FileUtils::Write(filename, std::vector<byte>(m_rsa_public_key.begin(), m_rsa_public_key.end()));
+            FileUtils::WriteString(filename, m_rsa_public_key);
           }
         }
         ImGui::PopID();
@@ -393,7 +393,7 @@ void EncryptTextScene::OnEncryptButtonPressed() {
     }
     ENIGMA_ASSERT_OR_THROW(!m_cipher_base64.empty(), ("Failed to encode cipher text to Base64"));
 
-    // TODO put public & private keys to text fields with copy button & save button
+    // Fetch RSA private & public key
     if (m_type == Algorithm::Type::RSA) {
       m_rsa_private_key = dynamic_cast<RSA *>(algorithm.get())->getPrivateKey();
       m_rsa_public_key = dynamic_cast<RSA *>(algorithm.get())->getPublicKey();
@@ -406,6 +406,7 @@ void EncryptTextScene::OnEncryptButtonPressed() {
       // Encryption
       ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), ("Encryption title must be between 3 and 255 characters"));
       auto e = std::make_unique<Encryption>();
+      e->algo = m_type;
       e->title = m_db_title;
       e->is_file = false;
       e->size = m_cipher.size();

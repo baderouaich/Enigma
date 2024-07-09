@@ -1,5 +1,6 @@
+#include <pch.hpp>
 #include "EncryptFileScene.hpp"
-#include "pch.hpp"
+#include <Algorithm/RSA/RSA.hpp>
 #include <Database/Database.hpp>
 #include <Database/Models/Encryption.hpp>
 #include <Events/EventDispatcher.hpp>
@@ -59,6 +60,9 @@ void EncryptFileScene::OnImGuiDraw() {
   static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
   static ImFont *const& font_montserrat_medium_16 = fonts.at("Montserrat-Medium-16");
   static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static ImFont *const& font_ubuntu_regular_30 = fonts.at("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = fonts.at("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = fonts.at("Ubuntu-Regular-18");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -123,21 +127,23 @@ void EncryptFileScene::OnImGuiDraw() {
     }
     ImGui::PopFont();
 
-#if 0
-		spacing(2);
-
-		// Compression widget
-		ImGui::PushFont(font_montserrat_medium_16);
-		{
-			ImGui::PushFont(font_audiowide_regular_20);
-			ImGui::Text("Compress file with gzip before encrypting:");
-			ImGui::PopFont();
-			inline_dummy(6.0f, 0.0f);
-			ImGui::SameLine();
-			ImGui::Checkbox("##compress_checkbox", &m_compress);
-		}
-		ImGui::PopFont();
-#endif
+    // RSA Key sizes
+    ImGui::PushFont(font_ubuntu_regular_18);
+    if (m_type == Algorithm::Type::RSA) {
+      ImGui::Text("%s:", ("Key Size"));
+      ImGui::NewLine();
+      for (const auto& [keySize, description]: RSA::RECOMMENDED_KEY_SIZES) {
+        inline_dummy(1.0f, 0.0f);
+        ImGui::SameLine();
+        const std::string keySizeStr = std::to_string(keySize);
+        if (ImGui::RadioButton(keySizeStr.c_str(), m_selected_rsa_keySize == keySize)) {
+          m_selected_rsa_keySize = keySize;
+        }
+        if (ImGui::IsItemHovered())
+          ImGui::SetTooltip("%s", description.data());
+      }
+    }
+    ImGui::PopFont();
 
     spacing(2);
 
@@ -223,33 +229,77 @@ void EncryptFileScene::OnImGuiDraw() {
     ImGui::Separator();
     spacing(3);
 
-    // Encryption Password & Confirm password
-    ImGui::PushFont(font_montserrat_medium_20);
+    if (m_type == Algorithm::Type::RSA) {
+      ImGui::PushFont(font_ubuntu_regular_18);
+      const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 10);
+      if (!m_rsa_private_key.empty()) {
+        ImGui::Text("%s:", "Private Key");
+        ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
+        ImGui::PushID("CopyPrivateKeyButton");
+        if (ImGuiWidgets::Button("Copy")) {
+          Clipboard::Set(m_rsa_private_key);
+        }
+        ImGui::PopID();
+        ImGui::SameLine();
+        ImGui::PushID("SavePrivateKeyToFileButton");
+        if (ImGuiWidgets::Button("Save to file...")) {
+          SaveFileDialog sfd{"Save Private Key", "PrivateKey.pem", true, {"All Files", "*"}};
+          if (std::string filename = sfd.Show(); !filename.empty()) {
+            FileUtils::WriteString(filename, m_rsa_private_key);
+          }
+        }
+        ImGui::PopID();
+      }
+      spacing(2);
+      if (!m_rsa_public_key.empty()) {
+        ImGui::Text("%s:", "Public Key");
+        ImGuiWidgets::InputTextMultiline("##public_key", &m_rsa_public_key, input_text_size);
+        ImGui::PushID("CopyPublicKeyButton");
+        if (ImGuiWidgets::Button("Copy")) {
+          Clipboard::Set(m_rsa_public_key);
+        }
+        ImGui::PopID();
+        ImGui::SameLine();
+        ImGui::PushID("SavePublicKeyToFileButton");
+        if (ImGuiWidgets::Button("Save to file...")) {
+          SaveFileDialog sfd{"Save Public Key", "PublicKey.pem", true, {"All Files", "*"}};
+          if (std::string filename = sfd.Show(); !filename.empty()) {
+            FileUtils::WriteString(filename, m_rsa_public_key);
+          }
+        }
+        ImGui::PopID();
+      }
+      ImGui::PopFont();
+    } else // RSA Doesnt need password
     {
-      // password text coloring for each state
-      ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text,
-                            (m_password.empty() && m_confirm_password.empty()) ? // if password or confirm password is empty...
-                              Constants::Colors::TEXT_COLOR
-                                                                               : // ... set color to white
-                              m_password == m_confirm_password ?                 // else if password matches confim password...
-                                Constants::Colors::PASSWORD_MATCH_TEXT_COLOR
-                                                               :    // ... set color to green
-                                Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
-      );
-      // Label
-      ImGui::Text("%s:", ("Password"));
-      // Input text
-      ImGuiWidgets::InputText("##text3", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
-      ImGui::Text("%s:", ("Confirm Password"));
-      ImGuiWidgets::InputText("##text4", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
-      ImGui::PopStyleColor();
-      // Bytes count
-      ImGui::PushFont(font_montserrat_medium_12);
-      //ImGui::Text("%zu bytes", m_password.size());
-      ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
+      // Encryption Password & Confirm password
+      ImGui::PushFont(font_montserrat_medium_20);
+      {
+        // password text coloring for each state
+        ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text,
+                              (m_password.empty() && m_confirm_password.empty()) ? // if password or confirm password is empty...
+                                Constants::Colors::TEXT_COLOR
+                                                                                 : // ... set color to white
+                                m_password == m_confirm_password ?                 // else if password matches confim password...
+                                  Constants::Colors::PASSWORD_MATCH_TEXT_COLOR
+                                                                 :    // ... set color to green
+                                  Constants::Colors::ERROR_TEXT_COLOR // else set color to red.
+        );
+        // Label
+        ImGui::Text("%s:", ("Password"));
+        // Input text
+        ImGuiWidgets::InputText("##text3", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        ImGui::Text("%s:", ("Confirm Password"));
+        ImGuiWidgets::InputText("##text4", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        ImGui::PopStyleColor();
+        // Bytes count
+        ImGui::PushFont(font_montserrat_medium_12);
+        //ImGui::Text("%zu bytes", m_password.size());
+        ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
+        ImGui::PopFont();
+      }
       ImGui::PopFont();
     }
-    ImGui::PopFont();
 
 
     spacing(3);
@@ -390,15 +440,15 @@ void EncryptFileScene::OnEncryptButtonPressed() {
     return;
   }
   //pass checks
-  if (m_password.empty() || m_confirm_password.empty()) {
+  if ((m_password.empty() || m_confirm_password.empty()) && m_type != Algorithm::Type::RSA) {
     (void) DialogUtils::Warn(("Encryption password is empty"));
     return;
   }
-  if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH) {
-    (void) DialogUtils::Warn(fmt::format("Password is too weak! consider using {} characters or more including special characters like {}", Constants::Algorithm::MINIMUM_PASSWORD_LENGTH, Constants::Algorithm::SPECIAL_CHARACTERS));
+  if (m_password.size() < Constants::Algorithm::MINIMUM_PASSWORD_LENGTH && m_type != Algorithm::Type::RSA) {
+    (void) DialogUtils::Warn("Password is too weak");
     return;
   }
-  if (m_password != m_confirm_password) {
+  if (m_password != m_confirm_password && m_type != Algorithm::Type::RSA) {
     (void) DialogUtils::Warn(("Password doesn't match confirm password"));
     return;
   }
@@ -408,9 +458,21 @@ void EncryptFileScene::OnEncryptButtonPressed() {
     // Create encryptor based on selected algorithm type
     const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Encrypt);
     ENIGMA_ASSERT_OR_THROW(algorithm, ("Failed to create algorithm from type"));
+    // RSA SETTINGS
+    if (algorithm->GetType() == Algorithm::Type::RSA) {
+      RSA::RSASettings settings{};
+      settings.keySize = m_selected_rsa_keySize;
+      dynamic_cast<RSA *>(algorithm.get())->setSettings(std::move(settings));
+    }
 
     // Encrypt file buffer
     algorithm->Encrypt(m_password, fs::path(m_in_filename), fs::path(m_out_filename));
+
+    // Fetch RSA private & public key
+    if (m_type == Algorithm::Type::RSA) {
+      m_rsa_private_key = dynamic_cast<RSA *>(algorithm.get())->getPrivateKey();
+      m_rsa_public_key = dynamic_cast<RSA *>(algorithm.get())->getPublicKey();
+    }
 
     // Save to database (in chunks)
     // Save to database
@@ -420,6 +482,7 @@ void EncryptFileScene::OnEncryptButtonPressed() {
       // Encryption
       ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(m_db_title.size(), 3, 255), ("Encryption title must be between 3 and 255 characters"));
       auto e = std::make_unique<Encryption>();
+      e->algo = m_type;
       e->title = m_db_title;
       e->is_file = true;
       e->file_ext = extractFileExtension(m_out_filename);
