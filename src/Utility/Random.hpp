@@ -5,6 +5,7 @@
 #include <Core/Core.hpp>
 #include <algorithm>
 #include <random>
+#include <climits>
 //#include <execution> // std::for_each(std::execution::par, ...)
 
 NS_ENIGMA_BEGIN
@@ -88,7 +89,7 @@ class Random final {
     */
     static std::vector<byte> Bytes(const std::size_t length) noexcept {
       using random_bytes_engine = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, byte>;
-      random_bytes_engine rbe{};
+      static random_bytes_engine rbe{m_engine};
       std::vector<byte> bytes(length);
       std::generate(bytes.begin(), bytes.end(), std::ref(rbe));
       return bytes;

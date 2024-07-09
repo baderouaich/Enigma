@@ -37,6 +37,21 @@ class FileUtils final {
       }
     }
 
+    static bool ReadString(const fs::path& filename, std::string& buffer) {
+      if (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) // ate: open at the end
+      {
+        const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
+        buffer.resize(file_size, '\000');
+        ifs.seekg(0, std::ios::beg);
+        ifs.read(reinterpret_cast<char *>(buffer.data()), file_size);
+        ifs.close();
+        return true;
+      } else {
+        ENIGMA_ERROR("Failed to read file {0}", filename.string());
+        return false;
+      }
+    }
+
     static bool Write(const fs::path& filename, const std::vector<byte>& buffer) {
       if (std::ofstream ofs{filename, std::ios::binary}) {
         ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
@@ -48,6 +63,16 @@ class FileUtils final {
       }
     }
 
+    static bool WriteString(const fs::path& filename, const std::string& buffer) {
+      if (std::ofstream ofs{filename, std::ios::binary}) {
+        ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
+        ofs.close();
+        return true;
+      } else {
+        ENIGMA_ERROR("Failed to write file {0}", filename.string());
+        return false;
+      }
+    }
 
     /*
     *	Reads a file chunk by chunk
