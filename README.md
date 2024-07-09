@@ -34,9 +34,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :white_check_mark: <strong>Blowfish-EAX</strong>
 - :white_check_mark: <strong>IDEA-EAX</strong>
 - :white_check_mark: <strong>ChaCha20Poly1305</strong>
-<!-- - :white_check_mark: <strong>RSA-OAEP-SHA256</strong> -->
-<!-- - [ ] algo || [x] algo -->
-
+- :white_check_mark: <strong>RSA-OAEP-SHA256</strong>
 
 ## Extra Tools
 - Password Generator
@@ -65,14 +63,15 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 
 ## UI
 - Main Menu
-![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/72b69cab-af31-48d1-88b5-86914662c27c)
+  ![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/72b69cab-af31-48d1-88b5-86914662c27c)
 - Straight forward
-![Straightforward](https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d)
+  ![Straightforward](https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d)
+- Supports the strongest encryption algorithms
+  ![Supports-Strongest-Encryption-Algorithms](https://github.com/baderouaich/Enigma/assets/49657842/932c260c-3f1c-4333-8267-3e8ae115d408)
 - Save Encryptions to a local database (an SQLite3 database which you can export/import)
-![My-Encryptions-Demo](https://github.com/baderouaich/Enigma/assets/49657842/3e0e7a95-446b-4f48-8bf2-516ab469fdae)
+  ![My-Encryptions-Demo](https://github.com/baderouaich/Enigma/assets/49657842/3e0e7a95-446b-4f48-8bf2-516ab469fdae)
 - Extra Utilities
-![Tools-Demo](https://github.com/baderouaich/Enigma/assets/49657842/064e35ce-2f3f-4f47-9411-e97c2a0b2a25)
-
+  ![Tools-Demo](https://github.com/baderouaich/Enigma/assets/49657842/064e35ce-2f3f-4f47-9411-e97c2a0b2a25)
 
 ### Compiling & Installing
 ```shell
