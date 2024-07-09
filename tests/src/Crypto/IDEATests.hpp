@@ -4,15 +4,16 @@
 #include <Utility/SizeUtils.hpp>
 #include <iostream>
 #include "TestsData.hpp"
+#include "Utility/FinalAction.hpp"
+#include "Utility/HashUtils.hpp"
 using namespace Enigma;
 using namespace Catch::Matchers;
 
-TEST_CASE("IDEA Encryption and Decryption - Text")
-{
-	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
-	
-	// Make IDEA algorithm with intention to Encrypt and Decrypt
-	std::unique_ptr<IDEA> idea(new IDEA(IDEA::Intent::Encrypt | IDEA::Intent::Decrypt));
+TEST_CASE("IDEA Encryption and Decryption - Text") {
+  std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
+
+  // Make IDEA algorithm with intention to Encrypt and Decrypt
+  std::unique_ptr<IDEA> idea(new IDEA(IDEA::Intent::Encrypt | IDEA::Intent::Decrypt));
 
   // Buffer to encrypt
   std::string randomStr = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 50)));
@@ -59,5 +60,33 @@ TEST_CASE("IDEA Encryption and Decryption - File") {
     REQUIRE_THAT(originalFileHash, !Equals(encryptedFileHash));
     // Original must match decrypted file
     REQUIRE_THAT(originalFileHash, Equals(recoveredFileHash));
+  }
+}
+
+TEST_CASE("Decrypt lorem_ipsum_IDEA.txt.enigma") {
+  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_IDEA.txt.enigma";
+  const fs::path decryptedFilename = fs::temp_directory_path() / "lorem_ipsum_IDEA.txt";
+  FinalAction decryptedFileDeleter([decryptedFilename] {
+    fs::remove(decryptedFilename);
+  });
+
+  try {
+    IDEA idea{IDEA::Intent::Decrypt};
+    idea.Decrypt("enigma@123", encryptedFilename, decryptedFilename);
+
+    // Ensure recovered file and original file match
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> originalFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(originalFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> encryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(encryptedFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> decryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(decryptedFilename);
+
+    REQUIRE(originalFileHash == decryptedFileHash);
+    REQUIRE(originalFileHash != encryptedFileHash);
+
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    REQUIRE(false);
+  } catch (...) {
+    REQUIRE(false);
   }
 }

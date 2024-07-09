@@ -1,4 +1,5 @@
 #include "TestsAll.hpp"
+#include <Logger/Logger.hpp>
 
 int main(int argc, const char* argv[]) {
   Enigma::Logger::initialize();

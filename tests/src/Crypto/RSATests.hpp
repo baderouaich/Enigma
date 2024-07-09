@@ -1,5 +1,6 @@
 #pragma once
 #include <Algorithm/RSA/RSA.hpp>
+#include "Meta/Meta.hpp"
 #include "TestsData.hpp"
 #include "Utility/DateTimeUtils.hpp"
 #include <iostream>
@@ -29,15 +30,66 @@ TEST_CASE("RSA getMaximumBufferSizeFromKeySize") {
   }
 }
 
-TEST_CASE("RSA Encryption and Decryption") {
+
+TEST_CASE("RSA Encryption and Decryption - File") {
+  fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  fs::path publicKeyFilename = fs::temp_directory_path() / "lorem_ipsum_public_key.pem";
+  fs::path privateKeyFilename = fs::temp_directory_path() / "lorem_ipsum_private_key.pem";
+  fs::path encryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_lorem_ipsum.txt.enigma");
+  fs::path decryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_lorem_ipsum.txt.recovered");
+  FinalAction cleaner{[=] {
+    fs::remove(decryptedFilename);
+    fs::remove(encryptedFilename);
+    fs::remove(privateKeyFilename);
+    fs::remove(publicKeyFilename);
+  }};
+
+  try {
+    // Encrypt
+    std::unique_ptr<RSA> encrypter(new RSA(RSA::Intent::Encrypt));
+    RSA::RSASettings encrypterSettings{};
+    encrypterSettings.keySize = 4096;
+    encrypter->setSettings(std::move(encrypterSettings));
+    REQUIRE(FileUtils::WriteString(publicKeyFilename, encrypter->getPublicKey()));
+    REQUIRE(FileUtils::WriteString(privateKeyFilename, encrypter->getPrivateKey()));
+    encrypter->Encrypt({}, originalFilename, encryptedFilename);
+
+    // Decrypt
+    std::unique_ptr<RSA> decrypter(new RSA(RSA::Intent::Decrypt));
+    RSA::RSASettings decrypterSettings{};
+    std::size_t keySize{};
+    Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromFile(encryptedFilename);
+    REQUIRE(footer.extra.size() == sizeof(std::size_t));
+    std::memcpy(&keySize, footer.extra.data(), footer.extra.size());
+    REQUIRE(keySize == 4096);
+    decrypterSettings.keySize = keySize;
+    decrypterSettings.privateKeyFilename = privateKeyFilename;
+    decrypter->setSettings(std::move(decrypterSettings));
+    decrypter->Decrypt({}, encryptedFilename, decryptedFilename);
+
+    // Ensure recovered file and original file match
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> originalFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(originalFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> encryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(encryptedFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> decryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(decryptedFilename);
+
+    REQUIRE(originalFileHash == decryptedFileHash);
+    REQUIRE(originalFileHash != encryptedFileHash);
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    REQUIRE(false);
+  } catch (...) {
+    REQUIRE(false);
+  }
+}
+
+TEST_CASE("RSA Encryption and Decryption - Text") {
   try {
     ENIGMA_BEGIN_TIMER(t1);
     // Make IDEA algorithm with intention to Encrypt and Decrypt
     std::unique_ptr<RSA> encrypter(new RSA(RSA::Intent::Encrypt));
     const std::size_t keySize = 2048;
-    RSA::RSASettings settings =
-      {
-        .keySize = keySize};
+    RSA::RSASettings settings{};
+    settings.keySize = keySize;
     encrypter->setSettings(std::move(settings));
     // Buffer to encrypt
     std::size_t maxBufferSize = encrypter->getMaximumBufferSize();
@@ -96,8 +148,8 @@ TEST_CASE("RSA Encryption and Decryption") {
 
 TEST_CASE("RSA Encryption and Decryption - various buffer sizes and key sizes") {
 
-    static const std::vector<std::size_t> keySizes = {1024, 1536, 2048, 4096, 5120, 6144, 8192};
-    for(const std::size_t keySize : keySizes) {
+  static const std::vector<std::size_t> keySizes = {1024, 1536, 2048, 4096, 5120, 6144, 8192};
+  for (const std::size_t keySize: keySizes) {
     const std::size_t bufferSize = Random::Int<std::size_t>(1, ENIGMA_MB_TO_BYTES(10));
     std::cout << "Key size: " << keySize << "\nBuffer size:" << SizeUtils::FriendlySize(bufferSize) << std::endl;
 
@@ -105,9 +157,8 @@ TEST_CASE("RSA Encryption and Decryption - various buffer sizes and key sizes") 
       ENIGMA_BEGIN_TIMER(t1);
       // Make IDEA algorithm with intention to Encrypt and Decrypt
       std::unique_ptr<RSA> encrypter(new RSA(RSA::Intent::Encrypt));
-      RSA::RSASettings settings =
-        {
-          .keySize = keySize};
+      RSA::RSASettings settings{};
+      settings.keySize = keySize;
       encrypter->setSettings(std::move(settings));
       // Buffer to encrypt
       std::size_t maxBufferSize = encrypter->getMaximumBufferSize();
@@ -121,15 +172,14 @@ TEST_CASE("RSA Encryption and Decryption - various buffer sizes and key sizes") 
 
       std::string private_key = encrypter->getPrivateKey();
       std::string public_key = encrypter->getPublicKey();
-      std::cout <<"Took: " << s << "s to encrypt with rsa key size " << keySize << std::endl
+      std::cout << "Took: " << s << "s to encrypt with rsa key size " << keySize << std::endl
                 << std::endl;
 
 
       std::unique_ptr<RSA> decrypter(new RSA(RSA::Intent::Decrypt));
-      RSA::RSASettings settings1 =
-        {
-          .keySize = keySize,
-          .privateKey = private_key};
+      RSA::RSASettings settings1{};
+      settings1.keySize = keySize;
+      settings1.privateKey = private_key;
       decrypter->setSettings(std::move(settings1));
       std::cout << "\nDecrypting... " << std::endl
                 << std::endl;
@@ -141,5 +191,41 @@ TEST_CASE("RSA Encryption and Decryption - various buffer sizes and key sizes") 
       std::cerr << Enigma::CryptoPPUtils::GetFullErrorMessage(e) << '\n';
       REQUIRE(false);
     }
+  }
+}
+
+
+TEST_CASE("Decrypt lorem_ipsum_RSA.txt.enigma") {
+  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_RSA.txt.enigma";
+  const fs::path privateKeyFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_RSA_PrivateKey.pem";
+  [[maybe_unused]] const fs::path publicKeyFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_RSA_PublicKey.pem";
+  const fs::path decryptedFilename = fs::temp_directory_path() / "lorem_ipsum_RSA.txt";
+  FinalAction decryptedFileDeleter([decryptedFilename] {
+    fs::remove(decryptedFilename);
+  });
+
+  try {
+    RSA rsa{RSA::Intent::Decrypt};
+    RSA::RSASettings settings{};
+    settings.keySize = 2048;
+    settings.privateKey = privateKeyFilename;
+    REQUIRE(FileUtils::ReadString(privateKeyFilename, *settings.privateKey));
+    rsa.setSettings(std::move(settings));
+    rsa.Decrypt({}, encryptedFilename, decryptedFilename);
+
+    // Ensure recovered file and original file match
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> originalFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(originalFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> encryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(encryptedFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> decryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(decryptedFilename);
+
+    REQUIRE(originalFileHash == decryptedFileHash);
+    REQUIRE(originalFileHash != encryptedFileHash);
+
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    REQUIRE(false);
+  } catch (...) {
+    REQUIRE(false);
   }
 }

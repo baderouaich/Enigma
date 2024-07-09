@@ -1,5 +1,7 @@
 #pragma once
 #include "TestsData.hpp"
+#include "Utility/FinalAction.hpp"
+#include "Utility/HashUtils.hpp"
 #include <Algorithm/Twofish/Twofish.hpp>
 #include <Utility/SizeUtils.hpp>
 #include <catch2/catch_all.hpp>
@@ -59,5 +61,33 @@ TEST_CASE("Twofish Encryption and Decryption - File") {
     REQUIRE_THAT(originalFileHash, !Equals(encryptedFileHash));
     // Original must match decrypted file
     REQUIRE_THAT(originalFileHash, Equals(recoveredFileHash));
+  }
+}
+
+TEST_CASE("Decrypt lorem_ipsum_Twofish.txt.enigma") {
+  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_Twofish.txt.enigma";
+  const fs::path decryptedFilename = fs::temp_directory_path() / "lorem_ipsum_Twofish.txt";
+  FinalAction decryptedFileDeleter([decryptedFilename] {
+    fs::remove(decryptedFilename);
+  });
+
+  try {
+    Twofish twofish{Twofish::Intent::Decrypt};
+    twofish.Decrypt("enigma@123", encryptedFilename, decryptedFilename);
+
+    // Ensure recovered file and original file match
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> originalFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(originalFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> encryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(encryptedFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> decryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(decryptedFilename);
+
+    REQUIRE(originalFileHash == decryptedFileHash);
+    REQUIRE(originalFileHash != encryptedFileHash);
+
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    REQUIRE(false);
+  } catch (...) {
+    REQUIRE(false);
   }
 }

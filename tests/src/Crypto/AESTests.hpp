@@ -69,3 +69,32 @@ TEST_CASE("AES-GCM Encryption and Decryption - File") {
     REQUIRE_THAT(originalFileHash, Equals(recoveredFileHash));
   }
 }
+
+
+TEST_CASE("Decrypt lorem_ipsum_AES.txt.enigma") {
+  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_AES.txt.enigma";
+  const fs::path decryptedFilename = fs::temp_directory_path() / "lorem_ipsum_AES.txt";
+  FinalAction decryptedFileDeleter([decryptedFilename] {
+    fs::remove(decryptedFilename);
+  });
+
+  try {
+    AES aes{AES::Intent::Decrypt};
+    aes.Decrypt("enigma@123", encryptedFilename, decryptedFilename);
+
+    // Ensure recovered file and original file match
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> originalFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(originalFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> encryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(encryptedFilename);
+    std::array<byte, CryptoPP::SHA512::DIGESTSIZE> decryptedFileHash = HashUtils::fileBytes<CryptoPP::SHA512>(decryptedFilename);
+
+    REQUIRE(originalFileHash == decryptedFileHash);
+    REQUIRE(originalFileHash != encryptedFileHash);
+
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    REQUIRE(false);
+  } catch (...) {
+    REQUIRE(false);
+  }
+}
