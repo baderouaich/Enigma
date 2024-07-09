@@ -94,14 +94,13 @@ class Random final {
       static random_bytes_engine gen{m_engine};
       std::generate(bytes.begin(), bytes.end(), std::ref(gen));
 #else
-			// MSVC's std::independent_bits_engine doesn't take std::uint8_t
+      // MSVC's std::independent_bits_engine doesn't take std::uint8_t
       std::uniform_int_distribution<std::uint16_t> dist{static_cast<std::uint16_t>(std::numeric_limits<byte>::min()), static_cast<std::uint16_t>(std::numeric_limits<byte>::max())};
       std::generate(bytes.begin(), bytes.end(), [&]() -> byte {
         return dist(m_engine);
-			});
+      });
 #endif
       return bytes;
-
     }
 
 
