@@ -28,6 +28,11 @@ class ViewEncryptionScene : public Enigma::Scene {
 
     std::string m_password{};       // password used for encryption text or file
     std::string m_recovered_text{}; // to be assigned Decrypted/Recovered Text after decryption success
+
+
+    // RSA special stuff
+    std::string m_rsa_private_key{};
+    std::size_t m_rsa_keySize{}; // to be detected
 };
 
 NS_ENIGMA_END
