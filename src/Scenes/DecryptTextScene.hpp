@@ -27,5 +27,9 @@ class DecryptTextScene : public Enigma::Scene {
     std::vector<byte> m_cipher;   // Encrypted text
     std::string m_cipher_base64;  // Encrypted text in Base64 to be Decrypted
     std::string m_password;       // Encryption password
+
+    // Rsa special stuff
+    std::string m_rsa_private_key; // Only private key is needed for decryption (pub key used for verification)
+    std::size_t m_selected_rsa_keySize = 2048;
 };
 NS_ENIGMA_END

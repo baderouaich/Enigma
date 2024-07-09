@@ -34,11 +34,3 @@ class EncryptFileScene : public Scene {
     bool m_save_to_database{false};
 };
 NS_ENIGMA_END
-/*
-Note:
-	 # Compression
-	 - You should compress before encrypting. Encryption turns your data into high-entropy data,
-	 usually indistinguishable from a random stream. Compression relies on patterns in order to gain
-	 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
-	 unable to give you much (if any) reduction in size if you apply it to encrypted data.
-*/

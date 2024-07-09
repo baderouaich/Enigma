@@ -140,7 +140,7 @@ void EncryptTextScene::OnImGuiDraw() {
     if (m_type == Algorithm::Type::RSA) {
       ImGui::Text("%s:", ("Key Size"));
       ImGui::NewLine();
-      for (const auto& [keySize, description]: m_rsa_keysizes) {
+      for (const auto& [keySize, description]: RSA::RECOMMENDED_KEY_SIZES) {
         inline_dummy(1.0f, 0.0f);
         ImGui::SameLine();
         const std::string keySizeStr = std::to_string(keySize);
@@ -184,7 +184,7 @@ void EncryptTextScene::OnImGuiDraw() {
       ImGui::Text("%s:", ("Text"));
 
       // Input text
-      const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 5);
+      const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 6);
       ImGuiWidgets::InputTextMultiline("##text1", &m_text, input_text_size);
       // Bytes count
       ImGui::PushFont(font_montserrat_medium_12);
@@ -200,7 +200,7 @@ void EncryptTextScene::OnImGuiDraw() {
     // Encryption Password & Confirm password (Private & Public keys for RSA)
     if (m_type == Algorithm::Type::RSA) {
       ImGui::PushFont(font_ubuntu_regular_18);
-      const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 7);
+      const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 10);
       if (!m_rsa_private_key.empty()) {
         ImGui::Text("%s:", "Private Key");
         ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);

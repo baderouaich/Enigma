@@ -4,7 +4,8 @@
 #include <optional>
 #include <rsa.h>
 #include <base64.h>
-#include "Utility/FileUtils.hpp"
+#include <Utility/FileUtils.hpp>
+#include <pssr.h>
 
 NS_ENIGMA_BEGIN
 /**
@@ -26,11 +27,11 @@ class RSA : public Algorithm {
     ~RSA() noexcept override;
 
     struct RSASettings {
-      std::size_t keySize{};
-      std::optional<std::string> privateKey{std::nullopt};
-      //std::optional<std::string> publicKey{std::nullopt};
-      std::optional<fs::path> privateKeyFilename{std::nullopt};
-      //std::optional<fs::path> publicKeyFilename{std::nullopt};
+        std::size_t keySize{};
+        std::optional<std::string> privateKey{std::nullopt};
+        //std::optional<std::string> publicKey{std::nullopt};
+        std::optional<fs::path> privateKeyFilename{std::nullopt};
+        //std::optional<fs::path> publicKeyFilename{std::nullopt};
     };
 
     void setSettings(RSASettings&& settings) {
@@ -38,26 +39,28 @@ class RSA : public Algorithm {
       initialize();
     }
 
-    void initialize(){
+    void initialize() {
       m_params = std::make_unique<CryptoPP::InvertibleRSAFunction>();
       m_params->GenerateRandomWithKeySize(*m_auto_seeded_random_pool, m_settings->keySize);
 
-      if(static_cast<bool>(m_intent & Intent::Encrypt)) {
+      if (static_cast<bool>(m_intent & Intent::Encrypt)) {
         m_private_key = std::make_unique<CryptoPP::RSA::PrivateKey>(*m_params);
         m_public_key = std::make_unique<CryptoPP::RSA::PublicKey>(*m_params);
         m_rsa_encryptor = std::make_unique<decltype(m_rsa_encryptor)::element_type>(*m_public_key);
       }
-      if(static_cast<bool>(m_intent & Intent::Decrypt)) {
+      if (static_cast<bool>(m_intent & Intent::Decrypt)) {
         ENIGMA_ASSERT_OR_THROW(m_settings->privateKey or m_settings->privateKeyFilename, "RSA private key was not set for decryption");
-        if(m_settings->privateKey)
+        if (m_settings->privateKey)
           setPrivateKey(*m_settings->privateKey);
         else {
-         std::vector<byte> pk;
-         FileUtils::Read(*m_settings->privateKeyFilename, pk);
-         setPrivateKey(std::string(pk.begin(), pk.end()));
-        }m_rsa_decryptor = std::make_unique<decltype(m_rsa_decryptor)::element_type>(*m_private_key);
+          std::vector<byte> pk;
+          FileUtils::Read(*m_settings->privateKeyFilename, pk);
+          setPrivateKey(std::string(pk.begin(), pk.end()));
+        }
+        m_rsa_decryptor = std::make_unique<decltype(m_rsa_decryptor)::element_type>(*m_private_key);
       }
     }
+
   public:
     std::vector<byte> Encrypt(const std::string& password, const byte *buffer, const std::size_t buffSize) override;
     std::vector<byte> Encrypt(const std::string& password, const std::vector<byte>& buffer) override;
@@ -66,15 +69,50 @@ class RSA : public Algorithm {
     void Encrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
     void Decrypt(const std::string& password, const fs::path& in_filename, const fs::path& out_filename) override;
 
+    /**
+     * todo:
+     * @return
+     */
+    [[deprecated("Not implemented yet")]]
+    bool SignAndVerify(const std::vector<byte>& message) {
+      /*
+       * TO SIGN: YOU NEED PRIV KEY
+       * TO VERIFY: YOU NEED PUB KEY
+       *
+       */
+      // Verifier object
+      // Signer object
+      using namespace CryptoPP;
+      RSASS<PSS, SHA256>::Signer signer(*m_private_key);
+
+      // Create signature space
+      size_t length = signer.MaxSignatureLength();
+      SecByteBlock signature(length);
+
+      // Sign message
+      length = signer.SignMessage(*m_auto_seeded_random_pool, message.data(),
+                                  message.size(),
+                                  signature);
+
+      // Resize now we know the true size of the signature
+      signature.resize(length);
+
+      // Verifier object
+      RSASS<PSS, SHA256>::Verifier verifier(*m_public_key);
+
+      // Verify
+      bool result = verifier.VerifyMessage(message.data(),
+                                           message.size(), signature, signature.size());
+      return result;
+    }
 
   private:
-
     void setPrivateKey(const std::string& privateKey) {
       std::string privateKeyBase64 = privateKey;
-      if(privateKeyBase64.starts_with(BEGIN_RSA_PRIVATE_KEY_HEADER)) {
+      if (privateKeyBase64.starts_with(BEGIN_RSA_PRIVATE_KEY_HEADER)) {
         privateKeyBase64.erase(privateKeyBase64.begin(), privateKeyBase64.begin() + BEGIN_RSA_PRIVATE_KEY_HEADER.size());
       }
-      if(privateKeyBase64.ends_with(END_RSA_PRIVATE_KEY_FOOTER)) {
+      if (privateKeyBase64.ends_with(END_RSA_PRIVATE_KEY_FOOTER)) {
         privateKeyBase64.erase(privateKeyBase64.begin() + privateKeyBase64.size() - END_RSA_PRIVATE_KEY_FOOTER.size(), privateKeyBase64.end());
       }
 
@@ -82,16 +120,16 @@ class RSA : public Algorithm {
       CryptoPP::StringSource ss(privateKeyBase64, true, new CryptoPP::Base64Decoder(new CryptoPP::StringSink(decoded)));
       m_private_key.reset(new CryptoPP::RSA::PrivateKey());
 
-      CryptoPP::ArraySource as(reinterpret_cast<const byte*>(decoded.data()), decoded.size(), true);
+      CryptoPP::ArraySource as(reinterpret_cast<const byte *>(decoded.data()), decoded.size(), true);
       m_private_key->Load(as);
     }
 
     void setPublicKey(const std::string& publicKey) {
       std::string publicKeyBase64 = publicKey;
-      if(publicKeyBase64.starts_with(BEGIN_RSA_PUBLIC_KEY_HEADER)) {
+      if (publicKeyBase64.starts_with(BEGIN_RSA_PUBLIC_KEY_HEADER)) {
         publicKeyBase64.erase(publicKeyBase64.begin(), publicKeyBase64.begin() + BEGIN_RSA_PUBLIC_KEY_HEADER.size());
       }
-      if(publicKeyBase64.ends_with(END_RSA_PUBLIC_KEY_FOOTER)) {
+      if (publicKeyBase64.ends_with(END_RSA_PUBLIC_KEY_FOOTER)) {
         publicKeyBase64.erase(publicKeyBase64.begin() + publicKeyBase64.size() - END_RSA_PUBLIC_KEY_FOOTER.size(), publicKeyBase64.end());
       }
 
@@ -100,7 +138,7 @@ class RSA : public Algorithm {
       m_public_key.reset(new CryptoPP::RSA::PublicKey());
 
 
-      CryptoPP::ArraySource as(reinterpret_cast<const byte*>(decoded.data()), decoded.size(), true);
+      CryptoPP::ArraySource as(reinterpret_cast<const byte *>(decoded.data()), decoded.size(), true);
       m_public_key->Load(as);
     }
 
@@ -112,8 +150,7 @@ class RSA : public Algorithm {
 
       std::string base64PrivateKey;
       CryptoPP::StringSource ss(derPrivateKey, true,
-                             new CryptoPP::Base64Encoder(new CryptoPP::StringSink(base64PrivateKey), true /* with newlines */)
-      );
+                                new CryptoPP::Base64Encoder(new CryptoPP::StringSink(base64PrivateKey), true /* with newlines */));
       return BEGIN_RSA_PRIVATE_KEY_HEADER + base64PrivateKey + END_RSA_PRIVATE_KEY_FOOTER;
     }
 
@@ -124,8 +161,7 @@ class RSA : public Algorithm {
 
       std::string base64PublicKey;
       CryptoPP::StringSource ss(derPublicKey, true,
-                             new CryptoPP::Base64Encoder(new CryptoPP::StringSink(base64PublicKey), true /* with newlines */)
-      );
+                                new CryptoPP::Base64Encoder(new CryptoPP::StringSink(base64PublicKey), true /* with newlines */));
       return BEGIN_RSA_PUBLIC_KEY_HEADER + base64PublicKey + END_RSA_PUBLIC_KEY_FOOTER;
     }
 
@@ -134,9 +170,9 @@ class RSA : public Algorithm {
       ENIGMA_ASSERT_OR_THROW(m_rsa_encryptor, "RSA encryptor was not initialized properly");
       return m_rsa_encryptor->FixedMaxPlaintextLength();
     }
-//    std::size_t getKeySize() const {
-//      ENIGMA_ASSERT_OR_THROW(m_params, "RSA params was not initialized properly");
-//    }
+    //    std::size_t getKeySize() const {
+    //      ENIGMA_ASSERT_OR_THROW(m_params, "RSA params was not initialized properly");
+    //    }
     static constexpr std::size_t getMaximumBufferSizeFromKeySize(const std::size_t keySize) {
       return keySize / 8 - 2 * static_cast<std::size_t>(CryptoPP::SHA256::DIGESTSIZE) - 2;
     }
@@ -150,6 +186,16 @@ class RSA : public Algorithm {
 
     std::unique_ptr<RSASettings> m_settings{};
 
+  public:
+    /// Key, description
+    inline static const std::map<std::size_t, std::string_view> RECOMMENDED_KEY_SIZES = {
+      {2048, "Secure for use at least until 2030."},
+      {3072, "Secure for use beyond 2030."},
+      {4096, "Secure for longer-term security needs."},
+      {8192, "Very high security but very slow. Suitable for cases requiring extremely high security,\nthough it's rarely used in practice due to performance concerns."},
+      {16384, "Almost never used due to extreme computational cost.\nThis key size will take about ~5 minutes to complete"},
+      {32768, "Theoretical and impractical for most applications\ndue to excessive computational and storage requirements.\nThis key size will take a lot of time to complete"},
+    };
 };
 
 NS_ENIGMA_END

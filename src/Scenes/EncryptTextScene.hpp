@@ -35,22 +35,6 @@ class EncryptTextScene : public Enigma::Scene {
     // Rsa special stuff
     std::string m_rsa_private_key;
     std::string m_rsa_public_key;
-    inline static const std::map<std::size_t, std::string_view> m_rsa_keysizes = {
-      {2048, "Secure for use at least until 2030."},
-      {3072, "Secure for use beyond 2030."},
-      {4096, "Secure for longer-term security needs."},
-      {8192, "Very high security but very slow. Suitable for cases requiring extremely high security,\nthough it's rarely used in practice due to performance concerns."},
-      {16384, "Almost never used due to extreme computational cost.\nThis key size will take about ~5 minutes to complete"},
-      {32768, "Theoretical and impractical for most applications\ndue to excessive computational and storage requirements.\nThis key size will take a lot of time to complete"},
-    };
     std::size_t m_selected_rsa_keySize = 2048;
 };
 NS_ENIGMA_END
-/*
-Note:
-	 # Compression
-	 - You should compress before encrypting. Encryption turns your data into high-entropy data,
-	 usually indistinguishable from a random stream. Compression relies on patterns in order to gain
-	 any size reduction. Since encryption destroys such patterns, the compression algorithm would be
-	 unable to give you much (if any) reduction in size if you apply it to encrypted data.
-*/

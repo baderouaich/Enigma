@@ -1,5 +1,6 @@
+#include <pch.hpp>
 #include "DecryptTextScene.hpp"
-#include "pch.hpp"
+#include <Algorithm/RSA/RSA.hpp>
 #include <GUI/ImGuiWidgets.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 #include <Utility/Base64.hpp>
@@ -53,6 +54,9 @@ void DecryptTextScene::OnImGuiDraw() {
   static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
   static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
   static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static ImFont *const& font_ubuntu_regular_30 = fonts.at("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = fonts.at("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = fonts.at("Ubuntu-Regular-18");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -117,6 +121,24 @@ void DecryptTextScene::OnImGuiDraw() {
     }
     ImGui::PopFont();
 
+    // RSA Key sizes (will be auto detected from cipher base64 too)
+    ImGui::PushFont(font_ubuntu_regular_18);
+    if (m_type == Algorithm::Type::RSA) {
+      ImGui::Text("%s:", ("Key Size"));
+      ImGui::NewLine();
+      for (const auto& [keySize, description]: RSA::RECOMMENDED_KEY_SIZES) {
+        inline_dummy(1.0f, 0.0f);
+        ImGui::SameLine();
+        const std::string keySizeStr = std::to_string(keySize);
+        if (ImGui::RadioButton(keySizeStr.c_str(), m_selected_rsa_keySize == keySize)) {
+          m_selected_rsa_keySize = keySize;
+        }
+        if (ImGui::IsItemHovered())
+          ImGui::SetTooltip("%s", description.data());
+      }
+    }
+    ImGui::PopFont();
+
     spacing(3);
     ImGui::Separator();
     spacing(3);
@@ -143,22 +165,39 @@ void DecryptTextScene::OnImGuiDraw() {
     ImGui::Separator();
     spacing(3);
 
-    // Password used for encryption
-    ImGui::PushFont(font_montserrat_medium_20);
-    {
-      // Label
-      ImGui::Text("%s:", ("Password"));
+    // Private key for RSA
+    if (m_type == Algorithm::Type::RSA) {
+      ImGui::PushFont(font_ubuntu_regular_18);
+      const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 10);
+      ImGui::Text("%s:", "Private Key");
+      ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
+      ImGui::PushID("LoadPrivateKeyFromFileButton");
+      if (ImGuiWidgets::Button("Load from file...")) {
+        if (std::vector<std::string> filenames = OpenFileDialog{"Load Private Key...", ".", false}.Show(); !filenames.empty()) {
+          if (fs::is_regular_file(filenames[0]))
+            FileUtils::ReadString(filenames[0], m_rsa_private_key);
+        }
+      }
+      ImGui::PopID();
+      ImGui::PopFont();
+    } else {
+      // Password used for encryption
+      ImGui::PushFont(font_montserrat_medium_20);
+      {
+        // Label
+        ImGui::Text("%s:", ("Password"));
 
-      // Input text
-      ImGuiWidgets::InputText("##password", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        // Input text
+        ImGuiWidgets::InputText("##password", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
-      // Bytes count
-      ImGui::PushFont(font_montserrat_medium_12);
-      //ImGui::Text("%zu bytes", m_password.size());
-      ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
+        // Bytes count
+        ImGui::PushFont(font_montserrat_medium_12);
+        //ImGui::Text("%zu bytes", m_password.size());
+        ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
+        ImGui::PopFont();
+      }
       ImGui::PopFont();
     }
-    ImGui::PopFont();
 
 
     // Decrypted/Recovered Text
@@ -266,8 +305,12 @@ void DecryptTextScene::OnDecryptButtonPressed() {
     (void) DialogUtils::Warn(("Cipher Base64 is empty"));
     return;
   }
-  if (m_password.empty()) {
+  if (m_password.empty() && m_type != Algorithm::Type::RSA) {
     (void) DialogUtils::Warn(("Encryption password is empty"));
+    return;
+  }
+  if (m_type == Algorithm::Type::RSA && m_rsa_private_key.empty()) {
+    (void) DialogUtils::Warn("RSA private key is empty");
     return;
   }
 
@@ -278,12 +321,28 @@ void DecryptTextScene::OnDecryptButtonPressed() {
 
     // Auto detect encryption algorithm
     //m_type = Algorithm::DetectFromCipherBase64(m_cipher_base64);
-    m_type = Meta::EnigmaFooter::fromBytes(m_cipher).algo;
+    Meta::EnigmaFooter footer = Meta::EnigmaFooter::fromBytes(m_cipher);
+    m_type = footer.algo;
     ENIGMA_INFO("Successfully auto-detected algorithm used for encryption which is {0}", Algorithm::AlgoTypeEnumToStr(m_type));
+
+    // Auto detect RSA key size
+    if (m_type == Algorithm::Type::RSA) {
+      ENIGMA_ASSERT_OR_THROW(footer.extra.size() == sizeof(m_selected_rsa_keySize), "Could not read RSA key size from EnigmaFooter::extra");
+      std::memcpy(&m_selected_rsa_keySize, footer.extra.data(), footer.extra.size());
+      ENIGMA_INFO("Successfully auto-detected RSA key size used for encryption which is {0}", m_selected_rsa_keySize);
+    }
 
     // Create encryptor based on selected algorithm type
     const auto algorithm = Algorithm::CreateFromType(m_type, Algorithm::Intent::Decrypt);
     ENIGMA_ASSERT_OR_THROW(algorithm, ("Failed to create algorithm from type"));
+
+    // RSA SETTINGS
+    if (algorithm->GetType() == Algorithm::Type::RSA) {
+      RSA::RSASettings settings{};
+      settings.keySize = m_selected_rsa_keySize;
+      settings.privateKey = m_rsa_private_key; // TODO: maybe allow user to put just the path of the private key?
+      dynamic_cast<RSA *>(algorithm.get())->setSettings(std::move(settings));
+    }
 
     // Decrypt text
     std::vector<byte> recovered = algorithm->Decrypt(m_password, m_cipher);
