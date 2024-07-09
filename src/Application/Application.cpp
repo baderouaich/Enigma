@@ -1,5 +1,5 @@
-#include "Application.hpp"
 #include <pch.hpp>
+#include "Application.hpp"
 
 #include <GUI/ImGuiRenderer.hpp>
 #include <Utility/DialogUtils.hpp>

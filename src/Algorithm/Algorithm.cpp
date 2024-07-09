@@ -1,5 +1,5 @@
-#include "Algorithm.hpp"
 #include <pch.hpp>
+#include "Algorithm.hpp"
 
 #include "AES/AES.hpp"
 #include "Blowfish/Blowfish.hpp"

@@ -1,7 +1,7 @@
+#include <pch.hpp>
 #include "MyEncryptionsScene.hpp"
 #include "ViewEncryptionScene.hpp"
 #include <Utility/DialogUtils.hpp>
-#include <pch.hpp>
 
 #include <Application/Application.hpp>
 #include <GUI/ImGuiWidgets.hpp>

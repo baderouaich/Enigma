@@ -1,6 +1,6 @@
+#include <pch.hpp>
 #include "Base64.hpp"
 #include <base64.h> // Crypto++'s Base64 Encode/Decoder
-#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 

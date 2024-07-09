@@ -1,5 +1,5 @@
-#include "Twofish.hpp"
 #include <pch.hpp>
+#include "Twofish.hpp"
 
 NS_ENIGMA_BEGIN
 

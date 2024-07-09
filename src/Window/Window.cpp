@@ -1,5 +1,5 @@
-#include "Window.hpp"
 #include <pch.hpp>
+#include "Window.hpp"
 
 #include <Analytics/Hardware/CPU/CPUInfo.hpp>
 #include <Analytics/Hardware/RAM/RAMInfo.hpp>

@@ -1,5 +1,5 @@
-#include "Clipboard.hpp"
 #include <pch.hpp>
+#include "Clipboard.hpp"
 
 #include <Application/Application.hpp>
 #include <GLFW/glfw3.h>

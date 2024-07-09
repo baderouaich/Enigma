@@ -1,5 +1,5 @@
+#include <pch.hpp>
 #include "CPUInfo.hpp"
-#include "pch.hpp"
 
 
 NS_ENIGMA_BEGIN

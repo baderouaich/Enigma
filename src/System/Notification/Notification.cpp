@@ -1,5 +1,5 @@
-#include "Notification.hpp"
 #include <pch.hpp>
+#include "Notification.hpp"
 
 NS_ENIGMA_BEGIN
 

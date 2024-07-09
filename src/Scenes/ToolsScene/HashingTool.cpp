@@ -1,10 +1,10 @@
+#include <pch.hpp>
 #include "HashingTool.hpp"
 #include <Application/Application.hpp>
 #include <GUI/ImGuiWidgets.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 #include <Utility/CryptoPPUtils.hpp>
 #include <Utility/DialogUtils.hpp>
-#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 void HashingTool::OnCreate() {

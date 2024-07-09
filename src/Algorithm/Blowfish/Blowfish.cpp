@@ -1,5 +1,5 @@
-#include "Blowfish.hpp"
 #include <pch.hpp>
+#include "Blowfish.hpp"
 
 NS_ENIGMA_BEGIN
 

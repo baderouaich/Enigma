@@ -1,9 +1,9 @@
+#include <pch.hpp>
 #include "PasswordGeneratorTool.hpp"
 #include <GUI/ImGuiWidgets.hpp>
 #include <System/Clipboard/Clipboard.hpp>
 #include <Utility/Random.hpp>
 #include <cstring>
-#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 void PasswordGeneratorTool::OnCreate() {

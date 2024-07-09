@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma warning(push, 0)
-
 /// ENIGMA Core (Must be before platform includes to detect current platform)
 #include <Core/Core.hpp>
 ///
@@ -84,6 +82,7 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <bit>
 ///
 
 /// the C Standard Libraries
@@ -101,4 +100,3 @@
 #include <ctime>
 #include <cwchar>
 ///
-#pragma warning(pop)

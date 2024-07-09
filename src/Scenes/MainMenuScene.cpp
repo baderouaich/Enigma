@@ -1,3 +1,4 @@
+#include <pch.hpp>
 #include "MainMenuScene.hpp"
 #include "DecryptFileScene.hpp"
 #include "DecryptTextScene.hpp"
@@ -6,7 +7,6 @@
 #include "MyEncryptionsScene.hpp"
 #include "ToolsScene/ToolsScene.hpp"
 #include "Utility/DateTimeUtils.hpp"
-#include <pch.hpp>
 
 #include <GUI/ImGuiWidgets.hpp>
 #include <Networking/CheckForUpdates.hpp>

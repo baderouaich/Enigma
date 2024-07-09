@@ -1,5 +1,5 @@
+#include <pch.hpp>
 #include "EncryptTextScene.hpp"
-#include "pch.hpp"
 #include <Database/Database.hpp>
 #include <Database/Models/Encryption.hpp>
 #include <GUI/ImGuiWidgets.hpp>

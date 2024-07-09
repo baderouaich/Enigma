@@ -1,5 +1,5 @@
+#include <pch.hpp>
 #include "XOREncryptionTool.hpp"
-#include "pch.hpp"
 #include <Application/Application.hpp>
 #include <GUI/ImGuiWidgets.hpp>
 #include <System/Clipboard/Clipboard.hpp>

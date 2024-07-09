@@ -1,5 +1,5 @@
-#include "SelectFolderDialog.hpp"
 #include <pch.hpp>
+#include "SelectFolderDialog.hpp"
 
 NS_ENIGMA_BEGIN
 

@@ -1,7 +1,7 @@
+#include <pch.hpp>
 #include "ToolsScene.hpp"
 #include <Application/Application.hpp>
 #include <imgui.h>
-#include <pch.hpp>
 
 #include "HashingTool.hpp"
 #include "PasswordGeneratorTool.hpp"

@@ -1,5 +1,5 @@
-#include "ChaCha20Poly1305.hpp"
 #include <pch.hpp>
+#include "ChaCha20Poly1305.hpp"
 
 NS_ENIGMA_BEGIN
 

@@ -1,5 +1,5 @@
-#include "IDEA.hpp"
 #include <pch.hpp>
+#include "IDEA.hpp"
 
 NS_ENIGMA_BEGIN
 

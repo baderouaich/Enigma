@@ -1,7 +1,7 @@
+#include <pch.hpp>
 #include "SystemAndHardwareInfoTool.hpp"
 #include <Application/Application.hpp>
 #include <Utility/SizeUtils.hpp>
-#include <pch.hpp>
 
 
 NS_ENIGMA_BEGIN

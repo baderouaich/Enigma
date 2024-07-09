@@ -23,5 +23,7 @@ TEST_CASE("Endianness") {
   } else [[unlikely]] {
     REQUIRE(false);
   }
-  std::cout << std::endl;
+  Catch::cout() << std::endl;
+
+
 }

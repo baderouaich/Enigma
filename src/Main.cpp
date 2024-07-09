@@ -1,5 +1,5 @@
-#include <Enigma.hpp>
 #include <pch.hpp>
+#include <Enigma.hpp>
 
 static void SignalHandler(const int sig);
 

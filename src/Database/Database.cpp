@@ -1,7 +1,7 @@
+#include <pch.hpp>
 #include "Database.hpp"
 #include <Utility/FileUtils.hpp>
 #include <Utility/ResourceUtils.hpp>
-#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 

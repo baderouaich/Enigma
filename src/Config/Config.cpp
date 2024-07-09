@@ -1,6 +1,6 @@
+#include <pch.hpp>
 #include "Config.hpp"
 #include <Logger/Logger.hpp>
-#include <pch.hpp>
 
 NS_ENIGMA_BEGIN
 
