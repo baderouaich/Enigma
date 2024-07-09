@@ -80,7 +80,7 @@ class RSA : public Algorithm {
       bool result = verifier.VerifyMessage(message.data(),
                                            message.size(), signature, signature.size());
       return result;
-    }it gu
+    }
 
   private:
     void initialize();
