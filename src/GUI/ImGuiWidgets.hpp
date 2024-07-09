@@ -274,7 +274,7 @@ class ImGuiWidgets final {
         ImGui::PushFont(font_audiowide_regular_20); // text font
         const auto text_size = ImGui::CalcTextSize(text);
         ImGui::SetCursorPosX((win_w - text_size.x) / 2.0f);
-        ImGui::TextWrapped(text);
+        ImGui::TextWrapped("%s",text);
         ImGui::PopFont();
         ImGui::EndPopup();
       }

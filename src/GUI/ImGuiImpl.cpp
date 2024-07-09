@@ -1,5 +1,3 @@
-#include <pch.hpp>
-
 #ifndef IMGUI_IMPL_OPENGL_LOADER_GLAD
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD 1
 #endif
