@@ -153,25 +153,34 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_random.html#a43e23e0969369a6f86aca9e7fbaf8ec0">   90</a></span>&#160;    <span class="keyword">static</span> std::vector&lt;byte&gt; <a class="code" href="class_random.html#a43e23e0969369a6f86aca9e7fbaf8ec0">Bytes</a>(<span class="keyword">const</span> std::size_t length) noexcept {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="keyword">using</span> random_bytes_engine = std::independent_bits_engine&lt;std::default_random_engine, CHAR_BIT, byte&gt;;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keyword">static</span> random_bytes_engine rbe{m_engine};</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      std::vector&lt;byte&gt; bytes(length);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      std::generate(bytes.begin(), bytes.end(), std::ref(rbe));</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">return</span> bytes;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">  100</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Reseed</a>() {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      m_engine.seed(m_seed());</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::random_device m_seed{};</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::default_random_engine m_engine{m_seed()};</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;};</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_RANDOM_H</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      std::vector&lt;byte&gt; bytes(length);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#ifndef _MSC_VER</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keyword">using</span> random_bytes_engine = std::independent_bits_engine&lt;std::default_random_engine, CHAR_BIT, byte&gt;;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keyword">static</span> random_bytes_engine gen{m_engine};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      std::generate(bytes.begin(), bytes.end(), std::ref(gen));</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="comment">// MSVC&#39;s std::independent_bits_engine doesn&#39;t take std::uint8_t</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      std::uniform_int_distribution&lt;std::uint16_t&gt; dist{<span class="keyword">static_cast&lt;</span>std::uint16_t<span class="keyword">&gt;</span>(std::numeric_limits&lt;byte&gt;::min()), <span class="keyword">static_cast&lt;</span>std::uint16_t<span class="keyword">&gt;</span>(std::numeric_limits&lt;byte&gt;::max())};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      std::generate(bytes.begin(), bytes.end(), [&amp;]() -&gt; <span class="keywordtype">byte</span> {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        return dist(m_engine);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            });</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keywordflow">return</span> bytes;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">  109</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Reseed</a>() {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      m_engine.seed(m_seed());</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::random_device m_seed{};</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">inline</span> <span class="keyword">static</span> std::default_random_engine m_engine{m_seed()};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_RANDOM_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_key_codes_8hpp_html_a2947a2ca8156371b14dcc077072dcaf5ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5ab9ece18c950afbfa6b0fdbfa4ff731d3">KeyCode::T</a></div><div class="ttdeci">@ T</div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00013">Macros.hpp:13</a></div></div>
@@ -182,7 +191,7 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div class="ttc" id="aclass_random_html_a43e23e0969369a6f86aca9e7fbaf8ec0"><div class="ttname"><a href="class_random.html#a43e23e0969369a6f86aca9e7fbaf8ec0">Random::Bytes</a></div><div class="ttdeci">static std::vector&lt; byte &gt; Bytes(const std::size_t length) noexcept</div><div class="ttdoc">Generates a random vector of bytes.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00090">Random.hpp:90</a></div></div>
 <div class="ttc" id="aclass_random_html_a6dd16775002ce89c60bef0749b35ff3b"><div class="ttname"><a href="class_random.html#a6dd16775002ce89c60bef0749b35ff3b">Random::Int</a></div><div class="ttdeci">static std::enable_if&lt; std::is_integral&lt; T &gt;::value &amp;&amp;!std::is_same&lt; T, bool &gt;::value, T &gt;::type Int(const T min, const T max)</div><div class="ttdoc">Generates a random integer between a range.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00038">Random.hpp:38</a></div></div>
 <div class="ttc" id="aclass_random_html_a9c8eecba49e71c80dbbc84b093b1b09f"><div class="ttname"><a href="class_random.html#a9c8eecba49e71c80dbbc84b093b1b09f">Random::Real</a></div><div class="ttdeci">static std::enable_if&lt; std::is_floating_point&lt; T &gt;::value, T &gt;::type Real(const T min, const T max)</div><div class="ttdoc">Generates a random real between a range.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00024">Random.hpp:24</a></div></div>
-<div class="ttc" id="aclass_random_html_aa813b66cca7fd2e7416c0a03c2225732"><div class="ttname"><a href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Random::Reseed</a></div><div class="ttdeci">static void Reseed()</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00100">Random.hpp:100</a></div></div>
+<div class="ttc" id="aclass_random_html_aa813b66cca7fd2e7416c0a03c2225732"><div class="ttname"><a href="class_random.html#aa813b66cca7fd2e7416c0a03c2225732">Random::Reseed</a></div><div class="ttdeci">static void Reseed()</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00109">Random.hpp:109</a></div></div>
 <div class="ttc" id="aclass_random_html_abd88f50c53f3a878f14ce529e4522f4c"><div class="ttname"><a href="class_random.html#abd88f50c53f3a878f14ce529e4522f4c">Random::Str</a></div><div class="ttdeci">static std::string Str(const std::size_t length) noexcept</div><div class="ttdoc">Generates a random string.</div><div class="ttdef"><b>Definition:</b> <a href="_random_8hpp_source.html#l00059">Random.hpp:59</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -190,7 +199,7 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_random_8hpp.html">Random.hpp</a></li>
-    <li class="footer">Generated on Tue Jul 9 2024 15:01:20 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue Jul 9 2024 18:24:42 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
