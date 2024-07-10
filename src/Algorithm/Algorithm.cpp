@@ -19,7 +19,7 @@ Algorithm::Algorithm(Type type, Intent intent) noexcept
     : m_type(type),
       m_intent(intent) {
   // we only need random seeder to generate random iv when encrypting
-  if ((static_cast<bool>(intent & Intent::Encrypt) || m_type == Type::RSA) && !m_auto_seeded_random_pool )
+  if ((static_cast<bool>(intent & Intent::Encrypt) || m_type == Type::RSA) && !m_auto_seeded_random_pool)
     m_auto_seeded_random_pool = std::make_unique<CryptoPP::AutoSeededRandomPool>();
 }
 
@@ -45,8 +45,8 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const std::string& algorith
     return std::make_unique<IDEA>(intent);
   else if (AlgoIn({"blowfish", "blowfish-eax", "blowfish_eax", "blowfisheax"}))
     return std::make_unique<Blowfish>(intent);
-  else if (AlgoIn({ "rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
-  	return std::make_unique<RSA>(intent);
+  else if (AlgoIn({"rsa", "rsa-oaep", "rsa-oaep-sha256", "rsa_oaep", "rsa-sha256"}))
+    return std::make_unique<RSA>(intent);
   else
     throw std::runtime_error("Unsupported algorithm: " + algorithm_name);
 }
@@ -62,66 +62,6 @@ std::vector<byte> Algorithm::GenerateRandomIV(const std::size_t size) {
   return iv;
 }
 
-#if 0
-Algorithm::Type Algorithm::DetectFromCipher(const std::string& cipher)
-{
-	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Cannot auto-detect algorithm without cipher text");
-
-	// extract first byte from cipher which must be the mode type used in encryption
-	const byte cipher_first_byte = *cipher.begin();
-
-	// Check if we detected a valid encryption algorithm mode
-	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::BEGIN), static_cast<byte>(Algorithm::Type::END)),
-		"Could not auto-detect algorithm used for encryption");
-
-	// if alles gut, return type
-	return static_cast<Algorithm::Type>(cipher_first_byte);
-}
-
-Algorithm::Type Algorithm::DetectFromCipherBase64(const std::string& cipher_base64)
-{
-	ENIGMA_ASSERT_OR_THROW(!cipher_base64.empty(), "Cannot auto-detect algorithm without cipher base64 text");
-
-	// Decode base64 to cipher
-	std::vector<byte> cipher = Base64::Decode(reinterpret_cast<const byte *>(cipher_base64.data()), cipher_base64.size());
-	// check if successfully decoded
-	ENIGMA_ASSERT_OR_THROW(!cipher.empty(), "Failed to decode cipher base64! please make sure you have the exact cipher base64 text you had in encryption");
-	//NOTE: no need to decompress, since files and text are encrypted after compressed.
-
-
-	// pass cipher to another DetectFromCipher() to complete the work
-	return DetectFromCipher(cipher);
-}
-
-Algorithm::Type Algorithm::DetectFromFile(const std::string& filename)
-{
-	// check if the infile exists
-	ENIGMA_ASSERT_OR_THROW(!filename.empty(), "input file name is empty");
-	ENIGMA_ASSERT_OR_THROW(fs::exists(filename), "input file does not exist");
-	ENIGMA_ASSERT_OR_THROW(!fs::is_empty(filename), "input file is empty");
-	ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(filename), "input file is not a regular file");
-
-	//// Read file cipher
-	//std::string cipher{};
-	//ENIGMA_ASSERT_OR_THROW(FileUtils::Read(filename, cipher), "Failed to read file " + filename);
-	////NOTE: no need to decompress, since files and text are encrypted after compressed.
-
-	// extract first byte from infile cipher which must be the algorithm type used in encryption
-	byte cipher_first_byte = static_cast<byte>(Algorithm::Type::END) + 1;
-	if (std::ifstream ifs{ filename, std::ios::binary | std::ios::in })
-	{
-		ifs >> cipher_first_byte;
-		ifs.close();
-	}
-
-	// Check if we detected a valid encryption algorithm
-	ENIGMA_ASSERT_OR_THROW(ENIGMA_IS_BETWEEN(cipher_first_byte, static_cast<byte>(Algorithm::Type::BEGIN), static_cast<byte>(Algorithm::Type::END)),
-		"Could not auto-detect algorithm used for encryption");
-
-	return static_cast<Algorithm::Type>(cipher_first_byte);
-}
-
-#endif
 std::string Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept {
 #define CASE_RET(e)        \
   case Algorithm::Type::e: \
