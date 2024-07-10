@@ -2,9 +2,6 @@
 #ifndef ENIGMA_SINGLE_INSTANCE_H
 #define ENIGMA_SINGLE_INSTANCE_H
 
-#include <Core/Core.hpp>
-#include <Logger/Logger.hpp>
-
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 #define WIN32_LEAN_AND_MEAN
 #if defined(_WIN32_WINNT)
@@ -23,6 +20,8 @@ using socket_t = std::int32_t;
 constexpr socket_t M_INVALID_SOCKET = -1;
 #endif
 
+#include <Core/Core.hpp>
+#include <Logger/Logger.hpp>
 
 NS_ENIGMA_BEGIN
 /** @brief Single process instance class
