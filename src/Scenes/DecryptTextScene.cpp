@@ -342,6 +342,7 @@ void DecryptTextScene::OnDecryptButtonPressed() {
       settings.keySize = m_selected_rsa_keySize;
       settings.privateKey = m_rsa_private_key; // TODO: maybe allow user to put just the path of the private key?
       dynamic_cast<RSA *>(algorithm.get())->setSettings(std::move(settings));
+      m_password.clear();
     }
 
     // Decrypt text

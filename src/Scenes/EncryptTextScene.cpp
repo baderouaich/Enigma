@@ -380,6 +380,7 @@ void EncryptTextScene::OnEncryptButtonPressed() {
       RSA::RSASettings settings{};
       settings.keySize = m_selected_rsa_keySize;
       dynamic_cast<RSA *>(algorithm.get())->setSettings(std::move(settings));
+      m_password.clear();
     }
 
     // Encrypt text
