@@ -87,7 +87,8 @@ $(document).ready(function(){initNavTree('namespace_enigma.html',''); initResiza
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Enigma Namespace Reference</div>  </div>
 </div><!--header-->
@@ -95,10 +96,14 @@ $(document).ready(function(){initNavTree('namespace_enigma.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespace_enigma_1_1_big_endian"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma_1_1_big_endian.html">BigEndian</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_enigma_1_1_constants"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma_1_1_constants.html">Constants</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_enigma_1_1_date_time_utils"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma_1_1_date_time_utils.html">DateTimeUtils</a></td></tr>
 <tr class="memdesc:namespace_enigma_1_1_date_time_utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Namespace contains useful Date Time related utility functions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_enigma_1_1_little_endian"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma_1_1_little_endian.html">LittleEndian</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -110,6 +115,15 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:af2a42f76a7252581a38e63841d73ee64"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64">byte</a> = std::uint8_t</td></tr>
 <tr class="separator:af2a42f76a7252581a38e63841d73ee64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4d634d8eaf14088424523e087f5f82a9"><td class="memItemLeft" align="right" valign="top">constexpr std::uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">BSwap64</a> (std::uint64_t host_int)</td></tr>
+<tr class="separator:a4d634d8eaf14088424523e087f5f82a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb519fd22395cd4456f76972295918b"><td class="memItemLeft" align="right" valign="top">constexpr std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">BSwap32</a> (std::uint32_t host_int)</td></tr>
+<tr class="separator:a7fb519fd22395cd4456f76972295918b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4477200a9971c49d59b868ebae481689"><td class="memItemLeft" align="right" valign="top">constexpr std::uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">BSwap16</a> (std::uint16_t host_int)</td></tr>
+<tr class="separator:a4477200a9971c49d59b868ebae481689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="af2a42f76a7252581a38e63841d73ee64"></a>
@@ -128,13 +142,98 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a4477200a9971c49d59b868ebae481689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4477200a9971c49d59b868ebae481689">&#9670;&nbsp;</a></span>BSwap16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::uint16_t Enigma::BSwap16 </td>
+          <td>(</td>
+          <td class="paramtype">std::uint16_t&#160;</td>
+          <td class="paramname"><em>host_int</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_endianness_8hpp_source.html#l00042">42</a> of file <a class="el" href="_endianness_8hpp_source.html">Endianness.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7fb519fd22395cd4456f76972295918b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb519fd22395cd4456f76972295918b">&#9670;&nbsp;</a></span>BSwap32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::uint32_t Enigma::BSwap32 </td>
+          <td>(</td>
+          <td class="paramtype">std::uint32_t&#160;</td>
+          <td class="paramname"><em>host_int</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_endianness_8hpp_source.html#l00029">29</a> of file <a class="el" href="_endianness_8hpp_source.html">Endianness.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4d634d8eaf14088424523e087f5f82a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d634d8eaf14088424523e087f5f82a9">&#9670;&nbsp;</a></span>BSwap64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::uint64_t Enigma::BSwap64 </td>
+          <td>(</td>
+          <td class="paramtype">std::uint64_t&#160;</td>
+          <td class="paramname"><em>host_int</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_endianness_8hpp_source.html#l00012">12</a> of file <a class="el" href="_endianness_8hpp_source.html">Endianness.hpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_enigma.html">Enigma</a></li>
-    <li class="footer">Generated on Tue Jul 9 2024 21:25:00 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jul 10 2024 17:25:04 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
