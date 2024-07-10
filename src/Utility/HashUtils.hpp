@@ -46,7 +46,9 @@ class HashUtils final {
     static std::array<byte, Algo::DIGESTSIZE> fileBytes(const fs::path& filename) {
       std::array<byte, Algo::DIGESTSIZE> out{};
       Algo algo{};
-      std::ifstream file{filename};
+      std::ifstream file{filename, std::ios::binary}; // very important to open file in binary mode otherwise you will get
+                                                                // different hash values in different OS (unix2dos dos2unix kinda crap)
+
       ENIGMA_ASSERT_OR_THROW(file.good(), "No such file " + filename.string());
       const CryptoPP::FileSource fs(file,
                                     true,
@@ -59,7 +61,8 @@ class HashUtils final {
     static std::string fileStr(const fs::path& filename, const bool uppercase = false) {
       std::string out{};
       Algo algo{};
-      std::ifstream file{filename, std::ios::binary};
+      std::ifstream file{filename, std::ios::binary}; // very important to open file in binary mode otherwise you will get
+                                                                // different hash values in different OS (unix2dos dos2unix kinda crap)
       ENIGMA_ASSERT_OR_THROW(file.good(), "No such file " + filename.string());
       const CryptoPP::FileSource fs(file, true, new CryptoPP::HashFilter(algo, new CryptoPP::HexEncoder(new CryptoPP::StringSink(out), uppercase)));
       file.close();
