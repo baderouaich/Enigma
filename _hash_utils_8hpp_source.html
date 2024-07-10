@@ -136,55 +136,58 @@ $(document).ready(function(){initNavTree('_hash_utils_8hpp_source.html',''); ini
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_hash_utils.html#a5061deb459c0939ff34e5ff01b0023b7">   46</a></span>&#160;    <span class="keyword">static</span> std::array&lt;byte, Algo::DIGESTSIZE&gt; <a class="code" href="class_hash_utils.html#a5061deb459c0939ff34e5ff01b0023b7">fileBytes</a>(<span class="keyword">const</span> fs::path&amp; filename) {</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      std::array&lt;byte, Algo::DIGESTSIZE&gt; out{};</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      Algo algo{};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      std::ifstream file{filename};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <a class="code" href="_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2">ENIGMA_ASSERT_OR_THROW</a>(file.good(), <span class="stringliteral">&quot;No such file &quot;</span> + filename.string());</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <span class="keyword">const</span> CryptoPP::FileSource fs(file,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                    <span class="keyword">true</span>,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                    <span class="keyword">new</span> CryptoPP::HashFilter(algo, <span class="keyword">new</span> CryptoPP::ArraySink(out.data(), out.size())));</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      file.close();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keywordflow">return</span> out;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Algo = CryptoPP::SHA256&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_hash_utils.html#add1f21561ec6d0dfd111202b0c4f444e">   59</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_hash_utils.html#add1f21561ec6d0dfd111202b0c4f444e">fileStr</a>(<span class="keyword">const</span> fs::path&amp; filename, <span class="keyword">const</span> <span class="keywordtype">bool</span> uppercase = <span class="keyword">false</span>) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      std::string out{};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      Algo algo{};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      std::ifstream file{filename, std::ios::binary};</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <a class="code" href="_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2">ENIGMA_ASSERT_OR_THROW</a>(file.good(), <span class="stringliteral">&quot;No such file &quot;</span> + filename.string());</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keyword">const</span> CryptoPP::FileSource fs(file, <span class="keyword">true</span>, <span class="keyword">new</span> CryptoPP::HashFilter(algo, <span class="keyword">new</span> CryptoPP::HexEncoder(<span class="keyword">new</span> CryptoPP::StringSink(out), uppercase)));</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      file.close();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">return</span> out;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Algo = CryptoPP::SHA256&gt;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5">   70</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5">stringify</a>(<span class="keyword">const</span> std::array&lt;byte, Algo::DIGESTSIZE&gt;&amp; hash, <span class="keyword">const</span> <span class="keywordtype">bool</span> uppercase = <span class="keyword">false</span>) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      std::ostringstream out{};</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">byte</span> digest: hash) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        out &lt;&lt; std::hex &lt;&lt; std::setfill(&#39;0&#39;) &lt;&lt; std::setw(2) &lt;&lt; static_cast&lt;int&gt;(digest);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">return</span> out.str();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      std::ifstream file{filename, std::ios::binary}; <span class="comment">// very important to open file in binary mode otherwise you will get</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                                                <span class="comment">// different hash values in different OS (unix2dos dos2unix kinda crap)</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <a class="code" href="_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2">ENIGMA_ASSERT_OR_THROW</a>(file.good(), <span class="stringliteral">&quot;No such file &quot;</span> + filename.string());</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keyword">const</span> CryptoPP::FileSource fs(file,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                    <span class="keyword">true</span>,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                    <span class="keyword">new</span> CryptoPP::HashFilter(algo, <span class="keyword">new</span> CryptoPP::ArraySink(out.data(), out.size())));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      file.close();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordflow">return</span> out;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Algo = CryptoPP::SHA256&gt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="class_hash_utils.html#add1f21561ec6d0dfd111202b0c4f444e">   61</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_hash_utils.html#add1f21561ec6d0dfd111202b0c4f444e">fileStr</a>(<span class="keyword">const</span> fs::path&amp; filename, <span class="keyword">const</span> <span class="keywordtype">bool</span> uppercase = <span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      std::string out{};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      Algo algo{};</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      std::ifstream file{filename, std::ios::binary}; <span class="comment">// very important to open file in binary mode otherwise you will get</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                                                <span class="comment">// different hash values in different OS (unix2dos dos2unix kinda crap)</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <a class="code" href="_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2">ENIGMA_ASSERT_OR_THROW</a>(file.good(), <span class="stringliteral">&quot;No such file &quot;</span> + filename.string());</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <span class="keyword">const</span> CryptoPP::FileSource fs(file, <span class="keyword">true</span>, <span class="keyword">new</span> CryptoPP::HashFilter(algo, <span class="keyword">new</span> CryptoPP::HexEncoder(<span class="keyword">new</span> CryptoPP::StringSink(out), uppercase)));</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      file.close();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordflow">return</span> out;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Algo = CryptoPP::SHA256&gt;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5">   73</a></span>&#160;    <span class="keyword">static</span> std::string <a class="code" href="class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5">stringify</a>(<span class="keyword">const</span> std::array&lt;byte, Algo::DIGESTSIZE&gt;&amp; hash, <span class="keyword">const</span> <span class="keywordtype">bool</span> uppercase = <span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      std::ostringstream out{};</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keywordtype">byte</span> digest: hash) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        out &lt;&lt; std::hex &lt;&lt; std::setfill(&#39;0&#39;) &lt;&lt; std::setw(2) &lt;&lt; static_cast&lt;int&gt;(digest);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keywordflow">return</span> out.str();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00013">Macros.hpp:13</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a9ca8408337138cf0f5171fa659d1a1e2"><div class="ttname"><a href="_macros_8hpp.html#a9ca8408337138cf0f5171fa659d1a1e2">ENIGMA_ASSERT_OR_THROW</a></div><div class="ttdeci">#define ENIGMA_ASSERT_OR_THROW(x, msg)</div><div class="ttdef"><b>Definition:</b> <a href="_macros_8hpp_source.html#l00041">Macros.hpp:41</a></div></div>
 <div class="ttc" id="aclass_hash_utils_html"><div class="ttname"><a href="class_hash_utils.html">HashUtils</a></div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00020">HashUtils.hpp:20</a></div></div>
 <div class="ttc" id="aclass_hash_utils_html_a5061deb459c0939ff34e5ff01b0023b7"><div class="ttname"><a href="class_hash_utils.html#a5061deb459c0939ff34e5ff01b0023b7">HashUtils::fileBytes</a></div><div class="ttdeci">static std::array&lt; byte, Algo::DIGESTSIZE &gt; fileBytes(const fs::path &amp;filename)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00046">HashUtils.hpp:46</a></div></div>
-<div class="ttc" id="aclass_hash_utils_html_a640e5f3b19cbea405a4d4c52cfe1c3e5"><div class="ttname"><a href="class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5">HashUtils::stringify</a></div><div class="ttdeci">static std::string stringify(const std::array&lt; byte, Algo::DIGESTSIZE &gt; &amp;hash, const bool uppercase=false)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00070">HashUtils.hpp:70</a></div></div>
+<div class="ttc" id="aclass_hash_utils_html_a640e5f3b19cbea405a4d4c52cfe1c3e5"><div class="ttname"><a href="class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5">HashUtils::stringify</a></div><div class="ttdeci">static std::string stringify(const std::array&lt; byte, Algo::DIGESTSIZE &gt; &amp;hash, const bool uppercase=false)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00073">HashUtils.hpp:73</a></div></div>
 <div class="ttc" id="aclass_hash_utils_html_a73235ec110a13d7ced94c7ed02e866e0"><div class="ttname"><a href="class_hash_utils.html#a73235ec110a13d7ced94c7ed02e866e0">HashUtils::bytes</a></div><div class="ttdeci">static std::array&lt; byte, Algo::DIGESTSIZE &gt; bytes(const std::vector&lt; byte &gt; &amp;buffer)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00033">HashUtils.hpp:33</a></div></div>
 <div class="ttc" id="aclass_hash_utils_html_aaa76d32c1712c2b1763fb3a05546b800"><div class="ttname"><a href="class_hash_utils.html#aaa76d32c1712c2b1763fb3a05546b800">HashUtils::bytes</a></div><div class="ttdeci">static std::array&lt; byte, Algo::DIGESTSIZE &gt; bytes(const byte *buffer, const std::size_t buffSize)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00025">HashUtils.hpp:25</a></div></div>
 <div class="ttc" id="aclass_hash_utils_html_acafbae05312eeaa1d009c871130827cd"><div class="ttname"><a href="class_hash_utils.html#acafbae05312eeaa1d009c871130827cd">HashUtils::str</a></div><div class="ttdeci">static std::string str(const std::vector&lt; byte &gt; &amp;buffer, const bool uppercase=false)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00038">HashUtils.hpp:38</a></div></div>
-<div class="ttc" id="aclass_hash_utils_html_add1f21561ec6d0dfd111202b0c4f444e"><div class="ttname"><a href="class_hash_utils.html#add1f21561ec6d0dfd111202b0c4f444e">HashUtils::fileStr</a></div><div class="ttdeci">static std::string fileStr(const fs::path &amp;filename, const bool uppercase=false)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00059">HashUtils.hpp:59</a></div></div>
+<div class="ttc" id="aclass_hash_utils_html_add1f21561ec6d0dfd111202b0c4f444e"><div class="ttname"><a href="class_hash_utils.html#add1f21561ec6d0dfd111202b0c4f444e">HashUtils::fileStr</a></div><div class="ttdeci">static std::string fileStr(const fs::path &amp;filename, const bool uppercase=false)</div><div class="ttdef"><b>Definition:</b> <a href="_hash_utils_8hpp_source.html#l00061">HashUtils.hpp:61</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_hash_utils_8hpp.html">HashUtils.hpp</a></li>
-    <li class="footer">Generated on Wed Jul 10 2024 18:37:09 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Wed Jul 10 2024 18:52:02 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
