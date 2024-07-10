@@ -19,37 +19,41 @@ std::vector<byte> Meta::EnigmaFooter::toBytes() const {
   byte *pos = out.data();
 
   // Copy extra
-  std::memcpy(pos, extra.data(), extra.size());
+  std::memcpy(pos, extra.data(), LittleEndian::fromHost(extra.size()));
   pos += extra.size();
 
   // Copy extra size
-  size_type extraSize = extra.size();
+  size_type extraSize = LittleEndian::fromHost(extra.size());
   std::memcpy(pos, &extraSize, sizeof(extraSize));
   pos += sizeof(extraSize);
 
   // Copy iv
-  std::memcpy(pos, iv.data(), iv.size());
+  std::memcpy(pos, iv.data(), LittleEndian::fromHost(iv.size()));
   pos += iv.size();
 
   // Copy iv size
-  size_type ivSize = iv.size();
+  size_type ivSize = LittleEndian::fromHost(iv.size());
   std::memcpy(pos, &ivSize, sizeof(ivSize));
   pos += sizeof(ivSize);
 
   // Copy hash
-  std::memcpy(pos, hash.data(), hash.size());
+  std::memcpy(pos, hash.data(), LittleEndian::fromHost(hash.size()));
   pos += hash.size();
 
   // Copy algo
+  /// Note: In the context of endianness, there is no need for conversion functions for
+  /// std::uint8_t (byte) because endianness only affects data types larger than one byte.
   std::memcpy(pos, &algo, sizeof(algo));
   pos += sizeof(algo);
 
   // Copy version
-  std::memcpy(pos, &version, sizeof(version));
-  pos += sizeof(version);
+  decltype(version) versionLE = LittleEndian::fromHost(version);
+  std::memcpy(pos, &versionLE, sizeof(versionLE));
+  pos += sizeof(versionLE);
 
   // Copy magic
-  std::memcpy(pos, &magic, sizeof(magic));
+  decltype(magic) magicLE = LittleEndian::fromHost(magic);
+  std::memcpy(pos, &magicLE, sizeof(magicLE));
   return out;
 }
 
@@ -60,14 +64,18 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromBytes(const byte *bytes, const std::s
   // Copy magic (reading from the end)
   pos -= sizeof(footer.magic);
   std::memcpy(&footer.magic, pos, sizeof(footer.magic));
+  footer.magic = LittleEndian::toHost(footer.magic);
 
   // Copy version
   pos -= sizeof(footer.version);
   std::memcpy(&footer.version, pos, sizeof(footer.version));
+  footer.version = LittleEndian::toHost(footer.version);
 
   // Copy algo
   pos -= sizeof(footer.algo);
   std::memcpy(&footer.algo, pos, sizeof(footer.algo));
+  /// Note: In the context of endianness, there is no need for conversion functions for
+  /// std::uint8_t (byte) because endianness only affects data types larger than one byte.
 
   // Copy hash
   pos -= footer.hash.size();
@@ -77,6 +85,8 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromBytes(const byte *bytes, const std::s
   size_type ivSize{};
   pos -= sizeof(size_type);
   std::memcpy(&ivSize, pos, sizeof(size_type));
+  ivSize = LittleEndian::toHost(ivSize);
+
   // Copy iv
   footer.iv.resize(ivSize);
   pos -= ivSize;
@@ -86,6 +96,7 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromBytes(const byte *bytes, const std::s
   size_type extraSize{};
   pos -= sizeof(size_type);
   std::memcpy(&extraSize, pos, sizeof(size_type));
+  extraSize = LittleEndian::toHost(extraSize);
 
   // Copy extra
   footer.extra.resize(extraSize);
@@ -110,18 +121,22 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromFile(const fs::path& filename) {
   ifs.seekg(-offset, std::ios::end);
   ifs.read(reinterpret_cast<char *>(&footer.magic), sizeof(footer.magic));
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Failed to read EnigmaFooter::magic from file " + filename.string());
+  footer.magic = LittleEndian::toHost(footer.magic);
 
   // Read version
   offset += sizeof(footer.version);
   ifs.seekg(-offset, std::ios::end);
   ifs.read(reinterpret_cast<char *>(&footer.version), sizeof(footer.version));
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Failed to read EnigmaFooter::version from file " + filename.string());
+  footer.version = LittleEndian::toHost(footer.version);
 
   // Read algo
   offset += sizeof(footer.algo);
   ifs.seekg(-offset, std::ios::end);
   ifs.read(reinterpret_cast<char *>(&footer.algo), sizeof(footer.algo));
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Failed to read EnigmaFooter::algo from file " + filename.string());
+  /// Note: In the context of endianness, there is no need for conversion functions for
+  /// std::uint8_t (byte) because endianness only affects data types larger than one byte.
 
   // Read hash
   offset += footer.hash.size();
@@ -135,6 +150,8 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromFile(const fs::path& filename) {
   ifs.seekg(-offset, std::ios::end);
   ifs.read(reinterpret_cast<char *>(&ivSize), sizeof(ivSize));
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Failed to read EnigmaFooter::ivSize from file " + filename.string());
+  ivSize = LittleEndian::toHost(ivSize);
+
   // Read iv
   offset += ivSize;
   footer.iv.resize(ivSize);
@@ -148,6 +165,8 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromFile(const fs::path& filename) {
   ifs.seekg(-offset, std::ios::end);
   ifs.read(reinterpret_cast<char *>(&extraSize), sizeof(extraSize));
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Failed to read EnigmaFooter::extraSize from file " + filename.string());
+  extraSize = LittleEndian::toHost(extraSize);
+
   // Read extra
   offset += extraSize;
   footer.extra.resize(extraSize);
@@ -174,11 +193,12 @@ std::vector<byte> Meta::EnigmaCipherChunk::toBytes() const {
   std::vector<byte> out(this->sizeInBytes(), '\000');
   byte *pos = out.data();
   // Copy magic
-  std::memcpy(pos, &magic, sizeof(magic));
-  pos += sizeof(magic);
+  decltype(magic) magicLE = LittleEndian::fromHost(magic);
+  std::memcpy(pos, &magicLE, sizeof(magicLE));
+  pos += sizeof(magicLE);
 
   // Copy cipher size
-  size_type cipherSize = cipher.size();
+  size_type cipherSize = LittleEndian::fromHost(cipher.size());
   std::memcpy(pos, &cipherSize, sizeof(cipherSize));
   pos += sizeof(cipherSize);
 
@@ -187,7 +207,7 @@ std::vector<byte> Meta::EnigmaCipherChunk::toBytes() const {
   pos += cipher.size();
 
   // Copy extra size
-  size_type extraSize = extra.size();
+  size_type extraSize = LittleEndian::fromHost(extra.size());
   std::memcpy(pos, &extraSize, sizeof(extraSize));
   pos += sizeof(extraSize);
 
@@ -226,6 +246,7 @@ bool Meta::isEnigmaFile(const fs::path& filename) {
     ENIGMA_ERROR("Could not read Enigma magic from file " + filename.string());
     return false;
   }
+  magic = LittleEndian::toHost(magic);
   return magic == ENIGMA_MAGIC;
 }
 
@@ -249,6 +270,8 @@ void Meta::readCipherChunks(const fs::path& filename, const std::function<bool(M
       Meta::size_type cipherSize{};
       ifs.read(reinterpret_cast<char *>(&cipherSize), sizeof(cipherSize));
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read cipher size from file " + filename.string());
+      cipherSize = LittleEndian::toHost(cipherSize);
+
       // read cipher
       cipherChunk.cipher.resize(cipherSize);
       ifs.read(reinterpret_cast<char *>(cipherChunk.cipher.data()), cipherSize);
@@ -257,10 +280,13 @@ void Meta::readCipherChunks(const fs::path& filename, const std::function<bool(M
       Meta::size_type extraSize{};
       ifs.read(reinterpret_cast<char *>(&extraSize), sizeof(extraSize));
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read extra size from file " + filename.string());
+      extraSize = LittleEndian::toHost(extraSize);
+
       // read extra
       cipherChunk.extra.resize(extraSize);
       ifs.read(reinterpret_cast<char *>(cipherChunk.extra.data()), extraSize);
       ENIGMA_ASSERT_OR_THROW(ifs.good(), "Could not read extra from file " + filename.string());
+
       // Serve
       if (!callback(std::move(cipherChunk))) break;
     }

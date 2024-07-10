@@ -3,6 +3,7 @@
 #include <Core/Core.hpp>
 #include <Logger/Logger.hpp>
 #include <Utility/SizeUtils.hpp>
+#include "Endianness.hpp"
 #include <bit>
 #include <fstream>
 #include <iostream>
@@ -69,9 +70,9 @@ class Meta final {
     // Sanity checks
     // Ensure that size of magic_t is same on all platforms,
     // so if you encrypt in Windows, you can decrypt in Linux..
+    static_assert(std::endian::native == std::endian::little, "Host must be little endian");
     static_assert(sizeof(magic_t) == 8, "Magic type must be of 8 bytes");
     static_assert(sizeof(size_type) == 8, "Size type must be of 8 bytes");
-    static_assert(std::endian::native == std::endian::little, "Host must be little endian");
 
     /// Returns true if the file is encrypted with enigma
     static bool isEnigmaFile(const fs::path& filename);
