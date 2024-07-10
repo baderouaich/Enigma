@@ -3,7 +3,9 @@
 #define ENIGMA_SINGLE_INSTANCE_H
 
 #if defined(ENIGMA_PLATFORM_WINDOWS)
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#endif
 #if defined(_WIN32_WINNT)
 #undef _WIN32_WINNT
 #define _WIN32_WINNT 0x06000100
@@ -13,7 +15,8 @@
 #include <Windows.h>
 using socket_t = SOCKET;
 constexpr socket_t M_INVALID_SOCKET = INVALID_SOCKET;
-#else //#elif defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)
+#else
+//#elif defined(ENIGMA_PLATFORM_LINUX) || defined(ENIGMA_PLATFORM_MACOS)
 // Linux/Unix libraries will work in macos aswell.
 #include <netinet/in.h>
 using socket_t = std::int32_t;

@@ -39,6 +39,13 @@ TEST_CASE("HashUtils - SHA256") {
       << static_cast<int>(digest);
   }
   REQUIRE(oss.str() == hashStr);
+
+  SECTION("SHA256 - File") {
+    static constexpr std::string_view SHA256_OF_LOREM_IPSUM_FILE = "2719acdaadf4b6140f2ddd2ec797f96df43186a6021177186a32f7889cc9eee7";
+    fs::path filename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+    const auto hash = HashUtils::fileStr<CryptoPP::SHA256>(filename);
+    REQUIRE(hash == SHA256_OF_LOREM_IPSUM_FILE);
+  }
 }
 
 TEST_CASE("HashUtils - SHA512") {
