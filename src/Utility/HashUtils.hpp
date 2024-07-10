@@ -44,10 +44,11 @@ class HashUtils final {
 
     template<typename Algo = CryptoPP::SHA256>
     static std::array<byte, Algo::DIGESTSIZE> fileBytes(const fs::path& filename) {
+#if OLD_IMPL
       std::array<byte, Algo::DIGESTSIZE> out{};
       Algo algo{};
       std::ifstream file{filename, std::ios::binary}; // very important to open file in binary mode otherwise you will get
-                                                                // different hash values in different OS (unix2dos dos2unix kinda crap)
+                                                      // different hash values in different OS (unix2dos dos2unix kinda crap)
 
       ENIGMA_ASSERT_OR_THROW(file.good(), "No such file " + filename.string());
       const CryptoPP::FileSource fs(file,
@@ -55,18 +56,40 @@ class HashUtils final {
                                     new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
       file.close();
       return out;
+#else
+      Algo algo{};
+      std::array<byte, Algo::DIGESTSIZE> out{};
+      const CryptoPP::FileSource fileSource(filename.string().c_str(), true,
+                                            new CryptoPP::HashFilter(
+                                              algo,
+                                              new CryptoPP::ArraySink(out.data(), out.size())));
+      return out;
+#endif
     }
 
     template<typename Algo = CryptoPP::SHA256>
     static std::string fileStr(const fs::path& filename, const bool uppercase = false) {
+#if OLD_IMPL
       std::string out{};
-      Algo algo{};
       std::ifstream file{filename, std::ios::binary}; // very important to open file in binary mode otherwise you will get
-                                                                // different hash values in different OS (unix2dos dos2unix kinda crap)
+                                                      // different hash values in different OS (unix2dos dos2unix kinda crap)
       ENIGMA_ASSERT_OR_THROW(file.good(), "No such file " + filename.string());
-      const CryptoPP::FileSource fs(file, true, new CryptoPP::HashFilter(algo, new CryptoPP::HexEncoder(new CryptoPP::StringSink(out), uppercase)));
+      const CryptoPP::FileSource fs(file, true, new CryptoPP::HashFilter(Algo(), new CryptoPP::HexEncoder(new CryptoPP::StringSink(out), uppercase)));
       file.close();
       return out;
+#else
+      Algo algo{};
+      std::string out{};
+      ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(filename), "No such file " + filename.string());
+      const CryptoPP::FileSource fileSource(filename.string().c_str(), true,
+                                            new CryptoPP::HashFilter(
+                                              algo,
+                                              new CryptoPP::HexEncoder(
+                                                new CryptoPP::StringSink(out),
+                                                uppercase // Do not add a newline
+                                                )));
+      return out;
+#endif
     }
 
     template<typename Algo = CryptoPP::SHA256>
