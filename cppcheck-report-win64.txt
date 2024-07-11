@@ -10,12 +10,12 @@ src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 
 src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 4) requires 'size_t *' but the argument type is 'unsigned long long *'. [invalidScanfArgType_int]
   std::fscanf(file, "cpu %zu %zu %zu %zu",
        ^
-src/Meta/Endianness.hpp:114:41: warning: Identical condition 'std::endian::native==std::endian::big', second condition is always false [identicalConditionAfterEarlyExit]
-      if constexpr (std::endian::native == std::endian::big) {
-                                        ^
-src/Meta/Endianness.hpp:109:41: note: If condition 'std::endian::native==std::endian::big' is true, the function will return/exit
-      if constexpr (std::endian::native == std::endian::big) {
-                                        ^
-src/Meta/Endianness.hpp:114:41: note: Testing identical condition 'std::endian::native==std::endian::big'
-      if constexpr (std::endian::native == std::endian::big) {
-                                        ^
+src/Meta/Endianness.hpp:114:32: warning: Identical condition 'std::endian::native==std::endian::big', second condition is always false [identicalConditionAfterEarlyExit]
+      if  (std::endian::native == std::endian::big) {
+                               ^
+src/Meta/Endianness.hpp:109:32: note: If condition 'std::endian::native==std::endian::big' is true, the function will return/exit
+      if  (std::endian::native == std::endian::big) {
+                               ^
+src/Meta/Endianness.hpp:114:32: note: Testing identical condition 'std::endian::native==std::endian::big'
+      if  (std::endian::native == std::endian::big) {
+                               ^
