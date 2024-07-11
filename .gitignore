@@ -3,7 +3,7 @@ res/database/*
 res/logs/*
 *.ignore
 cmake-build-*
-
+build/
 # Ignore visual studio .sln .vcxproj...
 *.sln
 *.vcxproj

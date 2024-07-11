@@ -9,7 +9,7 @@
 
 namespace Enigma {
 
-  constexpr inline std::uint64_t BSwap64(std::uint64_t host_int) {
+   inline std::uint64_t BSwap64(std::uint64_t host_int) {
 #if defined(__GNUC__) || __has_builtin(__builtin_bswap64)
     return __builtin_bswap64(host_int);
 #elif defined(_MSC_VER)
@@ -26,7 +26,7 @@ namespace Enigma {
 #endif
   }
 
-  constexpr inline std::uint32_t BSwap32(std::uint32_t host_int) {
+   inline std::uint32_t BSwap32(std::uint32_t host_int) {
 #if defined(__GNUC__) || __has_builtin(__builtin_bswap32)
     return __builtin_bswap32(host_int);
 #elif defined(_MSC_VER)
@@ -39,7 +39,7 @@ namespace Enigma {
 #endif
   }
 
-  constexpr inline std::uint16_t BSwap16(std::uint16_t host_int) {
+   inline std::uint16_t BSwap16(std::uint16_t host_int) {
 #if defined(__GNUC__) || __has_builtin(__builtin_bswap16)
     return __builtin_bswap16(host_int);
 #elif defined(_MSC_VER)
@@ -52,48 +52,48 @@ namespace Enigma {
 
   namespace LittleEndian {
 
-    constexpr inline std::uint16_t fromHost(std::uint16_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint16_t fromHost(std::uint16_t value) {
+      if  (std::endian::native == std::endian::big) {
         return BSwap16(value);
       } else {
         return value;
       }
     }
 
-    constexpr inline std::uint32_t fromHost(std::uint32_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint32_t fromHost(std::uint32_t value) {
+      if  (std::endian::native == std::endian::big) {
         return BSwap32(value);
       } else {
         return value;
       }
     }
 
-    constexpr inline std::uint64_t fromHost(std::uint64_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint64_t fromHost(std::uint64_t value) {
+      if  (std::endian::native == std::endian::big) {
         return BSwap64(value);
       } else {
         return value;
       }
     }
 
-    constexpr inline std::uint16_t toHost(std::uint16_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint16_t toHost(std::uint16_t value) {
+      if  (std::endian::native == std::endian::big) {
         return BSwap16(value);
       } else {
         return value;
       }
     }
 
-    constexpr inline std::uint32_t toHost(std::uint32_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint32_t toHost(std::uint32_t value) {
+      if  (std::endian::native == std::endian::big) {
         return BSwap32(value);
       } else {
         return value;
       }
     }
 
-    constexpr inline std::uint64_t toHost(std::uint64_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint64_t toHost(std::uint64_t value) {
+      if  (std::endian::native == std::endian::big) {
         return BSwap64(value);
       } else {
         return value;
@@ -105,53 +105,53 @@ namespace Enigma {
   //[[maybe_unused]]
   namespace BigEndian {
 
-    constexpr inline std::uint16_t fromHost(std::uint16_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint16_t fromHost(std::uint16_t value) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap16(value);
       }
-      if constexpr (std::endian::native == std::endian::big) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap16(value);
       }
     }
 
-    constexpr inline std::uint32_t fromHost(std::uint32_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint32_t fromHost(std::uint32_t value) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap32(value);
       }
     }
 
-    constexpr inline std::uint64_t fromHost(std::uint64_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint64_t fromHost(std::uint64_t value) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap64(value);
       }
     }
 
-    constexpr inline std::uint16_t toHost(std::uint16_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint16_t toHost(std::uint16_t value) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap16(value);
       }
     }
 
-    constexpr inline std::uint32_t toHost(std::uint32_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint32_t toHost(std::uint32_t value) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap32(value);
       }
     }
 
-    constexpr inline std::uint64_t toHost(std::uint64_t value) {
-      if constexpr (std::endian::native == std::endian::big) {
+     inline std::uint64_t toHost(std::uint64_t value) {
+      if  (std::endian::native == std::endian::big) {
         return value;
       } else {
         return BSwap64(value);

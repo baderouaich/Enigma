@@ -112,6 +112,12 @@ if (ENIGMA_ENABLE_TESTS)
     EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
   )
   FetchContent_MakeAvailable(Catch2)
+	# Force Catch2 to use C++20 to avoid MSVC issue (unresolved external related to std::string_view c++14)
+	# see catch2 issue #2046
+	if ("cxx_std_20" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+			target_compile_features(Catch2 PRIVATE cxx_std_20)
+			target_compile_features(Catch2WithMain PRIVATE cxx_std_20)
+	endif()
 endif ()
 
 set(ENIGMA_DEPENDENCIES
