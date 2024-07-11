@@ -1,12 +1,12 @@
 var namespace_enigma =
 [
     [ "BigEndian", "namespace_enigma_1_1_big_endian.html", [
-      [ "fromHost", "namespace_enigma_1_1_big_endian.html#a2ef104ca8b2a73c33cc0189f549988cb", null ],
-      [ "fromHost", "namespace_enigma_1_1_big_endian.html#a11f450605e5e1b47b306f745f07d792a", null ],
-      [ "fromHost", "namespace_enigma_1_1_big_endian.html#a6a5042c8a7480fc35b01eb66b517da55", null ],
-      [ "toHost", "namespace_enigma_1_1_big_endian.html#a0ee972c2e14a2d162920b9f77644066a", null ],
-      [ "toHost", "namespace_enigma_1_1_big_endian.html#a2986cedc79fba6647100e1b077c324d2", null ],
-      [ "toHost", "namespace_enigma_1_1_big_endian.html#aa19199e4fbd9b1ea0be8af54f6bae6e7", null ]
+      [ "fromHost", "namespace_enigma_1_1_big_endian.html#ab244e75f65ba2fe1a0bc6bbce217a856", null ],
+      [ "fromHost", "namespace_enigma_1_1_big_endian.html#abe2f98f36287394e888074f333f84d4e", null ],
+      [ "fromHost", "namespace_enigma_1_1_big_endian.html#a6a3ae72de27a1c306b01e140cc1e30b8", null ],
+      [ "toHost", "namespace_enigma_1_1_big_endian.html#a728945ea5fceffc25c46f51aa3932a5f", null ],
+      [ "toHost", "namespace_enigma_1_1_big_endian.html#ab5c0468b9b595e0e810d206cfac9585f", null ],
+      [ "toHost", "namespace_enigma_1_1_big_endian.html#afa6cb4ec65e1d47809324ece6c5b2196", null ]
     ] ],
     [ "Constants", "namespace_enigma_1_1_constants.html", "namespace_enigma_1_1_constants" ],
     [ "DateTimeUtils", "namespace_enigma_1_1_date_time_utils.html", [
@@ -15,16 +15,16 @@ var namespace_enigma =
       [ "toString", "namespace_enigma_1_1_date_time_utils.html#ade85bc75ec751ce3944b905a5cba8fce", null ]
     ] ],
     [ "LittleEndian", "namespace_enigma_1_1_little_endian.html", [
-      [ "fromHost", "namespace_enigma_1_1_little_endian.html#a01402cdf1c7312d7be00e5235d76d32c", null ],
-      [ "fromHost", "namespace_enigma_1_1_little_endian.html#a3af569eb2b6b1c186e7122229b8e6128", null ],
-      [ "fromHost", "namespace_enigma_1_1_little_endian.html#a1e0a72fc3c9a039e1432e6d544e423e0", null ],
-      [ "toHost", "namespace_enigma_1_1_little_endian.html#a084599c9befe863377edffb2c26dcf01", null ],
-      [ "toHost", "namespace_enigma_1_1_little_endian.html#a3e9be8a6861b30d1ec59a89e97aef280", null ],
-      [ "toHost", "namespace_enigma_1_1_little_endian.html#a011674d989aa8dff9714e883b233e24a", null ]
+      [ "fromHost", "namespace_enigma_1_1_little_endian.html#ab94e05ad21f37826879eda9df3e5540c", null ],
+      [ "fromHost", "namespace_enigma_1_1_little_endian.html#a394fc4a042c4867e56a41d858a0d59c4", null ],
+      [ "fromHost", "namespace_enigma_1_1_little_endian.html#aaf0411628c51ee44ecf0511b52ad2879", null ],
+      [ "toHost", "namespace_enigma_1_1_little_endian.html#acbc0f4025c17322946fa1fe937069c01", null ],
+      [ "toHost", "namespace_enigma_1_1_little_endian.html#a585f988e7bd69971f81047f83d19cd76", null ],
+      [ "toHost", "namespace_enigma_1_1_little_endian.html#a4a8eef355ebdc68ccd1519b06500729b", null ]
     ] ],
     [ "ResourceUtils", "class_enigma_1_1_resource_utils.html", "class_enigma_1_1_resource_utils" ],
     [ "byte", "namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64", null ],
-    [ "BSwap16", "namespace_enigma.html#a4477200a9971c49d59b868ebae481689", null ],
-    [ "BSwap32", "namespace_enigma.html#a7fb519fd22395cd4456f76972295918b", null ],
-    [ "BSwap64", "namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9", null ]
+    [ "BSwap16", "namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea", null ],
+    [ "BSwap32", "namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75", null ],
+    [ "BSwap64", "namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6", null ]
 ];
