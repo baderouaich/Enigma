@@ -30,14 +30,18 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps.cmake")
 
 
 ################## Main Project ##########################
-file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/**.cpp")
+file(GLOB_RECURSE ENIGMA_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/**.cpp")
+file(GLOB_RECURSE ENIGMA_HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/src/**.hpp")
 if(ENIGMA_ENABLE_TESTS)
   # Tests enabled? Build Enigma as a static lib so EnigmaTests will link with it.
-  add_library(${PROJECT_NAME} STATIC ${SOURCES})
+	# The compiler will ignore the main function as an unused non-special function.
+  add_library(${PROJECT_NAME} STATIC ${ENIGMA_SOURCES})
 else ()
   # Tests off? build Enigma as an application
-  add_executable(${PROJECT_NAME} ${SOURCES})
+  add_executable(${PROJECT_NAME} ${ENIGMA_SOURCES})
 endif ()
+source_group("Headers" ${ENIGMA_HEADERS})
+
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 target_precompile_headers(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.hpp")
