@@ -20,17 +20,16 @@ jobs:
 
       - name: Installing Latest gcc & g++ Compiler
         run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt update
-          sudo apt install gcc-12 g++-12
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
+          sudo apt install clang-14
+          sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100
+          sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-14 100
 
       - name: Installing necessary system libraries
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating Ninja build files
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 
       - name: Building Enigma
         run: cd build && ninja -j$(nproc)
@@ -63,7 +62,7 @@ jobs:
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating Ninja build files
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 
       - name: Building Enigma Tests
         run: cd build && ninja EnigmaTests -j$(nproc)
