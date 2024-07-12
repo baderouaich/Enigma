@@ -71,10 +71,16 @@ jobs:
           mkdir build && cd build
           cmake .. -G"Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON
 
+      - name: Display tree structure of PRE build
+        run: tree /f /a build
+
       - name: Build Solution
         run: |
           cd build
           msbuild EnigmaTests.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+
+      - name: Display tree structure of POST build
+        run: tree /f /a build
 
       - name: Run EnigmaTests
         run: |

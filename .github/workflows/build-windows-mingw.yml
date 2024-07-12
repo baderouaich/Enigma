@@ -26,11 +26,12 @@ jobs:
       run: |
         cmake --version
         make --version
+        g++ --version
 
     - name: Generate Project Makefiles
       run: |
         md build && cd build
-        cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=OFF
+        cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=OFF -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 
     - name: Build Enigma
       run: cd build && make -j%NUMBER_OF_PROCESSORS%
@@ -66,7 +67,7 @@ jobs:
       - name: Generate Project Makefiles
         run: |
           md build && cd build
-          cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=ON
+          cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=ON -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 
       - name: Build Enigma Tests
         run: cd build && make EnigmaTests -j%NUMBER_OF_PROCESSORS%
