@@ -3,8 +3,7 @@
 ############################################################################################
 message(CHECK_START "Fetching CryptoPP-CMAKE")
 set(CRYPTOPP_CMAKE "cryptopp-cmake")
-#set(CRYPTOPP_GIT_TAG "CRYPTOPP_8_9_0")
-set(CRYPTOPP_GIT_TAG "master") # TODO: change me to any newer version than CRYPTOPP_8_9_0 (after the windows incorrect hash compute is fixed)
+set(CRYPTOPP_GIT_TAG "CRYPTOPP_8_9_0")
 set(CRYPTOPP_INSTALL OFF)
 set(CRYPTOPP_BUILD_TESTING OFF)
 set(CRYPTOPP_BUILD_DOCUMENTATION OFF)
