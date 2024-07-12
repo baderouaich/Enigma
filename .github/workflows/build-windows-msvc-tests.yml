@@ -1,4 +1,4 @@
-name: build-windows-msvc
+name: build-windows-msvc-tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  WindowsMSVC:
+  WindowsMSVCTests:
     runs-on: windows-latest
     strategy:
       matrix:
@@ -17,7 +17,6 @@ jobs:
     defaults:
       run:
         shell: cmd
-
     steps:
       - uses: actions/checkout@v2
 
@@ -28,22 +27,19 @@ jobs:
           vs-prerelease: true
           msbuild-architecture: x64
 
-
       - name: Generate Visual Studio 17 2022 Solution
         run: |
           mkdir build && cd build
-          cmake .. -G"Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=OFF
+          cmake .. -G"Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON
 
       - name: Display tree structure of PRE build
         run: tree /f /a build
 
-      - name: Build Enigma Solution
-        run: |
-          cd build
-          msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+      - name: Build EnigmaTests Solution
+        run: msbuild build\tests\EnigmaTests.vcxproj -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
 
       - name: Display tree structure of POST build
         run: tree /f /a build
 
-      - name: Running Enigma
-        run: build\Release\Enigma --version
+      - name: Run EnigmaTests
+        run: build\tests\Release\EnigmaTests.exe

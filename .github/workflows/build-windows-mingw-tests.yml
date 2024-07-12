@@ -1,0 +1,39 @@
+name: build-windows-mingw-tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  WindowsMinGWTests:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        architecture: [ x64 ] #architecture: [x86, x64]
+        build-platform: [ x64 ] #build-platform: [Win32, x64]
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@v4
+
+      - name: Ensure deps are installed
+        run: |
+          cmake --version
+          make --version
+
+      - name: Generate Project Makefiles
+        run: |
+          md build && cd build
+          cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=ON -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+
+      - name: Build Enigma Tests
+        run: cd build && make EnigmaTests -j%NUMBER_OF_PROCESSORS%
+
+      - name: Run Enigma Tests
+        run: .\build\tests\EnigmaTests
