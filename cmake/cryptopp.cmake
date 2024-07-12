@@ -3,10 +3,12 @@
 ############################################################################################
 message(CHECK_START "Fetching CryptoPP-CMAKE")
 set(CRYPTOPP_CMAKE "cryptopp-cmake")
-set(CRYPTOPP_GIT_TAG "CRYPTOPP_8_9_0")
-set(CRYPTOPP_BUILD_TESTING OFF)
+set(CRYPTOPP_GIT_TAG "CRYPTOPP_8_8_0")
 set(CRYPTOPP_INSTALL OFF)
-set(CRYPTOPP_DISABLE_ASM ON) # Disable assembly (see cryptopp issue #1222)
+set(CRYPTOPP_BUILD_TESTING OFF)
+set(CRYPTOPP_BUILD_DOCUMENTATION OFF)
+
+#set(CRYPTOPP_DISABLE_ASM ON) # Disable assembly (see cryptopp issue #1222)
 FetchContent_Declare(${CRYPTOPP_CMAKE}
   GIT_REPOSITORY  "https://github.com/abdes/cryptopp-cmake"
   GIT_TAG         ${CRYPTOPP_GIT_TAG}
