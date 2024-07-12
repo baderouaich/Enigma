@@ -3,7 +3,7 @@
 ############################################################################################
 message(CHECK_START "Fetching CryptoPP-CMAKE")
 set(CRYPTOPP_CMAKE "cryptopp-cmake")
-set(CRYPTOPP_GIT_TAG "CRYPTOPP_8_8_0")
+set(CRYPTOPP_GIT_TAG "CRYPTOPP_8_9_0")
 set(CRYPTOPP_INSTALL OFF)
 set(CRYPTOPP_BUILD_TESTING OFF)
 set(CRYPTOPP_BUILD_DOCUMENTATION OFF)
