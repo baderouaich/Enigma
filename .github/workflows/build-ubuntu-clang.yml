@@ -1,4 +1,4 @@
-name: build-ubuntu
+name: build-ubuntu-clang
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating Ninja build files
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 
       - name: Building Enigma
         run: cd build && ninja -j$(nproc)
@@ -63,7 +63,7 @@ jobs:
         run: sudo apt install cmake ninja-build libgl1-mesa-dev libxi-dev libx11-dev xorg-dev libwayland-dev libxkbcommon-dev libxcursor-dev libxrandr-dev libxcomposite-dev libxinerama-dev libtbb-dev
 
       - name: Generating Ninja build files
-        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON
+        run: mkdir build && cd build && cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug -DENIGMA_ENABLE_TESTS=ON -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 
       - name: Building Enigma Tests
         run: cd build && ninja EnigmaTests -j$(nproc)

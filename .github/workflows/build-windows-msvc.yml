@@ -65,7 +65,7 @@ jobs:
       - name: Build Solution
         run: |
           cd build
-          msbuild tests/EnigmaTests.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+          msbuild EnigmaTests.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
 
       - name: Run EnigmaTests
         run: |

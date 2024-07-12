@@ -21,10 +21,12 @@ Built to solve 3 problems i had:
 
 ### CI Status
 
-| Operating system | Build status                                                                                                                                                                                    |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ubuntu (x64)     | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-ubuntu.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-ubuntu.yml)    |
-| Windows (x64)    | [![Windows](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-windows.yml) |
+| Operating system         | Build status                                                                                                                                                                                                |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ubuntu GCC (x64)         | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-ubuntu-gcc.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-ubuntu-gcc.yml)        |
+| Ubuntu Clang (x64)       | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-ubuntu-clang.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-ubuntu-clang.yml)    |
+| Windows MinGW (x64)      | [![Windows](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows-mingw.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-windows-mingw.yml) |
+| Windows MSVC (x64)       | [![Windows](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows-msvc.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-windows-msvc.yml)   |
 
 ## Supported Encryption Algorithms
 All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)
