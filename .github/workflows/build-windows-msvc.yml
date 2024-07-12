@@ -8,7 +8,7 @@ on:
 
 jobs:
   WindowsMSVC:
-    runs-on: windows-latest
+    runs-on: windows-latest # https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md
     strategy:
       matrix:
         architecture: [ x64 ]
