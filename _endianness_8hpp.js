@@ -1,5 +1,6 @@
 var _endianness_8hpp =
 [
+    [ "ENIGMA_HAVE_BUILTIN", "_endianness_8hpp.html#aa10b4520e00f260d27e949c67a9d0a40", null ],
     [ "BSwap16", "_endianness_8hpp.html#a771af49f7395886dcabbb7f414b404ea", null ],
     [ "BSwap32", "_endianness_8hpp.html#a54f5e871905aa22deed9c87ea7555f75", null ],
     [ "BSwap64", "_endianness_8hpp.html#a036e39796b8640d6d4ca99ead57fbcc6", null ],
