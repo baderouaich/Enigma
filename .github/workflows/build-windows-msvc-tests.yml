@@ -29,8 +29,8 @@ jobs:
 
       - name: Calculate hash sum of test_data\lorem_ipsum.txt files
         run: |
-          Get-FileHash tests\test_data\lorem_ipsum.txt -Algorithm SHA256
-          Get-FileHash tests\test_data\lorem_ipsum.txt -Algorithm SHA512
+          powershell Get-FileHash tests\test_data\lorem_ipsum.txt -Algorithm SHA256
+          powershell Get-FileHash tests\test_data\lorem_ipsum.txt -Algorithm SHA512
 
       - name: Generate Visual Studio 17 2022 Solution
         run: |
