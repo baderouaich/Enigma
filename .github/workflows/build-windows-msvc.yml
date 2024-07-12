@@ -76,11 +76,8 @@ jobs:
       - name: Display tree structure of PRE build
         run: tree /f /a build
 
-      - name: Build Solution
-        run: msbuild build\EnigmaTests.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+      - name: Build & Run EnigmaTests Solution
+        run: msbuild build\tests\EnigmaTests.vcxproj -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
 
       - name: Display tree structure of POST build
         run: tree /f /a build
-
-      - name: Run EnigmaTests
-        run: msbuild build\tests\EnigmaTests.vcxproj
