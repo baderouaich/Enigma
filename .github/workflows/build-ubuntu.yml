@@ -1,6 +1,5 @@
 name: build-ubuntu
 
-# build on pushs and pull requests on master branch
 on:
   push:
     branches: [ main ]

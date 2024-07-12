@@ -1,0 +1,73 @@
+name: build-windows-msvc
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        architecture: [ x64 ]
+        build-platform: [ x64 ]
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.1.0'
+          msbuild-architecture: x64
+
+      - name: Generate Visual Studio 17 2022 Project Files
+        run: |
+          mkdir build && cd build
+          cmake .. -G"Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release -DCMAKE_ENABLE_TESTS=OFF
+
+      - name: Build Solution
+        run: | 
+          cd build
+          msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+
+  ############## Tests ##########################
+  Tests:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        architecture: [ x64 ]
+        build-platform: [ x64 ]
+
+    defaults:
+      run:
+        shell: cmd
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.1.0'
+          msbuild-architecture: x64
+
+      - name: Generate Visual Studio 17 2022 Project Files
+        run: |
+          mkdir build && cd build
+          cmake .. -G"Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_ENABLE_TESTS=ON
+
+      - name: Build Solution
+        run: |
+          cd build
+          msbuild tests/EnigmaTests.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+
+      - name: Run EnigmaTests
+        run: |
+          tree /f /a
+          build\tests\x64\Debug\EnigmaTests

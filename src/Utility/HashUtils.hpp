@@ -86,7 +86,7 @@ class HashUtils final {
                                               algo,
                                               new CryptoPP::HexEncoder(
                                                 new CryptoPP::StringSink(out),
-                                                uppercase // Do not add a newline
+                                                uppercase
                                                 )));
       return out;
 #endif
