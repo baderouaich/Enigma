@@ -86,3 +86,15 @@ TEST_CASE("HashUtils - SHA512") {
     REQUIRE(hash == SHA512_OF_LOREM_IPSUM_FILE);
   }
 }
+
+TEST_CASE("HashUtils - String case") {
+  fs::path filename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  const std::string uppercaseHash = HashUtils::fileStr<CryptoPP::SHA256>(filename, true);
+  const std::string lowercaseHash = HashUtils::fileStr<CryptoPP::SHA256>(filename, false);
+  REQUIRE(std::all_of(uppercaseHash.begin(), uppercaseHash.end(), [](char c) -> bool {
+    return std::isdigit(c) or std::isupper(c);
+  }));
+  REQUIRE(std::all_of(lowercaseHash.begin(), lowercaseHash.end(), [](char c) -> bool {
+    return std::isdigit(c) or std::islower(c);
+  }));
+}

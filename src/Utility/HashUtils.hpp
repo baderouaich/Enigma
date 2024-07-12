@@ -14,6 +14,8 @@
 #include <tiger.h>    // Tiger
 #include <whrlpool.h> // Whirlpool
 
+#include "FileUtils.hpp"
+#include <Meta/Meta.hpp>
 
 NS_ENIGMA_BEGIN
 
@@ -56,13 +58,22 @@ class HashUtils final {
                                     new CryptoPP::HashFilter(algo, new CryptoPP::ArraySink(out.data(), out.size())));
       file.close();
       return out;
-#else
+#elif NEW_IMPL
       Algo algo{};
       std::array<byte, Algo::DIGESTSIZE> out{};
       const CryptoPP::FileSource fileSource(filename.string().c_str(), true,
                                             new CryptoPP::HashFilter(
                                               algo,
                                               new CryptoPP::ArraySink(out.data(), out.size())));
+      return out;
+#else
+      std::array<byte, Algo::DIGESTSIZE> out{};
+      Algo algo{};
+      FileUtils::ReadChunks(filename, Meta::ENIGMA_BUFFER_DEFAULT_SIZE, [&algo](std::vector<byte>&& chunk) {
+        algo.Update(chunk.data(), chunk.size());
+        return true;
+      });
+      algo.Final(out.data());
       return out;
 #endif
     }
@@ -77,7 +88,7 @@ class HashUtils final {
       const CryptoPP::FileSource fs(file, true, new CryptoPP::HashFilter(Algo(), new CryptoPP::HexEncoder(new CryptoPP::StringSink(out), uppercase)));
       file.close();
       return out;
-#else
+#elif NEW_IMPL
       Algo algo{};
       std::string out{};
       ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(filename), "No such file " + filename.string());
@@ -86,16 +97,19 @@ class HashUtils final {
                                               algo,
                                               new CryptoPP::HexEncoder(
                                                 new CryptoPP::StringSink(out),
-                                                uppercase
-                                                )));
+                                                uppercase)));
       return out;
+#else
+      return stringify<Algo>(fileBytes<Algo>(filename), uppercase);
 #endif
     }
 
     template<typename Algo = CryptoPP::SHA256>
     static std::string stringify(const std::array<byte, Algo::DIGESTSIZE>& hash, const bool uppercase = false) {
       std::ostringstream out{};
-      for (const byte digest: hash) {
+      if (uppercase)
+        out << std::uppercase;
+      for (const byte digest : hash) {
         out << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(digest);
       }
       return out.str();
