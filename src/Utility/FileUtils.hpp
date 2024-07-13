@@ -17,6 +17,11 @@ namespace fs = std::experimental::filesystem;
 #error compiler does not support std::filesystem
 #endif
 
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 NS_ENIGMA_BEGIN
 class FileUtils final {
     ENIGMA_STATIC_CLASS(FileUtils);
@@ -25,6 +30,9 @@ class FileUtils final {
     static bool Read(const fs::path& filename, std::vector<byte>& buffer) {
       if (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) // ate: open at the end
       {
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+        _setmode(_fileno(ifs), _O_BINARY);
+#endif
         const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
         buffer.resize(file_size, '\000');
         ifs.seekg(0, std::ios::beg);
@@ -40,6 +48,9 @@ class FileUtils final {
     static bool ReadString(const fs::path& filename, std::string& buffer) {
       if (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) // ate: open at the end
       {
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+        _setmode(_fileno(ifs), _O_BINARY);
+#endif
         const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
         buffer.resize(file_size, '\000');
         ifs.seekg(0, std::ios::beg);
@@ -54,6 +65,9 @@ class FileUtils final {
 
     static bool Write(const fs::path& filename, const std::vector<byte>& buffer) {
       if (std::ofstream ofs{filename, std::ios::binary}) {
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+        _setmode(_fileno(ofs), _O_BINARY);
+#endif
         ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
         ofs.close();
         return true;
@@ -65,6 +79,9 @@ class FileUtils final {
 
     static bool WriteString(const fs::path& filename, const std::string& buffer) {
       if (std::ofstream ofs{filename, std::ios::binary}) {
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+        _setmode(_fileno(ofs), _O_BINARY);
+#endif
         ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
         ofs.close();
         return true;
@@ -77,8 +94,12 @@ class FileUtils final {
     /*
     *	Reads a file chunk by chunk
     */
+
     static void ReadChunks(const fs::path& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback) {
       if (std::ifstream ifs{filename, std::ios::binary}) {
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+        _setmode(_fileno(ifs), _O_BINARY);
+#endif
         while (!ifs.eof()) {
           std::vector<Enigma::byte> chunk(max_chunk_size, '\000');
           ifs.read(reinterpret_cast<char *>(chunk.data()), chunk.size());
