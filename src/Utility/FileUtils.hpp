@@ -16,11 +16,7 @@ namespace fs = std::experimental::filesystem;
 #else
 #error compiler does not support std::filesystem
 #endif
-
-#if defined(ENIGMA_PLATFORM_WINDOWS)
-#include <fcntl.h>
-#include <io.h>
-#endif
+#include "FinalAction.hpp"
 
 NS_ENIGMA_BEGIN
 class FileUtils final {
@@ -30,9 +26,6 @@ class FileUtils final {
     static bool Read(const fs::path& filename, std::vector<byte>& buffer) {
       if (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) // ate: open at the end
       {
-#if defined(ENIGMA_PLATFORM_WINDOWS)
-        _setmode(_fileno(ifs), _O_BINARY);
-#endif
         const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
         buffer.resize(file_size, '\000');
         ifs.seekg(0, std::ios::beg);
@@ -40,7 +33,7 @@ class FileUtils final {
         ifs.close();
         return true;
       } else {
-        ENIGMA_ERROR("Failed to read file {0}", filename.string());
+        ENIGMA_ERROR("Failed to read file {}", filename.string());
         return false;
       }
     }
@@ -48,9 +41,6 @@ class FileUtils final {
     static bool ReadString(const fs::path& filename, std::string& buffer) {
       if (std::ifstream ifs{filename, std::ios::binary | std::ios::ate}) // ate: open at the end
       {
-#if defined(ENIGMA_PLATFORM_WINDOWS)
-        _setmode(_fileno(ifs), _O_BINARY);
-#endif
         const std::size_t file_size = static_cast<std::size_t>(ifs.tellg());
         buffer.resize(file_size, '\000');
         ifs.seekg(0, std::ios::beg);
@@ -58,35 +48,29 @@ class FileUtils final {
         ifs.close();
         return true;
       } else {
-        ENIGMA_ERROR("Failed to read file {0}", filename.string());
+        ENIGMA_ERROR("Failed to read file {}", filename.string());
         return false;
       }
     }
 
     static bool Write(const fs::path& filename, const std::vector<byte>& buffer) {
       if (std::ofstream ofs{filename, std::ios::binary}) {
-#if defined(ENIGMA_PLATFORM_WINDOWS)
-        _setmode(_fileno(ofs), _O_BINARY);
-#endif
         ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
         ofs.close();
         return true;
       } else {
-        ENIGMA_ERROR("Failed to write file {0}", filename.string());
+        ENIGMA_ERROR("Failed to write file {}", filename.string());
         return false;
       }
     }
 
     static bool WriteString(const fs::path& filename, const std::string& buffer) {
       if (std::ofstream ofs{filename, std::ios::binary}) {
-#if defined(ENIGMA_PLATFORM_WINDOWS)
-        _setmode(_fileno(ofs), _O_BINARY);
-#endif
         ofs.write(reinterpret_cast<const char *>(buffer.data()), buffer.size());
         ofs.close();
         return true;
       } else {
-        ENIGMA_ERROR("Failed to write file {0}", filename.string());
+        ENIGMA_ERROR("Failed to write file {}", filename.string());
         return false;
       }
     }
@@ -94,12 +78,8 @@ class FileUtils final {
     /*
     *	Reads a file chunk by chunk
     */
-
-    static void ReadChunks(const fs::path& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback) {
+    static void ReadChunksFstream(const fs::path& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback) {
       if (std::ifstream ifs{filename, std::ios::binary}) {
-#if defined(ENIGMA_PLATFORM_WINDOWS)
-        _setmode(_fileno(ifs), _O_BINARY);
-#endif
         while (!ifs.eof()) {
           std::vector<Enigma::byte> chunk(max_chunk_size, '\000');
           ifs.read(reinterpret_cast<char *>(chunk.data()), chunk.size());
@@ -114,7 +94,39 @@ class FileUtils final {
         }
         ifs.close();
       } else {
-        ENIGMA_ERROR("Failed to read file chunks {0}", filename.string());
+        ENIGMA_ERROR("Failed to read file chunks {}", filename.string());
+      }
+    }
+
+    /*
+    *	Reads a file chunk by chunk
+    */
+    static void ReadChunks(const fs::path& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback) {
+      // Open file to read from
+      std::FILE* file = std::fopen(filename.string().c_str(), "rb");
+      if(!file) {
+        ENIGMA_ERROR("Failed to read file chunks {}", filename.string());
+        return;
+      }
+      FinalAction fileCloser([&file]{
+        std::fclose(file);
+      });
+
+      // While end of file not reached...
+      while (!std::feof(file))
+      {
+        // Make some memory for chunk
+        std::vector<Enigma::byte> chunk(max_chunk_size, '\000');
+
+        // Read chunk and get back how many bytes were read
+        const std::size_t bytes_read = std::fread(chunk.data(), sizeof(Enigma::byte), max_chunk_size, file);
+        // resize chunk if we read bytes less than max_chunk_size
+        if (bytes_read < max_chunk_size)
+          chunk.resize(bytes_read);
+
+        // Serve chunk
+        if(!callback(std::move(chunk))) break;
+
       }
     }
 };
