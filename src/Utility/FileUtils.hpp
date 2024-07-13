@@ -17,6 +17,10 @@ namespace fs = std::experimental::filesystem;
 #error compiler does not support std::filesystem
 #endif
 #include "FinalAction.hpp"
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+#include <fcntl.h>
+#include <io.h>
+#endif
 
 NS_ENIGMA_BEGIN
 class FileUtils final {
@@ -108,6 +112,9 @@ class FileUtils final {
         ENIGMA_ERROR("Failed to read file chunks {}", filename.string());
         return;
       }
+#if defined(ENIGMA_PLATFORM_WINDOWS)
+      _setmode(_fileno(file), _O_BINARY);
+#endif
       FinalAction fileCloser([&file]{
         std::fclose(file);
       });
