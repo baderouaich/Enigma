@@ -105,8 +105,23 @@ class HashingTool : public Tool {
     void OnCalculateHashButtonPressed();
     void OnCopyHashButtonPressed();
 
-  private:                  /* Hash Algorithms */
-    std::string m_input{};  // text to calculate hash for (Message)
+  private: /* Hash Algorithms */
+    enum class InputSource : byte {
+      Text,
+      File,
+      ENIGMA_ENUM_DECLARE_BEGIN_END(Text)
+    } m_input_source = InputSource::Text;
+    static const char *inputSourceEnumToStr(InputSource is) {
+      switch (is) {
+        default:
+        case InputSource::Text:
+          return "Text";
+        case InputSource::File:
+          return "File";
+      }
+    }
+
+    std::string m_input{};  // text to calculate hash for (Message) or input file
     std::string m_output{}; // calculated hash (Digest)
 
     HashAlgorithm m_selected_hash; // Radio buttons selected hash algorithm

@@ -9,9 +9,6 @@
 NS_ENIGMA_BEGIN
 void HashingTool::OnCreate() {
   ENIGMA_TRACE_CURRENT_FUNCTION();
-
-  // dm Register Available Hashing Algorithms
-  //m_hash_algorithms[HashAlgorithm::MD5] = std::make_unique<CryptoPP::MD5>();
   m_selected_hash = HashAlgorithm::MD5; // MD5 selected by default
 }
 
@@ -19,6 +16,7 @@ void HashingTool::OnDraw(Scene *parent) {
   const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
 
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
+  static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
 
   static auto& fonts = Application::getInstance()->GetFonts();
   //static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
@@ -141,14 +139,31 @@ void HashingTool::OnDestroy() {
 void HashingTool::OnCalculateHashButtonPressed() {
   if (m_input.empty()) return;
   m_output.clear();
+
   try {
     switch (m_selected_hash) {
-#define CASE_PERFORM_HASH(var, hash_algo, cryptopp_hash_name)                                                                                                                    \
-  case Enigma::HashingTool::HashAlgorithm::hash_algo: {                                                                                                                          \
-    if (!var) var = std::make_unique<CryptoPP::cryptopp_hash_name>();                                                                                                            \
-    [[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true, new CryptoPP::HashFilter(*var, new CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output), false))); \
-    break;                                                                                                                                                                       \
+
+#define CASE_PERFORM_HASH(var, hash_algo, cryptopp_hash_name)                                                                                                                              \
+  case Enigma::HashingTool::HashAlgorithm::hash_algo: {                                                                                                                                    \
+    if (!var) var = std::make_unique<CryptoPP::cryptopp_hash_name>();                                                                                                                      \
+    switch (m_input_source) {                                                                                                                                                              \
+      case InputSource::Text: {                                                                                                                                                            \
+        [[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true, new CryptoPP::HashFilter(*var, new CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output), false)));       \
+        break;                                                                                                                                                                             \
+      }                                                                                                                                                                                    \
+      case InputSource::File: {                                                                                                                                                            \
+        ENIGMA_ASSERT_OR_THROW(fs::is_regular_file(m_input), "No such file found");                                                                                                        \
+        [[maybe_unused]] const auto ss = CryptoPP::FileSource(m_input.c_str(), true, new CryptoPP::HashFilter(*var, new CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output), false))); \
+        break;                                                                                                                                                                             \
+      }                                                                                                                                                                                    \
+      default: {                                                                                                                                                                           \
+        ENIGMA_ASSERT(false, "Unhandled InputSource");                                                                                                                                     \
+        break;                                                                                                                                                                             \
+      };                                                                                                                                                                                   \
+    }                                                                                                                                                                                      \
+    break;                                                                                                                                                                                 \
   }
+
 
       CASE_PERFORM_HASH(m_md2, MD2, Weak::MD2);
       CASE_PERFORM_HASH(m_md4, MD4, Weak::MD4);
