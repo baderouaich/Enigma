@@ -17,6 +17,7 @@ namespace fs = std::experimental::filesystem;
 #error compiler does not support std::filesystem
 #endif
 #include "FinalAction.hpp"
+
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 #include <fcntl.h>
 #include <io.h>
@@ -107,21 +108,20 @@ class FileUtils final {
     */
     static void ReadChunks(const fs::path& filename, const std::size_t max_chunk_size, const std::function<bool(std::vector<byte>&&)>& callback) {
       // Open file to read from
-      std::FILE* file = std::fopen(filename.string().c_str(), "rb");
-      if(!file) {
+      std::FILE *file = std::fopen(filename.string().c_str(), "rb");
+      if (!file) {
         ENIGMA_ERROR("Failed to read file chunks {}", filename.string());
         return;
       }
 #if defined(ENIGMA_PLATFORM_WINDOWS)
       _setmode(_fileno(file), _O_BINARY);
 #endif
-      FinalAction fileCloser([&file]{
+      FinalAction fileCloser([&file] {
         std::fclose(file);
       });
 
       // While end of file not reached...
-      while (!std::feof(file))
-      {
+      while (!std::feof(file)) {
         // Make some memory for chunk
         std::vector<Enigma::byte> chunk(max_chunk_size, '\000');
 
@@ -132,8 +132,7 @@ class FileUtils final {
           chunk.resize(bytes_read);
 
         // Serve chunk
-        if(!callback(std::move(chunk))) break;
-
+        if (!callback(std::move(chunk))) break;
       }
     }
 };
