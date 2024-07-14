@@ -43,10 +43,15 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :white_check_mark: <strong>RSA-OAEP-SHA256</strong>
 
 ## Extra Tools
-- Password Generator
-- Hashing Algorithms (MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA384, SHA512, SHAKE128, SHAKE256, KECCAK224, KECCAK256, KECCAK384, KECCAK512, TIGER, WHIRLPOOL)
-- XOR Encryption
-- System & Hardware Information
+- Strong Password Generator
+- Hashing Algorithms (`MD2`, `MD4`, `MD5`,
+`SHA1`, `SHA224`, `SHA256`, `SHA384`, `SHA512`,
+`SHAKE128`, `SHAKE256`,
+`KECCAK224`, `KECCAK256`, `KECCAK384`, `KECCAK512`,
+`RIPEMD128`,`RIPEMD160`,`RIPEMD256`,`RIPEMD320`,
+`TIGER`, `WHIRLPOOL`, `SM3`)
+- XOR Encryption <small>for nerds</small>
+- System & Hardware Information (`CPU`, `RAM`, `GPU`, `OS`, `Kernel`...)
 
 <!--
 ## Features
