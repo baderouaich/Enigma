@@ -117,7 +117,7 @@ void HashingTool::OnDraw(Scene *parent) {
       // Output calculated hash
       if (!m_output.empty()) {
         ImGui::BulletText("%s:", ("Output (Hex Encoded)"));
-        ImGuiWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 60.0f), ImGuiInputTextFlags_ReadOnly);
+        ImGuiWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 33.0f), ImGuiInputTextFlags_ReadOnly);
         ImGui::SameLine();
         ImGui::PushID("CopyCalculatedHash");
         if (ImGuiWidgets::Button(("Copy"), ImVec2(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
