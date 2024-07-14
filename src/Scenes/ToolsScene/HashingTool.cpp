@@ -49,7 +49,8 @@ void HashingTool::OnDraw(Scene *parent) {
           case Enigma::HashingTool::HashAlgorithm::SHA512:
           case Enigma::HashingTool::HashAlgorithm::SHAKE256:
           case Enigma::HashingTool::HashAlgorithm::KECCAK512:
-          case Enigma::HashingTool::HashAlgorithm::WHIRLPOOL:
+          case Enigma::HashingTool::HashAlgorithm::RIPEMD320:
+          case Enigma::HashingTool::HashAlgorithm::END:
             //ImGui::NewLine(); // not calling ImGui::SameLine(); will go to next line, if called newline extra padding appears
             break;
           default: // else, stay at the same line
@@ -59,10 +60,52 @@ void HashingTool::OnDraw(Scene *parent) {
 
       spacing(2);
 
-      // Input text to calculate hash for
-      ImGui::BulletText("%s:", ("Input"));
-      ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 60.0f));
-      ImGui::SameLine();
+
+      // Input source (text, file)
+      ImGui::BulletText("%s:", ("Input Source"));
+      ImGui::NewLine();
+      for (byte s = (byte) InputSource::BEGIN; s <= (byte) InputSource::END; ++s) {
+        inline_dummy(1.0f, 0.0f);
+        ImGui::SameLine();
+        if (ImGui::RadioButton(inputSourceEnumToStr((InputSource) s), m_input_source == (InputSource) s)) {
+          m_input_source = (InputSource) s;
+        }
+      }
+
+      spacing(2);
+
+      // Input text or file to calculate hash for
+      switch (m_input_source) {
+        case InputSource::Text: {
+          ImGui::BulletText("%s:", "Text");
+          ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 256.0f));
+          ImGui::SameLine();
+          break;
+        }
+        case InputSource::File: {
+          ImGui::BulletText("%s:", "File");
+          ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 33.0f));
+          ImGui::SameLine();
+          static const ImVec2 browse_button_size(-1.0f, 33.0f);
+          ImGui::SameLine();
+          ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
+          ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
+          ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
+          ImGui::PushID("Browse1");
+          if (ImGui::Button("Browse", browse_button_size)) {
+            Application::getInstance()->LaunchWorkerThread(parent, "Browsing input file...", [this]() -> void {
+              if (std::vector<std::string> filenames = OpenFileDialog{"Select a file to compute its hash", ".", false}.Show(); !filenames.empty()) {
+                m_input = filenames[0];
+              }
+            });
+          }
+          ImGui::PopID();
+          ImGui::PopStyleColor(3);
+          break;
+        }
+        default:
+          ENIGMA_ASSERT(false, "Unhandled input source");
+      }
       if (ImGuiWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
         Application::getInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]() {
           this->OnCalculateHashButtonPressed();
@@ -125,135 +168,17 @@ void HashingTool::OnCalculateHashButtonPressed() {
       CASE_PERFORM_HASH(m_keccak384, KECCAK384, Keccak_384);
       CASE_PERFORM_HASH(m_keccak512, KECCAK512, Keccak_512);
 
+      CASE_PERFORM_HASH(m_ripemd128, RIPEMD128, RIPEMD128);
+      CASE_PERFORM_HASH(m_ripemd160, RIPEMD160, RIPEMD160);
+      CASE_PERFORM_HASH(m_ripemd256, RIPEMD256, RIPEMD256);
+      CASE_PERFORM_HASH(m_ripemd320, RIPEMD320, RIPEMD320);
+
       CASE_PERFORM_HASH(m_tiger, TIGER, Tiger);
       CASE_PERFORM_HASH(m_whirlpool, WHIRLPOOL, Whirlpool);
+      CASE_PERFORM_HASH(m_sm3, SM3, SM3);
 
 #undef CASE_PERFORM_HASH
 
-#if 0
-			case Enigma::HashingTool::HashAlgorithm::MD2:
-			{
-				
-				if (!m_md2) m_md2 = std::make_unique<CryptoPP::MD2>();
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_md2, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::MD4:
-			{
-				if (!m_md4) m_md4 = std::make_unique<CryptoPP::MD4>();
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_md4, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::MD5:
-			{
-				if(!m_md5) m_md5 = std::make_unique<CryptoPP::MD5>();
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-						new CryptoPP::HashFilter(*m_md5, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-					) ;// Note: CryptoPP will auto delete heap allocated passed params
-	
-				//m_md5->Update(reinterpret_cast<const byte*>(m_input.data()), m_input.size());
-				//m_output.resize(m_md5->DigestSize());
-				//m_md5->Final(reinterpret_cast<byte*>(m_output.data()));
-				//CryptoPP::StringSource ss(m_output, true, new CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)));
-			    //CryptoPP::StringSource ss(m_output, true, new CryptoPP::Redirector(encoder));
-
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHA1:
-			{
-				if(!m_sha1) m_sha1.reset(new CryptoPP::SHA1());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_sha1, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHA224:
-			{
-				if(!m_sha224) m_sha224.reset(new CryptoPP::SHA224());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_sha224, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHA256:
-			{
-				if(!m_sha256) m_sha256.reset(new CryptoPP::SHA256());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_sha256, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHA384:
-			{
-				if(!m_sha384) m_sha384.reset(new CryptoPP::SHA384());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_sha384, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHA512:
-			{
-				if(!m_sha512) m_sha512.reset(new CryptoPP::SHA512());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_sha512, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHAKE128:
-			{
-				if(!m_shake128) m_shake128.reset(new CryptoPP::SHAKE128());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_shake128, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::SHAKE256:
-			{
-				if(!m_shake256) m_shake256.reset(new CryptoPP::SHAKE256());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_shake256, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::KECCAK224:
-			{
-				if (!m_keccak224) m_keccak224.reset(new CryptoPP::Keccak_224());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_keccak224, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::KECCAK256:
-			{
-				if (m_keccak256) m_keccak256.reset(new CryptoPP::Keccak_256());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_keccak256, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::KECCAK384:
-			{
-				if (!m_keccak384) m_keccak384.reset(new CryptoPP::Keccak_384());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_keccak384, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-			case Enigma::HashingTool::HashAlgorithm::KECCAK512:
-			{
-				if (!m_keccak512) m_keccak512.reset(new CryptoPP::Keccak_512());
-				[[maybe_unused]] const auto ss = CryptoPP::StringSource(m_input, true,
-					new CryptoPP::HashFilter(*m_keccak512, new  CryptoPP::HexEncoder(new CryptoPP::StringSink(m_output)))
-				);// Note: CryptoPP will auto delete heap allocated passed params
-				break;
-			}
-#endif
       default:
         return;
     }

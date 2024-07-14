@@ -1,3 +1,8 @@
+# 3.2.0
+- New Hashing Algorithms in `Tools -> Hashing` utility:
+`SM3`, `RIPEMD128`, `RIPEMD160`, `RIPEMD256`, `RIPEMD256`
+- Multiple input source `Tools -> Hashing`. Now you can compute the hash of a file alongside text
+
 # 3.1.0
 - RSA Algorithm support for text and large files
 - Display algorithm used in encryption in My Encryptions Scene

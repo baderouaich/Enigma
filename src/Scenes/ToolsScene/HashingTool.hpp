@@ -15,6 +15,8 @@
 #include <shake.h>    // Shake
 #include <tiger.h>    // Tiger
 #include <whrlpool.h> // Whirlpool
+#include <sm3.h>      // SM3
+#include <ripemd.h>   // RIPEMD128,RIPEMD160,RIPEMD256,RIPEMD320
 
 /*
 *	Hashing Tool Collapsing Header View To be drawn in ToolsScene
@@ -40,11 +42,16 @@ class HashingTool : public Tool {
       KECCAK384,
       KECCAK512,
 
+      RIPEMD128,
+      RIPEMD160,
+      RIPEMD256,
+      RIPEMD320,
+
       TIGER,
       WHIRLPOOL,
+      SM3,
 
-      BEGIN = MD2,
-      END = WHIRLPOOL
+      ENIGMA_ENUM_DECLARE_BEGIN_END(MD2)
     };
     friend const char *operator*(const HashAlgorithm hash_algo) noexcept // stringify HashAlgorithm enum for radio buttons
     {
@@ -70,8 +77,14 @@ class HashingTool : public Tool {
         CASE_RET(KECCAK384);
         CASE_RET(KECCAK512);
 
+        CASE_RET(RIPEMD128);
+        CASE_RET(RIPEMD160);
+        CASE_RET(RIPEMD256);
+        CASE_RET(RIPEMD320);
+
         CASE_RET(TIGER);
         CASE_RET(WHIRLPOOL);
+        CASE_RET(SM3);
 
         default:
           return "<unknown hash algorithm>";
@@ -115,7 +128,14 @@ class HashingTool : public Tool {
     std::unique_ptr<CryptoPP::SHAKE128> m_shake128{nullptr};
     std::unique_ptr<CryptoPP::SHAKE256> m_shake256{nullptr};
 
+    std::unique_ptr<CryptoPP::RIPEMD128> m_ripemd128{nullptr};
+    std::unique_ptr<CryptoPP::RIPEMD160> m_ripemd160{nullptr};
+    std::unique_ptr<CryptoPP::RIPEMD256> m_ripemd256{nullptr};
+    std::unique_ptr<CryptoPP::RIPEMD320> m_ripemd320{nullptr};
+
     std::unique_ptr<CryptoPP::Tiger> m_tiger{nullptr};
     std::unique_ptr<CryptoPP::Whirlpool> m_whirlpool{nullptr};
+    std::unique_ptr<CryptoPP::SM3> m_sm3{nullptr};
+
 };
 NS_ENIGMA_END
