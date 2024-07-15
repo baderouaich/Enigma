@@ -1,6 +1,7 @@
 # 3.2.0
+- New Encryption Algorithm `Camelia-256-GCM`
 - New Hashing Algorithms in `Tools -> Hashing` utility:
-`SM3`, `RIPEMD128`, `RIPEMD160`, `RIPEMD256`, `RIPEMD256`
+  `SM3`, `RIPEMD128`, `RIPEMD160`, `RIPEMD256`, `RIPEMD256`
 - Multiple input source `Tools -> Hashing`. Now you can compute the hash of a file alongside text
 
 # 3.1.0

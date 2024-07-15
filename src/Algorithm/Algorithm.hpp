@@ -24,6 +24,7 @@
 #include <pssr.h>       // RSA Signer & Verifier
 #include <rsa.h>        // RSA
 #include <twofish.h>    // Twofish
+#include <camellia.h>   // Camellia
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
@@ -40,6 +41,7 @@ class Blowfish;
 class IDEA;
 class ChaCha20Poly1305;
 class RSA;
+class Camellia;
 
 /**
 *	@brief Algorithm abstract class
@@ -74,7 +76,8 @@ class Algorithm {
       Blowfish,         // Blowfish-EAX
       IDEA,             // IDEA-EAX
       ChaCha20Poly1305, // ChaCha20Poly1305
-      RSA,							// RSA N/A yet
+      RSA,							// RSA-OAEP-SHA256
+      Camellia,					// Camellia-GCM
 
       ENIGMA_ENUM_DECLARE_BEGIN_END(AES)
     };

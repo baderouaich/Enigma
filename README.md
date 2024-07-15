@@ -34,13 +34,15 @@ Built to solve 3 problems i had:
 
 ## Supported Encryption Algorithms
 All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)
-- :white_check_mark: <strong>AES-GCM</strong> (Recommended)
-- :white_check_mark: <strong>Twofish-GCM</strong>
-- :white_check_mark: <strong>TripleDES-EAX</strong>
-- :white_check_mark: <strong>Blowfish-EAX</strong>
-- :white_check_mark: <strong>IDEA-EAX</strong>
-- :white_check_mark: <strong>ChaCha20Poly1305</strong>
+> <small>Ordered by strength</small>
 - :white_check_mark: <strong>RSA-OAEP-SHA256</strong>
+- :white_check_mark: <strong>AES-GCM</strong>
+- :white_check_mark: <strong>ChaCha20Poly1305</strong>
+- :white_check_mark: <strong>Camellia-GCM</strong>
+- :white_check_mark: <strong>Twofish-GCM</strong>
+- :white_check_mark: <strong>IDEA-EAX</strong>
+- :white_check_mark: <strong>Blowfish-EAX</strong>
+- :white_check_mark: <strong>TripleDES-EAX</strong>
 
 ## Extra Tools
 - Strong Password Generator
