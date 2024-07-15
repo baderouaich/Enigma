@@ -31,7 +31,7 @@ jobs:
     - name: Generate Project Makefiles
       run: |
         md build && cd build
-        cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=OFF -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+        cmake .. -G"Unix Makefiles" -A x64 -DCMAKE_BUILD_TYPE=Release -DENIGMA_ENABLE_TESTS=OFF -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 
     - name: Build Enigma
       run: cd build && make -j%NUMBER_OF_PROCESSORS%
