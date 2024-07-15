@@ -40,17 +40,7 @@ install(TARGETS Enigma RUNTIME DESTINATION ${INSTALL_BASE_DIR})
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/res/
   DESTINATION ${INSTALL_BASE_DIR}/res
   FILES_MATCHING PATTERN "*"
-  PATTERN "Enigma.db" EXCLUDE)  # Exclude Enigma.db database from this install command,
-# we don't want to overwrite user's data on an update
-# Check if Enigma.db exists and install it if it doesn't
-install(CODE "
-  if(NOT EXISTS \"${INSTALL_BASE_DIR}/res/database/Enigma.db\")
-    message(STATUS \"Enigma.db is missing. Installing it from repository's resources...\")
-    file(COPY \"${CMAKE_CURRENT_SOURCE_DIR}/res/database/Enigma.db\" DESTINATION \"${INSTALL_BASE_DIR}/res/database/\")
-  else()
-    message(STATUS \"Enigma.db already exists. Skipping.\")
-  endif()
-")
+  PATTERN "Enigma.db" EXCLUDE)  # Exclude Enigma.db database from this install command, we don't want to overwrite user's data on an update
 
 # Install .desktop file to /home/$(whoami)/Enigma/Enigma.desktop
 if (UNIX AND NOT APPLE)
