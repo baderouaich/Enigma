@@ -46,7 +46,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/res/
 install(CODE "
   if(NOT EXISTS \"${INSTALL_BASE_DIR}/res/database/Enigma.db\")
     message(STATUS \"Enigma.db is missing. Installing it from repository's resources...\")
-    file(COPY \"${CMAKE_CURRENT_SOURCE_DIR}/res/database/Enigma.db\" DESTINATION \"${INSTALL_BASE_DIR}/res/database\")
+    file(COPY \"${CMAKE_CURRENT_SOURCE_DIR}/res/database/Enigma.db\" DESTINATION \"${INSTALL_BASE_DIR}/res/database/\")
   else()
     message(STATUS \"Enigma.db already exists. Skipping.\")
   endif()
