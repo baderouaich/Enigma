@@ -6,19 +6,6 @@ option(ENIGMA_ENABLE_TESTS "Enable/Disable building of tests" OFF)
 option(ENIGMA_BUILD_DOCS "Build Doxygen API documentation" OFF)
 #####################################################
 
-################# Force x64 arch ###########################
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  # No need to add compile options for Visual Studio, it's handled by the generator platform
-  if(CMAKE_GENERATOR MATCHES "Visual Studio")
-    set(CMAKE_GENERATOR_PLATFORM "x64" CACHE STRING "" FORCE)
-  else()
-    add_compile_options(/machine:x64)
-  endif()
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  add_compile_options(-m64)
-endif()
-#####################################################
-
 ###### Doxygen Documentation ######
 if (ENIGMA_BUILD_DOCS)
   message(STATUS "Building Doxygen docs is enabled")
