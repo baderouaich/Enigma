@@ -3,6 +3,7 @@ var hierarchy =
     [ "Algorithm", "class_algorithm.html", [
       [ "AES", "class_a_e_s.html", null ],
       [ "Blowfish", "class_blowfish.html", null ],
+      [ "Camellia", "class_camellia.html", null ],
       [ "ChaCha20Poly1305", "class_cha_cha20_poly1305.html", null ],
       [ "IDEA", "class_i_d_e_a.html", null ],
       [ "RSA", "class_r_s_a.html", null ],

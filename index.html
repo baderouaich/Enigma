@@ -114,14 +114,17 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <td class="markdownTableBodyNone">Windows MSVC Tests (x64)   </td><td class="markdownTableBodyNone"><a href="https://github.com/baderouaich/Enigma/actions/workflows/build-windows-msvc-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows-msvc-tests.yml?branch=main" alt="Windows" class="inline"/></a>   </td></tr>
 </table>
 <h1>Supported <a class="el" href="struct_encryption.html">Encryption</a> Algorithms</h1>
-<p>All <a href="https://www.cryptopp.com/wiki/Authenticated_Encryption">Authenticated Encryption</a></p><ul>
-<li>:white_check_mark: <b>AES-GCM</b> (Recommended)</li>
-<li>:white_check_mark: <b>Twofish-GCM</b></li>
-<li>:white_check_mark: <b>TripleDES-EAX</b></li>
-<li>:white_check_mark: <b>Blowfish-EAX</b></li>
-<li>:white_check_mark: <b>IDEA-EAX</b></li>
+<p>All <a href="https://www.cryptopp.com/wiki/Authenticated_Encryption">Authenticated Encryption</a> </p><blockquote class="doxtable">
+<p><small>Ordered by strength</small> </p>
+</blockquote>
+<p>- :white_check_mark: <b>RSA-OAEP-SHA256</b></p><ul>
+<li>:white_check_mark: <b>AES-GCM</b></li>
 <li>:white_check_mark: <b><a class="el" href="class_cha_cha20_poly1305.html">ChaCha20Poly1305</a></b></li>
-<li>:white_check_mark: <b>RSA-OAEP-SHA256</b></li>
+<li>:white_check_mark: <b>Camellia-GCM</b></li>
+<li>:white_check_mark: <b>Twofish-GCM</b></li>
+<li>:white_check_mark: <b>IDEA-EAX</b></li>
+<li>:white_check_mark: <b>Blowfish-EAX</b></li>
+<li>:white_check_mark: <b>TripleDES-EAX</b></li>
 </ul>
 <h1>Extra Tools</h1>
 <ul>
@@ -159,7 +162,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Jul 15 2024 16:14:43 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Jul 15 2024 22:36:53 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

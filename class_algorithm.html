@@ -107,13 +107,14 @@ Inheritance diagram for Algorithm:</div>
  <div class="center">
   <img src="class_algorithm.png" usemap="#Algorithm_map" alt=""/>
   <map id="Algorithm_map" name="Algorithm_map">
-<area href="class_a_e_s.html" alt="AES" shape="rect" coords="0,56,125,80"/>
-<area href="class_blowfish.html" alt="Blowfish" shape="rect" coords="135,56,260,80"/>
-<area href="class_cha_cha20_poly1305.html" alt="ChaCha20Poly1305" shape="rect" coords="270,56,395,80"/>
-<area href="class_i_d_e_a.html" alt="IDEA" shape="rect" coords="405,56,530,80"/>
-<area href="class_r_s_a.html" alt="RSA" shape="rect" coords="540,56,665,80"/>
-<area href="class_triple_d_e_s.html" alt="TripleDES" shape="rect" coords="675,56,800,80"/>
-<area href="class_twofish.html" alt="Twofish" shape="rect" coords="810,56,935,80"/>
+<area href="class_a_e_s.html" alt="AES" shape="rect" coords="135,56,260,80"/>
+<area href="class_blowfish.html" alt="Blowfish" shape="rect" coords="135,112,260,136"/>
+<area href="class_camellia.html" alt="Camellia" shape="rect" coords="135,168,260,192"/>
+<area href="class_cha_cha20_poly1305.html" alt="ChaCha20Poly1305" shape="rect" coords="135,224,260,248"/>
+<area href="class_i_d_e_a.html" alt="IDEA" shape="rect" coords="135,280,260,304"/>
+<area href="class_r_s_a.html" alt="RSA" shape="rect" coords="135,336,260,360"/>
+<area href="class_triple_d_e_s.html" alt="TripleDES" shape="rect" coords="135,392,260,416"/>
+<area href="class_twofish.html" alt="Twofish" shape="rect" coords="135,448,260,472"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -134,6 +135,7 @@ Public Types</h2></td></tr>
 &#160;&#160;<a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6">IDEA</a>
 , <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d">ChaCha20Poly1305</a>
 , <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba445d0434ad7b42aff5bab616ebb41970">RSA</a>
+, <a class="el" href="class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba7bf560866975b3b51155b2ef1b5b4cf1">Camellia</a>
 <br />
  }</td></tr>
 <tr class="separator:abfa56bd0469d341e959bb510f4fac41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,7 +201,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="textblock"><p><a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a> abstract class. </p>
 <p>All encryption algorithms like <a class="el" href="class_a_e_s.html">AES</a>, <a class="el" href="class_twofish.html">Twofish</a>.. inherit from this class </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>add more encryption algorithms </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00049">49</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00051">51</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8a542c0aebeb6e59c9b7d0b6bd90b35">&#9670;&nbsp;</a></span>Intent</h2>
@@ -229,7 +231,7 @@ Static Protected Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="ae8a542c0aebeb6e59c9b7d0b6bd90b35ab1c94ca2fbc3e78fc30069c8d0f01680"></a>All&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00058">58</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00060">60</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -261,9 +263,10 @@ Static Protected Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6"></a>IDEA&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d"></a>ChaCha20Poly1305&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="abfa56bd0469d341e959bb510f4fac41ba445d0434ad7b42aff5bab616ebb41970"></a>RSA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abfa56bd0469d341e959bb510f4fac41ba7bf560866975b3b51155b2ef1b5b4cf1"></a>Camellia&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00070">70</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00072">72</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +488,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_twofish.html#ad56a2447a85021e68829bd223d85f251">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#ac2e4e726f5ff1bba36b9f14d25dd9ef1">TripleDES</a>, <a class="el" href="class_r_s_a.html#aebdbf9974770361603609e6e817ce002">RSA</a>, <a class="el" href="class_i_d_e_a.html#a7c931bcf6f7ce790f8aaeebf952457d6">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#ab99723eb21be504e9b66d6bd00bdc637">ChaCha20Poly1305</a>, <a class="el" href="class_blowfish.html#a116da833ea8576fb82565a7384768524">Blowfish</a>, and <a class="el" href="class_a_e_s.html#af5bb1fe33a0932e5d007ba86dbf40267">AES</a>.</p>
+<p>Implemented in <a class="el" href="class_twofish.html#ad56a2447a85021e68829bd223d85f251">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#ac2e4e726f5ff1bba36b9f14d25dd9ef1">TripleDES</a>, <a class="el" href="class_r_s_a.html#aebdbf9974770361603609e6e817ce002">RSA</a>, <a class="el" href="class_i_d_e_a.html#a7c931bcf6f7ce790f8aaeebf952457d6">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#ab99723eb21be504e9b66d6bd00bdc637">ChaCha20Poly1305</a>, <a class="el" href="class_camellia.html#af70c5dbfcc9a380f4039d34acdd9d3ad">Camellia</a>, <a class="el" href="class_blowfish.html#a116da833ea8576fb82565a7384768524">Blowfish</a>, and <a class="el" href="class_a_e_s.html#af5bb1fe33a0932e5d007ba86dbf40267">AES</a>.</p>
 
 </div>
 </div>
@@ -543,7 +546,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_twofish.html#a53534108f44380a49925b33be03af9a7">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a8ec84054d2ff9f8fc79fcd8e8a42d346">TripleDES</a>, <a class="el" href="class_r_s_a.html#aaaea15d6a436f169ca77b6d7980006ec">RSA</a>, <a class="el" href="class_i_d_e_a.html#ad48e918ca7ebda734d680703f5a88666">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#ac64cf79fa85a84f6537727eccb24e540">ChaCha20Poly1305</a>, <a class="el" href="class_blowfish.html#aaef9db2a7e96a3253e46ba27afcdd72d">Blowfish</a>, and <a class="el" href="class_a_e_s.html#a5a3a1839a40a72b694faa053cfb31dbd">AES</a>.</p>
+<p>Implemented in <a class="el" href="class_twofish.html#a53534108f44380a49925b33be03af9a7">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a8ec84054d2ff9f8fc79fcd8e8a42d346">TripleDES</a>, <a class="el" href="class_r_s_a.html#aaaea15d6a436f169ca77b6d7980006ec">RSA</a>, <a class="el" href="class_i_d_e_a.html#ad48e918ca7ebda734d680703f5a88666">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#ac64cf79fa85a84f6537727eccb24e540">ChaCha20Poly1305</a>, <a class="el" href="class_camellia.html#a06d8f4b1e1edace3ea873775efc9ca76">Camellia</a>, <a class="el" href="class_blowfish.html#aaef9db2a7e96a3253e46ba27afcdd72d">Blowfish</a>, and <a class="el" href="class_a_e_s.html#a5a3a1839a40a72b694faa053cfb31dbd">AES</a>.</p>
 
 </div>
 </div>
@@ -581,7 +584,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_twofish.html#a4dda77e8e2f55121c118c7e29faef078">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a51af5899d3effa0b0390a6aa8444d79b">TripleDES</a>, <a class="el" href="class_r_s_a.html#aadd9ab18379982d68680ffe4f344e5f1">RSA</a>, <a class="el" href="class_i_d_e_a.html#a8404e09cfcb3201b580d7803b7bbc003">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#ae0b4b46e9588f51d2f8586ab44c0f201">ChaCha20Poly1305</a>, <a class="el" href="class_blowfish.html#ad89c3c600e3d5f5d7e935a14a8784416">Blowfish</a>, and <a class="el" href="class_a_e_s.html#ac4f30120cf9cd8edcce877c9c419535b">AES</a>.</p>
+<p>Implemented in <a class="el" href="class_twofish.html#a4dda77e8e2f55121c118c7e29faef078">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a51af5899d3effa0b0390a6aa8444d79b">TripleDES</a>, <a class="el" href="class_r_s_a.html#aadd9ab18379982d68680ffe4f344e5f1">RSA</a>, <a class="el" href="class_i_d_e_a.html#a8404e09cfcb3201b580d7803b7bbc003">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#ae0b4b46e9588f51d2f8586ab44c0f201">ChaCha20Poly1305</a>, <a class="el" href="class_camellia.html#acf2c0668814d13d76c75542cf3cb5685">Camellia</a>, <a class="el" href="class_blowfish.html#ad89c3c600e3d5f5d7e935a14a8784416">Blowfish</a>, and <a class="el" href="class_a_e_s.html#ac4f30120cf9cd8edcce877c9c419535b">AES</a>.</p>
 
 </div>
 </div>
@@ -639,7 +642,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_twofish.html#a49110c97dc5d7066a344e35ae63c5886">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#ac202e5464a111dd50c0c9721ebac142d">TripleDES</a>, <a class="el" href="class_r_s_a.html#adf9024e9c271af4bf57203143d54fe4c">RSA</a>, <a class="el" href="class_i_d_e_a.html#a63fcf51cfcb2839486efa68ef2ebaeb4">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#a8ae6d023d40a265fa69cd93da5dbf6d7">ChaCha20Poly1305</a>, <a class="el" href="class_blowfish.html#a771835e77c4158dfd540136d1f8c1c41">Blowfish</a>, and <a class="el" href="class_a_e_s.html#aa85f9a55acf784ecfa01d93d3affad33">AES</a>.</p>
+<p>Implemented in <a class="el" href="class_twofish.html#a49110c97dc5d7066a344e35ae63c5886">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#ac202e5464a111dd50c0c9721ebac142d">TripleDES</a>, <a class="el" href="class_r_s_a.html#adf9024e9c271af4bf57203143d54fe4c">RSA</a>, <a class="el" href="class_i_d_e_a.html#a63fcf51cfcb2839486efa68ef2ebaeb4">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#a8ae6d023d40a265fa69cd93da5dbf6d7">ChaCha20Poly1305</a>, <a class="el" href="class_camellia.html#ae80a907ba547a5bbd33f6011ea27a2b7">Camellia</a>, <a class="el" href="class_blowfish.html#a771835e77c4158dfd540136d1f8c1c41">Blowfish</a>, and <a class="el" href="class_a_e_s.html#aa85f9a55acf784ecfa01d93d3affad33">AES</a>.</p>
 
 </div>
 </div>
@@ -697,7 +700,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_twofish.html#a3d8995541ef2155e492f6cda05093433">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a7247cc0dcedefe7f032c5e2f39bb2881">TripleDES</a>, <a class="el" href="class_r_s_a.html#a75be936f7bfaba97862153941c5239f6">RSA</a>, <a class="el" href="class_i_d_e_a.html#a7776cdbf199623f1b1113ce9ad05e8d2">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#a73785545d991ebdcb6afa4cbc4f18ae0">ChaCha20Poly1305</a>, <a class="el" href="class_blowfish.html#a836ace72c8ffb5c5836a28a0e1c88ec6">Blowfish</a>, and <a class="el" href="class_a_e_s.html#a026bd49efcabcdafcde811c6fde1b55d">AES</a>.</p>
+<p>Implemented in <a class="el" href="class_twofish.html#a3d8995541ef2155e492f6cda05093433">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a7247cc0dcedefe7f032c5e2f39bb2881">TripleDES</a>, <a class="el" href="class_r_s_a.html#a75be936f7bfaba97862153941c5239f6">RSA</a>, <a class="el" href="class_i_d_e_a.html#a7776cdbf199623f1b1113ce9ad05e8d2">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#a73785545d991ebdcb6afa4cbc4f18ae0">ChaCha20Poly1305</a>, <a class="el" href="class_camellia.html#a80807ccf88f79233e927738f09ad8ab9">Camellia</a>, <a class="el" href="class_blowfish.html#a836ace72c8ffb5c5836a28a0e1c88ec6">Blowfish</a>, and <a class="el" href="class_a_e_s.html#a026bd49efcabcdafcde811c6fde1b55d">AES</a>.</p>
 
 </div>
 </div>
@@ -735,7 +738,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_twofish.html#aef1cc7a8da0fc3956fa8e6a34b0752e0">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a68fe35ce8ef823878944029a2ee11976">TripleDES</a>, <a class="el" href="class_r_s_a.html#a403e818b63cec8ae18ad1c71654278dd">RSA</a>, <a class="el" href="class_i_d_e_a.html#ad4f2121b51104bee49aaff8ae3e4bc28">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#a72c9f651c571844cd83add699072dd15">ChaCha20Poly1305</a>, <a class="el" href="class_blowfish.html#a32988fa545404d895e2c989f79e5f347">Blowfish</a>, and <a class="el" href="class_a_e_s.html#a54bcc943bd32b8d9c9493d76f3fe52de">AES</a>.</p>
+<p>Implemented in <a class="el" href="class_twofish.html#aef1cc7a8da0fc3956fa8e6a34b0752e0">Twofish</a>, <a class="el" href="class_triple_d_e_s.html#a68fe35ce8ef823878944029a2ee11976">TripleDES</a>, <a class="el" href="class_r_s_a.html#a403e818b63cec8ae18ad1c71654278dd">RSA</a>, <a class="el" href="class_i_d_e_a.html#ad4f2121b51104bee49aaff8ae3e4bc28">IDEA</a>, <a class="el" href="class_cha_cha20_poly1305.html#a72c9f651c571844cd83add699072dd15">ChaCha20Poly1305</a>, <a class="el" href="class_camellia.html#a7ab7ff4270fe162f853f2f49a4c7a2ad">Camellia</a>, <a class="el" href="class_blowfish.html#a32988fa545404d895e2c989f79e5f347">Blowfish</a>, and <a class="el" href="class_a_e_s.html#a54bcc943bd32b8d9c9493d76f3fe52de">AES</a>.</p>
 
 </div>
 </div>
@@ -869,7 +872,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00136">136</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00139">139</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -896,7 +899,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00138">138</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00141">141</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -924,7 +927,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00137">137</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00140">140</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -950,7 +953,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>To generate random IV on encryption </p>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00183">183</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00186">186</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -975,7 +978,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Operation, Encrypt or Decrypt </p>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00182">182</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00185">185</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -1000,7 +1003,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="class_algorithm.html" title="Algorithm abstract class.">Algorithm</a> type: <a class="el" href="class_a_e_s.html">AES</a>, ChaCha, <a class="el" href="class_triple_d_e_s.html">TripleDES</a>... </p>
 
-<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00181">181</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_algorithm_8hpp_source.html#l00184">184</a> of file <a class="el" href="_algorithm_8hpp_source.html">Algorithm.hpp</a>.</p>
 
 </div>
 </div>
@@ -1013,7 +1016,7 @@ Static Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_algorithm.html">Algorithm</a></li>
-    <li class="footer">Generated on Mon Jul 15 2024 16:14:43 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Mon Jul 15 2024 22:36:53 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

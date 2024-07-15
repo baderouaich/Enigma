@@ -11,6 +11,7 @@ var annotated_dup =
     [ "AppUpdateEvent", "class_app_update_event.html", "class_app_update_event" ],
     [ "Base64", "class_base64.html", "class_base64" ],
     [ "Blowfish", "class_blowfish.html", "class_blowfish" ],
+    [ "Camellia", "class_camellia.html", "class_camellia" ],
     [ "ChaCha20Poly1305", "class_cha_cha20_poly1305.html", "class_cha_cha20_poly1305" ],
     [ "CheckForUpdates", "class_check_for_updates.html", "class_check_for_updates" ],
     [ "CipherChunk", "struct_cipher_chunk.html", "struct_cipher_chunk" ],
