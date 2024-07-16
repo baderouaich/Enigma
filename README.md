@@ -77,21 +77,15 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 
 ## UI
 - Main Menu
-  <!--![Main-Menu-Demo](https://github.com/baderouaich/Enigma/assets/49657842/72b69cab-af31-48d1-88b5-86914662c27c)-->
-  ![Main-Menu-Demo](https://github.com/user-attachments/assets/14ec29fb-6c23-4bed-8a3f-8e8089cb5b84)
+![Main-Menu-Demo](https://github.com/user-attachments/assets/14ec29fb-6c23-4bed-8a3f-8e8089cb5b84)
 - Straight forward
-  <!--![Straightforward](https://github.com/baderouaich/Enigma/assets/49657842/52474a80-41bd-4f12-a05b-c2b5579ed34d)-->
-  ![Straightforward](https://github.com/user-attachments/assets/fe8e2320-d89f-4185-b3c2-c371d5898107)
+ ![Straightforward](https://github.com/user-attachments/assets/fe8e2320-d89f-4185-b3c2-c371d5898107)
 - Supports the strongest encryption algorithms
-  <!--![Supports-Strongest-Encryption-Algorithms](https://github.com/baderouaich/Enigma/assets/49657842/932c260c-3f1c-4333-8267-3e8ae115d408) -->
-  ![Supports-Strongest-Encryption-Algorithms](https://github.com/user-attachments/assets/56e14297-dffb-4a8f-a546-41f188d8af2d)
+![Supports-Strongest-Encryption-Algorithms](https://github.com/user-attachments/assets/56e14297-dffb-4a8f-a546-41f188d8af2d)
 - Save Encryptions to a local database (an SQLite3 database which you can export/import)
-  <!--![My-Encryptions-Demo](https://github.com/baderouaich/Enigma/assets/49657842/3e0e7a95-446b-4f48-8bf2-516ab469fdae)-->
-	![My-Encryptions-Demo](https://github.com/user-attachments/assets/30e23abf-9a94-478d-94fd-521ccc13fd2a)
-
+![My-Encryptions-Demo](https://github.com/user-attachments/assets/30e23abf-9a94-478d-94fd-521ccc13fd2a)
 - Extra Utilities
- <!--![Tools-Demo](https://github.com/user-attachments/assets/becba2d3-0b1e-4a7e-ba12-74fca3883611)-->
- ![Tools-Demo](https://github.com/user-attachments/assets/b3f96607-d94a-47eb-8288-793b319e6e24)
+![Tools-Demo](https://github.com/user-attachments/assets/b3f96607-d94a-47eb-8288-793b319e6e24)
 
 
 ### Compiling & Installing
