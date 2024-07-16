@@ -1,7 +1,7 @@
 var annotated_dup =
 [
     [ "Enigma", "namespace_enigma.html", [
-      [ "ResourceUtils", "class_enigma_1_1_resource_utils.html", "class_enigma_1_1_resource_utils" ]
+      [ "ResourceManager", "class_enigma_1_1_resource_manager.html", "class_enigma_1_1_resource_manager" ]
     ] ],
     [ "AES", "class_a_e_s.html", "class_a_e_s" ],
     [ "Algorithm", "class_algorithm.html", "class_algorithm" ],

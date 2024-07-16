@@ -6,7 +6,6 @@ var class_application =
     [ "Exit", "class_application.html#ab832d28b8d0f3a2ba1e182b022ef98c9", null ],
     [ "GetCPUInfo", "class_application.html#a9f7e61cc3f73709d358bbfb4460b9cac", null ],
     [ "GetDeltaTime", "class_application.html#ac24755c59b839bd899cc1d2552203c8f", null ],
-    [ "GetFonts", "class_application.html#a79f80c2b5780524bccc1059dcbba7351", null ],
     [ "GetFPS", "class_application.html#a31f268a4dabe9f3979a7d8a94b31bbc3", null ],
     [ "getInstance", "class_application.html#a3c7c4032f258f147ab9c1eda98fd59f3", null ],
     [ "GetRAMInfo", "class_application.html#aeaa8b370d4bad89fd2b8802c16644bff", null ],

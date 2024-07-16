@@ -12,6 +12,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "Logger", "dir_ce44ad55c7286bf5a6cd8cf01717cab8.html", "dir_ce44ad55c7286bf5a6cd8cf01717cab8" ],
     [ "Meta", "dir_022f6552a590871b5e744fe7964d6696.html", "dir_022f6552a590871b5e744fe7964d6696" ],
     [ "Networking", "dir_bd51a612c92e41a52efc1573706495c8.html", "dir_bd51a612c92e41a52efc1573706495c8" ],
+    [ "ResourceManager", "dir_cc826e206496d9bb3cee340d21aea050.html", "dir_cc826e206496d9bb3cee340d21aea050" ],
     [ "Scenes", "dir_d665af80335f773f8bfcf2f56b3f3e8a.html", "dir_d665af80335f773f8bfcf2f56b3f3e8a" ],
     [ "System", "dir_ef68f1e1f5148ff8ef7fb1c955106c3c.html", "dir_ef68f1e1f5148ff8ef7fb1c955106c3c" ],
     [ "Utility", "dir_9761b53e3d9349800c0cb59b71c8cd3d.html", "dir_9761b53e3d9349800c0cb59b71c8cd3d" ],

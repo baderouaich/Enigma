@@ -1,6 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"class_base64.html#a25139dee392bddc811d579837a75d0f9":[4,0,7,4],
 "class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14":[4,0,7,3],
 "class_base64.html#ac8bfd1c5f378788be5167c465a8cb2ff":[4,0,7,0],
 "class_base64.html#ae647cddbe69257613c6fe780d5eecb4f":[4,0,7,2],
@@ -117,9 +116,12 @@ var NAVTREEINDEX3 =
 "class_encrypt_text_scene.html":[4,0,24],
 "class_encrypt_text_scene.html#a2456c9b862033d35a85c9bd3debcb1a5":[4,0,24,1],
 "class_encrypt_text_scene.html#aca4ee7f1c0b471e193f5846077218491":[4,0,24,0],
-"class_enigma_1_1_resource_utils.html":[4,0,0,0],
-"class_enigma_1_1_resource_utils.html#a08c959a3f8501615c8248d7d5b33423f":[4,0,0,0,1],
-"class_enigma_1_1_resource_utils.html#ab48e495b06613c3d74ed678cca7d0d42":[4,0,0,0,0],
+"class_enigma_1_1_resource_manager.html":[4,0,0,0],
+"class_enigma_1_1_resource_manager.html#a03a3071188e257cbf75e9f0ca2202f0c":[4,0,0,0,1],
+"class_enigma_1_1_resource_manager.html#a0a896d4ab09a0012ced7357496b75a9f":[4,0,0,0,0],
+"class_enigma_1_1_resource_manager.html#a9cad83d934ed60abb04c21aade548928":[4,0,0,0,4],
+"class_enigma_1_1_resource_manager.html#ac07bf9143c4cefcf216d688e63a81cfd":[4,0,0,0,3],
+"class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909":[4,0,0,0,2],
 "class_event.html":[4,0,26],
 "class_event.html#a17303a8089a66eece86b41cdea845f55":[4,0,26,6],
 "class_event.html#a6daafe93a3b5f53bfa1c90dbda255d80":[4,0,26,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a727b63583e01fa2b3952dab580c84dc2":[4,0,45,0,4],
 "class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a93cba07454f06a4a960172bbd6e2a435":[4,0,45,0,2],
 "class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aa60852f204ed8028c1c58808b746d115":[4,0,45,0,1],
-"class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b":[4,0,45,0,3],
-"class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aea4788705e6873b424c65e91c2846b19":[4,0,45,0,0],
-"class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4afd038fc7f319e48f3115d92bf5bdbef9":[4,0,45,0,6]
+"class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b":[4,0,45,0,3]
 };

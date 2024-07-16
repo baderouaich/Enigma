@@ -68,7 +68,7 @@ var hierarchy =
     [ "OpenGLUtils", "class_open_g_l_utils.html", null ],
     [ "RAMInfo", "class_r_a_m_info.html", null ],
     [ "Random", "class_random.html", null ],
-    [ "Enigma::ResourceUtils", "class_enigma_1_1_resource_utils.html", null ],
+    [ "Enigma::ResourceManager", "class_enigma_1_1_resource_manager.html", null ],
     [ "RSA::RSASettings", "struct_r_s_a_1_1_r_s_a_settings.html", null ],
     [ "SaveFileDialog", "class_save_file_dialog.html", null ],
     [ "Enigma::Scene", null, [

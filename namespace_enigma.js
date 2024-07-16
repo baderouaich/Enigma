@@ -22,7 +22,7 @@ var namespace_enigma =
       [ "toHost", "namespace_enigma_1_1_little_endian.html#a585f988e7bd69971f81047f83d19cd76", null ],
       [ "toHost", "namespace_enigma_1_1_little_endian.html#a4a8eef355ebdc68ccd1519b06500729b", null ]
     ] ],
-    [ "ResourceUtils", "class_enigma_1_1_resource_utils.html", "class_enigma_1_1_resource_utils" ],
+    [ "ResourceManager", "class_enigma_1_1_resource_manager.html", "class_enigma_1_1_resource_manager" ],
     [ "byte", "namespace_enigma.html#af2a42f76a7252581a38e63841d73ee64", null ],
     [ "BSwap16", "namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea", null ],
     [ "BSwap32", "namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75", null ],

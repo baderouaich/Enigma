@@ -1,8 +1,11 @@
 var NAVTREEINDEX6 =
 {
+"namespacemembers_type.html":[3,1,3],
+"namespacemembers_vars.html":[3,1,2],
+"namespaces.html":[3,0],
 "pages.html":[],
-"pch_8hpp.html":[5,0,0,17],
-"pch_8hpp_source.html":[5,0,0,17],
+"pch_8hpp.html":[5,0,0,18],
+"pch_8hpp_source.html":[5,0,0,18],
 "struct_check_for_updates_1_1_latest_release_info.html":[4,0,11,0],
 "struct_check_for_updates_1_1_latest_release_info.html#a0ecfb815b1566bc5204cb8e8ede66824":[4,0,11,0,9],
 "struct_check_for_updates_1_1_latest_release_info.html#a2fe4b0b68ebe286c45a1e42158c4cfc9":[4,0,11,0,0],

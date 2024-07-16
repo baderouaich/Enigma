@@ -16,7 +16,7 @@ var searchData=
   ['imguiwidgets_2ehpp_587',['ImGuiWidgets.hpp',['../_im_gui_widgets_8hpp.html',1,'']]],
   ['import_588',['Import',['../class_database.html#a946954852fb5a30b683750badd38d0a7',1,'Database']]],
   ['info_589',['Info',['../class_dialog_utils.html#a1c022bc651104b1b39d53dd0b13cb5b7',1,'DialogUtils::Info(const std::string &amp;title, const std::string &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)'],['../class_dialog_utils.html#a2520ede139ddbbc3917a6fa5e2d12a24',1,'DialogUtils::Info(const std::string &amp;message, const Enigma::MessageBox::Choice choice=Enigma::MessageBox::Choice::Ok)'],['../class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a4059b0251f66a18cb56f544728796875',1,'MessageBox::Info()'],['../class_notification.html#a19c5d398f953120d38dd490cdb2a40d0a4059b0251f66a18cb56f544728796875',1,'Notification::Info()']]],
-  ['initialize_590',['initialize',['../class_database.html#a80b0a336a0a82b460c1f2e71444349bb',1,'Database::initialize()'],['../class_logger.html#ae68a638fd155541bd76a456c38fa1bf4',1,'Logger::initialize()']]],
+  ['initialize_590',['initialize',['../class_enigma_1_1_resource_manager.html#ac07bf9143c4cefcf216d688e63a81cfd',1,'Enigma::ResourceManager::initialize()'],['../class_logger.html#ae68a638fd155541bd76a456c38fa1bf4',1,'Logger::initialize()'],['../class_database.html#a80b0a336a0a82b460c1f2e71444349bb',1,'Database::initialize()']]],
   ['input_591',['Input',['../class_input.html',1,'']]],
   ['input_592',['INPUT',['../_event_8hpp.html#aaa1c281ec2a8aa38bfc59ae098f6e4c3aa84cc046d48610b05c21fd3670d0c829',1,'Event.hpp']]],
   ['input_2ehpp_593',['Input.hpp',['../_input_8hpp.html',1,'']]],
