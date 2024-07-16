@@ -9,6 +9,7 @@
 #include "Twofish/Twofish.hpp"
 #include "RSA/RSA.hpp"
 #include "Camellia/Camellia.hpp"
+#include "Serpent/Serpent.hpp"
 #include <Utility/Base64.hpp>
 #include <Utility/FileUtils.hpp>
 #include <Utility/StringUtils.hpp>
@@ -49,6 +50,8 @@ std::unique_ptr<Algorithm> Algorithm::CreateFromName(const std::string& algorith
     return std::make_unique<RSA>(intent);
   else if (AlgoIn({"camellia", "camellia-256", "camellia-gcm", "cameliagcm"}))
     return std::make_unique<Camellia>(intent);
+  else if (AlgoIn({"serpent", "serpent-256", "serpent-gcm", "serpentgcm"}))
+    return std::make_unique<Serpent>(intent);
   else
     throw std::runtime_error("Unsupported algorithm: " + algorithm_name);
 }
@@ -77,6 +80,7 @@ std::string Algorithm::AlgoTypeEnumToStr(const Algorithm::Type e) noexcept {
     CASE_RET(ChaCha20Poly1305);
     CASE_RET(RSA);
     CASE_RET(Camellia);
+    CASE_RET(Serpent);
     default:
       return "<unknown algorithm>";
   }

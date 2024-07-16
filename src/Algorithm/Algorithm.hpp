@@ -25,6 +25,7 @@
 #include <rsa.h>        // RSA
 #include <twofish.h>    // Twofish
 #include <camellia.h>   // Camellia
+#include <serpent.h>    // Serpent
 #pragma warning(pop)
 static_assert(sizeof(Enigma::byte) == sizeof(CryptoPP::byte), "Enigma byte size must be the same size with Crypto++'s byte");
 
@@ -42,6 +43,7 @@ class IDEA;
 class ChaCha20Poly1305;
 class RSA;
 class Camellia;
+class Serpent;
 
 /**
 *	@brief Algorithm abstract class
@@ -76,12 +78,24 @@ class Algorithm {
       Blowfish,         // Blowfish-EAX
       IDEA,             // IDEA-EAX
       ChaCha20Poly1305, // ChaCha20Poly1305
-      RSA,							// RSA-OAEP-SHA256
-      Camellia,					// Camellia-GCM
+      RSA,              // RSA-OAEP-SHA256
+      Camellia,         // Camellia-GCM
+      Serpent,          // Serpent-GCM
 
       ENIGMA_ENUM_DECLARE_BEGIN_END(AES)
     };
 
+    inline static const std::unordered_map<Type, std::string_view> ALGORITHM_DESCRIPTIONS = {
+      {Type::AES, "Symmetric, extremely high security, efficient, widely supported"},
+      {Type::Twofish, "Symmetric, high security, flexible and efficient"},
+      {Type::TripleDES, "Symmetric, moderate security, suitable for legacy systems"},
+      {Type::Blowfish, "Symmetric, moderate security, fast and simple"},
+      {Type::IDEA, "Symmetric, moderate to high security, simple and efficient"},
+      {Type::ChaCha20Poly1305, "Symmetric, very high security, high performance in software"},
+      {Type::RSA, "Asymmetric, very high security, excellent for key exchange"},
+      {Type::Camellia, "Symmetric, very high security, comparable to AES"},
+      {Type::Serpent, "Symmetric, high security, conservative design"},
+    };
 
   public:
     explicit Algorithm(const Type type, const Intent intent = Intent::Encrypt | Intent::Decrypt) noexcept;

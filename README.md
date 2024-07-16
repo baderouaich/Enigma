@@ -39,6 +39,7 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 - :white_check_mark: <strong>AES-GCM</strong>
 - :white_check_mark: <strong>ChaCha20Poly1305</strong>
 - :white_check_mark: <strong>Camellia-GCM</strong>
+- :white_check_mark: <strong>Serpent-GCM</strong>
 - :white_check_mark: <strong>Twofish-GCM</strong>
 - :white_check_mark: <strong>IDEA-EAX</strong>
 - :white_check_mark: <strong>Blowfish-EAX</strong>
