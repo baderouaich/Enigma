@@ -10,7 +10,7 @@ NS_ENIGMA_BEGIN
 class PasswordGeneratorTool : public Tool {
   public:
     PasswordGeneratorTool() = default;
-    ~PasswordGeneratorTool() = default;
+    ~PasswordGeneratorTool() override = default;
 
   public: /* Tool Life Cycle */
     void OnCreate() override;
@@ -24,72 +24,66 @@ class PasswordGeneratorTool : public Tool {
 
 
   private: // Password settings
-    bool m_digits, m_uppercase_alphabets, m_lowercase_alphabets, m_special_characters;
+    bool m_digits{}, m_uppercase_alphabets{}, m_lowercase_alphabets{}, m_special_characters{};
 
-    std::vector<const char *> m_lengths{};   // length combo box items (heap allocated elements with new[])
-    std::int32_t m_selected_length_index{0}; // selected length index from combo box
-
-    //inline static constexpr std::size_t MAX_LENGTHS_ITEMS = 100; // max length combo box items
-    //const char** m_lengths; // length combo box (heap allocated with new[])
-    //std::int32_t m_selected_length_index = 0; // selected length index from combo box
-
+    std::string m_length{"16"};
     std::string m_password{};                                                                     // generated password container
     std::string m_remember_password_sentence{};                                                   // a helpful sentence to remember ur password based on password characters
     inline static const std::unordered_map<char, std::string_view> m_remember_password_char_words // letter, word dictionary
       {
-        {'a', "alpha"},
-        {'b', "beta"},
-        {'c', "coffee"},
-        {'d', "delta"},
-        {'e', "egg"},
-        {'f', "flame"},
-        {'g', "gamma"},
-        {'h', "hello"},
-        {'i', "indeed"},
-        {'j', "jack"},
-        {'k', "kind"},
-        {'l', "lemon"},
-        {'m', "man"},
-        {'n', "new"},
-        {'o', "omega"},
-        {'p', "pi"},
-        {'q', "question"},
-        {'r', "right"},
-        {'s', "sigma"},
-        {'t', "tea"},
-        {'u', "upsilon"},
-        {'v', "visa"},
-        {'w', "word"},
-        {'x', "xbox"},
-        {'y', "yield"},
-        {'z', "zero"},
+        {'a', "apple"},
+        {'b', "banana"},
+        {'c', "cat"},
+        {'d', "dog"},
+        {'e', "elephant"},
+        {'f', "frog"},
+        {'g', "grape"},
+        {'h', "hat"},
+        {'i', "ice"},
+        {'j', "juice"},
+        {'k', "kite"},
+        {'l', "lion"},
+        {'m', "moon"},
+        {'n', "nest"},
+        {'o', "orange"},
+        {'p', "pizza"},
+        {'q', "queen"},
+        {'r', "rain"},
+        {'s', "sun"},
+        {'t', "tree"},
+        {'u', "umbrella"},
+        {'v', "violin"},
+        {'w', "whale"},
+        {'x', "x-ray"},
+        {'y', "yogurt"},
+        {'z', "zebra"},
 
-        {'A', "AMERICA"},
-        {'B', "BRAVO"},
-        {'C', "CANDY"},
-        {'D', "DRONE"},
-        {'E', "ERA"},
-        {'F', "FACT"},
-        {'G', "GARDIAN"},
-        {'H', "HOLLY"},
-        {'I', "ISLAND"},
-        {'J', "JOKE"},
-        {'K', "KOALA"},
-        {'L', "LUCK"},
-        {'M', "MUSIC"},
-        {'N', "NASA"},
-        {'O', "OLIVE"},
-        {'P', "PAINT"},
-        {'Q', "QUEEN"},
-        {'R', "RAM"},
-        {'S', "SPEED"},
-        {'T', "TRACK"},
-        {'U', "URANIUM"},
-        {'V', "VARIABLE"},
-        {'W', "WIND"},
-        {'X', "XRAY"},
-        {'Y', "YOUTUBE"},
-        {'Z', "ZIP"},
+        {'A', "Apple"},
+        {'B', "Banana"},
+        {'C', "Cat"},
+        {'D', "Dog"},
+        {'E', "Elephant"},
+        {'F', "Frog"},
+        {'G', "Grape"},
+        {'H', "Hat"},
+        {'I', "Ice"},
+        {'J', "Juice"},
+        {'K', "Kite"},
+        {'L', "Lion"},
+        {'M', "Moon"},
+        {'N', "Nest"},
+        {'O', "Orange"},
+        {'P', "Pizza"},
+        {'Q', "Queen"},
+        {'R', "Rain"},
+        {'S', "Sun"},
+        {'T', "Tree"},
+        {'U', "Umbrella"},
+        {'V', "Violin"},
+        {'W', "Whale"},
+        {'X', "X-ray"},
+        {'Y', "Yogurt"},
+        {'Z', "Zebra"},
       };
 };
 NS_ENIGMA_END

@@ -10,24 +10,6 @@ void PasswordGeneratorTool::OnCreate() {
   ENIGMA_TRACE_CURRENT_FUNCTION();
 
   m_digits = m_uppercase_alphabets = m_lowercase_alphabets = m_special_characters = true;
-
-#if 0
-	// Make Available lengths
-	for (std::int32_t i = 2; i <= 4096; i *= 2)
-	{
-		char* s = new char[10];
-		std::sprintf(s, "%d", i); // will add \000 at the end which is required for imgui combo box
-		m_lengths.emplace_back(std::move(s));
-	}
-#endif
-  // Make Available lengths
-  m_lengths.reserve(4096 - 5);
-  for (std::int32_t i = 5; i <= 4096; ++i) {
-    char *s = new char[10];
-    std::sprintf(s, "%d", i); // will add \000 at the end which is required for imgui combo box
-    m_lengths.emplace_back(std::move(s));
-  }
-  m_selected_length_index = 7; // 12
 }
 
 void PasswordGeneratorTool::OnDraw(Scene *parent) {
@@ -72,7 +54,7 @@ void PasswordGeneratorTool::OnDraw(Scene *parent) {
       ImGui::SameLine();
 
       // Generate button 25% of width
-      if (ImGuiWidgets::Button(("Generate"), ImVec2(win_w * 0.20f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
+      if (ImGuiWidgets::Button(("Generate"), ImVec2(150.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
         Application::getInstance()->LaunchWorkerThread(parent, ("Generating Password..."), [this]() {
           this->OnGenerateButtonPressed();
         });
@@ -99,15 +81,16 @@ void PasswordGeneratorTool::OnDraw(Scene *parent) {
 					ImGui::NextColumn();
 					ImGui::Checkbox("Special Characters (+*~.#^)", &m_special_characters);
 					*/
-      ImGui::Combo(("Length"), &m_selected_length_index, m_lengths.data(), static_cast<std::int32_t>(m_lengths.size()), -1);
+      //ImGui::Combo(("Length"), &m_selected_length_index, m_lengths.data(), static_cast<std::int32_t>(m_lengths.size()), -1);
+      ImGuiWidgets::InputText(("Length"), &m_length, 70.0f, ImGuiInputTextFlags_::ImGuiInputTextFlags_CharsDecimal);
       ImGui::NextColumn();
-      ImGui::Checkbox(("Numbers"), &m_digits);
+      ImGui::Checkbox(("Digits (0-9)"), &m_digits);
       ImGui::NextColumn();
-      ImGui::Checkbox(("Uppercase"), &m_uppercase_alphabets);
+      ImGui::Checkbox(("Uppercase (A-Z)"), &m_uppercase_alphabets);
       ImGui::NextColumn();
-      ImGui::Checkbox(("Lowercase"), &m_lowercase_alphabets);
+      ImGui::Checkbox(("Lowercase (a-z)"), &m_lowercase_alphabets);
       ImGui::NextColumn();
-      ImGui::Checkbox(("Symbols"), &m_special_characters);
+      ImGui::Checkbox(("Symbols (+*~.#^/)"), &m_special_characters);
       ImGui::EndColumns();
       //ImGui::PopFont();
       //
@@ -136,27 +119,28 @@ void PasswordGeneratorTool::OnDraw(Scene *parent) {
 
 void PasswordGeneratorTool::OnDestroy() {
   ENIGMA_TRACE_CURRENT_FUNCTION();
-
-  // Delete heap allocated combobox lengths item
-  for (auto& length: m_lengths) {
-    if (length) {
-      delete[] length;
-      length = nullptr;
-    }
-  }
-  m_lengths.clear();
 }
 
 void PasswordGeneratorTool::OnGenerateButtonPressed() {
   if (!m_digits && !m_lowercase_alphabets && !m_uppercase_alphabets && !m_special_characters)
     return;
 
-  // get desired length
-  const std::size_t length = std::stoull(m_lengths[m_selected_length_index]);
+  if (!std::all_of(m_length.begin(), m_length.end(), [](char c) { return std::isdigit(c); })) {
+    DialogUtils::Warn("Invalid password length");
+    return;
+  }
+  constexpr const std::size_t maxPasswordLength = ENIGMA_MB_TO_BYTES(10); // 10mb pw? is enough at most
+
+  const std::size_t length = std::stoull(m_length);
+  if (length > maxPasswordLength) {
+    DialogUtils::Warn("Password length is too long");
+    return;
+  }
   const std::string special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
 
   Random::Reseed();
   m_password.clear();
+  m_password.reserve(length);
   while (m_password.size() < length) {
     char c = '\000';
   again:
@@ -181,6 +165,9 @@ void PasswordGeneratorTool::OnGenerateButtonPressed() {
         if (m_special_characters) {
           c = special_characters[Random::Int<std::size_t>(0, special_characters.size() - 1)];
         } else goto again;
+        break;
+      default:
+        ENIGMA_ASSERT(false, "Unreachable");
         break;
     }
     m_password += c;
