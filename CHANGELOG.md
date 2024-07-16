@@ -4,7 +4,7 @@
 - New Hashing Algorithms in `Tools -> Hashing` utility:
   `SM3`, `RIPEMD128`, `RIPEMD160`, `RIPEMD256`, `RIPEMD256`
 - Multiple input source `Tools -> Hashing`. Now you can compute the hash of a file alongside text
-- UI view updates (font sizes, colors)
+- UI view updates (fonts, colors)
 - Upgraded ImGui from v1.90.8 to v1.90.9
 
 # 3.1.0
