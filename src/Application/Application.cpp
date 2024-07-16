@@ -44,7 +44,7 @@ Application::Application(const WindowSettings& window_settings)
   // Initializers
   this->InitWindow(window_settings);
   this->InitImGuiRenderer();
-  this->InitImGuiFonts();
+  Enigma::ResourceManager::initialize(); // must be after imgui context is created so to build ImFont
   this->InitHardwareInfo(window_settings);
 
   // Init loading scene
@@ -95,74 +95,6 @@ void Application::InitHardwareInfo(const WindowSettings& window_settings) {
     m_ram_info = std::make_unique<RAMInfo>();
   if (window_settings.is_show_cpu_usage)
     m_cpu_info = std::make_unique<CPUInfo>();
-}
-
-
-void Application::InitImGuiFonts() {
-  ENIGMA_TRACE_CURRENT_FUNCTION();
-
-  ENIGMA_TRACE("Loading Fonts...");
-
-  const auto& io = ImGui::GetIO();
-
-  const fs::path font_audiowide_path = Constants::Resources::Fonts::AUDIOWIDE_FONT_PATH;
-  const fs::path font_montserrat_path = Constants::Resources::Fonts::MONTSERRAT_FONT_PATH;
-  const fs::path font_ubuntu_path = Constants::Resources::Fonts::UBUNTU_FONT_PATH;
-  ENIGMA_ASSERT_OR_THROW(fs::exists(font_audiowide_path), "Font " + font_audiowide_path.string() + " not found");
-  ENIGMA_ASSERT_OR_THROW(fs::exists(font_montserrat_path), "Font " + font_montserrat_path.string() + " not found");
-  ENIGMA_ASSERT_OR_THROW(fs::exists(font_ubuntu_path), "Font " + font_ubuntu_path.string() + " not found");
-
-#ifdef ENIGMA_DEBUG
-  ENIGMA_LOG("Font Audiowide-Regular path: {}", font_audiowide_path.string());
-  ENIGMA_LOG("Font Montserrat-Medium path: {}", font_montserrat_path.string());
-  ENIGMA_LOG("Font Ubuntu-Regular path: {}", font_ubuntu_path.string());
-#endif
-
-  //using namespace std::string_literals;
-  //for(auto font_audiowide_size : std::initializer_list<short>{ 20, 30, 45, 60 })
-  //	m_fonts["Audiowide-Regular-"sv + std::to_string(font_audiowide_size)] =  io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), static_cast<float>(font_audiowide_size));
-  //for (auto font_montserrat_size : std::initializer_list<short>{ 12, 14, 16, 18, 20, 45 })
-  //	m_fonts["Montserrat-Medium-"sv + std::to_string(font_montserrat_size)] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), static_cast<float>(font_montserrat_size));
-
-  ImFontConfig fontConfig = ImFontConfig();
-  //fontConfig.FontDataOwnedByAtlas = true;
-
-  m_fonts["Audiowide-Regular-60"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 60.0f, &fontConfig);
-  m_fonts["Audiowide-Regular-45"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 45.0f, &fontConfig);
-  m_fonts["Audiowide-Regular-30"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 30.0f, &fontConfig);
-  m_fonts["Audiowide-Regular-20"] = io.Fonts->AddFontFromFileTTF(font_audiowide_path.string().c_str(), 20.0f, &fontConfig);
-
-  m_fonts["Ubuntu-Regular-60"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 60.0f, &fontConfig);
-  m_fonts["Ubuntu-Regular-45"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 45.0f, &fontConfig);
-  m_fonts["Ubuntu-Regular-30"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 30.0f, &fontConfig);
-  m_fonts["Ubuntu-Regular-20"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 20.0f, &fontConfig);
-  m_fonts["Ubuntu-Regular-18"] = io.Fonts->AddFontFromFileTTF(font_ubuntu_path.string().c_str(), 18.0f, &fontConfig);
-
-  m_fonts["Montserrat-Medium-45"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 45.0f, &fontConfig);
-  m_fonts["Montserrat-Medium-20"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 20.0f, &fontConfig);
-  m_fonts["Montserrat-Medium-18"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 18.0f, &fontConfig);
-  m_fonts["Montserrat-Medium-16"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 16.0f, &fontConfig);
-  m_fonts["Montserrat-Medium-14"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 14.0f, &fontConfig);
-  m_fonts["Montserrat-Medium-12"] = io.Fonts->AddFontFromFileTTF(font_montserrat_path.string().c_str(), 12.0f, &fontConfig);
-
-  // Build added fonts atlas --> imgui issue #3643
-  io.Fonts->Build();
-
-  // Check if fonts are loaded
-  for (const auto& [font_name, font]: m_fonts) {
-    if (font->IsLoaded()) {
-      ENIGMA_TRACE("Font {} Loaded", font->ConfigData->Name);
-    } else {
-      const std::string err_msg = "Failed to load font " + std::string(font_name);
-      // console alert
-      ENIGMA_ERROR(err_msg);
-      // ui alert
-      (void) DialogUtils::Error("Resource Loading Error", err_msg);
-      // no further app without dear fonts :c
-      this->EndApplication();
-      break;
-    }
-  }
 }
 
 void Application::PushScene(std::unique_ptr<Scene> scene) {
@@ -444,8 +376,7 @@ Application::~Application() {
     m_loading_scene->OnDestroy(); // Don't forget the loading scene
 
   m_scenes.clear();
-  m_fonts.clear();
 
-  ImGui::GetIO().Fonts->Clear();
+  Enigma::ResourceManager::shutdown();
 }
 NS_ENIGMA_END

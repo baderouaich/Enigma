@@ -91,9 +91,6 @@ class Application final : public SingleProcessInstance {
     /** Returns Realtime CPU usage informations (if enabled in WindowSettings.ini, otherwise nullptr) */
     constexpr const std::unique_ptr<CPUInfo>& GetCPUInfo() const noexcept { return m_cpu_info; }
 
-    /** Returns Loaded Fonts map */
-    constexpr const std::unordered_map<std::string_view, ImFont *>& GetFonts() const noexcept { return m_fonts; }
-
   private: // Updates
     /** Updates delta time */
     void UpdateDeltaTime() noexcept;
@@ -134,9 +131,6 @@ class Application final : public SingleProcessInstance {
 
   private:
     std::unique_ptr<ImGuiRenderer> m_imgui_renderer; /**< ImGui renderer wrapper */
-
-  private:
-    std::unordered_map<std::string_view, ImFont *> m_fonts; /**< Loaded fonts */
 
   private:
     inline static Application *m_instance{nullptr}; /**< Application singleton */

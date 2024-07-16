@@ -1,7 +1,7 @@
 #include <pch.hpp>
 #include <Enigma.hpp>
 
-static void SignalHandler(const int sig);
+static void SignalHandler(int sig);
 
 int main(int argc, char *argv[]) {
   if (argc > 1 && (!std::strcmp(argv[1], "--version") || !std::strcmp(argv[1], "-v"))) {
@@ -20,16 +20,14 @@ int main(int argc, char *argv[]) {
   std::signal(SIGBREAK, SignalHandler); // On Windows, a click on console window close button will raise SIGBREAK
 #endif
 
-  using namespace Enigma;
-
-  Logger::initialize();
-  Database::initialize();
+  Enigma::Logger::initialize();
+  Enigma::Database::initialize();
 
   std::int32_t exit_code = -1;
   try {
-    const Config windowConfig(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
-    const WindowSettings windowSettings(windowConfig);
-    Application app(windowSettings);
+    const Enigma::Config windowConfig(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
+    const Enigma::WindowSettings windowSettings(windowConfig);
+    Enigma::Application app(windowSettings);
     app.Run();
     exit_code = EXIT_SUCCESS;
   } catch (const std::exception& e) {
@@ -37,8 +35,8 @@ int main(int argc, char *argv[]) {
     exit_code = EXIT_FAILURE;
   }
 
-  Database::shutdown();
-  Logger::shutdown();
+  Enigma::Database::shutdown();
+  Enigma::Logger::shutdown();
 
   return exit_code;
 }
@@ -46,7 +44,7 @@ int main(int argc, char *argv[]) {
 /**
 *	Handles exit signals to release program resources gracefully
 */
-static void SignalHandler(const int sig) {
+static void SignalHandler(int sig) {
   const auto stringify_signal = [sig]() noexcept -> const char * {
 
 #define RET_STR(s, desc) \

@@ -1,6 +1,6 @@
 #pragma once
 #include "Types.hpp"
-#include <Utility/ResourceUtils.hpp>
+#include <ResourceManager/ResourceManager.hpp>
 #include <array>
 
 namespace Enigma {
@@ -41,7 +41,7 @@ namespace Enigma {
     }
 
     namespace Config {
-      static const fs::path WINDOW_CONFIG_FILE_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "config" / "WindowSettings.ini";
+      static const fs::path WINDOW_CONFIG_FILE_PATH = ::Enigma::ResourceManager::getResourcesDir() / "config" / "WindowSettings.ini";
     }
 
     namespace ENV // Environment Variable
@@ -50,11 +50,11 @@ namespace Enigma {
     }
 
     namespace Logger {
-      static const fs::path LOG_FILE_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "logs" / "Enigma.log";
+      static const fs::path LOG_FILE_PATH = ::Enigma::ResourceManager::getResourcesDir() / "logs" / "Enigma.log";
     }
 
     namespace Database {
-      static const fs::path DATABASE_FILE_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "database" / "Enigma.db";
+      static const fs::path DATABASE_FILE_PATH = ::Enigma::ResourceManager::getResourcesDir() / "database" / "Enigma.db";
       // Unfortunately, u cant create multiple tables at once..
       static constexpr const std::array<std::string_view, 2> CREATE_TABLES_SQL = {
         R"(
@@ -112,13 +112,13 @@ namespace Enigma {
     namespace Resources {
       namespace Textures {
         // window runtime icon
-        static const fs::path ENIGMA_LOGO_PNG_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "branding" / "Logo.png";
+        static const fs::path ENIGMA_LOGO_PNG_PATH = ::Enigma::ResourceManager::getResourcesDir() / "branding" / "Logo.png";
       }
 
       namespace Fonts {
-        static const fs::path AUDIOWIDE_FONT_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "fonts" / "Audiowide-Regular.ttf";
-        static const fs::path MONTSERRAT_FONT_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "fonts" / "Montserrat-Medium.ttf";
-        static const fs::path UBUNTU_FONT_PATH = ::Enigma::ResourceUtils::GetResourcesDir() / "fonts" / "Ubuntu-Regular.ttf";
+        static const fs::path AUDIOWIDE_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Audiowide-Regular.ttf";
+        static const fs::path MONTSERRAT_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Montserrat-Medium.ttf";
+        static const fs::path UBUNTU_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Ubuntu-Regular.ttf";
       }
     }
 

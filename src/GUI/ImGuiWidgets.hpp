@@ -3,6 +3,7 @@
 #define ENIGMA_IMGUI_WIDGETS_H
 
 #include <Application/Application.hpp>
+#include <ResourceManager/ResourceManager.hpp>
 #include <Core/Core.hpp>
 #include <Utility/OpenGLUtils.hpp>
 #include <Utility/SizeUtils.hpp>
@@ -259,8 +260,7 @@ class ImGuiWidgets final {
       static constexpr auto popup_id = "loadingDialog";
 
       const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
-      static const auto& fonts = Application::getInstance()->GetFonts();
-      static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
+      static ImFont* const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
 
       ImGui::OpenPopup(popup_id, ImGuiPopupFlags_AnyPopup);
       static constexpr const auto popup_window_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground;
@@ -271,7 +271,7 @@ class ImGuiWidgets final {
         static const std::uint32_t COLOR = ImGui::GetColorU32(spinner_color); // 0xrrggbbaa
         ImGui::SetCursorPos(spinner_position);
         ImGuiWidgets::LoadingSpinner("##spinner", spinner_radius, spinner_thickness, COLOR);
-        ImGui::PushFont(font_audiowide_regular_20); // text font
+        ImGui::PushFont(font_ubuntu_regular_20); // text font
         const auto text_size = ImGui::CalcTextSize(text);
         ImGui::SetCursorPosX((win_w - text_size.x) / 2.0f);
         ImGui::TextWrapped("%s",text);

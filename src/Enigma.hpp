@@ -89,4 +89,9 @@
 #include <Meta/Meta.hpp>
 //
 
+// ResourceManager
+#include <ResourceManager/ResourceManager.hpp>
+//
+
+
 #endif // !ENIGMA_H

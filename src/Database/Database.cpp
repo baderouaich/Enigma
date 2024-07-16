@@ -1,14 +1,14 @@
 #include <pch.hpp>
 #include "Database.hpp"
 #include <Utility/FileUtils.hpp>
-#include <Utility/ResourceUtils.hpp>
+#include <ResourceManager/ResourceManager.hpp>
 
 NS_ENIGMA_BEGIN
 
 void Database::initialize() {
   ENIGMA_TRACE_CURRENT_FUNCTION();
   {
-    const fs::path resDir = ::Enigma::ResourceUtils::GetResourcesDir();
+    const fs::path resDir = ::Enigma::ResourceManager::getResourcesDir();
     if (!fs::is_directory(resDir)) {
       ENIGMA_CRITICAL("Couldn't find resources directory at {}", resDir.string());
       std::exit(EXIT_FAILURE);
@@ -24,7 +24,7 @@ void Database::initialize() {
 
   try {
     //Create db dir if not exists
-    const fs::path dbDir = ::Enigma::ResourceUtils::GetResourcesDir() / "database";
+    const fs::path dbDir = ::Enigma::ResourceManager::getResourcesDir() / "database";
     if (!fs::is_directory(dbDir)) {
       ENIGMA_INFO("Creating Database Directory {} ...", dbDir.string());
       if (!fs::create_directory(dbDir)) {
