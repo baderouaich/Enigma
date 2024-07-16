@@ -14,7 +14,8 @@ var class_algorithm =
       [ "IDEA", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba798db05b7c8ac4e09724fd2a87a785a6", null ],
       [ "ChaCha20Poly1305", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba8eb0132c227519353e44de6fc1df241d", null ],
       [ "RSA", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba445d0434ad7b42aff5bab616ebb41970", null ],
-      [ "Camellia", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba7bf560866975b3b51155b2ef1b5b4cf1", null ]
+      [ "Camellia", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba7bf560866975b3b51155b2ef1b5b4cf1", null ],
+      [ "Serpent", "class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba7cde8b0cc9c769422774241c9f7baf60", null ]
     ] ],
     [ "Algorithm", "class_algorithm.html#a47f9be0e5d341b289d086a1067769320", null ],
     [ "~Algorithm", "class_algorithm.html#a4d50bd605f1ce4fc2e9d71a46b433b6b", null ],
@@ -34,6 +35,7 @@ var class_algorithm =
     [ "GetType", "class_algorithm.html#a0a00540b7e662d891947e28a05a36fa6", null ],
     [ "GetTypeString", "class_algorithm.html#a259b8b3950464590a1930a5858452865", null ],
     [ "SetType", "class_algorithm.html#a8853c9698687fb221f2ba0d8433b6daf", null ],
+    [ "ALGORITHM_DESCRIPTIONS", "class_algorithm.html#a5e2ab2c42ac3ace5df6a5575221040e1", null ],
     [ "m_auto_seeded_random_pool", "class_algorithm.html#a8156b440a1edcfc56fa3d027da60ea5c", null ],
     [ "m_intent", "class_algorithm.html#af8989bb50a2ef53a437c531dd061cf39", null ],
     [ "m_type", "class_algorithm.html#a4149bad1914f21bf2d145fc3d4acfa5d", null ]

@@ -6,6 +6,7 @@ var dir_d537ec303f13b8e88e2bd2506dfe6a9e =
     [ "ChaCha20Poly1305", "dir_7487ba709179bc2faf64c8ac7ef6d489.html", "dir_7487ba709179bc2faf64c8ac7ef6d489" ],
     [ "IDEA", "dir_52feaadfb4f914366d9650e7c6263b01.html", "dir_52feaadfb4f914366d9650e7c6263b01" ],
     [ "RSA", "dir_fe11ce497ecf053aca26a97f9dfce6d3.html", "dir_fe11ce497ecf053aca26a97f9dfce6d3" ],
+    [ "Serpent", "dir_ef6864fe0ec78778e09d5c9e63656b43.html", "dir_ef6864fe0ec78778e09d5c9e63656b43" ],
     [ "TripleDES", "dir_78642b7eddd5c53f51a2e8cffd57f3f9.html", "dir_78642b7eddd5c53f51a2e8cffd57f3f9" ],
     [ "Twofish", "dir_af031666c25e6544e62f28ac9758b2ac.html", "dir_af031666c25e6544e62f28ac9758b2ac" ],
     [ "Algorithm.hpp", "_algorithm_8hpp.html", [

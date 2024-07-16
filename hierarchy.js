@@ -7,6 +7,7 @@ var hierarchy =
       [ "ChaCha20Poly1305", "class_cha_cha20_poly1305.html", null ],
       [ "IDEA", "class_i_d_e_a.html", null ],
       [ "RSA", "class_r_s_a.html", null ],
+      [ "Serpent", "class_serpent.html", null ],
       [ "TripleDES", "class_triple_d_e_s.html", null ],
       [ "Twofish", "class_twofish.html", null ]
     ] ],

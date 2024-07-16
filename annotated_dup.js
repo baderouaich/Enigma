@@ -65,6 +65,7 @@ var annotated_dup =
     [ "SaveFileDialog", "class_save_file_dialog.html", "class_save_file_dialog" ],
     [ "Scene", "class_scene.html", "class_scene" ],
     [ "SelectFolderDialog", "class_select_folder_dialog.html", "class_select_folder_dialog" ],
+    [ "Serpent", "class_serpent.html", "class_serpent" ],
     [ "SingleProcessInstance", "class_single_process_instance.html", "class_single_process_instance" ],
     [ "SizeUtils", "class_size_utils.html", "class_size_utils" ],
     [ "StringUtils", "class_string_utils.html", "class_string_utils" ],
