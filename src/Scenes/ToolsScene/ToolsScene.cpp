@@ -47,13 +47,14 @@ void ToolsScene::OnImGuiDraw() {
   static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static auto& fonts = Application::getInstance()->GetFonts();
-  static ImFont *const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  static ImFont *const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-  static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static ImFont *const& font_ubuntu_regular_60 = ResourceManager::getFont("Ubuntu-Regular-60");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_16 = ResourceManager::getFont("Ubuntu-Regular-16");
+  static ImFont *const& font_ubuntu_regular_14 = ResourceManager::getFont("Ubuntu-Regular-14");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -66,14 +67,14 @@ void ToolsScene::OnImGuiDraw() {
   {
     // Back button [<] & Title
     {
-      static const auto& title_font = font_audiowide_regular_30;
-      const auto title = ("Tools");
-      static const ImVec2 title_size((ImGui::CalcTextSize(title).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title).y * title_font->Scale);
+      static const auto& title_font = font_ubuntu_regular_30;
+      static const std::string title = ("Tools");
+      static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
       static const ImVec2 back_button_size(45.0f, title_size.y);
 
       // Back Button [<]
       {
-        ImGui::PushFont(font_montserrat_medium_18); // < arrow is a text too
+        ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
         if (ImGuiWidgets::BackButton("##back", back_button_size)) {
           Scene::EndScene();
         }
@@ -88,7 +89,7 @@ void ToolsScene::OnImGuiDraw() {
         ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR);                     // text color
         ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
         {
-          (void) ImGui::ButtonEx(title, ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+          (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w) - back_button_size.x - 25.0f, title_size.y), ImGuiItemFlags_Disabled);
         }
         ImGui::PopStyleColor(2);
         ImGui::PopFont();

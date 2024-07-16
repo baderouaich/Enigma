@@ -20,25 +20,22 @@ void PasswordGeneratorTool::OnDraw(Scene *parent) {
 
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static auto& fonts = Application::getInstance()->GetFonts();
-  //static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  //static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-  static ImFont *const& font_montserrat_medium_14 = fonts.at("Montserrat-Medium-14");
-  //static ImFont* const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
-  ImGui::PushFont(font_audiowide_regular_20);
+  ImGui::PushFont(font_ubuntu_regular_20);
   {
     if (ImGui::CollapsingHeader(("Password Generator"), nullptr, ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_DefaultOpen))
     //if (ImGui::CollapsingHeader("Password Generator", nullptr))
     {
-      ImGui::PushFont(font_montserrat_medium_18);
+      ImGui::PushFont(font_ubuntu_regular_18);
       spacing(3);
       // Copy button, Output Input Text , Generate Button
       // Copy Generated password button 10% of width
-      //ImGui::PushFont(font_montserrat_medium_20);
+      //ImGui::PushFont(font_ubuntu_regular_20);
       ImGui::PushID("CopyGeneratedPw");
       if (ImGuiWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
         this->OnCopyPasswordButtonPressed();
@@ -67,7 +64,7 @@ void PasswordGeneratorTool::OnDraw(Scene *parent) {
 
       // Password Settings
       // Wrap password settings in columns to order things up
-      //ImGui::PushFont(font_montserrat_medium_14);
+      //ImGui::PushFont(font_ubuntu_regular_14);
       ImGui::BeginColumns("Password Settings", 5, ImGuiOldColumnFlags_::ImGuiOldColumnFlags_NoResize);
       // Length Combo Box
       /*

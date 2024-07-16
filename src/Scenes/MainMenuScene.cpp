@@ -53,11 +53,15 @@ void MainMenuScene::OnImGuiDraw() {
 
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static const auto& fonts = Application::getInstance()->GetFonts();
-  static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
-  static ImFont *const& font_audiowide_regular_60 = fonts.at("Audiowide-Regular-60");
-  static ImFont *const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
+  static ImFont *const& font_ubuntu_regular_60 = ResourceManager::getFont("Ubuntu-Regular-60");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_16 = ResourceManager::getFont("Ubuntu-Regular-16");
+  static ImFont *const& font_ubuntu_regular_14 = ResourceManager::getFont("Ubuntu-Regular-14");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
+
 
   static constexpr const auto container_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -74,7 +78,7 @@ void MainMenuScene::OnImGuiDraw() {
     // Menu bar
     {
       ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 22.0f)); // 22.0f Menu bar padding
-      ImGui::PushFont(font_audiowide_regular_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       if (ImGui::BeginMenuBar()) {
         if (ImGui::BeginMenu("File")) {
           if (ImGui::MenuItem("Export")) { this->OnExportEncryptionsButtonPressed(); }
@@ -181,12 +185,12 @@ void MainMenuScene::OnImGuiDraw() {
 #if true // use text
     // Enigma Version
     {
-      ImGui::PushFont(font_audiowide_regular_60);                          // text font
+      ImGui::PushFont(font_ubuntu_regular_60);                          // text font
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
       {
 
         static constexpr const auto title = "Enigma";
-        static const ImVec2 title_size = {ImGui::CalcTextSize(title).x * font_audiowide_regular_60->Scale, ImGui::CalcTextSize(title).y * font_audiowide_regular_60->Scale};
+        static const ImVec2 title_size = {ImGui::CalcTextSize(title).x * font_ubuntu_regular_60->Scale, ImGui::CalcTextSize(title).y * font_ubuntu_regular_60->Scale};
         ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x) / 2.0f);
         ImGui::Text(title);
         //static const ImVec2 label_size = { ImGui::CalcTextSize("Enigma x.y.z").x * font_audiowide_regular_45->Scale, ImGui::CalcTextSize("Enigma x.y.z").y * font_audiowide_regular_45->Scale };
@@ -212,7 +216,7 @@ void MainMenuScene::OnImGuiDraw() {
 
     // Buttons
     {
-      ImGui::PushFont(font_audiowide_regular_20);                                           // buttons font
+      ImGui::PushFont(font_ubuntu_regular_20);                                           // buttons font
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
       ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
@@ -438,7 +442,7 @@ void MainMenuScene::OnAboutMenuButtonPressed() {
 }
 
 void MainMenuScene::OnExportEncryptionsButtonPressed() {
-  const fs::path defaultExportFilename = ResourceUtils::GetResourcesDir() / DateTimeUtils::now("Enigma_export_%Y_%m_%d_%H_%M_%S.db");
+  const fs::path defaultExportFilename = ResourceManager::getResourcesDir() / DateTimeUtils::now("Enigma_export_%Y_%m_%d_%H_%M_%S.db");
   const SaveFileDialog sfd("Export Database to ...", defaultExportFilename.string(), true);
   const std::string outputFilename = sfd.Show();
   if (outputFilename.empty()) return;
@@ -455,7 +459,7 @@ void MainMenuScene::OnExportEncryptionsButtonPressed() {
   });
 }
 void MainMenuScene::OnImportEncryptionsButtonPressed() {
-  const OpenFileDialog ofd("Import Database from ...", ResourceUtils::GetResourcesDir().string(), false);
+  const OpenFileDialog ofd("Import Database from ...", ResourceManager::getResourcesDir().string(), false);
   const std::vector<std::string> selectedFiles = ofd.Show();
   if (selectedFiles.empty()) return;
   const std::string& inputFilename = selectedFiles[0];

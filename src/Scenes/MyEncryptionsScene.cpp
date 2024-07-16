@@ -51,13 +51,11 @@ void MyEncryptionsScene::OnImGuiDraw() {
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
   static constexpr const auto inline_spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine(); } };
 
-  static auto& fonts = Application::getInstance()->GetFonts();
-  static ImFont *const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  static ImFont *const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-  static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -69,14 +67,14 @@ void MyEncryptionsScene::OnImGuiDraw() {
   ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));                                            // top left
   {
 #pragma region Back button [<] & Scene Title
-    static const auto& title_font = font_audiowide_regular_30;
+    static const auto& title_font = font_ubuntu_regular_30;
     static const std::string title = "My Encryptions";
     static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
     static const ImVec2 back_button_size(45.0f, title_size.y);
 
     // Back Button [<]
     {
-      ImGui::PushFont(font_montserrat_medium_18); // < arrow is a text too
+      ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
       if (ImGuiWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
@@ -91,7 +89,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR);                     // text color
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
       {
-        (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+        (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w) - back_button_size.x - 25.0f, title_size.y), ImGuiItemFlags_Disabled);
       }
       ImGui::PopStyleColor(2);
       ImGui::PopFont();
@@ -104,7 +102,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
     spacing(2);
 
     // Search Query
-    ImGui::PushFont(font_montserrat_medium_18);                                           // text font
+    ImGui::PushFont(font_ubuntu_regular_18);                                           // text font
     ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
@@ -155,7 +153,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
 
       {
         // Order By
-        ImGui::PushFont(font_montserrat_medium_18); // text font
+        ImGui::PushFont(font_ubuntu_regular_18); // text font
         ImGui::Text(("Order By"));
         ImGui::SameLine();
         for (byte i = static_cast<byte>(Database::OrderBy::BEGIN); i <= static_cast<byte>(Database::OrderBy::END); i++) {
@@ -189,7 +187,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
 
 #if 0
 			// Order By
-			ImGui::PushFont(font_montserrat_medium_18); // text font
+			ImGui::PushFont(font_ubuntu_regular_18); // text font
 			ImGui::Text("Order By "); ImGui::SameLine();
 			if (ImGui::RadioButton("ID", m_order_by == Database::OrderBy::ID))
 			{
@@ -248,7 +246,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
       // Encryptions records Table
       // https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp#L5024
       {
-        ImGui::PushFont(font_montserrat_medium_18); // text font
+        ImGui::PushFont(font_ubuntu_regular_18); // text font
                                                     // settings inspired from https://github.com/ocornut/imgui/issues/2957 # https://user-images.githubusercontent.com/8225057/71590710-dd057f80-2b29-11ea-8c1f-d827c008e050.png
 
         static constexpr const auto table_flags =
@@ -349,11 +347,11 @@ void MyEncryptionsScene::OnImGuiDraw() {
     } else // No Encryption records saved yet.
     {
       // Centre text no saved encryption records
-      ImGui::PushFont(font_montserrat_medium_18);                          // text font
+      ImGui::PushFont(font_ubuntu_regular_18);                          // text font
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
       {
         const char *text = m_isSearching ? ("No Encryptions found") : ("No Encryptions saved yet");
-        static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_montserrat_medium_18->Scale, ImGui::CalcTextSize(text).y * font_montserrat_medium_18->Scale);
+        static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_ubuntu_regular_18->Scale, ImGui::CalcTextSize(text).y * font_ubuntu_regular_18->Scale);
         ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
         ImGui::Text("%s", text);
       }

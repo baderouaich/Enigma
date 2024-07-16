@@ -48,16 +48,14 @@ void ViewEncryptionScene::OnImGuiDraw() {
   static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); ImGui::SameLine(); };
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static const auto& fonts = Application::getInstance()->GetFonts();
-  static ImFont *const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  static ImFont *const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-  static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
-  static ImFont *const& font_ubuntu_regular_30 = fonts.at("Ubuntu-Regular-30");
-  static ImFont *const& font_ubuntu_regular_20 = fonts.at("Ubuntu-Regular-20");
-  static ImFont *const& font_ubuntu_regular_18 = fonts.at("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_60 = ResourceManager::getFont("Ubuntu-Regular-60");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_16 = ResourceManager::getFont("Ubuntu-Regular-16");
+  static ImFont *const& font_ubuntu_regular_14 = ResourceManager::getFont("Ubuntu-Regular-14");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -69,14 +67,14 @@ void ViewEncryptionScene::OnImGuiDraw() {
   ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));                                            // top left
   {
 #pragma region Back button [<] & Scene Title
-    static const auto& title_font = font_audiowide_regular_30;
+    static const auto& title_font = font_ubuntu_regular_30;
     static const std::string title = ("View Encryption");
     static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
     static const ImVec2 back_button_size(45.0f, title_size.y);
 
     // Back Button [<]
     {
-      ImGui::PushFont(font_montserrat_medium_18); // < arrow is a text too
+      ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
       if (ImGuiWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
@@ -91,7 +89,7 @@ void ViewEncryptionScene::OnImGuiDraw() {
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR);                     // text color
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
       {
-        (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+        (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w) - back_button_size.x - 25.0f, title_size.y), ImGuiItemFlags_Disabled);
       }
       ImGui::PopStyleColor(2);
       ImGui::PopFont();
@@ -106,14 +104,14 @@ void ViewEncryptionScene::OnImGuiDraw() {
     // Encryption info (title \n Date time  - size)
     {
       // title
-      ImGui::PushFont(font_audiowide_regular_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       ImGui::TextWrapped("%s", m_encryption->title.c_str()); // we had an issue here, abort was called because the random generated string contains % confuses imgui which thinks it needs format string, solved by adding %s then text
       ImGui::PopFont();
 
       spacing(2);
 
       // Date time  - size - ...
-      ImGui::PushFont(font_montserrat_medium_18);
+      ImGui::PushFont(font_ubuntu_regular_18);
       {
         static const std::string format = std::string("Format: ") + (m_encryption->is_file ? ("File") : ("Text"));
         ImGui::ButtonEx(format.c_str(), {0.0f, 0.0f}, ImGuiItemFlags_Disabled);
@@ -160,7 +158,7 @@ void ViewEncryptionScene::OnImGuiDraw() {
       ImGui::PopFont();
     } else {
       // Password used for encryption
-      ImGui::PushFont(font_montserrat_medium_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       {
         // Label
         ImGui::Text("%s:", "Password");
@@ -169,7 +167,7 @@ void ViewEncryptionScene::OnImGuiDraw() {
         ImGuiWidgets::InputText("##password", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
         // Bytes count
-        ImGui::PushFont(font_montserrat_medium_12);
+        ImGui::PushFont(font_ubuntu_regular_12);
         //ImGui::Text("%zu bytes", m_password.size());
         ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
         ImGui::PopFont();
@@ -185,7 +183,7 @@ void ViewEncryptionScene::OnImGuiDraw() {
       spacing(3);
 
 
-      ImGui::PushFont(font_montserrat_medium_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       {
         // Label
         ImGui::Text("%s:", "Recovered Text");
@@ -193,7 +191,7 @@ void ViewEncryptionScene::OnImGuiDraw() {
         // Encrypted text
         static const ImVec2 copy_button_size(45.0f, 25.0f);
         ImGuiWidgets::InputTextMultiline("##enc_txt", &m_recovered_text, ImVec2(win_w - (copy_button_size.x * 1.5f), ImGui::GetTextLineHeightWithSpacing() * 10.0f));
-        ImGui::PushFont(font_montserrat_medium_12);
+        ImGui::PushFont(font_ubuntu_regular_12);
         ImGui::SameLine();
         ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
@@ -214,7 +212,7 @@ void ViewEncryptionScene::OnImGuiDraw() {
     // Decrypt Button
     {
 
-      ImGui::PushFont(font_audiowide_regular_20);                                           // buttons font
+      ImGui::PushFont(font_ubuntu_regular_20);                                           // buttons font
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
       ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed

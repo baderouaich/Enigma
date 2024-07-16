@@ -21,19 +21,19 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
 
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static auto& fonts = Application::getInstance()->GetFonts();
-  //static ImFont* const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  //static ImFont* const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-  static ImFont *const& font_montserrat_medium_14 = fonts.at("Montserrat-Medium-14");
-  static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
+  static ImFont *const& font_ubuntu_regular_60 = ResourceManager::getFont("Ubuntu-Regular-60");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_16 = ResourceManager::getFont("Ubuntu-Regular-16");
+  static ImFont *const& font_ubuntu_regular_14 = ResourceManager::getFont("Ubuntu-Regular-14");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
-  ImGui::PushFont(font_audiowide_regular_20);
+  ImGui::PushFont(font_ubuntu_regular_20);
   {
     if (ImGui::CollapsingHeader(("XOR Encrypt/Decrypt"))) {
-      ImGui::PushFont(font_montserrat_medium_18);
+      ImGui::PushFont(font_ubuntu_regular_18);
       spacing(3);
 
 
@@ -50,7 +50,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
       spacing(3);
 
       // Buffer or cipher to encrypt/decrypt
-      ImGui::PushFont(font_montserrat_medium_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       {
         // Label
         ImGui::Text("%s:", ("Input"));
@@ -60,7 +60,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
         ImGuiWidgets::InputTextMultiline("##text1", &m_input, input_text_size);
 
         // Bytes count
-        ImGui::PushFont(font_montserrat_medium_12);
+        ImGui::PushFont(font_ubuntu_regular_12);
         ImGui::Text("%s", SizeUtils::FriendlySize(m_input.size()).c_str());
         ImGui::PopFont();
       }
@@ -69,7 +69,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
       spacing(3);
 
       // Encryption Password
-      ImGui::PushFont(font_montserrat_medium_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       {
         // Label
         ImGui::Text("%s:", ("Password"));
@@ -82,13 +82,13 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
 
       // Encrypted/decrypted output
       if (!m_output.empty()) {
-        ImGui::PushFont(font_montserrat_medium_20);
+        ImGui::PushFont(font_ubuntu_regular_20);
         {
           // Label
           ImGui::Text("%s:", ("Output (in base64)"));
           // Encrypted/Decrypted text
           ImGuiWidgets::InputTextMultiline("##text4", &m_output, ImVec2(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f));
-          ImGui::PushFont(font_montserrat_medium_14);
+          ImGui::PushFont(font_ubuntu_regular_14);
           ImGui::SameLine();
           ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
           ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
@@ -97,7 +97,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
             Clipboard::Set(m_output);
           }
           //ImGui::NewLine();
-          ImGui::PushFont(font_montserrat_medium_12);
+          ImGui::PushFont(font_ubuntu_regular_12);
           ImGui::Text("%s", SizeUtils::FriendlySize(m_output.size()).c_str());
           ImGui::PopFont();
           ImGui::PopStyleColor(3);
@@ -110,7 +110,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
 
       // Encrypt/Decrypt Button
       {
-        ImGui::PushFont(font_audiowide_regular_20);                                           // buttons font
+        ImGui::PushFont(font_ubuntu_regular_20);                                           // buttons font
         ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
         ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed

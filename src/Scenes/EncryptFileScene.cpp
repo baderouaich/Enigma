@@ -52,17 +52,14 @@ void EncryptFileScene::OnImGuiDraw() {
   static constexpr const auto inline_dummy = [](const float& x, const float& y) noexcept {  ImGui::SameLine(); ImGui::Dummy(ImVec2(x, y)); };
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static const auto& fonts = Application::getInstance()->GetFonts();
-  static ImFont *const& font_audiowide_regular_45 = fonts.at("Audiowide-Regular-45");
-  static ImFont *const& font_audiowide_regular_30 = fonts.at("Audiowide-Regular-30");
-  static ImFont *const& font_audiowide_regular_20 = fonts.at("Audiowide-Regular-20");
-  static ImFont *const& font_montserrat_medium_20 = fonts.at("Montserrat-Medium-20");
-  static ImFont *const& font_montserrat_medium_18 = fonts.at("Montserrat-Medium-18");
-  static ImFont *const& font_montserrat_medium_16 = fonts.at("Montserrat-Medium-16");
-  static ImFont *const& font_montserrat_medium_12 = fonts.at("Montserrat-Medium-12");
-  static ImFont *const& font_ubuntu_regular_30 = fonts.at("Ubuntu-Regular-30");
-  static ImFont *const& font_ubuntu_regular_20 = fonts.at("Ubuntu-Regular-20");
-  static ImFont *const& font_ubuntu_regular_18 = fonts.at("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_60 = ResourceManager::getFont("Ubuntu-Regular-60");
+  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont *const& font_ubuntu_regular_16 = ResourceManager::getFont("Ubuntu-Regular-16");
+  static ImFont *const& font_ubuntu_regular_14 = ResourceManager::getFont("Ubuntu-Regular-14");
+  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -74,14 +71,14 @@ void EncryptFileScene::OnImGuiDraw() {
   ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));                                            // top left
   {
 #pragma region Back button [<] & Scene Title
-    static const auto& title_font = font_audiowide_regular_30;
+    static const auto& title_font = font_ubuntu_regular_30;
     static const std::string title = ("Encrypt File");
     static const ImVec2 title_size((ImGui::CalcTextSize(title.c_str()).x * title_font->Scale) - 45.0f, ImGui::CalcTextSize(title.c_str()).y * title_font->Scale);
     static const ImVec2 back_button_size(45.0f, title_size.y);
 
     // Back Button [<]
     {
-      ImGui::PushFont(font_montserrat_medium_18); // < arrow is a text too
+      ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
       if (ImGuiWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
@@ -96,7 +93,7 @@ void EncryptFileScene::OnImGuiDraw() {
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR);                     // text color
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::SCENE_TITLE_BACKGROUND_COLOR); // Scene title back color
       {
-        (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w), title_size.y), ImGuiItemFlags_Disabled);
+        (void) ImGui::ButtonEx(title.c_str(), ImVec2(static_cast<float>(win_w) - back_button_size.x - 25.0f, title_size.y), ImGuiItemFlags_Disabled);
       }
       ImGui::PopStyleColor(2);
       ImGui::PopFont();
@@ -109,7 +106,7 @@ void EncryptFileScene::OnImGuiDraw() {
 
 
     // Algorithm To encrypt File with
-    ImGui::PushFont(font_audiowide_regular_20);
+    ImGui::PushFont(font_ubuntu_regular_20);
     {
       // Label
       ImGui::Text("%s:", ("Algorithm"));
@@ -118,8 +115,7 @@ void EncryptFileScene::OnImGuiDraw() {
       // Algo types radio buttons
       const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
       for (const auto& [algo_name, algo_type]: supported_algorithms) {
-        inline_dummy(1.0f, 0.0f);
-        ImGui::SameLine();
+        ImGui::SameLine(0.0f,5.0f);
         if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type)) {
           m_type = algo_type;
         }
@@ -150,9 +146,9 @@ void EncryptFileScene::OnImGuiDraw() {
     spacing(2);
 
     // Save to database widget
-    ImGui::PushFont(font_montserrat_medium_16);
+    ImGui::PushFont(font_ubuntu_regular_16);
     {
-      ImGui::PushFont(font_audiowide_regular_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       ImGui::Text("%s:", ("Save to database"));
       ImGui::PopFont();
       inline_dummy(6.0f, 0.0f);
@@ -160,8 +156,7 @@ void EncryptFileScene::OnImGuiDraw() {
       ImGui::Checkbox("##savetodb_checkbox", &m_save_to_database);
 
       if (m_save_to_database) {
-        ImGui::Text("%s:", ("Encryption Title"));
-        ImGuiWidgets::InputTextWithHint("##idb", ("(example > An important video) helps with searching through encryption records in the future"), &m_db_title, win_w / 1.3f);
+        ImGuiWidgets::InputTextWithHint("##idb", ("A clear encryption title (e.g., An important Document) facilitates future record searches."), &m_db_title, win_w / 1.3f);
       }
     }
     ImGui::PopFont();
@@ -172,14 +167,14 @@ void EncryptFileScene::OnImGuiDraw() {
     spacing(3);
 
     // In File to Encrypt
-    ImGui::PushFont(font_montserrat_medium_20);
+    ImGui::PushFont(font_ubuntu_regular_20);
     {
       // Label
       ImGui::Text("%s:", ("File To Encrypt"));
       // Encrypted text
       static const ImVec2 browse_button_size(win_w * 0.10f, 25.0f);
       ImGuiWidgets::InputText("##text1", &m_in_filename, win_w * 0.85f);
-      ImGui::PushFont(font_montserrat_medium_12);
+      ImGui::PushFont(font_ubuntu_regular_12);
       ImGui::SameLine();
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
       ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
@@ -200,7 +195,7 @@ void EncryptFileScene::OnImGuiDraw() {
 
     // Out File Encrypted
     if (!m_in_filename.empty()) {
-      ImGui::PushFont(font_montserrat_medium_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       {
         // Label
         ImGui::Text("%s:", ("Encrypted File Location"));
@@ -208,7 +203,7 @@ void EncryptFileScene::OnImGuiDraw() {
         // Encrypted text
         static const ImVec2 browse_button_size(win_w * 0.10f, 25.0f);
         ImGuiWidgets::InputText("##text2", &m_out_filename, win_w * 0.85f);
-        ImGui::PushFont(font_montserrat_medium_12);
+        ImGui::PushFont(font_ubuntu_regular_12);
         ImGui::SameLine();
         ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
         ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
@@ -275,7 +270,7 @@ void EncryptFileScene::OnImGuiDraw() {
     } else // RSA Doesnt need password
     {
       // Encryption Password & Confirm password
-      ImGui::PushFont(font_montserrat_medium_20);
+      ImGui::PushFont(font_ubuntu_regular_20);
       {
         // password text coloring for each state
         ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text,
@@ -295,7 +290,7 @@ void EncryptFileScene::OnImGuiDraw() {
         ImGuiWidgets::InputText("##text4", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
         ImGui::PopStyleColor();
         // Bytes count
-        ImGui::PushFont(font_montserrat_medium_12);
+        ImGui::PushFont(font_ubuntu_regular_12);
         //ImGui::Text("%zu bytes", m_password.size());
         ImGui::Text("%s", SizeUtils::FriendlySize(m_password.size()).c_str());
         ImGui::PopFont();
@@ -311,7 +306,7 @@ void EncryptFileScene::OnImGuiDraw() {
 
     // Encrypt Button
     {
-      ImGui::PushFont(font_audiowide_regular_20);                                           // buttons font
+      ImGui::PushFont(font_ubuntu_regular_20);                                           // buttons font
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
       ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
@@ -328,14 +323,14 @@ void EncryptFileScene::OnImGuiDraw() {
       ImGui::PopFont();
     }
     // Out File Encrypted
-    /*ImGui::PushFont(font_montserrat_medium_20);
+    /*ImGui::PushFont(font_ubuntu_regular_20);
 		{
 			// Label
 			ImGui::Text("Save Encrypted File To:");
 			// Encrypted text
 			static const ImVec2 browse_button_size(45.0f, 25.0f);
 			ImGuiUtils::InputText("##text2", &m_out_file_path, win_w - (browse_button_size.x * 1.5f));
-			ImGui::PushFont(font_montserrat_medium_12);
+			ImGui::PushFont(font_ubuntu_regular_12);
 			ImGui::SameLine();
 			if (ImGui::Button("Browse ", browse_button_size))
 			{
