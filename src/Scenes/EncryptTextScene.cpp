@@ -121,6 +121,8 @@ void EncryptTextScene::OnImGuiDraw() {
         if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type)) {
           m_type = algo_type;
         }
+        if (ImGui::IsItemHovered())
+          ImGui::SetTooltip("%s", Algorithm::ALGORITHM_DESCRIPTIONS.at(algo_type).data());
       }
       /*const static auto supported_algorithms = Algorithm::GetSupportedAlgorithms();
 			for (const auto& [algo_name, algo_type] : supported_algorithms)

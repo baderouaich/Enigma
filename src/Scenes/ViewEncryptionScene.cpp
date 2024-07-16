@@ -129,6 +129,8 @@ void ViewEncryptionScene::OnImGuiDraw() {
 
         static const std::string algorithm = "Algorithm: " + Algorithm::AlgoTypeEnumToStr(m_encryption->algo);
         ImGui::ButtonEx(algorithm.c_str(), {0.0f, 0.0f}, ImGuiItemFlags_Disabled);
+        if (ImGui::IsItemHovered())
+          ImGui::SetTooltip("%s", Algorithm::ALGORITHM_DESCRIPTIONS.at(m_encryption->algo).data());
       }
       //const auto text_size = ImGui::CalcTextSize(text.c_str());
       //ImGui::SetCursorPosX((win_w - (text_size.x)) / 2.0f);

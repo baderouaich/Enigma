@@ -123,6 +123,8 @@ void EncryptFileScene::OnImGuiDraw() {
         if (ImGui::RadioButton(algo_name.c_str(), m_type == algo_type)) {
           m_type = algo_type;
         }
+        if (ImGui::IsItemHovered())
+          ImGui::SetTooltip("%s", Algorithm::ALGORITHM_DESCRIPTIONS.at(algo_type).data());
       }
     }
     ImGui::PopFont();
