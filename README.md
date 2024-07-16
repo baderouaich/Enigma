@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/27082acf-45d9-42f2-a2fd-f7de017b37fc)# Enigma
+# Enigma
 [![MIT License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/baderouaich/Enigma/blob/main/LICENSE.md)
 [![Static Analysis Status](https://github.com/baderouaich/Enigma/workflows/static-analysis/badge.svg)](https://github.com/baderouaich/Enigma/actions?workflow=static-analysis)
 [![Docs](https://codedocs.xyz/doxygen/doxygen.svg)](https://baderouaich.github.io/Enigma)
