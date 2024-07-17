@@ -96,7 +96,7 @@ mkdir build && cd build
 cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release # or -G"Visual Studio 17 2022" to use the MSVC compiler
 make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows
 ```
-- No `sudo` or `Administrator` privileges are needed for installation.
+<!--- No `sudo` or `Administrator` privileges are needed for installation.-->
 - All Enigma files will be installed to `/home/$(whoami)/Enigma/` (**Linux**) |  `C:\Program Files\Enigma\` (**Windows**)
 - To uninstall simply remove the installed `Enigma/` directory. Please make sure you export your encryptions from menu `File -> Export`before removing the directory.
 
