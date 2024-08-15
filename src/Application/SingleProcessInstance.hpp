@@ -10,7 +10,7 @@
 #undef _WIN32_WINNT
 #define _WIN32_WINNT 0x06000100
 #endif
-#include <Winsock2.h> # WARNING: make sure winsock is included before windows.h
+#include <Winsock2.h> // WARNING: make sure winsock is included before windows.h
 #include <SDKDDKVer.h>
 #include <Windows.h>
 using socket_t = SOCKET;
