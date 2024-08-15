@@ -32,11 +32,11 @@ TEST_CASE("RSA getMaximumBufferSizeFromKeySize") {
 
 
 TEST_CASE("RSA Encryption and Decryption - File") {
-  fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
-  fs::path publicKeyFilename = fs::temp_directory_path() / "lorem_ipsum_public_key.pem";
-  fs::path privateKeyFilename = fs::temp_directory_path() / "lorem_ipsum_private_key.pem";
-  fs::path encryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_lorem_ipsum.txt.enigma");
-  fs::path decryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_lorem_ipsum.txt.recovered");
+  fs::path originalFilename = fs::path(TEST_DATA_DIR) / "file.bin";
+  fs::path publicKeyFilename = fs::temp_directory_path() / "file_public_key.pem";
+  fs::path privateKeyFilename = fs::temp_directory_path() / "file_private_key.pem";
+  fs::path encryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_file.bin.enigma");
+  fs::path decryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_file.bin.recovered");
   FinalAction cleaner{[=] {
     fs::remove(decryptedFilename);
     fs::remove(encryptedFilename);
@@ -97,7 +97,7 @@ TEST_CASE("RSA Encryption and Decryption - Text") {
     std::cout << "maximum buffer length u can encrypt with keysize " << keySize << " is " << maxBufferSize << std::endl;
 
     std::vector<byte> buffer;
-    REQUIRE(FileUtils::Read(fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt", buffer));
+    REQUIRE(FileUtils::Read(fs::path(TEST_DATA_DIR) / "file.bin", buffer));
 
     std::cout << "Encrypting... " << std::endl
               << std::endl;
@@ -195,12 +195,12 @@ TEST_CASE("RSA Encryption and Decryption - various buffer sizes and key sizes") 
 }
 
 
-TEST_CASE("Decrypt lorem_ipsum_RSA.txt.enigma") {
-  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
-  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_RSA.txt.enigma";
-  const fs::path privateKeyFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_RSA_PrivateKey.pem";
-  [[maybe_unused]] const fs::path publicKeyFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_RSA_PublicKey.pem";
-  const fs::path decryptedFilename = fs::temp_directory_path() / "lorem_ipsum_RSA.txt";
+TEST_CASE("Decrypt file_RSA.bin.enigma") {
+  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "file.bin";
+  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "file_RSA.bin.enigma";
+  const fs::path privateKeyFilename = fs::path(TEST_DATA_DIR) / "file_RSA_PrivateKey.pem";
+  [[maybe_unused]] const fs::path publicKeyFilename = fs::path(TEST_DATA_DIR) / "file_RSA_PublicKey.pem";
+  const fs::path decryptedFilename = fs::temp_directory_path() / "file_RSA.bin";
   FinalAction decryptedFileDeleter([decryptedFilename] {
     fs::remove(decryptedFilename);
   });

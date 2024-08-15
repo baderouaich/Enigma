@@ -12,7 +12,7 @@ TEST_CASE("File Utils Tests", "FileUtils")
 {
 	std::cout << "\n======[ " << Catch::getResultCapture().getCurrentTestName() << " ]======\n";
 
-	const auto filename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+	const auto filename = fs::path(TEST_DATA_DIR) / "file.bin";
 
 	std::vector<Enigma::byte> buffer{};
 

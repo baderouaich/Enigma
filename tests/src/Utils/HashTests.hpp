@@ -41,10 +41,11 @@ TEST_CASE("HashUtils - SHA256") {
   REQUIRE(oss.str() == hashStr);
 
   SECTION("SHA256 - File") {
-    static constexpr std::string_view SHA256_OF_LOREM_IPSUM_FILE = "2719acdaadf4b6140f2ddd2ec797f96df43186a6021177186a32f7889cc9eee7";
-    fs::path filename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+    std::string ORIGIN_SHA256;
+    FileUtils::ReadString(fs::path(TEST_DATA_DIR) / "file.bin.sha256", ORIGIN_SHA256);
+    fs::path filename = fs::path(TEST_DATA_DIR) / "file.bin";
     const auto hash = HashUtils::fileStr<CryptoPP::SHA256>(filename);
-    REQUIRE(hash == SHA256_OF_LOREM_IPSUM_FILE);
+    REQUIRE(hash == ORIGIN_SHA256);
   }
 }
 
@@ -80,15 +81,16 @@ TEST_CASE("HashUtils - SHA512") {
 
 
   SECTION("SHA512 - File") {
-    static constexpr std::string_view SHA512_OF_LOREM_IPSUM_FILE = "01ac81bd29cf24a7e9ca51da260cea9f5de5937be11f0df08a1487249e199667e41c7826eab97e7b4c3f1d4664c19823e93a6abfa9db5766a79abb7ea34f6d51";
-    fs::path filename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+    std::string ORIGIN_SHA512;
+    FileUtils::ReadString(fs::path(TEST_DATA_DIR) / "file.bin.sha512", ORIGIN_SHA512);
+    fs::path filename = fs::path(TEST_DATA_DIR) / "file.bin";
     const auto hash = HashUtils::fileStr<CryptoPP::SHA512>(filename);
-    REQUIRE(hash == SHA512_OF_LOREM_IPSUM_FILE);
+    REQUIRE(hash == ORIGIN_SHA512);
   }
 }
 
 TEST_CASE("HashUtils - String case") {
-  fs::path filename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
+  fs::path filename = fs::path(TEST_DATA_DIR) / "file.bin";
   const std::string uppercaseHash = HashUtils::fileStr<CryptoPP::SHA256>(filename, true);
   const std::string lowercaseHash = HashUtils::fileStr<CryptoPP::SHA256>(filename, false);
   REQUIRE(std::all_of(uppercaseHash.begin(), uppercaseHash.end(), [](char c) -> bool {

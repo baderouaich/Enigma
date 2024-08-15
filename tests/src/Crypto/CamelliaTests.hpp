@@ -50,10 +50,10 @@ TEST_CASE("Camellia-GCM Encryption and Decryption - File") {
   const std::string password = Random::Str(ENIGMA_MB_TO_BYTES(Random::Int<std::size_t>(1, 5)));
 
   // File to encrypt
-  fs::path filenameToEncrypt = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
-  fs::path encryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_lorem_ipsum.txt.enigma");
+  fs::path filenameToEncrypt = fs::path(TEST_DATA_DIR) / "file.bin";
+  fs::path encryptedFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_file.bin.enigma");
   FinalAction encryptedFilenameDeleter{[encryptedFilename] { fs::remove(encryptedFilename); }};
-  fs::path recoveredFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_lorem_ipsum.txt.recovered");
+  fs::path recoveredFilename = fs::temp_directory_path() / ("Enigma_tmp_" + Random::Str(16) + "_file.bin.recovered");
   FinalAction recoveredFilenameDeleter{[recoveredFilename] { fs::remove(recoveredFilename); }};
 
   camellia->Encrypt(password, filenameToEncrypt, encryptedFilename);
@@ -71,10 +71,10 @@ TEST_CASE("Camellia-GCM Encryption and Decryption - File") {
 }
 
 
-TEST_CASE("Decrypt lorem_ipsum_Camellia.txt.enigma") {
-  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum.txt";
-  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "lorem_ipsum_Camellia.txt.enigma";
-  const fs::path decryptedFilename = fs::temp_directory_path() / "lorem_ipsum_Camellia.txt";
+TEST_CASE("Decrypt file_Camellia.bin.enigma") {
+  const fs::path originalFilename = fs::path(TEST_DATA_DIR) / "file.bin";
+  const fs::path encryptedFilename = fs::path(TEST_DATA_DIR) / "file_Camellia.bin.enigma";
+  const fs::path decryptedFilename = fs::temp_directory_path() / "file_Camellia.bin";
   FinalAction decryptedFileDeleter([decryptedFilename] {
     fs::remove(decryptedFilename);
   });
