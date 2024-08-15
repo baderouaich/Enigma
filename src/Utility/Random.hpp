@@ -84,8 +84,8 @@ class Random final {
     }
 
     /** @brief Generates a random vector of bytes
-    *	@param length: length of the random string to generate
-    *	@returns a random std::string a-zA-Z0-9
+    *	@param length: length of the random vector to generate
+    *	@returns a random std::vector of bytes
     */
     static std::vector<byte> Bytes(const std::size_t length) noexcept {
       std::vector<byte> bytes(length);

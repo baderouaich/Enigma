@@ -272,6 +272,7 @@ void Database::getCipherChunks(const std::int64_t ide, const std::function<bool(
       cc->offset = query->getColumn(i++).getInt64();
       cc->size = query->getColumn(i++).getInt64();
       const void *blob = query->getColumn(i++).getBlob();
+      //ENIGMA_ASSERT_OR_THROW(cc->size == query->getColumn(i).size(), "");
       cc->bytes.resize(cc->size, '\000');
       std::memcpy(cc->bytes.data(), blob, cc->size);
 
