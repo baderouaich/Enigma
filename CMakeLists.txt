@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 project(Enigma VERSION "3.2.0" DESCRIPTION "A Simple, Reliable and Efficient Encryption Tool" LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 ################# Options ###########################
 option(ENIGMA_ENABLE_TESTS "Enable/Disable building of tests" OFF)
 option(ENIGMA_BUILD_DOCS "Build Doxygen API documentation" OFF)
@@ -42,7 +45,7 @@ else ()
 endif ()
 source_group("Headers" ${ENIGMA_HEADERS})
 
-target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${CMAKE_CURRENT_SOURCE_DIR}/res/fonts"  "${CMAKE_CURRENT_SOURCE_DIR}/res/branding")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 target_precompile_headers(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.hpp")
 target_compile_definitions(${PROJECT_NAME} PRIVATE

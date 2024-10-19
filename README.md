@@ -89,9 +89,12 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 
 
 ### Compiling & Installing
+
 ```shell
 git clone https://github.com/baderouaich/Enigma
 cd Enigma
+# on Linux, run linux_sysdeps.sh to install system libraries (X11, wayland..)
+# bash linux_sysdeps.sh
 mkdir build && cd build
 cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release # or -G"Visual Studio 17 2022" to use the MSVC compiler
 make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows

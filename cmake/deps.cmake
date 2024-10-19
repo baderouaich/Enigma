@@ -6,7 +6,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cryptopp.cmake)
 
 FetchContent_Declare(cpr
   GIT_REPOSITORY "https://github.com/libcpr/cpr"
-  GIT_TAG "1.10.5"
+  GIT_TAG "1.11.0"
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 set(BUILD_CURL_EXE OFF CACHE BOOL "Set to ON to build curl executable." FORCE)
@@ -14,12 +14,13 @@ set(BUILD_STATIC_CURL ON CACHE BOOL "Build curl executable with static libcurl" 
 FetchContent_MakeAvailable(cpr)
 
 
-FetchContent_Declare(cxxopts
-  GIT_REPOSITORY "https://github.com/jarro2783/cxxopts"
-  GIT_TAG "v3.2.0"
-  EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
-)
-FetchContent_MakeAvailable(cxxopts)
+# CLI not supported
+#FetchContent_Declare(cxxopts
+#  GIT_REPOSITORY "https://github.com/jarro2783/cxxopts"
+#  GIT_TAG "v3.2.0"
+#  EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
+#)
+#FetchContent_MakeAvailable(cxxopts)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/glad EXCLUDE_FROM_ALL)
 
@@ -78,7 +79,7 @@ FetchContent_MakeAvailable(spdlog)
 
 FetchContent_Declare(SQLiteCpp
   GIT_REPOSITORY "https://github.com/SRombauts/SQLiteCpp"
-  GIT_TAG "3.3.1"
+  GIT_TAG "3.3.2"
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 
 )
@@ -87,12 +88,13 @@ FetchContent_MakeAvailable(SQLiteCpp)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image EXCLUDE_FROM_ALL)
 
-FetchContent_Declare(tabulate
-  GIT_REPOSITORY "https://github.com/p-ranav/tabulate"
-  GIT_TAG "v1.5"
-  EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
-)
-FetchContent_MakeAvailable(tabulate)
+# CLI not supported
+#FetchContent_Declare(tabulate
+#  GIT_REPOSITORY "https://github.com/p-ranav/tabulate"
+#  GIT_TAG "v1.5"
+#  EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
+#)
+#FetchContent_MakeAvailable(tabulate)
 
 FetchContent_Declare(zlib
   GIT_REPOSITORY "https://github.com/madler/zlib"
@@ -108,7 +110,7 @@ if (ENIGMA_ENABLE_TESTS)
   set(CATCH_ENABLE_REPRODUCIBLE_BUILD OFF CACHE BOOL "" FORCE)
   FetchContent_Declare(Catch2
     GIT_REPOSITORY "https://github.com/catchorg/Catch2"
-    GIT_TAG "v3.6.0"
+    GIT_TAG "v3.7.1"
     EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
   )
   FetchContent_MakeAvailable(Catch2)
@@ -124,7 +126,6 @@ set(ENIGMA_DEPENDENCIES
   cpr
   ${CRYPTOPP}
   glad
-  cxxopts
   glfw
   imgui
   infoware
@@ -132,9 +133,10 @@ set(ENIGMA_DEPENDENCIES
   nlohmann_json::nlohmann_json
   portable_file_dialogs
   spdlog
+  #cxxopts
+  #tabulate
   SQLiteCpp
   stb_image
-  tabulate
   zlib
 )
 # Append Ws2_32 if we're on windows for the SingleProcessInstance socket
