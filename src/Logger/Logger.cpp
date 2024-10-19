@@ -1,5 +1,7 @@
 #include <pch.hpp>
 #include "Logger.hpp"
+
+#include <Utility/DateTimeUtils.hpp>
 #include <Utility/FileUtils.hpp>
 
 NS_ENIGMA_BEGIN
@@ -13,8 +15,9 @@ void Logger::initialize() {
 
   // File Logger
   //log_sinks[1] = std::make_shared<spdlog::sinks::basic_file_sink_mt>(Constants::Logger::LOG_FILE_PATH, true);
-  const fs::path log_file_path = Constants::Logger::LOG_FILE_PATH;
-  log_sinks[1] = std::make_shared<spdlog::sinks::basic_file_sink_mt>(log_file_path.string(), true);
+  const fs::path logsDir = ResourceManager::getLogsDir();
+  const fs::path logFilepath = logsDir / DateTimeUtils::now("Enigma-%Y%m%d%H%M%S.log");
+  log_sinks[1] = std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFilepath.string(), true);
 
   // Set pattern of the console logger => [time] [trace/info/debug...]: msg]
   log_sinks[0]->set_pattern("%^[%T] [%l]: %v%$"); // regex like pattern output format https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
@@ -38,7 +41,7 @@ void Logger::initialize() {
 
   ENIGMA_TRACE_CURRENT_FUNCTION();
 #if defined(ENIGMA_DEBUG)
-  ENIGMA_INFO("Log File Path: {0}", log_file_path.string());
+  ENIGMA_INFO("Log File Path: {0}", logFilepath.string());
 #endif
 }
 

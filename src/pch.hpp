@@ -39,12 +39,14 @@
 #include <portable-file-dialogs.h>
 ///
 
+// CLI not supported
 /// tablulate: cli table maker
-#include <tabulate/table.hpp>
+// #include <tabulate/table.hpp>
 ///
 
+// CLI not supported
 /// cxxopts: CMD parser library
-#include <cxxopts.hpp>
+// #include <cxxopts.hpp>
 ///
 
 /// cpr: cURL c++ wrapper

@@ -17,12 +17,12 @@ struct WindowSettings {
     /*
     *	Width in pixels of the window
     */
-    std::int32_t width = 640;
+    std::int32_t width = 960;
 
     /*
     *	Height in pixels of the window
     */
-    std::int32_t height = 480;
+    std::int32_t height = 720;
 
     /*
     *	Minimum width of the window.
@@ -74,64 +74,64 @@ struct WindowSettings {
     /*
     *	Specifies if the window is by default in fullscreen or windowed mode
     */
-    bool is_fullscreen = false;
+    bool fullscreen = false;
 
     /*
     *	 Specifies whether the windowed mode window will have window decorations such as a border, a close widget, etc.
     *	 An undecorated window may still allow the user to generate close events on some platforms. This hint is ignored
     *	 for full screen windows.
     */
-    bool is_decorated = true;
+    bool decorated = true;
 
     /*
     *	Specifies whether the windowed mode window will be resizable by the user. The window will still be resizable using
     *	the "SetSize(std::int32_t, std::int32_t)" method of the "Window" class. This hint is ignored for full screen windows
     */
-    bool is_resizable = true;
+    bool resizable = true;
 
     /*
     *	 Specifies whether the windowed mode window will be given input focus when created. This hint is ignored for
     *	 full screen and initially hidden windows.
     */
-    bool is_focused = true;
+    bool focused = true;
 
     /*
     *	Specifies whether the windowed mode window will be maximized when created. This hint is ignored for full screen windows.
     */
-    bool is_maximized = false;
+    bool maximized = false;
 
     /*
     *	 Specifies whether the windowed mode window will be floating above other regular windows, also called topmost or always-on-top.
     *	 This is intended primarily for debugging purposes and cannot be used to implement proper full screen windows. This hint is
     *	 ignored for full screen windows.
     */
-    bool is_floating = false;
+    bool floating = false;
 
     /*
     *	Specifies whether the windowed mode window will be initially visible. This hint is ignored for full screen windows.
     */
-    bool is_visible = true;
+    bool visible = true;
 
     /*
     *	 Specifies whether the full screen window will automatically iconify and restore
     *	 the previous video mode on input focus loss. This hint is ignored for windowed mode windows
 	  */
-    bool is_auto_iconify = true;
+    bool auto_iconify = true;
 
     /*
     *	Show FPS count next to window title in format: title - FPS: x
     */
-    bool is_show_fps = false;
+    bool show_fps = false;
 
     /*
     *	Show realtime RAM usage in percentage
     */
-    bool is_show_ram_usage = false;
+    bool show_ram_usage = false;
 
     /*
     *	Show realtime CPU usage in percentage
     */
-    bool is_show_cpu_usage = false;
+    bool show_cpu_usage = false;
 
 
     /** Default construct WindowSettings with default values */
@@ -148,17 +148,17 @@ struct WindowSettings {
                                                     refresh_rate(config.Get<decltype(WindowSettings::refresh_rate)>("window", "refresh_rate", -1)),
                                                     samples(config.Get<decltype(WindowSettings::samples)>("window", "samples", 4)),
                                                     swap_interval(config.Get<decltype(WindowSettings::swap_interval)>("window", "swap_interval", 2)),
-                                                    is_resizable(config.Get<decltype(WindowSettings::is_resizable)>("window", "resizable", true)),
-                                                    is_fullscreen(config.Get<decltype(WindowSettings::is_fullscreen)>("window", "fullscreen", false)),
-                                                    is_decorated(config.Get<decltype(WindowSettings::is_decorated)>("window", "decorated", true)),
-                                                    is_focused(config.Get<decltype(WindowSettings::is_focused)>("window", "focused", true)),
-                                                    is_maximized(config.Get<decltype(WindowSettings::is_maximized)>("window", "maximized", false)),
-                                                    is_floating(config.Get<decltype(WindowSettings::is_floating)>("window", "floating", false)),
-                                                    is_visible(config.Get<decltype(WindowSettings::is_visible)>("window", "visible", true)),
-                                                    is_auto_iconify(config.Get<decltype(WindowSettings::is_auto_iconify)>("window", "auto_iconify", true)),
-                                                    is_show_fps(config.Get<decltype(WindowSettings::is_show_fps)>("window", "show_fps", true)),
-                                                    is_show_ram_usage(config.Get<decltype(WindowSettings::is_show_ram_usage)>("window", "show_ram_usage", true)),
-                                                    is_show_cpu_usage(config.Get<decltype(WindowSettings::is_show_cpu_usage)>("window", "show_cpu_usage", true)) {
+                                                    resizable(config.Get<decltype(WindowSettings::resizable)>("window", "resizable", true)),
+                                                    fullscreen(config.Get<decltype(WindowSettings::fullscreen)>("window", "fullscreen", false)),
+                                                    decorated(config.Get<decltype(WindowSettings::decorated)>("window", "decorated", true)),
+                                                    focused(config.Get<decltype(WindowSettings::focused)>("window", "focused", true)),
+                                                    maximized(config.Get<decltype(WindowSettings::maximized)>("window", "maximized", false)),
+                                                    floating(config.Get<decltype(WindowSettings::floating)>("window", "floating", false)),
+                                                    visible(config.Get<decltype(WindowSettings::visible)>("window", "visible", true)),
+                                                    auto_iconify(config.Get<decltype(WindowSettings::auto_iconify)>("window", "auto_iconify", true)),
+                                                    show_fps(config.Get<decltype(WindowSettings::show_fps)>("window", "show_fps", true)),
+                                                    show_ram_usage(config.Get<decltype(WindowSettings::show_ram_usage)>("window", "show_ram_usage", true)),
+                                                    show_cpu_usage(config.Get<decltype(WindowSettings::show_cpu_usage)>("window", "show_cpu_usage", true)) {
     }
 
   public:
@@ -168,11 +168,11 @@ struct WindowSettings {
           << ", minimum_width:" << minimum_width << ", minimum_height:" << minimum_height
           << ", maximum_width:" << maximum_width << ", maximum_height:" << maximum_height
           << ", refresh_rate:" << refresh_rate << ", swap_interval:" << swap_interval
-          << ", is_resizable:" << is_resizable << ", is_decorated:" << is_decorated
-          << ", is_fullscreen:" << is_fullscreen << ", samples:" << samples
-          << ", is_focused:" << is_focused << ", is_maximized:" << is_maximized
-          << ", is_floating:" << is_floating << ", is_visible:" << is_visible
-          << ", is_auto_iconify:" << is_auto_iconify << ", is_show_fps:" << is_show_fps
+          << ", resizable:" << resizable << ", decorated:" << decorated
+          << ", fullscreen:" << fullscreen << ", samples:" << samples
+          << ", focused:" << focused << ", maximized:" << maximized
+          << ", floating:" << floating << ", visible:" << visible
+          << ", auto_iconify:" << auto_iconify << ", show_fps:" << show_fps
           << " ]";
       return oss.str();
     }

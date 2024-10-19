@@ -40,19 +40,6 @@ namespace Enigma {
       }
     }
 
-    namespace Config {
-      static const fs::path WINDOW_CONFIG_FILE_PATH = ::Enigma::ResourceManager::getResourcesDir() / "config" / "WindowSettings.ini";
-    }
-
-    namespace ENV // Environment Variable
-    {
-      static constexpr const char *ENIGMA_DIR_ENV_KEY = "ENIGMA_DIR"; // Holds the directory path of Enigma
-    }
-
-    namespace Logger {
-      static const fs::path LOG_FILE_PATH = ::Enigma::ResourceManager::getResourcesDir() / "logs" / "Enigma.log";
-    }
-
     namespace Database {
       static const fs::path DATABASE_FILE_PATH = ::Enigma::ResourceManager::getResourcesDir() / "database" / "Enigma.db";
       // Unfortunately, u cant create multiple tables at once..
@@ -110,16 +97,16 @@ namespace Enigma {
     }
 
     namespace Resources {
-      namespace Textures {
-        // window runtime icon
-        static const fs::path ENIGMA_LOGO_PNG_PATH = ::Enigma::ResourceManager::getResourcesDir() / "branding" / "Logo.png";
-      }
+      // namespace Textures {
+      //   // window runtime icon
+      //   static const fs::path ENIGMA_LOGO_PNG_PATH = ::Enigma::ResourceManager::getResourcesDir() / "branding" / "Logo.png";
+      // }
 
-      namespace Fonts {
-        static const fs::path AUDIOWIDE_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Audiowide-Regular.ttf";
-        static const fs::path MONTSERRAT_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Montserrat-Medium.ttf";
-        static const fs::path UBUNTU_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Ubuntu-Regular.ttf";
-      }
+      // namespace Fonts {
+      //   static const fs::path AUDIOWIDE_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Audiowide-Regular.ttf";
+      //   static const fs::path MONTSERRAT_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Montserrat-Medium.ttf";
+      //   static const fs::path UBUNTU_FONT_PATH = ::Enigma::ResourceManager::getResourcesDir() / "fonts" / "Ubuntu-Regular.ttf";
+      // }
     }
 
     namespace Colors {

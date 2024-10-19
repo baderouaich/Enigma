@@ -25,9 +25,7 @@ int main(int argc, char *argv[]) {
 
   std::int32_t exit_code = -1;
   try {
-    const Enigma::Config windowConfig(Enigma::Constants::Config::WINDOW_CONFIG_FILE_PATH);
-    const Enigma::WindowSettings windowSettings(windowConfig);
-    Enigma::Application app(windowSettings);
+    Enigma::Application app{};
     app.Run();
     exit_code = EXIT_SUCCESS;
   } catch (const std::exception& e) {

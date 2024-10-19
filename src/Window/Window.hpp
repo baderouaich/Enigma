@@ -220,6 +220,7 @@ class Window {
     *	Set Window runtime icon
     */
     void SetIcon(const std::string& icon_path) noexcept;
+    void SetIcon(const byte* iconData, std::size_t iconDataSize) noexcept;
 
     /*
     *	Set Window cursor mode
@@ -299,26 +300,26 @@ class Window {
 
 
   private: /* Events */
-    EventCallback m_event_callback;
+    EventCallback m_event_callback{};
 
 
   private: /* Properties */
     // Window properties
-    std::string m_title;
-    std::pair<std::int32_t, std::int32_t> m_position;
-    std::pair<std::int32_t, std::int32_t> m_size;
-    std::pair<std::int32_t, std::int32_t> m_minimum_size;
-    std::pair<std::int32_t, std::int32_t> m_maximum_size;
-    std::pair<std::int32_t, std::int32_t> m_frame_buffer_size;
-    std::int32_t m_swap_interval;
+    std::string m_title{};
+    std::pair<std::int32_t, std::int32_t> m_position{};
+    std::pair<std::int32_t, std::int32_t> m_size{};
+    std::pair<std::int32_t, std::int32_t> m_minimum_size{};
+    std::pair<std::int32_t, std::int32_t> m_maximum_size{};
+    std::pair<std::int32_t, std::int32_t> m_frame_buffer_size{};
+    std::int32_t m_swap_interval{};
 
     // Monitor & Video Mode
-    GLFWwindow *m_GLFWwindow;
-    GLFWmonitor *m_monitor;
-    const GLFWvidmode *m_video_mode;
+    GLFWwindow *m_GLFWwindow{};
+    GLFWmonitor *m_monitor{};
+    const GLFWvidmode *m_video_mode{};
 
     // Window Cursor
-    std::unique_ptr<Cursor> m_cursor;
+    std::unique_ptr<Cursor> m_cursor{};
 
   public: /* Good Friends :) */
     friend class Application;

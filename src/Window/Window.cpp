@@ -55,13 +55,13 @@ bool Window::InitGLFW(const WindowSettings& window_settings) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, ENIGMA_GL_VERSION_MAJOR);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, ENIGMA_GL_VERSION_MINOR);
 
-  glfwWindowHint(GLFW_RESIZABLE, window_settings.is_resizable);
-  glfwWindowHint(GLFW_DECORATED, window_settings.is_decorated);
-  glfwWindowHint(GLFW_FOCUSED, window_settings.is_focused);
-  glfwWindowHint(GLFW_MAXIMIZED, window_settings.is_maximized);
-  glfwWindowHint(GLFW_FLOATING, window_settings.is_floating);
-  glfwWindowHint(GLFW_VISIBLE, window_settings.is_visible);
-  glfwWindowHint(GLFW_AUTO_ICONIFY, window_settings.is_auto_iconify);
+  glfwWindowHint(GLFW_RESIZABLE, window_settings.resizable);
+  glfwWindowHint(GLFW_DECORATED, window_settings.decorated);
+  glfwWindowHint(GLFW_FOCUSED, window_settings.focused);
+  glfwWindowHint(GLFW_MAXIMIZED, window_settings.maximized);
+  glfwWindowHint(GLFW_FLOATING, window_settings.floating);
+  glfwWindowHint(GLFW_VISIBLE, window_settings.visible);
+  glfwWindowHint(GLFW_AUTO_ICONIFY, window_settings.auto_iconify);
   glfwWindowHint(GLFW_REFRESH_RATE, window_settings.refresh_rate);
   glfwWindowHint(GLFW_SAMPLES, window_settings.samples);
 
@@ -87,7 +87,7 @@ bool Window::InitGLFW(const WindowSettings& window_settings) {
   this->SetMaximumSize(window_settings.maximum_width, window_settings.maximum_height);
 
   //Set fullscreen mode if enabled
-  this->SetFullscreen(window_settings.is_fullscreen);
+  this->SetFullscreen(window_settings.fullscreen);
 
   //MUST BE RIGHT AFTER WINDOW CREATED
   glfwMakeContextCurrent(m_GLFWwindow); // !! IMPORTANT FOR GLAD TO WORK !!
@@ -592,7 +592,25 @@ void Window::SetIcon(const std::string& icon_path) noexcept {
   stbi_set_flip_vertically_on_load(false);
   byte *pixels = stbi_load(icon_path.c_str(), &width, &height, &channels, 4);
 
-  ENIGMA_ASSERT(pixels, "Failed to load window icon");
+  ENIGMA_ASSERT(pixels, "Failed to load window icon from file");
+  //the alpha channel isn't necessary
+  //ENIGMA_ASSERT(channels == 4, "Icon must be RGBA");
+
+  std::array<GLFWimage, 1> images{};
+  images[0].pixels = pixels;
+  images[0].width = width;
+  images[0].height = height;
+  glfwSetWindowIcon(m_GLFWwindow, static_cast<std::int32_t>(images.size()), images.data());
+
+  stbi_image_free(pixels);
+  pixels = nullptr;
+}
+void Window::SetIcon(const byte *iconData, std::size_t iconDataSize) noexcept {
+  std::int32_t width{}, height{}, channels{};
+  stbi_set_flip_vertically_on_load(false);
+  byte *pixels = stbi_load_from_memory(iconData, iconDataSize, &width, &height, &channels, 4);
+
+  ENIGMA_ASSERT(pixels, "Failed to load window icon from memory");
   //the alpha channel isn't necessary
   //ENIGMA_ASSERT(channels == 4, "Icon must be RGBA");
 

@@ -7,40 +7,19 @@ NS_ENIGMA_BEGIN
 
 void Database::initialize() {
   ENIGMA_TRACE_CURRENT_FUNCTION();
-  {
-    const fs::path resDir = ::Enigma::ResourceManager::getResourcesDir();
-    if (!fs::is_directory(resDir)) {
-      ENIGMA_CRITICAL("Couldn't find resources directory at {}", resDir.string());
-      std::exit(EXIT_FAILURE);
-    }
-#if defined(ENIGMA_DEBUG)
-    ENIGMA_INFO("Resources Dir Path: {}", resDir.string());
-#endif
-  }
-
 #if defined(ENIGMA_DEBUG)
   ENIGMA_INFO("SQLite3 version {}", SQLite::VERSION);
 #endif
 
   try {
-    //Create db dir if not exists
-    const fs::path dbDir = ::Enigma::ResourceManager::getResourcesDir() / "database";
-    if (!fs::is_directory(dbDir)) {
-      ENIGMA_INFO("Creating Database Directory {} ...", dbDir.string());
-      if (!fs::create_directory(dbDir)) {
-        ENIGMA_CRITICAL("Failed to create database directory: {}", dbDir.string());
-        std::exit(EXIT_FAILURE);
-      }
-    }
-
     // Create or open db file
-    const fs::path database_file_path = Constants::Database::DATABASE_FILE_PATH;
     m_database = std::make_unique<SQLite::Database>(
-      database_file_path.string(),
+      //database_file_path.string(),
+      ResourceManager::getDatabaseFilepath(),
       SQLite::OPEN_CREATE | SQLite::OPEN_READWRITE // create if not exists
     );
 #if defined(ENIGMA_DEBUG)
-    ENIGMA_INFO("Database File Path: {0}", database_file_path.string());
+    ENIGMA_INFO("Database File Path: {0}", m_database->getFilename());
 #endif
 
     // Create Tables If Not Exists

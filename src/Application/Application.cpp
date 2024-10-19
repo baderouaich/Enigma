@@ -12,6 +12,9 @@
 #include <Scenes/MainMenuScene.hpp>
 #include <Utility/OpenGLUtils.hpp>
 
+#include <Logo.hpp>
+
+
 NS_ENIGMA_BEGIN
 
 Application::Application(const WindowSettings& window_settings)
@@ -21,10 +24,10 @@ Application::Application(const WindowSettings& window_settings)
       m_current_frame_time(0.0f),
       m_delta_time(0.0f),
       // Analytics
+      m_hardware_info_timer(0.0f),
       m_FPS(nullptr),
       m_ram_info(nullptr),
-      m_cpu_info(nullptr),
-      m_hardware_info_timer(0.0f) {
+      m_cpu_info(nullptr) {
   // Check if there is an enigma process already running or not.
   if (!SingleProcessInstance::IsUnique()) {
     DialogUtils::Warn("Another instance of Enigma is already running!");
@@ -64,13 +67,14 @@ void Application::InitWindow(const WindowSettings& window_settings) {
     m_window->SetEventCallback(ENIGMA_BIND_FUN(Application::OnEvent));
 
     // Set Window runtime icon
-    m_window->SetIcon(Constants::Resources::Textures::ENIGMA_LOGO_PNG_PATH.string());
+    m_window->SetIcon(Enigma::Textures::Logo_png, Enigma::Textures::Logo_png_len);
 
     // Set window top left position at center
     const auto [monitor_width, monitor_height] = m_window->GetMonitorSize();
     const auto& [window_width, window_height] = m_window->GetSize();
     m_window->SetPosition(static_cast<std::int32_t>((monitor_width - window_width) / 2), static_cast<std::int32_t>((monitor_height - window_height) / 2));
 
+    m_window->Focus();
     // Set window's default cursor mode
     //m_window->SetCursor(CursorMode::CrossHair);
   } catch (const std::exception& e) {
@@ -89,11 +93,11 @@ void Application::InitImGuiRenderer() {
 }
 
 void Application::InitHardwareInfo(const WindowSettings& window_settings) {
-  if (window_settings.is_show_fps)
+  if (window_settings.show_fps)
     m_FPS = std::make_unique<std::uint32_t>(0);
-  if (window_settings.is_show_ram_usage)
+  if (window_settings.show_ram_usage)
     m_ram_info = std::make_unique<RAMInfo>();
-  if (window_settings.is_show_cpu_usage)
+  if (window_settings.show_cpu_usage)
     m_cpu_info = std::make_unique<CPUInfo>();
 }
 
