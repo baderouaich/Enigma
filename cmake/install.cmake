@@ -25,7 +25,7 @@ else ()
     message(FATAL_ERROR "The HOME environment variable is not defined.")
   endif ()
   set(USER_DOT_LOCAL_DIR "$ENV{HOME}/.local")
-  set(INSTALL_BASE_DIR "$ENV{HOME}/Enigma")
+  set(INSTALL_BASE_DIR "${USER_DOT_LOCAL_DIR}/Enigma") # /home/$(whoami)/.local/Enigma
 endif ()
 
 # Install the executable to /home/$(whoami)/Enigma/Enigma
@@ -45,18 +45,18 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/res/
 # Install .desktop file to /home/$(whoami)/Enigma/Enigma.desktop
 if (UNIX AND NOT APPLE)
   # Create the .desktop file content
+  # Note: Version=1.0 is not the app version, but .desktop config version.
   file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/Enigma.desktop"
-    "[Desktop Entry]
+"[Desktop Entry]
 Type=Application
 Name=${PROJECT_NAME}
-Version=${PROJECT_VERSION}
 Comment=${PROJECT_DESCRIPTION}
 GenericName=${PROJECT_NAME}
 Exec=${INSTALL_BASE_DIR}/Enigma
 Icon=${INSTALL_BASE_DIR}/res/branding/Logo.png
-Categories=Utility;Security
-Terminal=false"
-  )
+Categories=Utility;Security;
+Terminal=false
+Version=1.0")
   # Put the Enigma.desktop to /home/$(whoami)/.local/share/applications (not the usr/local/share/applications so only this user will have access to the app)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Enigma.desktop DESTINATION ${USER_DOT_LOCAL_DIR}/share/applications)
 
