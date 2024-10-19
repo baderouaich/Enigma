@@ -145,6 +145,8 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <h2>Compiling &amp; Installing</h2>
 <div class="fragment"><div class="line">git clone https://github.com/baderouaich/Enigma</div>
 <div class="line">cd Enigma</div>
+<div class="line"># on Linux, run linux_sysdeps.sh to install system libraries (X11, wayland..)</div>
+<div class="line"># bash linux_sysdeps.sh</div>
 <div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake .. -G&quot;Unix Makefiles&quot; -DCMAKE_BUILD_TYPE=Release # or -G&quot;Visual Studio 17 2022&quot; to use the MSVC compiler</div>
 <div class="line">make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows</div>
@@ -162,7 +164,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Aug 15 2024 19:32:38 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Oct 19 2024 20:10:47 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

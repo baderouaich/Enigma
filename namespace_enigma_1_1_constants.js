@@ -28,6 +28,6 @@ var namespace_enigma_1_1_constants =
       [ "TOOLS_BUTTON_COLOR_ACTIVE", "namespace_enigma_1_1_constants_1_1_colors.html#a862a044af03745eed110d0b9dece5c0b", null ],
       [ "TOOLS_BUTTON_COLOR_HOVER", "namespace_enigma_1_1_constants_1_1_colors.html#aa10d622498c278c9f3dcafb1c7db2b74", null ]
     ] ],
-    [ "Resources", "namespace_enigma_1_1_constants_1_1_resources.html", "namespace_enigma_1_1_constants_1_1_resources" ],
+    [ "Resources", "namespace_enigma_1_1_constants_1_1_resources.html", null ],
     [ "ENIGMA_SINGLE_PROCESS_UNIQUE_PORT", "namespace_enigma_1_1_constants.html#a27c892f1b3856ae986dd9cdcb3421e75", null ]
 ];

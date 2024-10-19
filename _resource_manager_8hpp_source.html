@@ -107,27 +107,37 @@ $(document).ready(function(){initNavTree('_resource_manager_8hpp_source.html',''
 <div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#ac07bf9143c4cefcf216d688e63a81cfd">   17</a></span>&#160;      <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_enigma_1_1_resource_manager.html#ac07bf9143c4cefcf216d688e63a81cfd">initialize</a>();</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#a9cad83d934ed60abb04c21aade548928">   18</a></span>&#160;      <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_enigma_1_1_resource_manager.html#a9cad83d934ed60abb04c21aade548928">shutdown</a>();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909">   22</a></span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909">getResourcesDir</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#a03a3071188e257cbf75e9f0ca2202f0c">   26</a></span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#a03a3071188e257cbf75e9f0ca2202f0c">getInstallBaseDir</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#a0a896d4ab09a0012ced7357496b75a9f">   29</a></span>&#160;      <span class="keyword">static</span> ImFont*&amp; <a class="code" href="class_enigma_1_1_resource_manager.html#a0a896d4ab09a0012ced7357496b75a9f">getFont</a>(std::string_view name);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">void</span> loadFonts();</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#a4669e45afd2f2e292645ac6eeb7224bb">   20</a></span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#a4669e45afd2f2e292645ac6eeb7224bb">getAppDataDir</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#ae93fe116a711dd316f2bd531fdecb3e8">   22</a></span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#ae93fe116a711dd316f2bd531fdecb3e8">getDatabaseFilepath</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#abcfae612b6885e7492e0c07fdd263d1e">   23</a></span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#abcfae612b6885e7492e0c07fdd263d1e">getLogsDir</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;      <span class="comment">//static fs::path getConfigDir();</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909">   28</a></span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909">getResourcesDir</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#if 0</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      <span class="keyword">static</span> fs::path <a class="code" href="class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909">getResourcesDir</a>();</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keyword">inline</span> <span class="keyword">static</span> std::unordered_map&lt;std::string_view, ImFont *&gt; m_fonts{};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;      <span class="keyword">static</span> fs::path getInstallBaseDir();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_enigma_1_1_resource_manager.html#a0a896d4ab09a0012ced7357496b75a9f">   39</a></span>&#160;      <span class="keyword">static</span> ImFont*&amp; <a class="code" href="class_enigma_1_1_resource_manager.html#a0a896d4ab09a0012ced7357496b75a9f">getFont</a>(std::string_view name);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      <span class="keyword">static</span> <span class="keywordtype">void</span> loadFonts();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keyword">inline</span> <span class="keyword">static</span> std::unordered_map&lt;std::string_view, ImFont *&gt; m_fonts{};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  };</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
 <div class="ttc" id="a_macros_8hpp_html"><div class="ttname"><a href="_macros_8hpp.html">Macros.hpp</a></div></div>
 <div class="ttc" id="aclass_application_html"><div class="ttname"><a href="class_application.html">Application</a></div><div class="ttdef"><b>Definition:</b> <a href="_application_8hpp_source.html#l00028">Application.hpp:28</a></div></div>
 <div class="ttc" id="aclass_enigma_1_1_resource_manager_html"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html">Enigma::ResourceManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00013">ResourceManager.hpp:13</a></div></div>
-<div class="ttc" id="aclass_enigma_1_1_resource_manager_html_a03a3071188e257cbf75e9f0ca2202f0c"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#a03a3071188e257cbf75e9f0ca2202f0c">Enigma::ResourceManager::getInstallBaseDir</a></div><div class="ttdeci">static fs::path getInstallBaseDir()</div><div class="ttdoc">Returns path to installed Enigma/ folder Example: /home//Enigma/.</div></div>
 <div class="ttc" id="aclass_enigma_1_1_resource_manager_html_a0a896d4ab09a0012ced7357496b75a9f"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#a0a896d4ab09a0012ced7357496b75a9f">Enigma::ResourceManager::getFont</a></div><div class="ttdeci">static ImFont *&amp; getFont(std::string_view name)</div><div class="ttdoc">Returns ImFont by name.</div></div>
+<div class="ttc" id="aclass_enigma_1_1_resource_manager_html_a4669e45afd2f2e292645ac6eeb7224bb"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#a4669e45afd2f2e292645ac6eeb7224bb">Enigma::ResourceManager::getAppDataDir</a></div><div class="ttdeci">static fs::path getAppDataDir()</div></div>
 <div class="ttc" id="aclass_enigma_1_1_resource_manager_html_a9cad83d934ed60abb04c21aade548928"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#a9cad83d934ed60abb04c21aade548928">Enigma::ResourceManager::shutdown</a></div><div class="ttdeci">static void shutdown()</div></div>
+<div class="ttc" id="aclass_enigma_1_1_resource_manager_html_abcfae612b6885e7492e0c07fdd263d1e"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#abcfae612b6885e7492e0c07fdd263d1e">Enigma::ResourceManager::getLogsDir</a></div><div class="ttdeci">static fs::path getLogsDir()</div></div>
 <div class="ttc" id="aclass_enigma_1_1_resource_manager_html_ac07bf9143c4cefcf216d688e63a81cfd"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#ac07bf9143c4cefcf216d688e63a81cfd">Enigma::ResourceManager::initialize</a></div><div class="ttdeci">static void initialize()</div></div>
 <div class="ttc" id="aclass_enigma_1_1_resource_manager_html_ae5010def75eee58d6702b6e2edba8909"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#ae5010def75eee58d6702b6e2edba8909">Enigma::ResourceManager::getResourcesDir</a></div><div class="ttdeci">static fs::path getResourcesDir()</div><div class="ttdoc">Returns path to res/ folder Example: /home//Enigma/res/.</div></div>
+<div class="ttc" id="aclass_enigma_1_1_resource_manager_html_ae93fe116a711dd316f2bd531fdecb3e8"><div class="ttname"><a href="class_enigma_1_1_resource_manager.html#ae93fe116a711dd316f2bd531fdecb3e8">Enigma::ResourceManager::getDatabaseFilepath</a></div><div class="ttdeci">static fs::path getDatabaseFilepath()</div></div>
 <div class="ttc" id="anamespace_enigma_html"><div class="ttname"><a href="namespace_enigma.html">Enigma</a></div><div class="ttdef"><b>Definition:</b> <a href="_constants_8hpp_source.html#l00006">Constants.hpp:6</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -135,7 +145,7 @@ $(document).ready(function(){initNavTree('_resource_manager_8hpp_source.html',''
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_cc826e206496d9bb3cee340d21aea050.html">ResourceManager</a></li><li class="navelem"><a class="el" href="_resource_manager_8hpp.html">ResourceManager.hpp</a></li>
-    <li class="footer">Generated on Thu Aug 15 2024 19:32:38 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Sat Oct 19 2024 20:10:46 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

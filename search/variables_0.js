@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['algo_1604',['algo',['../struct_encryption.html#af84f1060bd9ad3bf7b3f236c6e36702a',1,'Encryption::algo()'],['../struct_meta_1_1_enigma_footer.html#a2740fe887daf39747ddc46e05cefa999',1,'Meta::EnigmaFooter::algo()']]],
-  ['algorithm_5fdescriptions_1605',['ALGORITHM_DESCRIPTIONS',['../class_algorithm.html#a5e2ab2c42ac3ace5df6a5575221040e1',1,'Algorithm']]],
-  ['audiowide_5ffont_5fpath_1606',['AUDIOWIDE_FONT_PATH',['../namespace_enigma_1_1_constants_1_1_resources_1_1_fonts.html#a22188a812191dd39451ec87ba9c61d62',1,'Enigma::Constants::Resources::Fonts']]]
+  ['algo_1589',['algo',['../struct_encryption.html#af84f1060bd9ad3bf7b3f236c6e36702a',1,'Encryption::algo()'],['../struct_meta_1_1_enigma_footer.html#a2740fe887daf39747ddc46e05cefa999',1,'Meta::EnigmaFooter::algo()']]],
+  ['algorithm_5fdescriptions_1590',['ALGORITHM_DESCRIPTIONS',['../class_algorithm.html#a5e2ab2c42ac3ace5df6a5575221040e1',1,'Algorithm']]],
+  ['auto_5ficonify_1591',['auto_iconify',['../struct_window_settings.html#a940ff5449d4cdd3e70407247ef6e2d96',1,'WindowSettings']]]
 ];

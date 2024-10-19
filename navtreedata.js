@@ -67,12 +67,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_e_s_8hpp.html",
-"_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a2521dc256a4368da87585c936b451dd7",
-"_logger_8hpp.html#ae9a06c8e4b7a075e1c94975a0bd93e88",
-"class_base64.html#a9c3cc59cb6cdd46aa15958439ae8fd14",
-"class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aea4788705e6873b424c65e91c2846b19",
-"class_window_close_event.html#ac042e490a8fd1c758a70c9978ccbd9c5",
-"namespacemembers_type.html"
+"_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a37f438df6a6d5ba4c17ef8ca58562f00",
+"_macros_8hpp.html#a03b87860fb5c74cc165dbfaa2e46b7be",
+"class_blowfish.html#a771835e77c4158dfd540136d1f8c1c41",
+"class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd",
+"class_window_file_drop_event.html#aab72cc801f5d9bffb534f9a4200e6609",
+"struct_check_for_updates_1_1_latest_release_info.html#ac88911eb9a3288f0450dffd696b03f93"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

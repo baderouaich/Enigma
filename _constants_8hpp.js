@@ -3,7 +3,6 @@ var _constants_8hpp =
     [ "BLUE", "_constants_8hpp.html#ab4f65576e845a28cc856f52fcacead5a", null ],
     [ "GREEN", "_constants_8hpp.html#a219d9d579398c4bb5c0d63edcfd1a28d", null ],
     [ "RED", "_constants_8hpp.html#aef8c51cf640e7456af7846c8b2aa1244", null ],
-    [ "AUDIOWIDE_FONT_PATH", "_constants_8hpp.html#a22188a812191dd39451ec87ba9c61d62", null ],
     [ "BACK_BUTTON_COLOR", "_constants_8hpp.html#aa6dfbe4d12f1c0aee3a9c53abdb5734e", null ],
     [ "BACK_BUTTON_COLOR_ACTIVE", "_constants_8hpp.html#a04cdc3681b5dbfebbef4030fa9f5b063", null ],
     [ "BACK_BUTTON_COLOR_HOVER", "_constants_8hpp.html#a20218d3207da93a079b323e9b85b90eb", null ],
@@ -15,16 +14,12 @@ var _constants_8hpp =
     [ "COLOR4I_TO_COLOR4F", "_constants_8hpp.html#a87e6f9a172d52e4a5b218fb618d2d6e0", null ],
     [ "CREATE_TABLES_SQL", "_constants_8hpp.html#a2522abf0553baabd3c4edfdb1ccd86a3", null ],
     [ "DATABASE_FILE_PATH", "_constants_8hpp.html#a2eac9428dc0975139b15f17d59982170", null ],
-    [ "ENIGMA_DIR_ENV_KEY", "_constants_8hpp.html#aad86a798109fdf90b9dd866dea328782", null ],
-    [ "ENIGMA_LOGO_PNG_PATH", "_constants_8hpp.html#a9f3f828cb8d47e507785a0db9037ead2", null ],
     [ "ENIGMA_SINGLE_PROCESS_UNIQUE_PORT", "_constants_8hpp.html#a27c892f1b3856ae986dd9cdcb3421e75", null ],
     [ "ERROR_TEXT_COLOR", "_constants_8hpp.html#add7a204e66833c17be0fdc07cc9f02cc", null ],
     [ "LOADING_BACKGROUND_COLOR", "_constants_8hpp.html#a15d250b7d3f4680dd3904b6aec9d75d0", null ],
     [ "LOADING_SPINNER_COLOR", "_constants_8hpp.html#aa090d3cf7846f19185eb05494f7280c3", null ],
-    [ "LOG_FILE_PATH", "_constants_8hpp.html#a4099dbea35e657ad13dd8ccc2bef73a1", null ],
     [ "MENUBAR_BACKGROUND_COLOR", "_constants_8hpp.html#a6decb63e528fbf11f92c6b2577e54b10", null ],
     [ "MINIMUM_PASSWORD_LENGTH", "_constants_8hpp.html#aa586d233a0a60f35bdd30e6bc884c434", null ],
-    [ "MONTSERRAT_FONT_PATH", "_constants_8hpp.html#ab5aa39745492282f8905d1fa06c269d6", null ],
     [ "MY_ENCRYPTIONS_BUTTON_COLOR", "_constants_8hpp.html#a221e7541243b1e6dad9692f7e6676faa", null ],
     [ "MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE", "_constants_8hpp.html#af1360b35ea2b300460d6f58f8f5115f5", null ],
     [ "MY_ENCRYPTIONS_BUTTON_COLOR_HOVER", "_constants_8hpp.html#a75fcf2830f78e4b783230e0b418b712d", null ],
@@ -35,7 +30,5 @@ var _constants_8hpp =
     [ "TEXT_COLOR", "_constants_8hpp.html#aaa4021734684c2ea3983cea1fd000e12", null ],
     [ "TOOLS_BUTTON_COLOR", "_constants_8hpp.html#aece2dd023beedd4a498e4fd6badba5d7", null ],
     [ "TOOLS_BUTTON_COLOR_ACTIVE", "_constants_8hpp.html#a862a044af03745eed110d0b9dece5c0b", null ],
-    [ "TOOLS_BUTTON_COLOR_HOVER", "_constants_8hpp.html#aa10d622498c278c9f3dcafb1c7db2b74", null ],
-    [ "UBUNTU_FONT_PATH", "_constants_8hpp.html#a5c388104257f378d2f4a52c682716fa7", null ],
-    [ "WINDOW_CONFIG_FILE_PATH", "_constants_8hpp.html#a2437d3731a5eb42fe0ad7ea9daab8266", null ]
+    [ "TOOLS_BUTTON_COLOR_HOVER", "_constants_8hpp.html#aa10d622498c278c9f3dcafb1c7db2b74", null ]
 ];

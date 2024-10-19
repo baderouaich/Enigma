@@ -39,6 +39,7 @@ var class_window =
     [ "SetCursorPosition", "class_window.html#a08c7ba3e84da5794326a6f040c356a3e", null ],
     [ "SetEventCallback", "class_window.html#ad8030aaf4b1144ac7ccfb86c0b03262e", null ],
     [ "SetFullscreen", "class_window.html#ad58630d5b75c54ebad14b62fe8799b99", null ],
+    [ "SetIcon", "class_window.html#a178434fb6ad610b141a75782f200aa0d", null ],
     [ "SetIcon", "class_window.html#af39fcd6290048ce80652e5fa48bd7a93", null ],
     [ "SetMaximumSize", "class_window.html#a5d8e56696b88509d3e233c446639d15b", null ],
     [ "SetMinimumSize", "class_window.html#abba086d356c7502e82ecc352be8b8f23", null ],

@@ -29,5 +29,5 @@ var searchData=
   ['arrow_27',['Arrow',['../_cursor_8hpp.html#a58a2d4949a47c3856230629f08d7ee7ea0f4e1aaabd074689b7d3ead824d1ee8e',1,'Cursor.hpp']]],
   ['ascending_28',['Ascending',['../class_database.html#ab952f2fdd9cf079a6c412b19b885eb5bacf3fb1ff52ea1eed3347ac5401ee7f0c',1,'Database']]],
   ['assign_5fif_29',['ASSIGN_IF',['../_check_for_updates_8hpp.html#a42d3a544df252137ea9b2d3e639174bf',1,'CheckForUpdates.hpp']]],
-  ['audiowide_5ffont_5fpath_30',['AUDIOWIDE_FONT_PATH',['../namespace_enigma_1_1_constants_1_1_resources_1_1_fonts.html#a22188a812191dd39451ec87ba9c61d62',1,'Enigma::Constants::Resources::Fonts']]]
+  ['auto_5ficonify_30',['auto_iconify',['../struct_window_settings.html#a940ff5449d4cdd3e70407247ef6e2d96',1,'WindowSettings']]]
 ];
