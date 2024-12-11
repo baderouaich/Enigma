@@ -68,8 +68,8 @@ AccessModifierOffset: -2
 ReferenceAlignment: Left
 FixNamespaceComments: false
 IndentAccessModifiers: false
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Left
 AlignTrailingComments: true
 BreakBeforeBraces: Attach
