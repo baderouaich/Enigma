@@ -11,6 +11,9 @@ FetchContent_Declare(cpr
 )
 set(BUILD_CURL_EXE OFF CACHE BOOL "Set to ON to build curl executable." FORCE)
 set(BUILD_STATIC_CURL ON CACHE BOOL "Build curl executable with static libcurl" FORCE)
+if(WIN32)
+set(CURL_STATIC_CRT ON CACHE BOOL "Build libcurl with static CRT on Windows (/MT)" FORCE)
+endif()
 FetchContent_MakeAvailable(cpr)
 
 
