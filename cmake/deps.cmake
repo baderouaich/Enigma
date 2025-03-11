@@ -1,6 +1,10 @@
 include(FetchContent)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
 set(BUILD_STATIC_LIBS ON CACHE BOOL "Build static libraries" FORCE)
+if(${CMAKE_CXX_COMPILER_ID} MATCHES "MSVC")
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug$<$<CONFIG:Debug>:Debug>")
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
+endif()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cryptopp.cmake)
 
@@ -11,9 +15,6 @@ FetchContent_Declare(cpr
 )
 set(BUILD_CURL_EXE OFF CACHE BOOL "Set to ON to build curl executable." FORCE)
 set(BUILD_STATIC_CURL ON CACHE BOOL "Build curl executable with static libcurl" FORCE)
-if(WIN32)
-set(CURL_STATIC_CRT ON CACHE BOOL "Build libcurl with static CRT on Windows (/MT)" FORCE)
-endif()
 FetchContent_MakeAvailable(cpr)
 
 
