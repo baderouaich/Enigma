@@ -386,7 +386,6 @@ void MyEncryptionsScene::GetAllEncryptions() {
 }
 
 void MyEncryptionsScene::ResetSearch() {
-  ENIGMA_WARN("Resetting search...");
   m_isSearching = false;
   m_query.clear();
   this->GetAllEncryptions();

@@ -18,16 +18,16 @@
 NS_ENIGMA_BEGIN
 
 Application::Application(const WindowSettings& window_settings)
-    : SingleProcessInstance(Constants::ENIGMA_SINGLE_PROCESS_UNIQUE_PORT),
-      // Delta time
-      m_last_frame_time(0.0f),
-      m_current_frame_time(0.0f),
-      m_delta_time(0.0f),
-      // Analytics
-      m_hardware_info_timer(0.0f),
-      m_FPS(nullptr),
-      m_ram_info(nullptr),
-      m_cpu_info(nullptr) {
+  : SingleProcessInstance(Constants::ENIGMA_SINGLE_PROCESS_UNIQUE_PORT),
+    // Delta time
+    m_last_frame_time(0.0f),
+    m_current_frame_time(0.0f),
+    m_delta_time(0.0f),
+    // Analytics
+    m_hardware_info_timer(0.0f),
+    m_FPS(nullptr),
+    m_ram_info(nullptr),
+    m_cpu_info(nullptr) {
   // Check if there is an enigma process already running or not.
   if (!SingleProcessInstance::IsUnique()) {
     DialogUtils::Warn("Another instance of Enigma is already running!");
@@ -112,7 +112,7 @@ void Application::PushScene(std::unique_ptr<Scene> scene) {
 }
 
 
-std::future<void> Application::LaunchWorkerThread(Scene *scene, const std::string& loading_text, const std::function<void()>& work_func) {
+std::future<void> Application::LaunchWorkerThread(Scene* scene, const std::string& loading_text, const std::function<void()>& work_func) {
   ENIGMA_ASSERT(scene, "Scene is nullptr!");
   ENIGMA_ASSERT(work_func, "Work function is empty!");
   return m_threadPool->Submit([scene, loading_text, work_func, this]() -> void {
