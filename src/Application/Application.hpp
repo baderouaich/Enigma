@@ -46,8 +46,9 @@ class Application final : public SingleProcessInstance {
     *	@param loading_text: the reason behind launching this worker thread, will appear bellow loading spinner e.g: "Encrypting file..."
     *	@param scene: pointer to scene which spawns the worker thread
     *	@param work_func: function has work code to run in parallel
+    *	@returns a future, calling future.get() will wait task done.
     */
-    void LaunchWorkerThread(Scene *scene, const std::string& loading_text, const std::function<void()>& work_func);
+    std::future<void> LaunchWorkerThread(Scene *scene, const std::string& loading_text, const std::function<void()>& work_func);
 
 
   public: //https://www.doxygen.nl/manual/grouping.html#memgroup

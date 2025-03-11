@@ -58,6 +58,9 @@ std::vector<byte> Meta::EnigmaFooter::toBytes() const {
 }
 
 Meta::EnigmaFooter Meta::EnigmaFooter::fromBytes(const byte *bytes, const std::size_t bytesSize) {
+  if (!Meta::isEnigmaCipher(bytes, bytesSize)) {
+    throw std::invalid_argument("Invalid/Corrupted Enigma Cipher");
+  }
   EnigmaFooter footer{};
   const byte *pos = bytes + bytesSize;
 
@@ -251,7 +254,17 @@ bool Meta::isEnigmaFile(const fs::path& filename) {
 }
 
 bool Meta::isEnigmaCipher(const byte *cipher, const std::size_t cipherSize) {
-  return EnigmaFooter::fromBytes(cipher, cipherSize).magic == ENIGMA_MAGIC;
+  if (cipherSize < sizeof(ENIGMA_MAGIC)) {
+    return false;
+  }
+  const byte *pos = cipher + cipherSize;
+  // Copy magic ONLY (reading from the end)
+  magic_t magic{};
+  pos -= sizeof(magic_t);
+  std::memcpy(&magic, pos, sizeof(magic_t));
+  magic = LittleEndian::toHost(magic);
+  return magic == ENIGMA_MAGIC;
+  // return EnigmaFooter::fromBytes(cipher, cipherSize).magic == ENIGMA_MAGIC;
 }
 bool Meta::isEnigmaCipher(const std::vector<byte>& cipher) {
   return Meta::isEnigmaCipher(cipher.data(), cipher.size());

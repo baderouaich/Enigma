@@ -112,10 +112,10 @@ void Application::PushScene(std::unique_ptr<Scene> scene) {
 }
 
 
-void Application::LaunchWorkerThread(Scene *scene, const std::string& loading_text, const std::function<void()>& work_func) {
+std::future<void> Application::LaunchWorkerThread(Scene *scene, const std::string& loading_text, const std::function<void()>& work_func) {
   ENIGMA_ASSERT(scene, "Scene is nullptr!");
   ENIGMA_ASSERT(work_func, "Work function is empty!");
-  m_threadPool->Submit([scene, loading_text, work_func, this]() -> void {
+  return m_threadPool->Submit([scene, loading_text, work_func, this]() -> void {
     ENIGMA_LOG("Launching Worker Thread ID #{} To Do Work: {}", std::this_thread::get_id(), loading_text);
     dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(loading_text); // set loading status description text will appear bellow loading spinner
     scene->SetLoading(true);

@@ -22,9 +22,9 @@ class Meta final {
   public:
     using magic_t = std::uint64_t;
     using size_type = std::size_t;
-    static constexpr const magic_t ENIGMA_MAGIC = 0x456e69676d61;
-    static constexpr const magic_t ENIGMA_CIPHER_CHUNK_MAGIC = 0x43456e69676d6143;
-    static constexpr const size_type ENIGMA_BUFFER_DEFAULT_SIZE = ENIGMA_KB_TO_BYTES(64); // 64KB chunk size is reasonable for memory usage and efficiency.
+    static constexpr magic_t ENIGMA_MAGIC = 0x456e69676d61;
+    static constexpr magic_t ENIGMA_CIPHER_CHUNK_MAGIC = 0x43456e69676d6143;
+    static constexpr size_type ENIGMA_BUFFER_DEFAULT_SIZE = ENIGMA_KB_TO_BYTES(64); // 64KB chunk size is reasonable for memory usage and efficiency.
 
 #pragma pack(push, 1)
     /// Encrypted buffer footer
