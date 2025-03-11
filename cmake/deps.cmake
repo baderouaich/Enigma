@@ -6,7 +6,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cryptopp.cmake)
 
 FetchContent_Declare(cpr
   GIT_REPOSITORY "https://github.com/libcpr/cpr"
-  GIT_TAG "1.11.0"
+  GIT_TAG "1.11.2"
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 set(BUILD_CURL_EXE OFF CACHE BOOL "Set to ON to build curl executable." FORCE)
