@@ -2,7 +2,7 @@
 
 set -xe
 
-export VERSION=3.2.0
+export VERSION=3.2.1
 
 if [ ! -f "./linuxdeploy-x86_64.AppImage" ]; then
   echo "Downloading linuxdeploy..."
