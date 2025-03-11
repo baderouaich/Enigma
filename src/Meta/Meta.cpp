@@ -125,6 +125,7 @@ Meta::EnigmaFooter Meta::EnigmaFooter::fromFile(const fs::path& filename) {
   ifs.read(reinterpret_cast<char *>(&footer.magic), sizeof(footer.magic));
   ENIGMA_ASSERT_OR_THROW(ifs.good(), "Failed to read EnigmaFooter::magic from file " + filename.string());
   footer.magic = LittleEndian::toHost(footer.magic);
+  ENIGMA_ASSERT_OR_THROW(footer.magic == ENIGMA_MAGIC, "Invalid Enigma cipher file "+ filename.string());
 
   // Read version
   offset += sizeof(footer.version);

@@ -322,13 +322,13 @@ class ImGuiWidgets final {
 
         void Draw(const ImVec2& position, const float width, const float height) {
           ImGui::SetCursorPos(position);
-          ImGui::Image((void *) (std::intptr_t) m_id, ImVec2(width, height));
+          ImGui::Image(m_id, ImVec2(width, height));
         }
 
       public:
-        std::int32_t GetWidth() const noexcept { return m_width; };
-        std::int32_t GetHeight() const noexcept { return m_height; };
-        GLuint GetID() const noexcept { return m_id; };
+        [[nodiscard]] std::int32_t GetWidth() const noexcept { return m_width; };
+        [[nodiscard]] std::int32_t GetHeight() const noexcept { return m_height; };
+        [[nodiscard]] GLuint GetID() const noexcept { return m_id; };
 
       private:
         GLuint m_id{}; // OpenGL texture id

@@ -153,7 +153,7 @@ void EncryptTextScene::OnImGuiDraw() {
       ImGui::Checkbox("##checkbox", &m_save_to_database);
 
       if (m_save_to_database) {
-        ImGuiWidgets::InputTextWithHint("##idb", ("A clear encryption title (e.g., An important Document) facilitates future record searches."), &m_db_title, win_w / 1.3f);
+        ImGuiWidgets::InputTextWithHint("##idb", ("A clear encryption title to facilitate future record searches."), &m_db_title, win_w / 1.3f);
       }
     }
     ImGui::PopFont();

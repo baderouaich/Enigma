@@ -73,7 +73,7 @@ void HashingTool::OnDraw(Scene *parent) {
       switch (m_input_source) {
         case InputSource::Text: {
           ImGui::BulletText("%s:", "Text");
-          ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 256.0f));
+          ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 128.0f));
           ImGui::SameLine();
           break;
         }
