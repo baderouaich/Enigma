@@ -49,7 +49,7 @@ var searchData=
   ['slash_46',['Slash',['../_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a358cfe58715d680d9ab09f82e4010cbc',1,'KeyCodes.hpp']]],
   ['socket_5ft_47',['socket_t',['../_single_process_instance_8hpp.html#a14eec5e288844f80562846c4fe687dfc',1,'SingleProcessInstance.hpp']]],
   ['space_48',['Space',['../_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5ad511f8439ecde36647437fbba67a4394',1,'KeyCodes.hpp']]],
-  ['special_5fcharacters_49',['SPECIAL_CHARACTERS',['../namespace_enigma_1_1_constants_1_1_algorithm.html#adb33929218625e814b9da279fe84eaf6',1,'Enigma::Constants::Algorithm']]],
+  ['special_5fcharacters_49',['SPECIAL_CHARACTERS',['../namespace_enigma_1_1_constants_1_1_algorithm.html#ac54fb147d1c06292b3486346039bea06',1,'Enigma::Constants::Algorithm']]],
   ['split_50',['Split',['../class_string_utils.html#a8dd64a5831f0a88bf70af0394b55ab23',1,'StringUtils']]],
   ['startswith_51',['StartsWith',['../class_string_utils.html#af8122eb3d554daefe8b12040dc42bb15',1,'StringUtils']]],
   ['str_52',['str',['../class_hash_utils.html#acafbae05312eeaa1d009c871130827cd',1,'HashUtils::str()'],['../class_random.html#abd88f50c53f3a878f14ce529e4522f4c',1,'Random::Str()'],['../struct_im_gui_widgets_1_1_input_text_callback___user_data.html#aa488b3549c60d1ff1c7383b29e869272',1,'ImGuiWidgets::InputTextCallback_UserData::Str']]],

@@ -6,7 +6,7 @@ var searchData=
   ['show_5ffps_3',['show_fps',['../struct_window_settings.html#a1328ad4fd016604af817ced774ee956c',1,'WindowSettings']]],
   ['show_5fram_5fusage_4',['show_ram_usage',['../struct_window_settings.html#a905ffe530ec00e6b2dcb876b4f194c5d',1,'WindowSettings']]],
   ['size_5',['size',['../struct_cipher_chunk.html#a50ba87a6b1ce6777b81e3c90c826f21d',1,'CipherChunk::size'],['../struct_encryption.html#a82bd3bb69a3703c55dfc3d9a65f91314',1,'Encryption::size']]],
-  ['special_5fcharacters_6',['SPECIAL_CHARACTERS',['../namespace_enigma_1_1_constants_1_1_algorithm.html#adb33929218625e814b9da279fe84eaf6',1,'Enigma::Constants::Algorithm']]],
+  ['special_5fcharacters_6',['SPECIAL_CHARACTERS',['../namespace_enigma_1_1_constants_1_1_algorithm.html#ac54fb147d1c06292b3486346039bea06',1,'Enigma::Constants::Algorithm']]],
   ['str_7',['Str',['../struct_im_gui_widgets_1_1_input_text_callback___user_data.html#aa488b3549c60d1ff1c7383b29e869272',1,'ImGuiWidgets::InputTextCallback_UserData']]],
   ['swap_5finterval_8',['swap_interval',['../struct_window_settings.html#a10ae3d4ece37af5b4828cd8d02bcfb82',1,'WindowSettings']]]
 ];

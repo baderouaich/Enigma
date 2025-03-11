@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_enigma.html">Enigma</a> {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">   18</a></span>  <span class="keyword">constexpr</span> std::uint64_t <a class="code hl_function" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">BSwap64</a>(std::uint64_t host_int) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">   18</a></span>  <span class="keyword">inline</span> std::uint64_t <a class="code hl_function" href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">BSwap64</a>(std::uint64_t host_int) {</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#if defined(__GNUC__) || ENIGMA_HAVE_BUILTIN(__builtin_bswap64)</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> __builtin_bswap64(host_int);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
@@ -136,7 +136,7 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">   35</a></span>  <span class="keyword">constexpr</span> std::uint32_t <a class="code hl_function" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">BSwap32</a>(std::uint32_t host_int) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">   35</a></span>  <span class="keyword">inline</span> std::uint32_t <a class="code hl_function" href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">BSwap32</a>(std::uint32_t host_int) {</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#if defined(__GNUC__) || ENIGMA_HAVE_BUILTIN(__builtin_bswap32)</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> __builtin_bswap32(host_int);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">   48</a></span>  <span class="keyword">constexpr</span> std::uint16_t <a class="code hl_function" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">BSwap16</a>(std::uint16_t host_int) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">   48</a></span>  <span class="keyword">inline</span> std::uint16_t <a class="code hl_function" href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">BSwap16</a>(std::uint16_t host_int) {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#if defined(__GNUC__) || ENIGMA_HAVE_BUILTIN(__builtin_bswap16)</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">return</span> __builtin_bswap16(host_int);</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#elif defined(_MSC_VER)</span></div>
@@ -167,9 +167,9 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html">   59</a></span>  <span class="keyword">namespace </span>LittleEndian {</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
 <div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a01402cdf1c7312d7be00e5235d76d32c">   61</a></span>    <span class="keyword">constexpr</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#a01402cdf1c7312d7be00e5235d76d32c">fromHost</a>(std::uint16_t value) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">BSwap16</a>(value);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#ab94e05ad21f37826879eda9df3e5540c">   61</a></span>    <span class="keyword">inline</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#ab94e05ad21f37826879eda9df3e5540c">fromHost</a>(std::uint16_t value) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">BSwap16</a>(value);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      }</div>
@@ -177,9 +177,9 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a3af569eb2b6b1c186e7122229b8e6128">   69</a></span>    <span class="keyword">constexpr</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#a01402cdf1c7312d7be00e5235d76d32c">fromHost</a>(std::uint32_t value) {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">BSwap32</a>(value);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a394fc4a042c4867e56a41d858a0d59c4">   69</a></span>    <span class="keyword">inline</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#ab94e05ad21f37826879eda9df3e5540c">fromHost</a>(std::uint32_t value) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">BSwap32</a>(value);</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      }</div>
@@ -187,9 +187,9 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a1e0a72fc3c9a039e1432e6d544e423e0">   77</a></span>    <span class="keyword">constexpr</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#a01402cdf1c7312d7be00e5235d76d32c">fromHost</a>(std::uint64_t value) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">BSwap64</a>(value);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#aaf0411628c51ee44ecf0511b52ad2879">   77</a></span>    <span class="keyword">inline</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#ab94e05ad21f37826879eda9df3e5540c">fromHost</a>(std::uint64_t value) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">BSwap64</a>(value);</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      }</div>
@@ -197,9 +197,9 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
 <div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a084599c9befe863377edffb2c26dcf01">   85</a></span>    <span class="keyword">constexpr</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#a084599c9befe863377edffb2c26dcf01">toHost</a>(std::uint16_t value) {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">BSwap16</a>(value);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#acbc0f4025c17322946fa1fe937069c01">   85</a></span>    <span class="keyword">inline</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#acbc0f4025c17322946fa1fe937069c01">toHost</a>(std::uint16_t value) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">BSwap16</a>(value);</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      }</div>
@@ -207,9 +207,9 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
 <div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a3e9be8a6861b30d1ec59a89e97aef280">   93</a></span>    <span class="keyword">constexpr</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#a084599c9befe863377edffb2c26dcf01">toHost</a>(std::uint32_t value) {</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">BSwap32</a>(value);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a585f988e7bd69971f81047f83d19cd76">   93</a></span>    <span class="keyword">inline</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#acbc0f4025c17322946fa1fe937069c01">toHost</a>(std::uint32_t value) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">BSwap32</a>(value);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      }</div>
@@ -217,9 +217,9 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
 <div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a011674d989aa8dff9714e883b233e24a">  101</a></span>    <span class="keyword">constexpr</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#a084599c9befe863377edffb2c26dcf01">toHost</a>(std::uint64_t value) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">BSwap64</a>(value);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_little_endian.html#a4a8eef355ebdc68ccd1519b06500729b">  101</a></span>    <span class="keyword">inline</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_little_endian.html#acbc0f4025c17322946fa1fe937069c01">toHost</a>(std::uint64_t value) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">BSwap64</a>(value);</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      }</div>
@@ -233,61 +233,61 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 <div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html">  112</a></span>  <span class="keyword">namespace </span>BigEndian {</div>
 <div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a2ef104ca8b2a73c33cc0189f549988cb">  113</a></span>    <span class="keyword">constexpr</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a2ef104ca8b2a73c33cc0189f549988cb">fromHost</a>(std::uint16_t value) {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#ab244e75f65ba2fe1a0bc6bbce217a856">  113</a></span>    <span class="keyword">inline</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#ab244e75f65ba2fe1a0bc6bbce217a856">fromHost</a>(std::uint16_t value) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">BSwap16</a>(value);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">BSwap16</a>(value);</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      }</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
 </div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
 <div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a11f450605e5e1b47b306f745f07d792a">  121</a></span>    <span class="keyword">constexpr</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a2ef104ca8b2a73c33cc0189f549988cb">fromHost</a>(std::uint32_t value) {</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#abe2f98f36287394e888074f333f84d4e">  121</a></span>    <span class="keyword">inline</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#ab244e75f65ba2fe1a0bc6bbce217a856">fromHost</a>(std::uint32_t value) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">BSwap32</a>(value);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">BSwap32</a>(value);</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      }</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
 </div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
 <div class="foldopen" id="foldopen00129" data-start="{" data-end="}">
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a6a5042c8a7480fc35b01eb66b517da55">  129</a></span>    <span class="keyword">constexpr</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a2ef104ca8b2a73c33cc0189f549988cb">fromHost</a>(std::uint64_t value) {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a6a3ae72de27a1c306b01e140cc1e30b8">  129</a></span>    <span class="keyword">inline</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#ab244e75f65ba2fe1a0bc6bbce217a856">fromHost</a>(std::uint64_t value) {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">BSwap64</a>(value);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">BSwap64</a>(value);</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>      }</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
 </div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
 <div class="foldopen" id="foldopen00137" data-start="{" data-end="}">
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a0ee972c2e14a2d162920b9f77644066a">  137</a></span>    <span class="keyword">constexpr</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a0ee972c2e14a2d162920b9f77644066a">toHost</a>(std::uint16_t value) {</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a728945ea5fceffc25c46f51aa3932a5f">  137</a></span>    <span class="keyword">inline</span> std::uint16_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a728945ea5fceffc25c46f51aa3932a5f">toHost</a>(std::uint16_t value) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">BSwap16</a>(value);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">BSwap16</a>(value);</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>      }</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
 </div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
 <div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#a2986cedc79fba6647100e1b077c324d2">  145</a></span>    <span class="keyword">constexpr</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a0ee972c2e14a2d162920b9f77644066a">toHost</a>(std::uint32_t value) {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#ab5c0468b9b595e0e810d206cfac9585f">  145</a></span>    <span class="keyword">inline</span> std::uint32_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a728945ea5fceffc25c46f51aa3932a5f">toHost</a>(std::uint32_t value) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">BSwap32</a>(value);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">BSwap32</a>(value);</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      }</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    }</div>
 </div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
 <div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#aa19199e4fbd9b1ea0be8af54f6bae6e7">  153</a></span>    <span class="keyword">constexpr</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a0ee972c2e14a2d162920b9f77644066a">toHost</a>(std::uint64_t value) {</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::endian::native == std::endian::big) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="namespace_enigma_1_1_big_endian.html#afa6cb4ec65e1d47809324ece6c5b2196">  153</a></span>    <span class="keyword">inline</span> std::uint64_t <a class="code hl_function" href="namespace_enigma_1_1_big_endian.html#a728945ea5fceffc25c46f51aa3932a5f">toHost</a>(std::uint64_t value) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>      <span class="keywordflow">if</span> (std::endian::native == std::endian::big) {</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">return</span> value;</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">BSwap64</a>(value);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">BSwap64</a>(value);</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>      }</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    }</div>
 </div>
@@ -296,21 +296,21 @@ $(document).ready(function(){initNavTree('_endianness_8hpp_source.html',''); ini
 </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>} <span class="comment">// namespace Enigma</span></div>
-<div class="ttc" id="anamespace_enigma_1_1_big_endian_html_a0ee972c2e14a2d162920b9f77644066a"><div class="ttname"><a href="namespace_enigma_1_1_big_endian.html#a0ee972c2e14a2d162920b9f77644066a">Enigma::BigEndian::toHost</a></div><div class="ttdeci">constexpr std::uint16_t toHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00137">Endianness.hpp:137</a></div></div>
-<div class="ttc" id="anamespace_enigma_1_1_big_endian_html_a2ef104ca8b2a73c33cc0189f549988cb"><div class="ttname"><a href="namespace_enigma_1_1_big_endian.html#a2ef104ca8b2a73c33cc0189f549988cb">Enigma::BigEndian::fromHost</a></div><div class="ttdeci">constexpr std::uint16_t fromHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00113">Endianness.hpp:113</a></div></div>
-<div class="ttc" id="anamespace_enigma_1_1_little_endian_html_a01402cdf1c7312d7be00e5235d76d32c"><div class="ttname"><a href="namespace_enigma_1_1_little_endian.html#a01402cdf1c7312d7be00e5235d76d32c">Enigma::LittleEndian::fromHost</a></div><div class="ttdeci">constexpr std::uint16_t fromHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00061">Endianness.hpp:61</a></div></div>
-<div class="ttc" id="anamespace_enigma_1_1_little_endian_html_a084599c9befe863377edffb2c26dcf01"><div class="ttname"><a href="namespace_enigma_1_1_little_endian.html#a084599c9befe863377edffb2c26dcf01">Enigma::LittleEndian::toHost</a></div><div class="ttdeci">constexpr std::uint16_t toHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00085">Endianness.hpp:85</a></div></div>
+<div class="ttc" id="anamespace_enigma_1_1_big_endian_html_a728945ea5fceffc25c46f51aa3932a5f"><div class="ttname"><a href="namespace_enigma_1_1_big_endian.html#a728945ea5fceffc25c46f51aa3932a5f">Enigma::BigEndian::toHost</a></div><div class="ttdeci">std::uint16_t toHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00137">Endianness.hpp:137</a></div></div>
+<div class="ttc" id="anamespace_enigma_1_1_big_endian_html_ab244e75f65ba2fe1a0bc6bbce217a856"><div class="ttname"><a href="namespace_enigma_1_1_big_endian.html#ab244e75f65ba2fe1a0bc6bbce217a856">Enigma::BigEndian::fromHost</a></div><div class="ttdeci">std::uint16_t fromHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00113">Endianness.hpp:113</a></div></div>
+<div class="ttc" id="anamespace_enigma_1_1_little_endian_html_ab94e05ad21f37826879eda9df3e5540c"><div class="ttname"><a href="namespace_enigma_1_1_little_endian.html#ab94e05ad21f37826879eda9df3e5540c">Enigma::LittleEndian::fromHost</a></div><div class="ttdeci">std::uint16_t fromHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00061">Endianness.hpp:61</a></div></div>
+<div class="ttc" id="anamespace_enigma_1_1_little_endian_html_acbc0f4025c17322946fa1fe937069c01"><div class="ttname"><a href="namespace_enigma_1_1_little_endian.html#acbc0f4025c17322946fa1fe937069c01">Enigma::LittleEndian::toHost</a></div><div class="ttdeci">std::uint16_t toHost(std::uint16_t value)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00085">Endianness.hpp:85</a></div></div>
 <div class="ttc" id="anamespace_enigma_html"><div class="ttname"><a href="namespace_enigma.html">Enigma</a></div><div class="ttdef"><b>Definition</b> <a href="_constants_8hpp_source.html#l00007">Constants.hpp:7</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_a4477200a9971c49d59b868ebae481689"><div class="ttname"><a href="namespace_enigma.html#a4477200a9971c49d59b868ebae481689">Enigma::BSwap16</a></div><div class="ttdeci">constexpr std::uint16_t BSwap16(std::uint16_t host_int)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00048">Endianness.hpp:48</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_a4d634d8eaf14088424523e087f5f82a9"><div class="ttname"><a href="namespace_enigma.html#a4d634d8eaf14088424523e087f5f82a9">Enigma::BSwap64</a></div><div class="ttdeci">constexpr std::uint64_t BSwap64(std::uint64_t host_int)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00018">Endianness.hpp:18</a></div></div>
-<div class="ttc" id="anamespace_enigma_html_a7fb519fd22395cd4456f76972295918b"><div class="ttname"><a href="namespace_enigma.html#a7fb519fd22395cd4456f76972295918b">Enigma::BSwap32</a></div><div class="ttdeci">constexpr std::uint32_t BSwap32(std::uint32_t host_int)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00035">Endianness.hpp:35</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_a036e39796b8640d6d4ca99ead57fbcc6"><div class="ttname"><a href="namespace_enigma.html#a036e39796b8640d6d4ca99ead57fbcc6">Enigma::BSwap64</a></div><div class="ttdeci">std::uint64_t BSwap64(std::uint64_t host_int)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00018">Endianness.hpp:18</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_a54f5e871905aa22deed9c87ea7555f75"><div class="ttname"><a href="namespace_enigma.html#a54f5e871905aa22deed9c87ea7555f75">Enigma::BSwap32</a></div><div class="ttdeci">std::uint32_t BSwap32(std::uint32_t host_int)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00035">Endianness.hpp:35</a></div></div>
+<div class="ttc" id="anamespace_enigma_html_a771af49f7395886dcabbb7f414b404ea"><div class="ttname"><a href="namespace_enigma.html#a771af49f7395886dcabbb7f414b404ea">Enigma::BSwap16</a></div><div class="ttdeci">std::uint16_t BSwap16(std::uint16_t host_int)</div><div class="ttdef"><b>Definition</b> <a href="_endianness_8hpp_source.html#l00048">Endianness.hpp:48</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_022f6552a590871b5e744fe7964d6696.html">Meta</a></li><li class="navelem"><a class="el" href="_endianness_8hpp.html">Endianness.hpp</a></li>
-    <li class="footer">Generated on Tue Mar 11 2025 02:10:41 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Tue Mar 11 2025 02:28:55 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
