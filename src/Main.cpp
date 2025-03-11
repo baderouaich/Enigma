@@ -31,6 +31,9 @@ int main(int argc, char *argv[]) {
   } catch (const std::exception& e) {
     ENIGMA_CRITICAL(e.what());
     exit_code = EXIT_FAILURE;
+  } catch (...) {
+    ENIGMA_CRITICAL("Unknown Error");
+    exit_code = EXIT_FAILURE;
   }
 
   Enigma::Database::shutdown();

@@ -170,8 +170,8 @@ class Database final {
 
 /**
 *	Notes:
-*	for bind, use index starts by 1
-*	for getColumn, use index starts by 0
+*	for bind, use index starts from 1
+*	for getColumn, use index starts from 0
 */
 
 NS_ENIGMA_END

@@ -25,9 +25,17 @@ void Database::initialize() {
     // Create Tables If Not Exists
     for (const auto& create_table_sql: Constants::Database::CREATE_TABLES_SQL) {
       //ENIGMA_LOG("SQL: {0}", create_table_sql);
-      const auto query = std::make_unique<SQLite::Statement>(
-        *m_database,
-        create_table_sql.data());
+      const auto query = std::make_unique<SQLite::Statement>(*m_database, create_table_sql.data());
+      const std::int32_t status = query->exec(); // status 0 == SQLite::OK
+      ENIGMA_ASSERT_OR_THROW(status == SQLite::OK,
+                             "Database failed to create tables with error code " +
+                               std::to_string(query->getErrorCode()) +
+                               " and message: " + std::string(query->getErrorMsg()));
+    }
+
+    // Create indexes
+    for (const auto& create_index_sql: Constants::Database::CREATE_INDEXES_SQL) {
+      const auto query = std::make_unique<SQLite::Statement>(*m_database, create_index_sql.data());
       const std::int32_t status = query->exec(); // status 0 == SQLite::OK
       ENIGMA_ASSERT_OR_THROW(status == SQLite::OK,
                              "Database failed to create tables with error code " +
@@ -116,13 +124,13 @@ std::unique_ptr<Encryption> Database::getEncryption(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE ide = " << ide;
+    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE ide = ?;";
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
 
     const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-
+    query->bind(1, ide);
     if (query->executeStep()) {
       auto e = std::make_unique<Encryption>();
       std::int32_t i{0};
@@ -148,13 +156,13 @@ std::unique_ptr<CipherChunk> Database::getCipherChunk(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT idc, ide, offset, size, bytes FROM " << CipherChunk::TABLE_NAME << " WHERE ide = " << ide;
+    sql << "SELECT idc, ide, offset, size, bytes FROM " << CipherChunk::TABLE_NAME << " WHERE ide = ?;";
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
 
     const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-
+    query->bind(1, ide);
     if (query->executeStep()) {
       auto cc = std::make_unique<CipherChunk>();
       std::int32_t i{0};
@@ -162,7 +170,7 @@ std::unique_ptr<CipherChunk> Database::getCipherChunk(const std::int64_t ide) {
       cc->ide = query->getColumn(i++).getInt64();
       cc->offset = query->getColumn(i++).getInt64();
       cc->size = query->getColumn(i++).getInt64();
-      const void *blob = query->getColumn(i++).getBlob();
+      const void* blob = query->getColumn(i++).getBlob();
       cc->bytes.resize(cc->size, '\000');
       std::memcpy(cc->bytes.data(), blob, cc->size);
       return cc;
@@ -213,12 +221,13 @@ bool Database::deleteEncryption(const std::int64_t ide) {
 
   try {
     std::ostringstream sql{};
-    sql << "DELETE FROM " << Encryption::TABLE_NAME << " WHERE ide = " << ide;
+    sql << "DELETE FROM " << Encryption::TABLE_NAME << " WHERE ide = ?;";
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
 
     const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
+    query->bind(1, ide);
     std::int32_t r = query->exec(); // returns # of rows effected
     ENIGMA_ASSERT_OR_THROW(r > 0, "Failed to delete encryption record");
     return true;
@@ -236,13 +245,13 @@ void Database::getCipherChunks(const std::int64_t ide, const std::function<bool(
 
   try {
     std::ostringstream sql{};
-    sql << "SELECT idc, ide, offset, size, bytes FROM " << CipherChunk::TABLE_NAME << " WHERE ide = " << ide << " ORDER BY offset ASC"; // NOTE: order by offset 0 -> MAX to get chunks respectively in order
+    sql << "SELECT idc, ide, offset, size, bytes FROM " << CipherChunk::TABLE_NAME << " WHERE ide = ? ORDER BY offset ASC"; // NOTE: order by offset 0 -> MAX to get chunks respectively in order
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
 
     const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-
+    query->bind(1, ide);
     while (query->executeStep()) {
       auto cc = std::make_unique<CipherChunk>();
       std::int32_t i{0};
@@ -250,7 +259,7 @@ void Database::getCipherChunks(const std::int64_t ide, const std::function<bool(
       cc->ide = query->getColumn(i++).getInt64();
       cc->offset = query->getColumn(i++).getInt64();
       cc->size = query->getColumn(i++).getInt64();
-      const void *blob = query->getColumn(i++).getBlob();
+      const void* blob = query->getColumn(i++).getBlob();
       //ENIGMA_ASSERT_OR_THROW(cc->size == query->getColumn(i).size(), "");
       cc->bytes.resize(cc->size, '\000');
       std::memcpy(cc->bytes.data(), blob, cc->size);
@@ -292,13 +301,13 @@ std::vector<std::unique_ptr<Encryption>> Database::searchEncryptionsByTitle(cons
   std::vector<std::unique_ptr<Encryption>> encryptions;
   try {
     std::ostringstream sql{};
-    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE LOWER(title) LIKE '%" << StringUtils::LowerCopy(qtitle) << "%' ORDER BY " << order_by << ' ' << order;
+    sql << "SELECT ide, algo, title, date_time, size, is_file, file_ext FROM " << Encryption::TABLE_NAME << " WHERE title LIKE '%'||?||'%' ORDER BY " << order_by << ' ' << order;
 #if defined(ENIGMA_DEBUG)
     ENIGMA_LOG("SQL: {0}", sql.str());
 #endif
 
     const auto query = std::make_unique<SQLite::Statement>(*m_database, sql.str());
-
+    query->bind(1, qtitle);
     while (query->executeStep()) {
       auto e = std::make_unique<Encryption>();
       std::int32_t i{0};
