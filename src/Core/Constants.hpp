@@ -19,7 +19,7 @@ namespace Enigma::Constants {
     // https://i.stack.imgur.com/0hNsK.jpg
 
     static constexpr std::size_t MINIMUM_PASSWORD_LENGTH = 6; // AT LEAST 6 CHARACTERS, FOR SECURITY REASONS.
-    static constexpr char *SPECIAL_CHARACTERS = R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)";
+    static constexpr char SPECIAL_CHARACTERS[] = R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)";
 
     namespace AES {
       //https://www.cryptopp.com/wiki/GCM_Mode
@@ -88,7 +88,7 @@ namespace Enigma::Constants {
 #endif
 
   namespace CLI {
-    static constexpr char *CLI_HELP_MESSAGE = "Say -h or --help to display available options";
+    static constexpr char CLI_HELP_MESSAGE[] = "Say -h or --help to display available options";
   }
 
   namespace Links {
