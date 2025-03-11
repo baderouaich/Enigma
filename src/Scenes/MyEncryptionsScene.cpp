@@ -11,7 +11,7 @@
 NS_ENIGMA_BEGIN
 
 MyEncryptionsScene::MyEncryptionsScene()
-    : Enigma::Scene() {
+  : Enigma::Scene() {
 }
 
 void MyEncryptionsScene::OnCreate() {
@@ -51,11 +51,11 @@ void MyEncryptionsScene::OnImGuiDraw() {
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
   static constexpr const auto inline_spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) { ImGui::SameLine(); ImGui::Spacing(); ImGui::SameLine(); } };
 
-  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
-  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
-  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
-  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
-  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
+  static ImFont* const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont* const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont* const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont* const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont* const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
   static constexpr const auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
@@ -102,7 +102,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
     spacing(2);
 
     // Search Query
-    ImGui::PushFont(font_ubuntu_regular_18);                                           // text font
+    ImGui::PushFont(font_ubuntu_regular_18);                                              // text font
     ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
@@ -115,14 +115,14 @@ void MyEncryptionsScene::OnImGuiDraw() {
 
         if (!m_query.empty()) {
           this->OnSearchEncryptionsByTitle();
+        } else {
+          this->ResetSearch();
         }
       }
       ImGui::SameLine();
 
       if (ImGuiWidgets::Button("Reset", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
-        m_isSearching = false;
-        m_query.clear();
-        this->GetAllEncryptions();
+        this->ResetSearch();
       }
 
 #if 0
@@ -247,7 +247,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
       // https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp#L5024
       {
         ImGui::PushFont(font_ubuntu_regular_18); // text font
-                                                    // settings inspired from https://github.com/ocornut/imgui/issues/2957 # https://user-images.githubusercontent.com/8225057/71590710-dd057f80-2b29-11ea-8c1f-d827c008e050.png
+                                                 // settings inspired from https://github.com/ocornut/imgui/issues/2957 # https://user-images.githubusercontent.com/8225057/71590710-dd057f80-2b29-11ea-8c1f-d827c008e050.png
 
         static constexpr const auto table_flags =
           ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable |
@@ -347,10 +347,10 @@ void MyEncryptionsScene::OnImGuiDraw() {
     } else // No Encryption records saved yet.
     {
       // Centre text no saved encryption records
-      ImGui::PushFont(font_ubuntu_regular_18);                          // text font
+      ImGui::PushFont(font_ubuntu_regular_18);                             // text font
       ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
       {
-        const char *text = m_isSearching ? ("No Encryptions found") : ("No Encryptions saved yet");
+        const char* text = m_isSearching ? ("No Encryptions found") : ("No Encryptions saved yet");
         static const ImVec2 text_size(ImGui::CalcTextSize(text).x * font_ubuntu_regular_18->Scale, ImGui::CalcTextSize(text).y * font_ubuntu_regular_18->Scale);
         ImGui::SetCursorPosX((io.DisplaySize.x - text_size.x) / 2.0f);
         ImGui::Text("%s", text);
@@ -383,6 +383,13 @@ void MyEncryptionsScene::GetAllEncryptions() {
   ENIGMA_INFO("Getting all encryptions from database...");
   m_encryptions = Database::getAllEncryptions(m_order_by, m_order);
   ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
+}
+
+void MyEncryptionsScene::ResetSearch() {
+  ENIGMA_WARN("Resetting search...");
+  m_isSearching = false;
+  m_query.clear();
+  this->GetAllEncryptions();
 }
 
 void MyEncryptionsScene::ReformatEncryptionsDateTime() {

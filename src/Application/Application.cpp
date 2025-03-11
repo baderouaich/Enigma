@@ -128,23 +128,6 @@ void Application::LaunchWorkerThread(Scene *scene, const std::string& loading_te
     dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(""); // reset loading text
     ENIGMA_LOG("Finished Worker Thread ID #{}", std::this_thread::get_id());
   });
-#if 0
-	std::thread worker_thread([this, scene, loading_text, work_func]() -> void //Note: Don't use [&] e.g [&func] when the object or copies of it outlives the current scope. You are capturing references to local variables and storing them beyond the current scope. https://stackoverflow.com/questions/46489068/access-violation-on-stdfunction-assigned-to-a-lambda
-		{
-			std::scoped_lock<std::mutex> guard{ scene->GetMutex() };
-
-			ENIGMA_LOG("Launching Worker Thread ID #{} To Do Work: {}", std::this_thread::get_id(), loading_text);
-
-			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(loading_text); // set loading status description text will appear bellow loading spinner
-			scene->SetLoading(true);
-			work_func();
-			scene->SetLoading(false);
-			dynamic_cast<LoadingScene&>(*this->m_loading_scene).SetLoadingText(""); // reset loading text
-
-			ENIGMA_LOG("Finished Worker Thread ID #{}", std::this_thread::get_id());
-		});
-    worker_thread.detach();
-#endif
 }
 
 
