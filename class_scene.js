@@ -5,7 +5,7 @@ var class_scene =
     [ "EndScene", "class_scene.html#a17fe00698e2d065ae722aa42677429df", null ],
     [ "ENIGMA_NON_COPYABLE", "class_scene.html#aed03ca6e88454e9262ca9d60779b2333", null ],
     [ "ENIGMA_NON_MOVEABLE", "class_scene.html#a64c732b5476d1db3524f4b2a8ab33ba8", null ],
-    [ "GetMutex", "class_scene.html#a0fdd59aa0f1b0ad8dfc36734ce744757", null ],
+    [ "GetMutex", "class_scene.html#a877999d848b525450dd0a9a4bc99d5be", null ],
     [ "IsLoading", "class_scene.html#a08178340f931c23f882b97ba8af58fac", null ],
     [ "OnCreate", "class_scene.html#af6668f33bd29ad3c74d2b4953afd6137", null ],
     [ "OnDestroy", "class_scene.html#a2cecf726ce703eb9c7f45d737f340a90", null ],

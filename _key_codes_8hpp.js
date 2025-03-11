@@ -244,5 +244,5 @@ var _key_codes_8hpp =
       [ "RightSuper", "_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a0cc5a9f113dc1147c8eeae2f0199f9f2", null ],
       [ "Menu", "_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5ab61541208db7fa7dba42c85224405911", null ]
     ] ],
-    [ "operator<<", "_key_codes_8hpp.html#ac83c53982b2a0fd1bdc9e6703c84b41b", null ]
+    [ "operator<<", "_key_codes_8hpp.html#aca3f6904513633e39d846f055f21f478", null ]
 ];

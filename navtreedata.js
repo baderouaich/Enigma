@@ -47,7 +47,7 @@ var NAVTREE =
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Related Functions", "functions_rela.html", null ]
+        [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -67,12 +67,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_e_s_8hpp.html",
-"_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a37f438df6a6d5ba4c17ef8ca58562f00",
-"_macros_8hpp.html#a03b87860fb5c74cc165dbfaa2e46b7be",
-"class_blowfish.html#a771835e77c4158dfd540136d1f8c1c41",
-"class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd",
-"class_window_file_drop_event.html#aab72cc801f5d9bffb534f9a4200e6609",
-"struct_check_for_updates_1_1_latest_release_info.html#ac88911eb9a3288f0450dffd696b03f93"
+"_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a358cfe58715d680d9ab09f82e4010cbc",
+"_macros_8hpp.html#a0096cb0231e220a5a22389350edadf03",
+"class_blowfish.html#a836ace72c8ffb5c5836a28a0e1c88ec6",
+"class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a727b63583e01fa2b3952dab580c84dc2",
+"class_window.html#af39fcd6290048ce80652e5fa48bd7a93",
+"struct_check_for_updates_1_1_latest_release_info.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

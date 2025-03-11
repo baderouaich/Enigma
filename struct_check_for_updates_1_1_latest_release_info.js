@@ -2,7 +2,7 @@ var struct_check_for_updates_1_1_latest_release_info =
 [
     [ "LatestReleaseInfo", "struct_check_for_updates_1_1_latest_release_info.html#a2fe4b0b68ebe286c45a1e42158c4cfc9", null ],
     [ "~LatestReleaseInfo", "struct_check_for_updates_1_1_latest_release_info.html#ac88911eb9a3288f0450dffd696b03f93", null ],
-    [ "FromJson", "struct_check_for_updates_1_1_latest_release_info.html#a4a488fd330f9f94fd5f36b02bee034fb", null ],
+    [ "FromJson", "struct_check_for_updates_1_1_latest_release_info.html#aa9a3e9b8366b860682ba466ff48947cd", null ],
     [ "toString", "struct_check_for_updates_1_1_latest_release_info.html#ad66a2191e661f1033cab563b3c71459c", null ],
     [ "body", "struct_check_for_updates_1_1_latest_release_info.html#ab23e6ae64e3f28ffa2d0e37174ae5354", null ],
     [ "created_at", "struct_check_for_updates_1_1_latest_release_info.html#aac8f0a4806f21cbf553a3d17d0b2d20a", null ],

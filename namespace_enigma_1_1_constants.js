@@ -12,7 +12,7 @@ var namespace_enigma_1_1_constants =
       [ "BUTTON_COLOR", "namespace_enigma_1_1_constants_1_1_colors.html#af5142d30ec06114910484e206a93ce03", null ],
       [ "BUTTON_COLOR_ACTIVE", "namespace_enigma_1_1_constants_1_1_colors.html#a4ef1c91c536f0c0805b5b16eaca46c8b", null ],
       [ "BUTTON_COLOR_HOVER", "namespace_enigma_1_1_constants_1_1_colors.html#aea667a4b47806e04b7e742fed9a70eef", null ],
-      [ "COLOR4I_TO_COLOR4F", "namespace_enigma_1_1_constants_1_1_colors.html#a87e6f9a172d52e4a5b218fb618d2d6e0", null ],
+      [ "COLOR4I_TO_COLOR4F", "namespace_enigma_1_1_constants_1_1_colors.html#a4871f3a1fb379608415cefe660b7317d", null ],
       [ "ERROR_TEXT_COLOR", "namespace_enigma_1_1_constants_1_1_colors.html#add7a204e66833c17be0fdc07cc9f02cc", null ],
       [ "LOADING_BACKGROUND_COLOR", "namespace_enigma_1_1_constants_1_1_colors.html#a15d250b7d3f4680dd3904b6aec9d75d0", null ],
       [ "LOADING_SPINNER_COLOR", "namespace_enigma_1_1_constants_1_1_colors.html#aa090d3cf7846f19185eb05494f7280c3", null ],
@@ -29,5 +29,5 @@ var namespace_enigma_1_1_constants =
       [ "TOOLS_BUTTON_COLOR_HOVER", "namespace_enigma_1_1_constants_1_1_colors.html#aa10d622498c278c9f3dcafb1c7db2b74", null ]
     ] ],
     [ "Resources", "namespace_enigma_1_1_constants_1_1_resources.html", null ],
-    [ "ENIGMA_SINGLE_PROCESS_UNIQUE_PORT", "namespace_enigma_1_1_constants.html#a27c892f1b3856ae986dd9cdcb3421e75", null ]
+    [ "ENIGMA_SINGLE_PROCESS_UNIQUE_PORT", "namespace_enigma_1_1_constants.html#aa9f3559f57f0b76d72b6b051b97dd967", null ]
 ];

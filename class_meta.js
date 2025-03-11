@@ -8,7 +8,7 @@ var class_meta =
     [ "isEnigmaCipher", "class_meta.html#a1f274630c4ff9116a529d3cb2f32e548", null ],
     [ "isEnigmaFile", "class_meta.html#afb824fbfd645fe9505bc0cf4dec32418", null ],
     [ "readCipherChunks", "class_meta.html#a5a02e3d6536a980ded374f98041a54c1", null ],
-    [ "ENIGMA_BUFFER_DEFAULT_SIZE", "class_meta.html#a5d0e9c1340b1475936ca142cfbfb700b", null ],
-    [ "ENIGMA_CIPHER_CHUNK_MAGIC", "class_meta.html#a5e0c8fff5f1c21cc181c98b13dbd0e77", null ],
-    [ "ENIGMA_MAGIC", "class_meta.html#ae0038dc464b3f9111d4ff66823c7b8c9", null ]
+    [ "ENIGMA_BUFFER_DEFAULT_SIZE", "class_meta.html#a55d5f0f0e2dd149774fc008ba1f571f2", null ],
+    [ "ENIGMA_CIPHER_CHUNK_MAGIC", "class_meta.html#ab3fd8c31fde107d240eec99832d56461", null ],
+    [ "ENIGMA_MAGIC", "class_meta.html#ad7b37bea2b5d8d60b66f84e8a05cd903", null ]
 ];

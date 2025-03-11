@@ -9,7 +9,5 @@ var dir_d537ec303f13b8e88e2bd2506dfe6a9e =
     [ "Serpent", "dir_ef6864fe0ec78778e09d5c9e63656b43.html", "dir_ef6864fe0ec78778e09d5c9e63656b43" ],
     [ "TripleDES", "dir_78642b7eddd5c53f51a2e8cffd57f3f9.html", "dir_78642b7eddd5c53f51a2e8cffd57f3f9" ],
     [ "Twofish", "dir_af031666c25e6544e62f28ac9758b2ac.html", "dir_af031666c25e6544e62f28ac9758b2ac" ],
-    [ "Algorithm.hpp", "_algorithm_8hpp.html", [
-      [ "Algorithm", "class_algorithm.html", "class_algorithm" ]
-    ] ]
+    [ "Algorithm.hpp", "_algorithm_8hpp.html", "_algorithm_8hpp" ]
 ];

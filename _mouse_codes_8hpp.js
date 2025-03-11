@@ -28,5 +28,5 @@ var _mouse_codes_8hpp =
       [ "ButtonRight", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a93c4a961054f2fa59f45f358526b02ad", null ],
       [ "ButtonMiddle", "_mouse_codes_8hpp.html#a08d09f6faa1678cb6c85a1a865044531a330fb6bc14c7210c411202d9168b3bf1", null ]
     ] ],
-    [ "operator<<", "_mouse_codes_8hpp.html#ad49ab1293d6fe22a626d96cd0afe4c73", null ]
+    [ "operator<<", "_mouse_codes_8hpp.html#a428f5cc57f90672e95ac790c4e83c2ce", null ]
 ];

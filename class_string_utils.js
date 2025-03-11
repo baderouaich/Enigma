@@ -4,7 +4,7 @@ var class_string_utils =
     [ "EndsWith", "class_string_utils.html#af54fb7fbac9054aa9d0718c830279dae", null ],
     [ "Lower", "class_string_utils.html#a75849d25ed1a3cb99321351a6d489d45", null ],
     [ "LowerCopy", "class_string_utils.html#a6aa4413a3dbf61ba6cbbf8258668fa7c", null ],
-    [ "Split", "class_string_utils.html#a0673b81161dc1641ce54e0b1194cf8d4", null ],
+    [ "Split", "class_string_utils.html#a8dd64a5831f0a88bf70af0394b55ab23", null ],
     [ "StartsWith", "class_string_utils.html#af8122eb3d554daefe8b12040dc42bb15", null ],
     [ "StringToWString", "class_string_utils.html#a48f60f9c798409ce5873971fc08b3a43", null ],
     [ "To", "class_string_utils.html#a1fe40b85a3f357ac6255e3d9286ddf19", null ],
