@@ -10,12 +10,3 @@ src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 
 src/Analytics/Hardware/CPU/CPUInfo.cpp:27:8: warning: %zu in format string (no. 4) requires 'size_t *' but the argument type is 'unsigned long long *'. [invalidScanfArgType_int]
   std::fscanf(file, "cpu %zu %zu %zu %zu",
        ^
-src/Meta/Endianness.hpp:120:31: warning: Identical condition 'std::endian::native==std::endian::big', second condition is always false [identicalConditionAfterEarlyExit]
-      if (std::endian::native == std::endian::big) {
-                              ^
-src/Meta/Endianness.hpp:115:31: note: If condition 'std::endian::native==std::endian::big' is true, the function will return/exit
-      if (std::endian::native == std::endian::big) {
-                              ^
-src/Meta/Endianness.hpp:120:31: note: Testing identical condition 'std::endian::native==std::endian::big'
-      if (std::endian::native == std::endian::big) {
-                              ^
