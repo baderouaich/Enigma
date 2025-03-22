@@ -89,20 +89,36 @@ All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encry
 
 
 ### Compiling & Installing
-
-```shell
+### Linux
+```bash
 git clone https://github.com/baderouaich/Enigma
 cd Enigma
-# on Linux, run linux_sysdeps.sh to install system libraries (X11, wayland..)
-# bash linux_sysdeps.sh
+# on Linux, run install_sys_deps.sh to install system libraries (X11, wayland..)
+bash install_sys_deps.sh
 mkdir build && cd build
-cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release # or -G"Visual Studio 17 2022" to use the MSVC compiler
-make install -j$(nproc) # or -j%NUMBER_OF_PROCESSORS% on Windows
+cmake .. -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+make install -j$(nproc)
 ```
-<!--- No `sudo` or `Administrator` privileges are needed for installation.-->
-- All Enigma files will be installed to `/home/$(whoami)/Enigma/` (**Linux**) |  `C:\Program Files\Enigma\` (**Windows**)
-- To uninstall simply remove the installed `Enigma/` directory. Please make sure you export your encryptions from menu `File -> Export`before removing the directory.
+### Windows
+```batch
+git clone https://github.com/baderouaich/Enigma
+cd Enigma
+mkdir build && cd build
+cmake .. -G"Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
+msbuild Enigma.sln -property:Configuration=Release,MultiProcessorCompilation=true -maxCpuCount -verbosity:minimal -noLogo
+```
 
+> [!TIP]
+> Export a backup of your encryptions database occasionally from menu **File** -> **Export** and save it somewhere (e.g, clouds like Google Drive).
+
+> [!NOTE]
+> Backed-up databases do not store any passwords, all data (text & files) are stored as encrypted ciphers (you can see that using tools like [sqlite3 browser](https://sqlitebrowser.org)), which means, even if your backup is compromised, no one can decrypt your data without the encryption password.
+
+
+<!--- No `sudo` or `Administrator` privileges are needed for installation.-->
+<!--- All Enigma files will be installed to `/home/$(whoami)/Enigma/` (**Linux**) |  `C:\Program Files\Enigma\` (**Windows**)
+- To uninstall simply remove the installed `Enigma/` directory. Please make sure you export your encryptions from menu `File -> Export`before removing the directory.
+-->
 <!--
 ## Compiling
 - <i>Clone Repository</i> : `$ git clone https://github.com/baderouaich/Enigma.git`<br>
