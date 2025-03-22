@@ -1,16 +1,14 @@
 include(FetchContent)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
 set(BUILD_STATIC_LIBS ON CACHE BOOL "Build static libraries" FORCE)
-if(${CMAKE_CXX_COMPILER_ID} MATCHES "MSVC")
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug$<$<CONFIG:Debug>:Debug>")
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
-endif()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/cryptopp.cmake)
 
 FetchContent_Declare(cpr
   GIT_REPOSITORY "https://github.com/libcpr/cpr"
-  GIT_TAG "1.11.2"
+  GIT_TAG "1.11.1"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 set(BUILD_CURL_EXE OFF CACHE BOOL "Set to ON to build curl executable." FORCE)
@@ -32,6 +30,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/glad EXCLUDE_FROM_ALL)
 FetchContent_Declare(glfw
   GIT_REPOSITORY "https://github.com/glfw/glfw"
   GIT_TAG "3.4"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 
 )
@@ -45,6 +45,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/imgui EXCLUDE_FROM_ALL)
 FetchContent_Declare(infoware
   GIT_REPOSITORY "https://github.com/ThePhD/infoware"
   GIT_TAG "v0.6.0"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 if (UNIX AND NOT APPLE)
@@ -62,6 +64,8 @@ if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
 endif ()
 FetchContent_Declare(json
   URL "https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz"
+  GIT_SHALLOW TRUE  # redundant
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 FetchContent_MakeAvailable(json)
@@ -70,6 +74,8 @@ FetchContent_MakeAvailable(json)
 FetchContent_Declare(portable_file_dialogs
   GIT_REPOSITORY "https://github.com/samhocevar/portable-file-dialogs"
   GIT_TAG "0.1.0"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 FetchContent_MakeAvailable(portable_file_dialogs)
@@ -77,6 +83,8 @@ FetchContent_MakeAvailable(portable_file_dialogs)
 FetchContent_Declare(spdlog
   GIT_REPOSITORY "https://github.com/gabime/spdlog"
   GIT_TAG "v1.8.2"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 FetchContent_MakeAvailable(spdlog)
@@ -84,8 +92,9 @@ FetchContent_MakeAvailable(spdlog)
 FetchContent_Declare(SQLiteCpp
   GIT_REPOSITORY "https://github.com/SRombauts/SQLiteCpp"
   GIT_TAG "3.3.2"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
-
 )
 set(SQLITECPP_RUN_CPPLINT OFF)
 FetchContent_MakeAvailable(SQLiteCpp)
@@ -103,6 +112,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image EXCLUDE_FROM_ALL)
 FetchContent_Declare(zlib
   GIT_REPOSITORY "https://github.com/madler/zlib"
   GIT_TAG "v1.3.1"
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 FetchContent_MakeAvailable(zlib)
@@ -115,6 +126,8 @@ if (ENIGMA_ENABLE_TESTS)
   FetchContent_Declare(Catch2
     GIT_REPOSITORY "https://github.com/catchorg/Catch2"
     GIT_TAG "v3.7.1"
+    GIT_SHALLOW TRUE
+    GIT_PROGRESS TRUE
     EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
   )
   FetchContent_MakeAvailable(Catch2)
