@@ -19,6 +19,7 @@ if [ ! -d "./cmake-build-release" ]; then
 fi
 
 cp ./cmake-build-release/Enigma ./Enigma
+strip -R .comment --strip-all ./Enigma
 cp ../../res/branding/Logo.png ./Enigma.png
 printf "[Desktop Entry]\n\
 Type=Application\n\

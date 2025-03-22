@@ -12,6 +12,8 @@ set(CRYPTOPP_BUILD_DOCUMENTATION OFF)
 FetchContent_Declare(${CRYPTOPP_CMAKE}
   GIT_REPOSITORY  "https://github.com/abdes/cryptopp-cmake"
   GIT_TAG         ${CRYPTOPP_GIT_TAG}
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
 FetchContent_MakeAvailable(${CRYPTOPP_CMAKE})
