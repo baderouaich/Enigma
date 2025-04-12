@@ -33,9 +33,10 @@ Built to solve 3 problems i had:
 | Windows MSVC Tests (x64)  | [![Windows](https://img.shields.io/github/actions/workflow/status/baderouaich/Enigma/build-windows-msvc-tests.yml?branch=main)](https://github.com/baderouaich/Enigma/actions/workflows/build-windows-msvc-tests.yml)   |
 
 ## Supported Encryption Algorithms
-All [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)
-> <small>Ordered by strength</small>
+> <small>Asymmetric</small>
 - :white_check_mark: <strong>RSA-OAEP-SHA256</strong>
+
+> <small>Symmetric [Authenticated Encryption](https://www.cryptopp.com/wiki/Authenticated_Encryption)</small>
 - :white_check_mark: <strong>AES-GCM</strong>
 - :white_check_mark: <strong>ChaCha20Poly1305</strong>
 - :white_check_mark: <strong>Camellia-GCM</strong>
