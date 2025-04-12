@@ -9,7 +9,7 @@ var searchData=
   ['scene_5ftitle_5fbackground_5fcolor_6',['SCENE_TITLE_BACKGROUND_COLOR',['../namespace_enigma_1_1_constants_1_1_colors.html#aa8004ac8e8a888a0205008ca9a8992a5',1,'Enigma::Constants::Colors']]],
   ['scrolllock_7',['ScrollLock',['../_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a7d7902d5e2998e4fb2b8694a2de4ff65',1,'KeyCodes.hpp']]],
   ['searchencryptionsbytitle_8',['searchEncryptionsByTitle',['../class_database.html#a4d7ab640da720a6319dd4a2b36b72c70',1,'Database']]],
-  ['selectfolderdialog_9',['selectfolderdialog',['../class_select_folder_dialog.html',1,'SelectFolderDialog'],['../class_select_folder_dialog.html#a337b52a2119922907a41f66e981f4f5f',1,'SelectFolderDialog::SelectFolderDialog()']]],
+  ['selectfolderdialog_9',['selectfolderdialog',['../class_select_folder_dialog.html',1,'SelectFolderDialog'],['../class_select_folder_dialog.html#a02d6541fc1d0a066c582c4bf6fdd0a03',1,'SelectFolderDialog::SelectFolderDialog()']]],
   ['selectfolderdialog_2ehpp_10',['SelectFolderDialog.hpp',['../_select_folder_dialog_8hpp.html',1,'']]],
   ['semicolon_11',['Semicolon',['../_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5a9806fa37a3ecd39bf637c203aa011ed0',1,'KeyCodes.hpp']]],
   ['serpent_12',['serpent',['../class_algorithm.html#abfa56bd0469d341e959bb510f4fac41ba7cde8b0cc9c769422774241c9f7baf60',1,'Algorithm::Serpent'],['../class_serpent.html',1,'Serpent'],['../class_serpent.html#aa684ffb1a6fced62d6dc3988c33bf826',1,'Serpent::Serpent()']]],
