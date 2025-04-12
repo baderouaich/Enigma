@@ -25,10 +25,10 @@ public: /* Enums */
     Question,
   };
   static constexpr std::string_view Icon2Str[4] = {
-    [static_cast<std::size_t>(Icon::Info)] = "info",
-    [static_cast<std::size_t>(Icon::Warning)] = "warning",
-    [static_cast<std::size_t>(Icon::Error)] = "error",
-    [static_cast<std::size_t>(Icon::Question)] = "question"};
+    "info",
+    "warning",
+    "error",
+    "question"};
   /**
 	  *	Message box button layout choices
 	  */
@@ -39,10 +39,10 @@ public: /* Enums */
     Yes_No_Cancel
   };
   static constexpr std::string_view Choice2Str[4] = {
-    [static_cast<std::size_t>(Choice::Ok)] = "ok",
-    [static_cast<std::size_t>(Choice::Ok_Cancel)] = "okcancel",
-    [static_cast<std::size_t>(Choice::Yes_No)] = "yesno",
-    [static_cast<std::size_t>(Choice::Yes_No_Cancel)] = "yesnocancel"};
+    "ok",
+    "okcancel",
+    "yesno",
+    "yesnocancel"};
 
   /**
 	*	User Performed Action Result

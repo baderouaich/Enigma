@@ -19,9 +19,9 @@ public: /* Enums */
     Error
   };
   static constexpr std::string_view Icon2Str[3] = {
-    [static_cast<std::size_t>(Icon::Info)] = "info",
-    [static_cast<std::size_t>(Icon::Warning)] = "warning",
-    [static_cast<std::size_t>(Icon::Error)] = "error"
+    "info",
+    "warning",
+    "error"
   };
 
 public:
