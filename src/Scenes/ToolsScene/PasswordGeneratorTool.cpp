@@ -12,7 +12,7 @@ void PasswordGeneratorTool::OnCreate() {
   m_digits = m_uppercase_alphabets = m_lowercase_alphabets = m_special_characters = true;
 }
 
-void PasswordGeneratorTool::OnDraw(Scene *parent) {
+void PasswordGeneratorTool::OnDraw(Scene* parent) {
   const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
   //const auto& [win_x, win_y] = Application::getInstance()->GetWindow()->GetPosition();
 
@@ -20,11 +20,11 @@ void PasswordGeneratorTool::OnDraw(Scene *parent) {
 
   static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
-  static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
-  static ImFont *const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
-  static ImFont *const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
-  static ImFont *const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
-  static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
+  static ImFont* const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
+  static ImFont* const& font_ubuntu_regular_30 = ResourceManager::getFont("Ubuntu-Regular-30");
+  static ImFont* const& font_ubuntu_regular_20 = ResourceManager::getFont("Ubuntu-Regular-20");
+  static ImFont* const& font_ubuntu_regular_18 = ResourceManager::getFont("Ubuntu-Regular-18");
+  static ImFont* const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
   ImGui::PushFont(font_ubuntu_regular_20);
   {
@@ -126,61 +126,47 @@ void PasswordGeneratorTool::OnGenerateButtonPressed() {
     DialogUtils::Warn("Invalid password length");
     return;
   }
-  constexpr const std::size_t maxPasswordLength = ENIGMA_MB_TO_BYTES(10); // 10mb pw? is enough at most
+  constexpr std::size_t maxPasswordLength = ENIGMA_MB_TO_BYTES(10); // 10mb password? is enough at most
 
   const std::size_t length = std::stoull(m_length);
   if (length > maxPasswordLength) {
     DialogUtils::Warn("Password length is too long");
     return;
   }
-  const std::string special_characters = Constants::Algorithm::SPECIAL_CHARACTERS;
+  static constexpr std::string_view digits = "0123456789";
+  static constexpr std::string_view lowercase = "abcdefghijklmnopqrstuvwxyz";
+  static constexpr std::string_view uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  static constexpr std::string_view special = Constants::Algorithm::SPECIAL_CHARACTERS;
+
+  std::vector<std::string_view> charsets;
+  charsets.reserve(4);
+  if (m_digits) charsets.push_back(digits);
+  if (m_lowercase_alphabets) charsets.push_back(lowercase);
+  if (m_uppercase_alphabets) charsets.push_back(uppercase);
+  if (m_special_characters) charsets.push_back(special);
 
   Random::Reseed();
+  std::uniform_int_distribution<std::size_t> setDist{0, charsets.size() - 1};
   m_password.clear();
-  m_password.reserve(length);
-  while (m_password.size() < length) {
-    char c = '\000';
-  again:
-    const std::uint16_t r = Random::Int<std::uint16_t>(1, 4);
-    switch (r) {
-      case 1: // m_digits
-        if (m_digits) {
-          c = static_cast<char>(Random::Int<int>('0', '9'));
-        } else goto again;
-        break;
-      case 2: // m_uppercase_alphabets
-        if (m_uppercase_alphabets) {
-          c = static_cast<char>(Random::Int<int>('A', 'Z'));
-        } else goto again;
-        break;
-      case 3: // m_lowercase_alphabets
-        if (m_lowercase_alphabets) {
-          c = static_cast<char>(Random::Int<int>('a', 'z'));
-        } else goto again;
-        break;
-      case 4: // m_special_characters
-        if (m_special_characters) {
-          c = special_characters[Random::Int<std::size_t>(0, special_characters.size() - 1)];
-        } else goto again;
-        break;
-      default:
-        ENIGMA_ASSERT(false, "Unreachable");
-        break;
-    }
-    m_password += c;
+  m_password.resize(length, '\000');
+  for (std::size_t i = 0; i < length; ++i) {
+    const std::string_view& charset = charsets[setDist(Random::GetEngine())];
+    std::uniform_int_distribution<std::size_t> charDist{0, charset.size() - 1};
+    m_password[i] = charset[charDist(Random::GetEngine())];
   }
-
 
   // Generate helpful sentence to remember password with
   m_remember_password_sentence.clear();
-  for (const char c: m_password) {
-    // if char its a digit or special character, place it directly
-    if (m_remember_password_char_words.find(c) == m_remember_password_char_words.end()) {
-      m_remember_password_sentence += c;
-    } else {
-      m_remember_password_sentence += m_remember_password_char_words.at(c);
+  if (m_lowercase_alphabets || m_uppercase_alphabets) {
+    for (const char c: m_password) {
+      // if char its a digit or special character, place it directly
+      if (!m_remember_password_char_words.contains(c)) {
+        m_remember_password_sentence += c;
+      } else {
+        m_remember_password_sentence += m_remember_password_char_words.at(c);
+      }
+      m_remember_password_sentence += ' ';
     }
-    m_remember_password_sentence += ' ';
   }
 }
 

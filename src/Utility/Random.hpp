@@ -109,6 +109,10 @@ class Random final {
       m_engine.seed(m_seed());
     }
 
+    static std::default_random_engine& GetEngine() noexcept {
+      return m_engine;
+    }
+
   private:
     inline static std::random_device m_seed{};
     inline static std::default_random_engine m_engine{m_seed()};
