@@ -4,20 +4,30 @@
 
 NS_ENIGMA_BEGIN
 
-SaveFileDialog::SaveFileDialog(const std::string& title, const std::string& initial_path, const bool force_overwrite, const std::initializer_list<std::string>& filters)
-    : m_title(title),
-      m_initial_path(initial_path),
-      m_force_overwrite(force_overwrite),
-      m_filters(filters) {
+SaveFileDialog::SaveFileDialog(const std::string& title, const std::string& initialPath, const bool forceOverwrite, const std::initializer_list<std::string>& filters, const std::string& singleFilterDescription)
+  : m_title(title),
+    m_initialPath(initialPath),
+    m_forceOverwrite(forceOverwrite),
+    m_filters(filters),
+    m_singleFilterDescription(singleFilterDescription) {
 }
 
 std::string SaveFileDialog::Show() const {
-  return pfd::save_file(
-           m_title,
-           m_initial_path,
-           m_filters,
-           m_force_overwrite ? pfd::opt::force_overwrite : pfd::opt::none)
-    .result();
+
+  std::vector<const char*> filters;
+  if (!m_filters.empty()) {
+    filters.reserve(m_filters.size());
+    for (const std::string& filter: m_filters) {
+      filters.push_back(filter.c_str());
+    }
+  }
+  /* returns NULL on cancel */
+  const char* res = tinyfd_saveFileDialog(m_title.c_str(),
+                                          m_initialPath.c_str(),
+                                          m_filters.size(),
+                                          filters.empty() ? nullptr : filters.data(),
+                                          m_singleFilterDescription.empty() ? nullptr : m_singleFilterDescription.c_str());
+  return res ? std::string(res) : std::string();
 }
 
 NS_ENIGMA_END

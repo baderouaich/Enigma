@@ -35,8 +35,8 @@
 #include <spdlog/spdlog.h>
 ///
 
-/// pfd: portable file dialog
-#include <portable-file-dialogs.h>
+/// Tiny files dialogs
+#include <tinyfiledialogs.h>
 ///
 
 // CLI not supported
