@@ -8,6 +8,7 @@
 /// Platform Windows include
 #if defined(ENIGMA_PLATFORM_WINDOWS)
 #include <Windows.h>
+#include <ShellAPI.h>
 #endif
 ///
 
