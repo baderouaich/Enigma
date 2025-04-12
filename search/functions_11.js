@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['savefiledialog_0',['SaveFileDialog',['../class_save_file_dialog.html#a9b5062506e83f8b7f432c8dda29464ba',1,'SaveFileDialog']]],
+  ['savefiledialog_0',['SaveFileDialog',['../class_save_file_dialog.html#a234d7663979e54c13bc7f8df72e55a8d',1,'SaveFileDialog']]],
   ['scene_1',['Scene',['../class_scene.html#ab0dd98c2065e2fa4c16a7f4420292321',1,'Scene']]],
   ['searchencryptionsbytitle_2',['searchEncryptionsByTitle',['../class_database.html#a4d7ab640da720a6319dd4a2b36b72c70',1,'Database']]],
-  ['selectfolderdialog_3',['SelectFolderDialog',['../class_select_folder_dialog.html#a302c0029429f0eb0bb5745bbe838f160',1,'SelectFolderDialog']]],
+  ['selectfolderdialog_3',['SelectFolderDialog',['../class_select_folder_dialog.html#a337b52a2119922907a41f66e981f4f5f',1,'SelectFolderDialog']]],
   ['serpent_4',['Serpent',['../class_serpent.html#aa684ffb1a6fced62d6dc3988c33bf826',1,'Serpent']]],
   ['set_5',['set',['../class_clipboard.html#ac2f9790fdc022e11d803d701620766c3',1,'Clipboard::Set()'],['../class_e_n_v.html#ac852c59f10bf4e65d5ea591bb37889a9',1,'ENV::Set()']]],
   ['setcursor_6',['setcursor',['../class_window.html#a3d906637e642286dea5e7c515ef6f5a9',1,'Window::SetCursor(CursorMode mode) noexcept'],['../class_window.html#a3ffa817587c183cc3401f6ed0d3c4b9e',1,'Window::SetCursor(const std::string &amp;image_path, const std::int32_t xhot, const std::int32_t yhot) noexcept']]],
@@ -31,7 +31,7 @@ var searchData=
   ['sizeinbytes_28',['sizeinbytes',['../struct_meta_1_1_enigma_footer.html#ab03fec62dde759912abe75fa2e537369',1,'Meta::EnigmaFooter::sizeInBytes()'],['../struct_meta_1_1_enigma_cipher_chunk.html#a87afb81879ee09ee4b211c83a92832e7',1,'Meta::EnigmaCipherChunk::sizeInBytes()']]],
   ['split_29',['Split',['../class_string_utils.html#a8dd64a5831f0a88bf70af0394b55ab23',1,'StringUtils']]],
   ['startswith_30',['StartsWith',['../class_string_utils.html#af8122eb3d554daefe8b12040dc42bb15',1,'StringUtils']]],
-  ['str_31',['str',['../class_random.html#abd88f50c53f3a878f14ce529e4522f4c',1,'Random::Str()'],['../class_hash_utils.html#acafbae05312eeaa1d009c871130827cd',1,'HashUtils::str(const std::vector&lt; byte &gt; &amp;buffer, const bool uppercase=false)']]],
+  ['str_31',['str',['../class_hash_utils.html#acafbae05312eeaa1d009c871130827cd',1,'HashUtils::str()'],['../class_random.html#abd88f50c53f3a878f14ce529e4522f4c',1,'Random::Str()']]],
   ['stringify_32',['stringify',['../class_hash_utils.html#a640e5f3b19cbea405a4d4c52cfe1c3e5',1,'HashUtils']]],
   ['stringtowstring_33',['StringToWString',['../class_string_utils.html#a48f60f9c798409ce5873971fc08b3a43',1,'StringUtils']]],
   ['systemandhardwareinfotool_34',['SystemAndHardwareInfoTool',['../class_system_and_hardware_info_tool.html#a7132de028b8f71c9225eda89c6c052cb',1,'SystemAndHardwareInfoTool']]]

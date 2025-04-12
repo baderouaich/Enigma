@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="Logo127x142.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.1</span>
+   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.2</span>
    </div>
    <div id="projectbrief">A Simple, Reliable and Efficient Encryption Tool</div>
   </td>
@@ -102,8 +102,8 @@ $(document).ready(function(){initNavTree('class_select_folder_dialog.html',''); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a302c0029429f0eb0bb5745bbe838f160" id="r_a302c0029429f0eb0bb5745bbe838f160"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_select_folder_dialog.html#a302c0029429f0eb0bb5745bbe838f160">SelectFolderDialog</a> (const std::string &amp;title, const std::string &amp;initial_path=&quot;.&quot;, const bool force_path=true)</td></tr>
-<tr class="separator:a302c0029429f0eb0bb5745bbe838f160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a337b52a2119922907a41f66e981f4f5f" id="r_a337b52a2119922907a41f66e981f4f5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_select_folder_dialog.html#a337b52a2119922907a41f66e981f4f5f">SelectFolderDialog</a> (const std::string &amp;title, const std::string &amp;initialPath=ResourceManager::getAppDataDir())</td></tr>
+<tr class="separator:a337b52a2119922907a41f66e981f4f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb55ce6feae2885c22bb977dc1b119fe" id="r_aeb55ce6feae2885c22bb977dc1b119fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_select_folder_dialog.html#aeb55ce6feae2885c22bb977dc1b119fe">~SelectFolderDialog</a> () noexcept=default</td></tr>
 <tr class="separator:aeb55ce6feae2885c22bb977dc1b119fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a563308dc67a8185ce5422bac0e7fae13" id="r_a563308dc67a8185ce5422bac0e7fae13"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_select_folder_dialog.html#a563308dc67a8185ce5422bac0e7fae13">Show</a> () const</td></tr>
@@ -112,13 +112,16 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>System Dialog to ask the user to select a folder from disk </p>
 
-<p class="definition">Definition at line <a class="el" href="_select_folder_dialog_8hpp_source.html#l00013">13</a> of file <a class="el" href="_select_folder_dialog_8hpp_source.html">SelectFolderDialog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_select_folder_dialog_8hpp_source.html#l00012">12</a> of file <a class="el" href="_select_folder_dialog_8hpp_source.html">SelectFolderDialog.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a302c0029429f0eb0bb5745bbe838f160" name="a302c0029429f0eb0bb5745bbe838f160"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a302c0029429f0eb0bb5745bbe838f160">&#9670;&#160;</a></span>SelectFolderDialog()</h2>
+<a id="a337b52a2119922907a41f66e981f4f5f" name="a337b52a2119922907a41f66e981f4f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a337b52a2119922907a41f66e981f4f5f">&#9670;&#160;</a></span>SelectFolderDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">SelectFolderDialog::SelectFolderDialog </td>
@@ -130,13 +133,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>initial_path</em> = <code>&quot;.&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>force_path</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>initialPath</em> = <code>ResourceManager::getAppDataDir()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -144,12 +141,16 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">title</td><td>title of the dialog </td></tr>
-    <tr><td class="paramname">initial_path</td><td>the default path of the dialog. </td></tr>
-    <tr><td class="paramname">force_path</td><td>to force the operating system to use the provided path. Some systems default to the most recently used path, if applicable. </td></tr>
+    <tr><td class="paramname">initialPath</td><td>the default path of the dialog. </td></tr>
   </table>
   </dd>
 </dl>
@@ -209,7 +210,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_select_folder_dialog.html">SelectFolderDialog</a></li>
-    <li class="footer">Generated on Sat Mar 22 2025 02:25:20 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Apr 12 2025 16:14:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

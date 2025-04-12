@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"struct_check_for_updates_1_1_latest_release_info.html":[4,0,11,0],
 "struct_check_for_updates_1_1_latest_release_info.html#a0ecfb815b1566bc5204cb8e8ede66824":[4,0,11,0,9],
 "struct_check_for_updates_1_1_latest_release_info.html#a2fe4b0b68ebe286c45a1e42158c4cfc9":[4,0,11,0,0],
 "struct_check_for_updates_1_1_latest_release_info.html#a307da2765ab052a895a71593c6677836":[4,0,11,0,10],

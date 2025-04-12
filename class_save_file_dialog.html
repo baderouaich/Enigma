@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="Logo127x142.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.1</span>
+   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.2</span>
    </div>
    <div id="projectbrief">A Simple, Reliable and Efficient Encryption Tool</div>
   </td>
@@ -102,8 +102,8 @@ $(document).ready(function(){initNavTree('class_save_file_dialog.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b5062506e83f8b7f432c8dda29464ba" id="r_a9b5062506e83f8b7f432c8dda29464ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a9b5062506e83f8b7f432c8dda29464ba">SaveFileDialog</a> (const std::string &amp;title, const std::string &amp;initial_path=&quot;.&quot;, const bool force_overwrite=true, const std::initializer_list&lt; std::string &gt; &amp;filters={&quot;All Files&quot;, &quot;*&quot;})</td></tr>
-<tr class="separator:a9b5062506e83f8b7f432c8dda29464ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a234d7663979e54c13bc7f8df72e55a8d" id="r_a234d7663979e54c13bc7f8df72e55a8d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a234d7663979e54c13bc7f8df72e55a8d">SaveFileDialog</a> (const std::string &amp;title, const std::string &amp;initialPath=&quot;.&quot;, const bool forceOverwrite=true, const std::initializer_list&lt; std::string &gt; &amp;filters={&quot;*&quot;}, const std::string &amp;singleFilterDescription=&quot;All Files&quot;)</td></tr>
+<tr class="separator:a234d7663979e54c13bc7f8df72e55a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f310f6537eb6a020ebaab834eaac2a1" id="r_a9f310f6537eb6a020ebaab834eaac2a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a9f310f6537eb6a020ebaab834eaac2a1">~SaveFileDialog</a> () noexcept=default</td></tr>
 <tr class="separator:a9f310f6537eb6a020ebaab834eaac2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c139ef59865fe59477d260601caa886" id="r_a0c139ef59865fe59477d260601caa886"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_save_file_dialog.html#a0c139ef59865fe59477d260601caa886">Show</a> () const</td></tr>
@@ -112,13 +112,16 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>System Dialog to ask the user to select a path to save a file to </p>
 
-<p class="definition">Definition at line <a class="el" href="_save_file_dialog_8hpp_source.html#l00013">13</a> of file <a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_save_file_dialog_8hpp_source.html#l00012">12</a> of file <a class="el" href="_save_file_dialog_8hpp_source.html">SaveFileDialog.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a9b5062506e83f8b7f432c8dda29464ba" name="a9b5062506e83f8b7f432c8dda29464ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b5062506e83f8b7f432c8dda29464ba">&#9670;&#160;</a></span>SaveFileDialog()</h2>
+<a id="a234d7663979e54c13bc7f8df72e55a8d" name="a234d7663979e54c13bc7f8df72e55a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a234d7663979e54c13bc7f8df72e55a8d">&#9670;&#160;</a></span>SaveFileDialog()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">SaveFileDialog::SaveFileDialog </td>
@@ -130,19 +133,25 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>initial_path</em> = <code>&quot;.&quot;</code>, </td>
+          <td class="paramname"><em>initialPath</em> = <code>&quot;.&quot;</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool&#160;</td>
-          <td class="paramname"><em>force_overwrite</em> = <code>true</code>, </td>
+          <td class="paramname"><em>forceOverwrite</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::initializer_list&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>filters</em> = <code>{&quot;All&#160;Files&quot;,&#160;&quot;*&quot;}</code>&#160;</td>
+          <td class="paramname"><em>filters</em> = <code>{&quot;*&quot;}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>singleFilterDescription</em> = <code>&quot;All&#160;Files&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -150,13 +159,19 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">title</td><td>title of the dialog </td></tr>
-    <tr><td class="paramname">initial_path</td><td>the default path of the dialog. </td></tr>
-    <tr><td class="paramname">force_overwrite</td><td>force overwrite and disable the confirmation dialog </td></tr>
-    <tr><td class="paramname">filters</td><td>The filter list enumerates filter names and corresponded space-separated wildcard lists. It defaults to { "All Files", "*" } </td></tr>
+    <tr><td class="paramname">initialPath</td><td>the default path of the dialog. </td></tr>
+    <tr><td class="paramname">forceOverwrite</td><td>force overwrite and disable the confirmation dialog </td></tr>
+    <tr><td class="paramname">filters</td><td>The filter list enumerates filter names and corresponded space-separated wildcard lists. It defaults to { "*" } </td></tr>
+    <tr><td class="paramname">singleFilterDescription</td><td>The single filter description. It defaults to "All Files" </td></tr>
   </table>
   </dd>
 </dl>
@@ -216,7 +231,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_save_file_dialog.html">SaveFileDialog</a></li>
-    <li class="footer">Generated on Sat Mar 22 2025 02:25:20 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Apr 12 2025 16:14:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

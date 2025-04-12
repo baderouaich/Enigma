@@ -1,6 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"class_window.html#af39fcd6290048ce80652e5fa48bd7a93":[4,0,73,40],
 "class_window.html#afcc338662a400753210d00d728bf26f6":[4,0,73,27],
 "class_window.html#afd1aa20b446bdf724307d80ccef76c8b":[4,0,73,13],
 "class_window_close_event.html":[4,0,74],
@@ -249,5 +248,6 @@ var NAVTREEINDEX5 =
 "namespaces.html":[3,0],
 "pages.html":[],
 "pch_8hpp.html":[5,0,0,18],
-"pch_8hpp_source.html":[5,0,0,18]
+"pch_8hpp_source.html":[5,0,0,18],
+"struct_check_for_updates_1_1_latest_release_info.html":[4,0,11,0]
 };

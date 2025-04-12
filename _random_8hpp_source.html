@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="Logo127x142.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.1</span>
+   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.2</span>
    </div>
    <div id="projectbrief">A Simple, Reliable and Efficient Encryption Tool</div>
   </td>
@@ -197,14 +197,20 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
 </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">inline</span> <span class="keyword">static</span> std::random_device m_seed{};</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">inline</span> <span class="keyword">static</span> std::default_random_engine m_engine{m_seed()};</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>};</div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="class_random.html#a279efa6b36cc30b3dc2c84b9e9d93eb8">  112</a></span>    <span class="keyword">static</span> std::default_random_engine&amp; <a class="code hl_function" href="class_random.html#a279efa6b36cc30b3dc2c84b9e9d93eb8">GetEngine</a>() noexcept {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <span class="keywordflow">return</span> m_engine;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
 </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><a class="code hl_define" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_RANDOM_H</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">inline</span> <span class="keyword">static</span> std::random_device m_seed{};</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">inline</span> <span class="keyword">static</span> std::default_random_engine m_engine{m_seed()};</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>};</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><a class="code hl_define" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_RANDOM_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_key_codes_8hpp_html_a2947a2ca8156371b14dcc077072dcaf5ab9ece18c950afbfa6b0fdbfa4ff731d3"><div class="ttname"><a href="_key_codes_8hpp.html#a2947a2ca8156371b14dcc077072dcaf5ab9ece18c950afbfa6b0fdbfa4ff731d3">KeyCode::T</a></div><div class="ttdeci">@ T</div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition</b> <a href="_macros_8hpp_source.html#l00013">Macros.hpp:13</a></div></div>
@@ -213,6 +219,7 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div class="ttc" id="a_macros_8hpp_html_a96241f328dcf0a7006576fccc4e67c38"><div class="ttname"><a href="_macros_8hpp.html#a96241f328dcf0a7006576fccc4e67c38">ENIGMA_ASSERT</a></div><div class="ttdeci">#define ENIGMA_ASSERT(x,...)</div><div class="ttdoc">Asserts.</div><div class="ttdef"><b>Definition</b> <a href="_macros_8hpp_source.html#l00037">Macros.hpp:37</a></div></div>
 <div class="ttc" id="aclass_random_html"><div class="ttname"><a href="class_random.html">Random</a></div><div class="ttdef"><b>Definition</b> <a href="_random_8hpp_source.html#l00012">Random.hpp:12</a></div></div>
 <div class="ttc" id="aclass_random_html_a19b8dabe610e36d2016ebdd477bf0f6c"><div class="ttname"><a href="class_random.html#a19b8dabe610e36d2016ebdd477bf0f6c">Random::Real</a></div><div class="ttdeci">static std::enable_if&lt; std::is_floating_point&lt; T &gt;::value, T &gt;::type Real(const T min, const T max)</div><div class="ttdoc">Generates a random real between a range.</div><div class="ttdef"><b>Definition</b> <a href="_random_8hpp_source.html#l00024">Random.hpp:24</a></div></div>
+<div class="ttc" id="aclass_random_html_a279efa6b36cc30b3dc2c84b9e9d93eb8"><div class="ttname"><a href="class_random.html#a279efa6b36cc30b3dc2c84b9e9d93eb8">Random::GetEngine</a></div><div class="ttdeci">static std::default_random_engine &amp; GetEngine() noexcept</div><div class="ttdef"><b>Definition</b> <a href="_random_8hpp_source.html#l00112">Random.hpp:112</a></div></div>
 <div class="ttc" id="aclass_random_html_a309a91e60c6ec9e868b94ee7fd08c453"><div class="ttname"><a href="class_random.html#a309a91e60c6ec9e868b94ee7fd08c453">Random::Bool</a></div><div class="ttdeci">static bool Bool(const double p=0.5)</div><div class="ttdoc">Generates a random boolean value.</div><div class="ttdef"><b>Definition</b> <a href="_random_8hpp_source.html#l00049">Random.hpp:49</a></div></div>
 <div class="ttc" id="aclass_random_html_a49dbd2cc9eea0148ddcf613d5ea92867"><div class="ttname"><a href="class_random.html#a49dbd2cc9eea0148ddcf613d5ea92867">Random::Int</a></div><div class="ttdeci">static std::enable_if&lt; std::is_integral&lt; T &gt;::value &amp;&amp;!std::is_same&lt; T, bool &gt;::value, T &gt;::type Int(const T min, const T max)</div><div class="ttdoc">Generates a random integer between a range.</div><div class="ttdef"><b>Definition</b> <a href="_random_8hpp_source.html#l00038">Random.hpp:38</a></div></div>
 <div class="ttc" id="aclass_random_html_a7c1fe11ad248e41bd166bdc1240cd98a"><div class="ttname"><a href="class_random.html#a7c1fe11ad248e41bd166bdc1240cd98a">Random::Bytes</a></div><div class="ttdeci">static std::vector&lt; byte &gt; Bytes(const std::size_t length) noexcept</div><div class="ttdoc">Generates a random vector of bytes.</div><div class="ttdef"><b>Definition</b> <a href="_random_8hpp_source.html#l00090">Random.hpp:90</a></div></div>
@@ -224,7 +231,7 @@ $(document).ready(function(){initNavTree('_random_8hpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9761b53e3d9349800c0cb59b71c8cd3d.html">Utility</a></li><li class="navelem"><a class="el" href="_random_8hpp.html">Random.hpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2025 02:25:19 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Apr 12 2025 16:14:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

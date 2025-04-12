@@ -7,5 +7,6 @@ var class_notification =
     ] ],
     [ "Notification", "class_notification.html#a909b704ccd742726c1e96438316818f9", null ],
     [ "~Notification", "class_notification.html#aa00449acf49a2ba94d8c23b2d408f3af", null ],
-    [ "Show", "class_notification.html#a0cd8e2feaef432371928b153e27a0b34", null ]
+    [ "Show", "class_notification.html#a0cd8e2feaef432371928b153e27a0b34", null ],
+    [ "Icon2Str", "class_notification.html#a9940e56caf657f3adda466000af7c672", null ]
 ];

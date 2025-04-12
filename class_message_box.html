@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="Logo127x142.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.1</span>
+   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.2</span>
    </div>
    <div id="projectbrief">A Simple, Reliable and Efficient Encryption Tool</div>
   </td>
@@ -94,6 +94,7 @@ $(document).ready(function(){initNavTree('class_message_box.html',''); initResiz
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="class_message_box-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MessageBox Class Reference</div></div>
 </div><!--header-->
@@ -103,33 +104,22 @@ $(document).ready(function(){initNavTree('class_message_box.html',''); initResiz
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aaea45ecde75ed114cb488cf01e7b0b37" id="r_aaea45ecde75ed114cb488cf01e7b0b37"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37">Icon</a> : std::uint8_t { <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a4059b0251f66a18cb56f544728796875">Info</a> = static_cast&lt;std::uint8_t&gt;(pfd::icon::info)
-, <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a0eaadb4fcb48a0a0ed7bc9868be9fbaa">Warning</a> = static_cast&lt;std::uint8_t&gt;(pfd::icon::warning)
-, <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd">Error</a> = static_cast&lt;std::uint8_t&gt;(pfd::icon::error)
-, <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a">Question</a> = static_cast&lt;std::uint8_t&gt;(pfd::icon::question)
+<tr class="memitem:aaea45ecde75ed114cb488cf01e7b0b37" id="r_aaea45ecde75ed114cb488cf01e7b0b37"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37">Icon</a> : std::uint8_t { <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a4059b0251f66a18cb56f544728796875">Info</a> = 0
+, <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a0eaadb4fcb48a0a0ed7bc9868be9fbaa">Warning</a>
+, <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd">Error</a>
+, <a class="el" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a">Question</a>
  }</td></tr>
 <tr class="separator:aaea45ecde75ed114cb488cf01e7b0b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a132faa125d2f008058ea90cc3aad391c" id="r_a132faa125d2f008058ea90cc3aad391c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391c">Choice</a> : std::uint8_t { <br />
-&#160;&#160;<a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391caa60852f204ed8028c1c58808b746d115">Ok</a> = static_cast&lt;std::uint8_t&gt;(pfd::choice::ok)
-, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e">Ok_Cancel</a> = static_cast&lt;std::uint8_t&gt;(pfd::choice::ok_cancel)
-, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e">Yes_No</a> = static_cast&lt;std::uint8_t&gt;(pfd::choice::yes_no)
-, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f">Yes_No_Cancel</a> = static_cast&lt;std::uint8_t&gt;(pfd::choice::yes_no_cancel)
-, <br />
-&#160;&#160;<a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391caae0331837fa9a532133b3599d6cd6e38">Retry_Cancel</a> = static_cast&lt;std::uint8_t&gt;(pfd::choice::retry_cancel)
-, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca0581d04dc1aa46c4928d3169d774b51f">Abort_Retry_Ignore</a> = static_cast&lt;std::uint8_t&gt;(pfd::choice::abort_retry_ignore)
-<br />
+<tr class="memitem:a132faa125d2f008058ea90cc3aad391c" id="r_a132faa125d2f008058ea90cc3aad391c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391c">Choice</a> : std::uint8_t { <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391caa60852f204ed8028c1c58808b746d115">Ok</a> = 0
+, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e">Ok_Cancel</a>
+, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e">Yes_No</a>
+, <a class="el" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f">Yes_No_Cancel</a>
  }</td></tr>
 <tr class="separator:a132faa125d2f008058ea90cc3aad391c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ece255407bc9d063484f9c6461b2ab4" id="r_a7ece255407bc9d063484f9c6461b2ab4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4">Action</a> : std::int8_t { <br />
-&#160;&#160;<a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aea4788705e6873b424c65e91c2846b19">Cancel</a> = static_cast&lt;std::int8_t&gt;(pfd::button::cancel)
-, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aa60852f204ed8028c1c58808b746d115">Ok</a> = static_cast&lt;std::int8_t&gt;(pfd::button::ok)
-, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a93cba07454f06a4a960172bbd6e2a435">Yes</a> = static_cast&lt;std::int8_t&gt;(pfd::button::yes)
-, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b">No</a> = static_cast&lt;std::int8_t&gt;(pfd::button::no)
-, <br />
-&#160;&#160;<a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a727b63583e01fa2b3952dab580c84dc2">Abort</a> = static_cast&lt;std::int8_t&gt;(pfd::button::abort)
-, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a6327b4e59f58137083214a1fec358855">Retry</a> = static_cast&lt;std::int8_t&gt;(pfd::button::retry)
-, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4afd038fc7f319e48f3115d92bf5bdbef9">Ignore</a> = static_cast&lt;std::int8_t&gt;(pfd::button::ignore)
-<br />
+<tr class="memitem:a7ece255407bc9d063484f9c6461b2ab4" id="r_a7ece255407bc9d063484f9c6461b2ab4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4">Action</a> : std::int8_t { <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aea4788705e6873b424c65e91c2846b19">Cancel</a> = 0
+, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b">No</a> = Cancel
+, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4aa60852f204ed8028c1c58808b746d115">Ok</a> = 1
+, <a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4a93cba07454f06a4a960172bbd6e2a435">Yes</a> = Ok
  }</td></tr>
 <tr class="separator:a7ece255407bc9d063484f9c6461b2ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -141,11 +131,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4d78c6b8b256101f87ed57a9d26e909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7b72a7b877a624f90d052dca71a98d4" id="r_ab7b72a7b877a624f90d052dca71a98d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_message_box.html#a7ece255407bc9d063484f9c6461b2ab4">MessageBox::Action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#ab7b72a7b877a624f90d052dca71a98d4">Show</a> () const</td></tr>
 <tr class="separator:ab7b72a7b877a624f90d052dca71a98d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:aa56fe81c63effa6f2aaae97206526aa6" id="r_aa56fe81c63effa6f2aaae97206526aa6"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#aa56fe81c63effa6f2aaae97206526aa6">Icon2Str</a> [4]</td></tr>
+<tr class="separator:aa56fe81c63effa6f2aaae97206526aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92585f72874eda9ca0119e0b2a99cf99" id="r_a92585f72874eda9ca0119e0b2a99cf99"><td class="memItemLeft" align="right" valign="top">static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_message_box.html#a92585f72874eda9ca0119e0b2a99cf99">Choice2Str</a> [4]</td></tr>
+<tr class="separator:a92585f72874eda9ca0119e0b2a99cf99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Avoid mismatch with windows's <a class="el" href="class_message_box.html">MessageBox</a> macro </p>
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00017">17</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00016">16</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a7ece255407bc9d063484f9c6461b2ab4" name="a7ece255407bc9d063484f9c6461b2ab4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ece255407bc9d063484f9c6461b2ab4">&#9670;&#160;</a></span>Action</h2>
@@ -169,15 +166,12 @@ Public Member Functions</h2></td></tr>
 <p>User Performed Action Result </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4aea4788705e6873b424c65e91c2846b19" name="a7ece255407bc9d063484f9c6461b2ab4aea4788705e6873b424c65e91c2846b19"></a>Cancel&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b" name="a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b"></a>No&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4aa60852f204ed8028c1c58808b746d115" name="a7ece255407bc9d063484f9c6461b2ab4aa60852f204ed8028c1c58808b746d115"></a>Ok&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4a93cba07454f06a4a960172bbd6e2a435" name="a7ece255407bc9d063484f9c6461b2ab4a93cba07454f06a4a960172bbd6e2a435"></a>Yes&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b" name="a7ece255407bc9d063484f9c6461b2ab4abafd7322c6e97d25b6299b5d6fe8920b"></a>No&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4a727b63583e01fa2b3952dab580c84dc2" name="a7ece255407bc9d063484f9c6461b2ab4a727b63583e01fa2b3952dab580c84dc2"></a>Abort&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4a6327b4e59f58137083214a1fec358855" name="a7ece255407bc9d063484f9c6461b2ab4a6327b4e59f58137083214a1fec358855"></a>Retry&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a7ece255407bc9d063484f9c6461b2ab4afd038fc7f319e48f3115d92bf5bdbef9" name="a7ece255407bc9d063484f9c6461b2ab4afd038fc7f319e48f3115d92bf5bdbef9"></a>Ignore&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00044">44</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00050">50</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>
@@ -206,11 +200,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e" name="a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e"></a>Ok_Cancel&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e" name="a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e"></a>Yes_No&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f" name="a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f"></a>Yes_No_Cancel&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a132faa125d2f008058ea90cc3aad391caae0331837fa9a532133b3599d6cd6e38" name="a132faa125d2f008058ea90cc3aad391caae0331837fa9a532133b3599d6cd6e38"></a>Retry_Cancel&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a132faa125d2f008058ea90cc3aad391ca0581d04dc1aa46c4928d3169d774b51f" name="a132faa125d2f008058ea90cc3aad391ca0581d04dc1aa46c4928d3169d774b51f"></a>Abort_Retry_Ignore&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00032">32</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00035">35</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>
@@ -241,7 +233,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a" name="aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a"></a>Question&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00022">22</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00021">21</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
 
 </div>
 </div>
@@ -339,6 +331,73 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a92585f72874eda9ca0119e0b2a99cf99" name="a92585f72874eda9ca0119e0b2a99cf99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92585f72874eda9ca0119e0b2a99cf99">&#9670;&#160;</a></span>Choice2Str</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view MessageBox::Choice2Str[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391caa60852f204ed8028c1c58808b746d115">Choice::Ok</a>)] = <span class="stringliteral">&quot;ok&quot;</span>,</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e">Choice::Ok_Cancel</a>)] = <span class="stringliteral">&quot;okcancel&quot;</span>,</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e">Choice::Yes_No</a>)] = <span class="stringliteral">&quot;yesno&quot;</span>,</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f">Choice::Yes_No_Cancel</a>)] = <span class="stringliteral">&quot;yesnocancel&quot;</span>}</div>
+<div class="ttc" id="aclass_message_box_html_a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e"><div class="ttname"><a href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca5ab4f2eaf629c7b8092163e59acee45e">MessageBox::Choice::Ok_Cancel</a></div><div class="ttdeci">@ Ok_Cancel</div></div>
+<div class="ttc" id="aclass_message_box_html_a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f"><div class="ttname"><a href="class_message_box.html#a132faa125d2f008058ea90cc3aad391ca6138b6b3bcb85898b39f5d202456944f">MessageBox::Choice::Yes_No_Cancel</a></div><div class="ttdeci">@ Yes_No_Cancel</div></div>
+<div class="ttc" id="aclass_message_box_html_a132faa125d2f008058ea90cc3aad391caa60852f204ed8028c1c58808b746d115"><div class="ttname"><a href="class_message_box.html#a132faa125d2f008058ea90cc3aad391caa60852f204ed8028c1c58808b746d115">MessageBox::Choice::Ok</a></div><div class="ttdeci">@ Ok</div></div>
+<div class="ttc" id="aclass_message_box_html_a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e"><div class="ttname"><a href="class_message_box.html#a132faa125d2f008058ea90cc3aad391cae816c37bd483962bce3462233f68e43e">MessageBox::Choice::Yes_No</a></div><div class="ttdeci">@ Yes_No</div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00041">41</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa56fe81c63effa6f2aaae97206526aa6" name="aa56fe81c63effa6f2aaae97206526aa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa56fe81c63effa6f2aaae97206526aa6">&#9670;&#160;</a></span>Icon2Str</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view MessageBox::Icon2Str[4]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a4059b0251f66a18cb56f544728796875">Icon::Info</a>)] = <span class="stringliteral">&quot;info&quot;</span>,</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a0eaadb4fcb48a0a0ed7bc9868be9fbaa">Icon::Warning</a>)] = <span class="stringliteral">&quot;warning&quot;</span>,</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd">Icon::Error</a>)] = <span class="stringliteral">&quot;error&quot;</span>,</div>
+<div class="line">    [<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a">Icon::Question</a>)] = <span class="stringliteral">&quot;question&quot;</span>}</div>
+<div class="ttc" id="aclass_message_box_html_aaea45ecde75ed114cb488cf01e7b0b37a0eaadb4fcb48a0a0ed7bc9868be9fbaa"><div class="ttname"><a href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a0eaadb4fcb48a0a0ed7bc9868be9fbaa">MessageBox::Icon::Warning</a></div><div class="ttdeci">@ Warning</div></div>
+<div class="ttc" id="aclass_message_box_html_aaea45ecde75ed114cb488cf01e7b0b37a4059b0251f66a18cb56f544728796875"><div class="ttname"><a href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a4059b0251f66a18cb56f544728796875">MessageBox::Icon::Info</a></div><div class="ttdeci">@ Info</div></div>
+<div class="ttc" id="aclass_message_box_html_aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd"><div class="ttname"><a href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37a902b0d55fddef6f8d651fe1035b7d4bd">MessageBox::Icon::Error</a></div><div class="ttdeci">@ Error</div></div>
+<div class="ttc" id="aclass_message_box_html_aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a"><div class="ttname"><a href="class_message_box.html#aaea45ecde75ed114cb488cf01e7b0b37aa97ea56b0e00b2379736ae60869ff66a">MessageBox::Icon::Question</a></div><div class="ttdeci">@ Question</div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="_message_box_8hpp_source.html#l00027">27</a> of file <a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/System/Dialogs/<a class="el" href="_message_box_8hpp_source.html">MessageBox.hpp</a></li>
 </ul>
@@ -348,7 +407,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_message_box.html">MessageBox</a></li>
-    <li class="footer">Generated on Sat Mar 22 2025 02:25:19 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Apr 12 2025 16:14:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

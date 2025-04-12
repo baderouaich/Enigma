@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="Logo127x142.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.1</span>
+   <div id="projectname">Enigma<span id="projectnumber">&#160;3.2.2</span>
    </div>
    <div id="projectbrief">A Simple, Reliable and Efficient Encryption Tool</div>
   </td>
@@ -104,37 +104,34 @@ $(document).ready(function(){initNavTree('_select_folder_dialog_8hpp_source.html
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="_select_folder_dialog_8hpp.html#ad9694595ffa288dd57d1e7958c56a7d2">    3</a></span><span class="preprocessor">#define ENIGMA_SELECT_FOLDER_DIALOG_H</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="_core_8hpp.html">Core/Core.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;portable-file-dialogs.h&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><a class="code hl_define" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="class_select_folder_dialog.html">SelectFolderDialog</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keyword">public</span>: <span class="comment">/* Constructors / Destructor */</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html#a302c0029429f0eb0bb5745bbe838f160">   21</a></span>    <a class="code hl_function" href="class_select_folder_dialog.html#a302c0029429f0eb0bb5745bbe838f160">SelectFolderDialog</a>(<span class="keyword">const</span> std::string&amp; title,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                       <span class="keyword">const</span> std::string&amp; initial_path = <span class="stringliteral">&quot;.&quot;</span>,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                       <span class="keyword">const</span> <span class="keywordtype">bool</span> force_path = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html#aeb55ce6feae2885c22bb977dc1b119fe">   24</a></span>    <a class="code hl_function" href="class_select_folder_dialog.html#aeb55ce6feae2885c22bb977dc1b119fe">~SelectFolderDialog</a>() noexcept = default;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  public: <span class="comment">/* Accessors */</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html#a563308dc67a8185ce5422bac0e7fae13">   30</a></span>    std::<span class="keywordtype">string</span> <a class="code hl_function" href="class_select_folder_dialog.html#a563308dc67a8185ce5422bac0e7fae13">Show</a>() const;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  private:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    std::<span class="keywordtype">string</span> m_title;        <span class="comment">/*&lt; Dialog title */</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    std::<span class="keywordtype">string</span> m_initial_path; <span class="comment">/*&lt; Dialog initial path */</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">bool</span> m_force_path;          <span class="comment">/*&lt; Shall force the operating system to use the provided path? Some systems default to the most recently used path, if applicable. */</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><a class="code hl_define" href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="class_select_folder_dialog.html">SelectFolderDialog</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html#a337b52a2119922907a41f66e981f4f5f">   19</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="class_select_folder_dialog.html#a337b52a2119922907a41f66e981f4f5f">SelectFolderDialog</a>(<span class="keyword">const</span> std::string&amp; title,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                              <span class="keyword">const</span> std::string&amp; initialPath = ResourceManager::getAppDataDir());</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html#aeb55ce6feae2885c22bb977dc1b119fe">   21</a></span>  <a class="code hl_function" href="class_select_folder_dialog.html#aeb55ce6feae2885c22bb977dc1b119fe">~SelectFolderDialog</a>() noexcept = default;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>public: <span class="comment">/* Accessors */</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_select_folder_dialog.html#a563308dc67a8185ce5422bac0e7fae13">   27</a></span>  [[nodiscard]] std::<span class="keywordtype">string</span> <a class="code hl_function" href="class_select_folder_dialog.html#a563308dc67a8185ce5422bac0e7fae13">Show</a>() const;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>private:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  std::<span class="keywordtype">string</span> m_title;       <span class="comment">/*&lt; Dialog title */</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  std::<span class="keywordtype">string</span> m_initialPath; <span class="comment">/*&lt; Dialog initial path */</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
 </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><a class="code hl_define" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_SELECT_FOLDER_DIALOG_H</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><a class="code hl_define" href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">// !ENIGMA_SELECT_FOLDER_DIALOG_H</span></div>
 <div class="ttc" id="a_core_8hpp_html"><div class="ttname"><a href="_core_8hpp.html">Core.hpp</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a11d84e8467cb54e495e610c02a490f6e"><div class="ttname"><a href="_macros_8hpp.html#a11d84e8467cb54e495e610c02a490f6e">NS_ENIGMA_BEGIN</a></div><div class="ttdeci">#define NS_ENIGMA_BEGIN</div><div class="ttdoc">Enable/Disable Assertions.</div><div class="ttdef"><b>Definition</b> <a href="_macros_8hpp_source.html#l00013">Macros.hpp:13</a></div></div>
 <div class="ttc" id="a_macros_8hpp_html_a17def91b90348892363a61d025d8f0b3"><div class="ttname"><a href="_macros_8hpp.html#a17def91b90348892363a61d025d8f0b3">NS_ENIGMA_END</a></div><div class="ttdeci">#define NS_ENIGMA_END</div><div class="ttdef"><b>Definition</b> <a href="_macros_8hpp_source.html#l00014">Macros.hpp:14</a></div></div>
-<div class="ttc" id="aclass_select_folder_dialog_html"><div class="ttname"><a href="class_select_folder_dialog.html">SelectFolderDialog</a></div><div class="ttdef"><b>Definition</b> <a href="_select_folder_dialog_8hpp_source.html#l00013">SelectFolderDialog.hpp:13</a></div></div>
-<div class="ttc" id="aclass_select_folder_dialog_html_a302c0029429f0eb0bb5745bbe838f160"><div class="ttname"><a href="class_select_folder_dialog.html#a302c0029429f0eb0bb5745bbe838f160">SelectFolderDialog::SelectFolderDialog</a></div><div class="ttdeci">SelectFolderDialog(const std::string &amp;title, const std::string &amp;initial_path=&quot;.&quot;, const bool force_path=true)</div></div>
+<div class="ttc" id="aclass_select_folder_dialog_html"><div class="ttname"><a href="class_select_folder_dialog.html">SelectFolderDialog</a></div><div class="ttdef"><b>Definition</b> <a href="_select_folder_dialog_8hpp_source.html#l00012">SelectFolderDialog.hpp:12</a></div></div>
+<div class="ttc" id="aclass_select_folder_dialog_html_a337b52a2119922907a41f66e981f4f5f"><div class="ttname"><a href="class_select_folder_dialog.html#a337b52a2119922907a41f66e981f4f5f">SelectFolderDialog::SelectFolderDialog</a></div><div class="ttdeci">SelectFolderDialog(const std::string &amp;title, const std::string &amp;initialPath=ResourceManager::getAppDataDir())</div></div>
 <div class="ttc" id="aclass_select_folder_dialog_html_a563308dc67a8185ce5422bac0e7fae13"><div class="ttname"><a href="class_select_folder_dialog.html#a563308dc67a8185ce5422bac0e7fae13">SelectFolderDialog::Show</a></div><div class="ttdeci">std::string Show() const</div></div>
 <div class="ttc" id="aclass_select_folder_dialog_html_aeb55ce6feae2885c22bb977dc1b119fe"><div class="ttname"><a href="class_select_folder_dialog.html#aeb55ce6feae2885c22bb977dc1b119fe">SelectFolderDialog::~SelectFolderDialog</a></div><div class="ttdeci">~SelectFolderDialog() noexcept=default</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -143,7 +140,7 @@ $(document).ready(function(){initNavTree('_select_folder_dialog_8hpp_source.html
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ef68f1e1f5148ff8ef7fb1c955106c3c.html">System</a></li><li class="navelem"><a class="el" href="dir_3f46c916329686e528204c6b24abaef2.html">Dialogs</a></li><li class="navelem"><a class="el" href="_select_folder_dialog_8hpp.html">SelectFolderDialog.hpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2025 02:25:19 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">Generated on Sat Apr 12 2025 16:14:54 for Enigma by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
