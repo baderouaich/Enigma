@@ -17,7 +17,7 @@ public:
     *	@param initialPath: the default path of the dialog.
     */
   explicit SelectFolderDialog(const std::string& title,
-                              const std::string& initialPath = ResourceManager::getAppDataDir());
+                              const std::string& initialPath = ResourceManager::getAppDataDir().string());
   ~SelectFolderDialog() noexcept = default;
 
 public: /* Accessors */
