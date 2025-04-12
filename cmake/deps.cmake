@@ -71,14 +71,14 @@ FetchContent_Declare(json
 FetchContent_MakeAvailable(json)
 
 
-FetchContent_Declare(portable_file_dialogs
-  GIT_REPOSITORY "https://github.com/samhocevar/portable-file-dialogs"
-  GIT_TAG "0.1.0"
-  GIT_SHALLOW TRUE
-  GIT_PROGRESS TRUE
-  EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
-)
-FetchContent_MakeAvailable(portable_file_dialogs)
+#FetchContent_Declare(portable_file_dialogs
+#  GIT_REPOSITORY "https://github.com/samhocevar/portable-file-dialogs"
+#  GIT_TAG "0.1.0"
+#  GIT_SHALLOW TRUE
+#  GIT_PROGRESS TRUE
+#  EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
+#)
+#FetchContent_MakeAvailable(portable_file_dialogs)
 
 FetchContent_Declare(spdlog
   GIT_REPOSITORY "https://github.com/gabime/spdlog"
@@ -100,6 +100,8 @@ set(SQLITECPP_RUN_CPPLINT OFF)
 FetchContent_MakeAvailable(SQLiteCpp)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image EXCLUDE_FROM_ALL)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/tinyfiledialogs EXCLUDE_FROM_ALL)
 
 # CLI not supported
 #FetchContent_Declare(tabulate
@@ -148,7 +150,8 @@ set(ENIGMA_DEPENDENCIES
   infoware
   inih
   nlohmann_json::nlohmann_json
-  portable_file_dialogs
+  tinyfiledialogs
+  #portable_file_dialogs
   spdlog
   #cxxopts
   #tabulate
