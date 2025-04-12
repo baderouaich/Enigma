@@ -26,6 +26,9 @@ if (ENIGMA_BUILD_DOCS)
 endif ()
 ###################################
 
+################## Configure Version ##########################
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/Core/Version.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/src/Core/Version.hpp)
+#######################################################
 
 ################## Libraries ##########################
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/deps.cmake")
