@@ -27,9 +27,6 @@ void MyEncryptionsScene::OnCreate() {
 
   // Get all Encryptions from database
   this->GetAllEncryptions();
-
-  // Reformat sqlite3 date format from "2021-12-14 20:40:24" to "Dec 14 2021 20:40:24 PM"
-  this->ReformatEncryptionsDateTime();
 }
 
 void MyEncryptionsScene::OnUpdate(const float&) {}
@@ -383,6 +380,9 @@ void MyEncryptionsScene::GetAllEncryptions() {
   ENIGMA_INFO("Getting all encryptions from database...");
   m_encryptions = Database::getAllEncryptions(m_order_by, m_order);
   ENIGMA_INFO("Got {0} Encryption records.", m_encryptions.size());
+
+  // Reformat sqlite3 date format from "2021-12-14 20:40:24" to "Dec 14 2021 20:40:24 PM"
+  this->ReformatEncryptionsDateTime();
 }
 
 void MyEncryptionsScene::ResetSearch() {

@@ -30,7 +30,7 @@ Algorithm::~Algorithm() noexcept {}
 std::unique_ptr<Algorithm> Algorithm::CreateFromName(const std::string& algorithm_name, const Intent intent) {
   const std::string algo = StringUtils::LowerCopy(algorithm_name);
 
-  const auto AlgoIn = [&algo](const std::vector<std::string_view>& v) noexcept -> bool {
+  const auto AlgoIn = [&algo](const std::initializer_list<std::string_view>& v) noexcept -> bool {
     return std::find(v.begin(), v.end(), algo) != v.end();
   };
 

@@ -263,12 +263,12 @@ void ViewEncryptionScene::OnDecryptButtonPressed() {
       // Ask where to save decrypted file ?
       // Get path to where decrypted file should be saved
       const std::initializer_list<std::string> filters = {(m_encryption->file_ext.empty() ? std::string() : std::string('*' + m_encryption->file_ext)), "All Files", "*"}; // { "Text Files (.txt .text)", "*.txt *.text", "All Files", "*" }
-      const std::string output_filename = SaveFileDialog("Select a location to save decrypted file", "Decrypted"+(m_encryption->file_ext.empty() ? "" : m_encryption->file_ext), true, filters).Show();
+      std::string output_filename = SaveFileDialog("Select a location to save decrypted file", "Decrypted"+(m_encryption->file_ext.empty() ? "" : m_encryption->file_ext), true, filters).Show();
       if (output_filename.empty()) return;
       // Ensure selected output filename has an extension and it is the same one used in encryption
-      if (!m_encryption->file_ext.empty() && fs::path(output_filename).extension() != m_encryption->file_ext) {
-        DialogUtils::Error("Original file extension must match recovered file extension (" + m_encryption->file_ext + ").");
-        return;
+      if (!m_encryption->file_ext.empty() && StringUtils::LowerCopy(fs::path(output_filename).extension().string()) != StringUtils::LowerCopy(m_encryption->file_ext)) {
+        // Add it automatically
+        output_filename += m_encryption->file_ext;
       }
       // 1. create a temp file to  reassemble cipher chunks from db
       fs::path tmpFilename = fs::temp_directory_path() / (DateTimeUtils::now("Enigma_tmp_%Y_%m_%d_%H_%M_%S") + m_encryption->file_ext + ".enigma");

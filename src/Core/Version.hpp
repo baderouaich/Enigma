@@ -13,14 +13,14 @@
   "Copyright (c) Bader-Eddine Ouaich and other contributors\n"                                         \
   "Permission is hereby granted, free of charge, to any person\n"                                      \
   "obtaining a copy of this software and associated documentation"                                     \
-  " files (the 'Software'), to deal in the Software without restriction,\n"                            \
+  " files (the Software), to deal in the Software without restriction,\n"                              \
   " including without limitation the rights to use, copy, modify, merge,\n"                            \
   " publish, distribute, sublicense, and/or sell copies of the Software,\n"                            \
   " and to permit persons to whom the Software is furnished to do so,\n"                               \
   " subject to the following conditions:\n"                                                            \
   "The above copyright notice and this permission notice shall be included\n"                          \
   " in all copies or substantial portions of the Software.\n"                                          \
-  "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,\n"              \
+  "THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,\n"                \
   " INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR\n"        \
   " PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE\n"       \
   " FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\n" \
