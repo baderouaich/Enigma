@@ -37,7 +37,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent) {
       // Copy Generated password button 10% of width
       //ImGui::PushFont(font_ubuntu_regular_20);
       ImGui::PushID("CopyGeneratedPw");
-      if (ImGuiWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
+      if (ButtonWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
         this->OnCopyPasswordButtonPressed();
       }
       ImGui::PopID();
@@ -45,13 +45,13 @@ void PasswordGeneratorTool::OnDraw(Scene* parent) {
       ImGui::SameLine();
 
       // Output password input text 65% of width
-      ImGuiWidgets::InputTextMultiline("##input_pw", &m_password, ImVec2(win_w * 0.70f, 33.0f));
+      InputTextWidgets::InputTextMultiline("##input_pw", &m_password, ImVec2(win_w * 0.70f, 33.0f));
       //
 
       ImGui::SameLine();
 
       // Generate button 25% of width
-      if (ImGuiWidgets::Button(("Generate"), ImVec2(150.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
+      if (ButtonWidgets::Button(("Generate"), ImVec2(150.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
         Application::getInstance()->LaunchWorkerThread(parent, ("Generating Password..."), [this]() {
           this->OnGenerateButtonPressed();
         });
@@ -79,7 +79,7 @@ void PasswordGeneratorTool::OnDraw(Scene* parent) {
 					ImGui::Checkbox("Special Characters (+*~.#^)", &m_special_characters);
 					*/
       //ImGui::Combo(("Length"), &m_selected_length_index, m_lengths.data(), static_cast<std::int32_t>(m_lengths.size()), -1);
-      ImGuiWidgets::InputText(("Length"), &m_length, 70.0f, ImGuiInputTextFlags_::ImGuiInputTextFlags_CharsDecimal);
+      InputTextWidgets::InputText(("Length"), &m_length, 70.0f, ImGuiInputTextFlags_::ImGuiInputTextFlags_CharsDecimal);
       ImGui::NextColumn();
       ImGui::Checkbox(("Digits (0-9)"), &m_digits);
       ImGui::NextColumn();
@@ -98,12 +98,12 @@ void PasswordGeneratorTool::OnDraw(Scene* parent) {
       if (!m_remember_password_sentence.empty()) {
         ImGui::BulletText("%s:", ("Remember Your Password"));
         ImGui::PushID("CopyRememberPw");
-        if (ImGuiWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
+        if (ButtonWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
           this->OnCopyRememberPasswordSentenceButtonPressed();
         }
         ImGui::PopID();
         ImGui::SameLine();
-        ImGuiWidgets::InputTextMultiline("##output_rmb_pw", &m_remember_password_sentence, ImVec2(-1.0f, 33.0f));
+        InputTextWidgets::InputTextMultiline("##output_rmb_pw", &m_remember_password_sentence, ImVec2(-1.0f, 33.0f));
         ImGui::NewLine();
       }
       //

@@ -75,7 +75,7 @@ void ToolsScene::OnImGuiDraw() {
       // Back Button [<]
       {
         ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
-        if (ImGuiWidgets::BackButton("##back", back_button_size)) {
+        if (ButtonWidgets::BackButton("##back", back_button_size)) {
           Scene::EndScene();
         }
         ImGui::PopFont();

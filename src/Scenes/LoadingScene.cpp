@@ -39,7 +39,7 @@ void LoadingScene::OnImGuiDraw() {
 		*/
 
     const ImVec2 spinner_position = {(io.DisplaySize.x - ((SPINNER_RADIUS * SPINNER_THICKNESS) / 2.0f)) / 2.0f, (io.DisplaySize.y - ((SPINNER_RADIUS * SPINNER_THICKNESS) / 2.0f)) / 2.0f};
-    ImGuiWidgets::LoadingDialog(
+    ProgressWidgets::LoadingDialog(
       m_loading_text.empty() ? "Loading..." : m_loading_text.data(),
       spinner_position,
       SPINNER_RADIUS,

@@ -17,7 +17,7 @@ struct WindowSettings {
     /*
     *	Width in pixels of the window
     */
-    std::int32_t width = 960;
+    std::int32_t width = 1024;
 
     /*
     *	Height in pixels of the window

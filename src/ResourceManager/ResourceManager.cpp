@@ -169,7 +169,7 @@ void ResourceManager::loadFonts() {
   // Check if fonts are loaded
   for (const auto& [font_name, font]: m_fonts) {
     if (font->IsLoaded()) {
-      ENIGMA_TRACE("Font {} Loaded", font->ConfigData->Name);
+      ENIGMA_TRACE("Font {} Loaded",font_name);
     } else {
       const std::string err_msg = "Failed to load font " + std::string(font_name);
       // console alert

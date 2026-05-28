@@ -74,7 +74,7 @@ void DecryptTextScene::OnImGuiDraw() {
     // Back Button [<]
     {
       ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
-      if (ImGuiWidgets::BackButton("##back", back_button_size)) {
+      if (ButtonWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
       ImGui::PopFont();
@@ -150,7 +150,7 @@ void DecryptTextScene::OnImGuiDraw() {
 
       // Input text
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 2.5f);
-      ImGuiWidgets::InputTextMultiline("##cipher_base64", &m_cipher_base64, input_text_size);
+      InputTextWidgets::InputTextMultiline("##cipher_base64", &m_cipher_base64, input_text_size);
 
       // Bytes count
       ImGui::PushFont(font_ubuntu_regular_12);
@@ -169,9 +169,9 @@ void DecryptTextScene::OnImGuiDraw() {
       ImGui::PushFont(font_ubuntu_regular_18);
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 10);
       ImGui::Text("%s:", "Private Key");
-      ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
+      InputTextWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
       ImGui::PushID("LoadPrivateKeyFromFileButton");
-      if (ImGuiWidgets::Button("Load from file...")) {
+      if (ButtonWidgets::Button("Load from file...")) {
         if (std::vector<std::string> filenames = OpenFileDialog{"Load Private Key...", ".", false}.Show(); !filenames.empty()) {
           if (fs::is_regular_file(filenames[0]))
             FileUtils::ReadString(filenames[0], m_rsa_private_key);
@@ -187,7 +187,7 @@ void DecryptTextScene::OnImGuiDraw() {
         ImGui::Text("%s:", ("Password"));
 
         // Input text
-        ImGuiWidgets::InputText("##password", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        InputTextWidgets::InputText("##password", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
         // Bytes count
         ImGui::PushFont(font_ubuntu_regular_12);
@@ -212,10 +212,10 @@ void DecryptTextScene::OnImGuiDraw() {
 
         // Input text
         const ImVec2 input_text_size(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f);
-        ImGuiWidgets::InputTextMultiline("##recovered_text", &m_recovered_text, input_text_size);
+        InputTextWidgets::InputTextMultiline("##recovered_text", &m_recovered_text, input_text_size);
         ImGui::SameLine();
         // Copy Button
-        if (ImGuiWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 30.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
+        if (ButtonWidgets::Button(("Copy"), ImVec2(win_w * 0.10f, 30.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
           this->OnCopyDecryptedTextButtonPressed();
         }
         // Bytes count

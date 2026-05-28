@@ -76,7 +76,7 @@ void EncryptTextScene::OnImGuiDraw() {
     // Back Button [<]
     {
       ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
-      if (ImGuiWidgets::BackButton("##back", back_button_size)) {
+      if (ButtonWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
       ImGui::PopFont();
@@ -153,7 +153,7 @@ void EncryptTextScene::OnImGuiDraw() {
       ImGui::Checkbox("##checkbox", &m_save_to_database);
 
       if (m_save_to_database) {
-        ImGuiWidgets::InputTextWithHint("##idb", ("A clear encryption title to facilitate future record searches."), &m_db_title, win_w / 1.3f);
+        InputTextWidgets::InputTextWithHint("##idb", ("A clear encryption title to facilitate future record searches."), &m_db_title, win_w / 1.3f);
       }
     }
     ImGui::PopFont();
@@ -171,7 +171,7 @@ void EncryptTextScene::OnImGuiDraw() {
 
       // Input text
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 6);
-      ImGuiWidgets::InputTextMultiline("##text1", &m_text, input_text_size);
+      InputTextWidgets::InputTextMultiline("##text1", &m_text, input_text_size);
       // Bytes count
       ImGui::PushFont(font_ubuntu_regular_12);
       ImGui::Text("%s", SizeUtils::FriendlySize(m_text.size()).c_str());
@@ -189,15 +189,15 @@ void EncryptTextScene::OnImGuiDraw() {
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 10);
       if (!m_rsa_private_key.empty()) {
         ImGui::Text("%s:", "Private Key");
-        ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
+        InputTextWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
         ImGui::PushID("CopyPrivateKeyButton");
-        if (ImGuiWidgets::Button("Copy")) {
+        if (ButtonWidgets::Button("Copy")) {
           Clipboard::Set(m_rsa_private_key);
         }
         ImGui::PopID();
         ImGui::SameLine();
         ImGui::PushID("SavePrivateKeyToFileButton");
-        if (ImGuiWidgets::Button("Save to file...")) {
+        if (ButtonWidgets::Button("Save to file...")) {
           SaveFileDialog sfd{"Save Private Key", "PrivateKey.pem", true, {"All Files", "*"}};
           if (std::string filename = sfd.Show(); !filename.empty()) {
             FileUtils::Write(filename, std::vector<byte>(m_rsa_private_key.begin(), m_rsa_private_key.end()));
@@ -208,15 +208,15 @@ void EncryptTextScene::OnImGuiDraw() {
       spacing(2);
       if (!m_rsa_public_key.empty()) {
         ImGui::Text("%s:", "Public Key");
-        ImGuiWidgets::InputTextMultiline("##public_key", &m_rsa_public_key, input_text_size);
+        InputTextWidgets::InputTextMultiline("##public_key", &m_rsa_public_key, input_text_size);
         ImGui::PushID("CopyPublicKeyButton");
-        if (ImGuiWidgets::Button("Copy")) {
+        if (ButtonWidgets::Button("Copy")) {
           Clipboard::Set(m_rsa_public_key);
         }
         ImGui::PopID();
         ImGui::SameLine();
         ImGui::PushID("SavePublicKeyToFileButton");
-        if (ImGuiWidgets::Button("Save to file...")) {
+        if (ButtonWidgets::Button("Save to file...")) {
           SaveFileDialog sfd{"Save Public Key", "PublicKey.pem", true, {"All Files", "*"}};
           if (std::string filename = sfd.Show(); !filename.empty()) {
             FileUtils::WriteString(filename, m_rsa_public_key);
@@ -242,9 +242,9 @@ void EncryptTextScene::OnImGuiDraw() {
         // Label
         ImGui::Text("%s:", ("Password"));
         // Input text
-        ImGuiWidgets::InputText("##text2", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        InputTextWidgets::InputText("##text2", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
         ImGui::Text("%s:", ("Confirm Password"));
-        ImGuiWidgets::InputText("##text3", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        InputTextWidgets::InputText("##text3", &m_confirm_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
         ImGui::PopStyleColor();
         // Bytes count
         ImGui::PushFont(font_ubuntu_regular_12);
@@ -267,7 +267,7 @@ void EncryptTextScene::OnImGuiDraw() {
         // Label
         ImGui::Text("%s:", ("Cipher (in base64)"));
         // Encrypted text
-        ImGuiWidgets::InputText("##text4", &m_cipher_base64, win_w * 0.88f);
+        InputTextWidgets::InputText("##text4", &m_cipher_base64, win_w * 0.88f);
         ImGui::PushFont(font_ubuntu_regular_14);
         ImGui::SameLine();
         ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle

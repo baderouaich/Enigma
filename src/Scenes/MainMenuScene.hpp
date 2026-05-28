@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.hpp"
+#include "GUI/Widgets/SideBarWidget.hpp"
 
 NS_ENIGMA_BEGIN
 
@@ -33,7 +34,8 @@ class MainMenuScene : public Enigma::Scene {
     void OnImportEncryptionsButtonPressed();
 
   private:
-    //std::unique_ptr<ImGuiWidgets::Image> m_logo{};
+    std::unique_ptr<SideBarWidget> m_sidebar{};
+    std::weak_ptr<Scene> m_currentScene{};
 };
 
 NS_ENIGMA_END

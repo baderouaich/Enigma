@@ -112,50 +112,146 @@ namespace Enigma::Constants {
     // }
   }
 
+
   namespace Colors {
     static constexpr auto COLOR4I_TO_COLOR4F = [](const float r, const float g, const float b, const float a) -> ImVec4 {
       return ImVec4{r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f};
     };
+    
+    static constexpr ImVec4 PRIMARY_900 =
+      COLOR4I_TO_COLOR4F(15, 17, 21, 255); // near-black background
 
-    static const ImVec4 RED(1.0f, 0.0f, 0.0f, 1.0f);
-    static const ImVec4 GREEN(0.0f, 1.0f, 0.0f, 1.0f);
-    static const ImVec4 BLUE(0.0f, 0.0f, 1.0f, 1.0f);
-    static const auto ORANGE = COLOR4I_TO_COLOR4F(255, 182, 0, 255);
+    static constexpr ImVec4 PRIMARY_800 =
+      COLOR4I_TO_COLOR4F(20, 22, 28, 255); // elevated dark
 
-    static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(43, 43, 43, 255); // brown dark gray
-    //static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(46, 53, 56, 255); // cyan dark gray
-    //static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(46, 51, 56, 255); // blue dark gray
+    static constexpr ImVec4 PRIMARY_700 =
+      COLOR4I_TO_COLOR4F(26, 29, 36, 255); // surface
 
-    static const ImVec4 TEXT_COLOR = COLOR4I_TO_COLOR4F(242, 242, 243, 225);
-    static const ImVec4 ERROR_TEXT_COLOR = COLOR4I_TO_COLOR4F(201, 46, 64, 255);
-    static const ImVec4 PASSWORD_MATCH_TEXT_COLOR = COLOR4I_TO_COLOR4F(94, 172, 161, 225);
+    static constexpr ImVec4 PRIMARY_500 =
+      COLOR4I_TO_COLOR4F(155, 163, 180, 255); // muted text
 
-
-    static const ImVec4 BUTTON_COLOR = COLOR4I_TO_COLOR4F(10, 120, 122, 200);
-    static const ImVec4 BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(29, 188, 191, 200);
-    static const ImVec4 BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(11, 65, 66, 200); // PRESSSED
-
-    static const ImVec4 MENUBAR_BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(66, 66, 80, 200);
-
-    static const ImVec4 BACK_BUTTON_COLOR = COLOR4I_TO_COLOR4F(209, 61, 86, 255);
-    static const ImVec4 BACK_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(232, 81, 107, 255);
-    static const ImVec4 BACK_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(150, 41, 59, 255);
-
-    static const ImVec4 MY_ENCRYPTIONS_BUTTON_COLOR = COLOR4I_TO_COLOR4F(26, 72, 97, 255);
-    static const ImVec4 MY_ENCRYPTIONS_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(38, 91, 120, 255);
-    static const ImVec4 MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(10, 132, 199, 255);
-
-    static const ImVec4 TOOLS_BUTTON_COLOR = COLOR4I_TO_COLOR4F(25, 101, 130, 255);
-    static const ImVec4 TOOLS_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(48, 146, 184, 255);
-    static const ImVec4 TOOLS_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(60, 151, 186, 255);
-
-    static const ImVec4 LOADING_SPINNER_COLOR = BACK_BUTTON_COLOR;
-    //static const ImVec4 LOADING_BACKGROUND_COLOR = { BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 0.6f };
-    static const ImVec4 LOADING_BACKGROUND_COLOR = {0.0f, 0.0f, 0.0f, 0.8f};
+    static constexpr ImVec4 PRIMARY_100 =
+      COLOR4I_TO_COLOR4F(232, 236, 243, 255); // primary text
 
 
-    static const ImVec4 &SCENE_TITLE_BACKGROUND_COLOR = MENUBAR_BACKGROUND_COLOR;
+    static constexpr ImVec4 ACCENT_500 =
+      COLOR4I_TO_COLOR4F(79, 140, 255, 255); // main blue
 
+    static constexpr ImVec4 ACCENT_400 =
+      COLOR4I_TO_COLOR4F(102, 158, 255, 255); // hover blue
+
+    static constexpr ImVec4 ACCENT_600 =
+      COLOR4I_TO_COLOR4F(61, 120, 242, 255); // active blue
+
+
+    static constexpr ImVec4 SUCCESS_500 =
+      COLOR4I_TO_COLOR4F(51, 194, 127, 255);
+
+    static constexpr ImVec4 WARNING_500 =
+      COLOR4I_TO_COLOR4F(240, 178, 74, 255);
+
+    static constexpr ImVec4 ERROR_500 =
+      COLOR4I_TO_COLOR4F(224, 90, 90, 255);
+
+    static constexpr ImVec4 BACKGROUND_COLOR = PRIMARY_900;
+    static constexpr ImVec4 SURFACE_COLOR = PRIMARY_700;
+    static constexpr ImVec4 SIDEBAR_COLOR = PRIMARY_800;
+    static constexpr ImVec4 MENUBAR_COLOR = PRIMARY_800;
+
+    static constexpr ImVec4 TEXT_PRIMARY = PRIMARY_100;
+    static constexpr ImVec4 TEXT_SECONDARY = PRIMARY_500;
+
+    static constexpr ImVec4 ACCENT = ACCENT_500;
+    static constexpr ImVec4 ACCENT_HOVER = ACCENT_400;
+    static constexpr ImVec4 ACCENT_ACTIVE = ACCENT_600;
+
+
+    namespace {
+      static constexpr auto COLOR4I_TO_COLOR4F = [](const float r, const float g, const float b, const float a) -> ImVec4 {
+        return ImVec4{r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f};
+      };
+      // Main backgrounds
+      static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(15, 17, 21, 255); // Primary background
+
+      static const ImVec4 SURFACE_COLOR = COLOR4I_TO_COLOR4F(26, 29, 36, 255); // Secondary surface
+
+      static const ImVec4 SIDEBAR_BACKGROUND_COLOR =
+        COLOR4I_TO_COLOR4F(20, 22, 28, 255); // Sidebar background
+
+      static const ImVec4 MENUBAR_BACKGROUND_COLOR =
+        COLOR4I_TO_COLOR4F(23, 25, 31, 255); // Menubar background
+
+      // Accent
+      static const ImVec4 ACCENT_COLOR =
+        COLOR4I_TO_COLOR4F(79, 140, 255, 255); // Primary accent
+
+      static const ImVec4 ACCENT_HOVERED_COLOR =
+        COLOR4I_TO_COLOR4F(102, 158, 255, 255); // Hover accent
+
+      static const ImVec4 ACCENT_ACTIVE_COLOR =
+        COLOR4I_TO_COLOR4F(61, 120, 242, 255); // Active accent
+
+      // Text
+      static const ImVec4 TEXT_PRIMARY_COLOR =
+        COLOR4I_TO_COLOR4F(232, 236, 243, 255); // Primary text
+
+      static const ImVec4 TEXT_SECONDARY_COLOR =
+        COLOR4I_TO_COLOR4F(155, 163, 180, 255); // Secondary text
+
+      // States
+      static const ImVec4 SUCCESS_COLOR =
+        COLOR4I_TO_COLOR4F(51, 194, 127, 255); // Success green
+
+      static const ImVec4 WARNING_COLOR =
+        COLOR4I_TO_COLOR4F(240, 178, 74, 255); // Warning amber
+
+      static const ImVec4 ERROR_COLOR =
+        COLOR4I_TO_COLOR4F(224, 90, 90, 255); // Error red
+
+
+      static const ImVec4 RED(1.0f, 0.0f, 0.0f, 1.0f);
+      static const ImVec4 GREEN(0.0f, 1.0f, 0.0f, 1.0f);
+      static const ImVec4 BLUE(0.0f, 0.0f, 1.0f, 1.0f);
+      static const auto ORANGE = COLOR4I_TO_COLOR4F(255, 182, 0, 255);
+
+      // static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(15, 17, 21, 255); // brown dark gray
+      // static const ImVec4 SIDEBAR_BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(0,0,0,255); // Black
+      //static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(46, 53, 56, 255); // cyan dark gray
+      //static const ImVec4 BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(46, 51, 56, 255); // blue dark gray
+
+      static const ImVec4 TEXT_COLOR = COLOR4I_TO_COLOR4F(242, 242, 243, 225);
+      static const ImVec4 ERROR_TEXT_COLOR = COLOR4I_TO_COLOR4F(201, 46, 64, 255);
+      static const ImVec4 PASSWORD_MATCH_TEXT_COLOR = COLOR4I_TO_COLOR4F(94, 172, 161, 225);
+
+
+      static const ImVec4 BUTTON_COLOR = COLOR4I_TO_COLOR4F(10, 120, 122, 200);
+      static const ImVec4 BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(29, 188, 191, 200);
+      static const ImVec4 BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(11, 65, 66, 200); // PRESSSED
+
+      // static const ImVec4 MENUBAR_BACKGROUND_COLOR = COLOR4I_TO_COLOR4F(66, 66, 80, 200);
+
+      static const ImVec4 BACK_BUTTON_COLOR = COLOR4I_TO_COLOR4F(209, 61, 86, 255);
+      static const ImVec4 BACK_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(232, 81, 107, 255);
+      static const ImVec4 BACK_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(150, 41, 59, 255);
+
+      static const ImVec4 MY_ENCRYPTIONS_BUTTON_COLOR = COLOR4I_TO_COLOR4F(26, 72, 97, 255);
+      static const ImVec4 MY_ENCRYPTIONS_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(38, 91, 120, 255);
+      static const ImVec4 MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(10, 132, 199, 255);
+
+      static const ImVec4 TOOLS_BUTTON_COLOR = COLOR4I_TO_COLOR4F(25, 101, 130, 255);
+      static const ImVec4 TOOLS_BUTTON_COLOR_HOVER = COLOR4I_TO_COLOR4F(48, 146, 184, 255);
+      static const ImVec4 TOOLS_BUTTON_COLOR_ACTIVE = COLOR4I_TO_COLOR4F(60, 151, 186, 255);
+
+      static const ImVec4 LOADING_SPINNER_COLOR = BACK_BUTTON_COLOR;
+      //static const ImVec4 LOADING_BACKGROUND_COLOR = { BACKGROUND_COLOR.x, BACKGROUND_COLOR.y, BACKGROUND_COLOR.z, 0.6f };
+      static const ImVec4 LOADING_BACKGROUND_COLOR = {0.0f, 0.0f, 0.0f, 0.8f};
+
+
+      static const ImVec4 &SCENE_TITLE_BACKGROUND_COLOR = MENUBAR_BACKGROUND_COLOR;
+
+
+    }
 
   }
+
 }

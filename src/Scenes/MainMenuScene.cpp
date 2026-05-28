@@ -4,6 +4,12 @@
 #include "DecryptTextScene.hpp"
 #include "EncryptFileScene.hpp"
 #include "EncryptTextScene.hpp"
+//#include "Logo.hpp"
+#include "icons/Dashboard.hpp"
+#include "icons/Encryption.hpp"
+#include "icons/Vault.hpp"
+#include "icons/Tools.hpp"
+#include "icons/Settings.hpp"
 #include "MyEncryptionsScene.hpp"
 #include "ToolsScene/ToolsScene.hpp"
 #include "Utility/DateTimeUtils.hpp"
@@ -24,6 +30,62 @@ MainMenuScene::MainMenuScene() noexcept
 void MainMenuScene::OnCreate() {
   ENIGMA_TRACE_CURRENT_FUNCTION();
 
+
+  m_currentScene = Application::GetOrCreateScene<DashboardScene>();
+
+
+  SideBarWidget::Item dashboard{};
+  dashboard.icon = std::make_shared<ImageWidgets::Image>(Textures::Dashboard_png, Textures::Dashboard_png_len);
+  dashboard.title = "Dashboard";
+  SideBarWidget::Item encryption{};
+  encryption.icon = std::make_shared<ImageWidgets::Image>(Textures::Encryption_png, Textures::Encryption_png_len);
+  encryption.title = "Encryption";
+  SideBarWidget::Item vault{};
+  vault.icon = std::make_shared<ImageWidgets::Image>(Textures::Vault_png, Textures::Vault_png_len);
+  vault.title = "Vault";
+  SideBarWidget::Item tools{};
+  tools.icon = std::make_shared<ImageWidgets::Image>(Textures::Tools_png, Textures::Tools_png_len);
+  tools.title = "Tools";
+  SideBarWidget::Item settings{};
+  settings.icon = std::make_shared<ImageWidgets::Image>(Textures::Settings_png, Textures::Settings_png_len);
+  settings.title = "Settings";
+
+  m_sidebar = std::make_unique<SideBarWidget>(this);
+  m_sidebar->setItems({dashboard, encryption, vault, tools, settings});
+  m_sidebar->setOnItemSelected([this](std::size_t idx) {
+    ENIGMA_TRACE("SideBarWidget - Selected {}", idx);
+    switch (idx) {
+      case 0: // Dashboard
+      {
+        m_currentScene = Application::GetOrCreateScene<DashboardScene>();
+        break;
+      }
+      case 1: // Encryption
+      {
+        //@todo: m_currentScene = Application::GetOrCreateScene<EncryptionScene>();
+        break;
+      }
+      case 2: // Vault
+      {
+        //@todo: m_currentScene = Application::GetOrCreateScene<VaultScene>();
+        break;
+      }
+      case 3: // Tools
+      {
+        //@todo: m_currentScene = Application::GetOrCreateScene<ToolsScene>();
+        break;
+      }
+      case 4: // Settings
+      {
+        //@todo: m_currentScene = Application::GetOrCreateScene<SettingsScene>();
+        break;
+      }
+      default:
+        ENIGMA_ASSERT(false, "Unhandled side bar item index #{}", idx);
+        break;
+    }
+  });
+
   // Explicit OpenGL old method to et background clear color
   //glAssert(glClearColor(
   //	Constants::Colors::BACKGROUND_COLOR.x,
@@ -38,11 +100,11 @@ void MainMenuScene::OnCreate() {
 
 void MainMenuScene::OnUpdate(const float&) {}
 
+
 void MainMenuScene::OnDraw() {
   // Clear GL buffers
   //glAssert(glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT));
 }
-
 
 void MainMenuScene::OnImGuiDraw() {
   const auto& [win_w, win_h] = Application::getInstance()->GetWindow()->GetSize();
@@ -51,7 +113,7 @@ void MainMenuScene::OnImGuiDraw() {
 
   const auto button_size = ImVec2(win_w / 2.5f, 45.0f);
 
-  static constexpr const auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
+  static constexpr auto spacing = [](const std::uint8_t& n) noexcept { for (std::uint8_t i = 0; i < n; i++) ImGui::Spacing(); };
 
   static ImFont *const& font_ubuntu_regular_60 = ResourceManager::getFont("Ubuntu-Regular-60");
   static ImFont *const& font_ubuntu_regular_45 = ResourceManager::getFont("Ubuntu-Regular-45");
@@ -63,221 +125,22 @@ void MainMenuScene::OnImGuiDraw() {
   static ImFont *const& font_ubuntu_regular_12 = ResourceManager::getFont("Ubuntu-Regular-12");
 
 
-  static constexpr const auto container_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
+  static constexpr auto container_flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove; // | ImGuiWindowFlags_NoBackground;
 
   // Push window's background color
   ImGui::PushStyleColor(ImGuiCol_WindowBg, Constants::Colors::BACKGROUND_COLOR);
-  // Push Menu bar background color, see issue #3637
-  ImGui::PushStyleColor(ImGuiCol_MenuBarBg, Constants::Colors::MENUBAR_BACKGROUND_COLOR);
-
-
-  ImGui::Begin("MainMenuContainer", nullptr, container_flags);
-  ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as main app window
-  ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));                                            // top left
+  ImGui::Begin("#MainMenuContainer", nullptr, container_flags);
   {
-    // Menu bar
-    {
-      ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 22.0f)); // 22.0f Menu bar padding
-      ImGui::PushFont(font_ubuntu_regular_20);
-      if (ImGui::BeginMenuBar()) {
-        if (ImGui::BeginMenu("File")) {
-          if (ImGui::MenuItem("Export")) { this->OnExportEncryptionsButtonPressed(); }
+    ImGui::SetWindowSize(ImVec2(static_cast<float>(win_w), static_cast<float>(win_h))); // same size as main app window
+    ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));                                            // top left
 
-          if (ImGui::MenuItem("Import")) { this->OnImportEncryptionsButtonPressed(); }
-
-          if (ImGui::MenuItem("Exit", "CTRL+E")) { Scene::EndScene(); }
-
-          ImGui::EndMenu();
-        }
-
-        if (ImGui::BeginMenu("View")) {
-          if (ImGui::MenuItem("Encrypt File", "E+F")) { this->OnEncryptFileButtonPressed(); }
-
-          if (ImGui::MenuItem("Decrypt File", "D+F")) { this->OnDecryptFileButtonPressed(); }
-
-          if (ImGui::MenuItem("Encrypt Text", "E+T")) { this->OnEncryptTextButtonPressed(); }
-
-          if (ImGui::MenuItem("Decrypt Text", "D+T")) { this->OnDecryptTextButtonPressed(); }
-
-          if (ImGui::MenuItem("Tools", "CTRL+T")) { this->OnToolsButtonPressed(); }
-
-          ImGui::EndMenu();
-        }
-
-        /*
-				if (ImGui::BeginMenu(("Language")))
-				{
-					for (std::uint16_t i = static_cast<std::uint16_t>(Translation::Language::BEGIN); i <= static_cast<std::uint16_t>(Translation::Language::END); ++i)
-					{
-						bool selected = Translation::GetLanguage() == static_cast<Translation::Language>(i);
-						if (ImGui::MenuItem(Translation::StringifyLanguageEnum(static_cast<Translation::Language>(i)).c_str(), nullptr, &selected))
-						{
-							Translation::SetLanguage(static_cast<Translation::Language>(i));
-						}
-					}
-					ImGui::EndMenu();
-				}
-				*/
-        if (ImGui::BeginMenu("Help")) {
-          if (ImGui::MenuItem("Report an issue")) {
-            Application::getInstance()->LaunchWorkerThread(this, ("Reporting issue..."), [this]() -> void {
-              this->OnReportIssueMenuButtonPressed();
-            });
-          }
-          if (ImGui::MenuItem("Check for updates")) {
-            Application::getInstance()->LaunchWorkerThread(this, ("Checking for updates..."), [this]() -> void {
-              this->OnCheckForUpdatesMenuButtonPressed();
-            });
-          }
-          if (ImGui::MenuItem("About")) { this->OnAboutMenuButtonPressed(); }
-          ImGui::EndMenu();
-        }
-
-        /*if (ImGui::BeginMenu("Examples"))
-				{
-					ImGui::MenuItem("Example 1");
-					ImGui::MenuItem("Example 2");
-					ImGui::MenuItem("Example 3");
-					ImGui::MenuItem("Example 4");
-					ImGui::EndMenu();
-				}*/
-
-        // Process Menu items shortcuts
-        {
-          const static std::map<std::pair<KeyCode, KeyCode>, void (MainMenuScene::*)()> shortcuts =
-            {
-              // Encrypt File E+F
-              {{KeyCode::E, KeyCode::F}, &MainMenuScene::OnEncryptFileButtonPressed},
-              // Decrypt File D+F
-              {{KeyCode::D, KeyCode::F}, &MainMenuScene::OnDecryptFileButtonPressed},
-              // Encrypt Text E+T
-              {{KeyCode::E, KeyCode::T}, &MainMenuScene::OnEncryptTextButtonPressed},
-              // Decrypt Text D+T
-              {{KeyCode::D, KeyCode::T}, &MainMenuScene::OnDecryptTextButtonPressed},
-              // Tools CTRL+T
-              {{KeyCode::LeftControl, KeyCode::T}, &MainMenuScene::OnToolsButtonPressed},
-              // Exit CTRL+E
-              {{KeyCode::LeftControl, KeyCode::E}, &MainMenuScene::EndScene},
-
-              // About CTRL+A
-              {{KeyCode::LeftControl, KeyCode::A}, &MainMenuScene::OnAboutMenuButtonPressed},
-            };
-
-          for (const auto& [keys, method_ptr]: shortcuts) {
-            if (Input::AreKeysPressed({keys.first, keys.second})) {
-#ifdef ENIGMA_DEBUG
-              ENIGMA_LOG("Menu item shortcut pressed {}+{}", keys.first, keys.second);
-#endif
-              (*this.*method_ptr)();
-            }
-          }
-        }
-
-
-        ImGui::EndMenuBar();
-      }
-      ImGui::PopFont();
-      ImGui::PopStyleVar(1);
-    }
-
-    spacing(3);
-
-#if true // use text
-    // Enigma Version
-    {
-      ImGui::PushFont(font_ubuntu_regular_60);                          // text font
-      ImGui::PushStyleColor(ImGuiCol_Text, Constants::Colors::TEXT_COLOR); // text color
-      {
-
-        static constexpr const auto title = "Enigma";
-        static const ImVec2 title_size = {ImGui::CalcTextSize(title).x * font_ubuntu_regular_60->Scale, ImGui::CalcTextSize(title).y * font_ubuntu_regular_60->Scale};
-        ImGui::SetCursorPosX((io.DisplaySize.x - title_size.x) / 2.0f);
-        ImGui::Text(title);
-        //static const ImVec2 label_size = { ImGui::CalcTextSize("Enigma x.y.z").x * font_audiowide_regular_45->Scale, ImGui::CalcTextSize("Enigma x.y.z").y * font_audiowide_regular_45->Scale };
-        //ImGui::SetCursorPosX((io.DisplaySize.x - label_size.x) / 2.0f);
-        //ImGui::Text("Enigma %s", ENIGMA_VERSION);
-      }
-      ImGui::PopStyleColor(1);
-      ImGui::PopFont();
-    }
-#else // use logo
-    // Enigma Logo
-    {
-      const float logo_width = static_cast<float>(m_logo->GetWidth());
-      const float logo_height = static_cast<float>(m_logo->GetHeight());
-      const float logo_x = (win_w - logo_width) / 2.0f;
-      const float logo_y = ImGui::GetFrameHeight(); // GetFrameHeight ~=> Menubar height
-      m_logo->Draw({logo_x, logo_y}, logo_width, logo_height);
-    }
-#endif
-
-
-    spacing(6);
-
-    // Buttons
-    {
-      ImGui::PushFont(font_ubuntu_regular_20);                                           // buttons font
-      ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
-      ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::BUTTON_COLOR_HOVER); // buttons color hover
-      ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
-      {
-        ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-        if (ImGui::Button(("Encrypt File"), button_size)) {
-          this->OnEncryptFileButtonPressed();
-        }
-        ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-        if (ImGui::Button(("Decrypt File"), button_size)) {
-          this->OnDecryptFileButtonPressed();
-        }
-        spacing(6);
-        ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-        if (ImGui::Button(("Encrypt Text"), button_size)) {
-          this->OnEncryptTextButtonPressed();
-        }
-        ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-        if (ImGui::Button(("Decrypt Text"), button_size)) {
-          this->OnDecryptTextButtonPressed();
-        }
-        spacing(6);
-        {
-          ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR);              // buttons color idle
-          ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_HOVER); // buttons color hover
-          ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::MY_ENCRYPTIONS_BUTTON_COLOR_ACTIVE); // buttons color pressed
-          ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-          if (ImGui::Button(("My Encryptions"), button_size)) {
-            this->OnMyEncryptionsButtonPressed();
-          }
-          ImGui::PopStyleColor(3);
-        }
-        spacing(6);
-        {
-          ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::TOOLS_BUTTON_COLOR);              // buttons color idle
-          ImGui::PushStyleColor(ImGuiCol_ButtonHovered, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER); // buttons color hover
-          ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE); // buttons color pressed
-          ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-          if (ImGui::Button(("Tools"), button_size)) {
-            this->OnToolsButtonPressed();
-          }
-          ImGui::PopStyleColor(3);
-        }
-        spacing(7);
-
-        {
-          ImGui::SetCursorPosX((io.DisplaySize.x - button_size.x) / 2.0f);
-          //ImGui::SetCursorPosY((io.DisplaySize.y - button_size.y) - 20.0f);
-          if (ImGuiWidgets::Button(("Exit"), button_size, Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE)) {
-            Scene::EndScene();
-          }
-        }
-      }
-      ImGui::PopStyleColor(3);
-      ImGui::PopFont();
+    m_sidebar->Draw(); // left side bar
+    //@todo m_currentScene->Draw(); // context scene
+    if (auto contextScene = m_currentScene.lock()) {
+      contextScene->OnImGuiDraw();
     }
   }
   ImGui::End();
-
-  // Pop Menu bar background color, see issue #3637
-  ImGui::PopStyleColor(1);
   // Pop window's background color
   ImGui::PopStyleColor(1);
 }

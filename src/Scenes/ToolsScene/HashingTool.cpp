@@ -73,13 +73,13 @@ void HashingTool::OnDraw(Scene *parent) {
       switch (m_input_source) {
         case InputSource::Text: {
           ImGui::BulletText("%s:", "Text");
-          ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 128.0f));
+          InputTextWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 128.0f));
           ImGui::SameLine();
           break;
         }
         case InputSource::File: {
           ImGui::BulletText("%s:", "File");
-          ImGuiWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 33.0f));
+          InputTextWidgets::InputTextMultiline("##input1", &m_input, ImVec2(win_w * 0.85f, 33.0f));
           ImGui::SameLine();
           static const ImVec2 browse_button_size(-1.0f, 33.0f);
           ImGui::SameLine();
@@ -101,7 +101,7 @@ void HashingTool::OnDraw(Scene *parent) {
         default:
           ENIGMA_ASSERT(false, "Unhandled input source");
       }
-      if (ImGuiWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
+      if (ButtonWidgets::Button(("Calculate"), ImVec2(-1.0f, 33.0f), Constants::Colors::TOOLS_BUTTON_COLOR, Constants::Colors::TOOLS_BUTTON_COLOR_HOVER, Constants::Colors::TOOLS_BUTTON_COLOR_ACTIVE)) {
         Application::getInstance()->LaunchWorkerThread(parent, ("Calculating Hash..."), [this]() {
           this->OnCalculateHashButtonPressed();
         });
@@ -114,10 +114,10 @@ void HashingTool::OnDraw(Scene *parent) {
       // Output calculated hash
       if (!m_output.empty()) {
         ImGui::BulletText("%s:", ("Output (Hex Encoded)"));
-        ImGuiWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 33.0f), ImGuiInputTextFlags_ReadOnly);
+        InputTextWidgets::InputTextMultiline("##output1", &m_output, ImVec2(win_w * 0.85f, 33.0f), ImGuiInputTextFlags_ReadOnly);
         ImGui::SameLine();
         ImGui::PushID("CopyCalculatedHash");
-        if (ImGuiWidgets::Button(("Copy"), ImVec2(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
+        if (ButtonWidgets::Button(("Copy"), ImVec2(-1, 33.0f), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
           this->OnCopyHashButtonPressed();
         }
         ImGui::PopID();

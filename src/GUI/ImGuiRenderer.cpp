@@ -11,6 +11,48 @@
 #include <glad/glad.h>
 
 NS_ENIGMA_BEGIN
+static void ApplyEnigmaTheme()
+{
+  ImGuiStyle& style = ImGui::GetStyle();
+
+  style.WindowRounding    = 12.0f;
+  style.FrameRounding     = 10.0f;
+  style.PopupRounding     = 10.0f;
+  style.ScrollbarRounding = 12.0f;
+  style.GrabRounding      = 10.0f;
+  style.TabRounding       = 10.0f;
+
+#if 0
+  style.WindowPadding = ImVec2(16, 16);
+  style.FramePadding  = ImVec2(14, 12);
+  style.ItemSpacing   = ImVec2(12, 12);
+
+  ImVec4* colors = style.Colors;
+
+  colors[ImGuiCol_WindowBg]           = ImVec4(0.07f, 0.08f, 0.10f, 1.00f);
+
+  colors[ImGuiCol_Header]             = ImVec4(0.12f, 0.45f, 0.55f, 1.00f);
+  colors[ImGuiCol_HeaderHovered]      = ImVec4(0.16f, 0.55f, 0.67f, 1.00f);
+  colors[ImGuiCol_HeaderActive]       = ImVec4(0.10f, 0.65f, 0.80f, 1.00f);
+
+  colors[ImGuiCol_Button]             = ImVec4(0.10f, 0.48f, 0.55f, 1.00f);
+  colors[ImGuiCol_ButtonHovered]      = ImVec4(0.16f, 0.60f, 0.70f, 1.00f);
+  colors[ImGuiCol_ButtonActive]       = ImVec4(0.10f, 0.72f, 0.85f, 1.00f);
+
+  colors[ImGuiCol_FrameBg]            = ImVec4(0.11f, 0.13f, 0.16f, 1.00f);
+
+  colors[ImGuiCol_TitleBg]            = ImVec4(0.06f, 0.07f, 0.09f, 1.00f);
+  colors[ImGuiCol_TitleBgActive]      = ImVec4(0.06f, 0.07f, 0.09f, 1.00f);
+
+  colors[ImGuiCol_Border]             = ImVec4(0.18f, 0.20f, 0.24f, 1.00f);
+
+  colors[ImGuiCol_Separator]          = ImVec4(0.20f, 0.24f, 0.28f, 1.00f);
+
+  colors[ImGuiCol_Text]               = ImVec4(0.92f, 0.94f, 0.96f, 1.00f);
+
+  colors[ImGuiCol_MenuBarBg]          = ImVec4(0.08f, 0.09f, 0.12f, 1.00f);
+#endif
+}
 
 ImGuiRenderer::ImGuiRenderer() {
   // Setup Dear ImGui context
@@ -57,6 +99,8 @@ ImGuiRenderer::ImGuiRenderer() {
   if (!ImGui_ImplOpenGL3_Init(version.str().c_str())) {
     ENIGMA_ERROR("ImGui init for OpenGL failed.");
   }
+
+  //ApplyEnigmaTheme();
 }
 
 

@@ -57,7 +57,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
 
         // Input text/cipher
         const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 3.0f);
-        ImGuiWidgets::InputTextMultiline("##text1", &m_input, input_text_size);
+        InputTextWidgets::InputTextMultiline("##text1", &m_input, input_text_size);
 
         // Bytes count
         ImGui::PushFont(font_ubuntu_regular_12);
@@ -74,7 +74,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
         // Label
         ImGui::Text("%s:", ("Password"));
         // Input text
-        ImGuiWidgets::InputText("##text2", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        InputTextWidgets::InputText("##text2", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
       }
       ImGui::PopFont();
 
@@ -87,7 +87,7 @@ void XOREncryptionTool::OnDraw(Scene *parent) {
           // Label
           ImGui::Text("%s:", ("Output (in base64)"));
           // Encrypted/Decrypted text
-          ImGuiWidgets::InputTextMultiline("##text4", &m_output, ImVec2(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f));
+          InputTextWidgets::InputTextMultiline("##text4", &m_output, ImVec2(win_w * 0.88f, ImGui::GetTextLineHeightWithSpacing() * 3.0f));
           ImGui::PushFont(font_ubuntu_regular_14);
           ImGui::SameLine();
           ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle

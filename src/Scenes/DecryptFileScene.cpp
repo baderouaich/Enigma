@@ -72,7 +72,7 @@ void DecryptFileScene::OnImGuiDraw() {
     // Back Button [<]
     {
       ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
-      if (ImGuiWidgets::BackButton("##back", back_button_size)) {
+      if (ButtonWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
       ImGui::PopFont();
@@ -146,7 +146,7 @@ void DecryptFileScene::OnImGuiDraw() {
       ImGui::Text("%s:", ("File To Decrypt"));
       // Encrypted text
       static const ImVec2 browse_button_size(45.0f, 25.0f);
-      ImGuiWidgets::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
+      InputTextWidgets::InputText("##text1", &m_in_filename, win_w - (browse_button_size.x * 1.5f));
       ImGui::PushFont(font_ubuntu_regular_12);;
       ImGui::SameLine();
       ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
@@ -174,7 +174,7 @@ void DecryptFileScene::OnImGuiDraw() {
         ImGui::Text("%s:", ("Decrypted File Location"));
         // Encrypted text
         static const ImVec2 browse_button_size(45.0f, 25.0f);
-        ImGuiWidgets::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
+        InputTextWidgets::InputText("##text2", &m_out_filename, win_w - (browse_button_size.x * 1.5f));
         ImGui::PushFont(font_ubuntu_regular_12);;
         ImGui::SameLine();
         ImGui::PushStyleColor(ImGuiCol_Button, Constants::Colors::BUTTON_COLOR);              // buttons color idle
@@ -203,9 +203,9 @@ void DecryptFileScene::OnImGuiDraw() {
       ImGui::PushFont(font_ubuntu_regular_18);
       const ImVec2 input_text_size(static_cast<float>(win_w), ImGui::GetTextLineHeightWithSpacing() * 10);
       ImGui::Text("%s:", "Private Key");
-      ImGuiWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
+      InputTextWidgets::InputTextMultiline("##private_key", &m_rsa_private_key, input_text_size);
       ImGui::PushID("LoadPrivateKeyFromFileButton");
-      if (ImGuiWidgets::Button("Load from file...")) {
+      if (ButtonWidgets::Button("Load from file...")) {
         if (std::vector<std::string> filenames = OpenFileDialog{"Load Private Key...", ".", false}.Show(); !filenames.empty()) {
           if (fs::is_regular_file(filenames[0]))
             FileUtils::ReadString(filenames[0], m_rsa_private_key);
@@ -221,7 +221,7 @@ void DecryptFileScene::OnImGuiDraw() {
         ImGui::Text("%s:", ("Password"));
 
         // Input text
-        ImGuiWidgets::InputText("##text3", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
+        InputTextWidgets::InputText("##text3", &m_password, static_cast<float>(win_w), ImGuiInputTextFlags_::ImGuiInputTextFlags_Password);
 
         // Bytes count
         ImGui::PushFont(font_ubuntu_regular_12);

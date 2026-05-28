@@ -72,7 +72,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
     // Back Button [<]
     {
       ImGui::PushFont(font_ubuntu_regular_18); // < arrow is a text too
-      if (ImGuiWidgets::BackButton("##back", back_button_size)) {
+      if (ButtonWidgets::BackButton("##back", back_button_size)) {
         this->OnBackButtonPressed();
       }
       ImGui::PopFont();
@@ -105,7 +105,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, Constants::Colors::BUTTON_COLOR_ACTIVE); // buttons color pressed
     {
       //ImGui::LabelText("##label", "Search by title...");
-      if (ImGuiWidgets::InputTextWithHint("##inputtext", ("Search by title..."), &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database
+      if (InputTextWidgets::InputTextWithHint("##inputtext", ("Search by title..."), &m_query, win_w / 2.25f, ImGuiInputTextFlags_CallbackEdit)) // ImGuiInputTextFlags_CallbackEdit to return true only on edit so we don't exhaust database
       {
         // Enable searching
         m_isSearching = true;
@@ -118,14 +118,14 @@ void MyEncryptionsScene::OnImGuiDraw() {
       }
       ImGui::SameLine();
 
-      if (ImGuiWidgets::Button("Reset", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
+      if (ButtonWidgets::Button("Reset", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE)) {
         this->ResetSearch();
       }
 
 #if 0
 			// TODO
 			inline_spacing(4);
-			if (ImGuiWidgets::Button("Export JSON", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
+			if (ButtonWidgets::Button("Export JSON", ImVec2(), Constants::Colors::BUTTON_COLOR, Constants::Colors::BUTTON_COLOR_HOVER, Constants::Colors::BUTTON_COLOR_ACTIVE))
 			{
 				this->OnExportAllEncryptionsJSON();
 			}
@@ -134,7 +134,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
 
       if (!m_encryptions.empty()) {
         ImGui::SetCursorPosX(win_w - 85.0f);
-        if (ImGuiWidgets::Button("Delete All", ImVec2(80.0f, 30.0f), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE)) {
+        if (ButtonWidgets::Button("Delete All", ImVec2(80.0f, 30.0f), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE)) {
           this->OnDeleteAllEncryptions();
         }
       }
@@ -319,7 +319,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
             ImGui::TableSetColumnIndex(column++);
             {
               ImGui::PushID(static_cast<std::int32_t>(ide)); // Special id for button
-              if (ImGuiWidgets::Button(("View"))) {
+              if (ButtonWidgets::Button(("View"))) {
                 this->OnViewEncryptionButtonPressed(ide);
               }
               ImGui::PopID();
@@ -327,7 +327,7 @@ void MyEncryptionsScene::OnImGuiDraw() {
               ImGui::SameLine();
 
               ImGui::PushID(static_cast<std::int32_t>(ide)); // Special id for button
-              if (ImGuiWidgets::Button(("Delete"), ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE)) {
+              if (ButtonWidgets::Button(("Delete"), ImVec2(), Constants::Colors::BACK_BUTTON_COLOR, Constants::Colors::BACK_BUTTON_COLOR_HOVER, Constants::Colors::BACK_BUTTON_COLOR_ACTIVE)) {
                 // if item is deleted, vector size is changed so break loop.
                 if (this->OnDeleteEncryptionButtonPressed(ide)) {
                   ImGui::PopID(); // unregister button id after deletion
