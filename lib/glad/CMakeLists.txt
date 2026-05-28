@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
+# generator: https://glad.dav1d.de/
 project(glad)
 
 add_library(${PROJECT_NAME} STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/glad.c)
