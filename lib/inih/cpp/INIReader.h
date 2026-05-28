@@ -2,7 +2,7 @@
 
 // SPDX-License-Identifier: BSD-3-Clause
 
-// Copyright (C) 2009-2020, Ben Hoyt
+// Copyright (C) 2009-2025, Ben Hoyt
 
 // inih and INIReader are released under the New BSD license (see LICENSE.txt).
 // Go to the project home page for more info:
@@ -15,6 +15,8 @@
 #include <map>
 #include <string>
 #include <cstdint>
+#include <vector>
+#include <set>
 
 // Visibility symbols, required for Windows DLLs
 #ifndef INI_API
@@ -51,8 +53,13 @@ public:
     INI_API explicit INIReader(const char *buffer, size_t buffer_size);
 
     // Return the result of ini_parse(), i.e., 0 on success, line number of
-    // first error on parse error, or -1 on file open error.
+    // first error on parse error, -1 on file open error, or -2 if there was a
+    // memory allocation error.
     INI_API int ParseError() const;
+
+    // Return a message that describes the type of error that occurred.
+    // It will return "" (empty string) if there was no error.
+    INI_API std::string ParseErrorMessage() const;
 
     // Get a string value from INI file, returning default_value if not found.
     INI_API std::string Get(const std::string& section, const std::string& name,
@@ -89,6 +96,12 @@ public:
     // and valid false values are "false", "no", "off", "0" (not case sensitive).
     INI_API bool GetBoolean(const std::string& section, const std::string& name, bool default_value) const;
 
+    // Return a newly-allocated vector of all section names, in alphabetical order.
+    INI_API std::vector<std::string> Sections() const;
+
+    // Return a newly-allocated vector of keys in the given section, in alphabetical order.
+    INI_API std::vector<std::string> Keys(const std::string& section) const;
+
     // Return true if the given section exists (section must contain at least
     // one name=value pair).
     INI_API bool HasSection(const std::string& section) const;
@@ -96,7 +109,7 @@ public:
     // Return true if a value exists with the given section and field names.
     INI_API bool HasValue(const std::string& section, const std::string& name) const;
 
-private:
+protected:
     int _error;
     std::map<std::string, std::string> _values;
     static std::string MakeKey(const std::string& section, const std::string& name);

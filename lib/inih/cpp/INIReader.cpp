@@ -2,7 +2,7 @@
 
 // SPDX-License-Identifier: BSD-3-Clause
 
-// Copyright (C) 2009-2020, Ben Hoyt
+// Copyright (C) 2009-2025, Ben Hoyt
 
 // inih and INIReader are released under the New BSD license (see LICENSE.txt).
 // Go to the project home page for more info:
@@ -24,13 +24,39 @@ INIReader::INIReader(const string& filename)
 
 INIReader::INIReader(const char *buffer, size_t buffer_size)
 {
-  string content(buffer, buffer_size);
-  _error = ini_parse_string(content.c_str(), ValueHandler, this);
+  _error = ini_parse_string_length(buffer, buffer_size, ValueHandler, this);
 }
 
 int INIReader::ParseError() const
 {
     return _error;
+}
+
+string INIReader::ParseErrorMessage() const
+{
+    // If _error is positive it means it is the line number on which a parse
+    // error occurred. This could be an overlong line, that ValueHandler
+    // indicated a user defined error, an unterminated section name, or a name
+    // without a value.
+    if (_error > 0) {
+        return "parse error on line " + std::to_string(_error) + "; missing ']' or '='?";
+    }
+
+    // If _error is negative it is a system type error, and 0 means success.
+    switch (_error) {
+    case -2:
+        return "unable to allocate memory";
+
+    case -1:
+        return "unable to open file";
+
+    case 0:
+        return "";
+    }
+
+    // This should never be reached. It probably means a new error code was
+    // added to the C API without updating this method.
+    return "unknown error " + std::to_string(_error);
 }
 
 string INIReader::Get(const string& section, const string& name, const string& default_value) const
@@ -56,7 +82,7 @@ long INIReader::GetInteger(const string& section, const string& name, long defau
     return end > value ? n : default_value;
 }
 
-INI_API int64_t INIReader::GetInteger64(const std::string& section, const std::string& name, int64_t default_value) const
+INI_API int64_t INIReader::GetInteger64(const string& section, const string& name, int64_t default_value) const
 {
     string valstr = Get(section, name, "");
     const char* value = valstr.c_str();
@@ -76,7 +102,7 @@ unsigned long INIReader::GetUnsigned(const string& section, const string& name, 
     return end > value ? n : default_value;
 }
 
-INI_API uint64_t INIReader::GetUnsigned64(const std::string& section, const std::string& name, uint64_t default_value) const
+INI_API uint64_t INIReader::GetUnsigned64(const string& section, const string& name, uint64_t default_value) const
 {
     string valstr = Get(section, name, "");
     const char* value = valstr.c_str();
@@ -107,6 +133,30 @@ bool INIReader::GetBoolean(const string& section, const string& name, bool defau
         return false;
     else
         return default_value;
+}
+
+std::vector<string> INIReader::Sections() const
+{
+    std::set<string> sectionSet;
+    for (std::map<string, string>::const_iterator it = _values.begin(); it != _values.end(); ++it) {
+        size_t pos = it->first.find('=');
+        if (pos != string::npos) {
+            sectionSet.insert(it->first.substr(0, pos));
+        }
+    }
+    return std::vector<string>(sectionSet.begin(), sectionSet.end());
+}
+
+std::vector<string> INIReader::Keys(const string& section) const
+{
+    std::vector<string> keys;
+    string keyPrefix = MakeKey(section, "");
+    for (std::map<string, string>::const_iterator it = _values.begin(); it != _values.end(); ++it) {
+        if (it->first.compare(0, keyPrefix.length(), keyPrefix) == 0) {
+            keys.push_back(it->first.substr(keyPrefix.length()));
+        }
+    }
+    return keys;
 }
 
 bool INIReader::HasSection(const string& section) const
