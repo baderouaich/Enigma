@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(Enigma VERSION "3.2.2" DESCRIPTION "A Simple, Reliable and Efficient Encryption Tool" LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ################# Options ###########################
@@ -48,8 +48,8 @@ else ()
 endif ()
 source_group("Headers" ${ENIGMA_HEADERS})
 
-target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${CMAKE_CURRENT_SOURCE_DIR}/res/fonts"  "${CMAKE_CURRENT_SOURCE_DIR}/res/branding")
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
+target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src"  "${CMAKE_CURRENT_SOURCE_DIR}/res" "${CMAKE_CURRENT_SOURCE_DIR}/res/fonts"  "${CMAKE_CURRENT_SOURCE_DIR}/res/branding" "${CMAKE_CURRENT_SOURCE_DIR}/res/icons")
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
 target_precompile_headers(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.hpp")
 target_compile_definitions(${PROJECT_NAME} PRIVATE
   $<$<CONFIG:Debug>:ENIGMA_DEBUG>
