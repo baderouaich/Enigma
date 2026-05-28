@@ -91,12 +91,12 @@ FetchContent_MakeAvailable(spdlog)
 
 FetchContent_Declare(SQLiteCpp
   GIT_REPOSITORY "https://github.com/SRombauts/SQLiteCpp"
-  GIT_TAG "3.3.2"
+  GIT_TAG "3.3.3"
   GIT_SHALLOW TRUE
   GIT_PROGRESS TRUE
   EXCLUDE_FROM_ALL # to exclude this dependency from being installed with Enigma install target
 )
-set(SQLITECPP_RUN_CPPLINT OFF)
+set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(SQLiteCpp)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/stb_image EXCLUDE_FROM_ALL)
